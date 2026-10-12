@@ -20,7 +20,7 @@
     --rule: color-mix(in srgb, var(--line), #3A3A3F calc(var(--dark) * 100%));
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { background: var(--bg); overflow-x: clip; }
+  html { background: var(--bg); overflow-x: clip; overscroll-behavior-y: none; } /* kein Nachfedern ins Leere unter dem Footer */
   body { font-family: var(--font); color: var(--fg); font-size: 17px; line-height: 1.5; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
@@ -191,7 +191,8 @@
 
   /* Schluss: Slogan oben, EP in der Mitte (Platz = .ep-slot), Footer unten – alles in einer angehefteten Fläche,
      damit am Seitenende nichts unter den Flieger rutscht */
-  #kontakt .sticky { display: flex; flex-direction: column; align-items: stretch; text-align: center; padding: 14vh 0 0; }
+  #kontakt { height: auto; } /* letzter Abschnitt endet mit dem Footer (110vh ließ auf dem iPhone eine weiße Fläche darunter) */
+  #kontakt .sticky { position: relative; height: auto; min-height: 100svh; display: flex; flex-direction: column; align-items: stretch; text-align: center; padding: 14vh 0 0; }
   #kontakt .final { padding: 0 var(--gutter); }
   #kontakt .ep-slot { flex: 1; min-height: 140px; }
   #kontakt footer { text-align: left; }
@@ -277,7 +278,7 @@
   /* Variante 2 – Karte: das Bild kippt aus der Tiefe nach vorne und legt sich flach */
   .dom-img { opacity: min(1, calc(var(--d) * 1.6)); transform-origin: 50% 100%;
     transform: perspective(1400px) translateY(calc((1 - var(--d)) * 90px)) rotateX(calc((1 - var(--d)) * 24deg)) scale(calc(.86 + var(--d) * .14)); }
-  @media (prefers-reduced-motion: reduce) { .copy, #intro .hero, .rv { translate: none !important; rotate: none !important; scale: none !important; filter: none !important; } .btn.ping { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .copy, #intro .hero, .rv { translate: none !important; rotate: none !important; scale: none !important; filter: none !important; } }
 
   /* ---------- Erklärvideo ---------- */
   .vplayer { position: relative; aspect-ratio: 16 / 9; width: 100%; border-radius: 22px; overflow: hidden; background: #0d0d10; color: #F5F5F7; box-shadow: 0 40px 90px -40px rgba(0,0,0,.55); isolation: isolate; }
@@ -1104,7 +1105,7 @@ else {
     const hh = 3.154, hw = hh * innerWidth / innerHeight, pxU = innerHeight / (2 * hh);
     const size = mobile ? 72 : 130; // Breite des Fliegers in Pixeln
     // alle 2,4 s ein kurzer Stups Richtung Button (Spitze zeigt nach rechts oben); unterhalb der Kopfzeile, damit nichts abgeschnitten wird
-    const cyc = 2.4, n = Math.floor(time / cyc), ph = (time % cyc) / cyc, dart = reduced ? 0 : (ph < .2 ? Math.sin(ph / .2 * Math.PI) : 0);
+    const cyc = 2.4, n = Math.floor(time / cyc), ph = (time % cyc) / cyc, dart = (ph < .2 ? Math.sin(ph / .2 * Math.PI) : 0);
     const hit = ph > .1 && n !== lastPing; if (hit) lastPing = n;
     const reach = mobile ? 22 : 30;
     const cx = r.left - size * .42 + dart * reach, cy = r.bottom + size * .78 - dart * reach;
@@ -1143,7 +1144,7 @@ else {
     if (A === kontakt || B === kontakt) {
       const sp = satPlace(time); if (sp) U.uSat.value.set(sp.x, sp.y, sp.s);
       const arrived = A === kontakt || mixV > .85;
-      if (arrived && sp && sp.hit && !reduced) { satBtn.classList.remove('ping'); void satBtn.offsetWidth; satBtn.classList.add('ping'); }
+      if (arrived && sp && sp.hit) { satBtn.classList.remove('ping'); void satBtn.offsetWidth; satBtn.classList.add('ping'); }
     }
 
     // Texte bauen sich im Takt des Schwarms auf (während das Ziel-Motiv entsteht), halten
