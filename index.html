@@ -775,7 +775,7 @@ function timeline(y) {
   const A = chapters[k], B = chapters[Math.min(k + 1, chapters.length - 1)];
   // linear an den Scrollweg gekoppelt: je weiter gescrollt, desto mehr vom nächsten Bild steht.
   // Kurze Haltezone nach jedem Anker (u < .1) und vor dem nächsten (u > .9): das fertige Bild steht einen Moment.
-  const mix = reduced ? (u > .5 ? 1 : 0) : clamp01((u - .1) / .8);
+  const mix = clamp01((u - .1) / .8); // auch bei "Bewegung reduzieren": der Aufbau folgt nur dem eigenen Scrollen
   const night = lerp(+(A.dataset.night || 0), +(B.dataset.night || 0), sm((u - .1) / .45));
   return { k, u, A, B, mix, night };
 }
@@ -875,7 +875,7 @@ else {
   const U = {
     uMix: { value: 0 }, uTime: { value: 0 }, uSize: { value: mobile ? 6.6 : 5.0 }, uDpr: { value: dpr }, uDark: { value: 0 },
     uA: { value: new THREE.Vector3(0, 0, 1) }, uB: { value: new THREE.Vector3(0, 0, 1) },
-    uPhotoA: { value: 0 }, uPhotoB: { value: 0 }, uFocus: { value: 11 }, uFlow: { value: reduced ? 0 : 1 },
+    uPhotoA: { value: 0 }, uPhotoB: { value: 0 }, uFocus: { value: 11 }, uFlow: { value: reduced ? .4 : 1 },
     uFrom: { value: null }, uTo: { value: null }, uTexSize: { value: new THREE.Vector2(TEX_W, TEX_H) },
     // Papierflieger-Vorhut am Ende: eigene Platzierung für die Teilchen ab SAT0, wenn Start- bzw. Zielform 'ep2' ist
     uDimA: { value: 1 }, uDimB: { value: 1 }, uFlkA: { value: 0 }, uFlkB: { value: 0 }, // Hintergrund-Schwarm: Deckkraft und Verhalten (1 Stare, 2 Fische)
@@ -1088,7 +1088,7 @@ else {
   const lab = document.getElementById('lab');
   const labCards = track ? [...track.querySelectorAll('figure')] : [];
   labCards.forEach((fig, i) => { fig.style.setProperty('--cr', ((i % 2 ? -1 : 1) * (4 + Math.random() * 8)).toFixed(1) + 'deg'); fig.style.setProperty('--cy', (Math.random() * 90 - 20).toFixed(0) + 'px'); });
-  if (!reduced) root.classList.add('fx'); // Texte der Kapitel fest ins Bild legen – nur wenn der Schwarm-Takt sie auch steuert
+  root.classList.add('fx'); // Texte der Kapitel fest ins Bild legen – nur wenn der Schwarm-Takt sie auch steuert
   const services = ['websites', 'ki', 'apps', 'film', 'raeume', 'print'].map((id) => document.getElementById(id));
   const firstService = chapters.indexOf(services[0]);
   const hud = document.getElementById('hud'), hudN = document.getElementById('hud-n'), hudName = document.getElementById('hud-name'), hudBar = document.getElementById('hud-bar');
@@ -1148,7 +1148,7 @@ else {
 
     // Texte bauen sich im Takt des Schwarms auf (während das Ziel-Motiv entsteht), halten
     // und lösen sich bei angehefteten Kapiteln wieder auf, sobald das nächste Motiv beginnt
-    if (!reduced) for (const sec of textSecs) {
+    for (const sec of textSecs) { // bei "Bewegung reduzieren" nur Ein-/Ausblenden (CSS nimmt Verschieben/Drehen/Zoom heraus)
       const i = chapters.indexOf(sec), pinned = sec.classList.contains('ch') && sec !== kontakt;
       let rv = 1, out = 1;
       if (i === c.k + 1 && c.u > 0) rv = clamp01((c.mix - .3) / .62);
@@ -1191,7 +1191,7 @@ else {
     group.rotation.y = reduced ? 0 : pointer.x * .06;
     group.rotation.x = reduced ? 0 : pointer.y * .04;
     camera.position.z = 11 - (reduced ? 0 : Math.sin(c.u * Math.PI) * .45);
-    U.uTime.value = reduced ? 0 : time;
+    U.uTime.value = reduced ? time * .35 : time; // "Bewegung reduzieren": Schwarm lebt, aber deutlich ruhiger
 
     for (const [s, el] of stickies) {
       const r = s.getBoundingClientRect();
