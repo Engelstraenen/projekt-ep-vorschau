@@ -57,9 +57,9 @@
   .kicker { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--blue); margin-bottom: 18px; display: flex; gap: 14px; }
   .kicker > span:first-child { opacity: .75; } /* nur die Nummer – nicht die einzelnen Buchstaben der Animation */
   h1, h2 { font-weight: 650; color: var(--fg); text-wrap: balance; }
-  h2 { font-size: clamp(32px, 3.2vw, 50px); line-height: 1.04; letter-spacing: -.04em; }
+  h2 { font-size: clamp(26px, min(3.2vw, 5.4vh), 50px); line-height: 1.04; letter-spacing: -.04em; } /* wächst/schrumpft mit Breite und Höhe */
   h2 .mute, h1 .mute { color: var(--fg-2); }
-  .copy > p:not(.kicker) { color: var(--fg-2); font-size: clamp(17px, 1.3vw, 20px); line-height: 1.5; margin-top: 22px; }
+  .copy > p:not(.kicker) { color: var(--fg-2); font-size: clamp(15px, min(1.3vw, 2.2vh), 20px); line-height: 1.5; margin-top: clamp(10px, 2.4vh, 22px); }
   /* Zusatz unter einem Oberbegriff (SEO bei Websites, Games bei App Design) */
   .sub { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--rule); display: grid; gap: 4px; max-width: min(420px, 100%); }
   .sub small { font-size: 12px; color: var(--blue); letter-spacing: .3px; }
@@ -162,6 +162,7 @@
   #finder .swarm-slot { margin-bottom: 18px; }
   .head-row { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
   .no-gl .swarm-slot { display: none; }
+  html.gl .fb-img { display: none; } /* Ersatzbilder für Geräte ohne WebGL (ältere iPhones, PCs ohne Grafikbeschleunigung, manche App-Browser) */
   .card.dark .mute { color: #86868B; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
   .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
@@ -215,7 +216,8 @@
     [data-side] .copy { grid-column: 1; justify-self: start; }
     .copy { max-width: none; }
     dl.chain, .tags { display: none; }
-    h2 { font-size: 32px; }
+    h2 { font-size: clamp(24px, min(8vw, 4.3vh), 34px); }
+    .copy > p:not(.kicker) { font-size: clamp(14px, 2.1vh, 17px); }
     #intro .sticky { padding-top: 14vh; }
     #intro .ctas { flex-direction: column; gap: 12px; }
     #kontakt .sticky { padding-top: 20vh; padding-bottom: 0; align-items: stretch; } /* Platz für den Flieger unter der Kopfzeile */
@@ -242,6 +244,37 @@
     .brand i { display: none; }
     header.top .menu-mobile { font-size: 0; gap: 0; } /* nur das Symbol, Beschriftung steckt im aria-label */
   }
+  /* niedrige Bildschirme (Laptops, Querformat): Zusatzzeilen weglassen, damit Text und Bild nebeneinander Platz haben */
+  @media (max-height: 760px) { dl.chain { display: none; } .copy .sub p { display: none; } }
+  @media (max-height: 640px) { .tags { display: none; } }
+  /* Handy quer: Text und Bild nebeneinander statt untereinander */
+  @media (max-width: 860px) and (orientation: landscape) and (max-height: 520px) {
+    .sticky, [data-side] .sticky, [data-side="left"] .sticky { grid-template-columns: .5fr .5fr; align-items: center; padding: 56px 20px 8px; }
+    [data-side="right"] .copy { grid-column: 1; } [data-side="left"] .copy { grid-column: 2; }
+    h2 { font-size: clamp(20px, 6vh, 28px); } .copy > p:not(.kicker) { font-size: 13px; margin-top: 8px; }
+    .copy .sub { display: none; }
+  }
+
+  /* ---------- Themen ohne Schwarm-Aufbau: echtes Bild, gesteuert über --rv (Aufbau) und --out (Abbau) ---------- */
+  .dom-img { --d: min(clamp(0, calc((var(--rv) - .05) / .8), 1), var(--out)); grid-row: 1; align-self: center; justify-self: center; margin: 0;
+    width: min(100%, calc((100svh - 170px) * 1.5)); aspect-ratio: 3 / 2; border-radius: 22px; overflow: hidden; background: #e8e8ed;
+    box-shadow: 0 40px 90px -40px rgba(0,0,0,calc(.45 * var(--d))); }
+  .dom-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  [data-side="left"] .dom-img { grid-column: 1; } [data-side="right"] .dom-img { grid-column: 2; }
+  section[data-dom] .copy { grid-row: 1; }
+  @media (max-width: 860px) {
+    section[data-dom] .sticky { grid-template-rows: 1fr auto; }
+    section[data-dom] .dom-img { grid-column: 1; grid-row: 1; width: min(100%, calc((100% ) * 1)); max-height: 100%; align-self: center; }
+    section[data-dom] .copy { grid-row: 2; }
+  }
+  @media (max-width: 860px) and (orientation: landscape) and (max-height: 520px) {
+    section[data-dom] .sticky { grid-template-rows: none; }
+    section[data-dom][data-side="left"] .dom-img { grid-column: 1; } section[data-dom][data-side="left"] .copy { grid-column: 2; grid-row: 1; }
+  }
+
+  /* Variante 2 – Karte: das Bild kippt aus der Tiefe nach vorne und legt sich flach */
+  .dom-img { opacity: min(1, calc(var(--d) * 1.6)); transform-origin: 50% 100%;
+    transform: perspective(1400px) translateY(calc((1 - var(--d)) * 90px)) rotateX(calc((1 - var(--d)) * 24deg)) scale(calc(.86 + var(--d) * .14)); }
   @media (prefers-reduced-motion: reduce) { .copy, #intro .hero, .rv { translate: none !important; rotate: none !important; scale: none !important; filter: none !important; } .btn.ping { animation: none; } }
 
   /* ---------- Erklärvideo ---------- */
@@ -335,8 +368,8 @@
   <section class="ch short" id="intro" data-key="ep" data-name="Start">
     <div class="sticky">
       <div class="hero">
-        <p class="eyebrow">Independent AI Studio · Strategy · Creation · Development</p>
-        <h1>KI, die sichtbar wirkt. <span class="blue">Und messbar arbeitet.</span></h1>
+        <p class="eyebrow">Independent Creative Studio · Strategy · Creation · Development</p>
+        <h1>Vom ersten Gedanken. <span class="blue">Zum fertigen Ergebnis.</span></h1>
         <p class="lead">Wir machen Ideen sichtbar und auffindbar: mit Filmen, Raumkonzepten, Print Design und SEO. Und erlebbar als Websites, Apps, Games und intelligente Abläufe.</p>
         <button class="vthumb" type="button" aria-haspopup="dialog" aria-label="Erklärvideo abspielen: Was PROJEKT EP für euch macht"><video muted loop playsinline preload="none" aria-hidden="true"></video><span class="vposter" aria-hidden="true"><b>E<span>P</span></b><img src="video/erklaervideo-poster.webp" alt="" onerror="this.remove()"></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
       </div>
@@ -355,7 +388,7 @@
     </div>
   </section>
 
-  <section class="ch" id="websites" data-key="img:digital-design" data-side="right" data-name="Websites" data-nr="01">
+  <section class="ch" id="websites" data-dom data-key="img:digital-design" data-side="right" data-name="Websites" data-nr="01">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>01</span><span>Design</span></p>
       <h2>Websites, die eine Marke unverwechselbar machen.</h2>
@@ -363,57 +396,57 @@
       <p class="tags">Website · Domain · Hosting · Business-E-Mail · Betreuung</p>
       <a class="more" href="leistungen/websites.html">Websites im Detail</a>
       <div class="sub"><small>Mit dabei</small><b>SEO &amp; Sichtbarkeit</b><p>Gefunden werden, wenn es zählt: Audit, On-page SEO, Content und lokale Suche.</p><a href="leistungen/seo.html">SEO im Detail ›</a></div>
-    </div></div>
+    </div><figure class="dom-img fb-img"><img src="lab/digital-design.webp" alt="Website auf Laptop und Smartphone" loading="lazy"></figure></div>
   </section>
 
-  <section class="ch" id="ki" data-key="img:workflow" data-side="left" data-name="KI-Automatisierung" data-nr="02">
+  <section class="ch" id="ki" data-dom data-flock="1" data-key="flock1" data-side="left" data-name="KI-Automatisierung" data-nr="02">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>02</span><span>Connect</span></p>
       <h2>KI-Agenten, die Arbeit nicht komplizierter machen.</h2>
       <p>Wir verbinden Informationen, Systeme und Freigaben. Routine wird vorbereitet oder automatisiert – wichtige Entscheidungen bleiben beim Menschen.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Zu viele manuelle Schritte</dd></div><div><dt>System</dt><dd>Agenten, Regeln, Integrationen</dd></div><div><dt>Ergebnis</dt><dd>Weniger Aufwand, mehr Überblick</dd></div></dl>
       <a class="more" href="leistungen/ki-automatisierung.html">KI-Automatisierung im Detail</a>
-    </div></div>
+    </div><figure class="dom-img"><img src="lab/workflow.webp" alt="Kundenservice mit KI-gestütztem Postfach" loading="eager"></figure></div>
   </section>
 
-  <section class="ch" id="apps" data-key="img:app-design" data-side="right" data-name="App Design" data-nr="03">
+  <section class="ch" id="apps" data-dom data-key="img:app-design" data-side="right" data-name="App Design" data-nr="03">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>03</span><span>Develop</span></p>
       <h2>App Design, das sich sofort richtig anfühlt.</h2>
       <p>Von Nutzerführung und Interface Design bis zum klickbaren Prototyp und zur Entwicklung – für mobile Apps, Kundenportale und interne Tools.</p>
       <a class="more" href="leistungen/apps.html">App Design entdecken</a>
       <div class="sub"><small>Mit dabei</small><b>Game Design</b><p>Welten, die man nicht nur anschaut: Browser, Mobile, Lernspiele und Markenerlebnisse.</p><a href="leistungen/games.html">Game Design im Detail ›</a></div>
-    </div></div>
+    </div><figure class="dom-img fb-img"><img src="lab/app-design.webp" alt="Reise-App mit Karte auf einem Smartphone" loading="lazy"></figure></div>
   </section>
 
-  <section class="ch" id="film" data-key="img:campaign" data-side="left" data-night="1" data-name="Film & Fashion" data-nr="04">
+  <section class="ch" id="film" data-dom data-flock="2" data-key="flock2" data-side="left" data-night="1" data-name="Film & Fashion" data-nr="04">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>04</span><span>Create</span></p>
       <h2>Filme, die Mode und Produkte erzählen.</h2>
       <p>Fashion-Filme, Lookbooks, Werbeclips und Kurzfilme für Mode, Marken und Produkte – von Story und Bildsprache bis Schnitt und Sound.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Eine Idee oder ein Produkt</dd></div><div><dt>System</dt><dd>Konzept, Generierung, Regie</dd></div><div><dt>Ergebnis</dt><dd>Eine Geschichte. Passend für jeden Kanal.</dd></div></dl>
       <a class="more" href="leistungen/ki-werbeclips.html">Film &amp; Fashion entdecken</a>
-    </div></div>
+    </div><figure class="dom-img"><img src="lab/campaign.webp" alt="Filmkamera am Set einer Parfum-Kampagne" loading="eager"></figure></div>
   </section>
 
-  <section class="ch" id="raeume" data-key="img:spaces" data-side="right" data-name="Räume & Visualisierung" data-nr="05">
+  <section class="ch" id="raeume" data-dom data-key="img:spaces" data-side="right" data-name="Räume & Visualisierung" data-nr="05">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>05</span><span>Envision</span></p>
       <h2>Sehen, was möglich ist. Bevor es entsteht.</h2>
       <p>Gärten, Landschaften, Innenräume und Gebäude: Wir übersetzen eure Idee in greifbare Entwürfe – Gestaltung, Atmosphäre und Material vor der Umsetzung abstimmen.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Fotos, Skizzen oder ein Raumkonzept</dd></div><div><dt>System</dt><dd>Entwurfsrichtungen, Licht und Material</dd></div><div><dt>Ergebnis</dt><dd>Visualisierungen für Entscheidungen</dd></div></dl>
       <a class="more" href="leistungen/visualisierung.html">Visualisierungen entdecken</a>
-    </div></div>
+    </div><figure class="dom-img fb-img"><img src="lab/spaces.webp" alt="Architekturmodell einer Villa mit Visualisierung am Bildschirm" loading="lazy"></figure></div>
   </section>
 
-  <section class="ch" id="print" data-key="img:print" data-side="left" data-name="Print Design" data-nr="06">
+  <section class="ch" id="print" data-dom data-key="img:print" data-side="left" data-name="Print Design" data-nr="06">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>06</span><span>Express</span></p>
       <h2>Eine Handschrift. Auf jeder Oberfläche.</h2>
       <p>Print Designs für Textilien, Objekte und Folien – von einzelnen Motiven über Kollektionen bis zur durchgängigen Gestaltung.</p>
       <p class="tags">Textildruck · Objektdruck · Folien · Packaging · Allover-Prints</p>
       <a class="more" href="leistungen/print-design.html">Print Design entdecken</a>
-    </div></div>
+    </div><figure class="dom-img fb-img"><img src="lab/print.webp" alt="Siebdruck in Blau auf einem Hoodie" loading="lazy"></figure></div>
   </section>
 
   <section class="block" id="finder" data-key="icon:frage" data-name="Potenzialfinder">
@@ -448,6 +481,7 @@
   </section>
 </main>
 
+<script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js"></script> <!-- Import-Maps für ältere Browser (Safari < 16.4) -->
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
@@ -559,6 +593,8 @@ const makers = {
     [.18, ball(2.4, 1.45, 0, .14)],
   ]),
   ring: () => build([[1, () => { const a = R() * 6.28, b = R() * 6.28, r = .3 * Math.sqrt(R()); return [(1.6 + r * Math.cos(b)) * Math.cos(a), (1.6 + r * Math.cos(b)) * Math.sin(a), r * Math.sin(b)]; }]]),
+  flock1: () => build([[1, () => [gauss() * 1.15, gauss() * .5, gauss() * .7]]]),
+  flock2: () => build([[1, () => { const a = R() * 6.2832, r = 1 + gauss() * .32; return [Math.cos(a) * r, Math.sin(a) * r, gauss() * .4]; }]]),
   cube: () => build([[1, () => { const f = Math.floor(R() * 6), ax = f >> 1, v = [(R() - .5) * 2.2, (R() - .5) * 2.2, (R() - .5) * 2.2]; v[ax] = (f & 1 ? 1.1 : -1.1); return v; }]]),
 };
 async function textShape(txt, colorFn) {
@@ -654,6 +690,32 @@ function measure() {
   });
   for (let i = 1; i < anchors.length; i++) anchors[i] = Math.max(anchors[i], anchors[i - 1] + 1);
 }
+// Themenbild in den freien Raum setzen, den der Text übrig lässt – nie in die Schrift hinein.
+// Nebeneinander (Desktop, Tablet, Handy quer): Fläche zwischen Textspalte und Bildschirmrand.
+// Untereinander (Handy hochkant): Fläche zwischen Kopfzeile und Textoberkante.
+function flockPlace(s) {
+  const r = s.querySelector('.dom-img').getBoundingClientRect(), W = innerWidth, H = innerHeight, hh = 3.154, hw = hh * W / H, pxU = H / (2 * hh);
+  const f = Math.min(1, Math.max(0, (scrollY - s.offsetTop + H) / (s.offsetHeight + H)));
+  const stacked = r.width > W * .7, away = s.dataset.side === 'left' ? -1 : 1; // vom Text weg: Desktop zur Außenseite, Handy nach oben
+  const cy = r.top + r.height / 2 + (f - .5) * r.height * .5 - (stacked ? r.height * .22 : 0);
+  return { x: ((r.left + r.width / 2 + (stacked ? 0 : away * r.width * (s.dataset.flock === '2' ? .3 : .18))) / W * 2 - 1) * hw, y: -(cy / H * 2 - 1) * hh, s: r.width / pxU / (s.dataset.flock === '2' ? 1.7 : 2.2) }; // größer als das Bild, damit der Schwarm rundherum sichtbar ist
+}
+function imgPlace(s) {
+  const c = s.querySelector('.copy').getBoundingClientRect(), W = innerWidth, H = innerHeight;
+  const hh = 3.154, hw = hh * W / H, pxU = H / (2 * hh), top = 64 + 16;
+  const stacked = c.width > W * .6;
+  let box;
+  if (stacked) box = { l: 16, r: W - 16, t: top, b: c.top - 20 };
+  else {
+    const gap = Math.max(28, W * .03), edge = Math.max(16, W * .02), bottom = H - (W > 860 ? 64 : 12);
+    box = s.dataset.side === 'left' ? { l: edge, r: c.left - gap, t: top, b: bottom } : { l: c.right + gap, r: W - edge, t: top, b: bottom };
+  }
+  let w = Math.min(box.r - box.l, stacked ? W : W * .58), h = w * IMG_H / IMG_W; // untereinander volle Breite, nebeneinander max. 58 %
+  const maxH = Math.max(60, box.b - box.t); if (h > maxH) { h = maxH; w = h * IMG_W / IMG_H; }
+  const cx = stacked ? W / 2 : s.dataset.side === 'left' ? box.l + w / 2 : box.r - w / 2;
+  return { x: (cx / W * 2 - 1) * hw, y: -((box.t + (box.b - box.t) / 2) / H * 2 - 1) * hh, s: w / (IMG_W * pxU) };
+}
+window.__imgRect = (id) => { const s = document.getElementById(id), p = placeOf(s), hh = 3.154, pxU = innerHeight / (2 * hh), w = IMG_W * p.s * pxU, h = IMG_H * p.s * pxU, cx = innerWidth / 2 + p.x * pxU, cy = innerHeight / 2 - p.y * pxU; return { l: cx - w / 2, r: cx + w / 2, t: cy - h / 2, b: cy + h / 2 }; };
 const EP_W = 3.7, EP_H = 2.3; // sichtbare Ausdehnung der EP-Buchstaben in Szenen-Einheiten (gemessen, nicht die Canvas-Fläche)
 function placeOf(s) {
   const key = s.dataset.key, side = s.dataset.side;
@@ -680,7 +742,8 @@ function placeOf(s) {
   }
   if (mobile) {
     if (s.id === 'intro') return { x: 0, y: -2.35, s: .38 };
-    if (key.startsWith('img:')) return { x: 0, y: 1.5, s: 1.84 * 3.154 * innerWidth / innerHeight / IMG_W };
+    if (key.startsWith('img:')) return imgPlace(s);
+    if (key.startsWith('flock')) return flockPlace(s);
     if (key === 'stream') return { x: 0, y: -2.05, s: .5 };
     if (s.id === 'kontakt') return { x: 0, y: -1.55, s: .42 };
     return { x: 0, y: 1.3, s: .45 };
@@ -688,8 +751,11 @@ function placeOf(s) {
   if (s.id === 'intro') return { x: 0, y: -2.2, s: .46 };
   if (s.id === 'manifest') return { x: 0, y: -1.8, s: 1 };
   if (s.id === 'kontakt') return { x: 0, y: -1.4, s: .8 };
-  if (key.startsWith('img:') || key === 'stairs') {
-    // Bild nimmt ~56 % der Breite ein (max. 62 % der Höhe), bündig zum Rand mit kleinem Abstand
+  if (key.startsWith('img:')) return imgPlace(s);
+  if (key.startsWith('flock')) {
+    return flockPlace(s);
+  }
+  if (key === 'stairs') {
     const hw = 3.154 * innerWidth / innerHeight, s = Math.min(1.12 * hw / IMG_W, .62 * 6.308 / IMG_H), w = IMG_W * s;
     const x = hw * .955 - w / 2;
     const st = key === 'stairs' ? s * .76 : s; // die Treppe (5,4 Einheiten) ist breiter als ein Bild (4,5)
@@ -809,6 +875,7 @@ else {
     uPhotoA: { value: 0 }, uPhotoB: { value: 0 }, uFocus: { value: 11 }, uFlow: { value: reduced ? 0 : 1 },
     uFrom: { value: null }, uTo: { value: null }, uTexSize: { value: new THREE.Vector2(TEX_W, TEX_H) },
     // Papierflieger-Vorhut am Ende: eigene Platzierung für die Teilchen ab SAT0, wenn Start- bzw. Zielform 'ep2' ist
+    uDimA: { value: 1 }, uDimB: { value: 1 }, uFlkA: { value: 0 }, uFlkB: { value: 0 }, // Hintergrund-Schwarm: Deckkraft und Verhalten (1 Stare, 2 Fische)
     uSeed: { value: 0 }, uFx: { value: new THREE.Vector4(0, 0, 0, 0) }, // pro Übergang zufällig: Muster + Bogen, Wirbel, Explosion
     uSat: { value: new THREE.Vector3(0, 0, 1) }, uSatFrom: { value: 0 }, uSatTo: { value: 0 }, uSatStart: { value: SAT0 },
   };
@@ -818,7 +885,7 @@ else {
       attribute float aIndex, aRand;
       uniform sampler2D uFrom, uTo; uniform vec2 uTexSize;
       uniform float uMix, uTime, uSize, uDpr, uDark, uPhotoA, uPhotoB, uFocus, uFlow; uniform vec3 uA, uB;
-      uniform vec3 uSat; uniform float uSatFrom, uSatTo, uSatStart, uSeed; uniform vec4 uFx;
+      uniform vec3 uSat; uniform float uSatFrom, uSatTo, uSatStart, uSeed, uDimA, uDimB, uFlkA, uFlkB; uniform vec4 uFx;
       varying vec3 vCol; varying float vA, vBokeh;
       ${GLSL_NOISE}
       vec3 tone(vec3 c, float spark) {
@@ -826,6 +893,30 @@ else {
         vec3 ink = mix(vec3(.114,.114,.122), vec3(.0,.443,.89), spark);
         vec3 glow = mix(vec3(.93,.92,.97), vec3(.45,.7,1.), spark);
         return mix(ink, glow, uDark);
+      }
+      // Schwarmverhalten im Hintergrund. q = Punkt der Grundform, Rückgabe = lebende Position (läuft ständig, auch ohne Scrollen)
+      vec3 flockMove(vec3 q, float style){
+        float tm = uTime;
+        if (style < 1.5) { // Starenschwarm: Wolke streckt, staucht, dreht und faltet sich; Dichtewellen laufen hindurch
+          float a = tm * .23 + sin(tm * .11) * 1.4, ca = cos(a), sa = sin(a);
+          vec3 p = q;
+          p.x *= 1.5 + .6 * sin(tm * .41);
+          p.y *= .8 + .45 * sin(tm * .53 + 1.3);
+          p.xy = vec2(ca * p.x - sa * p.y, sa * p.x + ca * p.y);
+          p.y += sin(p.x * 1.6 + tm * 1.3) * .32;
+          p.z += cos(p.x * 1.1 - tm * .9) * .3;
+          vec3 n = q * .9 + vec3(0., 0., tm * .18);
+          p += vec3(sin(n.y * 2.3 + tm * .7), sin(n.z * 2.1 - tm * .5), sin(n.x * 1.9 + tm * .6)) * .2;
+          return p * (1. + .12 * sin(tm * .8 + length(q) * 2.5));
+        }
+        // Fischschwarm (Köderball): rotierender Ring, innen schneller, pulsiert, kippt langsam in der Tiefe
+        float r = length(q.xy), ang = atan(q.y, q.x) + tm * (.55 + .35 / (r + .4));
+        vec3 p = vec3(cos(ang) * r, sin(ang) * r * (.65 + .2 * sin(tm * .37)), q.z);
+        p *= 1. + .18 * sin(tm * .9 + ang * 3.);
+        vec3 n = q * 1.3 + vec3(tm * .2);
+        p += vec3(sin(n.y * 2.7 + tm), sin(n.z * 2.2 - tm * .8), sin(n.x * 2.5 + tm * .6)) * .16;
+        float ta = sin(tm * .17) * .9, cz = cos(ta), sz2 = sin(ta);
+        return vec3(p.x, cz * p.y - sz2 * p.z, sz2 * p.y + cz * p.z);
       }
       vec3 unpackCol(float w) { return w < 0. ? vec3(-1.) : vec3(floor(w / 65536.), mod(floor(w / 256.), 256.), mod(w, 256.)) / 255.; }
       void main() {
@@ -840,7 +931,8 @@ else {
         float t = clamp((uMix - d) / FLY, 0.0, 1.0);
         t = t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
         vec3 plA = mix(uA, uSat, satF);
-        vec3 pa = from * plA.z + vec3(plA.xy, 0.), pb = to * uB.z + vec3(uB.xy, 0.);
+        vec3 fromL = uFlkA > .5 ? flockMove(from, uFlkA) : from, toL = uFlkB > .5 ? flockMove(to, uFlkB) : to;
+        vec3 pa = fromL * plA.z + vec3(plA.xy, 0.), pb = toL * uB.z + vec3(uB.xy, 0.);
         vec3 p = mix(pa, pb, t);
         // Vorhut: landet zuerst als großer Flieger im EP, startet dann – während das EP entsteht – zum Button
         float t2 = satT * smoothstep(.46 + .05 * aRand, .8 + .05 * aRand, uMix);
@@ -869,7 +961,7 @@ else {
         float sz = (.55 + pow(aRand, 5.0) * 1.0 + spark * .2) * (1.0 + coc * .3) * mix(mix(mix(uA.z, .5, satF), uB.z, t), .5, t2);
         gl_PointSize = uSize * uDpr * sz * (11.0 / -mv.z);
         vCol = mix(tone(cFrom, spark), tone(cTo, spark), t);
-        vA = (1.0 - .97 * hide) / (1.0 + coc * 3.0);
+        vA = (1.0 - .97 * hide) / (1.0 + coc * 3.0) * mix(uDimA, uDimB, t);
         vA *= mix(.86, .62, uDark) * (.8 + .2 * sin(uTime * (1.2 + aRand * 2.5) + aRand * 90.));
       }`,
     fragmentShader: /* glsl */`
@@ -1029,6 +1121,9 @@ else {
     const pa = placeOf(A), pb = placeOf(B);
     U.uA.value.set(pa.x, pa.y, pa.s); U.uB.value.set(pb.x, pb.y, pb.s);
     U.uMix.value = mixV;
+    // Hintergrund-Schwarm: etwas gedämpft auf hellem Grund (im dunklen Film-Kapitel voller), Verhalten je Abschnitt
+    const dimOf = (x) => x.dataset.flock ? (x.dataset.night ? .5 : (mobile ? .45 : .6)) : 1;
+    U.uDimA.value = dimOf(A); U.uDimB.value = dimOf(B); U.uFlkA.value = +(A.dataset.flock || 0); U.uFlkB.value = +(B.dataset.flock || 0);
     // Papierflieger-Vorhut: sitzt links unter "Projekt starten" und stupst ihn regelmäßig an
     U.uSatFrom.value = A === kontakt ? 1 : 0; U.uSatTo.value = B === kontakt ? 1 : 0;
     if (A === kontakt || B === kontakt) {
