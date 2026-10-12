@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason)));</script>
+<script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PROJEKT EP – Vorschau v3</title>
 <meta name="robots" content="noindex">
@@ -1374,9 +1374,14 @@ show('zeit');
   if (new URLSearchParams(location.search).has('debug')) setTimeout(() => {
     const d = document.createElement('pre');
     d.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:99;background:rgba(0,0,0,.85);color:#7CFC9A;font:12px/1.4 monospace;padding:10px;border-radius:10px;white-space:pre-wrap;max-height:45vh;overflow:auto';
-    d.textContent = ['3D: ' + (window.__glInfo || 'Skript nicht gestartet'), 'Bewegung reduzieren: ' + matchMedia('(prefers-reduced-motion: reduce)').matches, 'Bildschirm: ' + innerWidth + '×' + innerHeight + ' @' + devicePixelRatio + 'x', 'Browser: ' + navigator.userAgent, 'Fehler: ' + (window.__errs.join(' | ') || 'keine')].join('\n');
-    document.body.append(d);
-  }, 4000);
+    const cv = document.querySelector('canvas'); let lost = false; cv?.addEventListener('webglcontextlost', () => { lost = true; });
+    const show = () => { const cs = cv && getComputedStyle(cv), r = cv?.getBoundingClientRect();
+      d.textContent = ['3D: ' + (window.__glInfo || 'Skript nicht gestartet'), 'Klassen: ' + document.documentElement.className, 'Bilder/s: ' + window.__fps + (lost ? ' · GRAFIK ABGESTÜRZT' : ''),
+        'Canvas: ' + (cv ? Math.round(r.width) + '×' + Math.round(r.height) + ' (' + cv.width + '×' + cv.height + ') sichtbar=' + cs.visibility + ' deckkraft=' + cs.opacity + ' display=' + cs.display : 'fehlt'),
+        'Bewegung reduzieren: ' + matchMedia('(prefers-reduced-motion: reduce)').matches + ' · Datensparen: ' + (navigator.connection?.saveData ?? '?'),
+        'Bildschirm: ' + innerWidth + '×' + innerHeight + ' @' + devicePixelRatio + 'x', 'Browser: ' + navigator.userAgent, 'Fehler: ' + (window.__errs.join(' | ') || 'keine')].join('\n'); };
+    document.body.append(d); show(); setInterval(show, 1000);
+  }, 3000);
 </script>
 <script src="assets/nav.js" defer></script>
 </body>
