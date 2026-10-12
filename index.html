@@ -1220,24 +1220,65 @@ else {
   requestAnimationFrame(frame);
   { const g = renderer.getContext(), ext = g.getExtension('WEBGL_debug_renderer_info'); window.__glInfo = (g instanceof WebGL2RenderingContext ? 'WebGL2' : 'WebGL1') + ' · ' + (ext ? g.getParameter(ext.UNMASKED_RENDERER_WEBGL) : g.getParameter(g.RENDERER)); }
 
-  // Haltepunkte: hört man auf zu scrollen, rastet die Seite am nächsten fertig aufgebauten Kapitel ein (Intro, Manifest, 6 Themen, Kontakt).
-  // Schnelles Scrollen springt so sauber von Thema zu Thema; die Inhalts-Blöcke (Potenzialfinder, Haltung) bleiben frei scrollbar.
-  if (!reduced && !new URLSearchParams(location.search).has('zeige')) {
-    const snapIdx = chapters.map((s, i) => (s.classList.contains('ch') ? i : -1)).filter((i) => i >= 0);
-    let idleT = 0, touching = false, snapping = false, snapReset = 0;
-    const settle = () => {
-      if (touching || snapping || document.querySelector('.kino.open, .mega.open')) return;
-      const y = lenis ? lenis.scroll : scrollY; let best = null, bd = Infinity;
-      for (const i of snapIdx) { const d = Math.abs(anchors[i] - y); if (d < bd) { bd = d; best = anchors[i]; } }
-      if (best == null || bd < 3 || bd > innerHeight * .55) return;
-      snapping = true; clearTimeout(snapReset); snapReset = setTimeout(() => { snapping = false; }, 1300);
-      if (lenis) lenis.scrollTo(best, { duration: .9, easing: (t) => 1 - Math.pow(1 - t, 3), onComplete: () => { snapping = false; } });
-      else scrollTo({ top: best, behavior: 'smooth' });
+  // Haltepunkte: normales Scrollen bleibt frei. Zusätzlich
+  //  1) schneller Wisch (Trackpad/Touch) oder schnelles Drehen am Mausrad → springt zum nächsten fertigen Kapitel,
+  //  2) hört man nah an einem Kapitel auf zu scrollen (≤ 22 % Bildschirmhöhe) → rastet es sanft dort ein.
+  if (!new URLSearchParams(location.search).has('zeige')) {
+    const stops = () => {
+      const list = [...new Set(anchors.map((a) => Math.round(a)))].sort((a, b) => a - b), maxY = document.documentElement.scrollHeight - innerHeight;
+      if (maxY - list[list.length - 1] > innerHeight * .3) list.push(maxY);
+      return list;
     };
-    const kick = () => { clearTimeout(idleT); idleT = setTimeout(settle, 160); };
-    addEventListener('scroll', kick, { passive: true });
-    addEventListener('touchstart', () => { touching = true; clearTimeout(idleT); }, { passive: true });
-    addEventListener('touchend', () => { touching = false; kick(); }, { passive: true });
+    window.__stops = stops;
+    const curY = () => (lenis ? lenis.scroll : scrollY);
+    const blocked = () => !!document.querySelector('.kino.open, .mega.open');
+    // busy = nur während eines Wisch-Sprungs (Eingaben werden dann geschluckt); spätestens nach 1 s wieder frei
+    let busy = false, busyT = 0, idleT = 0;
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    const scrollToY = (target, lockInput) => {
+      if (lockInput) { busy = true; clearTimeout(busyT); busyT = setTimeout(() => { busy = false; }, 1000); }
+      const done = () => { if (lockInput) { clearTimeout(busyT); busyT = setTimeout(() => { busy = false; }, 80); } };
+      if (lenis) lenis.scrollTo(target, { duration: reduced ? .01 : .8, easing: ease, onComplete: done });
+      else { scrollTo({ top: target, behavior: reduced ? 'auto' : 'smooth' }); if (lockInput) busyT = setTimeout(() => { busy = false; }, 800); }
+    };
+    const jump = (dir) => { const y = curY(), st = stops(); const t = dir > 0 ? st.find((v) => v > y + 8) : [...st].reverse().find((v) => v < y - 8); if (t != null) scrollToY(t, true); };
+    const settle = () => {
+      if (busy || blocked()) return;
+      const y = curY(); let best = null, bd = Infinity; for (const v of stops()) { const d = Math.abs(v - y); if (d < bd) { bd = d; best = v; } }
+      if (best != null && bd > 3 && bd < innerHeight * .22) scrollToY(best, false); // sanftes Einrasten, jederzeit durch Weiterscrollen unterbrechbar
+    };
+    const kickIdle = () => { clearTimeout(idleT); idleT = setTimeout(settle, 260); };
+
+    // Mausrad/Trackpad: Geste = Folge von Ereignissen ohne 160 ms Pause. Schnell (viel Weg in den ersten 140 ms) → Sprung,
+    // sonst läuft das Ereignis ganz normal an Lenis weiter.
+    let g = null;
+    addEventListener('wheel', (e) => {
+      if (blocked() || e.ctrlKey) return;
+      const now = performance.now();
+      if (!g || now - g.last > 160) g = { t0: now, last: now, sum: 0, flick: false };
+      g.last = now; g.sum += e.deltaY;
+      // während eines Sprungs bzw. im Nachlauf einer Wisch-Geste: Ereignis schlucken, bevor Lenis es sieht
+      if (busy || g.flick) { e.preventDefault(); e.stopPropagation(); return; }
+      g.n = (g.n || 0) + 1;
+      if (now - g.t0 < 220 && g.n >= 2 && Math.abs(g.sum) > 180 && Math.abs(e.deltaY) >= 40) { /* schnelle Geste: viel Weg in kurzer Zeit */ g.flick = true; e.preventDefault(); e.stopPropagation(); jump(Math.sign(g.sum)); return; }
+      kickIdle();
+    }, { capture: true, passive: false });
+
+    // Touch: freies Wischen; schneller kurzer Wisch springt zum nächsten Kapitel, sonst Einrasten nach dem Auslaufen
+    let t0 = null;
+    addEventListener('touchstart', (e) => { if (blocked()) return; t0 = { y: e.touches[0].clientY, x: e.touches[0].clientX, t: performance.now() }; clearTimeout(idleT); }, { passive: true });
+    addEventListener('touchend', (e) => {
+      if (!t0 || blocked()) return; const c = e.changedTouches[0], dy = t0.y - c.clientY, dx = t0.x - c.clientX, dt = performance.now() - t0.t; t0 = null;
+      if (!busy && Math.abs(dy) > 40 && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) / dt > .9 && dt < 320) jump(Math.sign(dy));
+    }, { passive: true });
+    addEventListener('scroll', () => { if (!busy) kickIdle(); }, { passive: true });
+
+    // Tastatur: Pfeile/Bild/Leertaste blättern kapitelweise
+    addEventListener('keydown', (e) => {
+      if (blocked() || /input|textarea|select/i.test(e.target.tagName)) return;
+      const dir = ['ArrowDown', 'PageDown', ' '].includes(e.key) ? 1 : ['ArrowUp', 'PageUp'].includes(e.key) ? -1 : 0;
+      if (dir) { e.preventDefault(); if (!busy) jump(dir); }
+    });
   }
 }
 
