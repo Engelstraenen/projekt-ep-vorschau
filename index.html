@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason)));</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PROJEKT EP – Vorschau v3</title>
 <meta name="robots" content="noindex">
@@ -821,7 +822,7 @@ const GLSL_NOISE = /* glsl */`
 const canvas = document.getElementById('stage');
 let renderer = null;
 try { renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' }); } catch {}
-if (!renderer) { canvas.remove(); root.classList.add('no-gl'); }
+if (!renderer) { canvas.remove(); root.classList.add('no-gl'); window.__glInfo = 'WebGL nicht verfügbar'; }
 else {
   const dpr = Math.min(devicePixelRatio, mobile ? 1.6 : 2);
   renderer.setPixelRatio(dpr);
@@ -1217,6 +1218,27 @@ else {
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+  { const g = renderer.getContext(), ext = g.getExtension('WEBGL_debug_renderer_info'); window.__glInfo = (g instanceof WebGL2RenderingContext ? 'WebGL2' : 'WebGL1') + ' · ' + (ext ? g.getParameter(ext.UNMASKED_RENDERER_WEBGL) : g.getParameter(g.RENDERER)); }
+
+  // Haltepunkte: hört man auf zu scrollen, rastet die Seite am nächsten fertig aufgebauten Kapitel ein (Intro, Manifest, 6 Themen, Kontakt).
+  // Schnelles Scrollen springt so sauber von Thema zu Thema; die Inhalts-Blöcke (Potenzialfinder, Haltung) bleiben frei scrollbar.
+  if (!reduced && !new URLSearchParams(location.search).has('zeige')) {
+    const snapIdx = chapters.map((s, i) => (s.classList.contains('ch') ? i : -1)).filter((i) => i >= 0);
+    let idleT = 0, touching = false, snapping = false, snapReset = 0;
+    const settle = () => {
+      if (touching || snapping || document.querySelector('.kino.open, .mega.open')) return;
+      const y = lenis ? lenis.scroll : scrollY; let best = null, bd = Infinity;
+      for (const i of snapIdx) { const d = Math.abs(anchors[i] - y); if (d < bd) { bd = d; best = anchors[i]; } }
+      if (best == null || bd < 3 || bd > innerHeight * .55) return;
+      snapping = true; clearTimeout(snapReset); snapReset = setTimeout(() => { snapping = false; }, 1300);
+      if (lenis) lenis.scrollTo(best, { duration: .9, easing: (t) => 1 - Math.pow(1 - t, 3), onComplete: () => { snapping = false; } });
+      else scrollTo({ top: best, behavior: 'smooth' });
+    };
+    const kick = () => { clearTimeout(idleT); idleT = setTimeout(settle, 160); };
+    addEventListener('scroll', kick, { passive: true });
+    addEventListener('touchstart', () => { touching = true; clearTimeout(idleT); }, { passive: true });
+    addEventListener('touchend', () => { touching = false; kick(); }, { passive: true });
+  }
 }
 
 // ---------- Potenzialfinder ----------
@@ -1304,6 +1326,15 @@ show('zeit');
   kino.querySelector('.close').addEventListener('click', () => open(false));
   kino.addEventListener('click', (e) => { if (e.target === kino) open(false); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && kino.classList.contains('open')) open(false); });
+</script>
+<script>
+  // Diagnose: Link mit ?debug öffnen – zeigt, ob WebGL läuft, ob "Bewegung reduzieren" aktiv ist und welche Fehler auftraten
+  if (new URLSearchParams(location.search).has('debug')) setTimeout(() => {
+    const d = document.createElement('pre');
+    d.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:99;background:rgba(0,0,0,.85);color:#7CFC9A;font:12px/1.4 monospace;padding:10px;border-radius:10px;white-space:pre-wrap;max-height:45vh;overflow:auto';
+    d.textContent = ['3D: ' + (window.__glInfo || 'Skript nicht gestartet'), 'Bewegung reduzieren: ' + matchMedia('(prefers-reduced-motion: reduce)').matches, 'Bildschirm: ' + innerWidth + '×' + innerHeight + ' @' + devicePixelRatio + 'x', 'Browser: ' + navigator.userAgent, 'Fehler: ' + (window.__errs.join(' | ') || 'keine')].join('\n');
+    document.body.append(d);
+  }, 4000);
 </script>
 <script src="assets/nav.js" defer></script>
 </body>
