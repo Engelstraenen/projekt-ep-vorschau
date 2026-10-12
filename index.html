@@ -267,6 +267,7 @@
     section[data-dom] .sticky { grid-template-rows: 1fr auto; }
     section[data-dom] .dom-img { grid-column: 1; grid-row: 1; width: min(100%, calc((100% ) * 1)); max-height: 100%; align-self: center; }
     section[data-dom] .copy { grid-row: 2; }
+    section[data-flock] .dom-img { width: 70%; } /* Handy hochkant: Bild kleiner, damit der Hintergrund-Schwarm rundherum sichtbar bleibt */
   }
   @media (max-width: 860px) and (orientation: landscape) and (max-height: 520px) {
     section[data-dom] .sticky { grid-template-rows: none; }
@@ -698,9 +699,9 @@ function measure() {
 function flockPlace(s) {
   const r = s.querySelector('.dom-img').getBoundingClientRect(), W = innerWidth, H = innerHeight, hh = 3.154, hw = hh * W / H, pxU = H / (2 * hh);
   const f = Math.min(1, Math.max(0, (scrollY - s.offsetTop + H) / (s.offsetHeight + H)));
-  const stacked = r.width > W * .7, away = s.dataset.side === 'left' ? -1 : 1; // vom Text weg: Desktop zur Außenseite, Handy nach oben
-  const cy = r.top + r.height / 2 + (f - .5) * r.height * .5 - (stacked ? r.height * (s.dataset.flock === '3' ? .35 : .22) : 0);
-  return { x: ((r.left + r.width / 2 + (stacked ? 0 : away * r.width * ({ 2: .3, 3: .32 }[s.dataset.flock] || .18))) / W * 2 - 1) * hw, y: -(cy / H * 2 - 1) * hh, s: r.width / pxU / ({ 2: 1.7, 3: 1.45 }[s.dataset.flock] || 2.2) }; // größer als das Bild, damit der Schwarm rundherum sichtbar ist
+  const stacked = s.querySelector('.copy').getBoundingClientRect().top >= r.bottom - 4, away = s.dataset.side === 'left' ? -1 : 1; // vom Text weg: Desktop zur Außenseite, Handy nach oben
+  const cy = r.top + r.height / 2 + (f - .5) * r.height * .5 - (stacked ? r.height * (s.dataset.flock === '3' ? .55 : .22) : 0);
+  return { x: ((r.left + r.width / 2 + (stacked ? 0 : away * r.width * ({ 2: .3, 3: .32 }[s.dataset.flock] || .18))) / W * 2 - 1) * hw, y: -(cy / H * 2 - 1) * hh, s: r.width / pxU / ({ 2: 1.7, 3: 1.45 }[s.dataset.flock] || 2.2) * (stacked ? 1.4 : 1) }; // Handy hochkant: Bild schmaler, Schwarm deutlich breiter; größer als das Bild, damit der Schwarm rundherum sichtbar ist
 }
 function imgPlace(s) {
   const c = s.querySelector('.copy').getBoundingClientRect(), W = innerWidth, H = innerHeight;
@@ -1135,7 +1136,7 @@ else {
     U.uA.value.set(pa.x, pa.y, pa.s); U.uB.value.set(pb.x, pb.y, pb.s);
     U.uMix.value = mixV;
     // Hintergrund-Schwarm: etwas gedämpft auf hellem Grund (im dunklen Film-Kapitel voller), Verhalten je Abschnitt
-    const dimOf = (x) => x.dataset.flock ? (x.dataset.night ? .5 : (mobile ? .45 : .6)) : 1;
+    const dimOf = (x) => x.dataset.flock ? (x.dataset.night ? .5 : (mobile ? .75 : .6)) : 1;
     U.uDimA.value = dimOf(A); U.uDimB.value = dimOf(B); U.uFlkA.value = +(A.dataset.flock || 0); U.uFlkB.value = +(B.dataset.flock || 0);
     // Papierflieger-Vorhut: sitzt links unter "Projekt starten" und stupst ihn regelmäßig an
     U.uSatFrom.value = A === kontakt ? 1 : 0; U.uSatTo.value = B === kontakt ? 1 : 0;
