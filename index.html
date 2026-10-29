@@ -158,6 +158,17 @@
   .card.dark { background: var(--night); color: #F5F5F7; }
   .gl .card.dark { background: transparent; box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
   .gl #finder .card { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: inset 0 0 0 1px #E5E5EA; }
+  .block.film-full { padding: 0; }
+  .film-stage { position: relative; height: 100vh; height: 100svh; background: #000; overflow: hidden; }
+  .film-stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
+  .film-stage video:fullscreen { object-fit: contain; }
+  .film-cap { position: absolute; left: var(--gutter); bottom: clamp(28px, 6vh, 64px); right: var(--gutter); color: #F5F5F7; pointer-events: none; transition: opacity .4s; background: linear-gradient(transparent, rgba(0,0,0,.0)); }
+  .film-cap .kicker { color: #A1A1A6; }
+  .film-cap h2 { color: #F5F5F7; max-width: 14em; }
+  .film-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font: inherit; font-size: 17px; height: 56px; padding: 0 28px; border-radius: 999px; border: 0; background: #fff; color: #1D1D1F; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,.35); transition: transform .25s, opacity .3s; }
+  .film-play:hover { transform: translate(-50%,-50%) scale(1.04); }
+  .film-stage.playing .film-play, .film-stage.playing .film-cap { opacity: 0; pointer-events: none; }
+  @media (max-width: 800px) { .film-stage video { object-fit: contain; } }
   .swarm-slot { height: 240px; pointer-events: none; }
   .swarm-slot.tall { height: 300px; margin-top: 24px; }
   #finder .swarm-slot { margin-bottom: 18px; }
@@ -492,6 +503,14 @@
       <p class="tags">Warenwirtschaft · Personal · Schichtplanung · Dashboards · Schnittstellen</p>
       <a class="more" href="leistungen/systeme.html">Systeme im Detail</a>
     </div><figure class="dom-img fb-img"><img src="lab/dashboards.webp" alt="Interaktives Dashboard mit Lager-, Team- und Umsatzzahlen" loading="lazy"></figure></div>
+  </section>
+
+  <section class="block film-full" id="erklaervideo" data-key="ep" data-night="1" data-name="Video">
+    <div class="film-stage">
+      <video id="erkl" playsinline preload="metadata" poster="video/motion-swarm-poster.jpg" aria-label="Motion-Video: PROJEKT EP in 20 Sekunden"><source src="video/motion-swarm.mp4" type="video/mp4"></video>
+      <div class="film-cap"><p class="kicker">In 20 Sekunden</p><h2>Die Agentur, die Probleme löst.</h2></div>
+      <button type="button" class="film-play" id="erklPlay" aria-label="Video abspielen im Vollbild"><span aria-hidden="true">▶</span> Video ansehen</button>
+    </div>
   </section>
 
   <section class="block" id="preise" data-key="icon:euro" data-name="Preise">
@@ -1427,5 +1446,13 @@ show('zeit');
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && kino.classList.contains('open')) open(false); });
 </script>
 <script src="assets/nav.js" defer></script>
+<script>
+(function(){const v=document.getElementById('erkl'),b=document.getElementById('erklPlay');if(!v||!b)return;const st=v.parentNode;
+b.addEventListener('click',()=>{v.controls=true;v.play().catch(()=>{});try{(v.requestFullscreen||v.webkitRequestFullscreen||function(){}).call(v)}catch(e){}});
+v.addEventListener('play',()=>st.classList.add('playing'));
+v.addEventListener('ended',()=>{st.classList.remove('playing');v.controls=false;v.currentTime=0;if(document.fullscreenElement)document.exitFullscreen()});
+v.addEventListener('pause',()=>{if(!v.ended&&!document.fullscreenElement){st.classList.remove('playing')}});
+})();
+</script>
 </body>
 </html>
