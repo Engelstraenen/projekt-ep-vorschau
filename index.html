@@ -177,6 +177,17 @@
   ol.steps span { color: var(--blue); font-size: 13px; }
   ol.steps b { display: block; font-size: 22px; font-weight: 650; letter-spacing: -.03em; margin: 10px 0 6px; }
   ol.steps p { color: var(--ink-2); font-size: 15px; }
+  .prices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 48px; }
+  .prices a { display: grid; gap: 6px; align-content: start; padding: 22px; border-radius: 20px; background: var(--bg); box-shadow: inset 0 0 0 1px #E5E5EA; color: inherit; text-decoration: none; transition: box-shadow .3s var(--ease), translate .3s var(--ease); }
+  .prices a:hover { box-shadow: inset 0 0 0 1.5px var(--blue); translate: 0 -2px; }
+  .prices small { font-size: 12px; color: var(--blue); letter-spacing: .3px; }
+  .prices b { font-size: 19px; font-weight: 650; letter-spacing: -.02em; }
+  .prices .price { font-size: 15px; color: var(--ink-2); }
+  .prices .price i { font-style: normal; font-size: 26px; font-weight: 650; letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .prices p { font-size: 14px; color: var(--ink-2); line-height: 1.45; }
+  .price-note { margin-top: 20px; font-size: 13px; color: var(--ink-2); }
+  @media (max-width: 1080px) { .prices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .prices { grid-template-columns: 1fr; gap: 8px; } .prices a { padding: 16px 18px; } }
   .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: 48px; }
   .principles b { display: block; font-size: 20px; font-weight: 650; letter-spacing: -.02em; margin-bottom: 8px; }
   .principles p { color: #A1A1A6; font-size: 15px; }
@@ -353,19 +364,19 @@
     <div class="mega-grid">
       <a class="tile" href="leistungen/websites.html"><span class="thumb"><img src="lab/digital-design.webp" alt="" loading="lazy"></span><span><small>01 · Design</small><b>Websites</b><span>Design, Entwicklung, SEO &amp; Sichtbarkeit</span></span></a>
       <a class="tile" href="leistungen/seo.html"><span class="thumb"><img src="lab/seo.webp" alt="" loading="lazy"></span><span><small>01 · Find</small><b>SEO &amp; Sichtbarkeit</b><span>Audit, On-page, Content</span></span></a>
-      <a class="tile" href="leistungen/ki-automatisierung.html"><span class="thumb"><img src="lab/workflow.webp" alt="" loading="lazy"></span><span><small>02 · Connect</small><b>KI-Automatisierung</b><span>Agenten, Integrationen, Abläufe</span></span></a>
+      <a class="tile" href="leistungen/ki-automatisierung.html"><span class="thumb"><img src="lab/workflow.webp" alt="" loading="lazy"></span><span><small>02 · Connect</small><b>KI-Automatisierung</b><span>Agenten, Integrationen, Abläufe</span></span></a><a class="tile" href="leistungen/systeme.html"><span class="thumb"><img src="lab/dashboards.webp" alt="" loading="lazy"></span><span><small>09 · Manage</small><b>Systeme &amp; Dashboards</b><span>Warenwirtschaft, Personal, Dashboards</span></span></a>
       <a class="tile" href="leistungen/apps.html"><span class="thumb"><img src="lab/app-design.webp" alt="" loading="lazy"></span><span><small>03 · Develop</small><b>App Design</b><span>UX, UI, Prototyp, Entwicklung, Games</span></span></a>
       <a class="tile" href="leistungen/games.html"><span class="thumb"><img src="lab/game.webp" alt="" loading="lazy"></span><span><small>03 · Play</small><b>Game Design</b><span>Browser, Mobile, Serious Games</span></span></a>
-      <a class="tile" href="leistungen/ki-werbeclips.html"><span class="thumb"><img src="lab/campaign.webp" alt="" loading="lazy"></span><span><small>04 · Create</small><b>Film &amp; Fashion</b><span>Fashion-Filme, Werbeclips, Lookbooks</span></span></a>
+      <a class="tile" href="leistungen/ki-werbeclips.html"><span class="thumb"><img src="lab/campaign.webp" alt="" loading="lazy"></span><span><small>04 · Create</small><b>Ad Creatives</b><span>Werbefilme, Motion Design, Social Ads</span></span></a>
       <a class="tile" href="leistungen/visualisierung.html"><span class="thumb"><img src="lab/spaces.webp" alt="" loading="lazy"></span><span><small>05 · Envision</small><b>Räume &amp; Visualisierung</b><span>Garten, Interior, Architektur</span></span></a>
-      <a class="tile" href="leistungen/print-design.html"><span class="thumb"><img src="lab/print.webp" alt="" loading="lazy"></span><span><small>06 · Craft</small><b>Print Design</b><span>Textil, Objekte, Packaging</span></span></a>
+      <a class="tile" href="leistungen/print-design.html"><span class="thumb"><img src="lab/print.webp" alt="" loading="lazy"></span><span><small>06 · Craft</small><b>Print Design</b><span>Textil, Objekte, Packaging</span></span></a><a class="tile" href="leistungen/logo-design.html"><span class="thumb"><img src="lab/logo-design.webp" alt="" loading="lazy"></span><span><small>07 · Brand</small><b>Logo Design</b><span>Logo, CI, Markenauftritt</span></span></a><a class="tile" href="leistungen/merch.html"><span class="thumb"><img src="lab/merch.webp" alt="" loading="lazy"></span><span><small>08 · Produce</small><b>Merch-Produktion</b><span>Shirts, Hoodies, Denim, Strick</span></span></a>
       <a class="tile" href="leistungen/individuelle-auftraege.html"><span class="thumb"><img src="lab/produkt.webp" alt="" loading="lazy"></span><span><small>Mehr</small><b>Individuelle Aufträge</b><span>Wenn deine Idee nicht ins Raster passt</span></span></a>
     </div>
     <nav class="mega-extra" aria-label="Weitere Seiten"><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a><a href="#kontakt">Projekt starten</a></nav>
   </div>
 <!-- mega:end -->
 <div class="scrollbar" aria-hidden="true"><span id="scrollbar"></span></div>
-<div class="hud" id="hud" aria-hidden="true"><b id="hud-n">01</b><span>/ 06</span><span class="bar"><i id="hud-bar"></i></span><span class="name" id="hud-name"></span></div>
+<div class="hud" id="hud" aria-hidden="true"><b id="hud-n">01</b><span>/ 09</span><span class="bar"><i id="hud-bar"></i></span><span class="name" id="hud-name"></span></div>
 
 <main id="main">
   <section class="ch short" id="intro" data-key="ep" data-name="Start">
@@ -373,7 +384,7 @@
       <div class="hero">
         <p class="eyebrow">Independent Creative Studio · Strategy · Creation · Development</p>
         <h1>Vom ersten Gedanken. <span class="blue">Zum fertigen Ergebnis.</span></h1>
-        <p class="lead">Wir machen Ideen sichtbar und auffindbar: mit Filmen, Raumkonzepten, Print Design und SEO. Und erlebbar als Websites, Apps, Games und intelligente Abläufe.</p>
+        <p class="lead">Wir machen Ideen sichtbar und auffindbar: mit Ad Creatives, Logo Design, Print, Merch und SEO. Und erlebbar als Websites, Apps, Games, Dashboards und intelligente Abläufe.</p>
         <button class="vthumb" type="button" aria-haspopup="dialog" aria-label="Erklärvideo abspielen: Was PROJEKT EP für euch macht"><video muted loop playsinline preload="none" aria-hidden="true"></video><span class="vposter" aria-hidden="true"><b>E<span>P</span></b><img src="video/erklaervideo-poster.webp" alt="" onerror="this.remove()"></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
       </div>
     </div>
@@ -384,8 +395,8 @@
       <div class="mf">
         <h2>Viele Signale. <span class="mute">Eine klare Bewegung.</span></h2>
         <p class="lead">Technologie ist kein Selbstzweck. Wir setzen sie ein, damit Ideen besser funktionieren.</p>
-        <nav class="mf-index" aria-label="Unsere sechs Themen">
-          <a href="#websites"><span>01</span>Websites &amp; SEO</a><a href="#ki"><span>02</span>KI-Automatisierung</a><a href="#apps"><span>03</span>App &amp; Game Design</a><a href="#film"><span>04</span>Film &amp; Fashion</a><a href="#raeume"><span>05</span>Räume &amp; Visualisierung</a><a href="#print"><span>06</span>Print Design</a>
+        <nav class="mf-index" aria-label="Unsere neun Themen">
+          <a href="#websites"><span>01</span>Websites &amp; SEO</a><a href="#ki"><span>02</span>KI-Automatisierung</a><a href="#apps"><span>03</span>App &amp; Game Design</a><a href="#film"><span>04</span>Ad Creatives</a><a href="#raeume"><span>05</span>Räume &amp; Visualisierung</a><a href="#print"><span>06</span>Print Design</a><a href="#logo"><span>07</span>Logo Design</a><a href="#merch"><span>08</span>Merch-Produktion</a><a href="#systeme"><span>09</span>Systeme &amp; Dashboards</a>
         </nav>
       </div>
     </div>
@@ -422,13 +433,14 @@
     </div><figure class="dom-img fb-img"><img src="lab/app-design.webp" alt="Reise-App mit Karte auf einem Smartphone" loading="lazy"></figure></div>
   </section>
 
-  <section class="ch" id="film" data-dom data-flock="2" data-key="flock2" data-side="left" data-night="1" data-name="Film & Fashion" data-nr="04">
+  <section class="ch" id="film" data-dom data-flock="2" data-key="flock2" data-side="left" data-night="1" data-name="Ad Creatives" data-nr="04">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>04</span><span>Create</span></p>
-      <h2>Filme, die Mode und Produkte erzählen.</h2>
-      <p>Fashion-Filme, Lookbooks, Werbeclips und Kurzfilme für Mode, Marken und Produkte – von Story und Bildsprache bis Schnitt und Sound.</p>
-      <dl class="chain"><div><dt>Ausgang</dt><dd>Eine Idee oder ein Produkt</dd></div><div><dt>System</dt><dd>Konzept, Generierung, Regie</dd></div><div><dt>Ergebnis</dt><dd>Eine Geschichte. Passend für jeden Kanal.</dd></div></dl>
-      <a class="more" href="leistungen/ki-werbeclips.html">Film &amp; Fashion entdecken</a>
+      <h2>Ad Creatives, die stoppen. Und verkaufen.</h2>
+      <p>Werbefilme, Motion Design Videos, Social Ads, Fashion-Filme und Static Ads für Mode, Marken und Produkte – von Idee und Bildsprache bis Schnitt, Sound und jedem Format.</p>
+      <p class="tags">Video Ads · Motion Design · Social Ads · Static Ads · Fashion-Filme · Lookbooks</p>
+      <dl class="chain"><div><dt>Ausgang</dt><dd>Eine Idee oder ein Produkt</dd></div><div><dt>System</dt><dd>Konzept, Generierung, Regie</dd></div><div><dt>Ergebnis</dt><dd>Creatives für jeden Kanal und jedes Format</dd></div></dl>
+      <a class="more" href="leistungen/ki-werbeclips.html">Ad Creatives entdecken</a>
     </div><figure class="dom-img"><img src="lab/campaign.webp" alt="Filmkamera am Set einer Parfum-Kampagne" loading="eager"></figure></div>
   </section>
 
@@ -450,6 +462,44 @@
       <p class="tags">Textildruck · Objektdruck · Folien · Packaging · Allover-Prints</p>
       <a class="more" href="leistungen/print-design.html">Print Design entdecken</a>
     </div><figure class="dom-img"><img src="lab/print.webp" alt="Siebdruck in Blau auf einem Hoodie" loading="lazy"></figure></div>
+  </section>
+
+  <section class="ch" id="logo" data-dom data-key="img:logo-design" data-side="right" data-name="Logo Design" data-nr="07">
+    <div class="sticky"><div class="copy">
+      <p class="kicker"><span>07</span><span>Brand</span></p>
+      <h2>Ein Zeichen, das man nicht mehr vergisst.</h2>
+      <p>Logo, Farben, Schrift und Bildsprache als ein klares System – damit eure Marke auf Website, Print, Merch und Social Media gleich stark wirkt.</p>
+      <p class="tags">Logo · Wortmarke · Corporate Identity · Brand Guide · Vorlagen</p>
+      <a class="more" href="leistungen/logo-design.html">Logo Design im Detail</a>
+    </div><figure class="dom-img fb-img"><img src="lab/logo-design.webp" alt="Markenauftritt mit Logo auf Geschäftsausstattung" loading="lazy"></figure></div>
+  </section>
+
+  <section class="ch" id="merch" data-dom data-flock="1" data-key="flock1" data-side="left" data-name="Merch-Produktion" data-nr="08">
+    <div class="sticky"><div class="copy">
+      <p class="kicker"><span>08</span><span>Produce</span></p>
+      <h2>Merch, den man gerne trägt.</h2>
+      <p>T-Shirts, Hoodies, Sweats, Denim und Strick – gestaltet und produziert aus einer Hand, mit starken Produktionen und sauberer Qualität.</p>
+      <dl class="chain"><div><dt>Ausgang</dt><dd>Eine Marke, ein Team oder ein Event</dd></div><div><dt>System</dt><dd>Design, Muster, Produktion</dd></div><div><dt>Ergebnis</dt><dd>Fertige Ware, die eure Marke trägt</dd></div></dl>
+      <a class="more" href="leistungen/merch.html">Merch-Produktion entdecken</a>
+    </div><figure class="dom-img"><img src="lab/merch.webp" alt="Merch-Kollektion mit Hoodies, Shirts, Denim und Strick" loading="lazy"></figure></div>
+  </section>
+
+  <section class="ch" id="systeme" data-dom data-key="img:dashboards" data-side="right" data-name="Systeme & Dashboards" data-nr="09">
+    <div class="sticky"><div class="copy">
+      <p class="kicker"><span>09</span><span>Manage</span></p>
+      <h2>Alles im Blick. Ohne Tabellenchaos.</h2>
+      <p>Warenwirtschaft, Personalwirtschaft und interaktive Dashboards – mit euren Tools verbunden oder passend neu gebaut.</p>
+      <p class="tags">Warenwirtschaft · Personal · Schichtplanung · Dashboards · Schnittstellen</p>
+      <a class="more" href="leistungen/systeme.html">Systeme im Detail</a>
+    </div><figure class="dom-img fb-img"><img src="lab/dashboards.webp" alt="Interaktives Dashboard mit Lager-, Team- und Umsatzzahlen" loading="lazy"></figure></div>
+  </section>
+
+  <section class="block" id="preise" data-key="icon:euro" data-name="Preise">
+    <div class="card">
+      <div class="head-row"><div class="section-head"><p class="kicker">Richtpreise</p><h2>Was kostet das? <span class="mute">Ein ehrlicher erster Rahmen.</span></h2><p style="color:var(--ink-2);margin-top:18px">Jedes Projekt ist anders. Diese Richtpreise geben euch eine erste Orientierung, das genaue Angebot stimmen wir nach dem Erstgespräch ab. Kleine Änderungs- und Wartungsaufträge: 100 € je Auftrag.</p></div><div class="swarm-slot" aria-hidden="true"></div></div>
+      <div class="prices"><a href="leistungen/websites.html"><small>01</small><b>Websites</b><span class="price">ab <i>X.XXX</i> €</span><p>Landingpage bis Markenauftritt mit Motion und SEO-Basis</p></a><a href="leistungen/ki-automatisierung.html"><small>02</small><b>KI-Automatisierung</b><span class="price">ab <i>X.XXX</i> €</span><p>Ein Ablauf, ein Agent oder ein Chatbot, eingerichtet und getestet</p></a><a href="leistungen/systeme.html"><small>02</small><b>Systeme &amp; Dashboards</b><span class="price">ab <i>X.XXX</i> €</span><p>Warenwirtschaft, Personal oder ein interaktives Dashboard</p></a><a href="leistungen/apps.html"><small>03</small><b>App &amp; Game Design</b><span class="price">ab <i>X.XXX</i> €</span><p>Klickbarer Prototyp bis fertige App oder Browser-Game</p></a><a href="leistungen/ki-werbeclips.html"><small>04</small><b>Ad Creatives</b><span class="price">ab <i>X.XXX</i> €</span><p>Ein Werbefilm oder ein Set Social Ads in allen Formaten</p></a><a href="leistungen/visualisierung.html"><small>05</small><b>Räume &amp; Visualisierung</b><span class="price">ab <i>X.XXX</i> €</span><p>Entwurfsrichtungen und Visualisierungen für einen Raum</p></a><a href="leistungen/logo-design.html"><small>06</small><b>Logo Design</b><span class="price">ab <i>X.XXX</i> €</span><p>Logo, Farben, Schrift und Regeln als kleines CI-Paket</p></a><a href="leistungen/merch.html"><small>06</small><b>Print &amp; Merch</b><span class="price">ab <i>X.XXX</i> €</span><p>Print Design je Motiv, Merch-Produktion je Stückzahl</p></a></div>
+      <p class="price-note">Alle Preise netto zzgl. MwSt. Anbieter-, Hosting- und Produktionskosten weisen wir separat aus.</p>
+    </div>
   </section>
 
   <section class="block" id="finder" data-key="icon:frage" data-name="Potenzialfinder">
@@ -547,7 +597,7 @@ document.querySelectorAll('main > section[data-key]').forEach((sec) => {
   const pDir = Math.random() < .5 ? 1 : -1, pStyle = Math.random() < .35 ? 'fog' : 'drift';
   own('.copy > p:not(.kicker), .section-head > p:not(.kicker), #lab .head > p, #manifest .lead').forEach((e) => splitText(e, sec.id === 'manifest' ? 'blur' : pStyle, { px: (pDir * (.6 + Math.random() * .8)).toFixed(2) + 'em' }));
   const ang = Math.random() * Math.PI * 2, bx = (Math.cos(ang) * 46).toFixed(0) + 'px', by = (Math.sin(ang) * 30).toFixed(0) + 'px';
-  own('dl.chain > div, .copy > .more, .copy > .sub, .tabs, ol.steps > li, .principles > div, #faq details, .mf-index a, #kontakt .ctas').forEach((e) => { e.classList.add('rv', 't-block'); e.style.setProperty('--bx', bx); e.style.setProperty('--by', by); });
+  own('dl.chain > div, .copy > .more, .copy > .sub, .tabs, ol.steps > li, .principles > div, .prices > a, #faq details, .mf-index a, #kontakt .ctas').forEach((e) => { e.classList.add('rv', 't-block'); e.style.setProperty('--bx', bx); e.style.setProperty('--by', by); });
   const els = [...sec.querySelectorAll('.rv')];
   if (!els.length) return;
   els.forEach((e, i) => e.style.setProperty('--i', (i + (e.dataset.jit ? (Math.random() - .5) * 9 : (Math.random() - .5) * 1.5)).toFixed(2)));
@@ -638,6 +688,7 @@ const ICON_SIZE = 2.6; // Kantenlänge der Zeichenfläche in Szenen-Einheiten
 const BLUE = [0, .443, .89], INK = [.114, .114, .122];
 const ICONS = {
   frage: { col: INK, draw: (g) => { g.font = '700 520px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('?', 300, 320); } },
+  euro: { col: BLUE, draw: (g) => { g.font = '700 470px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('€', 300, 320); } },
   zeit: { col: BLUE, draw: (g) => { g.beginPath(); g.arc(300, 300, 225, 0, 7); g.stroke(); g.beginPath(); g.moveTo(300, 300); g.lineTo(300, 150); g.moveTo(300, 300); g.lineTo(410, 360); g.stroke(); g.beginPath(); g.arc(300, 300, 26, 0, 7); g.fill(); } },
   reichweite: { col: BLUE, draw: (g) => { g.beginPath(); g.arc(150, 300, 42, 0, 7); g.fill(); for (const r of [130, 230, 330]) { g.beginPath(); g.arc(150, 300, r, -.85, .85); g.stroke(); } } },
   anfragen: { col: BLUE, draw: (g) => { g.beginPath(); g.roundRect(70, 150, 460, 300, 46); g.stroke(); g.beginPath(); g.moveTo(95, 180); g.lineTo(300, 330); g.lineTo(505, 180); g.stroke(); } },
@@ -1257,12 +1308,17 @@ else {
     addEventListener('wheel', (e) => {
       if (blocked() || e.ctrlKey) return;
       const now = performance.now();
-      if (!g || now - g.last > 160) g = { t0: now, last: now, sum: 0, flick: false };
-      g.last = now; g.sum += e.deltaY;
-      // während eines Sprungs bzw. im Nachlauf einer Wisch-Geste: Ereignis schlucken, bevor Lenis es sieht
+      const d = Math.abs(e.deltaY);
+      // Nach einem Sprung: nur den abklingenden Trackpad-Nachschwung schlucken. Ein neuer Wisch (Ausschlag wird wieder größer
+      // oder Richtung wechselt) und spätestens 1,2 s nach dem Sprung beginnt eine neue Geste – sonst blieb die Seite hängen,
+      // solange die Ereignisse ohne Pause weiterliefen.
+      if (g && g.flick && !busy && (d > g.prev * 1.5 + 6 || Math.sign(e.deltaY) !== Math.sign(g.sum) || now - g.flickT > 1200)) g = null;
+      if (!g || now - g.last > 160) g = { t0: now, last: now, sum: 0, flick: false, prev: 0 };
+      g.last = now; g.prev = d; if (!g.flick) g.sum += e.deltaY;
+      // während eines Sprungs bzw. im Nachschwung einer Wisch-Geste: Ereignis schlucken, bevor Lenis es sieht
       if (busy || g.flick) { e.preventDefault(); e.stopPropagation(); return; }
       g.n = (g.n || 0) + 1;
-      if (now - g.t0 < 220 && g.n >= 2 && Math.abs(g.sum) > 180 && Math.abs(e.deltaY) >= 40) { /* schnelle Geste: viel Weg in kurzer Zeit */ g.flick = true; e.preventDefault(); e.stopPropagation(); jump(Math.sign(g.sum)); return; }
+      if (now - g.t0 < 220 && g.n >= 2 && Math.abs(g.sum) > 180 && Math.abs(e.deltaY) >= 40) { /* schnelle Geste: viel Weg in kurzer Zeit */ g.flick = true; g.flickT = now; e.preventDefault(); e.stopPropagation(); jump(Math.sign(g.sum)); return; }
       kickIdle();
     }, { capture: true, passive: false });
 
