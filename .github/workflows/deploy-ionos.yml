@@ -41,7 +41,7 @@ jobs:
           mkdir dist
           rsync -a --exclude '.git' --exclude '.github' --exclude 'steak-seite' --exclude 'hq-showcase' \
             --exclude 'tools' --exclude 'docs' --exclude 'node_modules' --exclude '*.md' \
-            --exclude 'package.json' --exclude 'package-lock.json' --exclude '.nojekyll' ./ dist/
+            --exclude 'package.json' --exclude 'package-lock.json' --exclude '.nojekyll' --exclude '_config.yml' ./ dist/
           find dist -type f | wc -l
 
       - name: Upload per SFTP (lftp mirror)

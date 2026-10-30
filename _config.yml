@@ -1,0 +1,9 @@
+# NUR für die GitHub-Pages-Vorschau (bis zum IONOS-Umzug).
+# Jekyll kopiert alle Dateien ohne Front Matter unverändert; diese Dateien werden NICHT veröffentlicht:
+exclude:
+  - kontakt.php          # PHP läuft auf Pages nicht, sonst Download des Quelltexts
+  - docs
+  - tools
+  - package.json
+  - package-lock.json
+  - _config.yml
