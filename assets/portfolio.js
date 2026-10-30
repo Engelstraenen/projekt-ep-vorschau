@@ -1,10 +1,9 @@
 // Portfolio „Ad Creatives“: Sparten, Poster mit Play-Knopf, Video lädt erst beim Klick.
 // Neue Arbeit hinzufügen = Dateien ablegen + eine Zeile in CLIPS:
-//   video/portfolio/<id>-720.mp4 und <id>-1080.mp4 (H.264, +faststart, 9:16)
+//   video/portfolio/<id>-720.mp4 (H.264 720×1280, +faststart, 9:16)
 //   img/portfolio/<id>-480.avif|webp und <id>-960.avif|webp (Poster bzw. Motiv)
 // Leere Sparten bleiben ausgeblendet und erscheinen von selbst, sobald ein Eintrag dazukommt.
-// Layout-Variante per Klasse am Abschnitt: pf--a (Raster mit Reitern), pf--b (Karussell je Sparte), pf--c (Feature + Thumbnails).
-// Vorschau ohne Code-Änderung: ?pf=a|b|c
+// Aufbau (von Eugen gewählt): alle Sparten untereinander, je Überschrift + volle Reihe ihrer Clips im Raster.
 (() => {
   const sec = document.getElementById('portfolio');
   if (!sec) return;
@@ -26,10 +25,6 @@
     { id: 'effekte-showreel', sparte: 'effekte', titel: '17 Effekte für Short-Form-Videos', zweck: 'Showreel mit 17 Videoeffekten für Short-Form-Ads.', dauer: 42.5, ton: false },
   ];
 
-  const q = new URLSearchParams(location.search).get('pf');
-  if (/^[abc]$/.test(q || '')) { sec.classList.remove('pf--a', 'pf--b', 'pf--c'); sec.classList.add('pf--' + q); }
-  const variant = () => (sec.classList.contains('pf--c') ? 'c' : sec.classList.contains('pf--b') ? 'b' : 'a');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const lowPower = matchMedia('(max-width: 860px), (pointer: coarse)').matches;
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -41,8 +36,6 @@
     replay: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     on: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L11.5 6v12l-4.3-3.5H4z" fill="currentColor"/><path d="M15 9.2a4 4 0 0 1 0 5.6M17.6 6.8a7.4 7.4 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
     off: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L11.5 6v12l-4.3-3.5H4z" fill="currentColor"/><path d="m15.5 9.5 5 5m0-5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-    prev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    next: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   };
   const picture = (id, sizes, eager) => `<picture>` +
     `<source type="image/avif" srcset="img/portfolio/${id}-480.avif 480w, img/portfolio/${id}-960.avif 960w" sizes="${sizes}">` +
@@ -60,27 +53,20 @@
 
   // ---------- Aufbau ----------
   const used = SPARTEN.filter((s) => CLIPS.some((c) => c.sparte === s.id));
-  const tabs = sec.querySelector('.pf-tabs'), groups = sec.querySelector('.pf-groups'), feature = sec.querySelector('.pf-feature');
-  tabs.innerHTML = `<button type="button" aria-pressed="true" data-f="alle">Alle <span>${CLIPS.length}</span></button>` +
-    SPARTEN.map((s) => { const n = CLIPS.filter((c) => c.sparte === s.id).length; return `<button type="button" aria-pressed="false" data-f="${s.id}"${n ? '' : ' hidden'}>${esc(s.name)} <span>${n}</span></button>`; }).join('');
+  const groups = sec.querySelector('.pf-groups');
   groups.innerHTML = SPARTEN.map((s) => {
     const list = CLIPS.filter((c) => c.sparte === s.id);
     return `<section class="pf-group" data-sparte="${s.id}" aria-labelledby="pf-g-${s.id}"${list.length ? '' : ' hidden'}>` +
-      `<div class="pf-group-head"><h3 id="pf-g-${s.id}">${esc(s.name)}</h3><span class="pf-count">${list.length} ${list.length === 1 ? 'Arbeit' : 'Arbeiten'}</span>` +
-      `<span class="pf-arrows"><button type="button" class="pf-arrow" data-dir="-1" aria-label="${esc(s.name)}: zurück">${ICON.prev}</button><button type="button" class="pf-arrow" data-dir="1" aria-label="${esc(s.name)}: weiter">${ICON.next}</button></span></div>` +
-      `<ul class="pf-row" data-lenis-prevent-horizontal>` + list.map((c) => `<li class="pf-card" data-id="${c.id}" data-sparte="${c.sparte}">${media(c, '(max-width: 860px) 62vw, 280px')}${caption(c)}</li>`).join('') + `</ul></section>`;
+      `<div class="pf-group-head"><h3 id="pf-g-${s.id}">${esc(s.name)}</h3><span class="pf-count">${list.length} ${list.length === 1 ? 'Arbeit' : 'Arbeiten'}</span></div>` +
+      `<ul class="pf-row" data-lenis-prevent-horizontal>` + list.map((c) => `<li class="pf-card" data-id="${c.id}" data-sparte="${c.sparte}">${media(c, '(max-width: 860px) 46vw, 240px')}${caption(c)}</li>`).join('') + `</ul></section>`;
   }).join('');
-  const first = CLIPS[0];
-  feature.innerHTML = `<div class="pf-feature-in" data-id="${first.id}">${media(first, '(max-width: 860px) 80vw, 440px', true)}${caption(first, 'p')}</div>`;
   sec.dataset.ready = '';
 
   // ---------- Player ----------
   let soundOn = true, current = null;
   const setHold = () => { window.__pfHold = lowPower && !!current && !current.v.paused; };
-  function srcFor(box) { // 720p reicht für Karten und Handys, 1080p nur für große Darstellung auf scharfen Bildschirmen
-    const big = box.clientWidth * Math.min(devicePixelRatio || 1, 2) > 760 && !navigator.connection?.saveData;
-    return `video/portfolio/${box.closest('[data-id]').dataset.id}-${big ? 1080 : 720}.mp4`;
-  }
+  // Karten sind höchstens ~260 px breit: 720p ist auch auf Retina-Displays scharf genug
+  const srcFor = (box) => `video/portfolio/${box.closest('[data-id]').dataset.id}-720.mp4`;
   function wire(box) {
     if (box._p) return box._p;
     const v = box.querySelector('video'), btn = box.querySelector('.pf-play'), ic = box.querySelector('.pf-play-ic'), snd = box.querySelector('.pf-sound'), bar = box.querySelector('.pf-bar i');
@@ -114,7 +100,6 @@
       applySound,
     };
     btn.addEventListener('click', () => {
-      if (variant() === 'c' && !box.closest('.pf-feature')) return toFeature(box.closest('.pf-card').dataset.id, true);
       if (box.dataset.state === 'playing' || box.dataset.state === 'loading' && !v.paused) p.pause(); else p.play();
     });
     snd?.addEventListener('click', () => { soundOn = !soundOn; applySound(); });
@@ -124,45 +109,5 @@
   }
   sec.querySelectorAll('.pf-media:not(.is-bild)').forEach(wire);
 
-  // ---------- Variante C: Feature-Video + Thumbnails ----------
-  function toFeature(id, autoplay) {
-    const c = CLIPS.find((x) => x.id === id); if (!c) return;
-    const old = feature.querySelector('.pf-feature-in');
-    old.querySelector('.pf-media')._p?.reset();
-    if (current && current.box === old.querySelector('.pf-media')) current = null;
-    const nu = document.createElement('div'); nu.className = 'pf-feature-in'; nu.dataset.id = id;
-    nu.innerHTML = media(c, '(max-width: 860px) 80vw, 440px', true) + caption(c, 'p');
-    old.replaceWith(nu);
-    sec.querySelectorAll('.pf-card').forEach((k) => k.classList.toggle('is-active', k.dataset.id === id));
-    const p = nu.querySelector('.pf-media:not(.is-bild)') && wire(nu.querySelector('.pf-media'));
-    if (!reduced) nu.animate([{ opacity: 0, filter: 'blur(6px)' }, { opacity: 1, filter: 'blur(0)' }], { duration: 260, easing: 'cubic-bezier(.23,1,.32,1)' });
-    if (autoplay && p) p.play();
-    if (matchMedia('(max-width: 860px)').matches) { const r = feature.getBoundingClientRect(); if (r.top < 64 || r.top > innerHeight * .5) scrollBy({ top: r.top - 80, behavior: reduced ? 'auto' : 'smooth' }); }
-  }
-  sec.querySelectorAll('.pf-card').forEach((k) => k.classList.toggle('is-active', k.dataset.id === first.id));
-
-  // ---------- Variante A: Sparten-Reiter ----------
-  tabs.addEventListener('click', (e) => {
-    const b = e.target.closest('button[data-f]'); if (!b) return;
-    const f = b.dataset.f;
-    tabs.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    if (current && !current.v.paused) current.pause();
-    let i = 0;
-    sec.querySelectorAll('.pf-card').forEach((k) => {
-      const on = f === 'alle' || k.dataset.sparte === f;
-      k.classList.toggle('is-out', !on);
-      if (on && !reduced) k.animate([{ opacity: 0, transform: 'translateY(10px) scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 240, delay: 40 * i++, easing: 'cubic-bezier(.23,1,.32,1)', fill: 'backwards' });
-    });
-  });
-
-  // ---------- Variante B: Pfeile am Karussell ----------
-  sec.querySelectorAll('.pf-group').forEach((g) => {
-    const row = g.querySelector('.pf-row'), arrows = [...g.querySelectorAll('.pf-arrow')];
-    const upd = () => { const max = row.scrollWidth - row.clientWidth - 2; arrows[0].disabled = row.scrollLeft <= 2; arrows[1].disabled = row.scrollLeft >= max; g.classList.toggle('is-scrollable', max > 2); };
-    arrows.forEach((a) => a.addEventListener('click', () => { const card = row.querySelector('.pf-card'); row.scrollBy({ left: +a.dataset.dir * ((card?.offsetWidth || 260) + 16), behavior: reduced ? 'auto' : 'smooth' }); }));
-    row.addEventListener('scroll', upd, { passive: true });
-    new ResizeObserver(upd).observe(row);
-  });
-
-  window.__pf = { CLIPS, SPARTEN, variant, used: used.map((s) => s.id), players: () => [...sec.querySelectorAll('.pf-media')].map((m) => m._p).filter(Boolean) };
+  window.__pf = { CLIPS, SPARTEN, used: used.map((s) => s.id), players: () => [...sec.querySelectorAll('.pf-media')].map((m) => m._p).filter(Boolean) };
 })();
