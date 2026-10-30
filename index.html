@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-chC3iTz6XyPEIWAszVN9FtqM2B6odig/xQyUVBv/Vgg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-WzEGGxDkJc1rZyEw6m+mx8u9JaNwUueIcL11wKoGYxM=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -426,6 +426,7 @@
 <link rel="stylesheet" href="assets/nav.css">
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="assets/consent-theme.css">
+<link rel="stylesheet" href="assets/portfolio.css">
 </head>
 <body>
 <a class="skip" href="#main">Direkt zum Inhalt</a>
@@ -433,7 +434,7 @@
 
 <header class="top">
   <a class="brand" href="#intro">PROJEKT <b>EP</b><i aria-hidden="true"></i></a>
-  <nav class="links" aria-label="Hauptnavigation"><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mega">Leistungen <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a></nav>
+  <nav class="links" aria-label="Hauptnavigation"><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mega">Leistungen <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a href="#portfolio">Arbeiten</a><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a></nav>
   <div class="right"><button class="menu-mobile" type="button" aria-expanded="false" aria-controls="mega" aria-label="Menü öffnen"><i aria-hidden="true"></i>Menü</button><a class="btn small" href="#kontakt">Projekt starten ↗</a></div>
 </header>
 <!-- mega:start -->
@@ -450,7 +451,7 @@
       <a class="tile" href="leistungen/print-design.html"><span class="thumb"><img src="lab/print.webp" alt="" loading="lazy"></span><span><small>06 · Craft</small><b>Print Design</b><span>Textil, Objekte, Packaging</span></span></a><a class="tile" href="leistungen/logo-design.html"><span class="thumb"><img src="lab/logo-design.webp" alt="" loading="lazy"></span><span><small>07 · Brand</small><b>Logo Design</b><span>Logo, CI, Markenauftritt</span></span></a><a class="tile" href="leistungen/merch.html"><span class="thumb"><img src="lab/merch.webp" alt="" loading="lazy"></span><span><small>08 · Produce</small><b>Merch-Produktion</b><span>Shirts, Hoodies, Denim, Strick</span></span></a>
       <a class="tile" href="leistungen/individuelle-auftraege.html"><span class="thumb"><img src="lab/produkt.webp" alt="" loading="lazy"></span><span><small>Mehr</small><b>Individuelle Aufträge</b><span>Wenn deine Idee nicht ins Raster passt</span></span></a>
     </div>
-    <nav class="mega-extra" aria-label="Weitere Seiten"><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a><a href="#kontakt">Projekt starten</a></nav>
+    <nav class="mega-extra" aria-label="Weitere Seiten"><a href="#portfolio">Arbeiten</a><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a><a href="#kontakt">Projekt starten</a></nav>
   </div>
 <!-- mega:end -->
 <div class="scrollbar" aria-hidden="true"><span id="scrollbar"></span></div>
@@ -572,6 +573,14 @@
     </div><figure class="dom-img fb-img"><img src="lab/dashboards.webp" alt="Interaktives Dashboard mit Lager-, Team- und Umsatzzahlen" loading="lazy"></figure></div>
   </section>
 
+  <section class="block pf" id="portfolio" aria-labelledby="pf-h">
+    <div class="pf-in">
+      <div class="pf-head"><h2 id="pf-h">Ad Creatives. <span class="mute">Gemacht für den Feed.</span></h2><p>Eine Auswahl unserer Arbeiten, sortiert nach Sparte. Alle gezeigten Marken sind Demo&#8209;Marken.</p></div>
+      <div class="pf-groups"></div>
+      <noscript><p class="pf-zweck">Die Videos brauchen JavaScript.</p></noscript>
+    </div>
+  </section>
+
   <section class="block" id="preise" data-key="icon:euro" data-name="Preise">
     <div class="card">
       <div class="head-row"><div class="section-head"><p class="kicker">Richtpreise</p><h2>Was kostet das? <span class="mute">Ein ehrlicher erster Rahmen.</span></h2><p style="color:var(--ink-2);margin-top:18px">Jedes Projekt ist anders. Diese Richtpreise geben euch eine erste Orientierung, das genaue Angebot stimmen wir nach dem Erstgespräch ab. Kleine Änderungs- und Wartungsaufträge: 100 € je Auftrag.</p></div><div class="swarm-slot" aria-hidden="true"></div></div>
@@ -632,6 +641,7 @@
   </section>
 </main>
 
+<script src="assets/portfolio.js" defer></script>
 <!-- es-module-shims entfernt (Audit 10/2026): löste unter strikter CSP blob:-Skripte aus; Import-Maps können alle aktuellen Browser nativ (Safari ab 16.4). -->
 <script type="importmap">
 { "imports": {
@@ -1268,6 +1278,7 @@ else {
 
   function frame(now) {
     if (lenis) lenis.raf(now);
+    if (window.__pfHold) { requestAnimationFrame(frame); return; } // Portfolio-Video läuft (Handy/Touch): Schwarm pausiert, damit das Video ruckelfrei bleibt
     timer.update(now); const dt = Math.min(timer.getDelta(), .05), time = timer.getElapsed();
     const y = lenis ? lenis.scroll : scrollY;
     const c = timeline(y);
@@ -1384,11 +1395,16 @@ else {
     const stops = () => {
       const list = [...new Set(anchors.map((a) => Math.round(a)))].sort((a, b) => a - b), maxY = document.documentElement.scrollHeight - innerHeight;
       if (maxY - list[list.length - 1] > innerHeight * .3) list.push(maxY);
+      if (pfSec) { const t = pfTop(); list.push(t); list.sort((a, b) => a - b); }
       return list;
     };
     window.__stops = stops;
     const curY = () => (lenis ? lenis.scroll : scrollY);
-    const blocked = () => !!document.querySelector('.kino.open, .mega.open');
+    // Portfolio (frei fließend, höher als ein Bildschirm): drinnen normales Scrollen, kein Einrasten und kein Wisch-Sprung
+    const pfSec = document.getElementById('portfolio');
+    const pfTop = () => Math.round(pfSec.offsetTop);
+    const inPf = () => { if (!pfSec) return false; const y = curY(); return y >= pfTop() - 8 && y < pfTop() + pfSec.offsetHeight - innerHeight * .6; };
+    const blocked = () => !!document.querySelector('.kino.open, .mega.open') || inPf();
     // busy = nur während eines Wisch-Sprungs (Eingaben werden dann geschluckt); spätestens nach 1 s wieder frei
     let busy = false, busyT = 0, idleT = 0;
     const ease = (t) => 1 - Math.pow(1 - t, 3);
