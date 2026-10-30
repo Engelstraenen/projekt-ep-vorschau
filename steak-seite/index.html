@@ -9,8 +9,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3l13 13-13 13L3 16z' fill='%23d4af37'/%3E%3C/svg%3E" />
   <link rel="preload" as="image" href="./media/s1_hero.webp" />
   <link rel="preload" as="image" href="./media/s1_cutout.webp" />
-  <script type="module" crossorigin src="./assets/index-CLw0RRsb.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Bxbt-Phi.css">
+  <script type="module" crossorigin src="./assets/index-BkBIz_pz.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DwID0pkH.css">
 </head>
 <body>
   <div id="loader" aria-hidden="true"><div class="loader__mark"><span></span></div><div class="loader__bar"><i></i></div></div>
@@ -50,8 +50,10 @@
     <button type="button" data-goto="2" aria-label="Go to section 3: The Crown"><i></i></button>
   </nav>
 
-  <!-- foreground gold-leaf layer (scroll-scrubbed frame sequence, screen-blended) -->
-  <div class="flakes" aria-hidden="true"><canvas class="flakes__canvas" width="1280" height="720"></canvas></div>
+  <!-- interactive layers: cursor spotlight, embers + matte gold leaf (one canvas), film grain -->
+  <div class="spot" aria-hidden="true"><i></i></div>
+  <div class="flakes" aria-hidden="true"><canvas class="flakes__canvas"></canvas></div>
+  <div class="grain" aria-hidden="true"><i></i></div>
 
   <main>
     <!-- ============ S1 — THE REVEAL ============ -->
@@ -92,6 +94,7 @@
     <!-- ============ S3 — THE CROWN (pinned, scroll-scrubbed frame sequence) ============ -->
     <section class="sec s3" id="crown" aria-label="Section 03 — The Crown">
       <canvas class="media media--s3" width="1280" height="720" aria-hidden="true"></canvas>
+      <div class="s3__band" aria-hidden="true"></div>
       <div class="s3__shade" aria-hidden="true"></div>
       <div class="s3-head">
         <p class="overline" data-reveal>SECTION 03 — THE CROWN</p>
