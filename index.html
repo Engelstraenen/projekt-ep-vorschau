@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-2X3eNqNDknJ1dqOgeyF9Ah9X7P2T3UeSdwIubIqlyTA=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-Maq4FOhGA8IIO3FhgcoKn7zrPp2QCU28gXXzG8mADd0=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -55,8 +55,8 @@
   .btn.ghost:hover { text-decoration: underline; }
 
   /* Scrollweg pro Kapitel: kurz genug, dass bei jedem Wisch etwas passiert (alte Seite ~0,8 Bildschirme je Leistung) */
-  .ch { position: relative; height: 100vh; }
-  .ch.short { height: 110vh; }
+  .ch { position: relative; height: 100vh; height: 100svh; }
+  .ch.short { height: 110vh; height: 110svh; }
   #lab { height: 170vh; } /* braucht Weg für die waagerechte Galerie */
   .sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; grid-template-columns: .42fr .58fr; align-items: center; padding: 64px var(--gutter) 0; --f: 0; }
   [data-side="left"] .sticky { grid-template-columns: .58fr .42fr; }
@@ -588,7 +588,8 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 const root = document.documentElement;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobile = matchMedia('(max-width: 860px)').matches;
-const N = mobile ? 32000 : 80000;
+const touch = matchMedia('(pointer: coarse)').matches; // Handy/Tablet: natürliches Scrollen, kein Smooth-Scroll, kein Einrasten
+const N = mobile ? 14000 : 80000; // mobil deutlich weniger Teilchen
 const SAT0 = Math.floor(N * .91); // die letzten 9 % der Teilchen bilden am Ende den großen Papierflieger am "Projekt starten"-Button
 
 // ---------- Text-Choreografie: Texte in Buchstaben/Wörter zerlegen, damit sie sich mit dem Schwarm aufbauen ----------
@@ -631,7 +632,7 @@ document.querySelectorAll('main > section[data-key]').forEach((sec) => {
   const own = (sel) => [...sec.querySelectorAll(sel)].filter((e) => !e.closest('#answer') && !e.closest('.rv'));
   // Kicker sind Flex-Container mit Abstand: reinen Text erst in einen Span packen, sonst würde jedes Wort zum eigenen Flex-Element
   own('.kicker').slice(0, 1).forEach((e) => { if (!e.children.length) e.innerHTML = `<span>${e.innerHTML}</span>`; splitText(e, 'type'); });
-  own('h2').forEach((e) => splitText(e, sec.id === 'manifest' ? 'blur' : sec.id === 'kontakt' ? 'swarm' : pickStyle())); // Schluss-Slogan: Buchstaben wie Schwarm-Teilchen
+  own('h2').forEach((e) => splitText(e, sec.id === 'manifest' ? 'blur' : sec.id === 'kontakt' ? (mobile || touch ? 'fog' : 'swarm') : pickStyle())); // Schluss-Slogan: Buchstaben wie Schwarm-Teilchen; mobil/Touch ruhiger (Wörter blenden weich ein, keine fliegenden Buchstaben)
   const pDir = Math.random() < .5 ? 1 : -1, pStyle = Math.random() < .35 ? 'fog' : 'drift';
   own('.copy > p:not(.kicker), .section-head > p:not(.kicker), #lab .head > p, #manifest .lead').forEach((e) => splitText(e, sec.id === 'manifest' ? 'blur' : pStyle, { px: (pDir * (.6 + Math.random() * .8)).toFixed(2) + 'em' }));
   const ang = Math.random() * Math.PI * 2, bx = (Math.cos(ang) * 46).toFixed(0) + 'px', by = (Math.sin(ang) * 30).toFixed(0) + 'px';
@@ -647,7 +648,7 @@ document.querySelectorAll('main > section[data-key]').forEach((sec) => {
 
 // ---------- Smooth Scroll ----------
 let lenis = null;
-if (!reduced) {
+if (!reduced && !touch) {
   try {
     const { default: Lenis } = await import('./assets/vendor/lenis/lenis.mjs');
     lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 1.65, touchMultiplier: 1.8, autoRaf: false }); // direkter: weniger Nachlauf, mehr Weg pro Mausrad-Raste
@@ -915,7 +916,7 @@ let renderer = null;
 try { renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' }); } catch {}
 if (!renderer) { canvas.remove(); root.classList.add('no-gl'); window.__glInfo = 'WebGL nicht verfügbar'; }
 else {
-  const dpr = Math.min(devicePixelRatio, mobile ? 1.6 : 2);
+  const dpr = Math.min(devicePixelRatio, mobile ? 1.25 : 2);
   renderer.setPixelRatio(dpr);
   root.classList.add('gl');
   const scene = new THREE.Scene();
@@ -1124,7 +1125,7 @@ else {
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0, .4, .82);
-  composer.addPass(bloom);
+  if (!mobile) composer.addPass(bloom); // mobil ohne Leuchteffekt (spart GPU, ruhigeres Scrollen)
 
   // Formen werden vorab berechnet und als Texturen hochgeladen; beim Kapitelwechsel werden nur Texturen
   // umgeschaltet – im selben Frame wie alle übrigen Einstellungen.
@@ -1154,8 +1155,11 @@ else {
     return true; // fehlte vorher -> der Wechsel-Frame wurde mit alten Einstellungen gezeichnet = Aufblitzen
   }
 
+  let lastW = 0, lastH = 0;
   function resize() {
     const w = innerWidth, h = innerHeight;
+    if (w === lastW && Math.abs(h - lastH) < 120) return; // iOS-Adressleiste ein-/ausfahren: nichts neu aufbauen
+    lastW = w; lastH = h;
     renderer.setSize(w, h, false); composer.setSize(w, h); bgU.uRes.value.set(w * dpr, h * dpr);
     camera.aspect = w / h; camera.updateProjectionMatrix(); measure();
   }
@@ -1314,7 +1318,9 @@ else {
   // Haltepunkte: normales Scrollen bleibt frei. Zusätzlich
   //  1) schneller Wisch (Trackpad/Touch) oder schnelles Drehen am Mausrad → springt zum nächsten fertigen Kapitel,
   //  2) hört man nah an einem Kapitel auf zu scrollen (≤ 22 % Bildschirmhöhe) → rastet es sanft dort ein.
-  if (!new URLSearchParams(location.search).has('zeige')) {
+  // Nur am Desktop mit Maus/Trackpad: auf Touch-Geräten arbeitete das Einrasten gegen das Momentum-Scrollen von iOS
+  // (Seite sprang beim Hochziehen aus dem Schlussbereich zurück). Bei "Bewegung reduzieren" ebenfalls aus.
+  if (!touch && !reduced && !new URLSearchParams(location.search).has('zeige')) {
     const stops = () => {
       const list = [...new Set(anchors.map((a) => Math.round(a)))].sort((a, b) => a - b), maxY = document.documentElement.scrollHeight - innerHeight;
       if (maxY - list[list.length - 1] > innerHeight * .3) list.push(maxY);
