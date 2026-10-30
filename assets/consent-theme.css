@@ -1,0 +1,13 @@
+/* Banner im CI von PROJEKT EP: Systemschrift, Blau #0071E3, Tinte #1D1D1F, runde Ecken */
+#cc-main {
+  --cc-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Inter, Arial, sans-serif;
+  --cc-bg: #FFFFFF; --cc-primary-color: #1D1D1F; --cc-secondary-color: #515154;
+  --cc-btn-primary-bg: #0071E3; --cc-btn-primary-color: #FFFFFF; --cc-btn-primary-border-color: #0071E3;
+  --cc-btn-primary-hover-bg: #0062C4; --cc-btn-primary-hover-border-color: #0062C4;
+  --cc-btn-secondary-bg: #0071E3; --cc-btn-secondary-color: #FFFFFF; --cc-btn-secondary-border-color: #0071E3;
+  --cc-btn-secondary-hover-bg: #0062C4; --cc-btn-secondary-hover-color: #FFFFFF; --cc-btn-secondary-hover-border-color: #0062C4;
+  --cc-separator-border-color: #D2D2D7; --cc-toggle-on-bg: #0071E3; --cc-cookie-category-block-bg: #F5F5F7;
+  --cc-modal-border-radius: 22px; --cc-btn-border-radius: 999px; --cc-link-color: #0066CC;
+}
+#cc-main .cm__btn, #cc-main .pm__btn { font-weight: 500; letter-spacing: -.01em; }
+.cc-settings-link { cursor: pointer; }

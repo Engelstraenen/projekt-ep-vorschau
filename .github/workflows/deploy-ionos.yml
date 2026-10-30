@@ -1,0 +1,70 @@
+# Deploy der statischen Website zu IONOS Webhosting per SFTP.
+# Läuft NUR manuell (workflow_dispatch) und nur nach Freigabe in der Umgebung "production".
+# Vorher in GitHub anlegen: Settings > Environments > production (Required reviewers: Eugen)
+# Secrets dort: IONOS_SFTP_HOST, IONOS_SFTP_USER, IONOS_SFTP_PASSWORD, IONOS_SFTP_PATH, IONOS_SFTP_KNOWN_HOSTS
+name: Deploy zu IONOS (projekt-ep.de)
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Nur anzeigen, nichts hochladen"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-ionos
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sicherheitschecks vor dem Upload
+        run: |
+          set -e
+          # keine Drittanbieter-Skripte / -Fonts ohne Einwilligung
+          ! grep -rIl --include=*.html -E "cdn\.jsdelivr|fonts\.googleapis|fonts\.gstatic|unpkg\.com|cdnjs" . | grep -v steak-seite
+          # CSP-Hashes aktuell?
+          python3 tools/csp.py > /dev/null && git diff --exit-code -- '*.html' .htaccess
+          # Impressum/Datenschutz ohne offene Platzhalter? (Warnung, kein Abbruch)
+          grep -c "PLATZHALTER" impressum.html datenschutz.html || true
+
+      - name: Paket bauen (ohne Vorschauen, Werkzeuge und Repo-Dateien)
+        run: |
+          mkdir dist
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'steak-seite' --exclude 'hq-showcase' \
+            --exclude 'tools' --exclude 'docs' --exclude 'node_modules' --exclude '*.md' \
+            --exclude 'package.json' --exclude 'package-lock.json' --exclude '.nojekyll' ./ dist/
+          find dist -type f | wc -l
+
+      - name: Upload per SFTP (lftp mirror)
+        env:
+          HOST: ${{ secrets.IONOS_SFTP_HOST }}
+          USER: ${{ secrets.IONOS_SFTP_USER }}
+          PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          TARGET: ${{ secrets.IONOS_SFTP_PATH }}
+          KNOWN: ${{ secrets.IONOS_SFTP_KNOWN_HOSTS }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          mkdir -p ~/.ssh && echo "$KNOWN" > ~/.ssh/known_hosts && chmod 600 ~/.ssh/known_hosts
+          FLAGS="--reverse --delete --verbose --parallel=4"
+          [ "$DRY" = "true" ] && FLAGS="$FLAGS --dry-run"
+          lftp -e "set sftp:auto-confirm no; set net:max-retries 2; mirror $FLAGS dist/ $TARGET; bye" -u "$USER","$PASS" "sftp://$HOST"
+
+      - name: Prüfung nach dem Deploy
+        if: ${{ inputs.dry_run == false }}
+        run: |
+          sleep 10
+          curl -sSI https://projekt-ep.de/ | tee headers.txt
+          grep -qi "strict-transport-security" headers.txt
+          grep -qi "content-security-policy" headers.txt
+          curl -sSI http://projekt-ep.de/ | grep -q "301"
+          curl -sSI https://www.projekt-ep.de/ | grep -q "301"

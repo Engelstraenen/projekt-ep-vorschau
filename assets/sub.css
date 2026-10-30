@@ -39,7 +39,7 @@ main { padding: 0 var(--gutter); max-width: 1320px; margin: 0 auto; }
 
 .hero { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 5vw, 80px); align-items: center; padding: clamp(40px, 7vh, 80px) 0 clamp(60px, 9vh, 110px); }
 .kicker { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--blue); margin-bottom: 18px; display: flex; gap: 14px; }
-.kicker span:first-child { opacity: .75; }
+.kicker span:first-child { opacity: .75; } /* Audit: Kontrast */ .kicker span:first-child { opacity: 1; color: var(--blue-ink); }
 h1 { font-size: clamp(40px, 4.6vw, 72px); font-weight: 650; letter-spacing: -.05em; line-height: 1.02; text-wrap: balance; }
 .lead { color: var(--ink-2); font-size: clamp(18px, 1.4vw, 21px); margin-top: 22px; max-width: 46ch; }
 .ctas { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-top: 30px; }
@@ -73,7 +73,7 @@ h1 { font-size: clamp(40px, 4.6vw, 72px); font-weight: 650; letter-spacing: -.05
 .note { color: var(--ink-2); font-size: 14px; margin-top: 18px; max-width: 72ch; }
 ol.steps { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 36px; }
 ol.steps li { background: var(--bg-2); border-radius: 24px; padding: 26px; }
-ol.steps span { color: var(--blue); font-size: 13px; }
+ol.steps span { color: var(--blue-ink); font-size: 13px; } /* Audit: Kontrast 4.5:1 */
 ol.steps b { display: block; font-size: 20px; font-weight: 650; letter-spacing: -.03em; margin: 10px 0 6px; }
 ol.steps p { color: var(--ink-2); font-size: 15px; }
 details { border-bottom: 1px solid var(--line); padding: 22px 0; }
@@ -141,7 +141,7 @@ nav.links a[aria-current="page"] { opacity: 1; font-weight: 600; }
 .filter button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
 .filter button[aria-pressed="true"] span { color: #A1A1A6; }
 .qa summary { align-items: baseline; }
-.qa summary .tag { flex: 0 0 auto; font-size: 12px; font-weight: 500; color: var(--blue); background: #EAF2FF; border-radius: 999px; padding: 3px 10px; letter-spacing: 0; }
+.qa summary .tag { flex: 0 0 auto; font-size: 12px; font-weight: 500; color: var(--blue-ink); background: #EAF2FF; border-radius: 999px; padding: 3px 10px; letter-spacing: 0; }
 .qa summary .q { flex: 1; }
 .qa details p { max-width: 70ch; font-size: 17px; padding-left: 2px; }
 .qa details p strong { color: var(--ink); font-weight: 600; }

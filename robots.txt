@@ -1,2 +1,7 @@
+# Launch-Version für https://projekt-ep.de
+# ACHTUNG: Erst mit dem IONOS-Umzug live schalten. Die GitHub-Pages-Vorschau bleibt bis dahin gesperrt (main: Disallow: /).
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /kontakt.php
+
+Sitemap: https://projekt-ep.de/sitemap.xml

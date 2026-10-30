@@ -2,10 +2,18 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-2X3eNqNDknJ1dqOgeyF9Ah9X7P2T3UeSdwIubIqlyTA=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PROJEKT EP – Vorschau v3</title>
-<meta name="robots" content="noindex">
+<title>PROJEKT EP – Websites, Werbeclips, Design und Automatisierung</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PROJEKT EP">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://projekt-ep.de/">
+<meta property="og:title" content="PROJEKT EP – Websites, Werbeclips, Design und Automatisierung">
+<meta name="description" content="PROJEKT EP macht Ideen sichtbar: Websites, Werbeclips, Logo Design, Print, Merch, SEO, Apps, Games und Automatisierung. Vom ersten Gedanken zum fertigen Ergebnis.">
+<link rel="canonical" href="https://projekt-ep.de/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2714%27 fill=%27none%27 stroke=%27%230071E3%27 stroke-width=%273%27/%3E%3C/svg%3E">
 <style>
   :root {
@@ -361,8 +369,12 @@
   .kino .vplayer { width: min(1200px, 100%, calc((100svh - 140px) * 16 / 9)); transform: scale(.94); transition: transform .5s var(--ease); }
   .kino.open .vplayer { transform: none; }
   .kino .close { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 22px; cursor: pointer; }
+  .kontakt-wege { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; justify-content: center; position: relative; z-index: 3; }
+  .kontakt-wege .kontakt-mail { color: var(--ink-2); font-size: 17px; }
 </style>
 <link rel="stylesheet" href="assets/nav.css">
+<link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
+<link rel="stylesheet" href="assets/consent-theme.css">
 </head>
 <body>
 <a class="skip" href="#main">Direkt zum Inhalt</a>
@@ -400,7 +412,7 @@
         <p class="eyebrow">Independent Creative Studio · Strategy · Creation · Development</p>
         <h1>Vom ersten Gedanken. <span class="blue">Zum fertigen Ergebnis.</span></h1>
         <p class="lead">Wir machen Ideen sichtbar und auffindbar: mit Werbeclips, Logo Design, Print, Merch und SEO. Und erlebbar als Websites, Apps, Games, Dashboards und Abläufe, die von selbst laufen.</p>
-        <button class="vthumb" type="button" aria-haspopup="dialog" aria-label="Erklärvideo abspielen: Was PROJEKT EP für euch macht"><video muted loop playsinline preload="none" aria-hidden="true"></video><span class="vposter" aria-hidden="true"><b>E<span>P</span></b><img src="video/erklaervideo-poster.webp" alt="" onerror="this.remove()"></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
+        <button class="vthumb" type="button" aria-haspopup="dialog"><video muted loop playsinline preload="none" aria-hidden="true"></video><span class="vposter" aria-hidden="true"><b>E<span>P</span></b><img src="video/erklaervideo-poster.webp" alt="" data-remove-on-error></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
       </div>
     </div>
   </section>
@@ -542,7 +554,7 @@
     <div class="film-stage">
       <video id="erkl" playsinline preload="metadata" poster="video/motion-swarm-poster.jpg" aria-label="Motion-Video: Haben wir euer Interesse geweckt? PROJEKT EP"><source src="video/motion-swarm.mp4" type="video/mp4"></video>
       <div class="film-cap"><p class="kicker">Zum Schluss</p><h2>Haben wir euer Interesse geweckt?</h2></div>
-      <button type="button" class="film-play" id="erklPlay" aria-label="Video abspielen im Vollbild"><span aria-hidden="true">▶</span> Video ansehen</button>
+      <button type="button" class="film-play" id="erklPlay" aria-label="Video ansehen (Vollbild)"><span aria-hidden="true">▶</span> Video ansehen</button>
       <a class="film-cta" href="#kontakt">Projekt starten ↗</a>
     </div>
   </section>
@@ -551,18 +563,19 @@
     <div class="sticky"><div class="final">
       <p class="kicker" style="justify-content:center;color:var(--ink-2)">Der erste Schritt</p>
       <h2>Wer zu viel für sein Unternehmen arbeitet, <span class="mute">hat keine Zeit, an seinem Unternehmen zu arbeiten.</span></h2>
+      <p class="kontakt-wege"><a class="btn" href="kontakt.html">Projekt starten ↗</a> <a class="kontakt-mail" href="mailto:kontakt@projekt-ep.de">kontakt@projekt-ep.de</a></p>
     </div>
     <div class="ep-slot" aria-hidden="true"></div>
-    <footer role="contentinfo"><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="rechtliches.html#impressum">Impressum</a><a href="rechtliches.html#datenschutz">Datenschutz</a><a href="rechtliches.html#cookies">Cookie-Policy</a><a href="rechtliches.html#agb">AGB</a><a href="rechtliches.html#barrierefreiheit">Barrierefreiheit</a></footer>
+    <footer role="contentinfo"><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="rechtliches.html#cookies">Cookie-Policy</a><a href="rechtliches.html#agb">AGB</a><a href="rechtliches.html#barrierefreiheit">Barrierefreiheit</a><a href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
     </div>
   </section>
 </main>
 
-<script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js"></script> <!-- Import-Maps für ältere Browser (Safari < 16.4) -->
+<!-- es-module-shims entfernt (Audit 10/2026): löste unter strikter CSP blob:-Skripte aus; Import-Maps können alle aktuellen Browser nativ (Safari ab 16.4). -->
 <script type="importmap">
 { "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+  "three": "./assets/vendor/three/build/three.module.js",
+  "three/addons/": "./assets/vendor/three/examples/jsm/"
 } }
 </script>
 <script type="module">
@@ -635,7 +648,7 @@ document.querySelectorAll('main > section[data-key]').forEach((sec) => {
 let lenis = null;
 if (!reduced) {
   try {
-    const { default: Lenis } = await import('https://cdn.jsdelivr.net/npm/lenis@1.3.26/+esm');
+    const { default: Lenis } = await import('./assets/vendor/lenis/lenis.mjs');
     lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 1.65, touchMultiplier: 1.8, autoRaf: false }); // direkter: weniger Nachlauf, mehr Weg pro Mausrad-Raste
     document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
       const id = a.getAttribute('href'); if (id.length < 2) return;
@@ -1450,6 +1463,12 @@ show('zeit');
   kino.addEventListener('click', (e) => { if (e.target === kino) open(false); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && kino.classList.contains('open')) open(false); });
 </script>
+<script>
+  // ersetzt das frühere onerror-Attribut (CSP ohne 'unsafe-inline'): fehlendes Posterbild entfernen
+  document.querySelectorAll('img[data-remove-on-error]').forEach((img) => {
+    if (img.complete && img.naturalWidth === 0) img.remove(); else img.addEventListener('error', () => img.remove());
+  });
+</script>
 <script src="assets/nav.js" defer></script>
 <script>
 (function(){const v=document.getElementById('erkl'),b=document.getElementById('erklPlay');if(!v||!b)return;const st=v.parentNode;
@@ -1459,5 +1478,7 @@ v.addEventListener('ended',()=>{v.controls=false;if(document.fullscreenElement)d
 v.addEventListener('pause',()=>{if(!v.ended&&!document.fullscreenElement){st.classList.remove('playing')}});
 })();
 </script>
+<script src="assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
+<script src="assets/consent.js" defer></script>
 </body>
 </html>
