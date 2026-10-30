@@ -47,6 +47,14 @@ Ziel: Die Seite läuft unter https://projekt-ep.de bei IONOS (Webhosting, Apache
 - Achtung: Im kostenlosen GitHub-Plan endet damit GitHub Pages für dieses Repo. Deshalb erst danach.
 - Die öffentliche Git-Historie enthält bis dahin auch entfernte Vorschauen (`hq-showcase/`, ältere `steak-seite/`-Stände). Mit dem Privatstellen sind sie nicht mehr abrufbar. Bereits erstellte Forks oder Kopien Dritter lassen sich so nicht zurückholen.
 
+## Übergangslösungen auf GitHub Pages – vor dem Go-live auf projekt-ep.de prüfen bzw. zurücknehmen
+
+Stand 30.10.2026, von Eugen freigegeben. Gilt nur, solange die Seite auf GitHub Pages läuft.
+
+1. **noindex (Commit 4a7bcf9):** `<meta name="robots" content="noindex">` auf den bisherigen Seiten und `robots.txt` mit `Disallow: /`. Vor dem Go-live zurücknehmen: `git revert 4a7bcf9` (danach `python3 tools/csp.py`), sonst ist auch projekt-ep.de gesperrt.
+2. **Kontaktformular per E-Mail:** `assets/kontakt.js` öffnet außerhalb von `projekt-ep.de` beim Absenden das E-Mail-Programm (`mailto:kontakt@projekt-ep.de`, Betreff und Text aus den Feldern), statt `kontakt.php` aufzurufen. Auf `projekt-ep.de` und `*.projekt-ep.de` (z. B. `test.projekt-ep.de`) greift automatisch wieder `kontakt.php`, der Button heißt dann wieder „Anfrage senden“. Ganz entfernen: Block „ÜBERGANG bis zum IONOS-Umzug“ samt `MAILTO`-Zeilen in `assets/kontakt.js` löschen (externes Skript, CSP-Hashes unberührt). Beim Testlauf (Schritt 3) prüfen, dass eine Testanfrage über `kontakt.php` ankommt.
+3. **kontakt.php auf Pages versteckt:** `.nojekyll` wurde entfernt und `_config.yml` schließt `kontakt.php`, `docs/`, `tools/` und `package*.json` von der Veröffentlichung aus. `kontakt.php` liegt unverändert im Repo-Root und wird vom IONOS-Workflow mit hochgeladen (`_config.yml` ist dort ausgeschlossen). Nach Schritt 5 (Pages abgelöst) kann `_config.yml` gelöscht werden.
+
 ## Rollback
 - Fehler nach Deploy: Workflow mit dem letzten guten Tag erneut ausführen (Actions → Run workflow → Ref = Tag).
 - `.htaccess` verursacht 500: Datei per SFTP umbenennen (`.htaccess.off`), Seite ist sofort wieder erreichbar.
