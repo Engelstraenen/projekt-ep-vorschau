@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-2X3eNqNDknJ1dqOgeyF9Ah9X7P2T3UeSdwIubIqlyTA=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-mAQ8/xABNG0RXYu1C669mTlP5t3G/a7YlxadSIs7L1g=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -371,6 +371,52 @@
   .kino .close { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 22px; cursor: pointer; }
   .kontakt-wege { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; justify-content: center; position: relative; z-index: 3; }
   .kontakt-wege .kontakt-mail { color: var(--ink-2); font-size: 17px; }
+  /* Team (vor dem Footer). Variante per Klasse am #team: team--a (Standard), team--b, team--c */
+  #team { text-align: left; padding: clamp(56px, 9vh, 110px) var(--gutter) clamp(56px, 8vh, 96px); }
+  .team-in { max-width: 1080px; margin: 0 auto; }
+  .team-head { text-align: center; max-width: 40em; margin: 0 auto clamp(32px, 5vh, 56px); }
+  .team-kicker { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+  #team h2 { font-size: clamp(28px, 3.2vw, 48px); letter-spacing: -.035em; line-height: 1.08; max-width: none; margin: 0; }
+  #team h2 .mute { color: var(--ink-2); }
+  .team-lead { color: var(--ink-2); font-size: clamp(16px, 1.3vw, 19px); margin-top: 14px; }
+  .team-list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+  .person { text-align: center; }
+  .person-foto { width: clamp(160px, 17vw, 220px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; background: #E8E8ED; }
+  .person-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .person-foto--leer { display: grid; place-items: end center; }
+  .person-foto--leer svg { width: 78%; height: auto; display: block; }
+  .person h3 { font-size: clamp(20px, 1.7vw, 24px); font-weight: 600; letter-spacing: -.02em; }
+  .person-rolle { color: var(--blue-ink); font-size: 15px; margin-top: 2px; }
+  .person-satz { color: var(--ink-2); font-size: 16px; line-height: 1.5; margin-top: 12px; }
+  .team-promise { display: none; }
+  .team--a .person-satz { display: none; }
+  /* B: zwei Karten im Hochformat, Foto oben */
+  .team--b .team-list { max-width: 540px; margin: 0 auto; }
+  .team--b .person { background: var(--bg-2); border-radius: 28px; overflow: hidden; text-align: left; padding: 0 0 28px; }
+  .team--b .person-foto { width: 100%; aspect-ratio: 1; border-radius: 0; margin: 0 0 22px; }
+  .team--b .person-foto--leer svg { width: 70%; }
+  .team--b .person-txt { padding: 0 28px; }
+  /* C: breite Zeile, Versprechen links, beide Personen rechts daneben */
+  .team--c .team-head { display: none; }
+  .team--c .team-in { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; background: var(--bg-2); border-radius: 32px; padding: clamp(28px, 4.5vw, 64px); }
+  .team--c .team-promise { display: block; }
+  .team-promise p { font-size: clamp(24px, 2.4vw, 36px); line-height: 1.18; letter-spacing: -.03em; font-weight: 600; }
+  .team-promise p .mute { color: var(--ink-2); }
+  .team-promise .team-kicker { font-size: 12px; font-weight: 400; letter-spacing: 1px; line-height: 1.5; }
+  .team--c .team-list { grid-template-columns: 1fr; gap: 18px; }
+  .team--c .person { display: flex; align-items: center; gap: 20px; text-align: left; }
+  .team--c .person-foto { width: clamp(84px, 8vw, 112px); margin: 0; flex: none; }
+  .team--c .person-satz { display: none; }
+  @media (max-width: 860px) {
+    .team-list { gap: 28px 16px; }
+    .person-foto { width: min(38vw, 160px); margin-bottom: 14px; }
+    .person h3 { font-size: 18px; }
+    .person-rolle { font-size: 14px; }
+    .team--b .team-list { grid-template-columns: 1fr; max-width: 420px; }
+    .team--b .person-foto { width: 100%; }
+    .team--c .team-in { grid-template-columns: 1fr; padding: 28px 22px; }
+    .team--c .person-foto { width: 84px; }
+  }
 </style>
 <link rel="stylesheet" href="assets/nav.css">
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
@@ -566,6 +612,17 @@
       <p class="kontakt-wege"><a class="btn" href="kontakt.html">Projekt starten ↗</a> <a class="kontakt-mail" href="mailto:kontakt@projekt-ep.de">kontakt@projekt-ep.de</a></p>
     </div>
     <div class="ep-slot" aria-hidden="true"></div>
+
+    <section class="team team--a" id="team" aria-labelledby="team-h"><!-- Variante wechseln: Klasse team--a | team--b | team--c -->
+      <div class="team-in">
+        <div class="team-head"><p class="team-kicker">Das Team</p><h2 id="team-h">Zwei Köpfe. <span class="mute">Ein Ergebnis.</span></h2><p class="team-lead">Ihr sprecht direkt mit uns, vom ersten Gespräch bis zum fertigen Ergebnis.</p></div>
+        <div class="team-promise"><p class="team-kicker">Unser Versprechen</p><p>Ihr sprecht direkt mit denen, die umsetzen. <span class="mute">Vom ersten Gespräch bis zum fertigen Ergebnis.</span></p></div>
+        <ul class="team-list">
+          <li class="person"><div class="person-foto"><picture><source type="image/avif" srcset="img/team/eugen-kelberer-320.avif 320w, img/team/eugen-kelberer-640.avif 640w" sizes="(max-width: 860px) 160px, 400px"><source type="image/webp" srcset="img/team/eugen-kelberer-320.webp 320w, img/team/eugen-kelberer-640.webp 640w" sizes="(max-width: 860px) 160px, 400px"><img src="img/team/eugen-kelberer-640.webp" width="640" height="640" alt="Porträt von Eugen Kelberer, CEO von PROJEKT EP" loading="lazy" decoding="async"></picture></div><div class="person-txt"><h3>Eugen Kelberer</h3><p class="person-rolle">CEO</p><p class="person-satz">Ich sorge dafür, dass aus eurer Idee ein Ergebnis wird, das wirkt.</p></div></li>
+          <li class="person"><div class="person-foto person-foto--leer" role="img" aria-label="Platzhalter, Foto von Paul Haase folgt"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="44" r="22" fill="#B0B0B5"/><path d="M16 120c0-26 19.7-44 44-44s44 18 44 44z" fill="#B0B0B5"/></svg></div><div class="person-txt"><h3>Paul Haase</h3><p class="person-rolle">CEO</p><p class="person-satz">Persönlicher Satz folgt.</p></div></li>
+        </ul>
+      </div>
+    </section>
     <footer role="contentinfo"><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="rechtliches.html#cookies">Cookie-Policy</a><a href="rechtliches.html#agb">AGB</a><a href="rechtliches.html#barrierefreiheit">Barrierefreiheit</a><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
     </div>
   </section>
@@ -627,7 +684,7 @@ function splitText(el, how, opts = {}) {
 const textSecs = [];
 document.querySelectorAll('main > section[data-key]').forEach((sec) => {
   if (sec.id === 'intro') return; // die Startseite hat ihre eigene Einblendung
-  const own = (sel) => [...sec.querySelectorAll(sel)].filter((e) => !e.closest('#answer') && !e.closest('.rv'));
+  const own = (sel) => [...sec.querySelectorAll(sel)].filter((e) => !e.closest('#answer, #team') && !e.closest('.rv'));
   // Kicker sind Flex-Container mit Abstand: reinen Text erst in einen Span packen, sonst würde jedes Wort zum eigenen Flex-Element
   own('.kicker').slice(0, 1).forEach((e) => { if (!e.children.length) e.innerHTML = `<span>${e.innerHTML}</span>`; splitText(e, 'type'); });
   own('h2').forEach((e) => splitText(e, sec.id === 'manifest' ? 'blur' : sec.id === 'kontakt' ? 'swarm' : pickStyle())); // Schluss-Slogan: Buchstaben wie Schwarm-Teilchen
