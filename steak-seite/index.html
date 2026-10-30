@@ -9,8 +9,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3l13 13-13 13L3 16z' fill='%23d4af37'/%3E%3C/svg%3E" />
   <link rel="preload" as="image" href="./media/s1_hero.webp" />
   <link rel="preload" as="image" href="./media/s1_cutout.webp" />
-  <script type="module" crossorigin src="./assets/index-BkBIz_pz.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DwID0pkH.css">
+  <script type="module" crossorigin src="./assets/index-6mOJtlt6.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index--4zAknaj.css">
 </head>
 <body>
   <div id="loader" aria-hidden="true"><div class="loader__mark"><span></span></div><div class="loader__bar"><i></i></div></div>
@@ -18,11 +18,11 @@
   <!-- ============ HEADER ============ -->
   <header class="site-header">
     <a class="brand" href="#reveal" data-goto="0">
-      <span class="brand__num">SECTION 01</span><span class="brand__suffix"><em>—</em><span class="brand__name">THE REVEAL</span></span>
+      <span class="brand__num">SECTION 01</span><span class="brand__suffix"><em aria-hidden="true"></em><span class="brand__name">THE REVEAL</span></span>
     </a>
     <nav class="nav" aria-label="Primary">
       <a href="#reveal" data-goto="0" class="nav__item">HOME<i></i></a>
-      <a href="#dissection" data-goto="1" class="nav__item">MENUS<i></i></a>
+      <a href="#dissection" data-goto="1" class="nav__item">RECIPES<i></i></a>
       <div class="nav__drop">
         <a href="#crown" data-goto="2" class="nav__item" aria-haspopup="true">PHOTOS
           <svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1.5 1.5L6 6l4.5-4.5"/></svg><i></i></a>
@@ -60,11 +60,15 @@
     <section class="sec s1" id="reveal" aria-label="Section 01 — The Reveal">
       <div class="s1__stage">
         <img class="media media--s1" src="./media/s1_hero.webp" alt="" width="1280" height="720" fetchpriority="high" />
+        <img class="media media--s1 media--blur" src="./media/s1_hero_blur.webp" alt="" width="1280" height="720" loading="lazy" />
+        <canvas class="flakes-far flakes-far--s1" aria-hidden="true"></canvas>
         <h1 class="hero-title" aria-label="Not all gold is worn.">
           <span class="line"><span class="line__in">NOT ALL GOLD</span></span>
           <span class="line"><span class="line__in">IS WORN.</span></span>
         </h1>
+        <div class="hero-title hero-title--blur" aria-hidden="true"><span class="line"><span class="line__in">NOT ALL GOLD</span></span><span class="line"><span class="line__in">IS WORN.</span></span></div>
         <img class="media media--s1 media--cutout" src="./media/s1_cutout.webp" alt="" width="1280" height="720" />
+        <img class="media media--s1 media--cutout media--blur" src="./media/s1_cutout_blur.webp" alt="" width="1280" height="720" loading="lazy" />
       </div>
       <a href="#dissection" class="cta-link" data-goto="1" data-reveal>
         <span>DISCOVER THE CUT</span>
@@ -81,13 +85,15 @@
           <span class="mega__row mega__row--2"><span>IS</span><span>IS</span></span>
           <span class="mega__row mega__row--3"><span>EVERYTHING.</span></span>
         </div>
+        <canvas class="flakes-far flakes-far--s2" aria-hidden="true"></canvas>
         <canvas class="media media--s2" width="1280" height="720" aria-hidden="true"></canvas>
+        <canvas class="media media--s2 media--s2blur" width="92" height="52" aria-hidden="true"></canvas>
         <div class="s2-head">
-          <p class="overline" data-reveal>SECTION 02 — THE</p>
-          <h2 class="s2-title"><span class="line"><span class="line__in">THE DISSECTION</span></span></h2>
+          <p class="overline overline--mask"><span class="overline__in">SECTION 02 — THE</span></p>
+          <h2 class="s2-title" aria-label="The Dissection"><span class="line line--mask"><span class="line__in" data-split>THE DISSECTION</span></span></h2>
           <p class="sr-only">Precision is everything.</p>
         </div>
-        <div class="divider" aria-hidden="true"><i></i><b></b><i></i></div>
+        <div class="divider" aria-hidden="true"><i></i><svg class="divider__notch" viewBox="0 0 64 16" preserveAspectRatio="none"><path d="M0 .5H14C23 .5 27.5 4 32 15.5 36.5 4 41 .5 50 .5H64"/></svg><i></i></div>
       </div>
     </section>
 
@@ -110,7 +116,7 @@
         <span class="pill-cta__label">TASTE THE EXTRAORDINARY</span>
         <svg viewBox="0 0 10 16" aria-hidden="true"><path d="M2 2l6 6-6 6" /></svg>
       </a>
-      <div class="divider" aria-hidden="true"><i></i><b></b><i></i></div>
+      <div class="divider" aria-hidden="true"><i></i><svg class="divider__notch" viewBox="0 0 64 16" preserveAspectRatio="none"><path d="M0 .5H14C23 .5 27.5 4 32 15.5 36.5 4 41 .5 50 .5H64"/></svg><i></i></div>
     </section>
   </main>
 
