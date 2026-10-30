@@ -167,6 +167,10 @@
   .film-cap h2 { color: #F5F5F7; max-width: 14em; }
   .film-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font: inherit; font-size: 17px; height: 56px; padding: 0 28px; border-radius: 999px; border: 0; background: #fff; color: #1D1D1F; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,.35); transition: transform .25s, opacity .3s; }
   .film-play:hover { transform: translate(-50%,-50%) scale(1.04); }
+  .film-cta { position: absolute; left: 50%; bottom: clamp(24px, 7vh, 72px); transform: translateX(-50%) translateY(12px); font-size: 18px; height: 56px; padding: 0 32px; display: inline-flex; align-items: center; border-radius: 999px; background: #0071E3; color: #fff; text-decoration: none; opacity: 0; pointer-events: none; transition: opacity .5s, transform .5s; box-shadow: 0 10px 40px rgba(0,113,227,.45); }
+  .film-stage.done .film-cta { opacity: 1; transform: translateX(-50%); pointer-events: auto; }
+  .film-stage.done .film-cap { opacity: 0; }
+  .film-stage.done .film-play { opacity: 0; pointer-events: none; }
   .film-stage.playing .film-play, .film-stage.playing .film-cap { opacity: 0; pointer-events: none; }
   @media (max-width: 800px) { .film-stage video { object-fit: contain; } }
   .swarm-slot { height: 240px; pointer-events: none; }
@@ -505,14 +509,6 @@
     </div><figure class="dom-img fb-img"><img src="lab/dashboards.webp" alt="Interaktives Dashboard mit Lager-, Team- und Umsatzzahlen" loading="lazy"></figure></div>
   </section>
 
-  <section class="block film-full" id="erklaervideo" data-key="ep" data-night="1" data-name="Video">
-    <div class="film-stage">
-      <video id="erkl" playsinline preload="metadata" poster="video/motion-swarm-poster.jpg" aria-label="Motion-Video: PROJEKT EP in 20 Sekunden"><source src="video/motion-swarm.mp4" type="video/mp4"></video>
-      <div class="film-cap"><p class="kicker">In 20 Sekunden</p><h2>Die Agentur, die Probleme löst.</h2></div>
-      <button type="button" class="film-play" id="erklPlay" aria-label="Video abspielen im Vollbild"><span aria-hidden="true">▶</span> Video ansehen</button>
-    </div>
-  </section>
-
   <section class="block" id="preise" data-key="icon:euro" data-name="Preise">
     <div class="card">
       <div class="head-row"><div class="section-head"><p class="kicker">Richtpreise</p><h2>Was kostet das? <span class="mute">Ein ehrlicher erster Rahmen.</span></h2><p style="color:var(--ink-2);margin-top:18px">Jedes Projekt ist anders. Diese Richtpreise geben euch eine erste Orientierung, das genaue Angebot stimmen wir nach dem Erstgespräch ab. Kleine Änderungs- und Wartungsaufträge: 100 € je Auftrag.</p></div><div class="swarm-slot" aria-hidden="true"></div></div>
@@ -539,6 +535,15 @@
         <div><b>Kontrolle bleibt sichtbar.</b><p>Freigaben, Quellen und wichtige Entscheidungen verschwinden nicht in einer Blackbox.</p></div>
         <div><b>Ergebnis vor Tool.</b><p>Wir wählen Werkzeuge passend zur Aufgabe – nicht die Aufgabe passend zum Hype.</p></div>
       </div>
+    </div>
+  </section>
+
+  <section class="block film-full" id="erklaervideo" data-key="ep" data-night="1" data-name="Video">
+    <div class="film-stage">
+      <video id="erkl" playsinline preload="metadata" poster="video/motion-swarm-poster.jpg" aria-label="Motion-Video: Haben wir euer Interesse geweckt? PROJEKT EP"><source src="video/motion-swarm.mp4" type="video/mp4"></video>
+      <div class="film-cap"><p class="kicker">Zum Schluss</p><h2>Haben wir euer Interesse geweckt?</h2></div>
+      <button type="button" class="film-play" id="erklPlay" aria-label="Video abspielen im Vollbild"><span aria-hidden="true">▶</span> Video ansehen</button>
+      <a class="film-cta" href="#kontakt">Projekt starten ↗</a>
     </div>
   </section>
 
@@ -1449,8 +1454,8 @@ show('zeit');
 <script>
 (function(){const v=document.getElementById('erkl'),b=document.getElementById('erklPlay');if(!v||!b)return;const st=v.parentNode;
 b.addEventListener('click',()=>{v.controls=true;v.play().catch(()=>{});try{(v.requestFullscreen||v.webkitRequestFullscreen||function(){}).call(v)}catch(e){}});
-v.addEventListener('play',()=>st.classList.add('playing'));
-v.addEventListener('ended',()=>{st.classList.remove('playing');v.controls=false;v.currentTime=0;if(document.fullscreenElement)document.exitFullscreen()});
+v.addEventListener('play',()=>{st.classList.add('playing');st.classList.remove('done')});
+v.addEventListener('ended',()=>{v.controls=false;if(document.fullscreenElement)document.exitFullscreen();st.classList.remove('playing');st.classList.add('done');v.pause()});
 v.addEventListener('pause',()=>{if(!v.ended&&!document.fullscreenElement){st.classList.remove('playing')}});
 })();
 </script>
