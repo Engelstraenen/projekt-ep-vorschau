@@ -394,6 +394,34 @@
     .person h3 { font-size: 18px; }
     .person-rolle { font-size: 14px; }
   }
+
+  /* ===== Design-Review 10/2026 (von Eugen freigegeben) ===== */
+  /* P1 Hero: Fließtext bekommt einen weichen hellen Grund, damit der Schwarm ihn nicht verschluckt */
+  #intro .lead { position: relative; color: #424245; isolation: isolate; }
+  #intro .lead::before { content: ''; position: absolute; inset: -18px -36px; z-index: -1; border-radius: 40px;
+    background: radial-gradient(closest-side, rgba(255,255,255,.96) 62%, rgba(255,255,255,0)); }
+  #intro h1 { text-shadow: 0 0 24px #fff, 0 0 8px #fff; }
+  #intro .eyebrow .lang { display: inline; }
+  @media (max-width: 560px) { #intro .eyebrow .lang { display: none; } #intro .lead { font-size: 17px; } }
+  /* P2 Schlussvideo: heller, ruhiger Rahmen im CI statt weißem Poster auf schwarzer Bühne */
+  .film-stage { height: auto; min-height: 0; background: var(--bg-2); border-radius: 40px; margin: 0 clamp(8px, 2vw, 32px); overflow: visible; display: grid; justify-items: center; gap: 28px;
+    padding: clamp(72px, 12vh, 140px) var(--gutter); }
+  .film-cap { position: static; order: -1; text-align: center; color: var(--ink); pointer-events: auto; }
+  .film-cap .kicker { color: var(--blue); justify-content: center; }
+  .film-cap h2 { color: var(--ink); max-width: 18em; margin: 0 auto; font-size: clamp(34px, 4vw, 60px); letter-spacing: -.045em; line-height: 1.05; }
+  .film-cap h2 .mute { color: var(--ink-2); }
+  .film-stage video { position: relative; inset: auto; width: min(1080px, 100%); height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #fff;
+    border-radius: 28px; box-shadow: 0 40px 90px -50px rgba(0,40,120,.45), 0 0 0 1px #E5E5EA; }
+  .film-play { top: auto; bottom: auto; position: relative; left: auto; transform: none; background: var(--blue); color: #fff; white-space: nowrap;
+    box-shadow: 0 14px 34px -14px rgba(0,113,227,.7); margin-top: -4px; }
+  .film-play:hover { transform: none; }
+  @media (hover: hover) and (pointer: fine) { .film-play:hover { background: #0077ED; } }
+  .film-play:active { transform: scale(.97); transition: transform .16s var(--ease); }
+  .film-cta { position: relative; left: auto; bottom: auto; transform: translateY(8px); display: none; }
+  .film-stage.done .film-cta { display: inline-flex; transform: none; }
+  .film-stage.done .film-cap { opacity: 1; }
+  .film-stage.playing .film-cap { opacity: 1; }
+  @media (max-width: 800px) { .film-stage video { aspect-ratio: 1 / 1; object-fit: cover; border-radius: 22px; } }
 </style>
 <link rel="stylesheet" href="assets/nav.css">
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
@@ -432,7 +460,7 @@
   <section class="ch short" id="intro" data-key="ep" data-name="Start">
     <div class="sticky">
       <div class="hero">
-        <p class="eyebrow">Independent Creative Studio · Strategy · Creation · Development</p>
+        <p class="eyebrow"><span class="lang">Unabhängiges Kreativstudio · </span>Strategie · Gestaltung · Entwicklung</p>
         <h1>Vom ersten Gedanken. <span class="blue">Zum fertigen Ergebnis.</span></h1>
         <p class="lead">Wir machen Ideen sichtbar und auffindbar: mit Werbeclips, Logo Design, Print, Merch und SEO. Und erlebbar als Websites, Apps, Games, Dashboards und Abläufe, die von selbst laufen.</p>
         <button class="vthumb" type="button" aria-haspopup="dialog"><video muted loop playsinline preload="none" aria-hidden="true"></video><span class="vposter" aria-hidden="true"><b>E<span>P</span></b><img src="video/erklaervideo-poster.webp" alt="" data-remove-on-error></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
@@ -454,7 +482,7 @@
 
   <section class="ch" id="websites" data-dom data-key="img:digital-design" data-side="right" data-name="Websites" data-nr="01">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>01</span><span>Design</span></p>
+      <p class="kicker"><span>01</span><span>Websites</span></p>
       <h2>Websites, die eine Marke unverwechselbar machen.</h2>
       <p>Strategie, Design, Motion und Entwicklung greifen ineinander. Außergewöhnlich, klar bedienbar und technisch sauber.</p>
       <p class="tags">Website · Domain · Hosting · Business-E-Mail · Betreuung</p>
@@ -465,7 +493,7 @@
 
   <section class="ch" id="automatisierung" data-dom data-flock="1" data-key="flock1" data-side="left" data-name="Automatisierung &amp; Chatbots" data-nr="02">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>02</span><span>Connect</span></p>
+      <p class="kicker"><span>02</span><span>Automatisierung</span></p>
       <h2>Anfragen beantwortet, bevor jemand nachfragt.</h2>
       <p>Wir verbinden Informationen, Systeme und Freigaben. Routine wird vorbereitet oder automatisiert – wichtige Entscheidungen bleiben beim Menschen.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Zu viele manuelle Schritte</dd></div><div><dt>System</dt><dd>Chatbots, Regeln, Integrationen</dd></div><div><dt>Ergebnis</dt><dd>Weniger Aufwand, mehr Überblick</dd></div></dl>
@@ -475,7 +503,7 @@
 
   <section class="ch" id="apps" data-dom data-key="img:app-design" data-side="right" data-name="App Design" data-nr="03">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>03</span><span>Develop</span></p>
+      <p class="kicker"><span>03</span><span>Apps</span></p>
       <h2>App Design, das sich sofort richtig anfühlt.</h2>
       <p>Von Nutzerführung und Interface Design bis zum klickbaren Prototyp und zur Entwicklung – für mobile Apps, Kundenportale und interne Tools.</p>
       <a class="more" href="leistungen/apps.html">App Design entdecken</a>
@@ -485,7 +513,7 @@
 
   <section class="ch" id="film" data-dom data-flock="2" data-key="flock2" data-side="left" data-night="1" data-name="Werbeclips" data-nr="04">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>04</span><span>Create</span></p>
+      <p class="kicker"><span>04</span><span>Werbeclips</span></p>
       <h2>Werbeclips, die stoppen. Und verkaufen.</h2>
       <p>Werbefilme, Motion Design Videos, Social Ads, Fashion-Filme und Static Ads für Mode, Marken und Produkte – von Idee und Bildsprache bis Schnitt, Sound und jedem Format.</p>
       <p class="tags">Video Ads · Motion Design · Social Ads · Static Ads · Fashion-Filme · Lookbooks</p>
@@ -496,7 +524,7 @@
 
   <section class="ch" id="raeume" data-dom data-key="img:spaces" data-side="right" data-name="Räume & Visualisierung" data-nr="05">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>05</span><span>Envision</span></p>
+      <p class="kicker"><span>05</span><span>Räume</span></p>
       <h2>Sehen, was möglich ist. Bevor es entsteht.</h2>
       <p>Gärten, Landschaften, Innenräume und Gebäude: Wir übersetzen eure Idee in greifbare Entwürfe – Gestaltung, Atmosphäre und Material vor der Umsetzung abstimmen.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Fotos, Skizzen oder ein Raumkonzept</dd></div><div><dt>System</dt><dd>Entwurfsrichtungen, Licht und Material</dd></div><div><dt>Ergebnis</dt><dd>Visualisierungen für Entscheidungen</dd></div></dl>
@@ -506,7 +534,7 @@
 
   <section class="ch" id="print" data-dom data-flock="3" data-key="flock3" data-side="left" data-name="Print Design" data-nr="06">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>06</span><span>Craft</span></p>
+      <p class="kicker"><span>06</span><span>Print</span></p>
       <h2>Eine Handschrift. Auf jeder Oberfläche.</h2>
       <p>Print Designs für Textilien, Objekte und Folien – von einzelnen Motiven über Kollektionen bis zur durchgängigen Gestaltung.</p>
       <p class="tags">Textildruck · Objektdruck · Folien · Packaging · Allover-Prints</p>
@@ -516,7 +544,7 @@
 
   <section class="ch" id="logo" data-dom data-key="img:logo-design" data-side="right" data-name="Logo Design" data-nr="07">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>07</span><span>Brand</span></p>
+      <p class="kicker"><span>07</span><span>Logo</span></p>
       <h2>Ein Zeichen, das man nicht mehr vergisst.</h2>
       <p>Logo, Farben, Schrift und Bildsprache als ein klares System – damit eure Marke auf Website, Print, Merch und Social Media gleich stark wirkt.</p>
       <p class="tags">Logo · Wortmarke · Corporate Identity · Brand Guide · Vorlagen</p>
@@ -526,7 +554,7 @@
 
   <section class="ch" id="merch" data-dom data-flock="1" data-key="flock1" data-side="left" data-name="Merch-Produktion" data-nr="08">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>08</span><span>Produce</span></p>
+      <p class="kicker"><span>08</span><span>Merch</span></p>
       <h2>Merch, den man gerne trägt.</h2>
       <p>T-Shirts, Hoodies, Sweats, Denim und Strick – gestaltet und produziert aus einer Hand, mit starken Produktionen und sauberer Qualität.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Eine Marke, ein Team oder ein Event</dd></div><div><dt>System</dt><dd>Design, Muster, Produktion</dd></div><div><dt>Ergebnis</dt><dd>Fertige Ware, die eure Marke trägt</dd></div></dl>
@@ -536,7 +564,7 @@
 
   <section class="ch" id="systeme" data-dom data-key="img:dashboards" data-side="right" data-name="Systeme & Dashboards" data-nr="09">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>09</span><span>Manage</span></p>
+      <p class="kicker"><span>09</span><span>Systeme</span></p>
       <h2>Alles im Blick. Ohne Tabellenchaos.</h2>
       <p>Warenwirtschaft, Personalwirtschaft und interaktive Dashboards – mit euren Tools verbunden oder passend neu gebaut.</p>
       <p class="tags">Warenwirtschaft · Personal · Schichtplanung · Dashboards · Schnittstellen</p>
@@ -573,10 +601,10 @@
     </div>
   </section>
 
-  <section class="block film-full" id="erklaervideo" data-key="ep" data-night="1" data-name="Video">
+  <section class="block film-full" id="erklaervideo" data-key="ep" data-name="Video">
     <div class="film-stage">
-      <video id="erkl" playsinline preload="metadata" poster="video/motion-swarm-poster.jpg" aria-label="Motion-Video: Haben wir euer Interesse geweckt? PROJEKT EP"><source src="video/motion-swarm.mp4" type="video/mp4"></video>
-      <div class="film-cap"><p class="kicker">Zum Schluss</p><h2>Haben wir euer Interesse geweckt?</h2></div>
+      <video id="erkl" playsinline preload="metadata" poster="video/motion-swarm-poster.jpg" aria-label="Motion-Video: Haben wir euer Interesse geweckt? PROJEKT EP"><source media="(max-width: 800px)" src="video/motion-swarm-mobil.mp4" type="video/mp4"><source src="video/motion-swarm.mp4" type="video/mp4"></video>
+      <div class="film-cap"><p class="kicker">Zum Schluss</p><h2>Alles, was wir machen. <span class="mute">In 22 Sekunden.</span></h2></div>
       <button type="button" class="film-play" id="erklPlay" aria-label="Video ansehen (Vollbild)"><span aria-hidden="true">▶</span> Video ansehen</button>
       <a class="film-cta" href="#kontakt">Projekt starten ↗</a>
     </div>

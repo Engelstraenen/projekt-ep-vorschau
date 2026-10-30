@@ -41,9 +41,9 @@
 @media (prefers-reduced-motion: reduce) { .mega { transition: none; } }
 
 /* Lesefortschritt: dünner Farbverlauf direkt unter der Kopfzeile */
-.scrollbar { position: fixed; left: 0; right: 0; top: 63px; height: 3px; z-index: 31; pointer-events: none; }
+.scrollbar { position: fixed; left: 0; right: 0; top: 63px; height: 2px; z-index: 31; pointer-events: none; }
 .scrollbar span { display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(0);
-  background: linear-gradient(90deg, #0071E3 0%, #6E5CF6 38%, #E0457B 70%, #FF6A1A 100%); border-radius: 0 3px 3px 0; will-change: transform; }
+  background: #0071E3; border-radius: 0 2px 2px 0; will-change: transform; }
 .mega-also { margin-top: 16px; padding-top: 14px; border-top: 1px solid #E5E5EA; font-size: 14px; color: #6E6E73; }
 .mega-also a { color: #0066CC; text-decoration: none; }
 .mega-also a:hover { text-decoration: underline; }
