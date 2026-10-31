@@ -243,7 +243,7 @@
 .pp-view { position: absolute; inset: 0; padding: 56px 16px 16px; display: flex; flex-direction: column; gap: 10px; transition: transform .38s cubic-bezier(.23,1,.32,1), opacity .3s; }
 .pp-view[aria-hidden="true"] { transform: translateX(30%); opacity: 0; pointer-events: none; visibility: hidden; }
 .pp-view.back[aria-hidden="true"] { transform: translateX(-30%); }
-.pp-view h5 { font-size: 20px; font-weight: 700; letter-spacing: -.03em; }
+.pp-view h5, .pp-view .h5 { font-size: 20px; font-weight: 700; letter-spacing: -.03em; }
 .pp-view .sub { font-size: 12px; color: #7A7062; margin-top: -6px; }
 .pp-li { display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 14px; padding: 10px 12px; font-size: 13px; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
 .pp-li .bar { flex: none; width: 52px; height: 6px; border-radius: 3px; background: #EFE7DA; position: relative; overflow: hidden; }
@@ -272,7 +272,7 @@
 .pp-kh b { font-size: 16px; color: #23201C; letter-spacing: -.02em; }
 .pp-kan { display: grid; grid-template-columns: repeat(4, minmax(150px, 1fr)); gap: 10px; min-width: 640px; }
 .pp-col { background: rgba(255,255,255,.55); border-radius: 14px; padding: 10px; display: flex; flex-direction: column; gap: 8px; min-height: 260px; }
-.pp-col h6 { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6B6458; display: flex; justify-content: space-between; }
+.pp-col h6, .pp-col .h6 { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6B6458; display: flex; justify-content: space-between; }
 .pp-card { background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.06); font-size: 12.5px; border: 0; text-align: left; font: inherit; cursor: pointer; display: grid; gap: 6px; transition: transform .16s cubic-bezier(.23,1,.32,1), box-shadow .2s; }
 .pp-card:active { transform: scale(.97); }
 .pp-card b { font-size: 13px; font-weight: 650; display: block; color: #23201C; }
@@ -297,7 +297,7 @@
 .pp-ov .k em { font-style: normal; font-size: 11.5px; font-weight: 600; color: #18794E; }
 .pp-ov .k.warn em { color: #C5221F; }
 .pp-ov .big { grid-column: 1 / -1; background: #fff; border-radius: 14px; padding: 12px 14px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; }
-.pp-ov h6 { font-size: 12.5px; font-weight: 650; margin-bottom: 8px; }
+.pp-ov h6, .pp-ov .h6 { font-size: 12.5px; font-weight: 650; margin-bottom: 8px; }
 .pp-ov .bars { display: grid; gap: 7px; } .pp-ov .bars div { display: grid; grid-template-columns: 82px 1fr 34px; gap: 8px; align-items: center; font-size: 12px; }
 .pp-ov .bars i { height: 10px; border-radius: 5px; background: #0071E3; display: block; } .pp-ov .bars span:last-child { text-align: right; font-weight: 650; }
 .pp-ov .dl { list-style: none; display: grid; gap: 6px; font-size: 12px; } .pp-ov .dl li { display: flex; justify-content: space-between; gap: 8px; padding: 6px 8px; border-radius: 8px; background: #F5F6F8; }

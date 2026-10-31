@@ -256,3 +256,35 @@ footer#epf a { color: inherit; }
 html.gl .home .card.dark, html.gl body.home .card.dark { background: rgba(22, 22, 25, .94); }
 /* Links im Fließtext der Praxisbeispiele erkennbar (nicht nur über Farbe) */
 .pb-text p a, .uc-meta p a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+/* ===== Leistungs-Raster & Ablauf (.wm / .st) — High-End-Schicht ===== */
+body:not(.home) .wm h2, body:not(.home) .st h2 { font-size: clamp(40px, 5.2vw, 84px); line-height: .98; letter-spacing: -.055em; font-weight: 700; text-wrap: balance; }
+body:not(.home) .wm-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: clamp(28px, 4vh, 48px); }
+body:not(.home) .wm-grid li { min-height: 176px; padding: 28px 26px 26px; border-radius: 28px; align-content: space-between; gap: 28px;
+  transition: transform .45s cubic-bezier(.23, 1, .32, 1), background-color .3s, box-shadow .45s cubic-bezier(.23, 1, .32, 1); }
+body:not(.home) .wm-grid svg { width: 36px; height: 36px; }
+body:not(.home) .wm-grid b { font-size: clamp(19px, 1.5vw, 24px); letter-spacing: -.03em; }
+@media (hover: hover) and (pointer: fine) {
+  body:not(.home) .wm-grid li:hover { transform: translateY(-4px); background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 30px 60px -34px rgba(0, 40, 120, .4); }
+}
+body:not(.home) .st-steps { gap: 0; margin-top: clamp(28px, 4vh, 48px); border-top: 1px solid #D2D2D7; }
+body:not(.home) .st-steps li { background: none; border-radius: 0; padding: clamp(22px, 3vh, 34px) clamp(0px, 2vw, 28px) clamp(22px, 3vh, 34px) 0; display: grid; gap: 18px; align-content: start; }
+body:not(.home) .st-steps li + li { border-left: 1px solid #D2D2D7; padding-left: clamp(18px, 2vw, 28px); }
+body:not(.home) .st-steps li::after { display: none; }
+body:not(.home) .st-steps span { width: auto; height: auto; border-radius: 0; background: none; color: var(--blue); font-size: clamp(56px, 6vw, 96px); font-weight: 700; letter-spacing: -.06em; line-height: .9; place-items: start; font-variant-numeric: tabular-nums; }
+body:not(.home) .st-steps b { font-size: clamp(20px, 1.7vw, 26px); letter-spacing: -.035em; line-height: 1.15; text-wrap: balance; }
+@media (max-width: 1100px) { body:not(.home) .wm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 860px) {
+  body:not(.home) .st-steps { grid-template-columns: 1fr; }
+  body:not(.home) .st-steps li { grid-template-columns: 76px 1fr; align-items: center; padding: 20px 0; border-bottom: 1px solid #D2D2D7; }
+  body:not(.home) .st-steps li + li { border-left: 0; padding-left: 0; }
+  body:not(.home) .st-steps span { font-size: 56px; }
+  body:not(.home) .wm-grid li { min-height: 140px; padding: 22px 20px; gap: 18px; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.home) .st-steps li { animation: ep-rise both linear; animation-timeline: view(); animation-range: entry 0% entry 70%; }
+    body:not(.home) .st-steps li:nth-child(2) { animation-range: entry 8% entry 78%; }
+    body:not(.home) .st-steps li:nth-child(3) { animation-range: entry 16% entry 86%; }
+  }
+}
