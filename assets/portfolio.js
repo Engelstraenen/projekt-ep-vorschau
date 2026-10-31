@@ -26,6 +26,7 @@
     { id: 'motion-zitra', sparte: 'motion', titel: 'Durst? Drei Sorten. Null Langeweile.', zweck: 'Motion-Graphics-Spot für die Limonade ZITRA.', dauer: 12 },
     { id: 'motion-lindholz', sparte: 'motion', titel: 'Erst eine Linie. Dann ein Plan. Dann Holz.', zweck: 'Motion-Graphics-Spot für Lindholz, Möbel nach Maß.', dauer: 13 },
     { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für die Gieß-App BLATTFON, mit sprechender Pflanze.', dauer: 8 },
+    { id: 'aboschere', sparte: 'motion', titel: '14 Abos bezahlt. Nur 3 genutzt.', zweck: 'Motion-Graphics-Spot für ABOSCHERE: kündigt ungenutzte Abos.', dauer: 9.2 },
     { id: 'fleckfee', sparte: 'static', titel: 'Ein Blatt, Fleck weg.', zweck: 'Static Ad als Motion-Version für das Waschblatt FLECKFEE gegen Flecken.', dauer: 6 },
     { id: 'kajuete', sparte: 'fashion', titel: 'Gegen Wind hilft nur eins: der richtige Mantel.', zweck: 'Mantel-Lookbook für KAJÜTE auf dem Fährdeck.', dauer: 8 },
     { id: 'velournacht', sparte: 'fashion', titel: 'Feinwäsche. Wie ich.', zweck: 'Fashion-Film für VELOURNACHT: Samtanzug im Waschsalon.', dauer: 8 },
