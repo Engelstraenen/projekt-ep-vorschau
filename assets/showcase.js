@@ -1,8 +1,7 @@
 /* Referenz-Showcase: stummes Scroll-Video nur abspielen, wenn sichtbar; reduzierte Bewegung = kein Autoplay (Poster + Play-Knopf). */
-(() => {
-  const screen = document.querySelector('.sc-screen');
-  const video = screen && screen.querySelector('video');
-  const btn = screen && screen.querySelector('.sc-toggle');
+document.querySelectorAll('.sc-screen').forEach(screen => {
+  const video = screen.querySelector('video');
+  const btn = screen.querySelector('.sc-toggle');
   if (!video || !btn) return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const saveData = !!(navigator.connection && navigator.connection.saveData);
@@ -32,4 +31,4 @@
   } else if (auto()) play();
   reduce.addEventListener && reduce.addEventListener('change', () => { if (reduce.matches && !video.paused) { userPaused = true; video.pause(); } });
   document.addEventListener('visibilitychange', () => { if (document.hidden && !video.paused) video.pause(); else if (!document.hidden && visible && auto()) play(); });
-})();
+});
