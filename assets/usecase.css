@@ -162,3 +162,31 @@
 @keyframes uc-spin { to { transform: rotate(1turn); } }
 @keyframes uc-glow { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
 @media (max-width: 860px) { .v-quiz { grid-template-columns: 1fr; width: 80%; } .v-wheel-wrap { width: 62%; justify-self: center; } }
+
+/* --- Visual: Merch-Kollektion (SVG-Silhouetten) --- */
+.v-line { width: min(1040px, 92%); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2.4vw, 36px); align-items: end; }
+.v-line figure { display: grid; gap: 12px; justify-items: center; }
+.v-line svg { width: 100%; height: auto; filter: drop-shadow(0 30px 30px rgba(0, 0, 0, .18)); }
+.v-line figcaption { display: grid; gap: 4px; justify-items: center; text-align: center; font-size: 14px; }
+.v-line figcaption b { font-size: clamp(14px, 1.3vw, 17px); letter-spacing: -.01em; }
+.v-line figcaption span { color: var(--ink-2); font-size: 13px; }
+.v-line .sw { display: flex; gap: 6px; }
+.v-line .sw i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
+@media (max-width: 860px) { .v-line { grid-template-columns: 1fr 1fr; } .v-line figure:nth-child(3) { display: none; } }
+
+/* --- Visual: Tech Pack --- */
+.v-tp { width: min(1000px, 90%); display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(14px, 2vw, 28px); padding: clamp(16px, 2vw, 28px); border-radius: 24px; background: #fff; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .35); font-size: 13px; }
+.v-tp .draw { position: relative; border-radius: 16px; background: repeating-linear-gradient(0deg, #F5F5F7 0 1px, transparent 1px 22px), repeating-linear-gradient(90deg, #F5F5F7 0 1px, transparent 1px 22px); display: grid; place-items: center; padding: 18px; }
+.v-tp .draw svg { width: 82%; height: auto; }
+.v-tp .meta { display: grid; gap: 14px; align-content: start; }
+.v-tp .meta header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #EBEBEF; padding-bottom: 10px; }
+.v-tp .meta header b { font-size: clamp(15px, 1.4vw, 19px); }
+.v-tp .meta header small { color: var(--ink-2); }
+.v-tp .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.v-tp .chips span { display: grid; gap: 4px; width: 64px; font-size: 11px; color: var(--ink-2); }
+.v-tp .chips span i { height: 40px; border-radius: 8px; }
+.v-tp table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.v-tp th, .v-tp td { text-align: left; padding: 6px 4px; border-bottom: 1px solid #F0F0F3; }
+.v-tp th { color: var(--ink-2); font-weight: 500; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.v-tp .ok { justify-self: start; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: #E9F7EE; color: #0F5132; }
+@media (max-width: 860px) { .v-tp { grid-template-columns: 1fr; } .v-tp table { display: none; } }
