@@ -47,6 +47,8 @@ foreach (glob($dir . '/*') ?: [] as $f) { if (filemtime($f) < time() - 3600) @un
 $name      = clean((string)($_POST['name'] ?? ''), 100);
 $email     = clean((string)($_POST['email'] ?? ''), 200);
 $firma     = clean((string)($_POST['firma'] ?? ''), 150);
+$kundentyp = clean((string)($_POST['kundentyp'] ?? ''), 40);
+if (!in_array($kundentyp, ['', 'Unternehmen', 'Verein', 'Öffentlicher Auftraggeber', 'Privatperson'], true)) $kundentyp = '';
 $leistung  = clean((string)($_POST['leistung'] ?? ''), 60);
 $nachricht = clean((string)($_POST['nachricht'] ?? ''), 5000);
 
@@ -57,7 +59,7 @@ if (preg_match_all('~https?://~i', $nachricht) > 3) back('ok=1');               
 
 $subject = '=?UTF-8?B?' . base64_encode('Anfrage über projekt-ep.de: ' . ($leistung !== '' ? $leistung : 'Allgemein')) . '?=';
 $body = "Neue Anfrage über das Kontaktformular\n\n"
-      . "Name: $name\nE-Mail: $email\nUnternehmen: $firma\nLeistung: $leistung\n\nNachricht:\n$nachricht\n";
+      . "Name: $name\nE-Mail: $email\nAnfrage als: $kundentyp\nUnternehmen/Verein: $firma\nLeistung: $leistung\n\nNachricht:\n$nachricht\n";
 $headers = implode("\r\n", [
   'From: PROJEKT EP Website <' . FROM . '>',
   'Reply-To: ' . $email,

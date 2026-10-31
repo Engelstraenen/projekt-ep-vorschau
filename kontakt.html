@@ -154,7 +154,9 @@
         <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="e-name"><span class="err" id="e-name"></span></div>
       <div class="field"><label for="f-email">E-Mail <span aria-hidden="true">*</span></label>
         <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="e-email"><span class="err" id="e-email"></span></div>
-      <div class="field"><label for="f-firma">Unternehmen (optional)</label>
+      <div class="field"><label for="f-kundentyp">Ich frage an als (optional)</label>
+        <select id="f-kundentyp" name="kundentyp"><option value="">Bitte wählen</option><option>Unternehmen</option><option>Verein</option><option>Öffentlicher Auftraggeber</option><option>Privatperson</option></select></div>
+      <div class="field"><label for="f-firma">Unternehmen oder Verein (optional)</label>
         <input id="f-firma" name="firma" type="text" autocomplete="organization" maxlength="150"></div>
       <div class="field"><label for="f-leistung">Worum geht es? (optional)</label>
         <select id="f-leistung" name="leistung">
@@ -165,7 +167,7 @@
         <textarea id="f-nachricht" name="nachricht" rows="6" required minlength="10" maxlength="5000" aria-describedby="e-nachricht"></textarea><span class="err" id="e-nachricht"></span></div>
       <div class="hp" aria-hidden="true"><label for="f-website">Website (bitte leer lassen)</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
       <input type="hidden" name="ts" id="f-ts" value="">
-      <p class="privacy-hint">Mit dem Absenden verarbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Mehr dazu in der <a href="datenschutz.html#kontakt">Datenschutzerklärung</a>. Pflichtfelder sind mit * markiert.</p>
+      <p class="privacy-hint">Mit dem Absenden verarbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Mehr dazu in der <a href="datenschutz.html#kontakt">Datenschutzerklärung</a>. Pflichtfelder sind mit * markiert. Eine Anfrage ist noch kein Auftrag; das Erstgespräch ist kostenlos. Privatpersonen nennen wir Preise inkl. MwSt.; vor dem Auftrag erhaltet ihr unser Angebot mit <a href="rechtliches.html#agb">AGB</a> und <a href="widerruf.html">Widerrufsbelehrung</a>.</p>
       <button class="send" type="submit">Anfrage senden</button>
     </form>
   </section>

@@ -47,7 +47,9 @@
   h1 { font-size: clamp(40px, 5vw, 72px); font-weight: 650; letter-spacing: -.05em; line-height: 1.02; }
   h1 .mute { color: var(--ink-2); }
   .notice { margin-top: 28px; background: var(--amber-bg); border-radius: 18px; padding: 16px 20px; font-size: 14px; color: #5C3A10; max-width: 74ch; }
-  .ph { background: var(--amber-bg); color: var(--amber); border-radius: 6px; padding: 0 6px; font-weight: 500; white-space: nowrap; }
+  .notice.draft { border: 2px solid #E8A33D; font-size: 15px; padding: 18px 22px; }
+  .notice.draft strong:first-child { display: block; font-size: 17px; letter-spacing: .02em; color: #8A3B00; margin-bottom: 4px; }
+  .ph { background: var(--amber-bg); color: var(--amber); border-radius: 6px; padding: 0 6px; font-weight: 500; white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   .updated { margin-top: 18px; font-size: 14px; color: var(--ink-2); }
 
   nav.toc { display: flex; flex-wrap: wrap; gap: 10px; margin: 36px 0 24px; }
@@ -85,11 +87,11 @@
 <main id="main">
   <p class="kicker">PROJEKT EP / Rechtliches</p>
   <h1>Rechtliche Informationen. <span class="mute">Klar und transparent.</span></h1>
-  <p class="notice" role="note"><strong>Hinweis zur Vorschau:</strong> PROJEKT EP befindet sich in Gründung. Angaben, die noch nicht feststehen, sind als <span class="ph">[noch in Planung/Gründung]</span> markiert und werden vor dem Go-live ersetzt. Die Texte sind sorgfältig erstellte Muster und ersetzen keine Rechtsberatung – vor der Veröffentlichung sollten sie anwaltlich geprüft werden.</p>
+  <p class="notice draft" role="note"><strong>ENTWURF – nicht final, nicht veröffentlicht</strong> PROJEKT EP befindet sich in Gründung. Angaben, die noch nicht feststehen, sind gelb markiert und werden vor dem Go-live ersetzt. Die Texte sind sorgfältig erstellte Muster und ersetzen keine Rechtsberatung – vor der Veröffentlichung sollten sie anwaltlich geprüft werden.</p>
   <p class="updated">Stand: Oktober 2026</p>
 
   <nav class="toc" aria-label="Inhalt dieser Seite">
-    <a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="#cookies">Cookie-Policy</a><a href="#agb">AGB</a><a href="#barrierefreiheit">Barrierefreiheit</a>
+    <a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="#cookies">Cookie-Policy</a><a href="#agb">AGB</a><a href="widerruf.html">Widerrufsbelehrung</a><a href="#barrierefreiheit">Barrierefreiheit</a>
   </nav>
 
   <!-- ===================== IMPRESSUM / DATENSCHUTZ (eigene Seiten) ===================== -->
@@ -108,10 +110,11 @@
     <h3>Was sind Cookies?</h3>
     <p>Cookies sind kleine Textdateien, die eine Website auf Ihrem Endgerät speichert. Vergleichbare Techniken sind etwa der lokale Speicher des Browsers (Local Storage) oder Zählpixel. Nach § 25 des Telekommunikation-Digitale-Dienste-Datenschutz-Gesetzes (TDDDG) ist das Speichern von bzw. der Zugriff auf Informationen auf Ihrem Endgerät nur mit Ihrer Einwilligung zulässig – es sei denn, er ist für den von Ihnen gewünschten Dienst unbedingt erforderlich.</p>
     <h3>Welche Cookies verwenden wir?</h3>
-    <p>Ohne Ihre Einwilligung nur ein technisch notwendiges Cookie: <code>cc_cookie</code> speichert Ihre Auswahl im Cookie-Banner (6 Monate). Statistik- und Werbedienste (z.&nbsp;B. Google Analytics, Google Ads, Meta-Pixel) werden nur nach Ihrer Zustimmung im Banner geladen; derzeit ist keiner davon aktiv. <span class="ph">[ENTWURF – bei Aktivierung eines Dienstes hier und in der Datenschutzerklärung ergänzen]</span></p>
+    <p>Ohne Ihre Einwilligung nur ein technisch notwendiges Cookie: <code>cc_cookie</code> speichert Ihre Auswahl im Cookie-Banner (6 Monate). Statistik- und Werbedienste (z.&nbsp;B. Google Analytics, Google Ads, Meta-Pixel) werden nur nach Ihrer Zustimmung im Banner geladen; derzeit ist keiner davon aktiv.</p>
+    <p>Unser Chat-Assistent speichert eine Sitzungskennung im Sitzungsspeicher (sessionStorage) Ihres Browsers. Sie ist für die Chat-Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG) und wird beim Schließen des Tabs gelöscht. Cookies setzt der Chat nicht.</p>
     <p><a href="#cookies" data-cc="show-preferencesModal">Cookie-Einstellungen öffnen oder Einwilligung widerrufen</a></p>
     <h3>Dienste, die erst auf Ihren Wunsch geladen werden</h3>
-    <p>Die Online-Terminbuchung (<span class="ph">[Anbieter – noch in Planung]</span>) wird erst geladen, wenn Sie sie aktiv öffnen. Setzt der Dienst dabei Cookies, die nicht unbedingt erforderlich sind, holen wir vorher Ihre Einwilligung ein. Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+    <p>Eine Online-Terminbuchung ist derzeit nicht eingebunden. Führen wir sie ein, wird sie erst geladen, wenn Sie sie aktiv öffnen. Setzt der Dienst dabei Cookies, die nicht unbedingt erforderlich sind, holen wir vorher Ihre Einwilligung ein. Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>
     <h3>Cookies im Browser verwalten</h3>
     <p>Sie können Cookies in den Einstellungen Ihres Browsers jederzeit einsehen, löschen und das Setzen von Cookies generell blockieren.</p>
     <a class="totop" href="#main">Nach oben ↑</a>
@@ -120,26 +123,41 @@
   <!-- ===================== AGB ===================== -->
   <section class="legal" id="agb" aria-labelledby="h-agb">
     <h2 id="h-agb">Allgemeine Geschäftsbedingungen</h2>
-    <p>der PROJEKT EP, <span class="ph">[Inhaber/Firma, Anschrift – noch in Planung/Gründung]</span> (nachfolgend „EP“)</p>
+    <p class="notice draft" role="note"><strong>ENTWURF – nicht final, nicht veröffentlicht</strong> Die AGB gelten neu auch für Vereine und Privatpersonen (Verbraucher). Gelb markierte Angaben trägt Eugen noch ein. Vor der Veröffentlichung anwaltlich prüfen lassen; keine Rechtsberatung.</p>
+    <p>der PROJEKT EP, <span class="ph">[Inhaber bzw. Firma mit Rechtsform, Anschrift – trägt Eugen ein]</span> (nachfolgend „EP“)</p>
+    <p class="card"><strong>Kurz gesagt:</strong> Unsere Leistungen richten sich an Unternehmen, Vereine, öffentliche Auftraggeber und Privatpersonen. Für Privatpersonen (Verbraucher) gelten ergänzend die besonderen Regelungen in §§ 2a, 6 Abs. 1a, 6a und die <a href="widerruf.html">Widerrufsbelehrung</a>.</p>
+
+    <h3>Präambel</h3>
+    <p>PROJEKT EP erstellt keine Produkte von der Stange. Jede Website, jeder Onlineshop, jeder Bot, jede Automatisierung, jedes Video und jedes Design entsteht individuell nach den Vorgaben, Inhalten und Wünschen des jeweiligen Auftraggebers. Nach der Beauftragung erhält der Auftraggeber zwei bis drei Moodboards, wählt seinen Favoriten aus, und auf dieser Grundlage wird das Ergebnis eigens für ihn gestaltet und umgesetzt. Die Arbeitsergebnisse sind auf den Auftraggeber zugeschnitten und für Dritte in dieser Form regelmäßig nicht verwendbar.</p>
 
     <h3>§ 1 Geltungsbereich</h3>
     <ol>
-      <li>Diese AGB gelten für alle Verträge zwischen EP und ihren Auftraggebern über Leistungen in den Bereichen Werbeclips und Kampagnen, Raum- und Produktvisualisierung, Websites, SEO, App Design und -Entwicklung, Games, Print Design, Automatisierung &amp; Chatbots sowie damit verbundene Beratungs-, Hosting- und Betreuungsleistungen.</li>
-      <li>Das Angebot von EP richtet sich ausschließlich an Unternehmer im Sinne von § 14 BGB, juristische Personen des öffentlichen Rechts und öffentlich-rechtliche Sondervermögen. <span class="ph">[ob auch Verbraucher beauftragen können – noch in Planung]</span></li>
-      <li>Abweichende oder ergänzende Bedingungen des Auftraggebers werden nur Vertragsbestandteil, wenn EP ihrer Geltung ausdrücklich schriftlich zustimmt.</li>
+      <li>Diese AGB gelten für alle Verträge zwischen EP und ihren Auftraggebern über Leistungen in den Bereichen Werbeclips und Kampagnen, Raum- und Produktvisualisierung, Websites und Onlineshops, SEO, App Design und -Entwicklung, Games, Print Design, Logo Design, Merch, Automatisierung &amp; Chatbots, Systeme &amp; Dashboards sowie damit verbundene Beratungs-, Hosting-, Wartungs- und Betreuungsleistungen.</li>
+      <li>Das Angebot von EP richtet sich an<br>a) Unternehmer im Sinne von § 14 BGB,<br>b) juristische Personen des öffentlichen Rechts und öffentlich-rechtliche Sondervermögen,<br>c) Vereine, Stiftungen und sonstige Organisationen (unabhängig von Gemeinnützigkeit) sowie<br>d) Verbraucher im Sinne von § 13 BGB, also natürliche Personen, die einen Vertrag überwiegend weder zu gewerblichen noch zu selbständigen beruflichen Zwecken schließen.</li>
+      <li>Soweit diese AGB von „Unternehmern“ sprechen, sind die unter a) bis c) Genannten gemeint. Vereine sind keine Verbraucher im Sinne von § 13 BGB; für sie gelten die Regelungen für Unternehmer.</li>
+      <li>Bestimmungen, die mit <strong>„gilt nur für Unternehmer“</strong> gekennzeichnet sind, finden auf Verträge mit Verbrauchern keine Anwendung. Für Verbraucher gelten insoweit die gesetzlichen Vorschriften.</li>
+      <li>Bei Widersprüchen zwischen diesen AGB und zwingenden gesetzlichen Verbraucherschutzvorschriften gehen Letztere vor.</li>
+      <li>Individuelle Vereinbarungen haben stets Vorrang (§ 305b BGB). Abweichende oder ergänzende Bedingungen des Auftraggebers werden nur Vertragsbestandteil, wenn EP ihrer Geltung ausdrücklich schriftlich zustimmt (gilt nur für Unternehmer; gegenüber Verbrauchern genügt Textform).</li>
     </ol>
 
     <h3>§ 2 Angebot und Vertragsschluss</h3>
     <ol>
-      <li>Darstellungen auf der Website sind unverbindlich und stellen kein Angebot dar.</li>
+      <li>Darstellungen auf der Website sind unverbindlich und stellen kein Angebot dar. Eine Anfrage über das Kontaktformular, per E-Mail oder im Website-Chat ist noch kein Auftrag. Das Erstgespräch ist kostenlos und unverbindlich.</li>
       <li>Ein Vertrag kommt durch schriftliche Auftragsbestätigung (Textform genügt) oder durch Annahme eines individuellen Angebots von EP zustande. Leistungsumfang, Zeitplan und Vergütung ergeben sich aus dem jeweiligen Angebot.</li>
+    </ol>
+
+    <h3>§ 2a Vertragsschluss mit Verbrauchern</h3>
+    <ol>
+      <li>Vor Vertragsschluss stellt EP Verbrauchern die Pflichtinformationen nach Art. 246a EGBGB zur Verfügung, u. a. die wesentlichen Eigenschaften der Leistung, den Gesamtpreis einschließlich Umsatzsteuer, die Zahlungs- und Leistungsbedingungen sowie die Widerrufsbelehrung samt Muster-Widerrufsformular.</li>
+      <li>Nach Vertragsschluss erhält der Verbraucher innerhalb einer angemessenen Frist, spätestens vor Beginn der Ausführung, eine Vertragsbestätigung auf einem dauerhaften Datenträger (z. B. E-Mail mit PDF). Sie enthält den Vertragsinhalt, diese AGB, die Widerrufsbelehrung und gegebenenfalls die Bestätigung des Verlangens bzw. der Zustimmung nach § 6a (§ 312f Abs. 2 BGB).</li>
     </ol>
 
     <h3>§ 3 Leistungsumfang und Mitwirkung</h3>
     <ol>
-      <li>EP erbringt die vereinbarten Leistungen nach dem Stand der Technik und mit der Sorgfalt eines ordentlichen Kaufmanns. EP darf zur Leistungserbringung qualifizierte Subunternehmer und technische Hilfsmittel einschließlich Software-Werkzeugen einsetzen.</li>
+      <li>EP erbringt die vereinbarten Leistungen nach dem Stand der Technik und mit der im Verkehr erforderlichen Sorgfalt. EP darf zur Leistungserbringung qualifizierte Subunternehmer und technische Hilfsmittel einschließlich Software-Werkzeugen einsetzen.</li>
       <li>Der Auftraggeber stellt alle für die Leistung erforderlichen Informationen, Inhalte, Zugänge und Freigaben rechtzeitig und vollständig zur Verfügung. Er versichert, dass er über die erforderlichen Rechte an bereitgestellten Materialien (z. B. Texte, Bilder, Marken, Logos) verfügt, und stellt EP von Ansprüchen Dritter frei, die auf einer Verletzung dieser Pflicht beruhen.</li>
       <li>Verzögerungen, die auf fehlender oder verspäteter Mitwirkung des Auftraggebers beruhen, verlängern vereinbarte Fristen angemessen. Hierdurch entstehender Mehraufwand kann gesondert berechnet werden.</li>
+      <li>Auf Wunsch richtet EP ein einfaches Redaktionssystem ein, mit dem der Auftraggeber Inhalte selbst pflegen kann. Zur Übergabe gibt es eine kurze Einweisung bzw. Anleitung; Schulungen sind nicht Teil des Leistungsangebots.</li>
     </ol>
 
     <h3>§ 4 Änderungswünsche</h3>
@@ -148,15 +166,27 @@
     <h3>§ 5 Abnahme</h3>
     <ol>
       <li>Soweit werkvertragliche Leistungen geschuldet sind, ist der Auftraggeber zur Abnahme verpflichtet, sobald die Leistung im Wesentlichen vertragsgemäß erbracht ist. Unwesentliche Mängel berechtigen nicht zur Verweigerung der Abnahme.</li>
-      <li>Die Leistung gilt als abgenommen, wenn der Auftraggeber sie nicht innerhalb von 14 Tagen nach Übergabe unter Angabe mindestens eines wesentlichen Mangels zurückweist oder wenn er sie produktiv nutzt bzw. veröffentlicht.</li>
+      <li>Die Leistung gilt als abgenommen, wenn der Auftraggeber sie nicht innerhalb von 14 Tagen nach Übergabe unter Angabe mindestens eines wesentlichen Mangels zurückweist oder wenn er sie produktiv nutzt bzw. veröffentlicht. <strong>(gilt nur für Unternehmer)</strong></li>
+      <li>Bei Verträgen mit Verbrauchern über digitale Produkte (z. B. Websites, Onlineshops, Bots, Videos, Bild- und Designdateien) gelten die §§ 327 ff. BGB.</li>
     </ol>
 
     <h3>§ 6 Vergütung und Zahlung</h3>
+    <p>(1) Gegenüber Unternehmern verstehen sich alle Preise zuzüglich der jeweils gültigen gesetzlichen Umsatzsteuer. <strong>(gilt nur für Unternehmer)</strong> <span class="ph">[Kleinunternehmerregelung nach § 19 UStG ja/nein – entscheidet Eugen; falls ja: „Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.“ und Abs. 1/1a anpassen]</span></p>
+    <p>(1a) Gegenüber Verbrauchern nennt EP alle Preise als Gesamtpreise einschließlich der gesetzlichen Umsatzsteuer (Bruttopreise).</p>
+    <p>(1b) Zu jedem Paket gehört eine monatliche Wartungspauschale. Der Auftraggeber wählt im Angebot zwischen einem höheren Einmalpreis mit niedrigerer monatlicher Pauschale oder einem niedrigeren Einmalpreis mit höherer monatlicher Pauschale. Gegenüber Verbrauchern werden auch laufende Leistungen (Wartungspauschale, Hosting, Betreuung) als Bruttobeträge je Monat ausgewiesen.</p>
+    <p>(2) Sofern nicht anders vereinbart, ist EP berechtigt, bei Auftragserteilung eine Anzahlung von 50 % der Auftragssumme und den Rest nach Abnahme bzw. Fertigstellung in Rechnung zu stellen. Gegenüber Verbrauchern gilt eine Anzahlung nur, wenn sie im Angebot ausdrücklich ausgewiesen ist. Laufende Leistungen (z. B. Wartungspauschale, Hosting, Betreuung) werden monatlich im Voraus berechnet.</p>
+    <p>(3) Rechnungen sind innerhalb von 14 Tagen nach Zugang ohne Abzug zahlbar.</p>
+    <p>(3a) Zahlungswege: Rechnung bzw. Überweisung, SEPA-Lastschrift, PayPal, Klarna (auch Sofortüberweisung und Ratenkauf), Kredit- und Debitkarte (Visa, Mastercard, American Express), Apple Pay, Google Pay und Wero sowie iDEAL, Bancontact und EPS. Für die Nutzung eines Zahlungsmittels fallen für Verbraucher keine zusätzlichen Entgelte an (§ 312a Abs. 4 BGB, § 270a BGB). <span class="ph">[tatsächlich angebundene Zahlungsdienstleister für Karte und Wallets eintragen – trägt Eugen ein]</span></p>
+    <p>(4) Fremdkosten (z. B. Lizenzen, Stock-Material, Domain- und Hostingkosten, Nutzungsgebühren externer Software- und Rechendienste) werden nach vorheriger Abstimmung gesondert berechnet.</p>
+
+    <h3 id="agb-widerruf">§ 6a Widerrufsrecht für Verbraucher</h3>
     <ol>
-      <li>Alle Preise verstehen sich zuzüglich der jeweils gültigen gesetzlichen Umsatzsteuer. <span class="ph">[ggf. Kleinunternehmerregelung nach § 19 UStG – noch in Planung/Gründung]</span></li>
-      <li>Sofern nicht anders vereinbart, ist EP berechtigt, bei Auftragserteilung eine Anzahlung von 50 % der Auftragssumme und den Rest nach Abnahme bzw. Fertigstellung in Rechnung zu stellen. Laufende Leistungen (z. B. Hosting, Betreuung) werden monatlich im Voraus berechnet.</li>
-      <li>Rechnungen sind innerhalb von 14 Tagen nach Zugang ohne Abzug zahlbar.</li>
-      <li>Fremdkosten (z. B. Lizenzen, Stock-Material, Domain- und Hostingkosten, Nutzungsgebühren externer Software- und Rechendienste) werden nach vorheriger Abstimmung gesondert berechnet.</li>
+      <li>Verbrauchern steht ein gesetzliches Widerrufsrecht nach Maßgabe der <a href="widerruf.html">Widerrufsbelehrung</a> zu. Unternehmern, juristischen Personen des öffentlichen Rechts, öffentlich-rechtlichen Sondervermögen und Vereinen steht kein gesetzliches Widerrufsrecht zu.</li>
+      <li><strong>Dienstleistungen</strong> (z. B. Websites, Onlineshops, Bots, Automatisierungen, Wartung, Hosting, SEO): Da EP jede Leistung individuell erstellt, beginnt EP auf ausdrückliches Verlangen des Verbrauchers bereits vor Ablauf der Widerrufsfrist mit der Ausführung (z. B. mit der Erstellung der Moodboards). Das Verlangen und die Kenntnisbestätigung erfolgen bei der Auftragserteilung (Erklärung 1 in der <a href="widerruf.html#erklaerungen">Widerrufsbelehrung</a>).<br>a) Widerruft der Verbraucher nach diesem Beginn, hat er Wertersatz für die bis zum Widerruf erbrachten Leistungen zu leisten (§ 357a Abs. 2 BGB); bei der Berechnung ist der vereinbarte Gesamtpreis zugrunde zu legen. Bereits erstellte Moodboards gelten als erbrachter Leistungsteil.<br>b) Das Widerrufsrecht erlischt, wenn EP die Dienstleistung vollständig erbracht hat und der Verbraucher vor Beginn ausdrücklich zugestimmt und seine Kenntnis davon bestätigt hat, dass er sein Widerrufsrecht bei vollständiger Vertragserfüllung verliert (§ 356 Abs. 4 BGB).</li>
+      <li><strong>Digitale Inhalte</strong> (z. B. Videos, Bild-, Audio-, Design- und Grafikdateien, Logos), die nicht auf einem körperlichen Datenträger geliefert werden: Das Widerrufsrecht erlischt mit Beginn der Bereitstellung (z. B. Download-Link, Übergabe per Cloud-Ordner), wenn der Verbraucher a) ausdrücklich zugestimmt hat, dass EP vor Ablauf der Widerrufsfrist mit der Vertragserfüllung beginnt, b) seine Kenntnis davon bestätigt hat, dass er durch seine Zustimmung mit Beginn der Vertragserfüllung sein Widerrufsrecht verliert, und c) EP ihm eine Bestätigung nach § 312f BGB auf einem dauerhaften Datenträger zur Verfügung gestellt hat (§ 356 Abs. 5 BGB). Zustimmung und Kenntnisbestätigung erfolgen über Erklärung 2 in der <a href="widerruf.html#erklaerungen">Widerrufsbelehrung</a>.</li>
+      <li><strong>Waren nach Kundenspezifikation</strong> (z. B. Druckprodukte, bedruckte Textilien und Merch, Folierungen, Verpackungen): Soweit EP Waren liefert, die nicht vorgefertigt sind und für deren Herstellung eine individuelle Auswahl oder Bestimmung durch den Verbraucher maßgeblich ist oder die eindeutig auf die persönlichen Bedürfnisse des Verbrauchers zugeschnitten sind, besteht kein Widerrufsrecht (§ 312g Abs. 2 Nr. 1 BGB). Für Gestaltungsleistungen, die der Warenherstellung vorausgehen (Entwurf, Layout), gelten Abs. 2 bzw. Abs. 3.</li>
+      <li>Ein darüber hinausgehender pauschaler Ausschluss des Widerrufsrechts ist nicht vereinbart.</li>
+      <li>Werden Verträge mit Verbrauchern über eine Online-Benutzeroberfläche (z. B. Online-Bestellformular oder Shop) geschlossen, stellt EP eine Widerrufsfunktion „Vertrag widerrufen“ bereit (§ 356a BGB). Bis dahin kann der Widerruf jederzeit per E-Mail, Brief oder über die Seite <a href="widerruf.html#widerrufen">Widerruf erklären</a> erfolgen. <span class="ph">[prüfen: Pflicht zur Widerrufsfunktion bei Annahme von Angeboten per E-Mail/PDF – anwaltlich bestätigen]</span></li>
     </ol>
 
     <h3>§ 7 Nutzungsrechte</h3>
@@ -183,17 +213,17 @@
 
     <h3>§ 11 Gewährleistung</h3>
     <ol>
-      <li>Bei Mängeln werkvertraglicher Leistungen hat EP zunächst das Recht zur Nacherfüllung. Schlägt diese fehl, gelten die gesetzlichen Rechte.</li>
-      <li>Die Verjährungsfrist für Mängelansprüche beträgt ein Jahr ab Abnahme, außer in den Fällen des § 12 Abs. 1.</li>
-      <li>Für die Verfügbarkeit und Funktion von Diensten Dritter (z. B. Hosting-Plattformen, Schnittstellen, Software- und Cloud-Dienste, Suchmaschinen) übernimmt EP keine Gewähr. SEO-Leistungen umfassen keine Garantie bestimmter Platzierungen.</li>
+      <li>Bei Mängeln werkvertraglicher Leistungen hat EP zunächst das Recht zur Nacherfüllung. Schlägt diese fehl, gelten die gesetzlichen Rechte. <strong>(gilt nur für Unternehmer)</strong> Für Verbraucher gelten die gesetzlichen Mängelrechte, bei digitalen Produkten die §§ 327 ff. BGB.</li>
+      <li>Die Verjährungsfrist für Mängelansprüche beträgt ein Jahr ab Abnahme, außer in den Fällen des § 12 Abs. 1. <strong>(gilt nur für Unternehmer)</strong> Für Verbraucher gelten die gesetzlichen Verjährungsfristen.</li>
+      <li>Für die Verfügbarkeit und Funktion von Diensten Dritter (z. B. Hosting-Plattformen, Schnittstellen, Software- und Cloud-Dienste, Suchmaschinen) übernimmt EP keine Gewähr, soweit diese nicht Bestandteil der von EP geschuldeten Leistung sind. SEO-Leistungen umfassen keine Garantie bestimmter Platzierungen.</li>
     </ol>
 
     <h3>§ 12 Haftung</h3>
     <ol>
-      <li>EP haftet unbeschränkt bei Vorsatz und grober Fahrlässigkeit, bei Verletzung von Leben, Körper oder Gesundheit, nach dem Produkthaftungsgesetz sowie im Umfang einer übernommenen Garantie.</li>
+      <li>EP haftet unbeschränkt bei Vorsatz und grober Fahrlässigkeit, bei Verletzung von Leben, Körper oder Gesundheit, nach dem Produkthaftungsgesetz, im Umfang einer übernommenen Garantie sowie bei arglistig verschwiegenen Mängeln.</li>
       <li>Bei leicht fahrlässiger Verletzung wesentlicher Vertragspflichten (Pflichten, deren Erfüllung die ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung der Auftraggeber regelmäßig vertrauen darf) ist die Haftung auf den vertragstypischen, vorhersehbaren Schaden begrenzt.</li>
-      <li>Im Übrigen ist die Haftung für leichte Fahrlässigkeit ausgeschlossen.</li>
-      <li>Der Auftraggeber ist für die regelmäßige Sicherung seiner Daten verantwortlich.</li>
+      <li>Im Übrigen ist die Haftung für leichte Fahrlässigkeit ausgeschlossen. Die Haftungsbeschränkungen gelten nicht für Ansprüche von Verbrauchern nach §§ 327 ff. BGB, soweit diese zwingend sind.</li>
+      <li>Der Auftraggeber ist für die regelmäßige Sicherung seiner Daten verantwortlich. <strong>(gilt nur für Unternehmer)</strong> Verbrauchern wird empfohlen, ihre Daten regelmäßig zu sichern.</li>
     </ol>
 
     <h3>§ 13 Vertraulichkeit und Datenschutz</h3>
@@ -203,16 +233,20 @@
     </ol>
 
     <h3>§ 14 Laufzeit und Kündigung von Dauerleistungen</h3>
-    <p>Dauerleistungen wie Hosting, Wartung, SEO-Betreuung oder der Betrieb von Automatisierungen haben, sofern nicht anders vereinbart, eine Mindestlaufzeit von drei Monaten und verlängern sich danach jeweils um einen Monat, wenn sie nicht mit einer Frist von einem Monat zum Laufzeitende in Textform gekündigt werden. Das Recht zur außerordentlichen Kündigung bleibt unberührt.</p>
+    <p>Dauerleistungen wie Wartungspauschale, Hosting, SEO-Betreuung oder der Betrieb von Automatisierungen haben, sofern nicht anders vereinbart, eine Mindestlaufzeit von drei Monaten und verlängern sich danach jeweils um einen Monat, wenn sie nicht mit einer Frist von einem Monat zum Laufzeitende in Textform gekündigt werden. Das Recht zur außerordentlichen Kündigung bleibt unberührt. Werden Dauerleistungen künftig mit Verbrauchern über die Website abgeschlossen, stellt EP dort zusätzlich eine Kündigungsschaltfläche bereit (§ 312k BGB).</p>
 
     <h3>§ 15 Schlussbestimmungen</h3>
     <ol>
-      <li>Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.</li>
-      <li>Ausschließlicher Gerichtsstand für alle Streitigkeiten aus dem Vertragsverhältnis ist, soweit gesetzlich zulässig, der Sitz von EP: <span class="ph">[Ort – noch in Planung/Gründung]</span>.</li>
+      <li>Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Gegenüber Verbrauchern gilt diese Rechtswahl nur, soweit dadurch nicht der Schutz entzogen wird, der durch zwingende Bestimmungen des Rechts des Staates ihres gewöhnlichen Aufenthalts gewährt wird.</li>
+      <li>Ist der Auftraggeber Kaufmann, juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen, ist ausschließlicher Gerichtsstand für alle Streitigkeiten aus dem Vertragsverhältnis der Sitz von EP: <span class="ph">[Ort des Firmensitzes – trägt Eugen ein]</span>. <strong>(gilt nur für Unternehmer)</strong></li>
       <li>Sollten einzelne Bestimmungen dieser AGB unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</li>
     </ol>
+
+    <h3>§ 16 Verbraucherstreitbeilegung</h3>
+    <p>EP ist nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
     <a class="totop" href="#main">Nach oben ↑</a>
   </section>
+
 
   <!-- ===================== BARRIEREFREIHEIT ===================== -->
   <section class="legal" id="barrierefreiheit" aria-labelledby="h-barrierefreiheit">
@@ -251,7 +285,7 @@
   </section>
 </main>
 
-<footer><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="#cookies">Cookie-Policy</a><a href="#agb">AGB</a><a href="#barrierefreiheit">Barrierefreiheit</a><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
+<footer><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="#cookies">Cookie-Policy</a><a href="#agb">AGB</a><a href="widerruf.html">Widerruf</a><a href="#barrierefreiheit">Barrierefreiheit</a><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
 <script src="assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
 <script src="assets/consent.js" defer></script>
 </body>

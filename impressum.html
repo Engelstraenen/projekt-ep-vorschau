@@ -46,7 +46,9 @@
   h1 { font-size: clamp(40px, 5vw, 72px); font-weight: 650; letter-spacing: -.05em; line-height: 1.02; }
   h1 .mute { color: var(--ink-2); }
   .notice { margin-top: 28px; background: var(--amber-bg); border-radius: 18px; padding: 16px 20px; font-size: 14px; color: #5C3A10; max-width: 74ch; }
-  .ph { background: var(--amber-bg); color: var(--amber); border-radius: 6px; padding: 0 6px; font-weight: 500; white-space: nowrap; }
+  .notice.draft { border: 2px solid #E8A33D; font-size: 15px; padding: 18px 22px; }
+  .notice.draft strong:first-child { display: block; font-size: 17px; letter-spacing: .02em; color: #8A3B00; margin-bottom: 4px; }
+  .ph { background: var(--amber-bg); color: var(--amber); border-radius: 6px; padding: 0 6px; font-weight: 500; white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   .updated { margin-top: 18px; font-size: 14px; color: var(--ink-2); }
 
   nav.toc { display: flex; flex-wrap: wrap; gap: 10px; margin: 36px 0 24px; }
@@ -85,38 +87,38 @@
 
   <p class="kicker">PROJEKT EP / Impressum</p>
   <h1>Impressum.</h1>
-  <p class="notice" role="note"><strong>ENTWURF – nicht final.</strong> Dieser Text ist eine Vorlage nach dem Muster gängiger Generatoren (z.&nbsp;B. eRecht24, IT-Recht Kanzlei) und keine Rechtsberatung. Gelb markierte Stellen sind Platzhalter. Vor dem Go-live final über den Generator bzw. anwaltlich prüfen lassen und diesen Hinweis entfernen.</p>
+  <p class="notice draft" role="note"><strong>ENTWURF – nicht final, nicht veröffentlicht</strong> Gelb markierte Stellen fehlen noch und werden vor dem Go-live ergänzt. Der Text wird vor der Veröffentlichung anwaltlich geprüft und ist keine Rechtsberatung.</p>
   <p class="updated">Stand: Oktober 2026</p>
 
   <section class="legal" id="impressum" aria-labelledby="h-impressum">
     <h2 id="h-impressum">Angaben gemäß § 5 DDG</h2>
     <address>
       PROJEKT EP<br>
-      <span class="ph">[PLATZHALTER – Eugen trägt ein: Vor- und Nachname bzw. Firma mit Rechtsform]</span><br>
-      <span class="ph">[PLATZHALTER – Eugen trägt ein: Straße und Hausnummer (ladungsfähige Anschrift, kein Postfach)]</span><br>
-      <span class="ph">[PLATZHALTER – Eugen trägt ein: PLZ und Ort]</span><br>
+      <span class="ph">[trägt Eugen ein: Vor- und Nachname bzw. Firma mit Rechtsform]</span><br>
+      <span class="ph">[trägt Eugen ein: Straße und Hausnummer (ladungsfähige Anschrift, kein Postfach)]</span><br>
+      <span class="ph">[trägt Eugen ein: PLZ und Ort]</span><br>
       Deutschland
     </address>
 
     <h3>Vertreten durch</h3>
-    <p><span class="ph">[PLATZHALTER – Eugen trägt ein: Name der vertretungsberechtigten Person – nur bei GmbH/UG o.&nbsp;Ä., sonst Abschnitt löschen]</span></p>
+    <p><span class="ph">[trägt Eugen ein: Name der vertretungsberechtigten Person – nur bei GmbH/UG o.&nbsp;Ä., sonst Abschnitt löschen]</span></p>
 
     <h3>Kontakt</h3>
     <p>E-Mail: <a href="mailto:kontakt@projekt-ep.de">kontakt@projekt-ep.de</a><br>
-    Telefon: <span class="ph">[PLATZHALTER – Eugen trägt ein: Telefonnummer]</span><br>
+    Telefon: <span class="ph">[trägt Eugen ein: Telefonnummer]</span><br>
     Website: <a href="https://projekt-ep.de">projekt-ep.de</a></p>
 
     <h3>Registereintrag</h3>
-    <p>Registergericht und Registernummer: <span class="ph">[PLATZHALTER – Eugen trägt ein: nur bei Eintragung ins Handelsregister, sonst Abschnitt löschen]</span></p>
+    <p>Registergericht und Registernummer: <span class="ph">[trägt Eugen ein: nur bei Eintragung ins Handelsregister, sonst Abschnitt löschen]</span></p>
 
     <h3>Umsatzsteuer-ID</h3>
-    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: <span class="ph">[PLATZHALTER – Eugen trägt ein: USt-IdNr. – falls keine vorhanden: Abschnitt löschen; Kleinunternehmer nach § 19 UStG nennen keine USt-IdNr., sofern sie keine haben]</span></p>
+    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: <span class="ph">[trägt Eugen ein: USt-IdNr. – falls keine vorhanden: Abschnitt löschen; Kleinunternehmer nach § 19 UStG nennen keine USt-IdNr., sofern sie keine haben]</span></p>
 
     <h3>Berufsbezeichnung und berufsrechtliche Regelungen</h3>
-    <p><span class="ph">[PLATZHALTER – Eugen trägt ein: nur falls zutreffend (reglementierter Beruf, Kammer) – sonst Abschnitt löschen]</span></p>
+    <p><span class="ph">[trägt Eugen ein: nur falls zutreffend (reglementierter Beruf, Kammer) – sonst Abschnitt löschen]</span></p>
 
     <h3>Redaktionell verantwortlich nach § 18 Abs. 2 MStV</h3>
-    <p><span class="ph">[PLATZHALTER – Eugen trägt ein: Vor- und Nachname]</span>, Anschrift wie oben.</p>
+    <p><span class="ph">[trägt Eugen ein: Vor- und Nachname der verantwortlichen Person]</span>, Anschrift wie oben.</p>
 
     <h3>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h3>
     <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
@@ -134,7 +136,7 @@
 
 </main>
 
-<footer><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="kontakt.html">Kontakt</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
+<footer><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="kontakt.html">Kontakt</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="rechtliches.html#agb">AGB</a><a href="widerruf.html">Widerruf</a><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
 <script src="assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
 <script src="assets/consent.js" defer></script>
 </body>

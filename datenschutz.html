@@ -46,7 +46,9 @@
   h1 { font-size: clamp(40px, 5vw, 72px); font-weight: 650; letter-spacing: -.05em; line-height: 1.02; }
   h1 .mute { color: var(--ink-2); }
   .notice { margin-top: 28px; background: var(--amber-bg); border-radius: 18px; padding: 16px 20px; font-size: 14px; color: #5C3A10; max-width: 74ch; }
-  .ph { background: var(--amber-bg); color: var(--amber); border-radius: 6px; padding: 0 6px; font-weight: 500; white-space: nowrap; }
+  .notice.draft { border: 2px solid #E8A33D; font-size: 15px; padding: 18px 22px; }
+  .notice.draft strong:first-child { display: block; font-size: 17px; letter-spacing: .02em; color: #8A3B00; margin-bottom: 4px; }
+  .ph { background: var(--amber-bg); color: var(--amber); border-radius: 6px; padding: 0 6px; font-weight: 500; white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   .updated { margin-top: 18px; font-size: 14px; color: var(--ink-2); }
 
   nav.toc { display: flex; flex-wrap: wrap; gap: 10px; margin: 36px 0 24px; }
@@ -85,21 +87,21 @@
 
   <p class="kicker">PROJEKT EP / Datenschutz</p>
   <h1>Datenschutzerklärung.</h1>
-  <p class="notice" role="note"><strong>ENTWURF – nicht final.</strong> Dieser Text ist eine Vorlage nach dem Muster gängiger Generatoren (z.&nbsp;B. eRecht24, IT-Recht Kanzlei) und keine Rechtsberatung. Gelb markierte Stellen sind Platzhalter. Vor dem Go-live final über den Generator bzw. anwaltlich prüfen lassen und diesen Hinweis entfernen.</p>
+  <p class="notice draft" role="note"><strong>ENTWURF – nicht final, nicht veröffentlicht</strong> Gelb markierte Stellen fehlen noch und werden vor dem Go-live ergänzt. Der Text wird vor der Veröffentlichung anwaltlich geprüft und ist keine Rechtsberatung.</p>
   <p class="updated">Stand: Oktober 2026</p>
 
   <nav class="toc" aria-label="Inhalt dieser Seite">
-    <a href="#verantwortlicher">Verantwortlicher</a><a href="#hosting">Hosting</a><a href="#kontakt">Kontakt</a><a href="#cookies">Cookies &amp; Einwilligung</a><a href="#tracking">Analyse &amp; Werbung</a><a href="#rechte">Ihre Rechte</a>
+    <a href="#verantwortlicher">Verantwortlicher</a><a href="#hosting">Hosting</a><a href="#kontakt">Kontakt</a><a href="#chat">Website-Chat</a><a href="#auftraege">Aufträge &amp; Zahlung</a><a href="#cookies">Cookies &amp; Einwilligung</a><a href="#tracking">Analyse &amp; Werbung</a><a href="#rechte">Ihre Rechte</a>
   </nav>
 
   <section class="legal" id="verantwortlicher" aria-labelledby="h-verantwortlicher">
     <h2 id="h-verantwortlicher">1. Verantwortlicher</h2>
     <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
     <address>
-      PROJEKT EP, <span class="ph">[PLATZHALTER – Eugen trägt ein: Vor- und Nachname bzw. Firma]</span><br>
-      <span class="ph">[PLATZHALTER – Eugen trägt ein: Straße und Hausnummer, PLZ und Ort]</span><br>
+      PROJEKT EP, <span class="ph">[trägt Eugen ein: Firma mit Rechtsform bzw. Inhaber]</span><br>
+      <span class="ph">[trägt Eugen ein: Straße und Hausnummer, PLZ und Ort]</span><br>
       E-Mail: <a href="mailto:kontakt@projekt-ep.de">kontakt@projekt-ep.de</a><br>
-      Telefon: <span class="ph">[PLATZHALTER – Eugen trägt ein: Telefonnummer]</span>
+      Telefon: <span class="ph">[trägt Eugen ein: Telefonnummer]</span>
     </address>
     <p>Ein Datenschutzbeauftragter ist nicht benannt, da die gesetzlichen Voraussetzungen (Art. 37 DSGVO, § 38 BDSG) nicht vorliegen. <span class="ph">[bitte prüfen]</span></p>
 
@@ -132,17 +134,38 @@
 
   <section class="legal" id="kontakt" aria-labelledby="h-kontakt">
     <h2 id="h-kontakt">3. Kontaktformular und E-Mail</h2>
-    <p>Wenn Sie uns über das Kontaktformular oder per E-Mail schreiben, verarbeiten wir Ihre Angaben (Name, E-Mail-Adresse, ggf. Unternehmen, gewünschte Leistung und Ihre Nachricht), um Ihre Anfrage zu bearbeiten.</p>
+    <p>Wenn Sie uns über das Kontaktformular oder per E-Mail schreiben, verarbeiten wir Ihre Angaben (Name, E-Mail-Adresse, ggf. Unternehmen oder Verein, ob Sie als Unternehmen, Verein, öffentlicher Auftraggeber oder Privatperson anfragen, gewünschte Leistung und Ihre Nachricht), um Ihre Anfrage zu bearbeiten. Pflichtfelder sind Name, E-Mail-Adresse und Nachricht; ohne diese Angaben können wir Ihre Anfrage nicht beantworten. Alle weiteren Angaben sind freiwillig.</p>
     <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, wenn Ihre Anfrage auf einen Vertrag abzielt, sonst Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung von Anfragen).</p>
     <p>Das Formular wird über unseren Webspace bei IONOS verarbeitet und als E-Mail an unser Postfach kontakt@projekt-ep.de zugestellt. Das Postfach wird ebenfalls von der IONOS SE betrieben (Auftragsverarbeitung nach Art. 28 DSGVO, siehe oben). Zum Schutz vor Spam und Missbrauch prüfen wir die Eingaben automatisch (verstecktes Prüffeld, Mindest-Ausfüllzeit) und speichern Ihre IP-Adresse in gekürzter, nicht rückführbarer Form (Hash) für höchstens eine Stunde, um zu viele Anfragen in kurzer Zeit zu begrenzen (Art. 6 Abs. 1 lit. f DSGVO).</p>
     <p>Wir löschen Ihre Daten, sobald die Anfrage abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten (z.&nbsp;B. § 257 HGB, § 147 AO) entgegenstehen.</p>
   </section>
 
+  <section class="legal" id="chat" aria-labelledby="h-chat">
+    <h2 id="h-chat">3a. Website-Chat</h2>
+    <p>Auf unserer Website können Sie einen automatischen Chat-Assistenten nutzen. Es handelt sich um eine Software, nicht um einen Menschen. Anbieter und Betreiber des Chats ist PROJEKT EP selbst; der Chat läuft auf unserem eigenen Server <span class="ph">[Hoster und Serverstandort des Chat-Servers – trägt Eugen ein]</span>. Ein externes KI-Sprachmodell ist nicht angebunden; Ihre Nachrichten werden nicht an KI-Anbieter übermittelt. Sollte künftig ein Sprachmodell zugeschaltet werden, nennen wir den Anbieter vorher hier. <span class="ph">[Abschnitt gilt ab Einbindung des Chats auf dieser Website – derzeit nur in der privaten Vorschau]</span></p>
+    <p>Wir verarbeiten Ihre Nachrichten und die Antworten, um Ihre Fragen zu beantworten und Anfragen an unser Team weiterzuleiten (Art. 6 Abs. 1 lit. f DSGVO; bei vorvertraglichen Anfragen Art. 6 Abs. 1 lit. b DSGVO). Dazu speichern wir den Verlauf, eine kurze Zusammenfassung und eine Einordnung Ihres Anliegens. Kontaktdaten übermitteln Sie nur, wenn Sie im Chat ausdrücklich einwilligen (Art. 6 Abs. 1 lit. a DSGVO); die Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+    <p>Wir speichern keine IP-Adressen und setzen keine Cookies. Eine Sitzungskennung wird nur im Sitzungsspeicher (sessionStorage) Ihres Browsers abgelegt und beim Schließen des Tabs gelöscht (§ 25 Abs. 2 Nr. 2 TDDDG). Chatverläufe löschen wir automatisch nach 30 Tagen; Sie können den Verlauf jederzeit selbst über „Verlauf löschen“ im Chat-Menü löschen.</p>
+    <p>Bei dringenden Anfragen benachrichtigen wir unser Team, sobald diese Funktion aktiv ist, per WhatsApp (WhatsApp Ireland Limited, Merrion Road, Dublin 4, Irland; eine Datenübermittlung in die USA ist möglich, die Meta Platforms Inc. ist nach dem EU-US Data Privacy Framework zertifiziert) bzw. per E-Mail über <span class="ph">[E-Mail-Anbieter des Chat-Servers – trägt Eugen ein]</span>. Dabei werden nur die Zusammenfassung Ihres Anliegens und – falls Sie eingewilligt haben – Ihre Kontaktdaten übermittelt. Eine automatisierte Entscheidung im Sinne von Art. 22 DSGVO findet nicht statt.</p>
+  </section>
+  <section class="legal" id="auftraege" aria-labelledby="h-auftraege">
+    <h2 id="h-auftraege">3b. Aufträge, Rechnungen und Zahlung</h2>
+    <p>Für die Durchführung von Aufträgen verarbeiten wir Ihre Vertrags-, Kontakt- und Zahlungsdaten (Art. 6 Abs. 1 lit. b DSGVO). Zur Erfüllung steuer- und handelsrechtlicher Pflichten geben wir Rechnungsdaten an unsere Steuerberatung <span class="ph">[Name der Steuerberatung – trägt Eugen ein]</span> weiter und bewahren Buchungsbelege und Rechnungen 8 Jahre, Handels- und Geschäftsbriefe 6 Jahre sowie Bücher und Jahresabschlüsse 10 Jahre auf (Art. 6 Abs. 1 lit. c DSGVO i.&nbsp;V.&nbsp;m. § 147 AO, § 257 HGB).</p>
+    <h3>Zahlungsdienstleister</h3>
+    <p>Wenn Sie bei uns bezahlen, geben wir die zur Zahlungsabwicklung erforderlichen Daten (Name, Anschrift, E-Mail-Adresse, Rechnungsbetrag, Rechnungsnummer, ggf. Bankverbindung) an den von Ihnen gewählten Zahlungsdienst weiter (Art. 6 Abs. 1 lit. b und c DSGVO):</p>
+    <ul>
+      <li><strong>PayPal:</strong> PayPal (Europe) S.à r.l. et Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxemburg. Datenschutzhinweise: https://www.paypal.com/de/legalhub/privacy-full</li>
+      <li><strong>Klarna</strong> (auch Sofortüberweisung und Ratenkauf): Klarna Bank AB (publ), Sveavägen 46, 111 34 Stockholm, Schweden. Datenschutzhinweise: https://www.klarna.com/de/datenschutz/</li>
+      <li><strong>Kredit- und Debitkarte, Apple Pay, Google Pay, Wero, iDEAL, Bancontact, EPS:</strong> <span class="ph">[Zahlungsdienstleister mit Name, Anschrift und Link zu den Datenschutzhinweisen – trägt Eugen ein]</span></li>
+      <li><strong>Rechnung bzw. Überweisung und SEPA-Lastschrift:</strong> Ihre Bank und unsere Bank <span class="ph">[Name der Bank – trägt Eugen ein]</span></li>
+    </ul>
+    <p>Diese Anbieter verarbeiten die Daten in eigener Verantwortung. Bei Kauf auf Rechnung oder Ratenkauf über PayPal oder Klarna kann der Anbieter eine Identitäts- und Bonitätsprüfung durchführen; Einzelheiten stehen in dessen Datenschutzhinweisen.</p>
+  </section>
   <section class="legal" id="cookies" aria-labelledby="h-cookies">
     <h2 id="h-cookies">4. Cookies und Einwilligung</h2>
     <p>Nach § 25 TDDDG dürfen Informationen auf Ihrem Endgerät nur mit Ihrer Einwilligung gespeichert oder ausgelesen werden, es sei denn, das ist für den von Ihnen gewünschten Dienst unbedingt erforderlich.</p>
     <h3>Unbedingt erforderlich</h3>
     <p>Wir speichern Ihre Auswahl im Cookie-Banner in einem Cookie namens <code>cc_cookie</code> (Speicherdauer 6 Monate). Das ist nötig, damit wir Ihre Entscheidung respektieren können (§ 25 Abs. 2 Nr. 2 TDDDG, Art. 6 Abs. 1 lit. c DSGVO i.&nbsp;V.&nbsp;m. Art. 7 Abs. 1 DSGVO). Für das Banner nutzen wir die Open-Source-Software „CookieConsent“, die von unserem eigenen Webspace geladen wird. Dabei werden keine Daten an Dritte übertragen.</p>
+    <p>Unser Chat-Assistent legt eine Sitzungskennung im Sitzungsspeicher (sessionStorage) Ihres Browsers ab. Sie ist für die Chat-Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG) und wird beim Schließen des Tabs gelöscht.</p>
     <h3>Nur mit Einwilligung</h3>
     <p>Dienste zur Statistik und Werbung laden wir erst, nachdem Sie im Banner zugestimmt haben (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Ablehnen ist genauso einfach wie Zustimmen. Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen oder ändern: <a href="#cookies" data-cc="show-preferencesModal">Cookie-Einstellungen öffnen</a>.</p>
   </section>
@@ -164,7 +187,7 @@
   <section class="legal" id="rechte" aria-labelledby="h-rechte">
     <h2 id="h-rechte">6. Empfänger, Ihre Rechte und Beschwerde</h2>
     <h3>Empfänger</h3>
-    <p>Ihre Daten erhalten nur die oben genannten Auftragsverarbeiter (IONOS für Hosting und E-Mail) sowie – nur nach Ihrer Einwilligung – die genannten Analyse- und Werbedienste. Darüber hinaus geben wir Daten nur weiter, wenn wir gesetzlich dazu verpflichtet sind. Wir verkaufen keine Daten.</p>
+    <p>Ihre Daten erhalten nur die oben genannten Auftragsverarbeiter (IONOS für Hosting und E-Mail), bei Sofort-Meldungen aus dem Website-Chat WhatsApp bzw. unser E-Mail-Anbieter, bei Zahlungen der von Ihnen gewählte Zahlungsdienst (PayPal, Klarna bzw. die oben genannten Anbieter), für die Buchhaltung unsere Steuerberatung sowie – nur nach Ihrer Einwilligung – die genannten Analyse- und Werbedienste. Darüber hinaus geben wir Daten nur weiter, wenn wir gesetzlich dazu verpflichtet sind. Wir verkaufen keine Daten.</p>
     <h3>Ihre Rechte</h3>
     <ul>
       <li>Auskunft (Art. 15 DSGVO)</li>
@@ -177,7 +200,7 @@
     <h3>Widerspruchsrecht (Art. 21 DSGVO)</h3>
     <p>Verarbeiten wir Ihre Daten auf Grundlage berechtigter Interessen (Art. 6 Abs. 1 lit. f DSGVO), können Sie aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen. Wir verarbeiten die Daten dann nicht mehr, es sei denn, wir weisen zwingende schutzwürdige Gründe nach, die Ihre Interessen überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.</p>
     <h3>Beschwerderecht</h3>
-    <p>Sie können sich bei einer Datenschutz-Aufsichtsbehörde beschweren, insbesondere in dem Mitgliedstaat Ihres Aufenthalts, Arbeitsplatzes oder des mutmaßlichen Verstoßes. Für uns zuständig ist: <span class="ph">[PLATZHALTER – Eugen trägt ein: Landesdatenschutzbehörde des Bundeslandes des Firmensitzes]</span>.</p>
+    <p>Sie können sich bei einer Datenschutz-Aufsichtsbehörde beschweren, insbesondere in dem Mitgliedstaat Ihres Aufenthalts, Arbeitsplatzes oder des mutmaßlichen Verstoßes. Für uns zuständig ist: <span class="ph">[trägt Eugen ein: Landesdatenschutzbehörde des Bundeslandes des Firmensitzes]</span>.</p>
     <h3>Automatisierte Entscheidungen</h3>
     <p>Eine automatisierte Entscheidungsfindung einschließlich Profiling nach Art. 22 DSGVO findet nicht statt.</p>
     <h3>Änderungen</h3>
@@ -186,7 +209,7 @@
 
 </main>
 
-<footer><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="kontakt.html">Kontakt</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
+<footer><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="kontakt.html">Kontakt</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="rechtliches.html#agb">AGB</a><a href="widerruf.html">Widerruf</a><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
 <script src="assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
 <script src="assets/consent.js" defer></script>
 </body>

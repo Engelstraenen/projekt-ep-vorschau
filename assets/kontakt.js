@@ -39,7 +39,7 @@
     if (val('f-website')) return; // Honeypot
     var leistung = val('f-leistung');
     var subject = 'Anfrage über projekt-ep.de: ' + (leistung || 'Allgemein');
-    var body = 'Name: ' + val('f-name') + '\nE-Mail: ' + val('f-email') + '\nUnternehmen: ' + val('f-firma') +
+    var body = 'Name: ' + val('f-name') + '\nE-Mail: ' + val('f-email') + '\nAnfrage als: ' + val('f-kundentyp') + '\nUnternehmen/Verein: ' + val('f-firma') +
       '\nLeistung: ' + leistung + '\n\nNachricht:\n' + val('f-nachricht') + '\n';
     status.textContent = 'Dein E-Mail-Programm öffnet sich mit der vorbereiteten Anfrage. Bitte dort noch auf Senden tippen. Falls nichts passiert, schreib direkt an kontakt@projekt-ep.de.';
     location.href = 'mailto:kontakt@projekt-ep.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
