@@ -93,3 +93,8 @@
   .pf *, .pf *::before, .pf *::after { transition-duration: .01ms !important; }
   .pf-media[data-state="loading"] .pf-play-ic::after { animation-duration: 2.4s; }
 }
+
+/* Kennzeichnung „Inspiration“ (alle Clips sind Beispiele mit erfundenen Marken, keine Kundenprojekte) */
+.pf-insp { position: absolute; z-index: 3; top: 12px; left: 12px; font-size: 11.5px; font-weight: 600; line-height: 1; letter-spacing: .01em; color: #fff;
+  background: rgba(20, 20, 24, .5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 6px 10px; border-radius: 999px; pointer-events: none; }
+@media (max-width: 860px) { .pf-insp { top: 8px; left: 8px; font-size: 11px; padding: 5px 8px; } }
