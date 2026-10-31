@@ -254,3 +254,5 @@ footer#epf a { color: inherit; }
 @keyframes br-par { from { transform: scale(1.12) translateX(4%); } to { transform: scale(1.12) translateX(-4%); } }
 /* Haltung: dunkle Karte immer deckend (Kontrast auch bevor der Hintergrund nachtblau wird) */
 html.gl .home .card.dark, html.gl body.home .card.dark { background: rgba(22, 22, 25, .94); }
+/* Links im Fließtext der Praxisbeispiele erkennbar (nicht nur über Farbe) */
+.pb-text p a, .uc-meta p a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
