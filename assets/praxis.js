@@ -96,6 +96,34 @@
     btns.forEach((b) => b.addEventListener('click', () => { w.dataset.state = b.dataset.set; btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); }));
   });
 
+
+  // A/B-Test: Ergebnis aufbauen (Knopf oder automatisch beim Hineinscrollen)
+  $$('[data-px-ab]').forEach((w) => {
+    const btn = w.querySelector('[data-run]');
+    const run = () => { w.dataset.state = ''; void w.offsetWidth; requestAnimationFrame(() => { w.dataset.state = 'done'; }); btn.textContent = 'Test wiederholen'; };
+    btn.addEventListener('click', run);
+    io([w], () => setTimeout(() => { if (w.dataset.state !== 'done') run(); }, RM ? 0 : 900));
+  });
+
+  // Dashboard: Zeitraum umschalten (Beispielwerte)
+  $$('[data-px-dash]').forEach((w) => {
+    const D = JSON.parse(w.querySelector('script[type="application/json"]').textContent);
+    const btns = $$('.px-seg button', w);
+    const path = (arr, H = 170, W = 600) => { const mx = Math.max(...D.max ? [D.max] : arr) ; return arr.map((v, i) => `${i ? 'L' : 'M'}${(i / (arr.length - 1) * W).toFixed(1)} ${(H - v / mx * (H - 16)).toFixed(1)}`).join(' '); };
+    const show = (k) => {
+      const d = D[k]; btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.set === k)));
+      $$('[data-k]', w).forEach((e) => { const v = d.kpi[e.dataset.k]; e.querySelector('b').textContent = v[0]; e.querySelector('em').textContent = v[1]; });
+      const l = path(d.a), l2 = path(d.b);
+      w.querySelector('path.l').setAttribute('d', l); w.querySelector('path.l2').setAttribute('d', l2);
+      w.querySelector('path.a').setAttribute('d', l + ' L600 180 L0 180 Z');
+      w.querySelector('.ch tbody').innerHTML = d.ch.map((r) => `<tr><td><i></i>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+      w.querySelector('.tip').innerHTML = d.tip;
+      w.querySelector('.per').textContent = d.per;
+    };
+    btns.forEach((b) => b.addEventListener('click', () => show(b.dataset.set)));
+    show(btns.find((b) => b.getAttribute('aria-pressed') === 'true').dataset.set);
+  });
+
   // Stumme Clips: nur abspielen, solange sichtbar
   const vids = $$('video[data-px-auto]');
   if (vids.length && 'IntersectionObserver' in window) {

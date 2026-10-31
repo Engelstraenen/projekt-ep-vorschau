@@ -429,6 +429,38 @@
 <link rel="stylesheet" href="assets/nav.css">
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="assets/consent-theme.css">
+<style id="ads-kapitel">
+  .plat { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+  .plat span { display:inline-flex; align-items:center; gap:7px; height:32px; padding:0 13px 0 10px; border-radius:999px; font-size:14px; font-weight:500; letter-spacing:-.01em; color:var(--fg); box-shadow: inset 0 0 0 1px var(--rule); background: color-mix(in srgb, var(--bg), transparent calc(var(--dark)*100%)); }
+  .plat svg { width:16px; height:16px; color: var(--blue); }
+  .neu { display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; letter-spacing:.2px; color:#fff; background:var(--blue); vertical-align: 3px; }
+
+  .ads-fig { background: #F5F5F7; display:grid; grid-template-rows:auto 1fr auto; padding: clamp(22px,2.6vw,40px); gap: 18px; }
+  .ads-fig .fh { display:flex; justify-content:space-between; align-items:baseline; }
+  .ads-fig .fh b { font-size: clamp(17px,1.5vw,22px); font-weight:650; letter-spacing:-.025em; color:#1D1D1F; }
+  .ads-fig .fh small { font-size:12px; color:#6E6E73; letter-spacing:.3px; }
+  .flow { list-style:none; margin:0; padding:0; display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-self:center; counter-reset: s; position:relative; }
+  .flow li + li::before { content:""; position:absolute; left:-10px; top:33px; width:10px; height:1.5px; background:#0071E3; opacity:.5; }
+  .flow li { position:relative; background:#fff; border-radius:18px; padding: 18px 16px 18px; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 18px 40px -26px rgba(0,0,0,.35); display:grid; gap:8px; align-content:start; min-height: 0; }
+  .flow li i { width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-style:normal; font-size:13px; font-weight:650; color:#fff; background:#0071E3; font-variant-numeric: tabular-nums; position:relative; z-index:1; }
+  .flow li b { font-size: clamp(15px,1.25vw,18px); font-weight:650; letter-spacing:-.02em; color:#1D1D1F; }
+  .flow li p { font-size: clamp(12px,.95vw,14px); line-height:1.42; color:#6E6E73; }
+  .loop { display:flex; align-items:center; gap:10px; font-size:13.5px; color:#6E6E73; padding-top: 14px; border-top:1px solid #D2D2D7; }
+  .loop svg { width:18px; height:18px; color:#0071E3; flex:none; }
+  @media (max-width: 860px) {
+    .ads-fig { padding:14px; gap:0; grid-template-rows: 1fr; }
+    .ads-fig .fh { display:none; }
+    .flow { grid-template-columns: repeat(2,minmax(0,1fr)); gap:6px; align-self:stretch; align-content:center; }
+    .flow li + li::before { display:none; }
+    .flow li { padding:9px 10px; gap:6px; border-radius:12px; grid-template-columns:auto 1fr; align-items:baseline; }
+    .flow li b { font-size:13.5px; }
+    .flow li i { width:auto; height:auto; background:none; color:#0071E3; font-size:12px; }
+    .flow li p { display:none; }
+    .loop { display:none; }
+    .ads-fig .fh small { display:none; }
+    #ads .plat span { height:28px; font-size:13px; }
+  }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Direkt zum Inhalt</a>
@@ -448,7 +480,7 @@
       <a class="tile" href="leistungen/automatisierung-chatbots.html"><span class="thumb"><img src="lab/workflow.webp" alt="" loading="lazy"></span><span><small>02 · Connect</small><b>Automatisierung &amp; Chatbots</b><span>Chatbots, Integrationen, Abläufe</span></span></a><a class="tile" href="leistungen/systeme.html"><span class="thumb"><img src="lab/dashboards.webp" alt="" loading="lazy"></span><span><small>09 · Manage</small><b>Systeme &amp; Dashboards</b><span>Warenwirtschaft, Personal, Dashboards</span></span></a>
       <a class="tile" href="leistungen/apps.html"><span class="thumb"><img src="lab/app-design.webp" alt="" loading="lazy"></span><span><small>03 · Develop</small><b>App Design</b><span>UX, UI, Prototyp, Entwicklung, Games</span></span></a>
       <a class="tile" href="leistungen/games.html"><span class="thumb"><img src="lab/game.webp" alt="" loading="lazy"></span><span><small>03 · Play</small><b>Game Design</b><span>Browser, Mobile, Serious Games</span></span></a>
-      <a class="tile" href="leistungen/werbeclips.html"><span class="thumb"><img src="lab/campaign.webp" alt="" loading="lazy"></span><span><small>04 · Create</small><b>Werbeclips</b><span>Werbefilme, Motion Design, Social Ads</span></span></a>
+      <a class="tile" href="leistungen/werbeclips.html"><span class="thumb"><img src="lab/campaign.webp" alt="" loading="lazy"></span><span><small>04 · Create</small><b>Werbeclips</b><span>Werbefilme, Motion Design, Social Ads</span></span></a><a class="tile" href="leistungen/ads-management.html"><span class="thumb"><img src="lab/ads.webp" alt="" loading="lazy"></span><span><small>04 · Run</small><b>Ads-Management</b><span>Social Ads, Suchanzeigen, Tests</span></span></a>
       <a class="tile" href="leistungen/visualisierung.html"><span class="thumb"><img src="lab/spaces.webp" alt="" loading="lazy"></span><span><small>05 · Envision</small><b>Räume &amp; Visualisierung</b><span>Garten, Interior, Architektur</span></span></a>
       <a class="tile" href="leistungen/print-design.html"><span class="thumb"><img src="lab/print.webp" alt="" loading="lazy"></span><span><small>06 · Craft</small><b>Print Design</b><span>Textil, Objekte, Packaging</span></span></a><a class="tile" href="leistungen/logo-design.html"><span class="thumb"><img src="lab/logo-design.webp" alt="" loading="lazy"></span><span><small>07 · Brand</small><b>Logo Design</b><span>Logo, CI, Markenauftritt</span></span></a><a class="tile" href="leistungen/merch.html"><span class="thumb"><img src="lab/merch.webp" alt="" loading="lazy"></span><span><small>08 · Produce</small><b>Merch-Produktion</b><span>Shirts, Hoodies, Denim, Strick</span></span></a>
       <a class="tile" href="leistungen/individuelle-auftraege.html"><span class="thumb"><img src="lab/produkt.webp" alt="" loading="lazy"></span><span><small>Mehr</small><b>Individuelle Aufträge</b><span>Wenn deine Idee nicht ins Raster passt</span></span></a>
@@ -476,8 +508,8 @@
       <div class="mf">
         <h2>Viele Signale. <span class="mute">Eine klare Bewegung.</span></h2>
         <p class="lead">Technologie ist kein Selbstzweck. Wir setzen sie ein, damit Ideen besser funktionieren.</p>
-        <nav class="mf-index" aria-label="Unsere neun Themen">
-          <a href="#websites"><span>01</span>Websites &amp; SEO</a><a href="#automatisierung"><span>02</span>Automatisierung &amp; Chatbots</a><a href="#apps"><span>03</span>App &amp; Game Design</a><a href="#film"><span>04</span>Werbeclips</a><a href="#raeume"><span>05</span>Räume &amp; Visualisierung</a><a href="#print"><span>06</span>Print Design</a><a href="#logo"><span>07</span>Logo Design</a><a href="#merch"><span>08</span>Merch-Produktion</a><a href="#systeme"><span>09</span>Systeme &amp; Dashboards</a>
+        <nav class="mf-index" aria-label="Unsere zehn Themen">
+          <a href="#websites"><span>01</span>Websites &amp; SEO</a><a href="#automatisierung"><span>02</span>Automatisierung &amp; Chatbots</a><a href="#apps"><span>03</span>App &amp; Game Design</a><a href="#film"><span>04</span>Werbeclips</a><a href="#ads"><span>05</span>Ads-Management</a><a href="#raeume"><span>06</span>Räume &amp; Visualisierung</a><a href="#print"><span>07</span>Print Design</a><a href="#logo"><span>08</span>Logo Design</a><a href="#merch"><span>09</span>Merch-Produktion</a><a href="#systeme"><span>10</span>Systeme &amp; Dashboards</a>
         </nav>
       </div>
     </div>
@@ -525,9 +557,29 @@
     </div><figure class="dom-img"><img src="lab/campaign.webp" alt="Filmkamera am Set einer Parfum-Kampagne" loading="eager"></figure></div>
   </section>
 
-  <section class="ch" id="raeume" data-dom data-key="img:spaces" data-side="right" data-name="Räume & Visualisierung" data-nr="05">
+  <section class="ch" id="ads" data-dom data-flock="3" data-key="flock3" data-side="right" data-name="Ads-Management" data-nr="05">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>05</span><span>Räume</span></p>
+      <p class="kicker"><span>05</span><span>Ads-Management</span></p>
+      <h2>Anzeigen schalten. Testen. Besser werden.</h2>
+      <p>Wir setzen eure Werbeanzeigen auf Instagram, Facebook, TikTok und Google auf und betreuen sie laufend: Strategie, Kampagnenaufbau, Tests und ein Reporting, das ihr ohne Fachvokabular versteht.</p>
+      <div class="plat"><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg> Instagram &amp; Facebook</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M11 9.5v5l4-2.5z" fill="currentColor"/></svg> TikTok</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Google &amp; YouTube</span></div>
+      <a class="more" href="leistungen/ads-management.html">Ads-Management im Detail</a>
+      <div class="sub"><small>Passt zu</small><b>Werbeclips &amp; Ad Creatives</b><p>Die Anzeigen selbst gestalten wir auf Wunsch gleich mit. Ein Team, ein Ansprechpartner.</p><a href="#film">Zu den Werbeclips ›</a></div>
+    </div><figure class="dom-img ads-fig" aria-label="Ablauf im Ads-Management">
+      <div class="fh"><b>So betreuen wir eure Kampagnen</b><small>Ablauf</small></div>
+      <ol class="flow">
+        <li><i>1</i><b>Strategie</b><p>Ziel, Zielgruppe, Budgetrahmen und passende Plattformen festlegen.</p></li>
+        <li><i>2</i><b>Kampagne</b><p>Konten, Struktur, Tracking und Anzeigen sauber aufsetzen.</p></li>
+        <li><i>3</i><b>Tests</b><p>Motive, Hooks und Zielgruppen gegeneinander laufen lassen.</p></li>
+        <li><i>4</i><b>Reporting</b><p>Regelmäßig verständlich berichten und nächste Schritte abstimmen.</p></li>
+      </ol>
+      <div class="loop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4.4h-4.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Was wir aus den Tests lernen, fließt direkt in die nächste Runde.</div>
+    </figure></div>
+  </section>
+
+  <section class="ch" id="raeume" data-dom data-key="img:spaces" data-side="left" data-name="Räume & Visualisierung" data-nr="06">
+    <div class="sticky"><div class="copy">
+      <p class="kicker"><span>06</span><span>Räume</span></p>
       <h2>Sehen, was möglich ist. Bevor es entsteht.</h2>
       <p>Gärten, Landschaften, Innenräume und Gebäude: Wir übersetzen eure Idee in greifbare Entwürfe – Gestaltung, Atmosphäre und Material vor der Umsetzung abstimmen.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Fotos, Skizzen oder ein Raumkonzept</dd></div><div><dt>System</dt><dd>Entwurfsrichtungen, Licht und Material</dd></div><div><dt>Ergebnis</dt><dd>Visualisierungen für Entscheidungen</dd></div></dl>
@@ -535,9 +587,9 @@
     </div><figure class="dom-img fb-img"><img src="lab/spaces.webp" alt="Architekturmodell einer Villa mit Visualisierung am Bildschirm" loading="lazy"></figure></div>
   </section>
 
-  <section class="ch" id="print" data-dom data-flock="3" data-key="flock3" data-side="left" data-name="Print Design" data-nr="06">
+  <section class="ch" id="print" data-dom data-flock="3" data-key="flock3" data-side="right" data-name="Print Design" data-nr="07">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>06</span><span>Print</span></p>
+      <p class="kicker"><span>07</span><span>Print</span></p>
       <h2>Eine Handschrift. Auf jeder Oberfläche.</h2>
       <p>Print Designs für Textilien, Objekte und Folien – von einzelnen Motiven über Kollektionen bis zur durchgängigen Gestaltung.</p>
       <p class="tags">Textildruck · Objektdruck · Folien · Packaging · Allover-Prints</p>
@@ -545,9 +597,9 @@
     </div><figure class="dom-img"><img src="lab/print.webp" alt="Siebdruck in Blau auf einem Hoodie" loading="lazy"></figure></div>
   </section>
 
-  <section class="ch" id="logo" data-dom data-key="img:logo-design" data-side="right" data-name="Logo Design" data-nr="07">
+  <section class="ch" id="logo" data-dom data-key="img:logo-design" data-side="left" data-name="Logo Design" data-nr="08">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>07</span><span>Logo</span></p>
+      <p class="kicker"><span>08</span><span>Logo</span></p>
       <h2>Ein Zeichen, das man nicht mehr vergisst.</h2>
       <p>Logo, Farben, Schrift und Bildsprache als ein klares System – damit eure Marke auf Website, Print, Merch und Social Media gleich stark wirkt.</p>
       <p class="tags">Logo · Wortmarke · Corporate Identity · Brand Guide · Vorlagen</p>
@@ -555,9 +607,9 @@
     </div><figure class="dom-img fb-img"><img src="lab/logo-design.webp" alt="Markenauftritt mit Logo auf Geschäftsausstattung" loading="lazy"></figure></div>
   </section>
 
-  <section class="ch" id="merch" data-dom data-flock="1" data-key="flock1" data-side="left" data-name="Merch-Produktion" data-nr="08">
+  <section class="ch" id="merch" data-dom data-flock="1" data-key="flock1" data-side="right" data-name="Merch-Produktion" data-nr="09">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>08</span><span>Merch</span></p>
+      <p class="kicker"><span>09</span><span>Merch</span></p>
       <h2>Merch, den man gerne trägt.</h2>
       <p>T-Shirts, Hoodies, Sweats, Denim und Strick – gestaltet und produziert aus einer Hand, mit starken Produktionen und sauberer Qualität.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Eine Marke, ein Team oder ein Event</dd></div><div><dt>System</dt><dd>Design, Muster, Produktion</dd></div><div><dt>Ergebnis</dt><dd>Fertige Ware, die eure Marke trägt</dd></div></dl>
@@ -565,9 +617,9 @@
     </div><figure class="dom-img"><img src="lab/merch.webp" alt="Merch-Kollektion mit Hoodies, Shirts, Denim und Strick" loading="lazy"></figure></div>
   </section>
 
-  <section class="ch" id="systeme" data-dom data-key="img:dashboards" data-side="right" data-name="Systeme & Dashboards" data-nr="09">
+  <section class="ch" id="systeme" data-dom data-key="img:dashboards" data-side="left" data-name="Systeme & Dashboards" data-nr="10">
     <div class="sticky"><div class="copy">
-      <p class="kicker"><span>09</span><span>Systeme</span></p>
+      <p class="kicker"><span>10</span><span>Systeme</span></p>
       <h2>Alles im Blick. Ohne Tabellenchaos.</h2>
       <p>Warenwirtschaft, Personalwirtschaft und interaktive Dashboards – mit euren Tools verbunden oder passend neu gebaut.</p>
       <p class="tags">Warenwirtschaft · Personal · Schichtplanung · Dashboards · Schnittstellen</p>
