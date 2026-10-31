@@ -1,0 +1,34 @@
+{
+  "_anleitung": "Ungefähre Umsetzungszeiten (ab Wahl des Moodboards, inkl. einer Korrekturrunde). Wert als Text eintragen, z. B. \"3–5 Tage\" (ohne \"ca.\", das ergänzt die Seite). null = Zeit-Element bleibt ausgeblendet. Danach: python3 tools/dauer.py (oder python3 tools/shared.py) ausführen, committen, pushen.",
+  "hinweis": "Ungefähre Dauer ab Wahl des Moodboards, inkl. einer Korrekturrunde, ohne Gewähr.",
+  "website_arten": {
+    "statisch":   { "name": "Statische Website",          "dauer": "2–3 Tage",  "max_tage": 3 },
+    "dynamisch":  { "name": "Dynamische Website",         "dauer": "5–7 Tage",  "max_tage": 7 },
+    "interaktiv": { "name": "Interaktive Scroll-Website", "dauer": "7–14 Tage", "max_tage": 14 },
+    "shop":       { "name": "Online-Shop",                "dauer": null,        "max_tage": null }
+  },
+  "website_demos": {
+    "holm": "statisch",
+    "feld": "statisch",
+    "waermewerk": "dynamisch",
+    "lumen": "dynamisch",
+    "volta": "interaktiv",
+    "alma": "interaktiv",
+    "quartier": "interaktiv",
+    "nivora": "shop"
+  },
+  "rubriken": {
+    "seo": null,
+    "automatisierung-chatbots": null,
+    "apps": null,
+    "games": null,
+    "werbeclips": null,
+    "ads-management": null,
+    "visualisierung": null,
+    "print-design": null,
+    "logo-design": null,
+    "merch": null,
+    "systeme": null,
+    "individuelle-auftraege": null
+  }
+}

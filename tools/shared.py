@@ -111,3 +111,5 @@ if __name__ == '__main__':
     files = sys.argv[1:] or [os.path.join(ROOT, 'index.html'), os.path.join(ROOT, 'kontakt.html'), os.path.join(ROOT, 'prozess.html'), os.path.join(ROOT, 'faq.html')] + \
         [os.path.join(ROOT, 'leistungen', s[0] + '.html') for s in S]
     for f in files: process(os.path.abspath(f))
+    # Zeit-Element aus assets/dauer.json
+    import runpy; runpy.run_path(os.path.join(ROOT, 'tools', 'dauer.py'), run_name='__main__')
