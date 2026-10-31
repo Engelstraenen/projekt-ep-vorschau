@@ -4,6 +4,12 @@
    Look wie die übrigen Blöcke der Unterseite (sub.css: .block, h2, .intro). */
 .pf { --pf-ease: cubic-bezier(.23, 1, .32, 1); --pf-r: 20px; scroll-margin-top: 72px; }
 .pf [hidden] { display: none !important; } /* leere Sparten: im Code vorbereitet, aber unsichtbar */
+.pf-hero { padding-bottom: clamp(20px, 3.5vh, 36px); }
+.pf.block { padding-top: clamp(20px, 3.5vh, 40px); border-top: 0; }
+.pf-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.pf-groups { margin-top: 0 !important; }
+.pf-demo { margin-top: clamp(28px, 4vh, 40px); }
+.pf-sparten .card h3 { font-size: 20px; }
 .pf-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 16px 48px; align-items: end; }
 .pf-head h2 .mute { color: var(--ink-2); }
 .pf-head .intro { margin-top: 0; text-wrap: pretty; max-width: 34em; }
