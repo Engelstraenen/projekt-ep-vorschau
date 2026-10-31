@@ -124,6 +124,13 @@
     show(btns.find((b) => b.getAttribute('aria-pressed') === 'true').dataset.set);
   });
 
+
+  // Moodboards: genau eine Richtung gewählt
+  $$('.px-mb').forEach((g) => {
+    const bs = $$('button', g);
+    bs.forEach((b) => b.addEventListener('click', () => bs.forEach((x) => x.setAttribute('aria-pressed', String(x === b)))));
+  });
+
   // Stumme Clips: nur abspielen, solange sichtbar
   const vids = $$('video[data-px-auto]');
   if (vids.length && 'IntersectionObserver' in window) {

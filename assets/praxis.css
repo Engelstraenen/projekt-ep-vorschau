@@ -379,3 +379,77 @@
 .fd-media.r45::before { content: ''; position: absolute; inset: 0 0 45% 0; z-index: 1; background: linear-gradient(rgba(10,20,40,.55), transparent); pointer-events: none; }
 .fd-ovl { z-index: 2; }
 .px-phone .scr.full::before { content: ''; position: absolute; inset: 0 0 70% 0; z-index: 1; background: linear-gradient(rgba(0,0,0,.45), transparent); pointer-events: none; }
+
+/* ===== Logo Design ===== */
+/* Moodboards zur Wahl */
+.px-mb { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 2vw, 22px); }
+.px-mb button { all: unset; box-sizing: border-box; cursor: pointer; position: relative; display: grid; gap: 12px; align-content: start; padding: 14px; border-radius: 22px; transition: transform .2s var(--sc-ease), box-shadow .2s; }
+.px-mb button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.px-mb button[aria-pressed="true"] { box-shadow: 0 0 0 3px #0071E3, 0 30px 60px -36px rgba(0,30,90,.5); }
+@media (hover: hover) { .px-mb button:hover { transform: translateY(-3px); } }
+.px-mb .fav { position: absolute; top: -10px; right: 14px; font-size: 12px; font-weight: 700; color: #fff; background: #0071E3; border-radius: 999px; padding: 4px 11px; opacity: 0; transform: scale(.7); transition: opacity .3s, transform .3s var(--sc-ease); }
+.px-mb button[aria-pressed="true"] .fav { opacity: 1; transform: none; }
+.px-mb .hd { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6E6E73; }
+.px-mb .lg { background: #fff; border-radius: 14px; aspect-ratio: 16 / 9; display: grid; place-items: center; padding: 10%; }
+.px-mb .lg img { width: 100%; height: auto; max-height: 100%; }
+.px-mb .sw { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 6px; height: 46px; }
+.px-mb .sw i { border-radius: 10px; }
+.px-mb .tex { height: 80px; border-radius: 14px; }
+.px-mb .ty { font-size: 13px; color: #4D5156; display: flex; justify-content: space-between; gap: 8px; }
+.px-mb .ty b { color: #1D1D1F; font-weight: 600; }
+
+/* Logo im Einsatz: Mockups */
+.px-use { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(10px, 1.6vw, 18px); }
+.px-use figure { margin: 0; position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3 / 4; display: grid; place-items: center; }
+.px-use figcaption { position: absolute; left: 12px; bottom: 10px; font-size: 12px; font-weight: 600; color: #1D1D1F; background: rgba(255,255,255,.75); border-radius: 999px; padding: 4px 10px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.u-card { background: radial-gradient(80% 70% at 30% 20%, #F4EFE8, #E3D9CC); perspective: 900px; }
+.u-card .c { position: absolute; width: 70%; aspect-ratio: 85 / 55; border-radius: 6px; box-shadow: 0 18px 30px -14px rgba(60,40,20,.45); display: grid; place-items: center; padding: 10%; }
+.u-card .c1 { background: #fff; transform: translate(-6%, -18%) rotate(-8deg); }
+.u-card .c2 { background: #1F8A84; transform: translate(8%, 22%) rotate(6deg); }
+.u-card .c img { width: 100%; height: auto; }
+.u-card .c2 img { width: 30%; }
+.u-sign { background: linear-gradient(180deg, #B9C2C4 0%, #D8DCDB 55%, #8C8F88 55.2%, #A3A59E 100%); }
+.u-sign::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 2px, transparent 2px 46px); }
+.u-sign .pl { position: relative; width: 78%; padding: 12% 8%; border-radius: 14px; background: linear-gradient(160deg, rgba(255,255,255,.55), rgba(255,255,255,.18)); border: 1px solid rgba(255,255,255,.8); box-shadow: 0 20px 40px -20px rgba(0,0,0,.45), inset 0 1px 0 #fff; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); margin-top: -22%; }
+.u-sign .pl img { width: 100%; height: auto; }
+.u-sign .pl::after { content: ''; position: absolute; left: 10%; right: 10%; bottom: -14px; height: 10px; border-radius: 50%; background: rgba(0,0,0,.18); filter: blur(6px); }
+.u-app { background: linear-gradient(160deg, #C9E4E1, #8FBFBA 60%, #5E9E99); }
+.u-app .ph { width: 62%; aspect-ratio: 9 / 19; border-radius: 26px; background: linear-gradient(170deg, #2C5F5B, #173836); padding: 22% 9% 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 9%; align-content: start; box-shadow: 0 0 0 4px #111, 0 26px 40px -20px rgba(0,0,0,.6); }
+.u-app .ph i { aspect-ratio: 1; border-radius: 26%; background: rgba(255,255,255,.22); }
+.u-app .ph i.me { background: none; position: relative; }
+.u-app .ph i.me img { width: 100%; height: 100%; border-radius: 26%; box-shadow: 0 0 0 2px #fff; }
+.u-shirt { background: radial-gradient(80% 70% at 50% 30%, #F1F1EE, #DADAD4); }
+.u-shirt svg { width: 82%; height: auto; filter: drop-shadow(0 18px 20px rgba(0,0,0,.22)); }
+
+/* Brand Guide (nutzt .px-rep) */
+.px-page .sws { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; align-content: start; }
+.px-page .sws span { border-radius: 10px; padding: 34px 10px 8px; font-size: 11.5px; font-weight: 600; }
+.px-page .zone { position: relative; align-self: center; justify-self: center; width: 86%; padding: 9%; outline: 1.5px dashed #C9B79C; outline-offset: -1px; }
+.px-page .zone img { width: 100%; height: auto; display: block; }
+.px-page .zone::before, .px-page .zone::after { content: 'x'; position: absolute; font-size: 11px; color: #A18B6A; font-weight: 700; }
+.px-page .zone::before { left: 3%; top: 2%; } .px-page .zone::after { right: 3%; bottom: 2%; }
+.px-page .aa { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
+.px-page .aa div { background: #F5F1EA; border-radius: 12px; padding: 12px; display: grid; gap: 6px; font-size: 12px; color: #6E6E73; }
+.px-page .aa img { width: 70%; height: auto; }
+.px-page .aa b { color: #23262B; font-size: 13px; }
+.px-page .dd { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-content: start; }
+.px-page .dd div { position: relative; border-radius: 12px; background: #F5F1EA; aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 10%; overflow: hidden; }
+.px-page .dd div img { width: 100%; height: auto; }
+.px-page .dd div.no::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top right, transparent calc(50% - 1.5px), #E5484D calc(50% - 1.5px), #E5484D calc(50% + 1.5px), transparent calc(50% + 1.5px)); }
+.px-page .dd small { position: absolute; left: 8px; bottom: 6px; font-size: 10.5px; font-weight: 700; color: #18794E; }
+.px-page .dd .no small { color: #C5221F; }
+
+/* Rebrand-Fläche */
+.px-rb { background: #fff; padding: clamp(18px, 4vw, 48px); display: grid; gap: clamp(14px, 2.6vw, 28px); align-content: center; min-height: clamp(320px, 34vw, 440px); }
+.px-rb .big { display: grid; place-items: center; padding: 3% 8%; }
+.px-rb .big img { width: min(100%, 520px); height: auto; }
+.px-rb .row { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 12px; }
+.px-rb .row > div { border-radius: 14px; background: #F3F4F6; aspect-ratio: 16 / 9; display: grid; place-items: center; padding: 8%; overflow: hidden; }
+.px-rb .row img { width: 100%; height: auto; max-height: 100%; }
+.px-rb .row .dk { background: #12305C; }
+.px-rb .row .ic img { width: 42%; }
+
+@media (max-width: 860px) {
+  .px-mb { grid-template-columns: 1fr; }
+  .px-use { grid-template-columns: 1fr 1fr; }
+}
