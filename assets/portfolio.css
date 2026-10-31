@@ -1,14 +1,12 @@
-/* ===== Portfolio „Ad Creatives“ =====
-   Aufbau (von Eugen gewählt, Variante A ohne Reiter): alle Sparten untereinander, je Überschrift + volle Reihe ihrer Clips im Raster.
-   Reihenfolge UGC · CGI · Motion Graphics · Static Ads · Fashion-/Lookbook-Film · Effekte; leere Sparten sind ausgeblendet. */
-#portfolio.block { padding: clamp(40px, 7vh, 88px) clamp(8px, 2vw, 32px); }
-#portfolio { --pf-ease: cubic-bezier(.23, 1, .32, 1); --pf-r: 20px; scroll-margin-top: 64px; }
-#portfolio [hidden] { display: none !important; } /* leere Sparten: im Code vorbereitet, aber unsichtbar */
-.pf-in { background: #F5F5F7; border-radius: 40px; padding: clamp(56px, 9vh, 112px) var(--gutter) clamp(56px, 8vh, 96px); max-width: 1440px; margin: 0 auto; }
+/* ===== Clips „Ad Creatives“ (Unterseite 04 Werbeclips: leistungen/werbeclips.html#clips) =====
+   Aufbau (von Eugen gewählt, ohne Reiter): alle Sparten untereinander, je Überschrift + volle Reihe ihrer Clips im Raster.
+   Reihenfolge UGC · CGI · Motion Graphics · Static Ads · Fashion-/Lookbook-Film · Effekte; leere Sparten sind ausgeblendet.
+   Look wie die übrigen Blöcke der Unterseite (sub.css: .block, h2, .intro). */
+.pf { --pf-ease: cubic-bezier(.23, 1, .32, 1); --pf-r: 20px; scroll-margin-top: 72px; }
+.pf [hidden] { display: none !important; } /* leere Sparten: im Code vorbereitet, aber unsichtbar */
 .pf-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 16px 48px; align-items: end; }
-.pf-head h2 { color: var(--ink); font-size: clamp(32px, 3.8vw, 58px); letter-spacing: -.04em; line-height: 1.04; max-width: 13em; }
 .pf-head h2 .mute { color: var(--ink-2); }
-.pf-head p { color: var(--ink-2); font-size: clamp(16px, 1.25vw, 19px); line-height: 1.45; max-width: 34em; text-wrap: pretty; }
+.pf-head .intro { margin-top: 0; text-wrap: pretty; max-width: 34em; }
 
 /* Karte */
 .pf-row { list-style: none; }
@@ -71,15 +69,12 @@
 
 /* ---------- Handy: jede Reihe horizontal wischbar, ohne Einrasten ---------- */
 @media (max-width: 860px) {
-  #portfolio.block { padding: 32px 8px; }
-  .pf-in { border-radius: 28px; padding: 52px 16px 48px; }
   .pf-head { grid-template-columns: 1fr; gap: 12px; }
-  .pf-head h2 { font-size: clamp(30px, 8.4vw, 40px); }
-  .pf-head p { font-size: 16px; }
+  .pf-head .intro { font-size: 17px; }
   .pf-groups { gap: 40px; }
   .pf-group-head h3 { font-size: 22px; }
   .pf-row { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 44vw; gap: 12px; overflow-x: auto; overscroll-behavior-x: contain;
-    margin: 0 -16px; padding: 2px 16px 8px; scroll-snap-type: none; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    margin: 0 calc(-1 * var(--gutter)); padding: 2px var(--gutter) 8px; scroll-padding-inline: var(--gutter); scroll-snap-type: none; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .pf-row::-webkit-scrollbar { display: none; }
   .pf-play-ic { width: 52px; height: 52px; } .pf-play-ic svg { width: 21px; height: 21px; }
   .pf-media[data-state="loading"] .pf-play-ic::after { width: 52px; height: 52px; }
@@ -89,6 +84,6 @@
   .pf-txt { padding: 10px 2px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  #portfolio *, #portfolio *::before, #portfolio *::after { transition-duration: .01ms !important; }
+  .pf *, .pf *::before, .pf *::after { transition-duration: .01ms !important; }
   .pf-media[data-state="loading"] .pf-play-ic::after { animation-duration: 2.4s; }
 }

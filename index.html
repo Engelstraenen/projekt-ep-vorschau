@@ -84,6 +84,9 @@
   [data-dark-on] .more { color: #2997FF; }
   .more::after { content: '›'; margin-left: 6px; transition: translate .2s var(--ease); }
   .more:hover::after { translate: 3px 0; }
+  .more.cta { align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; background: var(--blue); font-size: 15px; font-weight: 500; transition: background .2s; }
+  .more.cta, [data-dark-on] .more.cta { color: #fff; }
+  .more.cta:hover { background: #0077ED; text-decoration: none; }
 
   #intro .sticky { display: block; text-align: center; padding-top: 18vh; }
   #intro .hero { opacity: clamp(0, calc((.62 - var(--f)) * 3.2), 1); translate: 0 calc(var(--f) * -60px); }
@@ -426,7 +429,6 @@
 <link rel="stylesheet" href="assets/nav.css">
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="assets/consent-theme.css">
-<link rel="stylesheet" href="assets/portfolio.css">
 </head>
 <body>
 <a class="skip" href="#main">Direkt zum Inhalt</a>
@@ -434,7 +436,7 @@
 
 <header class="top">
   <a class="brand" href="#intro">PROJEKT <b>EP</b><i aria-hidden="true"></i></a>
-  <nav class="links" aria-label="Hauptnavigation"><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mega">Leistungen <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a href="#portfolio">Arbeiten</a><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a></nav>
+  <nav class="links" aria-label="Hauptnavigation"><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mega">Leistungen <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a href="leistungen/werbeclips.html#clips">Arbeiten</a><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a></nav>
   <div class="right"><button class="menu-mobile" type="button" aria-expanded="false" aria-controls="mega" aria-label="Menü öffnen"><i aria-hidden="true"></i>Menü</button><a class="btn small" href="#kontakt">Projekt starten ↗</a></div>
 </header>
 <!-- mega:start -->
@@ -451,7 +453,7 @@
       <a class="tile" href="leistungen/print-design.html"><span class="thumb"><img src="lab/print.webp" alt="" loading="lazy"></span><span><small>06 · Craft</small><b>Print Design</b><span>Textil, Objekte, Packaging</span></span></a><a class="tile" href="leistungen/logo-design.html"><span class="thumb"><img src="lab/logo-design.webp" alt="" loading="lazy"></span><span><small>07 · Brand</small><b>Logo Design</b><span>Logo, CI, Markenauftritt</span></span></a><a class="tile" href="leistungen/merch.html"><span class="thumb"><img src="lab/merch.webp" alt="" loading="lazy"></span><span><small>08 · Produce</small><b>Merch-Produktion</b><span>Shirts, Hoodies, Denim, Strick</span></span></a>
       <a class="tile" href="leistungen/individuelle-auftraege.html"><span class="thumb"><img src="lab/produkt.webp" alt="" loading="lazy"></span><span><small>Mehr</small><b>Individuelle Aufträge</b><span>Wenn deine Idee nicht ins Raster passt</span></span></a>
     </div>
-    <nav class="mega-extra" aria-label="Weitere Seiten"><a href="#portfolio">Arbeiten</a><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a><a href="#kontakt">Projekt starten</a></nav>
+    <nav class="mega-extra" aria-label="Weitere Seiten"><a href="leistungen/werbeclips.html#clips">Arbeiten</a><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a><a href="#kontakt">Projekt starten</a></nav>
   </div>
 <!-- mega:end -->
 <div class="scrollbar" aria-hidden="true"><span id="scrollbar"></span></div>
@@ -519,7 +521,7 @@
       <p>Werbefilme, Motion Design Videos, Social Ads, Fashion-Filme und Static Ads für Mode, Marken und Produkte – von Idee und Bildsprache bis Schnitt, Sound und jedem Format.</p>
       <p class="tags">Video Ads · Motion Design · Social Ads · Static Ads · Fashion-Filme · Lookbooks</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Eine Idee oder ein Produkt</dd></div><div><dt>System</dt><dd>Konzept, Generierung, Regie</dd></div><div><dt>Ergebnis</dt><dd>Creatives für jeden Kanal und jedes Format</dd></div></dl>
-      <a class="more" href="leistungen/werbeclips.html">Werbeclips entdecken</a>
+      <a class="more cta" href="leistungen/werbeclips.html#clips">Alle Clips ansehen</a>
     </div><figure class="dom-img"><img src="lab/campaign.webp" alt="Filmkamera am Set einer Parfum-Kampagne" loading="eager"></figure></div>
   </section>
 
@@ -571,14 +573,6 @@
       <p class="tags">Warenwirtschaft · Personal · Schichtplanung · Dashboards · Schnittstellen</p>
       <a class="more" href="leistungen/systeme.html">Systeme im Detail</a>
     </div><figure class="dom-img fb-img"><img src="lab/dashboards.webp" alt="Interaktives Dashboard mit Lager-, Team- und Umsatzzahlen" loading="lazy"></figure></div>
-  </section>
-
-  <section class="block pf" id="portfolio" aria-labelledby="pf-h">
-    <div class="pf-in">
-      <div class="pf-head"><h2 id="pf-h">Ad Creatives. <span class="mute">Gemacht für den Feed.</span></h2><p>Eine Auswahl unserer Arbeiten, sortiert nach Sparte. Alle gezeigten Marken sind Demo&#8209;Marken.</p></div>
-      <div class="pf-groups"></div>
-      <noscript><p class="pf-zweck">Die Videos brauchen JavaScript.</p></noscript>
-    </div>
   </section>
 
   <section class="block" id="preise" data-key="icon:euro" data-name="Preise">
@@ -641,7 +635,6 @@
   </section>
 </main>
 
-<script src="assets/portfolio.js" defer></script>
 <!-- es-module-shims entfernt (Audit 10/2026): löste unter strikter CSP blob:-Skripte aus; Import-Maps können alle aktuellen Browser nativ (Safari ab 16.4). -->
 <script type="importmap">
 { "imports": {

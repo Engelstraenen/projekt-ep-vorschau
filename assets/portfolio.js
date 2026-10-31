@@ -1,12 +1,14 @@
-// Portfolio „Ad Creatives“: Sparten, Poster mit Play-Knopf, Video lädt erst beim Klick.
+// Clips „Ad Creatives“ (Unterseite leistungen/werbeclips.html#clips): Sparten, Poster mit Play-Knopf, Video lädt erst beim Klick.
 // Neue Arbeit hinzufügen = Dateien ablegen + eine Zeile in CLIPS:
 //   video/portfolio/<id>-720.mp4 (H.264 720×1280, +faststart, 9:16)
+// Pfade gelten ab Website-Wurzel; data-pf am Abschnitt gibt den Weg dorthin an (Unterseite: "../").
 //   img/portfolio/<id>-480.avif|webp und <id>-960.avif|webp (Poster bzw. Motiv)
 // Leere Sparten bleiben ausgeblendet und erscheinen von selbst, sobald ein Eintrag dazukommt.
 // Aufbau (von Eugen gewählt): alle Sparten untereinander, je Überschrift + volle Reihe ihrer Clips im Raster.
 (() => {
-  const sec = document.getElementById('portfolio');
+  const sec = document.querySelector('section.pf[data-pf]');
   if (!sec) return;
+  const B = sec.dataset.pf || ''; // Pfad zur Website-Wurzel, auf der Unterseite "../"
 
   const SPARTEN = [
     { id: 'ugc', name: 'UGC' },
@@ -43,9 +45,9 @@
     off: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L11.5 6v12l-4.3-3.5H4z" fill="currentColor"/><path d="m15.5 9.5 5 5m0-5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
   };
   const picture = (id, sizes, eager) => `<picture>` +
-    `<source type="image/avif" srcset="img/portfolio/${id}-480.avif 480w, img/portfolio/${id}-960.avif 960w" sizes="${sizes}">` +
-    `<source type="image/webp" srcset="img/portfolio/${id}-480.webp 480w, img/portfolio/${id}-960.webp 960w" sizes="${sizes}">` +
-    `<img src="img/portfolio/${id}-480.webp" width="480" height="853" alt="" ${eager ? 'fetchpriority="low"' : 'loading="lazy"'} decoding="async"></picture>`;
+    `<source type="image/avif" srcset="${B}img/portfolio/${id}-480.avif 480w, ${B}img/portfolio/${id}-960.avif 960w" sizes="${sizes}">` +
+    `<source type="image/webp" srcset="${B}img/portfolio/${id}-480.webp 480w, ${B}img/portfolio/${id}-960.webp 960w" sizes="${sizes}">` +
+    `<img src="${B}img/portfolio/${id}-480.webp" width="480" height="853" alt="" ${eager ? 'fetchpriority="low"' : 'loading="lazy"'} decoding="async"></picture>`;
   const media = (c, sizes, eager) => {
     const bild = c.typ === 'bild', ton = c.ton !== false;
     return `<div class="pf-media${bild ? ' is-bild' : ''}">${picture(c.id, sizes, eager)}` +
@@ -71,7 +73,7 @@
   let soundOn = true, current = null;
   const setHold = () => { window.__pfHold = lowPower && !!current && !current.v.paused; };
   // Karten sind höchstens ~260 px breit: 720p ist auch auf Retina-Displays scharf genug
-  const srcFor = (box) => `video/portfolio/${box.closest('[data-id]').dataset.id}-720.mp4`;
+  const srcFor = (box) => `${B}video/portfolio/${box.closest('[data-id]').dataset.id}-720.mp4`;
   function wire(box) {
     if (box._p) return box._p;
     const v = box.querySelector('video'), btn = box.querySelector('.pf-play'), ic = box.querySelector('.pf-play-ic'), snd = box.querySelector('.pf-sound'), bar = box.querySelector('.pf-bar i');
