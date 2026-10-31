@@ -94,3 +94,20 @@
     if (!RM && 'IntersectionObserver' in window) new IntersectionObserver((es) => es.forEach((en) => { if (!en.isIntersecting) { cancelAnimationFrame(raf); } else if (idle) { raf = requestAnimationFrame(loop); } }), { threshold: .2 }).observe(st);
   });
 })();
+
+/* Print: Optionen als data-Attribute, Muster-Größe, Rapport */
+(() => {
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  $$('[data-pp-opts]').forEach((w) => {
+    $$('[data-key]', w).forEach((g) => {
+      const bs = $$('button', g);
+      bs.forEach((b) => b.addEventListener('click', () => { w.dataset[g.dataset.key] = b.dataset.set; bs.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); }));
+    });
+    const sc = w.querySelector('[data-pp-scale]');
+    if (sc) { const pat = document.getElementById(sc.dataset.ppScale); const out = sc.parentElement.querySelector('output'); const rap = w.querySelector('.pp-rap');
+      const upd = () => { const v = +sc.value; pat.setAttribute('patternTransform', `scale(${v})`); out.textContent = `${Math.round(v * 100)} %`; if (rap) { rap.setAttribute('x', 120 * v); rap.setAttribute('y', 120 * v); rap.setAttribute('width', 120 * v); rap.setAttribute('height', 120 * v); } };
+      sc.addEventListener('input', upd); upd(); }
+    const cb = w.querySelector('[data-pp-rap]');
+    if (cb) cb.addEventListener('change', () => { w.dataset.rap = cb.checked ? '1' : '0'; });
+  });
+})();
