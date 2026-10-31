@@ -11,3 +11,4 @@ exclude:
 include:
   - _next
   - "__next*"
+  - _astro               # Astro-Exporte (z. B. referenzen/holm)
