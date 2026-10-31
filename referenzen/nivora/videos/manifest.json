@@ -1,0 +1,30 @@
+{
+  "clips": [
+    {
+      "file": "/videos/alpine-first-light.mp4",
+      "author": "Grisha Grishkoff",
+      "sourcePage": "https://www.pexels.com/video/a-drone-shot-over-a-snowy-mountain-peak-4185341/",
+      "downloadUrl": "https://videos.pexels.com/video-files/4185341/4185341-uhd_4096_2160_24fps.mp4",
+      "license": "https://www.pexels.com/license/",
+      "width": 2732,
+      "height": 1440,
+      "duration": 23.04,
+      "codec": "h264",
+      "note": "Actual file dimensions verified with ffprobe; source filename may describe a different rendition.",
+      "webRendition": "H.264 1920 px Breite, CRF 24, AAC 96 kbit/s, faststart (fuer die Web-Vorschau transkodiert)"
+    },
+    {
+      "file": "/videos/alpine-perfect-line.mp4",
+      "author": "Florian Delée",
+      "sourcePage": "https://www.pexels.com/video/a-person-is-skiing-down-a-snowy-slope-15861349/",
+      "downloadUrl": "https://videos.pexels.com/video-files/15861349/15861349-uhd_3840_2160_30fps.mp4",
+      "license": "https://www.pexels.com/license/",
+      "width": 3840,
+      "height": 2160,
+      "duration": 14.548333,
+      "codec": "h264",
+      "note": "Actual file dimensions verified with ffprobe; source filename may describe a different rendition.",
+      "webRendition": "H.264 1920 px Breite, CRF 24, AAC 96 kbit/s, faststart (fuer die Web-Vorschau transkodiert)"
+    }
+  ]
+}

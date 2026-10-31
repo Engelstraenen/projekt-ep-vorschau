@@ -8,7 +8,7 @@ Hinweis: frame-ancestors, report-to und sandbox wirken NICHT per Meta-Tag, nur a
 """
 import base64, hashlib, os, re, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SKIP_DIRS = {'.git', 'steak-seite', 'node_modules', 'assets', 'tools', 'docs'}
+SKIP_DIRS = {'.git', 'steak-seite', 'node_modules', 'assets', 'tools', 'docs', 'referenzen'}  # referenzen/: eigenstaendige Demo-Exporte mit eigener CSP (.htaccess im Ordner)
 SCRIPT_RE = re.compile(r'<script(?P<attrs>[^>]*)>(?P<body>.*?)</script>', re.S)
 META_RE = re.compile(r'<meta http-equiv="Content-Security-Policy"[^>]*>\n?')
 

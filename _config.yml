@@ -7,3 +7,7 @@ exclude:
   - package.json
   - package-lock.json
   - _config.yml
+# Statische Next.js-Exporte unter referenzen/ (z. B. referenzen/nivora): Jekyll blendet sonst Dateien mit "_" aus
+include:
+  - _next
+  - "__next*"
