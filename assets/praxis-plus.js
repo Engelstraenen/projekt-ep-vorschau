@@ -167,7 +167,7 @@
   // Baustellen-Board: Karte antippen = nächste Spalte; zeigt sich beim Hineinscrollen einmal selbst
   $$('[data-pp-kan]').forEach((w) => {
     const cols = $$('.pp-col', w); let touched = false;
-    const count = () => cols.forEach((c) => { c.querySelector('h6 em').textContent = c.querySelectorAll('.pp-card').length; });
+    const count = () => cols.forEach((c) => { c.querySelector('.h6 em, h6 em').textContent = c.querySelectorAll('.pp-card').length; });
     const adv = (card) => { const i = cols.indexOf(card.closest('.pp-col')); const ni = (i + 1) % cols.length; const pr = card.querySelector('.pr i'); if (pr) pr.style.width = [12, 35, 70, 100][ni] + '%';
       cols[ni].appendChild(card); card.classList.remove('flash'); void card.offsetWidth; if (!RM) card.classList.add('flash'); count(); };
     w.addEventListener('click', (e) => { const c = e.target.closest('.pp-card'); if (c) { touched = true; adv(c); } });

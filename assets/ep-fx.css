@@ -330,3 +330,6 @@ body:not(.home) .st-steps b { font-size: clamp(20px, 1.7vw, 26px); letter-spacin
 }
 @keyframes d-tick { 0%, 20% { transform: rotate(0); } 30%, 70% { transform: rotate(90deg); } 80%, 100% { transform: rotate(360deg); } }
 @keyframes d-bar { from { transform: scaleX(0); } }
+/* Demo-Adresszeile: lange Namen auf dem Handy kürzen statt seitlich überlaufen */
+@media (max-width: 860px) { .sc-url { min-width: 0; overflow: hidden; white-space: nowrap; display: inline-block; line-height: 26px; text-overflow: ellipsis; } .sc-url svg { display: none; } }
+body:not(.home) { overflow-x: clip; } /* kein seitliches Wackeln auf dem Handy */
