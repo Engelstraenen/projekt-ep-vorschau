@@ -161,6 +161,3 @@ nav.links a[aria-current="page"] { opacity: 1; font-weight: 600; }
   .brand i { display: none; }
   .menu-mobile { font-size: 0 !important; gap: 0 !important; }
 }
-/* Richtpreise (Platzhalter bis zur Freigabe der echten Preise) */
-#preise .card .price { margin: 2px 0 8px; color: var(--ink-2); font-size: 15px; }
-#preise .card .price b { font-size: 30px; font-weight: 650; letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; }

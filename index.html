@@ -204,17 +204,7 @@
   ol.steps span { color: var(--blue); font-size: 13px; }
   ol.steps b { display: block; font-size: 22px; font-weight: 650; letter-spacing: -.03em; margin: 10px 0 6px; }
   ol.steps p { color: var(--ink-2); font-size: 15px; }
-  .prices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 48px; }
-  .prices a { display: grid; gap: 6px; align-content: start; padding: 22px; border-radius: 20px; background: var(--bg); box-shadow: inset 0 0 0 1px #E5E5EA; color: inherit; text-decoration: none; transition: box-shadow .3s var(--ease), translate .3s var(--ease); }
-  .prices a:hover { box-shadow: inset 0 0 0 1.5px var(--blue); translate: 0 -2px; }
-  .prices small { font-size: 12px; color: var(--blue); letter-spacing: .3px; }
-  .prices b { font-size: 19px; font-weight: 650; letter-spacing: -.02em; }
-  .prices .price { font-size: 15px; color: var(--ink-2); }
-  .prices .price i { font-style: normal; font-size: 26px; font-weight: 650; letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .prices p { font-size: 14px; color: var(--ink-2); line-height: 1.45; }
   .price-note { margin-top: 20px; font-size: 13px; color: var(--ink-2); }
-  @media (max-width: 1080px) { .prices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .prices { grid-template-columns: 1fr; gap: 8px; } .prices a { padding: 16px 18px; } }
   .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: 48px; }
   .principles b { display: block; font-size: 20px; font-weight: 650; letter-spacing: -.02em; margin-bottom: 8px; }
   .principles p { color: #A1A1A6; font-size: 15px; }
@@ -461,8 +451,9 @@
     #ads .plat span { height:28px; font-size:13px; }
   }
 </style>
+<link rel="stylesheet" href="assets/ep-fx.css">
 </head>
-<body>
+<body class="home">
 <a class="skip" href="#main">Direkt zum Inhalt</a>
 <canvas id="stage" aria-hidden="true"></canvas>
 
@@ -475,15 +466,19 @@
 <div class="mega" id="mega" role="region" aria-label="Unsere Leistungen">
     <div class="mega-head"><p>Unsere Leistungen</p><a href="#websites">Als Geschichte erleben ›</a></div>
     <div class="mega-grid">
-      <a class="tile" href="leistungen/websites.html"><span class="thumb"><img src="lab/digital-design.webp" alt="" loading="lazy"></span><span><small>01 · Design</small><b>Websites</b><span>Design, Entwicklung, SEO &amp; Sichtbarkeit</span></span></a>
-      <a class="tile" href="leistungen/seo.html"><span class="thumb"><img src="lab/seo.webp" alt="" loading="lazy"></span><span><small>01 · Find</small><b>SEO &amp; Sichtbarkeit</b><span>Audit, On-page, Content</span></span></a>
-      <a class="tile" href="leistungen/automatisierung-chatbots.html"><span class="thumb"><img src="lab/workflow.webp" alt="" loading="lazy"></span><span><small>02 · Connect</small><b>Automatisierung &amp; Chatbots</b><span>Chatbots, Integrationen, Abläufe</span></span></a><a class="tile" href="leistungen/systeme.html"><span class="thumb"><img src="lab/dashboards.webp" alt="" loading="lazy"></span><span><small>09 · Manage</small><b>Systeme &amp; Dashboards</b><span>Warenwirtschaft, Personal, Dashboards</span></span></a>
-      <a class="tile" href="leistungen/apps.html"><span class="thumb"><img src="lab/app-design.webp" alt="" loading="lazy"></span><span><small>03 · Develop</small><b>App Design</b><span>UX, UI, Prototyp, Entwicklung, Games</span></span></a>
-      <a class="tile" href="leistungen/games.html"><span class="thumb"><img src="lab/game.webp" alt="" loading="lazy"></span><span><small>03 · Play</small><b>Game Design</b><span>Browser, Mobile, Serious Games</span></span></a>
-      <a class="tile" href="leistungen/werbeclips.html"><span class="thumb"><img src="lab/campaign.webp" alt="" loading="lazy"></span><span><small>04 · Create</small><b>Werbeclips</b><span>Werbefilme, Motion Design, Social Ads</span></span></a><a class="tile" href="leistungen/ads-management.html"><span class="thumb"><img src="lab/ads.webp" alt="" loading="lazy"></span><span><small>04 · Run</small><b>Ads-Management</b><span>Social Ads, Suchanzeigen, Tests</span></span></a>
-      <a class="tile" href="leistungen/visualisierung.html"><span class="thumb"><img src="lab/spaces.webp" alt="" loading="lazy"></span><span><small>05 · Envision</small><b>Räume &amp; Visualisierung</b><span>Garten, Interior, Architektur</span></span></a>
-      <a class="tile" href="leistungen/print-design.html"><span class="thumb"><img src="lab/print.webp" alt="" loading="lazy"></span><span><small>06 · Craft</small><b>Print Design</b><span>Textil, Objekte, Packaging</span></span></a><a class="tile" href="leistungen/logo-design.html"><span class="thumb"><img src="lab/logo-design.webp" alt="" loading="lazy"></span><span><small>07 · Brand</small><b>Logo Design</b><span>Logo, CI, Markenauftritt</span></span></a><a class="tile" href="leistungen/merch.html"><span class="thumb"><img src="lab/merch.webp" alt="" loading="lazy"></span><span><small>08 · Produce</small><b>Merch-Produktion</b><span>Shirts, Hoodies, Denim, Strick</span></span></a>
-      <a class="tile" href="leistungen/individuelle-auftraege.html"><span class="thumb"><img src="lab/produkt.webp" alt="" loading="lazy"></span><span><small>Mehr</small><b>Individuelle Aufträge</b><span>Wenn deine Idee nicht ins Raster passt</span></span></a>
+      <a class="tile" href="leistungen/websites.html"><span class="thumb"><img src="lab/digital-design-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>01 · Design</small><b>Websites</b><span>Design, Entwicklung, SEO &amp; Sichtbarkeit</span></span></a>
+      <a class="tile" href="leistungen/seo.html"><span class="thumb"><img src="lab/seo-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>01 · Find</small><b>SEO &amp; Sichtbarkeit</b><span>Audit, On-page, Content</span></span></a>
+      <a class="tile" href="leistungen/automatisierung-chatbots.html"><span class="thumb"><img src="lab/workflow-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>02 · Connect</small><b>Automatisierung &amp; Chatbots</b><span>Chatbots, Integrationen, Abläufe</span></span></a>
+      <a class="tile" href="leistungen/apps.html"><span class="thumb"><img src="lab/app-design-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>03 · Develop</small><b>App Design</b><span>UX, UI, Prototyp, Entwicklung</span></span></a>
+      <a class="tile" href="leistungen/games.html"><span class="thumb"><img src="lab/game-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>03 · Play</small><b>Game Design</b><span>Browser, Mobile, Serious Games</span></span></a>
+      <a class="tile" href="leistungen/werbeclips.html"><span class="thumb"><img src="lab/campaign-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>04 · Create</small><b>Werbeclips</b><span>Werbefilme, Motion Design, Social Ads</span></span></a>
+      <a class="tile" href="leistungen/ads-management.html"><span class="thumb"><img src="lab/ads-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>05 · Run</small><b>Ads-Management</b><span>Meta, TikTok, Google, laufend betreut</span></span></a>
+      <a class="tile" href="leistungen/visualisierung.html"><span class="thumb"><img src="lab/spaces-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>06 · Envision</small><b>Räume &amp; Visualisierung</b><span>Garten, Interior, Architektur</span></span></a>
+      <a class="tile" href="leistungen/print-design.html"><span class="thumb"><img src="lab/print-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>07 · Craft</small><b>Print Design</b><span>Textil, Objekte, Packaging</span></span></a>
+      <a class="tile" href="leistungen/logo-design.html"><span class="thumb"><img src="lab/logo-design-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>08 · Brand</small><b>Logo Design</b><span>Logo, Farben, Schrift, Brand Guide</span></span></a>
+      <a class="tile" href="leistungen/merch.html"><span class="thumb"><img src="lab/merch-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>09 · Produce</small><b>Merch-Produktion</b><span>Jersey, Denim, Strick, Kollektionen</span></span></a>
+      <a class="tile" href="leistungen/systeme.html"><span class="thumb"><img src="lab/dashboards-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>10 · Manage</small><b>Systeme &amp; Dashboards</b><span>Warenwirtschaft, Personal, Dashboards</span></span></a>
+      <a class="tile" href="leistungen/individuelle-auftraege.html"><span class="thumb"><img src="lab/produkt-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>Mehr</small><b>Individuelle Aufträge</b><span>Wenn deine Idee in kein Raster passt</span></span></a>
     </div>
     <nav class="mega-extra" aria-label="Weitere Seiten"><a href="leistungen/werbeclips.html#clips">Arbeiten</a><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a><a href="#kontakt">Projekt starten</a></nav>
   </div>
@@ -627,11 +622,41 @@
     </div><figure class="dom-img fb-img"><img src="lab/dashboards.webp" alt="Interaktives Dashboard mit Lager-, Team- und Umsatzzahlen" loading="lazy"></figure></div>
   </section>
 
-  <section class="block" id="preise" data-key="icon:euro" data-name="Preise">
-    <div class="card">
-      <div class="head-row"><div class="section-head"><p class="kicker">Richtpreise</p><h2>Was kostet das? <span class="mute">Ein ehrlicher erster Rahmen.</span></h2><p style="color:var(--ink-2);margin-top:18px">Jedes Projekt ist anders. Diese Richtpreise geben euch eine erste Orientierung, das genaue Angebot stimmen wir nach dem Erstgespräch ab. Kleine Änderungs- und Wartungsaufträge: 100 € je Auftrag.</p></div><div class="swarm-slot" aria-hidden="true"></div></div>
-      <div class="prices"><a href="leistungen/websites.html"><small>01</small><b>Websites</b><span class="price">ab <i>X.XXX</i> €</span><p>Landingpage bis Markenauftritt mit Motion und SEO-Basis</p></a><a href="leistungen/automatisierung-chatbots.html"><small>02</small><b>Automatisierung &amp; Chatbots</b><span class="price">ab <i>X.XXX</i> €</span><p>Ein automatisierter Ablauf, eine Telefonannahme oder ein Chatbot, eingerichtet und getestet</p></a><a href="leistungen/systeme.html"><small>02</small><b>Systeme &amp; Dashboards</b><span class="price">ab <i>X.XXX</i> €</span><p>Warenwirtschaft, Personal oder ein interaktives Dashboard</p></a><a href="leistungen/apps.html"><small>03</small><b>App &amp; Game Design</b><span class="price">ab <i>X.XXX</i> €</span><p>Klickbarer Prototyp bis fertige App oder Browser-Game</p></a><a href="leistungen/werbeclips.html"><small>04</small><b>Werbeclips</b><span class="price">ab <i>X.XXX</i> €</span><p>Ein Werbefilm oder ein Set Social Ads in allen Formaten</p></a><a href="leistungen/visualisierung.html"><small>05</small><b>Räume &amp; Visualisierung</b><span class="price">ab <i>X.XXX</i> €</span><p>Entwurfsrichtungen und Visualisierungen für einen Raum</p></a><a href="leistungen/logo-design.html"><small>06</small><b>Logo Design</b><span class="price">ab <i>X.XXX</i> €</span><p>Logo, Farben, Schrift und Regeln als kleines CI-Paket</p></a><a href="leistungen/merch.html"><small>06</small><b>Print &amp; Merch</b><span class="price">ab <i>X.XXX</i> €</span><p>Print Design je Motiv, Merch-Produktion je Stückzahl</p></a></div>
-      <p class="price-note">Alle Preise netto zzgl. MwSt. Anbieter-, Hosting- und Produktionskosten weisen wir separat aus.</p>
+  <section class="block br" id="branchen" aria-labelledby="br-h">
+    <div class="br-pin">
+      <div class="br-head">
+        <p class="br-kicker">Inspiration für eure Branche</p>
+        <h2 id="br-h">So könnte eure Website aussehen.</h2>
+        <p class="br-lead">Sechs Branchen, sechs Ideen. Jede Demo ist live und klickbar. Bei euch starten wir genauso: 2–3 Moodboards, ihr wählt den Favoriten, dann wird gebaut.</p>
+      </div>
+      <ol class="br-track" role="list">
+        <li class="br-card"><a href="referenzen/holm/" target="_blank" rel="noopener">
+          <span class="br-img"><img src="img/websites/holm-poster-960.webp" srcset="img/websites/holm-poster-960.webp 960w, img/websites/holm-poster.webp 1440w" sizes="(max-width: 860px) 86vw, 760px" width="1440" height="900" alt="So könnte die Website von HOLM &amp; CO aussehen (fiktive Marke)" loading="lazy" decoding="async"><em>Inspiration · fiktive Marke</em></span>
+          <span class="br-meta"><small><i>01</i>Handwerk &amp; Innenausbau</small><b>HOLM &amp; CO</b><ul class="br-tags"><li>Editorial</li><li>Warm</li><li>Referenzen</li></ul><span class="br-txt">Eine Tischlerei zeigt ihre Arbeit groß, Anfragen kommen mit Maßen und Fotos an.</span><span class="br-go">Live-Demo öffnen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+        </a></li>
+        <li class="br-card"><a href="referenzen/lumen/" target="_blank" rel="noopener">
+          <span class="br-img"><img src="img/websites/lumen-poster-960.webp" srcset="img/websites/lumen-poster-960.webp 960w, img/websites/lumen-poster.webp 1440w" sizes="(max-width: 860px) 86vw, 760px" width="1440" height="900" alt="So könnte die Website von LUMEN Zahnästhetik aussehen (fiktive Marke)" loading="lazy" decoding="async"><em>Inspiration · fiktive Marke</em></span>
+          <span class="br-meta"><small><i>02</i>Praxen</small><b>LUMEN Zahnästhetik</b><ul class="br-tags"><li>Liquid Glass</li><li>Ruhig</li><li>Online-Termin</li></ul><span class="br-txt">Ruhige Bildsprache, Behandlungen verständlich erklärt, Termin in drei Schritten.</span><span class="br-go">Live-Demo öffnen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+        </a></li>
+        <li class="br-card"><a href="referenzen/feld/" target="_blank" rel="noopener">
+          <span class="br-img"><img src="img/websites/feld-poster-960.webp" srcset="img/websites/feld-poster-960.webp 960w, img/websites/feld-poster.webp 1440w" sizes="(max-width: 860px) 86vw, 760px" width="1440" height="900" alt="So könnte die Website von FELD &amp; PARTNER aussehen (fiktive Marke)" loading="lazy" decoding="async"><em>Inspiration · fiktive Marke</em></span>
+          <span class="br-meta"><small><i>03</i>Kanzleien &amp; Büros</small><b>FELD &amp; PARTNER</b><ul class="br-tags"><li>Minimal</li><li>Editorial</li><li>Ratgeber</li></ul><span class="br-txt">Vertrauen durch Klarheit: Leistungen, Team und Ratgeber ohne Fachchinesisch.</span><span class="br-go">Live-Demo öffnen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+        </a></li>
+        <li class="br-card"><a href="referenzen/waermewerk/" target="_blank" rel="noopener">
+          <span class="br-img"><img src="img/websites/waermewerk-poster-960.webp" srcset="img/websites/waermewerk-poster-960.webp 960w, img/websites/waermewerk-poster.webp 1440w" sizes="(max-width: 860px) 86vw, 760px" width="1440" height="900" alt="So könnte die Website von WÄRMEWERK aussehen (fiktive Marke)" loading="lazy" decoding="async"><em>Inspiration · fiktive Marke</em></span>
+          <span class="br-meta"><small><i>04</i>Haustechnik &amp; Energie</small><b>WÄRMEWERK</b><ul class="br-tags"><li>Klar</li><li>Check in 4 Fragen</li><li>Anfrage</li></ul><span class="br-txt">Ein kurzer Check ersetzt das erste Telefonat und liefert vorqualifizierte Anfragen.</span><span class="br-go">Live-Demo öffnen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+        </a></li>
+        <li class="br-card"><a href="referenzen/quartier/" target="_blank" rel="noopener">
+          <span class="br-img"><img src="img/websites/quartier-poster-960.webp" srcset="img/websites/quartier-poster-960.webp 960w, img/websites/quartier-poster.webp 1440w" sizes="(max-width: 860px) 86vw, 760px" width="1440" height="900" alt="So könnte die Website von QUARTIER AERO aussehen (fiktive Marke)" loading="lazy" decoding="async"><em>Inspiration · fiktive Marke</em></span>
+          <span class="br-meta"><small><i>05</i>Immobilien &amp; Bauträger</small><b>QUARTIER AERO</b><ul class="br-tags"><li>3D</li><li>Etagen-Explorer</li><li>Exposé</li></ul><span class="br-txt">Interessenten drehen das Haus, wählen eine Etage und sehen sofort, was frei ist.</span><span class="br-go">Live-Demo öffnen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+        </a></li>
+        <li class="br-card"><a href="referenzen/alma/" target="_blank" rel="noopener">
+          <span class="br-img"><img src="img/websites/alma-poster-960.webp" srcset="img/websites/alma-poster-960.webp 960w, img/websites/alma-poster.webp 1440w" sizes="(max-width: 860px) 86vw, 760px" width="1440" height="900" alt="So könnte die Website von ALMA Rösterei aussehen (fiktive Marke)" loading="lazy" decoding="async"><em>Inspiration · fiktive Marke</em></span>
+          <span class="br-meta"><small><i>06</i>Gastronomie &amp; Manufaktur</small><b>ALMA Rösterei</b><ul class="br-tags"><li>Scrollytelling</li><li>Handwerk</li><li>Shop</li></ul><span class="br-txt">Vom Rohkaffee bis zur Tasse: eine Geschichte, die beim Scrollen entsteht.</span><span class="br-go">Live-Demo öffnen <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+        </a></li>
+        <li class="br-card br-end"><a href="leistungen/websites.html"><span class="br-endin"><small>Alle Praxisbeispiele</small><b>Eure Branche fehlt? <span>Wir zeigen euch drei Richtungen.</span></b><span class="br-go">Websites im Detail <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></li>
+      </ol>
+      <div class="br-progress" aria-hidden="true"><span></span></div>
     </div>
   </section>
 
@@ -678,11 +703,24 @@
         <div class="team-head"><p class="team-kicker">Das Team</p><h2 id="team-h">Zwei Köpfe. <span class="mute">Ein Ergebnis.</span></h2><p class="team-lead">Ihr sprecht direkt mit uns, vom ersten Gespräch bis zum fertigen Ergebnis.</p></div>
         <ul class="team-list">
           <li class="person"><div class="person-foto"><picture><source type="image/avif" srcset="img/team/eugen-kelberer-320.avif 320w, img/team/eugen-kelberer-640.avif 640w" sizes="(max-width: 860px) 160px, 400px"><source type="image/webp" srcset="img/team/eugen-kelberer-320.webp 320w, img/team/eugen-kelberer-640.webp 640w" sizes="(max-width: 860px) 160px, 400px"><img src="img/team/eugen-kelberer-640.webp" width="640" height="640" alt="Porträt von Eugen Kelberer, CEO von PROJEKT EP" loading="lazy" decoding="async"></picture></div><div class="person-txt"><h3>Eugen Kelberer</h3><p class="person-rolle">CEO</p></div></li>
-          <li class="person"><div class="person-foto person-foto--leer" role="img" aria-label="Platzhalter, Foto von Paul Haase folgt"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="44" r="22" fill="#B0B0B5"/><path d="M16 120c0-26 19.7-44 44-44s44 18 44 44z" fill="#B0B0B5"/></svg></div><div class="person-txt"><h3>Paul Haase</h3><p class="person-rolle">CEO</p></div></li>
+          <li class="person"><div class="person-foto person-foto--mono" aria-hidden="true"><span>P<b>H</b></span></div><div class="person-txt"><h3>Paul Haase</h3><p class="person-rolle">CEO</p></div></li>
         </ul>
       </div>
     </section>
-    <footer role="contentinfo"><span>© 2026 PROJEKT EP · projekt-ep.de</span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="rechtliches.html#cookies">Cookie-Policy</a><a href="rechtliches.html#agb">AGB</a><a href="rechtliches.html#barrierefreiheit">Barrierefreiheit</a><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
+    <footer class="epf" id="epf" role="contentinfo">
+  <div class="epf-cta">
+    <p class="epf-kicker">Projekt starten</p>
+    <p class="epf-big"><a href="kontakt.html">Erzähl uns von deiner Idee. <span>Wir machen sie sichtbar.</span><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></p>
+    <p class="epf-mail"><a href="mailto:kontakt@projekt-ep.de">kontakt@projekt-ep.de</a></p>
+  </div>
+  <div class="epf-cols">
+    <nav aria-label="Leistungen"><p class="epf-h">Leistungen</p><ul><li><a href="leistungen/websites.html">Websites</a></li><li><a href="leistungen/seo.html">SEO &amp; Sichtbarkeit</a></li><li><a href="leistungen/automatisierung-chatbots.html">Automatisierung &amp; Chatbots</a></li><li><a href="leistungen/apps.html">App Design</a></li><li><a href="leistungen/games.html">Game Design</a></li><li><a href="leistungen/werbeclips.html">Werbeclips</a></li><li><a href="leistungen/ads-management.html">Ads-Management</a></li><li><a href="leistungen/visualisierung.html">Räume &amp; Visualisierung</a></li><li><a href="leistungen/print-design.html">Print Design</a></li><li><a href="leistungen/logo-design.html">Logo Design</a></li><li><a href="leistungen/merch.html">Merch-Produktion</a></li><li><a href="leistungen/systeme.html">Systeme &amp; Dashboards</a></li><li><a href="leistungen/individuelle-auftraege.html">Individuelle Aufträge</a></li></ul></nav>
+    <nav aria-label="Studio"><p class="epf-h">Studio</p><ul><li><a href="index.html">Start</a></li><li><a href="prozess.html">Prozess</a></li><li><a href="faq.html">FAQ</a></li><li><a href="index.html#finder">Potenzialfinder</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav>
+    <nav aria-label="Rechtliches"><p class="epf-h">Rechtliches</p><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="rechtliches.html#cookies">Cookie-Policy</a></li><li><a href="rechtliches.html#agb">AGB</a></li><li><a href="rechtliches.html#barrierefreiheit">Barrierefreiheit</a></li><li><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></li></ul></nav>
+  </div>
+  <div class="epf-mark" aria-hidden="true"><span>PROJEKT</span><b>EP</b></div>
+  <p class="epf-legal"><span>© 2026 PROJEKT EP</span><span>Vom ersten Gedanken. Zum fertigen Ergebnis.</span></p>
+</footer>
     </div>
   </section>
 </main>
@@ -1608,5 +1646,6 @@ v.addEventListener('pause',()=>{if(!v.ended&&!document.fullscreenElement){st.cla
 </script>
 <script src="assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
 <script src="assets/consent.js" defer></script>
+<script src="assets/ep-fx.js" defer></script>
 </body>
 </html>
