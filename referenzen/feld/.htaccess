@@ -1,0 +1,6 @@
+# Feld & Partner – Demo (statischer Astro-Export, Projekt EP). Nur fuer IONOS/Apache relevant, GitHub Pages ignoriert diese Datei.
+# Nur eigenes JavaScript (assets/*.js, ohne Bibliotheken), keine Drittanbieter; CSP identisch zum Meta-Tag der Seiten, plus frame-ancestors (wirkt nur als Header).
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
