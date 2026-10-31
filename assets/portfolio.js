@@ -19,17 +19,17 @@
     { id: 'effekte', name: 'Effekte' },
   ];
   const CLIPS = [
-    { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für das Trockenshampoo SPRUZ.', dauer: 7.6 },
-    { id: 'ugc-knista', sparte: 'ugc', titel: 'Omi testet jetzt ASMR', zweck: 'UGC-Clip für die Paprika-Chips KNISTA.', dauer: 7.5 },
-    { id: 'ugc-mochimi', sparte: 'ugc', titel: 'Kalle, 72, testet Beauty', zweck: 'UGC-Clip für die Glow Sheet Mask MOCHIMI.', dauer: 7.57 },
-    { id: 'schlumma', sparte: 'cgi', titel: 'So weich, wie dein Montag sein sollte.', zweck: 'CGI-Spot für SCHLUMMA: eine ultraweiche Couch im Zugabteil.', dauer: 8 },
+    { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für das Trockenshampoo SPRUZ.', dauer: 9.13 },
+    { id: 'ugc-knista', sparte: 'ugc', titel: 'Omi testet jetzt ASMR', zweck: 'UGC-Clip für die Paprika-Chips KNISTA.', dauer: 9.03 },
+    { id: 'ugc-mochimi', sparte: 'ugc', titel: 'Kalle, 72, testet Beauty', zweck: 'UGC-Clip für die Glow Sheet Mask MOCHIMI.', dauer: 9.1 },
+    { id: 'schlumma', sparte: 'cgi', titel: 'So weich, wie dein Montag sein sollte.', zweck: 'CGI-Spot für SCHLUMMA: eine ultraweiche Couch im Zugabteil.', dauer: 8.83 },
     { id: 'motion-zitra', sparte: 'motion', titel: 'Durst? Drei Sorten. Null Langeweile.', zweck: 'Motion-Graphics-Spot für die Limonade ZITRA.', dauer: 12 },
     { id: 'motion-lindholz', sparte: 'motion', titel: 'Erst eine Linie. Dann ein Plan. Dann Holz.', zweck: 'Motion-Graphics-Spot für Lindholz, Möbel nach Maß.', dauer: 13 },
-    { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für die Gieß-App BLATTFON, mit sprechender Pflanze.', dauer: 8 },
+    { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für die Gieß-App BLATTFON, mit sprechender Pflanze.', dauer: 8.83 },
     { id: 'aboschere', sparte: 'motion', titel: '14 Abos bezahlt. Nur 3 genutzt.', zweck: 'Motion-Graphics-Spot für ABOSCHERE: kündigt ungenutzte Abos.', dauer: 9.7 },
-    { id: 'fleckfee', sparte: 'static', titel: 'Ein Blatt, Fleck weg.', zweck: 'Static Ad als Motion-Version für das Waschblatt FLECKFEE gegen Flecken.', dauer: 6 },
-    { id: 'kajuete', sparte: 'fashion', titel: 'Gegen Wind hilft nur eins: der richtige Mantel.', zweck: 'Mantel-Lookbook für KAJÜTE auf dem Fährdeck.', dauer: 8 },
-    { id: 'velournacht', sparte: 'fashion', titel: 'Feinwäsche. Wie ich.', zweck: 'Fashion-Film für VELOURNACHT: Samtanzug im Waschsalon.', dauer: 8 },
+    { id: 'fleckfee', sparte: 'static', titel: 'Ein Blatt, Fleck weg.', zweck: 'Static Ad als Motion-Version für das Waschblatt FLECKFEE gegen Flecken.', dauer: 7.21 },
+    { id: 'kajuete', sparte: 'fashion', titel: 'Gegen Wind hilft nur eins: der richtige Mantel.', zweck: 'Mantel-Lookbook für KAJÜTE auf dem Fährdeck.', dauer: 8.83 },
+    { id: 'velournacht', sparte: 'fashion', titel: 'Feinwäsche. Wie ich.', zweck: 'Fashion-Film für VELOURNACHT: Samtanzug im Waschsalon.', dauer: 8.83 },
     { id: 'effekte-showreel', sparte: 'effekte', titel: '17 Effekte für Short-Form-Videos', zweck: 'Showreel mit 17 Videoeffekten für Short-Form-Ads.', dauer: 42.5, ton: false },
   ];
 
