@@ -90,3 +90,75 @@
 @keyframes uc-dot { 0%, 100% { opacity: .3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
 .v-chat .dots { justify-self: start; display: flex; gap: 4px; padding: 12px 14px; border-radius: 18px; background: #F0F0F3; }
 .v-chat .dots i { width: 6px; height: 6px; border-radius: 50%; background: #8E8E93; }
+
+/* --- Visual: Handys (App-Screens) --- */
+.v-phones { display: flex; justify-content: center; align-items: center; gap: clamp(14px, 3vw, 48px); width: 100%; }
+.v-phone { width: clamp(200px, 21vw, 290px); aspect-ratio: 9 / 19; border-radius: 40px; padding: 10px; background: #111114; box-shadow: 0 50px 90px -40px rgba(0, 20, 60, .55), inset 0 0 0 1.5px #3A3A40; flex: none; }
+.v-phone.b { transform: translateY(26px) rotate(3deg); }
+.v-phone.a { transform: rotate(-3deg); }
+.v-scr { height: 100%; border-radius: 31px; overflow: hidden; background: #F5F5F7; color: #1D1D1F; display: grid; grid-template-rows: auto 1fr auto; font-size: 12.5px; }
+.v-scr .top { padding: 30px 16px 12px; display: grid; gap: 2px; }
+.v-scr .top small { color: #6E6E73; font-size: 11px; }
+.v-scr .top b { font-size: 19px; letter-spacing: -.03em; }
+.v-scr .body { padding: 0 12px; display: grid; gap: 8px; align-content: start; }
+.v-scr .row { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: center; background: #fff; border-radius: 14px; padding: 10px 12px; box-shadow: 0 1px 0 rgba(0, 0, 0, .04); }
+.v-scr .row i { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #C7C7CC; }
+.v-scr .row.done i, .v-scr .row.stamp i { background: #1A7F37; border-color: #1A7F37; }
+.v-scr .row.done span { color: #6E6E73; text-decoration: line-through; }
+.v-scr .row em { font-style: normal; font-size: 11px; color: #6E6E73; }
+.v-scr .photo { height: 92px; border-radius: 14px; background: linear-gradient(135deg, #C9A77C, #8B6A47 60%, #5A4330); position: relative; }
+.v-scr .photo::after { content: '+ Foto'; position: absolute; right: 8px; bottom: 8px; font-size: 11px; color: #fff; background: rgba(0, 0, 0, .4); padding: 3px 8px; border-radius: 999px; }
+.v-scr .bar { margin: 10px 12px 16px; height: 42px; border-radius: 14px; background: var(--blue); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 13px; }
+.v-scr.cafe { background: #F6EFE6; }
+.v-scr.cafe .top b { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: 22px; }
+.v-scr .prod { display: grid; grid-template-columns: 48px 1fr auto; gap: 10px; align-items: center; background: #fff; border-radius: 16px; padding: 8px 10px; }
+.v-scr .prod i { width: 48px; height: 48px; border-radius: 12px; background: radial-gradient(circle at 35% 35%, #B07A4F, #5B3A22); }
+.v-scr .prod i.l { background: radial-gradient(circle at 35% 35%, #E8D5BC, #B89B76); }
+.v-scr .prod em { font-style: normal; font-weight: 600; }
+.v-scr .prod small { display: block; color: #6E6E73; font-size: 11px; }
+.v-scr .pick { display: flex; gap: 6px; }
+.v-scr .pick b { flex: 1; text-align: center; padding: 8px 0; border-radius: 10px; background: #fff; font-weight: 600; font-size: 12px; }
+.v-scr .pick b.on { background: #2B1D14; color: #F6EFE6; }
+.v-scr.cafe .bar { background: #2B1D14; }
+@media (max-width: 860px) { .v-phones { gap: 10px; } .v-phone { width: 38vw; border-radius: 28px; padding: 6px; } .v-scr { border-radius: 24px; font-size: 11px; } .v-scr .top { padding-top: 22px; } .v-scr .top b { font-size: 15px; } .v-scr .photo { height: 64px; } }
+
+/* --- Visual: Browser-Spiel (Rohr-Puzzle) --- */
+.v-game { width: min(880px, 90%); display: grid; grid-template-columns: auto 1fr; gap: clamp(20px, 4vw, 56px); align-items: center; }
+.v-grid { display: grid; grid-template-columns: repeat(5, clamp(44px, 5.4vw, 76px)); gap: 6px; padding: 12px; border-radius: 22px; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1); }
+.v-grid i { aspect-ratio: 1; border-radius: 10px; background: rgba(255, 255, 255, .05); position: relative; }
+.v-grid i::before, .v-grid i::after { content: ''; position: absolute; background: #3A3A44; border-radius: 4px; }
+.v-grid i.h::before { left: 0; right: 0; top: 40%; height: 20%; }
+.v-grid i.v::before { top: 0; bottom: 0; left: 40%; width: 20%; }
+.v-grid i.c1::before { left: 40%; right: 0; top: 40%; height: 20%; } .v-grid i.c1::after { left: 40%; width: 20%; top: 40%; bottom: 0; }
+.v-grid i.c2::before { left: 0; right: 40%; top: 40%; height: 20%; } .v-grid i.c2::after { left: 40%; width: 20%; top: 0; bottom: 40%; }
+.v-grid i.c3::before { left: 0; right: 40%; top: 40%; height: 20%; } .v-grid i.c3::after { left: 40%; width: 20%; top: 40%; bottom: 0; }
+.v-grid i.c4::before { left: 40%; right: 0; top: 40%; height: 20%; } .v-grid i.c4::after { left: 40%; width: 20%; top: 0; bottom: 40%; }
+.v-grid i.w::before, .v-grid i.w::after { background: #2997FF; box-shadow: 0 0 14px rgba(41, 151, 255, .7); }
+.v-grid i.s { background: rgba(41, 151, 255, .18); }
+.v-hud { display: grid; gap: 14px; }
+.v-hud small { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #8E8E93; }
+.v-hud b { font-size: clamp(24px, 3vw, 44px); letter-spacing: -.04em; line-height: 1.02; }
+.v-hud .stats { display: flex; gap: 10px; flex-wrap: wrap; }
+.v-hud .stats span { font-size: 13px; padding: 7px 12px; border-radius: 999px; background: rgba(255, 255, 255, .08); color: #D2D2D7; }
+.v-hud .cta { justify-self: start; font-size: 14px; padding: 10px 16px; border-radius: 999px; background: #2997FF; color: #fff; font-weight: 600; }
+@media (max-width: 860px) { .v-game { grid-template-columns: 1fr; justify-items: center; text-align: center; } .v-hud .stats, .v-hud .cta { justify-self: center; justify-content: center; } .v-grid { grid-template-columns: repeat(5, 13vw); } }
+
+/* --- Visual: Glücksrad / Quiz am Tresen --- */
+.v-quiz { width: min(820px, 88%); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 40px); align-items: center; }
+.v-wheel { aspect-ratio: 1; border-radius: 50%; background: conic-gradient(#E9DCC9 0 60deg, #2B1D14 60deg 120deg, #C9A77C 120deg 180deg, #F6EFE6 180deg 240deg, #8B6A47 240deg 300deg, #0071E3 300deg 360deg); box-shadow: 0 40px 80px -30px rgba(43, 29, 20, .5), inset 0 0 0 10px rgba(255, 255, 255, .6); position: relative; }
+.v-wheel::after { content: ''; position: absolute; inset: 38%; border-radius: 50%; background: #fff; box-shadow: 0 6px 20px rgba(0, 0, 0, .2); }
+.v-wheel-wrap { position: relative; }
+.v-wheel-wrap::before { content: ''; position: absolute; z-index: 2; left: 50%; top: -10px; translate: -50% 0; border: 14px solid transparent; border-top: 22px solid #1D1D1F; }
+.v-card { display: grid; gap: 10px; padding: clamp(18px, 2.4vw, 32px); border-radius: 26px; background: #fff; box-shadow: 0 30px 60px -36px rgba(0, 0, 0, .35); }
+.v-card small { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #8B6A47; }
+.v-card b { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(22px, 2.4vw, 34px); line-height: 1.1; color: #2B1D14; }
+.v-card .opts { display: grid; gap: 8px; }
+.v-card .opts span { padding: 10px 14px; border-radius: 12px; background: #F6EFE6; font-size: 14px; }
+.v-card .opts span.on { background: #2B1D14; color: #F6EFE6; }
+@media (prefers-reduced-motion: no-preference) {
+  .v-wheel { animation: uc-spin 14s linear infinite; }
+  .v-grid i.w { animation: uc-glow 2.4s ease-in-out infinite; animation-delay: calc(var(--k, 0) * 120ms); }
+}
+@keyframes uc-spin { to { transform: rotate(1turn); } }
+@keyframes uc-glow { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+@media (max-width: 860px) { .v-quiz { grid-template-columns: 1fr; width: 80%; } .v-wheel-wrap { width: 62%; justify-self: center; } }
