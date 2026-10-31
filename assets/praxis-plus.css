@@ -1,0 +1,65 @@
+/* ===== Praxisbeispiele, Teil 2: Räume & Visualisierung, Print Design, Systeme & Dashboards =====
+   Ergänzt praxis.css. Bewegung nur transform/opacity, ease-out, kurz; prefers-reduced-motion respektiert.
+   Alle Marken fiktiv, Zahlen = Beispielwerte (sichtbar gekennzeichnet). */
+:root { --pp-ease: cubic-bezier(.23, 1, .32, 1); --pp-io: cubic-bezier(.77, 0, .175, 1); }
+
+/* Bild-Bühne: Bilder gestapelt, Überblendung per data-state */
+.pp-pics { position: relative; display: grid; border-radius: 22px; overflow: hidden; background: #DDE2E8; aspect-ratio: 16 / 9; }
+.pp-pics > img, .pp-pics > picture { grid-area: 1 / 1; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .6s var(--pp-ease); }
+.pp-pics > picture img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pp-pics > .on { opacity: 1; }
+.pp-pics .pp-cap { position: absolute; left: 14px; bottom: 14px; z-index: 3; font-size: 13px; font-weight: 600; color: #fff; background: rgba(20,20,24,.62); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 999px; padding: 6px 12px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.pp-ctrl { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 14px; }
+.pp-ctrl .px-seg { flex-wrap: wrap; }
+.px-ba > .px-side > img { display: block; width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+/* Tageszeit-Schieber */
+.pp-time { display: flex; align-items: center; gap: 12px; flex: 1 1 260px; min-width: 0; padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,.66);
+  border: 1px solid rgba(255,255,255,.9); box-shadow: 0 10px 30px -18px rgba(0,30,90,.45); transition: opacity .3s var(--pp-ease); }
+.pp-time[aria-disabled="true"] { opacity: .45; }
+.pp-time svg { width: 18px; height: 18px; flex: none; color: #1D1D1F; }
+.pp-time input { flex: 1; min-width: 0; accent-color: #1D1D1F; }
+.pp-time output { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 44px; text-align: right; }
+
+/* Galerie zum Wischen */
+.pp-gal { display: grid; grid-auto-flow: column; grid-auto-columns: 82%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 2px; }
+.pp-gal::-webkit-scrollbar { display: none; }
+.pp-gal figure { margin: 0; scroll-snap-align: start; position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 20px; background: #2A2B30; }
+.pp-gal img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pp-gal figcaption { position: absolute; left: 14px; bottom: 14px; font-size: 13px; font-weight: 600; color: #fff; background: rgba(20,20,24,.62); border-radius: 999px; padding: 6px 12px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.pp-galnav { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+.pp-galnav button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.12); color: inherit; cursor: pointer; display: grid; place-items: center;
+  transition: transform .16s var(--pp-ease), background-color .2s; }
+.pp-galnav button:active { transform: scale(.94); }
+.pp-galnav svg { width: 18px; height: 18px; }
+.pp-galnav .cnt { font-size: 13px; font-weight: 600; opacity: .8; margin-left: 6px; font-variant-numeric: tabular-nums; }
+.pp-dots { display: flex; gap: 6px; margin-left: auto; }
+.pp-dots i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .3; transition: opacity .2s, transform .2s var(--pp-ease); }
+.pp-dots i.on { opacity: 1; transform: scale(1.25); }
+@media (min-width: 861px) { .pp-gal { grid-auto-columns: 62%; } }
+
+/* Messestand in 3D (CSS 3D, ohne Bibliothek) */
+.pp-stand { position: relative; margin-top: 18px; height: clamp(300px, 50vw, 500px); perspective: 1400px; perspective-origin: 50% 30%; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; outline: none; }
+.pp-stand:active { cursor: grabbing; }
+.pp-stand:focus-visible { box-shadow: 0 0 0 3px rgba(0,113,227,.5); border-radius: 22px; }
+.pp-world { position: absolute; left: 50%; top: 58%; width: 0; height: 0; transform-style: preserve-3d; }
+.pp-world .f { position: absolute; left: 0; top: 0; backface-visibility: hidden; transform-origin: 0 0; }
+.pp-world .wall-logo, .pp-world .scr { display: grid; place-items: center; }
+.pp-shadow { position: absolute; left: 50%; top: 58%; width: 720px; height: 180px; margin: -10px 0 0 -360px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,20,60,.28), transparent); transform: scale(var(--s,1)); pointer-events: none; }
+.pp-hint { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); font-size: 12.5px; font-weight: 600; color: #1D1D1F; background: rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.9);
+  border-radius: 999px; padding: 6px 12px; display: flex; gap: 8px; align-items: center; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); pointer-events: none; white-space: nowrap; }
+.pp-hint svg { width: 16px; height: 16px; }
+.pp-views { display: flex; justify-content: center; margin-top: 8px; }
+
+/* Gemeinsam */
+@media (prefers-reduced-motion: reduce) {
+  .pp-pics > img, .pp-pics > picture, .pp-time, .pp-galnav button, .pp-dots i { transition: none; }
+}
+@media (max-width: 700px) {
+  .pp-pics .pp-cap { left: 10px; bottom: 10px; font-size: 12px; }
+  .pp-gal { grid-auto-columns: 88%; gap: 10px; }
+  .pp-ctrl { gap: 10px; }
+  .pp-time { flex-basis: 100%; }
+}
