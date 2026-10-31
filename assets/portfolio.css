@@ -93,3 +93,17 @@
   .pf *, .pf *::before, .pf *::after { transition-duration: .01ms !important; }
   .pf-media[data-state="loading"] .pf-play-ic::after { animation-duration: 2.4s; }
 }
+
+/* High-End (31.10.): Arbeiten größer (4 statt 5 je Reihe), Sparten-Titel als markante Zwischenüberschrift */
+@media (min-width: 1101px) { .pf-row { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 1.8vw, 28px); } }
+@media (min-width: 861px) {
+  .pf-group-head { align-items: end; justify-content: space-between; padding-bottom: 16px; }
+  .pf-group-head h3 { font-size: clamp(34px, 3.8vw, 60px); letter-spacing: -.05em; line-height: 1; }
+  .pf-count { font-size: 14px; color: var(--ink-2); }
+  .pf-groups { gap: clamp(64px, 10vh, 120px); }
+}
+.pf-media { transition: transform .5s cubic-bezier(.23, 1, .32, 1), box-shadow .5s cubic-bezier(.23, 1, .32, 1); }
+@media (hover: hover) and (pointer: fine) { .pf-card:hover .pf-media { transform: translateY(-6px); box-shadow: 0 2px 4px rgba(0, 0, 0, .06), 0 40px 70px -36px rgba(0, 40, 120, .55); } }
+.pf .pb-note { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--ink-2); margin: 0 0 clamp(20px, 3vh, 32px); }
+.pf .pb-note::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #F2A93B; flex: none; }
+.pf:not([data-ready]) .pf-groups { min-height: 100vh; } /* Platz reservieren, bis die Clips per JS stehen (CLS) */
