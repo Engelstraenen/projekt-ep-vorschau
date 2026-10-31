@@ -85,12 +85,37 @@
   .form-status { margin-top: 12px; background: #fff; border-radius: 14px; padding: 12px 16px; }
   /* Audit: Links im Text unterstreichen (WCAG 1.4.1) */
   section.legal p a, section.legal li a, .updated a, .notice a { text-decoration: underline; text-underline-offset: 2px; }
+
+  /* High-End Kontakt: Einleitung links, Formular rechts (Desktop) */
+  main { max-width: 1320px; padding-top: clamp(40px, 8vh, 96px); }
+  .k-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .k-intro { position: sticky; top: 104px; }
+  .k-intro h1 { font-size: clamp(44px, 5.6vw, 96px); line-height: .98; letter-spacing: -.055em; max-width: 11ch; }
+  .k-steps { list-style: none; display: grid; gap: 0; margin-top: clamp(32px, 6vh, 56px); border-top: 1px solid #E5E5EA; }
+  .k-steps li { display: grid; grid-template-columns: 40px 1fr; gap: 2px 16px; padding: 18px 0; border-bottom: 1px solid #E5E5EA; }
+  .k-steps i { grid-row: span 2; width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: #fff; font-style: normal; font-size: 14px; font-weight: 600; display: grid; place-items: center; }
+  .k-steps b { font-size: 19px; letter-spacing: -.02em; }
+  .k-steps span { color: var(--ink-2); font-size: 15.5px; }
+  .k-direct { display: flex; align-items: center; gap: 16px; margin-top: 28px; }
+  .k-direct p { font-size: 15px; color: var(--ink-2); }
+  .k-direct a { font-size: 17px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+  .k-faces { display: flex; }
+  .k-faces img, .k-faces b { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px #fff; }
+  .k-faces b { margin-left: -12px; background: #0B0B0D; color: #F5F5F7; display: flex; align-items: center; justify-content: center; font-size: 17px; letter-spacing: -.04em; }
+  .k-faces b em { font-style: normal; color: #2997FF; }
+  .kontakt section.legal { margin-top: 0; background: #fff; box-shadow: 0 0 0 1px #E5E5EA, 0 60px 120px -60px rgba(0, 40, 100, .25); }
+  .kontakt form.contact { max-width: none; }
+  .kontakt form.contact input, .kontakt form.contact select, .kontakt form.contact textarea { background: var(--bg-2); border-color: transparent; transition: background-color .2s ease, border-color .2s ease; }
+  .kontakt form.contact input:focus, .kontakt form.contact select:focus, .kontakt form.contact textarea:focus { background: #fff; border-color: var(--blue); }
+  .kontakt form.contact button.send { height: 52px; padding: 0 30px; font-size: 17px; transition: background-color .2s ease, transform .16s cubic-bezier(.23, 1, .32, 1); }
+  .kontakt form.contact button.send:active { transform: scale(.97); }
+  @media (max-width: 900px) { .k-grid { grid-template-columns: 1fr; } .k-intro { position: static; } }
 </style>
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="assets/consent-theme.css">
 <link rel="stylesheet" href="assets/ep-fx.css">
 </head>
-<body>
+<body class="kontakt">
 <a class="skip" href="#main">Direkt zum Inhalt</a>
 <header class="top">
   <a class="brand" href="index.html">PROJEKT <b>EP</b><i aria-hidden="true"></i></a>
@@ -99,9 +124,20 @@
 
 <main id="main">
 
+  <div class="k-grid">
+  <div class="k-intro">
   <p class="kicker">PROJEKT EP / Kontakt</p>
-  <h1>Projekt starten. <span class="mute">Schreib uns kurz, worum es geht.</span></h1>
-  <p class="updated">Lieber direkt per E-Mail? <a href="mailto:kontakt@projekt-ep.de">kontakt@projekt-ep.de</a></p>
+  <h1 data-hw><span class="hw"><span style="--i:0">Projekt</span></span> <span class="hw"><span style="--i:1">starten.</span></span> <span class="mute"><span class="hw"><span style="--i:2">Erzähl</span></span> <span class="hw"><span style="--i:3">uns,</span></span> <span class="hw"><span style="--i:4">worum</span></span> <span class="hw"><span style="--i:5">es</span></span> <span class="hw"><span style="--i:6">geht.</span></span></span></h1>
+  <ol class="k-steps">
+    <li><i>1</i><b>Ihr schreibt uns</b><span>Ein paar Sätze reichen. Ziel, Zeitraum, was es schon gibt.</span></li>
+    <li><i>2</i><b>Wir sprechen kurz</b><span>Persönlich, ohne Fachvokabular. Danach wisst ihr, was sinnvoll ist.</span></li>
+    <li><i>3</i><b>2–3 Moodboards</b><span>Ihr wählt den Favoriten, dann wird gebaut.</span></li>
+  </ol>
+  <div class="k-direct">
+    <span class="k-faces" aria-hidden="true"><img src="img/team/eugen-kelberer-320.webp" alt="" width="320" height="320"><b>P<em>H</em></b></span>
+    <p>Ihr sprecht direkt mit uns.<br><a href="mailto:kontakt@projekt-ep.de">kontakt@projekt-ep.de</a></p>
+  </div>
+  </div>
 
   <section class="legal" aria-labelledby="h-form">
     <h2 id="h-form">Anfrage</h2>
@@ -126,6 +162,7 @@
       <button class="send" type="submit">Anfrage senden</button>
     </form>
   </section>
+  </div>
 
 </main>
 
