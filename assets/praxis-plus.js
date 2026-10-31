@@ -111,3 +111,67 @@
     if (cb) cb.addEventListener('change', () => { w.dataset.rap = cb.checked ? '1' : '0'; });
   });
 })();
+
+/* Systeme: Schichtplan, Handy-Klickprototyp, Baustellen-Board */
+(() => {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const DAYS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']; const NAME = { F: 'Früh', S: 'Spät', N: 'Nacht' };
+
+  // Schichtplan: Dienste ziehen (Maus/Finger) oder antippen und Ziel antippen
+  $$('[data-pp-shift]').forEach((w) => {
+    const rows = ['Anna', 'Ben', 'Carla', 'Deniz', 'Emil', 'Offen'];
+    const plan = { Anna: 'FF.FF..', Ben: 'SSSS..S', Carla: 'NNF.SS.', Deniz: '..NNN.N', Emil: '.....FF', Offen: '.....N.' };
+    const G = rows.map((r) => plan[r].split('').map((c) => (c === '.' ? '' : c)));
+    const tb = w.querySelector('tbody'); const th = w.querySelector('thead tr'); const sum = w.querySelector('.pp-shift-sum .st');
+    th.innerHTML = '<th scope="col"><span class="px-vh">Person</span></th>' + DAYS.map((d) => `<th scope="col">${d}</th>`).join('');
+    let sel = null;
+    const draw = () => {
+      tb.innerHTML = G.map((row, r) => `<tr><th scope="row">${rows[r] === 'Offen' ? 'Offen' : rows[r]}</th>${row.map((c, d) => `<td data-r="${r}" data-d="${d}" class="${rows[r] === 'Offen' ? 'free' : ''}" tabindex="-1">${c ? `<button type="button" class="pp-chip ${c.toLowerCase()}${sel && sel[0] === r && sel[1] === d ? ' sel' : ''}" data-r="${r}" data-d="${d}" aria-label="${NAME[c]}dienst ${rows[r]} ${DAYS[d]}">${c}</button>` : ''}</td>`).join('')}</tr>`).join('');
+      // Prüfen
+      const prob = []; const miss = new Set();
+      DAYS.forEach((d, i) => { ['F', 'S', 'N'].forEach((s) => { if (!G.slice(0, 5).some((row) => row[i] === s)) { prob.push(`${d}: ${NAME[s]}dienst fehlt`); miss.add(i); } }); });
+      G.slice(0, 5).forEach((row, r) => { row.forEach((c, i) => { if (i < 6 && (c === 'N' || c === 'S') && row[i + 1] === 'F') prob.push(`${rows[r]}: Ruhezeit ${DAYS[i]}→${DAYS[i + 1]} zu kurz`); });
+        if (row.filter(Boolean).length > 5) prob.push(`${rows[r]}: mehr als 5 Dienste`); });
+      $$('th', th).forEach((h, i) => h.classList.toggle('warn', miss.has(i - 1)));
+      sum.classList.toggle('bad', prob.length > 0);
+      sum.textContent = prob.length ? `${prob.length} ${prob.length === 1 ? 'Problem' : 'Probleme'}: ${prob.join(' · ')}` : 'Plan vollständig · alle Ruhezeiten eingehalten ✓';
+    };
+    const move = (a, b) => { if (!a || !b || (a[0] === b[0] && a[1] === b[1])) return; const t = G[b[0]][b[1]]; G[b[0]][b[1]] = G[a[0]][a[1]]; G[a[0]][a[1]] = t; };
+    let drag = null;
+    w.addEventListener('pointerdown', (e) => { const c = e.target.closest('.pp-chip'); if (!c) return; drag = { r: +c.dataset.r, d: +c.dataset.d, x: e.clientX, y: e.clientY, el: null, src: c }; c.setPointerCapture(e.pointerId); });
+    w.addEventListener('pointermove', (e) => { if (!drag) return; if (!drag.el && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 6) { drag.el = drag.src.cloneNode(true); drag.el.classList.add('drag'); document.body.appendChild(drag.el); drag.src.style.opacity = '.3'; }
+      if (drag.el) { drag.el.style.left = (e.clientX - 32) + 'px'; drag.el.style.top = (e.clientY - 18) + 'px'; $$('td.over', w).forEach((t) => t.classList.remove('over')); const t = document.elementFromPoint(e.clientX, e.clientY)?.closest('td[data-r]'); if (t && w.contains(t)) t.classList.add('over'); } });
+    const up = (e) => { if (!drag) return; const d = drag; drag = null;
+      if (d.el) { d.el.remove(); const t = document.elementFromPoint(e.clientX, e.clientY)?.closest('td[data-r]'); if (t && w.contains(t)) move([d.r, d.d], [+t.dataset.r, +t.dataset.d]); sel = null; draw(); }
+      else { if (sel && !(sel[0] === d.r && sel[1] === d.d)) { move(sel, [d.r, d.d]); sel = null; } else sel = sel ? null : [d.r, d.d]; draw(); } };
+    w.addEventListener('pointerup', up); w.addEventListener('pointercancel', () => { if (drag?.el) drag.el.remove(); drag = null; draw(); });
+    w.addEventListener('click', (e) => { if (e.target.closest('.pp-chip')) return; const t = e.target.closest('td[data-r]'); if (t && sel) { move(sel, [+t.dataset.r, +t.dataset.d]); sel = null; draw(); } });
+    w.addEventListener('keydown', (e) => { const c = e.target.closest('.pp-chip'); if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); sel = [+c.dataset.r, +c.dataset.d]; draw(); w.querySelector('.pp-chip.sel')?.focus(); }
+      if (sel && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) { e.preventDefault(); const [r, d] = sel; const n = [r + (e.key === 'ArrowDown') - (e.key === 'ArrowUp'), d + (e.key === 'ArrowRight') - (e.key === 'ArrowLeft')];
+        if (n[0] >= 0 && n[0] < rows.length && n[1] >= 0 && n[1] < 7) { move(sel, n); sel = n; draw(); w.querySelector('.pp-chip.sel')?.focus(); } } });
+    w.querySelector('[data-reset]')?.addEventListener('click', () => { rows.forEach((r, i) => { G[i] = plan[r].split('').map((c) => (c === '.' ? '' : c)); }); sel = null; draw(); });
+    draw();
+  });
+
+  // Handy-Klickprototyp: Ansichten per data-go
+  $$('[data-pp-phone]').forEach((w) => {
+    const views = $$('.pp-view', w); const steps = $$('.pp-steps li', w);
+    const go = (id) => { const k = views.findIndex((v) => v.dataset.view === id); views.forEach((v, i) => { v.setAttribute('aria-hidden', String(i !== k)); v.classList.toggle('back', i < k); });
+      steps.forEach((s, i) => s.classList.toggle('on', i === k)); if (id === 'lager' && w.dataset.done) w.classList.add('sent'); };
+    w.addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) { if (b.dataset.go === 'fertig') w.dataset.done = '1'; go(b.dataset.go); }
+      const s = e.target.closest('[data-step]'); if (s) { const o = s.parentElement.querySelector('output'); const v = Math.max(0, +o.textContent + +s.dataset.step * +o.dataset.inc); o.textContent = v; } });
+    go('lager');
+  });
+
+  // Baustellen-Board: Karte antippen = nächste Spalte; zeigt sich beim Hineinscrollen einmal selbst
+  $$('[data-pp-kan]').forEach((w) => {
+    const cols = $$('.pp-col', w); let touched = false;
+    const count = () => cols.forEach((c) => { c.querySelector('h6 em').textContent = c.querySelectorAll('.pp-card').length; });
+    const adv = (card) => { const i = cols.indexOf(card.closest('.pp-col')); const ni = (i + 1) % cols.length; const pr = card.querySelector('.pr i'); if (pr) pr.style.width = [12, 35, 70, 100][ni] + '%';
+      cols[ni].appendChild(card); card.classList.remove('flash'); void card.offsetWidth; if (!RM) card.classList.add('flash'); count(); };
+    w.addEventListener('click', (e) => { const c = e.target.closest('.pp-card'); if (c) { touched = true; adv(c); } });
+    count();
+    if (!RM && 'IntersectionObserver' in window) { let n = 0; const o = new IntersectionObserver((es) => { if (es[0].isIntersecting) { o.disconnect(); const tick = () => { if (touched || n >= 3) return; const c = cols[n === 2 ? 1 : n].querySelector('.pp-card'); if (c) adv(c); n++; setTimeout(tick, 1800); }; setTimeout(tick, 1400); } }, { threshold: .5 }); o.observe(w); }
+  });
+})();
