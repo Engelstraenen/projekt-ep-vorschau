@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="../assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="../assets/consent-theme.css">
 <link rel="stylesheet" href="../assets/ep-fx.css">
+<link rel="stylesheet" href="../assets/themen.css">
 </head>
 <body>
 <a class="skip" href="#main">Direkt zum Inhalt</a>
@@ -55,16 +56,17 @@
   </div>
 <main id="main">
   <nav class="crumbs" aria-label="Brotkrumen"><a href="../index.html">Start</a> / <a href="../index.html#print">Leistungen</a> / <span aria-current="page">Print Design</span></nav>
-  <section class="hero page-hero solo sc-hero">
+  <section class="hero page-hero solo sc-hero th-hero">
     <div>
       <p class="kicker"><span>07</span><span>Craft</span></p>
       <h1 data-hw><span class="hw"><span style="--i:0">Druck,</span></span> <span class="hw"><span style="--i:1">der</span></span> <span class="hw"><span style="--i:2">hängen</span></span> <span class="hw"><span style="--i:3">bleibt.</span></span></h1>
-      <p class="lead">Fahrzeug, Schaufenster, Etikett, Muster und Plakat, gezeigt an fünf Beispielen.</p>
+      <p class="lead">Fahrzeugfolien, Schaufenster, Etiketten, Muster und Plakate: gestaltet für den echten Ort, druckfertig geliefert.</p>
+      <ul class="th-kinds" aria-label="Das gehört dazu"><li style="--k:0">Fahrzeugfolien</li><li style="--k:1">Schaufenster &amp; Schilder</li><li style="--k:2">Etiketten &amp; Verpackung</li><li style="--k:3">Muster &amp; Textil</li><li style="--k:4">Plakate &amp; Flyer</li><li style="--k:5">Geschäftsausstattung</li></ul>
     </div>
   </section>
 
   <section class="block pb-list" id="erklaervideo" aria-labelledby="ev-h">
-    <h2 id="ev-h" class="px-vh">Erklärvideo Print Design</h2>
+    <header class="pb-head"><p class="pb-type">Erklärvideo</p><h2 id="ev-h" class="th-ev-h">Ein Plakat, viele Flächen <span>· Restaurant</span></h2></header>
     <figure class="px-film">
       <video data-px-auto muted playsinline loop controls preload="none" width="1920" height="1080" poster="../img/print/print-erklaer-poster.webp" aria-label="Video mit Sprecher, Musik und Soundeffekten: ein Aktionsplakat entsteht Schicht für Schicht, wird auf Flyer, Aufkleber und Fahrzeug übertragen, danach zeigt ein Diagramm Scans und Reservierungen über acht Wochen (Beispielwerte)">
         <source src="../video/print/print-erklaer.webm" type="video/webm">
@@ -72,15 +74,18 @@
       </video>
       <figcaption><span><b>Erklärvideo</b> · 30 s · mit Ton</span><span>Zahlen sind Beispielwerte eines fiktiven Betriebs</span></figcaption>
     </figure>
+    <div class="uc-cap">
+      <ul class="pb-tags" aria-label="Stil"><li>Erklärvideo</li><li>Motion Design</li><li>Plakat</li><li>Flyer &amp; Fahrzeug</li></ul>
+      <div class="uc-cap-t"><p><b>Zu sehen:</b> Ein Aktionsplakat entsteht Schicht für Schicht und wandert auf Flyer, Aufkleber und Fahrzeug. Danach zeigt ein Diagramm Scans und Reservierungen über acht Wochen.</p><p class="pb-note">So könnte euer Erklärvideo aussehen. Erfundener Betrieb, Zahlen sind Beispielwerte.</p></div>
+    </div>
   </section>
 
   <section class="block pb-list" id="praxisbeispiele" aria-labelledby="pb-h">
-    <h2 id="pb-h" class="pb-title">So könnte euer Druck aussehen.</h2>
-    <p class="pb-lead">Inspiration, keine Kundenprojekte: Die Marken sind erfunden. Die Beispiele zeigen, wie eure Marke auf Auto, Fenster, Etikett und Plakat wirken kann.</p>
+    <div class="th-list-h"><h2 id="pb-h" class="pb-title">So könnte euer Druck aussehen.</h2><p>Fünf Beispiele, direkt am Ort gezeigt. Alle Marken sind erfunden, keine Kundenprojekte.</p></div>
     <!-- Alle Marken fiktiv. Fahrzeug, Muster, Fensterfolie, Etiketten und Plakate als SVG gebaut; Fotos selbst erzeugt (img/print/). Interaktion: assets/praxis.js + praxis-plus.js. -->
 
     <article class="pb" id="fahrzeug" aria-labelledby="pb-van">
-      <header class="pb-head"><p class="pb-type">Fahrzeugfolie</p><h3 id="pb-van">ELEKTRO BRANDT <span>· Elektroinstallation</span></h3><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">Fahrzeugfolie</p><h3 id="pb-van">ELEKTRO BRANDT <span>· Elektroinstallation</span></h3></header>
       <div class="px-stage" style="--a:#FFF1C9;--c:#DCE5F3" data-pp-opts data-d="1" data-c="gelb">
         <span class="px-badge">Inspiration · fiktiver Betrieb</span>
         <div class="pp-vanw">
@@ -109,12 +114,14 @@
           <div class="pp-sw" role="group" aria-label="Farbe wählen" data-key="c"><button type="button" data-set="gelb" aria-pressed="true" style="--s:#F2C230"><span class="px-vh">Gelb</span></button><button type="button" data-set="blau" aria-pressed="false" style="--s:#1F4FD1"><span class="px-vh">Blau</span></button><button type="button" data-set="anthrazit" aria-pressed="false" style="--s:#2B2F36"><span class="px-vh">Anthrazit</span></button></div>
         </div>
       </div>
-      <ul class="pb-tags" aria-label="Stil"><li>Zum Ausprobieren</li><li>Fahrzeugfolie</li><li>3 Designs</li><li>3 Farben</li><li>Handwerk</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Drei Folierungen für denselben Transporter, jede in den Markenfarben durchgespielt.</p><p><b>Der Nutzen:</b> Der Betrieb wählt am Bildschirm und fährt ab dann jeden Tag Werbung durch die Stadt.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Zum Ausprobieren</li><li>Fahrzeugfolie</li><li>3 Designs</li><li>3 Farben</li><li>Handwerk</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Drei Folierungen für denselben Transporter, jede in den Markenfarben durchgespielt.</p><p><b>Der Nutzen:</b> Der Betrieb wählt am Bildschirm und fährt ab dann jeden Tag Werbung durch die Stadt.</p><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
 
     <article class="pb" id="schaufenster" aria-labelledby="pb-sf">
-      <header class="pb-head"><p class="pb-type">Schaufenster</p><h3 id="pb-sf">PHYSIO KERN <span>· Physiotherapie</span></h3><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">Schaufenster</p><h3 id="pb-sf">PHYSIO KERN <span>· Physiotherapie</span></h3></header>
       <div class="px-stage" style="--a:#D7ECE9;--c:#F2ECE3">
         <span class="px-badge">Inspiration · fiktive Praxis</span>
         <div class="px-ba px-glass" style="--pos:50%;margin-top:22px">
@@ -140,12 +147,14 @@
           <span class="px-handle" aria-hidden="true"></span>
         </div>
       </div>
-      <ul class="pb-tags" aria-label="Stil"><li>Vorher/Nachher</li><li>Glasdekor</li><li>Milchglas</li><li>Ruhig</li><li>Praxis</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Logo, Leistungen, Milchglas-Band als Sichtschutz und Öffnungszeiten, passend zum <a href="logo-design.html#einsatz">Logo</a>.</p><p><b>Der Nutzen:</b> Wer vorbeigeht, sieht sofort, was hier passiert und wie man einen Termin bekommt.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Vorher/Nachher</li><li>Glasdekor</li><li>Milchglas</li><li>Ruhig</li><li>Praxis</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Logo, Leistungen, Milchglas-Band als Sichtschutz und Öffnungszeiten, passend zum <a href="logo-design.html#einsatz">Logo</a>.</p><p><b>Der Nutzen:</b> Wer vorbeigeht, sieht sofort, was hier passiert und wie man einen Termin bekommt.</p><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
 
     <article class="pb" id="etiketten" aria-labelledby="pb-et">
-      <header class="pb-head"><p class="pb-type">Etiketten &amp; Verpackung</p><h3 id="pb-et">ALMA <span>· Kaffeerösterei</span></h3><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">Etiketten &amp; Verpackung</p><h3 id="pb-et">ALMA <span>· Kaffeerösterei</span></h3></header>
       <div class="px-stage" style="--a:#F1E6D6;--c:#E3E8DC">
         <span class="px-badge">Inspiration · fiktive Rösterei</span>
         <figure class="pp-shot" style="margin-top:22px"><img src="../img/print/alma-tueten.webp" srcset="../img/print/alma-tueten-640.webp 640w, ../img/print/alma-tueten.webp 1280w" sizes="(max-width: 700px) 92vw, 1100px" width="1280" height="720" alt="Drei Kaffeetüten in Creme, Terrakotta und Oliv mit Schriftzug ALMA und gezeichnetem Kaffeezweig" loading="lazy"></figure>
@@ -155,12 +164,14 @@
           <svg role="listitem" viewBox="0 0 300 380" aria-label="Etikett Filter Verde, Röstgrad 2 von 5" class="lb" style="--lb:#4F5B3A;--lt:#EEF0E2;--la:#D9C38A"><rect width="300" height="380" rx="14" fill="var(--lb)"/><rect x="12" y="12" width="276" height="356" rx="8" fill="none" stroke="var(--lt)" stroke-opacity=".35"/><text x="150" y="96" text-anchor="middle" class="t-serif" fill="var(--lt)">ALMA</text><text x="150" y="128" text-anchor="middle" class="t-sm" fill="var(--la)">KAFFEERÖSTEREI</text><path d="M150 150 v60 M150 170 q-24-8-30-26 q22 2 30 20 M150 188 q24-8 30-26 q-22 2-30 20" fill="none" stroke="var(--lt)" stroke-width="2"/><circle cx="144" cy="206" r="5" fill="var(--la)"/><circle cx="156" cy="200" r="5" fill="var(--la)"/><text x="150" y="258" text-anchor="middle" class="t-md" fill="var(--lt)">Filter Verde</text><g fill="var(--lt)"><circle cx="118" cy="284" r="6"/><circle cx="134" cy="284" r="6"/><circle cx="150" cy="284" r="6" fill-opacity=".2"/><circle cx="166" cy="284" r="6" fill-opacity=".2"/><circle cx="182" cy="284" r="6" fill-opacity=".2"/></g><text x="150" y="322" text-anchor="middle" class="t-xs" fill="var(--lt)">Beere · Blüte · hell</text><text x="150" y="348" text-anchor="middle" class="t-xs" fill="var(--lt)" opacity=".7">250 g · ganze Bohne</text></svg>
         </div>
       </div>
-      <ul class="pb-tags" aria-label="Stil"><li>Etiketten-Serie</li><li>Packshot</li><li>Serif</li><li>Handgezeichnet</li><li>Gastro &amp; Manufaktur</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Ein Etikett-System für drei Sorten: gleiche Ordnung, eigene Farbe, Röstgrad als Punkte.</p><p><b>Der Nutzen:</b> Im Regal klar als Familie erkennbar, neue Sorten kommen in Minuten dazu.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Etiketten-Serie</li><li>Packshot</li><li>Serif</li><li>Handgezeichnet</li><li>Gastro &amp; Manufaktur</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Ein Etikett-System für drei Sorten: gleiche Ordnung, eigene Farbe, Röstgrad als Punkte.</p><p><b>Der Nutzen:</b> Im Regal klar als Familie erkennbar, neue Sorten kommen in Minuten dazu.</p><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
 
     <article class="pb" id="muster" aria-labelledby="pb-mu">
-      <header class="pb-head"><p class="pb-type">Allover-Muster</p><h3 id="pb-mu">MONDSAMT <span>· Loungewear online</span></h3><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">Allover-Muster</p><h3 id="pb-mu">MONDSAMT <span>· Loungewear online</span></h3></header>
       <div class="px-stage dark" data-pp-opts data-cw="nacht" style="--a:#2A2F5A;--c:#3A2A52">
         <span class="px-badge">Inspiration · fiktive Marke</span>
         <div class="pp-pat">
@@ -186,12 +197,14 @@
           <label class="pp-chk"><input type="checkbox" data-pp-rap> Rapport zeigen</label>
         </div>
       </div>
-      <ul class="pb-tags" aria-label="Stil"><li>Zum Ausprobieren</li><li>Allover</li><li>Nahtloser Rapport</li><li>3 Farbwege</li><li>E-Commerce</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Ein Motiv-Kachel, die sich nahtlos wiederholt, in drei Farbwegen für die Kollektion.</p><p><b>Der Nutzen:</b> Shop, Verpackung und Stoff tragen dasselbe Muster, in jeder Größe sauber.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Zum Ausprobieren</li><li>Allover</li><li>Nahtloser Rapport</li><li>3 Farbwege</li><li>E-Commerce</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Ein Motiv-Kachel, die sich nahtlos wiederholt, in drei Farbwegen für die Kollektion.</p><p><b>Der Nutzen:</b> Shop, Verpackung und Stoff tragen dasselbe Muster, in jeder Größe sauber.</p><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
 
     <article class="pb" id="plakat" aria-labelledby="pb-pl">
-      <header class="pb-head"><p class="pb-type">Plakat &amp; Aktion</p><h3 id="pb-pl">TRATTORIA SOLE <span>· Restaurant</span></h3><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">Plakat &amp; Aktion</p><h3 id="pb-pl">TRATTORIA SOLE <span>· Restaurant</span></h3></header>
       <div class="px-stage" style="--a:#FBE3CF;--c:#F3E9D2" data-pp-opts data-a="pasta">
         <span class="px-badge">Inspiration · fiktives Restaurant</span>
         <div class="pp-scene px-glass" style="margin-top:22px">
@@ -204,14 +217,11 @@
         </div>
         <div class="pp-ctrl"><div class="px-seg" role="group" aria-label="Aktion wählen" data-key="a"><button type="button" data-set="pasta" aria-pressed="true">Pasta-Woche</button><button type="button" data-set="aperitivo" aria-pressed="false">Aperitivo</button><button type="button" data-set="mittag" aria-pressed="false">Mittagstisch</button></div></div>
       </div>
-      <ul class="pb-tags" aria-label="Stil"><li>Plakat im Raum</li><li>3 Aktionen</li><li>Eine Vorlage</li><li>Warm</li><li>Gastro</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Eine Plakat-Vorlage für wechselnde Aktionen, mit QR-Code zur Reservierung, gezeigt direkt an der Wand.</p><p><b>Der Nutzen:</b> Neue Aktion in Minuten fertig, Plakat, Flyer und Story sehen gleich aus.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Plakat im Raum</li><li>3 Aktionen</li><li>Eine Vorlage</li><li>Warm</li><li>Gastro</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Eine Plakat-Vorlage für wechselnde Aktionen, mit QR-Code zur Reservierung, gezeigt direkt an der Wand.</p><p><b>Der Nutzen:</b> Neue Aktion in Minuten fertig, Plakat, Flyer und Story sehen gleich aus.</p><p class="pb-note"><b>So könnte euer Druck aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
-  </section>
-
-  <section class="block wm" aria-labelledby="wm-h">
-    <h2 id="wm-h">Was wir gestalten</h2>
-    <ul class="wm-grid"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 16V8h11v8M13 11h4l3 3v2H13M2 16h18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="6" cy="17.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="17.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><b>Fahrzeugfolien</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 14h18" stroke="currentColor" stroke-width="1.6"/></svg><b>Schaufenster &amp; Schilder</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l1 4v13H6V7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><rect x="9" y="10" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><b>Etiketten &amp; Verpackung</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 13h7v7h-7zM13 4h7v7h-7zM4 13h7v7H4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><b>Muster &amp; Textil</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 8h8M8 12h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><b>Plakate &amp; Flyer</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v10H4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 11h5M8 14h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><b>Geschäfts&shy;ausstattung</b></li></ul>
   </section>
 
   <section class="block st" aria-labelledby="st-h">
