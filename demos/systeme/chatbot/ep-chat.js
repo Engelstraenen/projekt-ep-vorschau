@@ -48,7 +48,7 @@
   let sid = sessionStorage.getItem("ep-chat-sid"), meta = null, busy = false, lastFocus = null;
   const mobile = () => matchMedia("(max-width: 560px)").matches;
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const linkify = s => esc(s).replace(/([\w.+-]+@[\w-]+\.[\w.]+)/g, '<a href="mailto:$1">$1</a>').replace(/\[([^\]]*Platzhalter[^\]]*)\]/g, '<mark style="background:#FFF4C2;border-radius:4px;padding:0 3px">[$1]</mark>');
+  const linkify = s => esc(s).replace(/\[([^\]]+)\]\((\.{1,2}\/[\w./#-]*)\)/g, '<a href="$2">$1</a>').replace(/([\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g, '<a href="mailto:$1">$1</a>').replace(/\[([^\]]*Platzhalter[^\]]*)\]/g, '<mark style="background:#FFF4C2;border-radius:4px;padding:0 3px">[$1]</mark>');
   async function call(path, body) {
     const r = await fetch(API + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) });
     const j = await r.json().catch(() => ({})); if (!r.ok) throw Object.assign(new Error(j.fehler || T.err), { status: r.status }); return j;

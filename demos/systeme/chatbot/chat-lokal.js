@@ -4,6 +4,9 @@
 (() => {
   'use strict';
   const KB = window.EP_KB; if (!KB) return;
+  // Relativer Pfad zur Website-Wurzel (Demo liegt unter demos/systeme/chatbot/). Anpassbar per data-site-root am <script>.
+  const ME = document.currentScript; const SITE_ROOT = (ME && ME.dataset.siteRoot) || '../../../';
+  const root = (s) => (typeof s === 'string' ? s.split('{ROOT}').join(SITE_ROOT) : s);
   const FOLD = { 'ä': 'ae', 'ö': 'oe', 'ü': 'ue', 'ß': 'ss', 'é': 'e', 'è': 'e', 'à': 'a', '’': "'", '„': '"', '“': '"' };
   const STOP = new Set(`der die das den dem des ein eine einen einem einer eines und oder aber auch noch schon nur mal so wie was wer wo wann warum wieso
 weshalb ich du er sie es wir ihr mich mir dich dir uns euch euer eure euren eurem ist sind bin bist war waren sein seid hat habe habt haben hast
@@ -72,7 +75,7 @@ dass the a an is are do does you your we i me my of to for and or in on it this 
     const lang = sess.lang = sprache(text, sess.lang || 'de'); const tn = norm(text); const flags = sess.flags;
     const out = (key, kw = {}) => { const a = Object.assign({}, key ? ANTW[key] : {}, kw);
       const r = { text: lang === 'en' && a.text_en ? a.text_en : a.text, quelle: a.quelle || null, chips: a.chips || [], aktion: a.aktion || null, rueckruf: !!a.rueckruf, intent: kw.intent || key, lang };
-      if (lang === 'en') r.chips = r.chips.map((c) => KB.EN_CHIPS[c] || c); sess.lastOffer = ['angebot_kontakt', 'angebot_rueckmeldung'].includes(r.aktion); return r; };
+      r.text = root(r.text); if (r.quelle && r.quelle.url) r.quelle = { label: r.quelle.label, url: root(r.quelle.url) }; if (lang === 'en') r.chips = r.chips.map((c) => KB.EN_CHIPS[c] || c); sess.lastOffer = ['angebot_kontakt', 'angebot_rueckmeldung'].includes(r.aktion); return r; };
     if (!tn) return out('leer');
     if (hasAny(tn, R.injektion)) return out('injektion');
     if (hasAny(tn, R.beleidigung) && !hasAny(tn, ['nicht dumm', 'dumme frage'])) { flags.bel = (flags.bel || 0) + 1; return out(flags.bel >= 3 ? 'beleidigung2' : 'beleidigung'); }
