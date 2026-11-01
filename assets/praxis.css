@@ -211,27 +211,6 @@
 /* --- Erklärvideo oben auf der Seite --- */
 .px-film { margin: 0; border-radius: 28px; padding: 6px; background: linear-gradient(160deg, rgba(255,255,255,.8), rgba(236,241,248,.6)); border: 1px solid rgba(255,255,255,.95);
   box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 40px 80px -40px rgba(0,40,120,.45), inset 0 1px 0 #fff; }
-/* Ton-Knopf auf vertonten Erklärvideos: Glas-Pille oben rechts, kurze ease-out-Übergänge */
-.px-film { position: relative; }
-.px-snd { position: absolute; z-index: 2; top: 20px; right: 20px; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px 0 12px; border: 0; border-radius: 999px; cursor: pointer;
-  font-family: inherit; font-size: 13px; font-weight: 600; line-height: 1; letter-spacing: -.005em; color: #fff; background: rgba(18,20,26,.58); -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), 0 10px 28px -14px rgba(0,0,0,.55);
-  transition: transform 160ms cubic-bezier(.23,1,.32,1), background-color 200ms cubic-bezier(.23,1,.32,1), color 200ms cubic-bezier(.23,1,.32,1); }
-.px-snd::before { content: ''; position: absolute; inset: -4px; } /* Trefferfläche 48 px */
-.px-snd svg { width: 20px; height: 20px; flex: none; overflow: visible; }
-.px-snd svg path:not(:first-child) { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; transform-box: fill-box; transform-origin: 0% 50%;
-  transition: opacity 180ms cubic-bezier(.23,1,.32,1), transform 180ms cubic-bezier(.23,1,.32,1); }
-.px-snd .w1, .px-snd .w2 { opacity: 0; transform: scale(.6); }
-.px-snd .x { transform-origin: 50% 50%; }
-.px-snd.on { background: rgba(255,255,255,.94); color: #0071E3; box-shadow: inset 0 0 0 1px rgba(0,113,227,.18), 0 10px 28px -14px rgba(0,0,0,.4); }
-.px-snd.on .w1, .px-snd.on .w2 { opacity: 1; transform: none; }
-.px-snd.on .w2 { transition-delay: 40ms; }
-.px-snd.on .x { opacity: 0; transform: scale(.6); }
-.px-snd:active { transform: scale(.96); }
-.px-snd:focus-visible { outline: 2px solid #0071E3; outline-offset: 3px; }
-@media (hover: hover) and (pointer: fine) { .px-snd:not(.on):hover { background: rgba(18,20,26,.72); } }
-@media (max-width: 520px) { .px-snd { top: 12px; right: 12px; height: 36px; padding: 0 13px 0 10px; font-size: 12.5px; } .px-snd svg { width: 18px; height: 18px; } }
-@media (prefers-reduced-motion: reduce) { .px-snd, .px-snd svg path { transition-duration: 0ms !important; } }
 .px-film video { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; border-radius: 22px; background: #EEF1F6; object-fit: cover; }
 .px-film figcaption { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: space-between; font-size: 13px; color: var(--ink-2); padding: 10px 12px 6px; }
 .px-film figcaption b { color: var(--ink); font-weight: 600; }

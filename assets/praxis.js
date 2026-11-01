@@ -140,32 +140,4 @@
     }), { threshold: 0.4 });
     vids.forEach((v) => o.observe(v));
   }
-
-  // Vertonte Erklärvideos: Autoplay läuft stumm (Browser-Regel), der Knopf schaltet Musik und Soundeffekte zu
-  const SND_ON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L11.5 6v12l-4.3-3.5H4z" fill="currentColor"/><path class="w1" d="M15 9.2a4 4 0 0 1 0 5.6"/><path class="w2" d="M17.6 6.8a7.4 7.4 0 0 1 0 10.4"/><path class="x" d="m15.5 9.5 5 5m0-5-5 5"/></svg>';
-  $$('video[data-px-sound]').forEach((v) => {
-    const host = v.parentElement;
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'px-snd';
-    b.innerHTML = SND_ON + '<span class="px-snd-l"></span>';
-    const sync = () => {
-      const on = !v.muted && v.volume > 0;
-      b.setAttribute('aria-pressed', String(on));
-      b.setAttribute('aria-label', on ? 'Ton ausschalten' : 'Ton einschalten');
-      b.querySelector('.px-snd-l').textContent = on ? 'Ton aus' : 'Ton an';
-      b.classList.toggle('on', on);
-    };
-    b.addEventListener('click', () => {
-      const on = v.muted || v.volume === 0;
-      v.muted = !on; if (on && v.volume === 0) v.volume = 1;
-      if (on) {
-        if (v.preload === 'none') v.preload = 'auto';
-        if (v.paused || v.ended) { if (v.ended) v.currentTime = 0; v.play().catch(() => { v.muted = true; sync(); }); }
-      }
-      sync();
-    });
-    v.addEventListener('volumechange', sync);
-    sync();
-    host.appendChild(b);
-  });
 })();
