@@ -221,3 +221,6 @@ svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-widt
  .toasts{left:12px;right:12px;bottom:110px;align-items:stretch}.toast{max-width:none}
  .hide-m{display:none}.hide-d{display:initial}
 }
+
+/* Transparenzhinweis EU AI Act Art. 50 */
+.aihint{margin:0 0 8px;font-size:12px;line-height:1.35;color:var(--ink-3)}

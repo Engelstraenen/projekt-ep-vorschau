@@ -67,7 +67,7 @@ export const items = [
 ];
 
 // ---------- Skripte für Live-Ereignisse ----------
-// who: bot | kunde ; sum = Stichpunkt für die KI-Zusammenfassung ; lager = Lager-Abfrage
+// who: bot | kunde ; sum = Stichpunkt für die Zusammenfassung ; lager = Lager-Abfrage
 export const SCRIPTS = {
   brandt: { k: 'tel', wer: 'Möbelhaus Brandt GmbH', st: 'auftrag', sc: 85, dringend: true,
     titel: (n) => `${n}, <b>Möbelhaus Brandt GmbH</b> ruft gerade an und möchte einen neuen Online-Shop für 12 Filialen beauftragen.`,

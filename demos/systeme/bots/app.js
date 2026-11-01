@@ -11,6 +11,8 @@ const kan = (k) => `<span class="kanal ${k}" title="${KAN[k] || k}">${ic(k === '
 const ADR = 'Chef';
 const me = () => { const L = login.get(); return { name: L?.name || 'Max', ini: ini(L?.name || 'Max Brandt'), rolle: L?.rolle === 'ma' ? 'Mitarbeitende' : 'Geschäftsführung', da: !!L }; };
 
+// Transparenzhinweis (EU AI Act Art. 50) · gleicher Gedanke wie im Demo-Chatbot
+const AIHINT = `<p class="aihint" role="note">Dieser Assistent ist automatisiert. Du kannst jederzeit eine Person verlangen.</p>`;
 // ---------------------------------------------------------------- Live-Ereignisse
 const live = { evs: [], hero: null, heroUntil: 0, filter: 'alle', stufe: null, sel: null, chatDraft: '', simIdx: { tel: 0, chat: 0 } };
 const byId = (id) => live.evs.find((e) => e.id === id) || items.find((i) => i.id === id);
@@ -109,7 +111,7 @@ function idleCard() {
 }
 function botHeute(s) {
   const mx = Math.max(s.chat, s.mail, s.tel);
-  return `<section class="card"><div class="ch">${ic('bot')}Bot heute<span class="meta">seit 00:00</span></div>
+  return `<section class="card"><div class="ch">${ic('bot')}Bot heute<span class="meta">seit 00:00</span></div>${AIHINT}
    <div class="row" style="gap:16px;margin:4px 0 6px"><div class="big num">${s.selbst} %</div><div class="meta">selbst gelöst<br>${s.ges} Gespräche</div></div>
    <div class="bars">${[['chat', 'Chat', 'var(--sage)'], ['mail', 'E-Mail', 'var(--amber)'], ['tel', 'Telefon', 'var(--coral)']].map(([k, t, c]) => `<div class="b"><span class="row" style="gap:6px">${ic(k)}${t}</span><div class="bar"><i style="width:${(s[k] / mx) * 100}%;background:${c}"></i></div><b class="num">${s[k]}</b></div>`).join('')}</div></section>`;
 }
@@ -174,6 +176,7 @@ function vGespraech(id, chat) {
         <button class="btn ghost wide" style="margin-top:8px" data-act="cb" data-id="${id}">${ic('callback')}Ich rufe zurück</button>`)
     : `<div class="meta" style="margin-bottom:10px">${esc(ev.status)} · Dauer ${Math.floor(ev.dauer / 60)}:${String(ev.dauer % 60).padStart(2, '0')}</div><a class="btn sec wide" href="#/leads/l-${ev.id}">${ic('star')}Zum Lead</a>`;
   return `<div class="grid main2"><section class="card"><div class="ch">${kan(i.k)}${esc(i.wer)}<span class="meta">${isLive ? `<span class="live"><i></i>${chatMode ? 'Chat live' : 'Transkript live'}</span>` : (i.k === 'mail' ? 'E-Mail' : 'Verlauf') + ' · ' + i.z}</span></div>
+     ${i.k !== 'mail' ? AIHINT : ''}
      ${i.k === 'tel' && isLive ? `<div class="row" style="margin-bottom:6px">${wave(60)}<span class="meta">${ev.mode === 'du' ? 'Du sprichst' : 'Bot spricht'}</span></div>` : ''}
      <div class="conv" id="conv">${lines.length ? lines.map((l, n) => lineHtml(l, chatMode, n >= prev ? 'fresh' : '')).join('') : `<p class="meta">${i.k === 'mail' ? 'E-Mail-Eingang. Der Bot hat sie gelesen, eingestuft und zusammengefasst:' : 'Kein Verlauf gespeichert.'}</p><div class="bub l" style="margin-top:8px">${esc(i.sum)}</div>`}
      ${typing ? `<div class="typing"><i></i><i></i><i></i> ${ev.mode === 'du' ? 'Bot schreibt mit …' : chatMode ? 'Chatbot tippt …' : 'Telefonbot hört zu …'}</div>` : ''}</div>
