@@ -45,6 +45,7 @@ h1 { font-size: clamp(40px, 4.6vw, 72px); font-weight: 650; letter-spacing: -.05
 .ctas { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-top: 30px; }
 .hero-img { border-radius: 28px; overflow: hidden; box-shadow: 0 40px 80px -40px rgba(0,0,0,.35); position: relative; background: var(--bg-2); }
 .hero-img img { width: 100%; height: auto; display: block; aspect-ratio: 3/2; object-fit: cover; }
+.hero-img picture { display: block; }
 .hero-img figcaption { position: absolute; left: 14px; bottom: 14px; font-size: 12px; color: #fff; background: rgba(0,0,0,.42); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 5px 10px; border-radius: 999px; }
 .seo-visual { aspect-ratio: 3/2; padding: clamp(24px, 4vw, 48px); background: linear-gradient(160deg, #EEF4FF, #F5F5F7 60%); display: grid; align-content: center; gap: 22px; box-shadow: none; }
 .seo-visual .search { background: #fff; border-radius: 999px; padding: 14px 22px; font-size: 17px; color: var(--ink); box-shadow: 0 10px 30px -12px rgba(0,0,0,.15); display: flex; gap: 12px; }

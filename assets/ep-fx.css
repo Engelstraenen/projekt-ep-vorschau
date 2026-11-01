@@ -215,12 +215,18 @@ footer#epf a { color: inherit; }
 .br-endin b { font-size: clamp(26px, 2.6vw, 40px); font-weight: 650; letter-spacing: -.045em; line-height: 1.04; }
 .br-endin b span { opacity: .72; }
 .br-endin .br-go { color: #fff; }
+.br-endin { align-self: start; width: 100%; } /* Karte bleibt 16:10 in Spaltenbreite statt über die Leiste hinauszuwachsen */
+.br-endin.has-img { position: relative; isolation: isolate; background: #0A2A5C; }
+.br-endbg { position: absolute; inset: 0; z-index: -1; display: block; overflow: hidden; border-radius: inherit; }
+.br-endbg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; transition: transform 1.1s var(--ease-out); }
+.br-endbg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 38, 98, .95) 0%, rgba(0, 78, 176, .8) 55%, rgba(0, 113, 227, .38) 100%); }
 .br-progress { margin: clamp(28px, 5vh, 48px) var(--gutter) 0; height: 2px; background: rgba(255, 255, 255, .12); border-radius: 2px; overflow: hidden; }
 .br-progress span { display: block; height: 100%; background: #2997FF; transform-origin: 0 50%; transform: scaleX(0); }
 @media (hover: hover) and (pointer: fine) {
   .br-card > a:hover .br-img img { transform: scale(1.04); }
   .br-card > a:hover .br-go svg { transform: translate(3px, -3px); }
   .br-end > a:hover .br-go svg { transform: translateX(4px); }
+  .br-end > a:hover .br-endbg img { transform: scale(1.04); }
 }
 /* Standard (Handy, ohne Scroll-Timeline): Wisch-Leiste */
 .br-track { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; width: auto; scroll-padding-inline: var(--gutter); overscroll-behavior-x: contain; }
@@ -231,6 +237,7 @@ footer#epf a { color: inherit; }
   .br-head { grid-template-columns: 1fr; }
   .br-card { width: 86vw; }
   .br-end { width: 70vw; }
+  .br-endin { aspect-ratio: auto; min-height: 100%; }
   .br-meta { grid-template-columns: 1fr; }
   .br-tags { justify-content: start; order: 3; }
 }

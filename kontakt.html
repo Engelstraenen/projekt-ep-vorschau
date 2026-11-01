@@ -110,6 +110,13 @@
   .kontakt form.contact button.send { height: 52px; padding: 0 30px; font-size: 17px; transition: background-color .2s ease, transform .16s cubic-bezier(.23, 1, .32, 1); }
   .kontakt form.contact button.send:active { transform: scale(.97); }
   @media (max-width: 900px) { .k-grid { grid-template-columns: 1fr; } .k-intro { position: static; } }
+  .k-photo { position: relative; margin-top: clamp(56px, 10vh, 120px); border-radius: clamp(22px, 2.6vw, 36px); overflow: hidden; background: var(--bg-2); box-shadow: 0 60px 120px -60px rgba(0, 40, 100, .35); }
+  .k-photo picture { display: block; }
+  .k-photo img { display: block; width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; }
+  .k-photo figcaption { position: absolute; left: clamp(14px, 2vw, 24px); bottom: clamp(14px, 2vw, 24px); font-size: 14px; color: #fff; background: rgba(0, 0, 0, .42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 7px 14px; border-radius: 999px; }
+  @media (max-width: 700px) { .k-photo img { aspect-ratio: 4 / 3; } .k-photo figcaption { font-size: 12.5px; right: 14px; } }
+  @media (prefers-reduced-motion: no-preference) { @supports (animation-timeline: view()) { .k-photo img { animation: k-par linear both; animation-timeline: view(); } } }
+  @keyframes k-par { from { transform: scale(1.12) translateY(-3%); } to { transform: scale(1.12) translateY(3%); } }
 </style>
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="assets/consent-theme.css">
@@ -163,6 +170,8 @@
     </form>
   </section>
   </div>
+
+  <figure class="k-photo"><picture><source type="image/avif" srcset="img/seite/kontakt-studio-640.avif 640w, img/seite/kontakt-studio-1080.avif 1080w, img/seite/kontakt-studio-1600.avif 1600w, img/seite/kontakt-studio-2400.avif 2400w" sizes="(max-width: 1440px) 90vw, 1320px"><source type="image/webp" srcset="img/seite/kontakt-studio-640.webp 640w, img/seite/kontakt-studio-1080.webp 1080w, img/seite/kontakt-studio-1600.webp 1600w, img/seite/kontakt-studio-2400.webp 2400w" sizes="(max-width: 1440px) 90vw, 1320px"><img src="img/seite/kontakt-studio-1080.webp" width="2400" height="1340" alt="Heller Besprechungstisch aus Holz am großen Fenster mit Kaffeetassen, zugeklapptem Laptop, Notizbuch und ausgedruckten Farbpaletten, ringsum freie Stühle" loading="lazy" decoding="async" style="object-position:50% 55%"></picture><figcaption>So fängt es an: ein Tisch, ein Gespräch, eure Moodboards.</figcaption></figure>
 
 </main>
 
