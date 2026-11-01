@@ -10,8 +10,8 @@
       "height": 1440,
       "duration": 23.04,
       "codec": "h264",
-      "note": "Actual file dimensions verified with ffprobe; source filename may describe a different rendition.",
-      "webRendition": "H.264 1920 px Breite, CRF 24, AAC 96 kbit/s, faststart (fuer die Web-Vorschau transkodiert)"
+      "bytes": 32817773,
+      "note": "Actual file dimensions verified with ffprobe; source filename may describe a different rendition."
     },
     {
       "file": "/videos/alpine-perfect-line.mp4",
@@ -23,8 +23,8 @@
       "height": 2160,
       "duration": 14.548333,
       "codec": "h264",
-      "note": "Actual file dimensions verified with ffprobe; source filename may describe a different rendition.",
-      "webRendition": "H.264 1920 px Breite, CRF 24, AAC 96 kbit/s, faststart (fuer die Web-Vorschau transkodiert)"
+      "bytes": 47459840,
+      "note": "Actual file dimensions verified with ffprobe; source filename may describe a different rendition."
     }
   ]
 }
