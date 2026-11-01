@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-jT39K1wGaNlSbhMkIEfFTkAHnNA7OLdkGqZDtMCRt5o=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-T6i9WO10c4YMO/oQCAI7lRObDS/Fw2qzZcG1Rpozvr8=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -227,9 +227,9 @@
   #kontakt { height: auto; } /* letzter Abschnitt endet mit dem Footer (110vh ließ auf dem iPhone eine weiße Fläche darunter) */
   #kontakt .sticky { position: relative; height: auto; min-height: 100svh; display: flex; flex-direction: column; align-items: stretch; text-align: center; padding: 14vh 0 0; }
   #kontakt .final { padding: 0 var(--gutter); }
-  /* Schluss-EP groß und mittig: Fläche = sichtbares EP (Seitenverhältnis 3,7 : 2,3), Desktop ~64 vw breit, höchstens 62 % der Bildhöhe;
+  /* Schluss-EP groß und mittig: Fläche = sichtbares EP (Seitenverhältnis 3,7 : 2,3), Desktop ~45 vw breit, höchstens 43 % der Bildhöhe;
      sobald seine Mitte die Bildmitte erreicht, bleibt das EP dort stehen und das Team scrollt darüber (placeOf) */
-  #kontakt .ep-slot { flex: none; height: min(39.8vw, 62svh); margin-top: clamp(16px, 4vh, 40px); }
+  #kontakt .ep-slot { flex: none; height: min(28vw, 43svh); margin-top: clamp(16px, 4vh, 40px); }
   #kontakt footer { text-align: left; }
   #kontakt h2 { font-size: clamp(30px, 3.6vw, 58px); max-width: 21ch; margin: 0 auto; letter-spacing: -.04em; }
   /* Desktop: kein Button im Kontakt – der Flieger stupst "Projekt starten" oben in der Kopfzeile an; mobil (dort fehlt er oben) steht er hier */
@@ -260,7 +260,7 @@
     #kontakt .sticky { padding-top: 20vh; padding-bottom: 0; align-items: stretch; } /* Platz für den Flieger unter der Kopfzeile */
     #kontakt footer { padding: 18px var(--gutter) 22px; gap: 6px 18px; }
     #kontakt .ctas { display: flex; }
-    #kontakt .ep-slot { height: 58.4vw; margin-top: 4vh; } /* mobil fast volle Breite (94 vw) */
+    #kontakt .ep-slot { height: 41vw; margin-top: 4vh; } /* mobil ~66 vw breit */
     .grid2, .principles, ol.steps, .head-row { grid-template-columns: 1fr; }
     .swarm-slot, .swarm-slot.tall { height: 170px; }
     #lab .head { flex-direction: column; align-items: start; gap: 12px; }
@@ -901,6 +901,7 @@ function imgPlace(s) {
   return { x: (cx / W * 2 - 1) * hw, y: -((box.t + (box.b - box.t) / 2) / H * 2 - 1) * hh, s: w / (IMG_W * pxU) };
 }
 window.__imgRect = (id) => { const s = document.getElementById(id), p = placeOf(s), hh = 3.154, pxU = innerHeight / (2 * hh), w = IMG_W * p.s * pxU, h = IMG_H * p.s * pxU, cx = innerWidth / 2 + p.x * pxU, cy = innerHeight / 2 - p.y * pxU; return { l: cx - w / 2, r: cx + w / 2, t: cy - h / 2, b: cy + h / 2 }; };
+const teamFoto = document.querySelector('#team .person-foto');
 const EP_W = 3.7, EP_H = 2.3; // sichtbare Ausdehnung der EP-Buchstaben in Szenen-Einheiten (gemessen, nicht die Canvas-Fläche)
 function placeOf(s) {
   const key = s.dataset.key, side = s.dataset.side;
@@ -914,9 +915,10 @@ function placeOf(s) {
     return { x: ((c.left + c.width / 2) / innerWidth * 2 - 1) * hh * innerWidth / innerHeight, y: -((top + h / 2) / innerHeight * 2 - 1) * hh, s: w / (EP_W * pxU) };
   }
   const epSlot = s.querySelector('.ep-slot');
-  if (epSlot) { // Schluss-EP: groß unter dem Slogan; erreicht es die Bildmitte, bleibt es dort stehen und das Team scrollt darüber
-    const r = epSlot.getBoundingClientRect(), hh = 3.154, hw = hh * innerWidth / innerHeight, pxU = innerHeight / (2 * hh);
-    const w = Math.min(r.height * EP_W / EP_H, innerWidth * (mobile ? .94 : .66)), cy = Math.max(r.top + r.height / 2, innerHeight / 2);
+  if (epSlot) { // Schluss-EP: groß unter dem Slogan; erreicht es die Bildmitte, bleibt es dort stehen und das Team scrollt darüber –
+    // bis die Team-Fotos auf Höhe der EP-Mitte (Mitte des E) stehen, dann laufen EP und Team gemeinsam weiter
+    const r = epSlot.getBoundingClientRect(), hh = 3.154, pxU = innerHeight / (2 * hh), f = teamFoto.getBoundingClientRect();
+    const w = Math.min(r.height * EP_W / EP_H, innerWidth * (mobile ? .66 : .46)), cy = Math.max(r.top + r.height / 2, Math.min(innerHeight / 2, f.top + f.height / 2));
     return { x: 0, y: -(cy / innerHeight * 2 - 1) * hh, s: w / (EP_W * pxU) };
   }
   const slot = s.querySelector('.swarm-slot');
