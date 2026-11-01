@@ -64,7 +64,7 @@ def footer(p):
   <div class="epf-cols">
     <nav aria-label="Leistungen"><p class="epf-h">Leistungen</p><ul>{links}</ul></nav>
     <nav aria-label="Studio"><p class="epf-h">Studio</p><ul><li><a href="{p}index.html">Start</a></li><li><a href="{p}prozess.html">Prozess</a></li><li><a href="{p}faq.html">FAQ</a></li><li><a href="{p}index.html#finder">Potenzialfinder</a></li><li><a href="{p}kontakt.html">Kontakt</a></li></ul></nav>
-    <nav aria-label="Rechtliches"><p class="epf-h">Rechtliches</p><ul><li><a href="{p}impressum.html">Impressum</a></li><li><a href="{p}datenschutz.html">Datenschutz</a></li><li><a href="{p}rechtliches.html#cookies">Cookie-Policy</a></li><li><a href="{p}rechtliches.html#agb">AGB</a></li><li><a href="{p}rechtliches.html#barrierefreiheit">Barrierefreiheit</a></li><li><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></li></ul></nav>
+    <nav aria-label="Rechtliches"><p class="epf-h">Rechtliches</p><ul><li><a href="{p}impressum.html">Impressum</a></li><li><a href="{p}datenschutz.html">Datenschutz</a></li><li><a href="{p}rechtliches.html#cookies">Cookie-Policy</a></li><li><a href="{p}rechtliches.html#agb">AGB</a></li><li><a href="{p}widerruf.html">Widerruf</a></li><li><a href="{p}rechtliches.html#barrierefreiheit">Barrierefreiheit</a></li><li><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></li></ul></nav>
   </div>
   <div class="epf-mark" aria-hidden="true"><span>PROJEKT</span><b>EP</b></div>
   <p class="epf-legal"><span>© 2026 PROJEKT EP</span><span>Vom ersten Gedanken. Zum fertigen Ergebnis.</span></p>
