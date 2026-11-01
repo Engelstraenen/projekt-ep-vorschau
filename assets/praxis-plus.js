@@ -172,6 +172,12 @@
       cols[ni].appendChild(card); card.classList.remove('flash'); void card.offsetWidth; if (!RM) card.classList.add('flash'); count(); };
     w.addEventListener('click', (e) => { const c = e.target.closest('.pp-card'); if (c) { touched = true; adv(c); } });
     count();
+    // Platz für bis zu vier Karten je Spalte reservieren (so viele sammelt die Selbst-Vorführung höchstens), damit nichts darunter springt
+    const fit = () => { const cs = getComputedStyle(cols[0]); const g = parseFloat(cs.rowGap) || 8; const h = cols[0].querySelector('.h6, h6');
+      const ch = Math.max(...$$('.pp-card', w).map((c) => c.offsetHeight));
+      const need = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + (h ? h.offsetHeight + g : 0) + 4 * ch + 3 * g;
+      cols.forEach((c) => { c.style.minHeight = Math.ceil(need) + 'px'; }); };
+    if (!RM) { fit(); addEventListener('resize', fit); }
     if (!RM && 'IntersectionObserver' in window) { let n = 0; const o = new IntersectionObserver((es) => { if (es[0].isIntersecting) { o.disconnect(); const tick = () => { if (touched || n >= 3) return; const c = cols[n === 2 ? 1 : n].querySelector('.pp-card'); if (c) adv(c); n++; setTimeout(tick, 1800); }; setTimeout(tick, 1400); } }, { threshold: .5 }); o.observe(w); }
   });
 })();

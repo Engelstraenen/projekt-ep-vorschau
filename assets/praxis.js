@@ -64,15 +64,18 @@
   $$('[data-px-ai]').forEach((w) => {
     const out = w.querySelector('.txt'); const src = out.dataset.text;
     const html = (s) => s.replace(/\[\[(.+?)\]\]/g, '<mark>$1</mark>');
-    const finish = () => { out.innerHTML = html(src); w.classList.add('done'); };
+    // Platz für die fertige Antwort reservieren (unsichtbarer Volltext im selben Rasterfeld), damit nichts springt
+    out.innerHTML = '<span class="g" aria-hidden="true">' + html(src) + '</span><span class="l"></span>';
+    const live = out.querySelector('.l');
+    const finish = () => { live.innerHTML = html(src); w.classList.add('done'); };
     if (RM) { finish(); return; }
-    out.innerHTML = '<span class="caret"></span>';
+    live.innerHTML = '<span class="caret"></span>';
     io([w], () => {
       const plain = src.replace(/\[\[|\]\]/g, ''); let i = 0;
       const tick = () => {
         i = Math.min(plain.length, i + 2);
         // Markierung erst zeigen, wenn der Text komplett ist
-        out.innerHTML = plain.slice(0, i).replace(/&/g, '&amp;').replace(/</g, '&lt;') + '<span class="caret"></span>';
+        live.innerHTML = plain.slice(0, i).replace(/&/g, '&amp;').replace(/</g, '&lt;') + '<span class="caret"></span>';
         if (i < plain.length) setTimeout(tick, 22); else setTimeout(finish, 250);
       };
       setTimeout(tick, 500);
