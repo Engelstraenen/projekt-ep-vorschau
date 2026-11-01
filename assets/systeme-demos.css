@@ -1,0 +1,70 @@
+/* PROJEKT EP · Systeme & Dashboards: Live-Demos als Karten (#live-demos in #praxisbeispiele)
+   Kein iframe (.htaccess: X-Frame-Options DENY). Nur Vorschaubild + Link, Demo lädt erst auf Klick.
+   Farben nur aus den Seiten-Variablen (sub.css). Bewegung: transform/opacity, ease-out, hinter Hover- und Reduced-Motion-Abfragen. */
+
+.sd { --sd-ease: cubic-bezier(.23, 1, .32, 1); }
+.sd-lead { margin: 0; max-width: 60ch; font-size: 17px; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+.sd-lead b { color: var(--ink); font-weight: 600; }
+
+.sd-grid { list-style: none; margin: clamp(24px, 3.4vh, 36px) 0 0; padding: 0; display: grid; gap: clamp(36px, 5vh, 52px) clamp(20px, 2.2vw, 32px); grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.sd-grid.sd-feature { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sd-grid.sd-looks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.sd-grid + .sd-grid { margin-top: clamp(40px, 6vh, 56px); }
+
+.sd-card { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; align-content: start; min-width: 0; }
+.sd-shot { position: relative; display: block; overflow: hidden; border-radius: 14px; background: var(--bg-2); aspect-ratio: 16 / 10; isolation: isolate; }
+.sd-feature .sd-shot { border-radius: 18px; }
+.sd-shot::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(29, 29, 31, .08); pointer-events: none; }
+.sd-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; transform-origin: 50% 0; }
+.sd-tag { position: absolute; left: 10px; bottom: 10px; z-index: 1; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; line-height: 1; letter-spacing: .01em; color: var(--ink); background: rgba(255, 255, 255, .92); border-radius: 999px; padding: 6px 10px 6px 9px; box-shadow: 0 1px 2px rgba(29, 29, 31, .08), 0 4px 12px rgba(29, 29, 31, .06); }
+.sd-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #F2A93B; flex: none; }
+
+.sd-t { margin: 16px 0 0; font-size: 19px; font-weight: 650; letter-spacing: -.02em; line-height: 1.2; color: var(--ink); text-wrap: balance; }
+.sd-feature .sd-t { font-size: clamp(20px, 1.7vw, 24px); margin-top: 18px; }
+.sd-t span { color: var(--ink-2); font-weight: 500; }
+.sd-card p { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--ink-2); text-wrap: pretty; max-width: 52ch; }
+.sd-feature .sd-card p { font-size: 16px; }
+.sd-open { justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; min-height: 32px; font-size: 15px; font-weight: 500; color: var(--blue); text-decoration: none; }
+.sd-open:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.sd-open span { display: inline-block; }
+
+.sd-looks-h { margin: clamp(56px, 8vh, 80px) 0 0; font-size: clamp(20px, 1.7vw, 24px); font-weight: 650; letter-spacing: -.02em; line-height: 1.2; color: var(--ink); }
+.sd-looks-h + .sd-grid { margin-top: 18px; }
+.sd-note { margin: clamp(32px, 5vh, 48px) 0 0; position: relative; padding-left: 14px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+.sd-note::before { content: ''; position: absolute; left: 0; top: .5em; width: 6px; height: 6px; border-radius: 50%; background: #F2A93B; }
+
+@media (hover: hover) and (pointer: fine) {
+  .sd-shot img { transition: transform .45s var(--sd-ease); }
+  .sd-shot::before { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; box-shadow: 0 18px 40px -18px rgba(29, 29, 31, .35); opacity: 0; transition: opacity .3s var(--sd-ease); pointer-events: none; }
+  .sd-card:hover .sd-shot img { transform: scale(1.025); }
+  .sd-card:hover .sd-shot::before { opacity: 1; }
+  .sd-open span { transition: transform .2s var(--sd-ease); }
+  .sd-card:hover .sd-open span { transform: translate(2px, -2px); }
+}
+.sd-open:active { transform: scale(.97); transition: transform .12s var(--sd-ease); }
+
+@media (max-width: 1100px) {
+  .sd-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sd-grid.sd-looks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .sd-grid.sd-looks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sd-lead { font-size: 16px; }
+}
+@media (max-width: 640px) {
+  .sd-grid, .sd-grid.sd-feature, .sd-grid.sd-looks { grid-template-columns: 1fr; gap: 36px; }
+  .sd-t, .sd-feature .sd-t { font-size: 19px; }
+  .sd-card p, .sd-feature .sd-card p { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .sd-card { animation: th-rise both var(--sd-ease); animation-timeline: view(); animation-range: entry 0% entry 40%; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sd-shot img, .sd-shot::before, .sd-open span, .sd-open:active { transition: none; transform: none; }
+}
+
+/* Vierer-Reihe: Zusatz immer in eigener Zeile, damit alle Titel gleich hoch stehen */
+.sd-grid:not(.sd-feature):not(.sd-looks) .sd-t span { display: block; margin-top: 3px; font-size: 15px; letter-spacing: -.01em; }

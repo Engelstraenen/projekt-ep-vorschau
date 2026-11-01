@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Shop-Dashboard · Holo-Glas · EP (Beispieldaten)</title>
+  <meta name="color-scheme" content="dark" />
+  <script type="module" crossorigin src="./assets/index-CvCwYwp4.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B7JyfoVy.css">
+<link rel="stylesheet" href="./ep-hinweis.css">
+</head>
+<body>
+  <!-- Hintergrund: dunkler Nebel + feines Raster, damit das Glas etwas zum Weichzeichnen hat -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg-blob b1"></div><div class="bg-blob b2"></div><div class="bg-blob b3"></div>
+    <div class="bg-grid"></div>
+    <canvas class="bg-stars"></canvas>
+  </div>
+
+  <main class="frame" id="frame">
+    <svg class="intro-grid" id="introGrid" aria-hidden="true"></svg>
+
+    <header class="topbar panel-free">
+      <div class="topbar-left">
+        <button class="back-btn" id="backBtn" type="button" aria-label="Zurück zur Übersicht" hidden>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h1 class="title" id="viewTitle">Shop-Dashboard</h1>
+      </div>
+
+      <div class="alert-slot" id="alertSlot" aria-live="polite"></div>
+
+      <div class="topbar-right">
+        <div class="period" id="periodWrap">
+          <button class="period-btn" id="periodBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+            Zeitraum: <strong id="periodLabel">Oktober 2026</strong>
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="period-menu" id="periodMenu" role="listbox" hidden>
+            <li role="option" data-period="day">Heute</li>
+            <li role="option" data-period="week">Letzte 7 Tage</li>
+            <li role="option" data-period="month" aria-selected="true">Oktober 2026</li>
+            <li role="option" data-period="year">Jahr 2026</li>
+          </ul>
+        </div>
+        <button class="icon-btn" id="nightBtn" type="button" title="Tagesabschluss (N)" aria-label="Tagesabschluss anzeigen">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="icon-btn" id="motionBtn" type="button" title="Bewegung pausieren (P)" aria-label="Bewegung pausieren" aria-pressed="false">
+          <svg class="i-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <svg class="i-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 5l12 7-12 7z" fill="currentColor"/></svg>
+        </button>
+        <span class="badge" title="Alle Werte sind simuliert">BEISPIELDATEN</span>
+      </div>
+    </header>
+
+    <!-- ===================== Übersicht ===================== -->
+    <section class="view view-overview" id="viewOverview" aria-label="Übersicht">
+      <div class="grid">
+       <div class="row row-kpi">
+        <article class="panel kpi is-clickable" data-panel="revenue" tabindex="0" role="button" aria-label="Umsatz – Details öffnen">
+          <div class="panel-head"><h2>Umsatz</h2><span class="chip" id="kpiRevenueTrend"></span></div>
+          <div class="kpi-value"><span class="num" id="kpiRevenue">–</span></div>
+          <div class="kpi-sub"><span class="live-dot"></span>Heute <span id="kpiRevenueToday">–</span></div>
+          <svg class="kpi-spark" id="sparkRevenue" aria-hidden="true"></svg>
+        </article>
+        <article class="panel kpi" data-panel="orders" tabindex="0">
+          <div class="panel-head"><h2>Bestellungen</h2><span class="chip" id="kpiOrdersTrend"></span></div>
+          <div class="kpi-value"><span class="num" id="kpiOrders">–</span><span class="bump" id="ordersBump">+1</span></div>
+          <div class="kpi-sub">Heute <span id="kpiOrdersToday">–</span></div>
+          <svg class="kpi-spark" id="sparkOrders" aria-hidden="true"></svg>
+        </article>
+        <article class="panel kpi" data-panel="aov" tabindex="0">
+          <div class="panel-head"><h2>Warenkorb-Schnitt</h2><span class="chip" id="kpiAovTrend"></span></div>
+          <div class="kpi-value"><span class="num" id="kpiAov">–</span></div>
+          <div class="kpi-sub">pro Bestellung</div>
+          <svg class="kpi-spark" id="sparkAov" aria-hidden="true"></svg>
+        </article>
+        <article class="panel kpi" data-panel="conversion" tabindex="0">
+          <div class="panel-head"><h2>Conversion</h2><span class="chip" id="kpiConvTrend"></span></div>
+          <div class="kpi-value"><span class="num" id="kpiConv">–</span></div>
+          <div class="kpi-sub">Besuche → Kauf</div>
+          <svg class="kpi-spark" id="sparkConv" aria-hidden="true"></svg>
+        </article>
+
+       </div>
+       <div class="row row-mid">
+        <article class="panel chart-panel is-clickable" data-panel="revenueChart" tabindex="0" role="button" aria-label="Umsatzverlauf – Details öffnen">
+          <div class="panel-head"><h2>Umsatzverlauf</h2><span class="muted small" id="chartRange">1.–31. Okt. 2026</span></div>
+          <div class="chart" id="overviewChart"></div>
+        </article>
+        <article class="panel globe-panel" data-panel="globe" tabindex="0">
+          <div class="panel-head"><h2>Kunden weltweit</h2><span class="muted small"><span class="live-dot"></span><span id="globeCount">–</span> Länder</span></div>
+          <div class="canvas-host" id="globeHost"></div>
+          <div class="globe-legend small muted">
+            <span><i class="lg-dot cy"></i>Kunden</span><span><i class="lg-dot vi"></i>Bestellung live</span>
+          </div>
+        </article>
+
+       </div>
+       <div class="row row-bottom">
+        <article class="panel bars-panel" data-panel="bars" tabindex="0">
+          <div class="panel-head"><h2>Bestellungen pro Tag</h2><span class="muted small">Ø je KW</span></div>
+          <div class="canvas-host" id="barsHost"></div>
+        </article>
+        <article class="panel ring-panel" data-panel="stock" tabindex="0">
+          <div class="panel-head"><h2>Lagerbestand</h2></div>
+          <div class="ring" id="ring">
+            <svg class="ring-svg" viewBox="0 0 200 200" aria-hidden="true"></svg>
+            <div class="ring-label"><span class="ring-num" id="ringNum">0</span><span class="ring-unit">%</span></div>
+          </div>
+          <div class="ring-caption small" id="ringCaption">Verfügbarkeit gesamt</div>
+        </article>
+        <article class="panel ship-panel is-clickable" data-panel="shipping" tabindex="0" role="button" aria-label="Versandstatus – Details öffnen">
+          <div class="panel-head"><h2>Versandstatus</h2></div>
+          <ul class="bars-list" id="shipList"></ul>
+        </article>
+        <article class="panel top-panel is-clickable" data-panel="products" tabindex="0" role="button" aria-label="Top-Produkte – Details öffnen">
+          <div class="panel-head"><h2>Top-Produkte</h2></div>
+          <ul class="bars-list" id="productList"></ul>
+        </article>
+        <article class="panel feed-panel" data-panel="feed" tabindex="0">
+          <div class="panel-head"><h2>Live-Feed</h2><span class="muted small"><span class="live-dot"></span>live</span></div>
+          <ol class="feed" id="feed" aria-live="polite"></ol>
+        </article>
+       </div>
+      </div>
+    </section>
+
+    <!-- ===================== Detail: Umsatz ===================== -->
+    <section class="view view-detail" id="viewRevenue" aria-label="Umsatz – Detail" hidden>
+      <div class="detail-grid">
+        <article class="panel detail-main">
+          <div class="panel-head">
+            <h2>Umsatzverlauf <span class="muted" id="revDetailRange">Oktober 2026</span></h2>
+            <div class="legend small"><span><i class="lg-line cy"></i>Aktuell</span><span><i class="lg-line vi"></i><span id="revPrevLabel">Vormonat</span></span></div>
+            <div class="segment" id="segment" role="tablist" aria-label="Zeitraum">
+              <button role="tab" data-period="day">Tag</button>
+              <button role="tab" data-period="week">Woche</button>
+              <button role="tab" data-period="month" aria-selected="true">Monat</button>
+              <button role="tab" data-period="year">Jahr</button>
+              <span class="segment-thumb" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="chart chart-big" id="detailChart"></div>
+        </article>
+        <aside class="detail-side">
+          <article class="panel stat"><h3>Gesamt</h3><div class="stat-value" id="revTotal">–</div></article>
+          <article class="panel stat"><h3 id="revPrevTitle">Vormonat</h3><div class="stat-value" id="revPrev">–</div></article>
+          <article class="panel stat"><h3>Wachstum</h3><div class="stat-value" id="revGrowth">–</div></article>
+          <article class="panel stat"><h3>Bestellungen</h3><div class="stat-value" id="revOrders">–</div></article>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================== Detail: Top-Produkt ===================== -->
+    <section class="view view-detail" id="viewProduct" aria-label="Top-Produkt – Detail" hidden>
+      <div class="detail-grid">
+        <article class="panel detail-main holo-panel">
+          <div class="panel-head"><h2>Top-Produkt</h2>
+            <div class="segment segment-small" id="productTabs" role="tablist" aria-label="Produkt">
+              <button role="tab" data-product="A" aria-selected="true">Produkt A</button>
+              <button role="tab" data-product="B">Produkt B</button>
+              <button role="tab" data-product="C">Produkt C</button>
+              <span class="segment-thumb" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="canvas-host" id="productHost"></div>
+          <div class="holo-caption small muted" id="holoCaption">Hologramm · Beispielprodukt</div>
+        </article>
+        <aside class="detail-side">
+          <article class="panel stat"><h3>Produkt</h3><div class="stat-value" id="pName">Produkt A</div><div class="small muted" id="pCat"></div></article>
+          <article class="panel stat"><h3>Anteil am Umsatz</h3><div class="stat-value" id="pShare">–</div><div class="mini-track"><span id="pShareBar"></span></div></article>
+          <article class="panel stat"><h3>Verkauft</h3><div class="stat-value" id="pSold">–</div></article>
+          <article class="panel stat"><h3>Bewertung</h3><div class="stat-value" id="pRating">–</div><svg class="stat-spark" id="pSpark" aria-hidden="true"></svg></article>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================== Detail: Versand ===================== -->
+    <section class="view view-detail" id="viewShipping" aria-label="Versand – Detail" hidden>
+      <div class="detail-grid">
+        <article class="panel detail-main map-panel">
+          <div class="panel-head"><h2>Lieferrouten Europa</h2>
+            <div class="legend small"><span><i class="lg-dot wh"></i>Lager Leipzig</span><span><i class="lg-line cy"></i>Lieferroute</span><span><i class="lg-dot vi"></i>Paket unterwegs</span></div>
+          </div>
+          <div class="canvas-host" id="mapHost"><canvas id="mapCanvas"></canvas></div>
+        </article>
+        <aside class="detail-side">
+          <article class="panel stat"><h3>Zugestellt</h3><div class="stat-value" id="sDelivered">–</div></article>
+          <article class="panel stat"><h3>Unterwegs</h3><div class="stat-value" id="sTransit">–</div></article>
+          <article class="panel stat"><h3>In Vorbereitung</h3><div class="stat-value" id="sPrep">–</div></article>
+          <article class="panel stat"><h3>Pünktlich</h3><div class="stat-value" id="sOnTime">–</div></article>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================== Tagesabschluss ===================== -->
+    <div class="night" id="night" hidden>
+      <div class="night-card panel" role="dialog" aria-modal="false" aria-labelledby="nightTitle">
+        <svg class="moon" viewBox="0 0 64 64" aria-hidden="true">
+          <defs><linearGradient id="moonG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e3d6ff"/><stop offset="1" stop-color="#9b7bff"/></linearGradient></defs>
+          <path d="M44 40.5A18 18 0 1 1 26.5 14 14 14 0 0 0 44 40.5z" fill="url(#moonG)"/>
+        </svg>
+        <h2 id="nightTitle">Tagesabschluss</h2>
+        <p class="night-date muted small" id="nightDate">31. Oktober 2026</p>
+        <dl class="night-list">
+          <div><dt>Umsatz heute</dt><dd id="nRevenue">–</dd></div>
+          <div><dt>Bestellungen heute</dt><dd id="nOrders">–</dd></div>
+          <div><dt>Zugestellt</dt><dd id="nDelivered">–</dd></div>
+          <div><dt>Bestes Produkt</dt><dd>Produkt A</dd></div>
+        </dl>
+        <button class="ghost-btn" id="nightClose" type="button">Zurück zum Live-Betrieb</button>
+      </div>
+    </div>
+
+    <footer class="hint small muted" id="keyHint">Tasten 1–9: Szenen · Esc: Übersicht · P: Bewegung pausieren</footer>
+  </main>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="28" height="28"><path d="M5 3l14 8-6 1.6L10 19z" fill="#fff" stroke="#0b1230" stroke-width="1.2" stroke-linejoin="round"/></svg>
+  </div>
+
+<div class="ep-bsp" role="note">Beispieldaten – so könnte dein System aussehen</div>
+</body>
+</html>

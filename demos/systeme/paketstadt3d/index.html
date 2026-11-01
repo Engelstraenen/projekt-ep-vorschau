@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /><meta name="theme-color" content="#efe4d8" />
+<meta name="robots" content="noindex" />
+<title>Paketstadt 3D · Projekt EP</title>
+  <script src="./ep-mock.js"></script>
+<script type="module" crossorigin src="./assets/index-tDMWptMr.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-C5VZg6GR.css">
+<link rel="stylesheet" href="./ep-hinweis.css">
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="labels"></div>
+<header class="top">
+  <div class="brand"><span class="logo"></span><div><b>Paketstadt</b><small id="sub">Live-Lagerstadt</small></div></div>
+  <nav class="switch" role="tablist">
+    <span class="thumb"></span>
+    <button data-view="stadt" role="tab">Stadt</button>
+    <button data-view="lager" role="tab">Lager</button>
+    <button data-view="dashboard" role="tab">Dashboard</button>
+    <button data-view="personal" role="tab">Personal</button>
+    <button data-view="bots" role="tab">Bots</button>
+  </nav>
+  <button class="hint-tg" id="hintTg" type="button" aria-label="Hinweise und Demo-Aktionen" aria-expanded="false" aria-controls="hint"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3.5l1.9 4.6 4.6 1.9-4.6 1.9L12 16.5l-1.9-4.6L5.5 10l4.6-1.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18 15.5l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z" fill="currentColor"/></svg></button>
+  <div class="right"><span class="live" aria-label="Live"><i></i><span>LIVE</span></span><span class="chip">BEISPIELDATEN</span></div>
+</header>
+<button class="back-btn" id="backBtn" type="button" hidden>← Zurück ins Lager</button>
+<section class="kpis" id="kpis"></section>
+<div class="ticker" id="ticker"></div>
+<aside class="card" id="card" hidden></aside>
+<div class="hint" id="hint"><span>Gebäude anklicken · Ziehen · Zoomen</span><button data-demo="order" type="button">Test-Bestellung</button><button data-demo="return" type="button">Test-Retoure</button></div>
+<div class="ep-bsp" role="note">Beispieldaten – so könnte dein System aussehen</div>
+</body>
+</html>

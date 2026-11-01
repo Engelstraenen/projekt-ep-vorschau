@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /><meta name="theme-color" content="#f2e9e0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="color-scheme" content="light" />
+  <title>Shop-Raum · Dashboard (Beispieldaten)</title>
+  <script src="./ep-mock.js"></script>
+<script type="module" crossorigin src="./assets/index-CrEkZ67c.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-On-WJqNX.css">
+<link rel="stylesheet" href="./ep-hinweis.css">
+</head>
+<body>
+  <div class="light" aria-hidden="true"></div>
+  <div class="app" id="app">
+    <header class="top" id="top">
+      <div class="brand">
+        <button class="brand-btn" id="homeBtn" type="button" aria-label="Gesamtansicht">
+          <svg class="i-bag" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11.2a1.5 1.5 0 0 1-1.5 1.3H8a1.5 1.5 0 0 1-1.5-1.3z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>
+          <svg class="i-back" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg>
+        </button>
+        <h1 id="viewTitle">Shop-Raum</h1>
+        <a class="ps-back" id="psBack" href="../paketstadt3d/?style=A&amp;view=lager"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg><span class="ps-long">Zurück ins&nbsp;</span>Lager</a>
+      </div>
+      <nav class="ps-nav" id="psNav" aria-label="Bereich wechseln">
+        <span class="ps-thumb" aria-hidden="true"></span>
+        <a href="../paketstadt3d/?style=A&amp;view=stadt" data-v="stadt">Stadt</a>
+        <a href="../paketstadt3d/?style=A&amp;view=lager" data-v="lager">Lager</a>
+        <a href="./" data-v="dashboard" aria-current="page">Dashboard</a>
+        <a href="../personal/" data-v="personal">Personal</a>
+        <a href="../personal/#/bots" data-v="bots">Bots</a>
+      </nav>
+      <div class="top-right">
+        <div class="ops-slot" id="opsSlot"></div>
+      <div class="segment" id="segment" role="tablist" aria-label="Zeitraum">
+        <span class="seg-thumb" aria-hidden="true"></span>
+        <button role="tab" type="button" data-period="day" aria-selected="false">Tag</button>
+        <button role="tab" type="button" data-period="week" aria-selected="false">Woche</button>
+        <button role="tab" type="button" data-period="month" aria-selected="true">Monat</button>
+        <button role="tab" type="button" data-period="year" aria-selected="false">Jahr</button>
+      </div>
+        <button class="icon-btn" id="scenesBtn" type="button" popovertarget="scenes" aria-label="Szenen abspielen" title="Szenen (Tasten 1–9)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M4 12h16M4 18h7"/><path d="M17 15.5v5l4-2.5z" class="fill"/></svg>
+        </button>
+        <button class="icon-btn" id="closeBtn" type="button" aria-label="Tagesabschluss öffnen" title="Tagesabschluss (N)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A7.8 7.8 0 1 1 9.4 4.5a6.3 6.3 0 0 0 10.1 10.1z"/></svg>
+        </button>
+        <button class="icon-btn" id="motionBtn" type="button" aria-label="Bewegung pausieren" aria-pressed="false" title="Bewegung pausieren (P)">
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5l11 6.5-11 6.5z" class="fill"/></svg>
+        </button>
+        <span class="sample" title="Alle Werte sind simuliert">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5" stroke-dasharray="2.2 2.6"/></svg>BEISPIELDATEN
+        </span>
+      </div>
+    </header>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+      <img class="toast-obj" data-obj="bagCoral" alt="" />
+      <div><strong>Neue Bestellung</strong><span id="toastText">Bestellung #10.284 · gerade eben</span></div>
+    </div>
+
+    <nav class="sec-nav" id="secNav" aria-label="Detailansicht wechseln" hidden>
+      <button class="icon-btn sm sec-arrow" type="button" data-step="-1" aria-label="Vorherige Ansicht"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg></button>
+      <div class="sec-tabs" role="tablist" aria-label="Ansicht">
+        <span class="sec-thumb" aria-hidden="true"></span>
+        <button role="tab" type="button" data-sec="revenue" aria-selected="false">Umsatz</button>
+        <button role="tab" type="button" data-sec="product" aria-selected="false">Top-Produkt</button>
+        <button role="tab" type="button" data-sec="shipping" aria-selected="false">Versand</button>
+      </div>
+      <button class="icon-btn sm sec-arrow" type="button" data-step="1" aria-label="Nächste Ansicht"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></button>
+      <span class="sec-pos" id="secPos" aria-live="polite"></span>
+    </nav>
+
+    <main class="views">
+      <section class="view view-overview" id="vOverview" aria-label="Gesamtansicht">
+        <div class="row ops-strip-row"><section class="card ops-host" id="opsStrip" aria-label="Ausnahmen zuerst"></section></div>
+        <div class="row kpis">
+          <article class="card kpi is-link" data-open="revenue" tabindex="0" role="button" aria-label="Umsatz – Detail öffnen">
+            <img class="obj" data-obj="coins" alt="" />
+            <div class="kpi-text"><h2>Umsatz</h2><p class="value num" id="kRevenue">–</p><p class="sub" id="kRevenueSub">–</p></div>
+          </article>
+          <article class="card kpi is-link" data-detail="orders" tabindex="0" role="button" aria-label="Bestellungen – heutige Bestellungen öffnen">
+            <img class="obj" data-obj="bag" alt="" />
+            <div class="kpi-text"><h2>Bestellungen</h2><p class="value num"><span id="kOrders">–</span><span class="bump" id="bump" aria-hidden="true">+1</span></p><p class="sub" id="kOrdersSub">–</p></div>
+          </article>
+          <article class="card kpi is-link" data-detail="aov" tabindex="0" role="button" aria-label="Warenkorb-Schnitt – Verlauf öffnen">
+            <img class="obj" data-obj="cart" alt="" />
+            <div class="kpi-text"><h2>Warenkorb-Schnitt</h2><p class="value num" id="kAov">–</p><p class="sub">pro Bestellung</p></div>
+          </article>
+          <article class="card kpi is-link" data-detail="conv" tabindex="0" role="button" aria-label="Conversion – Verlauf öffnen">
+            <img class="obj" data-obj="percent" alt="" />
+            <div class="kpi-text"><h2>Conversion</h2><p class="value num" id="kConv">–</p><p class="sub">Besuche mit Kauf</p></div>
+          </article>
+          <a class="card kpi is-link pers-kpi" id="persKpi" href="../personal/" aria-label="Personal – Personalmanagement öffnen">
+            <span class="obj pers-obj" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 5.6a3 3 0 010 5.8M17.5 14.4c1.7.7 2.7 2.3 3 4.6"/></svg></span>
+            <div class="kpi-text"><h2>Personal</h2><p class="value num" id="kPers">–</p><p class="sub" id="kPersSub">–</p></div>
+          </a>
+        </div>
+        <div class="row mid">
+          <article class="card chart-card is-link" data-open="revenue" tabindex="0" role="button" aria-label="Umsatzverlauf – Detail öffnen">
+            <div class="head"><svg class="hi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 16.5l5-5 3.5 3.5 7.5-7.5"/><path d="M15 7.5h4.5V12"/></svg><h2>Umsatzverlauf</h2><span class="meta" id="chartRange">1.–31. Okt.</span></div>
+            <div class="plot" id="ovChart"></div>
+          </article>
+          <article class="card globe-card is-link" data-detail="customers" tabindex="0" role="button" aria-label="Kunden weltweit – nach Land öffnen">
+            <div class="head"><svg class="hi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 3.6 5.4 3.6 8.5s-1 5.9-3.6 8.5c-2.6-2.6-3.6-5.4-3.6-8.5s1-5.9 3.6-8.5z"/></svg><h2>Kunden weltweit</h2></div>
+            <div class="globe-host" id="globeHost"><div class="globe-shadow" aria-hidden="true"></div></div>
+            <p class="globe-count"><span class="num" id="kCustomers">124.578</span><span class="sub">Kunden</span></p>
+          </article>
+          <article class="card bars-card is-link" data-detail="orders" tabindex="0" role="button" aria-label="Bestellungen – Detail öffnen">
+            <div class="head"><svg class="hi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V11M10 19V6M15 19v-9M20 19V8"/></svg><h2 id="barsTitle">Bestellungen pro Tag</h2></div>
+            <div class="plot" id="barsHost"></div>
+            <div class="legend"><span><i class="lg n"></i>Werktag</span><span><i class="lg w"></i>Wochenende</span><span><i class="lg t"></i>Heute</span></div>
+          </article>
+          <article class="card stock-card is-link" id="stockCard" data-detail="stock" tabindex="0" role="button" aria-label="Lagerbestand – Artikel mit niedrigem Bestand öffnen">
+            <div class="head"><svg class="hi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10L12 4.5l8.5 5.5V20h-17z"/><path d="M8 20v-6h8v6M8 17h8"/></svg><h2>Lagerbestand</h2></div>
+            <div class="stock-body">
+              <div class="ring" id="ring"><div class="ring-label"><span class="num"><span id="ringNum">0</span><small>%</small></span><span class="ring-cap" id="ringCap">verfügbar</span></div></div>
+              <img class="obj stock-obj" data-obj="parcel" alt="" />
+            </div>
+            <p class="warn-chip" id="warnChip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z"/><path d="M12 10v4.5M12 17.2v.3"/></svg>Karaffe Lumi bald ausverkauft</p>
+          </article>
+        </div>
+        <div class="row bottom">
+          <article class="card list-card is-link" data-open="shipping" tabindex="0" role="button" aria-label="Versandstatus – Karte öffnen">
+            <div class="head"><svg class="hi" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v10h-11zM13.5 10h4l3 3.2v3.3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><h2>Versandstatus</h2></div>
+            <ul class="rows" id="shipRows"></ul>
+          </article>
+          <article class="card list-card prod-card">
+            <div class="head"><svg class="hi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12.5V4.5h8l9 9-8 8z"/><circle cx="8" cy="9" r="1.4"/></svg><h2>Top-Produkte</h2></div>
+            <ul class="rows prod-rows" id="prodRows"></ul>
+          </article>
+          <article class="card list-card ret-card" id="retCard">
+            <div class="head"><svg class="hi" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7.5L5 11.5l4 4"/><path d="M5 11.5h9.5a4.5 4.5 0 0 1 0 9H12"/></svg><h2>Retouren</h2><span class="meta" id="retMeta">heute</span></div>
+            <ul class="rows" id="retRows"></ul>
+          </article>
+          <article class="card list-card">
+            <div class="head"><svg class="hi" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15v10h-9l-4.5 3.5v-3.5h-1.5z"/></svg><h2>Live-Feed</h2><span class="meta live"><i class="live-dot"></i>live</span></div>
+            <ol class="rows feed" id="feed" aria-live="polite"></ol>
+          </article>
+          <article class="card list-card leist-card" id="leistCard">
+            <div class="head"><svg class="hi" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6v12M7 6v12M10 6v12M13 6v12M17 6v12M20 6v12"/></svg><h2>Leistung</h2><span class="meta">je Station · anonym</span></div>
+            <ul class="rows" id="leistRows"></ul>
+            <svg class="leist-curve" id="leistCurve" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"></svg>
+          </article>
+        </div>
+      </section>
+
+      <section class="view view-detail" id="vRevenue" aria-label="Umsatz-Detail" hidden>
+        <article class="card detail-main">
+          <div class="head head-lg"><h2>Umsatzverlauf <span id="revTitle">Oktober 2026</span></h2>
+            <div class="legend"><span><i class="lg-line cur"></i>Aktuell</span><span><i class="lg-line prev"></i><span id="revPrevName">Vormonat</span></span></div>
+          </div>
+          <div class="plot plot-big" id="revChart"></div>
+        </article>
+        <aside class="card detail-side">
+          <div class="stat"><img class="obj" data-obj="coins" alt="" /><div><h3>Gesamt</h3><p class="num" id="rTotal">–</p></div></div>
+          <div class="stat"><img class="obj" data-obj="clipboard" alt="" /><div><h3 id="rPrevName">Vormonat</h3><p class="num" id="rPrev">–</p></div></div>
+          <div class="stat"><img class="obj" data-obj="arrow" alt="" /><div><h3>Wachstum</h3><p class="num" id="rGrowth">–</p></div></div>
+        </aside>
+      </section>
+
+      <section class="view view-product" id="vProduct" aria-label="Top-Produkt" hidden>
+        <article class="card product-card">
+          <div class="stage-host" id="productHost"><span class="stage-hint">Ziehen zum Drehen</span></div>
+          <div class="product-info">
+            <div class="p-head">
+              <h2 id="pName">Produkt A</h2>
+              <div class="p-nav">
+                <button class="icon-btn sm" id="pPrev" type="button" aria-label="Vorheriges Produkt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg></button>
+                <span class="p-pos" id="pPos">1 von 3</span>
+                <button class="icon-btn sm" id="pNext" type="button" aria-label="Nächstes Produkt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></button>
+              </div>
+            </div>
+            <dl class="p-list" id="pList"></dl>
+            <div class="p-extra" id="pExtra" hidden><dl class="p-list" id="pList2"></dl></div>
+            <div class="p-trend"><span class="meta">Verkäufe pro Tag · Okt.</span><svg id="pSpark" aria-hidden="true"></svg></div>
+            <button class="btn-primary" id="pMore" type="button" aria-expanded="false" aria-controls="pExtra">Details ansehen</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="view view-detail" id="vShipping" aria-label="Versand" hidden>
+        <article class="card detail-main map-card">
+          <div class="head head-lg"><h2>Lieferrouten Deutschland</h2>
+            <div class="legend"><span><i class="lg hub"></i>Lager</span><span><i class="lg-line route"></i>Route</span><span><i class="lg pk"></i>Paket unterwegs</span></div>
+          </div>
+          <div class="map-host" id="mapHost"><div class="map-labels" id="mapLabels"></div></div>
+        </article>
+        <aside class="card detail-side stats-plain">
+          <div class="stat"><div><h3>Zugestellt</h3><p class="num" id="sDel">–</p></div></div>
+          <div class="stat"><div><h3>Unterwegs</h3><p class="num" id="sTr">–</p></div></div>
+          <div class="stat"><div><h3>In Vorbereitung</h3><p class="num" id="sPr">–</p></div></div>
+          <div class="stat"><div><h3>Pünktlich</h3><p class="num" id="sOn">–</p></div></div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <div class="dusk" id="dusk" hidden>
+    <div class="dusk-card" role="dialog" aria-modal="true" aria-labelledby="duskTitle">
+      <img class="obj moon" data-obj="moon" alt="" />
+      <h2 id="duskTitle">Tagesabschluss</h2>
+      <p class="dusk-date" id="duskDate">31. Oktober 2026</p>
+      <dl class="dusk-list">
+        <div><dt>Umsatz heute</dt><dd class="num" id="dRev">–</dd></div>
+        <div><dt>Bestellungen heute</dt><dd class="num" id="dOrd">–</dd></div>
+        <div><dt>Zugestellt</dt><dd class="num" id="dDel">–</dd></div>
+      </dl>
+      <button class="btn-copper" id="duskDone" type="button">Fertig</button>
+    </div>
+  </div>
+
+  <div class="sweep" id="sweep" aria-hidden="true"></div>
+  <div class="pointer" id="pointer" aria-hidden="true"><span class="ripple"></span><svg viewBox="0 0 24 24"><path d="M5.5 3.5l13 7.6-5.6 1.5-2.9 5.6z"/></svg></div>
+
+  <div class="scenes" id="scenes" popover>
+    <p class="scenes-title">Szenen</p>
+    <ol id="sceneList"></ol>
+  </div>
+<div class="ep-bsp" role="note">Beispieldaten – so könnte dein System aussehen</div>
+</body>
+</html>

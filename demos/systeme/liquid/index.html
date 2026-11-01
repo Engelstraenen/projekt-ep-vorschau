@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Shop-Übersicht · Liquid Glass · Beispieldaten</title>
+  <link rel="preload" as="image" href="./wallpaper-hell.webp" />
+  <script type="module" crossorigin src="./assets/index-DZRPpZ95.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-dKD0SJQP.css">
+<link rel="stylesheet" href="./ep-hinweis.css">
+</head>
+<body>
+  <div class="wall" aria-hidden="true"><div class="wall-img wall-light"></div><div class="wall-img wall-dark"></div></div>
+
+  <div id="stage">
+    <div class="window" id="win">
+      <div class="window-glass" aria-hidden="true"></div>
+
+      <nav class="sidebar" aria-label="Hauptnavigation">
+        <div class="sidebar-bg" aria-hidden="true"></div>
+        <div class="traffic" aria-hidden="true"><i></i><i></i><i></i></div>
+        <ul class="nav">
+          <li><button class="nav-item" data-go="overview" data-icon="grid">Übersicht</button></li>
+          <li><button class="nav-item" data-go="orders" data-icon="bag">Bestellungen</button></li>
+          <li><button class="nav-item" data-go="product" data-icon="box">Produkte</button></li>
+          <li><button class="nav-item" data-go="customers" data-icon="user">Kunden</button></li>
+          <li><button class="nav-item" data-go="shipping" data-icon="truck">Versand</button></li>
+          <li><button class="nav-item" data-go="revenue" data-icon="chart">Berichte</button></li>
+        </ul>
+      </nav>
+
+      <header class="topbar">
+        <div class="title-row">
+          <button class="back-btn glass-btn" type="button" aria-label="Zurück zur Übersicht" hidden></button>
+          <div class="titles">
+            <h1 id="title">Shop-Übersicht</h1>
+            <p id="subtitle">Oktober 2026</p>
+          </div>
+        </div>
+        <div class="segment" role="radiogroup" aria-label="Zeitraum">
+          <div class="seg-knob" aria-hidden="true"></div>
+          <button role="radio" data-period="day">Tag</button>
+          <button role="radio" data-period="week">Woche</button>
+          <button role="radio" data-period="month">Monat</button>
+          <button role="radio" data-period="year">Jahr</button>
+        </div>
+        <div class="tools">
+          <span class="badge" tabindex="0" aria-describedby="badgeTip">Beispieldaten<span class="badge-tip glass-chip" id="badgeTip" role="tooltip">Alle Zahlen sind simulierte Beispieldaten – keine echten Shopdaten.</span></span>
+          <button class="round-btn glass-btn" id="bellBtn" type="button" aria-label="Mitteilungen" aria-haspopup="true" aria-expanded="false"></button>
+          <button class="round-btn glass-btn" id="gearBtn" type="button" aria-label="Einstellungen" aria-haspopup="true" aria-expanded="false"></button>
+        </div>
+      </header>
+
+      <main class="views">
+        <!-- 1 · Übersicht -->
+        <section class="view view-overview is-active" data-view="overview" aria-label="Shop-Übersicht">
+          <article class="card card-revenue" tabindex="0" role="button" aria-label="Umsatz – Details öffnen">
+            <div class="card-head"><h2>Umsatz</h2><span class="open-hint" aria-hidden="true"></span></div>
+            <p class="hero-num tnum" id="revValue">€ 1,28 Mio.</p>
+            <p class="trend" id="revTrend">+12 % zum Vormonat</p>
+            <div class="chart" id="miniChart"></div>
+          </article>
+          <article class="card card-kpis">
+            <div class="kpi" id="kpiOrdersBox"><h3>Bestellungen</h3><p class="kpi-num tnum"><span id="kpiOrders">8.420</span><span class="plus-one" id="plusOne" aria-hidden="true">+1</span></p></div>
+            <div class="kpi"><h3>Warenkorb-Schnitt</h3><p class="kpi-num tnum" id="kpiAov">€ 152</p></div>
+            <div class="kpi"><h3>Conversion</h3><p class="kpi-num tnum" id="kpiConv">3,4 %</p></div>
+          </article>
+          <div class="row-bottom">
+            <article class="card card-globe" tabindex="0" role="button" aria-label="Kunden weltweit – Details öffnen">
+              <h2>Kunden weltweit</h2>
+              <div class="globe-wrap"><div class="globe-shadow" aria-hidden="true"></div><div class="globe" id="globeSmall"></div></div>
+              <div class="globe-num"><p class="kpi-num tnum" id="custCount">124.578</p><p class="muted">Kunden</p></div>
+            </article>
+            <article class="card card-stock" id="stockCard">
+              <h2>Lager &amp; Versand</h2>
+              <div class="stock-body">
+                <div class="ring" id="ring" role="img" aria-label="Lagerbestand 92 Prozent">
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--ring-a)"/><stop offset="1" stop-color="var(--ring-b)"/></linearGradient></defs>
+                    <circle class="ring-track" cx="60" cy="60" r="50"/>
+                    <circle class="ring-val" cx="60" cy="60" r="50" pathLength="100"/>
+                  </svg>
+                  <div class="ring-label"><p class="ring-num tnum" id="ringNum">92 %</p><p class="ring-sub" id="ringSub">Lagerbestand</p></div>
+                </div>
+                <ul class="ship-list">
+                  <li data-icon="check"><span>Zugestellt</span><b class="tnum">4.812</b></li>
+                  <li data-icon="truck"><span>Unterwegs</span><b class="tnum">2.301</b></li>
+                  <li data-icon="box"><span>In Vorbereitung</span><b class="tnum">1.307</b></li>
+                </ul>
+              </div>
+              <button class="stock-alert" id="stockAlert" type="button" hidden></button>
+            </article>
+            <article class="card card-top">
+              <h2>Top-Produkte</h2>
+              <ul class="top-list" id="topList"></ul>
+            </article>
+            <article class="card card-feed">
+              <h2>Live-Feed <span class="live-dot" aria-hidden="true"></span></h2>
+              <ul class="feed" id="feed" aria-live="polite"></ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- 5 · Umsatz-Detail -->
+        <section class="view view-revenue" data-view="revenue" aria-label="Umsatz-Detail" hidden>
+          <article class="card card-bigchart">
+            <div class="card-head"><h2 id="bigTitle">Umsatzverlauf Oktober 2026</h2>
+              <div class="legend" aria-hidden="true"><span class="lg-cur" id="lgCur">Oktober 2026</span><span class="lg-prev" id="lgPrev">Vormonat</span></div></div>
+            <div class="chart" id="bigChart"></div>
+          </article>
+          <article class="card card-side">
+            <div class="kpi"><h3>Gesamt</h3><p class="kpi-num tnum" id="detTotal">€ 1,28 Mio.</p></div>
+            <div class="kpi"><h3 id="detPrevLabel">Vormonat</h3><p class="kpi-num tnum" id="detPrev">€ 1,14 Mio.</p></div>
+            <div class="kpi"><h3>Wachstum</h3><p class="kpi-num tnum" id="detGrowth">+12 %</p></div>
+          </article>
+        </section>
+
+        <!-- 7 · Top-Produkt -->
+        <section class="view view-product" data-view="product" aria-label="Top-Produkt" hidden>
+          <article class="card card-product">
+            <div class="product-stage" id="productStage">
+              <div class="product-tilt" id="productTilt">
+                <img class="product-base" id="productBase" src="./produkt-a-sockel.webp" alt="" width="724" height="324" />
+                <img class="product-obj" id="productObj" src="./produkt-a-objekt.webp" alt="Produkt A: Over-Ear-Kopfhörer, Produktbild (Beispiel)" width="1024" height="708" />
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-switch" role="tablist" aria-label="Produkt wählen"></div>
+              <h2 class="product-title" id="pTitle">Produkt A</h2>
+              <p class="muted product-name" id="pName">Over-Ear-Kopfhörer „Aurora“</p>
+              <dl class="product-stats" id="pStats"></dl>
+              <div class="product-spark"><svg id="pSpark" viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true"></svg><span class="muted spark-cap">Verkäufe pro Tag, 1.–31. Okt.</span></div>
+              <div class="product-actions"><button class="cta" id="pDetails" type="button" aria-expanded="false">Details ansehen</button></div>
+            </div>
+          </article>
+        </section>
+
+        <!-- 8 · Versand -->
+        <section class="view view-shipping" data-view="shipping" aria-label="Versand-Detail" hidden>
+          <article class="card card-map"><div class="map" id="map"></div><p class="map-cap glass-chip">Lieferrouten heute · Lager Leipzig</p></article>
+          <article class="card card-side">
+            <div class="kpi"><h3>Zugestellt</h3><p class="kpi-num tnum" id="shDelivered">4.812</p></div>
+            <div class="kpi"><h3>Unterwegs</h3><p class="kpi-num tnum" id="shTransit">2.301</p></div>
+            <div class="kpi"><h3>In Vorbereitung</h3><p class="kpi-num tnum" id="shPrep">1.307</p></div>
+            <div class="kpi"><h3>Pünktlich</h3><p class="kpi-num tnum" id="shOnTime">96 %</p></div>
+          </article>
+        </section>
+
+        <!-- Bestellungen -->
+        <section class="view view-orders" data-view="orders" aria-label="Bestellungen" hidden>
+          <article class="card card-orders">
+            <div class="card-head"><h2>Letzte Bestellungen</h2><p class="muted" id="ordersCount"></p></div>
+            <div class="orders-table" role="table" aria-label="Letzte Bestellungen">
+              <div class="orders-row orders-head" role="row"><span role="columnheader">Bestellung</span><span role="columnheader">Zeit</span><span role="columnheader">Ort</span><span role="columnheader">Artikel</span><span role="columnheader" class="num">Betrag</span><span role="columnheader">Status</span></div>
+              <div id="ordersBody" role="rowgroup"></div>
+            </div>
+          </article>
+          <article class="card card-side">
+            <div class="kpi"><h3>Bestellungen</h3><p class="kpi-num tnum" id="ordKpi">8.420</p></div>
+            <div class="kpi"><h3>Warenkorb-Schnitt</h3><p class="kpi-num tnum" id="ordAov">€ 152</p></div>
+            <div class="kpi"><h3>Retourenquote</h3><p class="kpi-num tnum">2,4 %</p></div>
+          </article>
+        </section>
+
+        <!-- Kunden -->
+        <section class="view view-customers" data-view="customers" aria-label="Kunden" hidden>
+          <article class="card card-bigglobe">
+            <div class="globe-wrap big"><div class="globe-shadow" aria-hidden="true"></div><div class="globe" id="globeBig"></div></div>
+            <div class="bigglobe-copy"><h2>Kunden weltweit</h2><p class="hero-num tnum" id="custBig">124.578</p><p class="muted">aus 21 Ländern · Globus mit der Maus drehen</p></div>
+          </article>
+          <article class="card card-side card-regions">
+            <h2>Nach Ländern</h2>
+            <ul class="region-list" id="regions"></ul>
+          </article>
+        </section>
+      </main>
+
+      <!-- 3 · Glas-Mitteilung -->
+      <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+        <span class="toast-ic" aria-hidden="true"></span>
+        <div><p class="toast-title">Neue Bestellung</p><p class="toast-sub" id="toastSub">Bestellung #10.284 · gerade eben</p></div>
+      </div>
+
+      <!-- Popover Mitteilungen / Einstellungen -->
+      <div class="popover" id="bellPop" role="dialog" aria-label="Mitteilungen" hidden><h2>Mitteilungen</h2><ul class="feed feed-pop" id="feedPop"></ul></div>
+      <div class="popover" id="gearPop" role="dialog" aria-label="Einstellungen" hidden>
+        <h2>Einstellungen</h2>
+        <button class="menu-item" id="openClose" type="button"><span data-icon="moon"></span>Tagesabschluss anzeigen</button>
+        <button class="menu-item" id="simOrder" type="button"><span data-icon="bag"></span>Bestellung simulieren</button>
+        <button class="menu-item" id="simStock" type="button"><span data-icon="alert"></span>Lager-Warnung simulieren</button>
+        <label class="menu-item switch"><span data-icon="sparkle"></span>Bewegung reduzieren<input type="checkbox" id="reduceToggle" role="switch" /></label>
+      </div>
+
+      <!-- 9 · Tagesabschluss -->
+      <div class="closing" id="closing" role="dialog" aria-modal="false" aria-labelledby="closingTitle" hidden>
+        <h2 id="closingTitle"><span data-icon="moon"></span>Tagesabschluss</h2>
+        <p class="closing-date muted" id="closingDate">Samstag, 31. Okt. 2026</p>
+        <dl class="closing-list">
+          <div><dt>Umsatz heute</dt><dd class="tnum" id="clRev">€ 56.880</dd></div>
+          <div><dt>Bestellungen heute</dt><dd class="tnum" id="clOrd">374</dd></div>
+          <div><dt>Zugestellt</dt><dd class="tnum" id="clDel">98 %</dd></div>
+        </dl>
+        <button class="pill-btn" id="closingDone" type="button">Fertig</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip glass-chip" id="tip" role="tooltip" hidden></div>
+  <div class="fake-cursor" id="fakeCursor" aria-hidden="true"></div>
+<div class="ep-bsp" role="note">Beispieldaten – so könnte dein System aussehen</div>
+</body>
+</html>

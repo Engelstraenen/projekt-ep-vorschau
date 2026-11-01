@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Website-Chat · Demo | PROJEKT EP</title>
+<meta name="description" content="Demo eines Website-Chats, der Fragen zu Leistungen und Ablauf beantwortet. Läuft komplett im Browser.">
+<link rel="stylesheet" href="./seite.css">
+<link rel="stylesheet" href="./ep-hinweis.css">
+</head>
+<body>
+<header class="bar"><a class="brand" href="../">PROJEKT <b>EP</b></a><span class="tag">Demo · Website-Chat</span></header>
+<main class="hero">
+  <p class="eyebrow">Systeme &amp; Dashboards · Live-Demo</p>
+  <h1>Frag einfach.</h1>
+  <p class="lead">So könnte der Chat auf deiner Website aussehen: Er beantwortet Fragen zu Leistungen, Ablauf und Datenschutz aus euren freigegebenen Inhalten, erfindet nichts und verbindet bei Bedarf mit dem Team.</p>
+  <div class="ctas">
+    <button class="btn" type="button" data-open>Chat öffnen</button>
+  </div>
+  <p class="sub">Zum Ausprobieren:</p>
+  <div class="chips">
+    <button type="button" data-ask="Was macht ihr genau?">Was macht ihr genau?</button>
+    <button type="button" data-ask="Wie läuft ein Projekt ab?">Wie läuft ein Projekt ab?</button>
+    <button type="button" data-ask="Könnt ihr ein Dashboard für unser Lager bauen?">Dashboard fürs Lager?</button>
+    <button type="button" data-ask="Bist du ein Mensch?">Bist du ein Mensch?</button>
+    <button type="button" data-ask="Ich möchte mit jemandem sprechen">Mit Mensch sprechen</button>
+  </div>
+  <ul class="facts">
+    <li><b>Ohne Server</b> Diese Demo läuft komplett in deinem Browser.</li>
+    <li><b>Nichts wird gesendet</b> Nachrichten und Formular bleiben auf deinem Gerät.</li>
+    <li><b>Ehrlich</b> Was nicht in den Inhalten steht, wird nicht erfunden.</li>
+  </ul>
+</main>
+<div class="ep-bsp" role="note">Beispieldaten – so könnte dein System aussehen</div>
+<script src="./kb.js" defer></script>
+<script src="./chat-lokal.js" defer></script>
+<script src="./ep-chat.js" data-api="./chatbot-lokal" defer></script>
+<script src="./chat-seite.js" defer></script>
+</body>
+</html>

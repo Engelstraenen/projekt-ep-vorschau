@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="color-scheme" content="dark" />
+  <title>SHOP / CONTROL · Dashboard (Beispieldaten)</title>
+  <script type="module" crossorigin src="./assets/index-cIM9OjFs.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BvJcIC1f.css">
+<link rel="stylesheet" href="./ep-hinweis.css">
+</head>
+<body>
+  <div class="gridbg" aria-hidden="true"></div>
+  <div class="app" id="app">
+    <header class="top" id="top">
+      <div class="brand">
+        <button class="brand-btn" id="homeBtn" type="button" aria-label="Zurück zur Gesamtansicht" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg>
+        </button>
+        <h1>SHOP / CONTROL</h1>
+        <span class="crumb" id="crumb"></span>
+      </div>
+      <div class="segment" id="segment" role="tablist" aria-label="Zeitraum">
+        <span class="seg-thumb" aria-hidden="true"></span>
+        <button role="tab" type="button" data-period="day" aria-selected="false">Tag</button>
+        <button role="tab" type="button" data-period="week" aria-selected="false">Woche</button>
+        <button role="tab" type="button" data-period="month" aria-selected="true">Monat</button>
+        <button role="tab" type="button" data-period="year" aria-selected="false">Jahr</button>
+      </div>
+      <div class="top-right">
+        <button class="icon-btn" id="scenesBtn" type="button" popovertarget="scenes" aria-label="Szenen abspielen" title="Szenen (Tasten 1–9)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M4 12h16M4 18h7"/><path d="M17 15.5v5l4-2.5z" class="fill"/></svg>
+        </button>
+        <button class="icon-btn" id="closeBtn" type="button" aria-label="Tagesabschluss öffnen" title="Tagesabschluss (N)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A7.8 7.8 0 1 1 9.4 4.5a6.3 6.3 0 0 0 10.1 10.1z"/></svg>
+        </button>
+        <button class="icon-btn" id="motionBtn" type="button" aria-label="Bewegung pausieren" aria-pressed="false" title="Bewegung pausieren (P)">
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5l11 6.5-11 6.5z" class="fill"/></svg>
+        </button>
+        <span class="sample" title="Alle Werte sind simuliert">BEISPIELDATEN</span>
+      </div>
+    </header>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+      <span class="toast-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2.2l2.1 10.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6.2"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></svg></span>
+      <div><strong>Neue Bestellung</strong><span id="toastText">Bestellung #10.284 · gerade eben</span></div>
+    </div>
+
+    <main class="views">
+      <section class="view view-overview" id="vOverview" aria-label="Gesamtansicht">
+        <div class="row kpis">
+          <article class="card kpi is-link" data-open="revenue" tabindex="0" role="button" aria-label="Umsatz – Detail öffnen"><h2>Umsatz</h2><p class="value num" id="kRevenue">–</p><p class="sub" id="kRevenueSub">–</p></article>
+          <article class="card kpi"><h2>Bestellungen</h2><p class="value num"><span id="kOrders">–</span><span class="bump" id="bump" aria-hidden="true">+1</span></p><p class="sub" id="kOrdersSub">–</p></article>
+          <article class="card kpi"><h2>Warenkorb-Schnitt</h2><p class="value num" id="kAov">–</p><p class="sub">pro Bestellung</p></article>
+          <article class="card kpi"><h2>Conversion</h2><p class="value num" id="kConv">–</p><p class="sub">Besuche mit Kauf</p></article>
+        </div>
+        <div class="row mid">
+          <article class="card chart-card is-link" data-open="revenue" tabindex="0" role="button" aria-label="Umsatzverlauf – Detail öffnen">
+            <div class="head"><h2>Umsatzverlauf</h2><span class="meta" id="chartRange">01.–31.10.</span></div>
+            <div class="plot" id="ovChart"></div>
+          </article>
+          <article class="card world-card">
+            <div class="head"><h2>Kunden weltweit</h2></div>
+            <div class="world-host" id="worldHost"></div>
+            <p class="world-count"><span class="num" id="kCustomers">124.578</span><span class="acc">Kunden</span></p>
+          </article>
+          <article class="card bars-card">
+            <div class="head"><h2 id="barsTitle">Bestellungen pro Tag</h2><span class="meta"><i class="lg t"></i>Heute</span></div>
+            <div class="plot" id="barsHost"></div>
+          </article>
+        </div>
+        <div class="row bottom">
+          <article class="card stock-card is-link" id="stockCard" tabindex="0" role="button" aria-pressed="false" aria-label="Lagerbestand – Bestandswarnung anzeigen">
+            <div class="head"><h2>Lagerbestand</h2></div>
+            <div class="ring" id="ring"><div class="ring-label"><span class="num"><span id="ringNum">0</span><small>%</small></span><span class="ring-cap" id="ringCap">verfügbar</span></div></div>
+            <p class="warn-chip" id="warnChip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z"/><path d="M12 10v4.5M12 17.2v.3"/></svg>Produkt B bald ausverkauft</p>
+          </article>
+          <article class="card list-card is-link" data-open="shipping" tabindex="0" role="button" aria-label="Versandstatus – Karte öffnen">
+            <div class="head"><h2>Versandstatus</h2></div>
+            <ul class="rows" id="shipRows"></ul>
+          </article>
+          <article class="card list-card">
+            <div class="head"><h2>Top-Produkte</h2></div>
+            <ul class="rows prod-rows" id="prodRows"></ul>
+          </article>
+          <article class="card list-card">
+            <div class="head"><h2>Live-Feed</h2><span class="meta live"><i class="live-dot"></i>live</span></div>
+            <ol class="rows feed" id="feed" aria-live="polite"></ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="view view-detail" id="vRevenue" aria-label="Umsatz-Detail" hidden>
+        <article class="card detail-main">
+          <div class="head head-lg"><h2>Umsatzverlauf <span id="revTitle">Oktober 2026</span></h2>
+            <div class="legend"><span><i class="lg-line cur"></i>Aktuell</span><span><i class="lg-line prev"></i><span id="revPrevName">Vormonat</span></span></div>
+          </div>
+          <div class="plot plot-big" id="revChart"></div>
+        </article>
+        <aside class="detail-side">
+          <article class="card stat"><h3>Gesamt</h3><p class="num" id="rTotal">–</p></article>
+          <article class="card stat"><h3 id="rPrevName">Vormonat</h3><p class="num" id="rPrev">–</p></article>
+          <article class="card stat"><h3>Wachstum</h3><p class="num acc" id="rGrowth">–</p></article>
+        </aside>
+      </section>
+
+      <section class="view view-product" id="vProduct" aria-label="Top-Produkt" hidden>
+        <article class="card product-card">
+          <div class="stage-host" id="productHost"><span class="stage-hint">Ziehen zum Drehen</span></div>
+          <div class="product-info">
+            <div class="p-head">
+              <h2 id="pName">Produkt A</h2>
+              <div class="p-nav">
+                <button class="icon-btn sm" id="pPrev" type="button" aria-label="Vorheriges Produkt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg></button>
+                <span class="p-pos num" id="pPos">1 / 3</span>
+                <button class="icon-btn sm" id="pNext" type="button" aria-label="Nächstes Produkt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></button>
+              </div>
+            </div>
+            <dl class="p-list" id="pList"></dl>
+            <div class="p-extra" id="pExtra" hidden><dl class="p-list" id="pList2"></dl></div>
+            <div class="p-trend"><span class="meta">Verkäufe pro Tag · 01.–31.10.</span><svg id="pSpark" aria-hidden="true"></svg></div>
+            <button class="btn-primary" id="pMore" type="button" aria-expanded="false" aria-controls="pExtra">Details ansehen</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="view view-detail" id="vShipping" aria-label="Versand" hidden>
+        <article class="card detail-main map-card">
+          <div class="head head-lg"><h2>Versand / Deutschland</h2>
+            <div class="legend"><span><i class="lg hub"></i>Lager</span><span><i class="lg-line route"></i>Route</span><span><i class="lg t"></i>Paket unterwegs</span></div>
+          </div>
+          <div class="map-host" id="mapHost"></div>
+        </article>
+        <aside class="card detail-side stats-icons" id="shipSide"></aside>
+      </section>
+    </main>
+  </div>
+
+  <div class="dusk" id="dusk" hidden>
+    <div class="dusk-card" role="dialog" aria-modal="true" aria-labelledby="duskTitle">
+      <h2 id="duskTitle">Tagesabschluss · <span class="num">31.10.</span></h2>
+      <dl class="dusk-list">
+        <div><dt>Umsatz heute</dt><dd class="num" id="dRev">–</dd></div>
+        <div><dt>Bestellungen heute</dt><dd class="num" id="dOrd">–</dd></div>
+        <div><dt>Zugestellt</dt><dd class="num" id="dDel">–</dd></div>
+      </dl>
+      <button class="btn-primary wide" id="duskDone" type="button">Fertig</button>
+    </div>
+  </div>
+
+  <div class="scan" id="scan" aria-hidden="true"></div>
+  <div class="pointer" id="pointer" aria-hidden="true"><span class="ripple"></span><svg viewBox="0 0 24 24"><path d="M5.5 3.5l13 7.6-5.6 1.5-2.9 5.6z"/></svg></div>
+
+  <div class="scenes" id="scenes" popover>
+    <p class="scenes-title">Szenen</p>
+    <ol id="sceneList"></ol>
+  </div>
+<div class="ep-bsp" role="note">Beispieldaten – so könnte dein System aussehen</div>
+</body>
+</html>
