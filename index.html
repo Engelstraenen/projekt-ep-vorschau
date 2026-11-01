@@ -289,6 +289,7 @@
   .dom-img { --d: min(clamp(0, calc((var(--rv) - .05) / .8), 1), var(--out)); grid-row: 1; align-self: center; justify-self: center; margin: 0;
     width: min(100%, calc((100svh - 170px) * 1.5)); aspect-ratio: 3 / 2; border-radius: 22px; overflow: hidden; background: #e8e8ed;
     box-shadow: 0 40px 90px -40px rgba(0,0,0,calc(.45 * var(--d))); }
+  .dom-img picture { display: block; width: 100%; height: 100%; }
   .dom-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
   [data-side="left"] .dom-img { grid-column: 1; } [data-side="right"] .dom-img { grid-column: 2; }
   section[data-dom] .copy { grid-row: 1; }
@@ -425,29 +426,7 @@
   .plat svg { width:16px; height:16px; color: var(--blue); }
   .neu { display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; letter-spacing:.2px; color:#fff; background:var(--blue); vertical-align: 3px; }
 
-  .ads-fig { background: #F5F5F7; display:grid; grid-template-rows:auto 1fr auto; padding: clamp(22px,2.6vw,40px); gap: 18px; }
-  .ads-fig .fh { display:flex; justify-content:space-between; align-items:baseline; }
-  .ads-fig .fh b { font-size: clamp(17px,1.5vw,22px); font-weight:650; letter-spacing:-.025em; color:#1D1D1F; }
-  .ads-fig .fh small { font-size:12px; color:#6E6E73; letter-spacing:.3px; }
-  .flow { list-style:none; margin:0; padding:0; display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-self:center; counter-reset: s; position:relative; }
-  .flow li + li::before { content:""; position:absolute; left:-10px; top:33px; width:10px; height:1.5px; background:#0071E3; opacity:.5; }
-  .flow li { position:relative; background:#fff; border-radius:18px; padding: 18px 16px 18px; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 18px 40px -26px rgba(0,0,0,.35); display:grid; gap:8px; align-content:start; min-height: 0; }
-  .flow li i { width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-style:normal; font-size:13px; font-weight:650; color:#fff; background:#0071E3; font-variant-numeric: tabular-nums; position:relative; z-index:1; }
-  .flow li b { font-size: clamp(15px,1.25vw,18px); font-weight:650; letter-spacing:-.02em; color:#1D1D1F; }
-  .flow li p { font-size: clamp(12px,.95vw,14px); line-height:1.42; color:#6E6E73; }
-  .loop { display:flex; align-items:center; gap:10px; font-size:13.5px; color:#6E6E73; padding-top: 14px; border-top:1px solid #D2D2D7; }
-  .loop svg { width:18px; height:18px; color:#0071E3; flex:none; }
   @media (max-width: 860px) {
-    .ads-fig { padding:14px; gap:0; grid-template-rows: 1fr; }
-    .ads-fig .fh { display:none; }
-    .flow { grid-template-columns: repeat(2,minmax(0,1fr)); gap:6px; align-self:stretch; align-content:center; }
-    .flow li + li::before { display:none; }
-    .flow li { padding:9px 10px; gap:6px; border-radius:12px; grid-template-columns:auto 1fr; align-items:baseline; }
-    .flow li b { font-size:13.5px; }
-    .flow li i { width:auto; height:auto; background:none; color:#0071E3; font-size:12px; }
-    .flow li p { display:none; }
-    .loop { display:none; }
-    .ads-fig .fh small { display:none; }
     #ads .plat span { height:28px; font-size:13px; }
   }
 </style>
@@ -560,16 +539,7 @@
       <div class="plat"><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg> Instagram &amp; Facebook</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M11 9.5v5l4-2.5z" fill="currentColor"/></svg> TikTok</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Google &amp; YouTube</span></div>
       <a class="more" href="leistungen/ads-management.html">Ads-Management im Detail</a>
       <div class="sub"><small>Passt zu</small><b>Werbeclips &amp; Ad Creatives</b><p>Die Anzeigen selbst gestalten wir auf Wunsch gleich mit. Ein Team, ein Ansprechpartner.</p><a href="#film">Zu den Werbeclips ›</a></div>
-    </div><figure class="dom-img ads-fig" aria-label="Ablauf im Ads-Management">
-      <div class="fh"><b>So betreuen wir eure Kampagnen</b><small>Ablauf</small></div>
-      <ol class="flow">
-        <li><i>1</i><b>Strategie</b><p>Ziel, Zielgruppe, Budgetrahmen und passende Plattformen festlegen.</p></li>
-        <li><i>2</i><b>Kampagne</b><p>Konten, Struktur, Tracking und Anzeigen sauber aufsetzen.</p></li>
-        <li><i>3</i><b>Tests</b><p>Motive, Hooks und Zielgruppen gegeneinander laufen lassen.</p></li>
-        <li><i>4</i><b>Reporting</b><p>Regelmäßig verständlich berichten und nächste Schritte abstimmen.</p></li>
-      </ol>
-      <div class="loop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4.4h-4.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Was wir aus den Tests lernen, fließt direkt in die nächste Runde.</div>
-    </figure></div>
+    </div><figure class="dom-img"><picture><source type="image/avif" srcset="img/seite/ads-management-640.avif 640w, img/seite/ads-management-1280.avif 1280w, img/seite/ads-management-1920.avif 1920w, img/seite/ads-management-2560.avif 2560w" sizes="(max-width: 860px) 70vw, 50vw"><source type="image/webp" srcset="img/seite/ads-management-640.webp 640w, img/seite/ads-management-1280.webp 1280w, img/seite/ads-management-1920.webp 1920w, img/seite/ads-management-2560.webp 2560w" sizes="(max-width: 860px) 70vw, 50vw"><img src="img/seite/ads-management-1280.webp" width="2560" height="1707" alt="Zwei Kolleginnen und Kollegen besprechen am Stehtisch mit Tablet die Kampagnenergebnisse, auf dem großen Bildschirm dahinter steigende Wachstumspfeile" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
   <section class="ch" id="raeume" data-dom data-key="img:spaces" data-side="left" data-name="Räume & Visualisierung" data-nr="06">
