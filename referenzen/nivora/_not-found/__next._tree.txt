@@ -1,4 +1,4 @@
 :HL["/projekt-ep-vorschau/referenzen/nivora/_next/static/chunks/1gcx_gujkz4g0.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"8IT9uJkTmTyy3ao-_aTpW","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"3S8wThwAE6gVEQCsX8fK5","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

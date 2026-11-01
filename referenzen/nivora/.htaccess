@@ -1,7 +1,7 @@
 # NIVORA-Demo (statischer Next.js-Export) – nur fuer IONOS/Apache relevant, GitHub Pages ignoriert diese Datei.
-# Next.js schreibt je Seite wechselnde Inline-Skripte (RSC-Daten); Hashes waeren zu viele fuer einen Header.
-# Daher hier eine eigene, auf diesen Ordner begrenzte CSP mit 'unsafe-inline' fuer Skripte. Keine Formulare, keine Drittanbieter.
+# Inline-Skripte des Next-Exports (RSC-Daten) sind in _next/static/inline/*.js ausgelagert (nivora/tools/externalize_inline.py),
+# daher strikte CSP ohne 'unsafe-inline' fuer Skripte (dieselbe Policy steht als Meta-Tag in jeder Seite). Keine Formulare, keine Drittanbieter.
 <IfModule mod_headers.c>
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
   Header always set X-Robots-Tag "noindex, nofollow"
 </IfModule>
