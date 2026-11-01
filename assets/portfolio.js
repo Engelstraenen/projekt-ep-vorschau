@@ -4,6 +4,8 @@
 // Pfade gelten ab Website-Wurzel; data-pf am Abschnitt gibt den Weg dorthin an (Unterseite: "../").
 //   img/portfolio/<id>-480.avif|webp und <id>-960.avif|webp (Poster bzw. Motiv)
 // Leere Sparten bleiben ausgeblendet und erscheinen von selbst, sobald ein Eintrag dazukommt.
+// Kennzeichnung: jede Karte trägt das Label „Inspiration“ am Video; Clips mit erfundener Marke (Standard, fiktiv:false = keine Marke)
+//   zeigen über dem Titel „Inspiration · erfundene Marke“. Die Clips dürfen nie wie echte Kundenprojekte wirken.
 // Aufbau (von Eugen gewählt): alle Sparten untereinander, je Überschrift + volle Reihe ihrer Clips im Raster.
 (() => {
   const sec = document.querySelector('section.pf[data-pf]');
@@ -19,18 +21,18 @@
     { id: 'effekte', name: 'Effekte' },
   ];
   const CLIPS = [
-    { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für das Trockenshampoo SPRUZ.', dauer: 9.13 },
-    { id: 'ugc-knista', sparte: 'ugc', titel: 'Omi testet jetzt ASMR', zweck: 'UGC-Clip für die Paprika-Chips KNISTA.', dauer: 9.03 },
-    { id: 'ugc-mochimi', sparte: 'ugc', titel: 'Kalle, 72, testet Beauty', zweck: 'UGC-Clip für die Glow Sheet Mask MOCHIMI.', dauer: 9.1 },
-    { id: 'schlumma', sparte: 'cgi', titel: 'So weich, wie dein Montag sein sollte.', zweck: 'CGI-Spot für SCHLUMMA: eine ultraweiche Couch im Zugabteil.', dauer: 8.83 },
-    { id: 'motion-zitra', sparte: 'motion', titel: 'Durst? Drei Sorten. Null Langeweile.', zweck: 'Motion-Graphics-Spot für die Limonade ZITRA.', dauer: 12 },
-    { id: 'motion-lindholz', sparte: 'motion', titel: 'Erst eine Linie. Dann ein Plan. Dann Holz.', zweck: 'Motion-Graphics-Spot für Lindholz, Möbel nach Maß.', dauer: 13 },
-    { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für die Gieß-App BLATTFON, mit sprechender Pflanze.', dauer: 8.83 },
-    { id: 'aboschere', sparte: 'motion', titel: '14 Abos bezahlt. Nur 3 genutzt.', zweck: 'Motion-Graphics-Spot für ABOSCHERE: kündigt ungenutzte Abos.', dauer: 9.7 },
-    { id: 'fleckfee', sparte: 'static', titel: 'Ein Blatt, Fleck weg.', zweck: 'Static Ad als Motion-Version für das Waschblatt FLECKFEE gegen Flecken.', dauer: 7.21 },
-    { id: 'kajuete', sparte: 'fashion', titel: 'Gegen Wind hilft nur eins: der richtige Mantel.', zweck: 'Mantel-Lookbook für KAJÜTE auf dem Fährdeck.', dauer: 8.83 },
-    { id: 'velournacht', sparte: 'fashion', titel: 'Feinwäsche. Wie ich.', zweck: 'Fashion-Film für VELOURNACHT: Samtanzug im Waschsalon.', dauer: 8.83 },
-    { id: 'effekte-showreel', sparte: 'effekte', titel: '17 Effekte für Short-Form-Videos', zweck: 'Showreel mit 17 Videoeffekten für Short-Form-Ads.', dauer: 42.5, ton: false },
+    { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für SPRUZ, ein erfundenes Trockenshampoo.', dauer: 9.13 },
+    { id: 'ugc-knista', sparte: 'ugc', titel: 'Omi testet jetzt ASMR', zweck: 'UGC-Clip für KNISTA, erfundene Paprika-Chips.', dauer: 9.03 },
+    { id: 'ugc-mochimi', sparte: 'ugc', titel: 'Kalle, 72, testet Beauty', zweck: 'UGC-Clip für MOCHIMI, eine erfundene Glow Sheet Mask.', dauer: 9.1 },
+    { id: 'schlumma', sparte: 'cgi', titel: 'So weich, wie dein Montag sein sollte.', zweck: 'CGI-Spot für die erfundene Marke SCHLUMMA: eine ultraweiche Couch im Zugabteil.', dauer: 8.83 },
+    { id: 'motion-zitra', sparte: 'motion', titel: 'Durst? Drei Sorten. Null Langeweile.', zweck: 'Motion-Graphics-Spot für ZITRA, eine erfundene Limonade.', dauer: 12 },
+    { id: 'motion-lindholz', sparte: 'motion', titel: 'Erst eine Linie. Dann ein Plan. Dann Holz.', zweck: 'Motion-Graphics-Spot für Lindholz, eine erfundene Tischlerei für Möbel nach Maß.', dauer: 13 },
+    { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für BLATTFON, eine erfundene Gieß-App, mit sprechender Pflanze.', dauer: 8.83 },
+    { id: 'aboschere', sparte: 'motion', titel: '14 Abos bezahlt. Nur 3 genutzt.', zweck: 'Motion-Graphics-Spot für ABOSCHERE, eine erfundene App, die ungenutzte Abos kündigt.', dauer: 9.7 },
+    { id: 'fleckfee', sparte: 'static', titel: 'Ein Blatt, Fleck weg.', zweck: 'Static Ad als Motion-Version für FLECKFEE, ein erfundenes Waschblatt gegen Flecken.', dauer: 7.21 },
+    { id: 'kajuete', sparte: 'fashion', titel: 'Gegen Wind hilft nur eins: der richtige Mantel.', zweck: 'Mantel-Lookbook für das erfundene Label KAJÜTE, auf dem Fährdeck.', dauer: 8.83 },
+    { id: 'velournacht', sparte: 'fashion', titel: 'Feinwäsche. Wie ich.', zweck: 'Fashion-Film für das erfundene Label VELOURNACHT: Samtanzug im Waschsalon.', dauer: 8.83 },
+    { id: 'effekte-showreel', sparte: 'effekte', titel: '17 Effekte für Short-Form-Videos', zweck: 'Showreel mit 17 Videoeffekten für Short-Form-Ads.', dauer: 42.5, ton: false, fiktiv: false },
   ];
 
   const lowPower = matchMedia('(max-width: 860px), (pointer: coarse)').matches;
@@ -51,13 +53,13 @@
     `<img src="${B}img/portfolio/${id}-480.webp" width="480" height="853" alt="" ${eager ? 'fetchpriority="low"' : 'loading="lazy"'} decoding="async"></picture>`;
   const media = (c, sizes, eager) => {
     const bild = c.typ === 'bild', ton = c.ton !== false;
-    return `<div class="pf-media${bild ? ' is-bild' : ''}">${picture(c.id, sizes, eager)}` +
+    return `<div class="pf-media${bild ? ' is-bild' : ''}">${picture(c.id, sizes, eager)}<span class="pf-insp">Inspiration</span>` +
       (bild ? '' : `<video preload="none" playsinline webkit-playsinline disablepictureinpicture disableremoteplayback aria-label="${esc(c.titel)}"></video>` +
       `<button type="button" class="pf-play" aria-label="Video abspielen: ${esc(c.titel)}"><span class="pf-play-ic">${ICON.play}</span></button>` +
       (ton ? `<button type="button" class="pf-sound" aria-label="Ton ausschalten" aria-pressed="true">${ICON.on}</button>` : '<span class="pf-mute-note">Ohne Ton</span>') +
       `<span class="pf-dur">${mmss(c.dauer)}</span><span class="pf-bar" aria-hidden="true"><i></i></span>`) + `</div>`;
   };
-  const caption = (c, tag = 'h4') => `<div class="pf-txt"><small class="pf-sparte">${esc(sparteName(c.sparte))}</small><${tag} class="pf-title">${esc(c.titel)}</${tag}><p class="pf-zweck">${esc(c.zweck)}</p></div>`;
+  const caption = (c, tag = 'h4') => `<div class="pf-txt"><small class="pf-sparte">${c.fiktiv === false ? 'Inspiration · ' + esc(sparteName(c.sparte)) : 'Inspiration · erfundene Marke'}</small><${tag} class="pf-title">${esc(c.titel)}</${tag}><p class="pf-zweck">${esc(c.zweck)}</p></div>`;
 
   // ---------- Aufbau ----------
   const used = SPARTEN.filter((s) => CLIPS.some((c) => c.sparte === s.id));
@@ -65,7 +67,7 @@
   groups.innerHTML = SPARTEN.map((s) => {
     const list = CLIPS.filter((c) => c.sparte === s.id);
     return `<section class="pf-group" data-sparte="${s.id}" aria-labelledby="pf-g-${s.id}"${list.length ? '' : ' hidden'}>` +
-      `<div class="pf-group-head"><h3 id="pf-g-${s.id}">${esc(s.name)}</h3><span class="pf-count">${list.length} ${list.length === 1 ? 'Arbeit' : 'Arbeiten'}</span></div>` +
+      `<div class="pf-group-head"><h3 id="pf-g-${s.id}">${esc(s.name)}</h3><span class="pf-count">${list.length} ${list.length === 1 ? 'Beispiel' : 'Beispiele'}</span></div>` +
       `<ul class="pf-row" data-lenis-prevent-horizontal>` + list.map((c) => `<li class="pf-card" data-id="${c.id}" data-sparte="${c.sparte}">${media(c, '(max-width: 860px) 46vw, 240px')}${caption(c)}</li>`).join('') + `</ul></section>`;
   }).join('');
   sec.dataset.ready = '';

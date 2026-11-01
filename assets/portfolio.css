@@ -107,3 +107,8 @@
 .pf .pb-note { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--ink-2); margin: 0 0 clamp(20px, 3vh, 32px); }
 .pf .pb-note::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #F2A93B; flex: none; }
 .pf:not([data-ready]) .pf-groups { min-height: 100vh; } /* Platz reservieren, bis die Clips per JS stehen (CLS) */
+
+/* Kennzeichnung „Inspiration“ (alle Clips sind Beispiele mit erfundenen Marken, keine Kundenprojekte) */
+.pf-insp { position: absolute; z-index: 3; top: 12px; left: 12px; font-size: 11.5px; font-weight: 600; line-height: 1; letter-spacing: .01em; color: #fff;
+  background: rgba(20, 20, 24, .5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 6px 10px; border-radius: 999px; pointer-events: none; }
+@media (max-width: 860px) { .pf-insp { top: 8px; left: 8px; font-size: 11px; padding: 5px 8px; } }

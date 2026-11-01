@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../assets/sub.css">
 <link rel="stylesheet" href="../assets/nav.css">
 <link rel="stylesheet" href="../assets/portfolio.css">
+<link rel="stylesheet" href="../assets/stile.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Werbeclips","description":"Werbeclips von PROJEKT EP: Video Ads, Social Ads, Fashion-Filme, Lookbooks und Kurzfilme für Mode, Marken und Produkte. Konzept, Bildsprache, Produktion, Schnitt und Sound von PROJEKT EP.","provider":{"@type":"Organization","name":"PROJEKT EP","url":"https://projekt-ep.de"},"areaServed":["DE","AT","CH","Worldwide"]}</script>
 <link rel="stylesheet" href="../assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="../assets/consent-theme.css">
@@ -94,7 +95,73 @@
         </div>
       </div>
       <noscript><p class="pf-zweck">Die Videos brauchen JavaScript.</p></noscript>
-      <p class="note pf-demo">Alle gezeigten Marken sind erfunden.</p>
+      <p class="note pf-demo">Alle Clips sind Inspiration, keine Kundenprojekte. Die gezeigten Marken sind erfunden.</p>
+    </div>
+  </section>
+  <!-- Stilauswahl: 4 Videostile (Band). Styles: assets/stile.css, Verhalten: assets/stile.js -->
+  <section class="stile" id="stile" aria-labelledby="stile-h">
+    <div class="stile-in">
+      <header class="stile-head">
+        <p class="stile-kicker">Inspiration · So könnte eure Werbung aussehen</p>
+        <h2 id="stile-h">Eine Botschaft. Vier Stile. Ihr wählt den Look.</h2>
+      </header>
+      <ol class="stile-rail" aria-label="Vier Videostile zur Auswahl">
+        <li class="stil" style="--i:0">
+          <div class="stil-media" data-state="idle">
+            <video muted playsinline loop preload="none" poster="../video/stile/stil-praesentation-poster.webp" data-src="../video/stile/stil-praesentation-720.mp4" aria-label="Inspiration: Beispielclip im Stil Präsentationsvideo, kein Kundenprojekt"></video>
+            <span class="stil-insp">Inspiration</span>
+            <button class="stil-toggle" type="button" aria-label="Clip abspielen"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l10.5-6.5z"/><path class="i-pause" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+          </div>
+          <div class="stil-text">
+            <h3><span>01</span>Präsentationsvideo</h3>
+            <ul class="stil-tags" aria-label="Merkmale"><li>Echte Bilder</li><li>Ruhig</li><li>Edel</li></ul>
+            <p>Eure Produkte und euer Auftritt, in Szene gesetzt wie ein Schaufenster in Bewegung. Ideal für Bäckerei, Handwerk, Praxis oder Laden.</p>
+          </div>
+        </li>
+        <li class="stil" style="--i:1">
+          <div class="stil-media" data-state="idle">
+            <video muted playsinline loop preload="none" poster="../video/stile/stil-motion-poster.webp" data-src="../video/stile/stil-motion-720.mp4" aria-label="Inspiration: Beispielclip im Stil Motion Graphics, kein Kundenprojekt"></video>
+            <span class="stil-insp">Inspiration</span>
+            <button class="stil-toggle" type="button" aria-label="Clip abspielen"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l10.5-6.5z"/><path class="i-pause" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+          </div>
+          <div class="stil-text">
+            <h3><span>02</span>Motion Graphics</h3>
+            <ul class="stil-tags" aria-label="Merkmale"><li>Formen &amp; Symbole</li><li>Klar</li><li>Markenfarben</li></ul>
+            <p>Bewegte Formen erklären in Sekunden, worum es geht. Perfekt für alles, was man nicht fotografieren kann: Dienstleistungen, Abläufe, digitale Lösungen.</p>
+          </div>
+        </li>
+        <li class="stil" style="--i:2">
+          <div class="stil-media" data-state="idle">
+            <video muted playsinline loop preload="none" poster="../video/stile/stil-comic-poster.webp" data-src="../video/stile/stil-comic-720.mp4" aria-label="Inspiration: Beispielclip im Stil Comic, kein Kundenprojekt"></video>
+            <span class="stil-insp">Inspiration</span>
+            <button class="stil-toggle" type="button" aria-label="Clip abspielen"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l10.5-6.5z"/><path class="i-pause" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+          </div>
+          <div class="stil-text">
+            <h3><span>03</span>Comic</h3>
+            <ul class="stil-tags" aria-label="Merkmale"><li>Gezeichnet</li><li>Mit Augenzwinkern</li><li>Nahbar</li></ul>
+            <p>Gezeichnete Figuren erzählen eine kleine Alltagsgeschichte, in der sich eure Kundschaft sofort wiedererkennt. Sympathisch für Vereine und Dienstleister.</p>
+          </div>
+        </li>
+        <li class="stil" style="--i:3">
+          <div class="stil-media" data-state="idle">
+            <video muted playsinline loop preload="none" poster="../video/stile/stil-3d-poster.webp" data-src="../video/stile/stil-3d-720.mp4" aria-label="Inspiration: Beispielclip im Stil 3D-Animation, kein Kundenprojekt"></video>
+            <span class="stil-insp">Inspiration</span>
+            <button class="stil-toggle" type="button" aria-label="Clip abspielen"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l10.5-6.5z"/><path class="i-pause" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+          </div>
+          <div class="stil-text">
+            <h3><span>04</span>3D-Animation</h3>
+            <ul class="stil-tags" aria-label="Merkmale"><li>Miniaturwelten</li><li>Verspielt</li><li>Hingucker</li></ul>
+            <p>Liebevolle Miniaturwelten, die sich drehen, aufklappen und lebendig werden. Ideal für Räume, Produkte oder Ideen, die es so noch gar nicht gibt.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="stile-note">Beispielclips zur Inspiration, keine Kundenprojekte. Gezeigte Betriebe und Marken sind erfunden.</p>
+      <ol class="stile-weg" aria-label="So findet ihr euren Stil">
+        <li><span>1</span>Auftrag</li>
+        <li><span>2</span>2–3 Moodboards für euch</li>
+        <li><span>3</span>Ihr wählt euren Favoriten</li>
+        <li><span>4</span>Wir setzen um</li>
+      </ol>
     </div>
   </section>
   <section class="block"><h2>Vom Gedanken zum bewegten Bild.</h2><ol class="steps"><li><span>01</span><b>Briefing schärfen</b><p>Ziel, Botschaft, Publikum, Kanal und vorhandenes Material klären.</p></li><li><span>02</span><b>Look entwickeln</b><p>Bildsprache, Licht, Kamera, Figuren und Bewegungslogik definieren.</p></li><li><span>03</span><b>Bewegung testen</b><p>Schlüsselmomente abstimmen, bevor die volle Produktion beginnt.</p></li><li><span>04</span><b>Finalisieren</b><p>Produktion, Schnitt, Sound, Varianten und Qualitätskontrolle verbinden.</p></li></ol></section>
@@ -118,6 +185,7 @@
 </footer>
 <script src="../assets/nav.js" defer></script>
 <script src="../assets/portfolio.js" defer></script>
+<script src="../assets/stile.js" defer></script>
 <script src="../assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
 <script src="../assets/consent.js" defer></script>
 <script src="../assets/ep-fx.js" defer></script>
