@@ -136,7 +136,9 @@ export function protokoll(S) {
     bind: (el, ctx) => el.querySelector('#rs').addEventListener('click', async () => { if (await act({ typ: 'reset' })) toast('Demo-Tag zurückgesetzt'); ctx.refresh(); }) };
 }
 export function bots() {
-  return { title: 'Bots', sub: 'Bereich im gemeinsamen Umschalter', html: `<div class="card" style="max-width:640px"><div class="row">${ic('bot')}<b>Bots-Bereich ist noch nicht gebaut</b><span class="chip a sp">in Planung</span></div><p class="m2" style="margin-top:8px">Für den Bots-Bereich liegen bisher nur Entwürfe (First Frames) vor. Der Umschalter-Eintrag ist schon da, damit der Login für alle Bereiche gilt – das Modul selbst folgt.</p></div>` };
+  // Raum „Bots“ ist gebaut (01.11.2026): eigener Bereich unter ../bots/ – alte Links (#/bots) leiten dorthin weiter
+  location.replace(LINKS.bots);
+  return { title: 'Bots', sub: 'Weiterleitung in den Raum „Bots“ …', html: `<div class="card" style="max-width:640px"><div class="row">${ic('bot')}<b>Raum „Bots“ wird geöffnet …</b></div><p class="m2" style="margin-top:8px"><a href="${LINKS.bots}">Falls nichts passiert: hier tippen</a></p></div>` };
 }
 export async function loginView(ctx) {
   const Z = await get('/zuordnung'); const cur = login.get(); let pick = cur?.ma || 'ma17';

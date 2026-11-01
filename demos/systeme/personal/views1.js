@@ -88,6 +88,13 @@ export function ichHeute(m) {
 // ---------- Schichtplan mit Paketkurve + Drag-Umplanung ----------
 const H0 = 6, H1 = 22; const pctOf = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return ((h + m / 60 - H0) / (H1 - H0)) * 100; };
 const toHM = (p) => { let t = H0 + (p / 100) * (H1 - H0); t = Math.round(t * 4) / 4; const h = Math.floor(t), m = Math.round((t - h) * 60); return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`; };
+// Rückrufe aus dem Raum „Bots“ (BEISPIELDATEN): dort mit „Ich rufe zurück“ festgelegt, hier im Plan sichtbar
+function botsTermine(people, heute) {
+  let T = []; try { T = JSON.parse(localStorage.getItem('ep-bots-termine') || '[]') || []; } catch {}
+  const me = login.get()?.ma; if (!isGF()) T = T.filter((t) => t.ma === me); if (!T.length) return '';
+  return `<div class="card" style="margin-bottom:14px" id="bots-termine"><div class="row">${ic('bot')}<b>Rückrufe aus dem Raum „Bots“</b><span class="chip a sp">${T.length} geplant</span><a class="m2" style="margin-left:auto" href="${LINKS.bots}#/rueckrufe">im Raum „Bots“ öffnen</a></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">${T.map((t) => `<span class="chip">${av(people[t.ma] || { anzeige: t.ma_name })}<b>${esc(t.um)}</b>&nbsp;${t.tag === heute ? '' : 'morgen · '}${esc(t.ma_name)} ruft ${esc(t.wer)} zurück</span>`).join('')}</div></div>`;
+}
 export async function plan(S, ctx) {
   const L0 = login.get() || {}; const P = await get('/plan' + (L0.rolle === 'ma' ? `?rolle=ma&ma=${L0.ma}` : '')); const mode = ctx.param === 'woche' ? 'woche' : 'tag'; const me = login.get()?.ma; const gf = isGF();
   const people = Object.fromEntries((S.mitarbeiter || [S.ich]).map((m) => [m.id, m]));
@@ -109,7 +116,7 @@ export async function plan(S, ctx) {
   const ticks = [6, 8, 10, 12, 14, 16, 18, 20, 22].map((h) => `<span style="left:${((h - H0) / (H1 - H0)) * 100}%">${h}</span>`).join('');
   const v = P.vorschlag;
   return { title: 'Schichtplan', sub: `Bedarf aus Paketprognose (${v.prognose} Pakete), Cutoff ${P.cutoff} und Retouren · ${gf ? 'Balken auf eine andere Station ziehen = umplanen (Figur geht im Lager mit), seitlich ziehen = Schichtbeginn verschieben' : 'deine Schicht ist markiert'}`, act: head,
-    html: `<div class="grid g21"><div class="card"><div class="plan" id="plan">
+    html: `${botsTermine(people, P.heute)}<div class="grid g21"><div class="card"><div class="plan" id="plan">
       <div class="axis"><div></div><div class="ticks">${ticks}</div></div>
       <div class="curve"><div class="lb"><b>Paketkurve</b><small>${v.prognose} Pakete · Prognose Shop</small></div><svg viewBox="0 0 1000 96" preserveAspectRatio="none"><defs><linearGradient id="pk" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d9735a" stop-opacity=".32"/><stop offset="1" stop-color="#d9735a" stop-opacity=".02"/></linearGradient></defs>
         <rect x="${pctOf(P.packfenster[0]) * 10}" y="0" width="${(pctOf(P.packfenster[1]) - pctOf(P.packfenster[0])) * 10}" height="96" fill="#e3e7da" opacity=".45"/>

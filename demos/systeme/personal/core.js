@@ -3,7 +3,7 @@ import { ic } from './icons.js';
 export { ic };
 export const ROOT = new URL('../', location.href).href.replace(/\/$/, '');
 export const API = ROOT + '/wws/personal';
-export const LINKS = { stadt: ROOT + '/paketstadt3d/?style=A', lager: ROOT + '/paketstadt3d/?style=A&view=lager', dashboard: ROOT + '/shop-raum/', personal: ROOT + '/personal/', bots: ROOT + '/personal/#/bots' };
+export const LINKS = { stadt: ROOT + '/paketstadt3d/?style=A', lager: ROOT + '/paketstadt3d/?style=A&view=lager', dashboard: ROOT + '/shop-raum/', personal: ROOT + '/personal/', bots: ROOT + '/bots/' };
 export const link3d = (ref, view) => `${ROOT}/paketstadt3d/?style=A&view=${view || (ref.startsWith('office') ? 'office' : 'lager')}&focus=${encodeURIComponent(ref)}`;
 export const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 export const de = (n, d = 0) => (n == null ? '–' : Number(n).toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d }));
