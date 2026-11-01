@@ -1,0 +1,95 @@
+/* PROJEKT EP · Themen-Unterseiten (leistungen/*.html), ein Muster für alle (Eugen, 1.11.2026)
+   1. Kurz-Intro: Titel, zwei Zeilen, Unterarten als Liste (.th-kinds)
+   2. Use Case für Use Case (.pb): Kopf (Art + Name), Arbeit groß, direkt darunter .uc-cap = Stil-Tags + 2–3 Zeilen
+   3. Rest kompakt: Umsetzung, Ablauf, Fragen, CTA
+   Bewegung: nur opacity/transform, scroll-gebunden, ease-out, hinter prefers-reduced-motion; ohne Support alles sichtbar. */
+
+/* ---------- 1 · Kurz-Intro ---------- */
+main > .hero.th-hero { display: block; padding-bottom: clamp(40px, 7vh, 88px); }
+main > .hero.th-hero .lead { max-width: 50ch; text-wrap: pretty; }
+.th-kinds { list-style: none; margin: clamp(24px, 3.4vh, 36px) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; max-width: 920px; }
+.th-kinds li { font-size: 14px; font-weight: 500; line-height: 1.2; letter-spacing: -.01em; color: var(--ink); padding: 8px 14px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
+.th-kinds a { color: inherit; text-decoration: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .th-kinds li { animation: th-chip .7s var(--ease-out, cubic-bezier(.23, 1, .32, 1)) both; animation-delay: calc(.42s + var(--k, 0) * 40ms); }
+}
+@keyframes th-chip { from { opacity: 0; transform: translateY(10px); } }
+
+/* ---------- Abschnittskopf der Beispiele ---------- */
+.th-list-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 32px; margin-bottom: clamp(24px, 4vh, 44px); }
+.th-list-h h2, .th-list-h .pb-title { font-size: clamp(26px, 2.4vw, 34px) !important; margin: 0 !important; max-width: none; }
+.th-list-h p { margin: 0; font-size: 15px; line-height: 1.45; color: var(--ink-2); max-width: 52ch; text-wrap: pretty; }
+.uc .uc-list { margin-top: 0; }
+
+/* ---------- 2 · Ein Use Case ---------- */
+.pb { min-width: 0; }
+.pb + .pb, .pb-sub + .pb, .pb + .pb-sub { margin-top: clamp(88px, 14vh, 168px); }
+.uc-list { gap: 0; }
+.pb-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 clamp(14px, 2vh, 20px); }
+.pb-type { font-size: 13px; font-weight: 600; letter-spacing: .01em; line-height: 1; color: var(--blue-ink, #0058B0); background: #EAF2FF; border-radius: 999px; padding: 7px 13px; margin: 0; }
+.pb-head h3 { font-size: clamp(22px, 2vw, 28px); font-weight: 650; letter-spacing: -.03em; line-height: 1.1; margin: 0; text-wrap: balance; }
+.pb-head h3 span { color: var(--ink-2); font-weight: 500; }
+.pb-head .th-ev-h { font-size: clamp(22px, 2vw, 28px) !important; font-weight: 650; letter-spacing: -.03em; line-height: 1.1; margin: 0; max-width: none; }
+.pb-head .th-ev-h span { color: var(--ink-2); font-weight: 500; }
+
+/* direkt unter der Arbeit: links Stil-Tags, rechts 2–3 Zeilen */
+.uc-cap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px clamp(32px, 5vw, 88px); align-items: start; margin-top: clamp(18px, 2.4vh, 26px); }
+.uc-cap .pb-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; align-content: start; }
+.uc-cap .pb-tags li { font-size: 13px; line-height: 1.2; color: var(--ink); background: var(--bg-2); border-radius: 999px; padding: 7px 12px; }
+.uc-cap .pb-tags li:first-child { background: var(--ink); color: #fff; }
+.uc-cap-t { display: grid; gap: 6px; max-width: 62ch; font-size: 17px; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+.uc-cap-t p { margin: 0; }
+.uc-cap-t b { color: var(--ink); font-weight: 600; }
+.uc-cap-t .pb-note { display: block; position: relative; padding-left: 14px; margin-top: 8px; font-size: 13px; line-height: 1.45; font-weight: 400; color: var(--ink-2); }
+.uc-cap-t .pb-note::before { content: ''; position: absolute; left: 0; top: .5em; width: 6px; height: 6px; border-radius: 50%; background: #F2A93B; }
+.uc-cap-t .pb-note b { font-weight: 500; color: var(--ink-2); }
+.uc-cap-t .btn { justify-self: start; margin-top: 12px; white-space: nowrap; }
+.uc-cap-t a:not(.btn) { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.uc-vis + .uc-cap, .px-film + .uc-cap { margin-top: clamp(18px, 2.4vh, 26px); }
+.px-stage + .uc-cap { margin-top: clamp(18px, 2.4vh, 26px); }
+
+/* Werbeclips: Text je Sparte unter ihrer Clip-Reihe */
+.pf-group .uc-cap { margin-top: clamp(16px, 2.2vh, 24px); }
+.pf-desc-src { display: none; }
+
+/* ---------- 3 · Rest kompakt ---------- */
+.th-dauer { border-top: 0; padding-top: clamp(64px, 10vh, 120px); padding-bottom: 0; }
+.th-dauer .ep-dauer { margin-top: 0; }
+.th-dauer + .block { border-top: 0; }
+
+@media (max-width: 860px) {
+  .uc-cap { grid-template-columns: 1fr; gap: 14px; }
+  .uc-cap-t { font-size: 16px; }
+  .pb + .pb, .pb-sub + .pb, .pb + .pb-sub { margin-top: clamp(64px, 10vh, 96px); }
+  .th-list-h { display: grid; gap: 8px; }
+}
+@media (max-width: 700px) {
+  .pb-head { gap: 8px 10px; }
+  .pb-head h3, .pb-head .th-ev-h { flex-basis: 100%; }
+  .pb-head h3 span, .pb-head .th-ev-h span { display: block; font-size: 16px; margin-top: 4px; }
+  .th-kinds li { font-size: 13px; padding: 7px 12px; }
+}
+
+/* ---------- dezente Scroll-Einblendung ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .pb > .pb-head, .pb-list > .pb-head, .pb-sub > .pb-head, .uc-cap > * { animation: th-rise both var(--ease-out, cubic-bezier(.23, 1, .32, 1)); animation-timeline: view(); animation-range: entry 0% entry 50%; }
+    .uc-cap > :nth-child(2) { animation-range: entry 6% entry 56%; }
+    .pb > .px-stage, .pb > .px-film, .pb-list > .px-film, .pb-sub > .px-film { animation: th-media both var(--ease-out, cubic-bezier(.23, 1, .32, 1)); animation-timeline: view(); animation-range: entry 0% entry 45%; }
+  }
+}
+@keyframes th-rise { from { opacity: 0; transform: translateY(16px); } }
+@keyframes th-media { from { opacity: .35; transform: translateY(32px) scale(.985); } }
+
+/* Foto als Use Case (z. B. Studio-Arbeitstisch) und EP-Lab-Galerie */
+.th-photo { margin: 0; border-radius: clamp(22px, 2.6vw, 36px); overflow: hidden; background: var(--bg-2); box-shadow: 0 50px 100px -60px rgba(0, 0, 0, .4); }
+.th-photo picture, .th-photo img { display: block; width: 100%; height: auto; }
+.th-photo img { aspect-ratio: 21 / 10; object-fit: cover; }
+.pb > .gallery { margin-top: 0; }
+.th-note .intro { max-width: 62ch; }
+@media (max-width: 860px) { .th-photo img { aspect-ratio: 4 / 3; } }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .pb > .th-photo { animation: th-media both var(--ease-out, cubic-bezier(.23, 1, .32, 1)); animation-timeline: view(); animation-range: entry 0% entry 45%; }
+  }
+}

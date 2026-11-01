@@ -27,8 +27,11 @@ def scale():
     return (f'{M0}<div class="ep-dauer ep-dauer--scale" role="note"><p class="ep-dauer-h"><span class="ep-dauer-ic">{CLOCK}</span>Umsetzung je nach Art</p>'
             f'<ul>{li}</ul><p class="ep-dauer-n">{H}</p></div>{M1}')
 
+SLOT = '<!--dauer-slot-->'
+
 def put_hero(s, block):
     if not block: return s
+    if SLOT in s: return s.replace(SLOT, SLOT + block, 1)  # Platz unter den Use Cases (Themen-Muster 1.11.2026)
     m = re.search(r'(<section class="hero[^"]*">.*?<p class="lead">.*?</p>)', s, flags=re.S)
     return s[:m.end()] + '\n      ' + block + s[m.end():] if m else s
 

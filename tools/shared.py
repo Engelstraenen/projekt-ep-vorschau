@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Gemeinsame Bausteine für PROJEKT EP (eine Quelle für alle Seiten).
 Erzeugt in allen Hauptseiten: Leistungsmenü (Nummern wie Startseite), Rail "Weitere Leistungen",
-Nächste-Leistung-Pager, Footer; bindet assets/ep-fx.css/js ein; maskiert H1-Wörter für die Einblendung.
+Nächste-Leistung-Pager, Footer; bindet assets/ep-fx.css/js (Leistungsseiten zusätzlich assets/themen.css) ein; maskiert H1-Wörter für die Einblendung.
 Danach immer: python3 tools/csp.py
 Aufruf: python3 tools/shared.py [datei ...]   (ohne Argumente: alle Seiten)
 """
@@ -102,6 +102,8 @@ def process(path):
     s = s.replace('href="mailto:">E-Mail folgt</a>', f'href="mailto:{MAIL}">{MAIL}</a>')
     if 'assets/ep-fx.css' not in s:
         s = s.replace('</head>', f'<link rel="stylesheet" href="{p}assets/ep-fx.css">\n</head>', 1)
+    if slug and 'assets/themen.css' not in s:  # Themen-Muster: Kurz-Intro + Use Cases (assets/themen.css)
+        s = s.replace(f'<link rel="stylesheet" href="{p}assets/ep-fx.css">\n', f'<link rel="stylesheet" href="{p}assets/ep-fx.css">\n<link rel="stylesheet" href="{p}assets/themen.css">\n', 1)
     if 'assets/ep-fx.js' not in s:
         s = s.replace('</body>', f'<script src="{p}assets/ep-fx.js" defer></script>\n</body>', 1)
     if s != o:
