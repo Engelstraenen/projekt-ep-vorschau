@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="../assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="../assets/consent-theme.css">
 <link rel="stylesheet" href="../assets/ep-fx.css">
+<link rel="stylesheet" href="../assets/themen.css">
 </head>
 <body>
 <a class="skip" href="#main">Direkt zum Inhalt</a>
@@ -54,20 +55,21 @@
   </div>
 <main id="main">
   <nav class="crumbs" aria-label="Brotkrumen"><a href="../index.html">Start</a> / <a href="../index.html#logo">Leistungen</a> / <span aria-current="page">Logo Design</span></nav>
-  <section class="hero page-hero solo sc-hero">
+  <section class="hero page-hero solo sc-hero th-hero">
     <div>
       <p class="kicker"><span>08</span><span>Brand</span></p>
       <h1 data-hw><span class="hw"><span style="--i:0">Ein</span></span> <span class="hw"><span style="--i:1">Zeichen,</span></span> <span class="hw"><span style="--i:2">das</span></span> <span class="hw"><span style="--i:3">man</span></span> <span class="hw"><span style="--i:4">nicht</span></span> <span class="hw"><span style="--i:5">vergisst.</span></span></h1>
-      <p class="lead">Logos und Markenauftritte, gezeigt an fünf Beispielen.</p>
+      <p class="lead">Vom ersten Strich bis zum Brand Guide: Logo, Farben und Schrift, die auf jeder Fläche gleich gut funktionieren.</p>
+      <ul class="th-kinds" aria-label="Das gehört dazu"><li style="--k:0">Logo &amp; Wortmarke</li><li style="--k:1">Farben &amp; Schrift</li><li style="--k:2">Brand Guide</li><li style="--k:3">Geschäftsausstattung</li><li style="--k:4">Animiertes Logo</li><li style="--k:5">Rebrand</li></ul>
     </div>
   </section>
 
   <section class="block pb-list" id="praxisbeispiele" aria-labelledby="pb-h">
-    <h2 id="pb-h" class="pb-title">Praxisbeispiele</h2>
+    <div class="th-list-h"><h2 id="pb-h" class="pb-title">Fünf Beispiele</h2><p>Vom ersten Strich bis zum Rebrand. Alle Marken sind erfunden.</p></div>
     <!-- Alle Marken fiktiv, alle Logos als SVG selbst gebaut (img/logo/). -->
 
     <article class="pb" id="entstehung" aria-labelledby="pb-ent">
-      <header class="pb-head"><p class="pb-type">Entstehung</p><h3 id="pb-ent">WÄRMEWERK <span>· Wärmepumpen &amp; Heizung</span></h3><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">Entstehung</p><h3 id="pb-ent">WÄRMEWERK <span>· Wärmepumpen &amp; Heizung</span></h3></header>
       <figure class="px-film">
         <video data-px-auto muted playsinline loop controls preload="none" width="1920" height="1080" poster="../img/logo/logo-erklaer-poster.webp" aria-label="Video mit Sprecher, Musik und Soundeffekten: drei Skizzen, die Wahl fällt auf W plus Wärme, das Zeichen wird konstruiert, bekommt Farbe und Wortmarke und wird im Einsatz gezeigt">
           <source src="../video/logo/logo-erklaer.webm" type="video/webm">
@@ -75,12 +77,14 @@
         </video>
         <figcaption><span><b>Vom Strich zur Marke</b> · 30 s · mit Ton</span><span>WÄRMEWERK ist eine fiktive Marke</span></figcaption>
       </figure>
-      <ul class="pb-tags" aria-label="Stil"><li>Animation</li><li>Bildmarke + Wortmarke</li><li>Warm</li><li>Klar</li><li>SHK &amp; Energie</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Drei Skizzen, eine Richtung, sauber konstruiert: ein W aus Wärmewellen, in Orange und Nachtblau.</p><p><b>Wirkung:</b> Zeichen, Wortmarke und App-Icon, lesbar bis in kleinste Größen.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Animation</li><li>Bildmarke + Wortmarke</li><li>Warm</li><li>Klar</li><li>SHK &amp; Energie</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Drei Skizzen, eine Richtung, sauber konstruiert: ein W aus Wärmewellen, in Orange und Nachtblau.</p><p><b>Wirkung:</b> Zeichen, Wortmarke und App-Icon, lesbar bis in kleinste Größen.</p><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
 
     <article class="pb" id="moodboards" aria-labelledby="pb-mb">
-      <header class="pb-head"><p class="pb-type">3 Richtungen zur Wahl</p><h3 id="pb-mb">FELD &amp; PARTNER <span>· Steuerberatung</span></h3><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">3 Richtungen zur Wahl</p><h3 id="pb-mb">FELD &amp; PARTNER <span>· Steuerberatung</span></h3></header>
       <div class="px-stage" style="--a:#E4ECE6;--c:#EEE7DA">
         <span class="px-badge">Beispiel · fiktive Kanzlei</span>
         <div class="px-mb" role="group" aria-label="Logo-Richtung wählen" style="padding-top:22px">
@@ -89,12 +93,14 @@
           <button type="button" class="px-glass" aria-pressed="false"><span class="fav">Favorit</span><span class="hd">C · Minimal</span><span class="lg"><img src="../img/logo/feld-c.svg" width="380" height="88" alt="Logo-Richtung C: schwarzes Quadrat mit F/P, daneben feld &amp; partner in Kleinbuchstaben"></span><span class="sw" aria-hidden="true"><i style="background:#111"></i><i style="background:#9A9A9A"></i><i style="background:#F2F2F2"></i></span><span class="tex" aria-hidden="true" style="background:linear-gradient(90deg,#111 50%,#F2F2F2 50%);"></span><span class="ty"><b>Mono</b><span>reduziert, selbstbewusst</span></span></button>
         </div>
       </div>
-      <ul class="pb-tags" aria-label="Stil"><li>Moodboards</li><li>Zum Anklicken</li><li>Seriös</li><li>Kanzlei</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Drei Richtungen mit Logo, Farben und Schrift nebeneinander, die Kanzlei wählt per Klick.</p><p><b>Wirkung:</b> Richtung B, modern und nahbar, ohne an Seriosität zu verlieren.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Moodboards</li><li>Zum Anklicken</li><li>Seriös</li><li>Kanzlei</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Drei Richtungen mit Logo, Farben und Schrift nebeneinander, die Kanzlei wählt per Klick.</p><p><b>Wirkung:</b> Richtung B, modern und nahbar, ohne an Seriosität zu verlieren.</p><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
 
     <article class="pb" id="einsatz" aria-labelledby="pb-use">
-      <header class="pb-head"><p class="pb-type">Logo im Einsatz</p><h3 id="pb-use">PHYSIO KERN <span>· Physiotherapie</span></h3><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">Logo im Einsatz</p><h3 id="pb-use">PHYSIO KERN <span>· Physiotherapie</span></h3></header>
       <div class="px-stage" style="--a:#D7ECE9;--c:#F2ECE3">
         <span class="px-badge">Beispiel · fiktive Praxis</span>
         <div class="px-use" style="padding-top:22px">
@@ -104,12 +110,14 @@
           <figure class="u-shirt"><svg viewBox="0 0 300 300" role="img" aria-label="Team-Shirt in Petrol mit weißem Logo-Zeichen auf der Brust"><path d="M95 30 L60 45 L18 90 L48 125 L72 105 L72 280 L228 280 L228 105 L252 125 L282 90 L240 45 L205 30 C195 55 175 66 150 66 C125 66 105 55 95 30 Z" fill="#1F8A84"/><path d="M95 30 C105 55 125 66 150 66 C175 66 195 55 205 30" fill="none" stroke="#16706B" stroke-width="6"/><g transform="translate(176 98) scale(.36)"><circle cx="50" cy="22" r="7" fill="#fff"/><path d="M50 36c-14 8-14 18 0 24s14 16-2 22" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/></g></svg><figcaption>Team-Shirt</figcaption></figure>
         </div>
       </div>
-      <ul class="pb-tags" aria-label="Stil"><li>Mockups</li><li>Visitenkarte</li><li>Schild</li><li>App-Icon</li><li>Textil</li><li>Praxis</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Zeichen aus Kopf und Wirbelsäule, Petrol und Sand, in allen Anwendungen geprüft.</p><p><b>Wirkung:</b> Von der Visitenkarte bis zum Team-Shirt ein Auftritt.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Mockups</li><li>Visitenkarte</li><li>Schild</li><li>App-Icon</li><li>Textil</li><li>Praxis</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Zeichen aus Kopf und Wirbelsäule, Petrol und Sand, in allen Anwendungen geprüft.</p><p><b>Wirkung:</b> Von der Visitenkarte bis zum Team-Shirt ein Auftritt.</p><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
 
     <article class="pb" id="brand-guide" aria-labelledby="pb-bg">
-      <header class="pb-head"><p class="pb-type">Brand Guide</p><h3 id="pb-bg">QUARTIER AERO <span>· Neubau-Quartier</span></h3><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">Brand Guide</p><h3 id="pb-bg">QUARTIER AERO <span>· Neubau-Quartier</span></h3></header>
       <div class="px-stage" style="--a:#EDE5D8;--c:#DCE3EA">
         <span class="px-badge">Beispiel · fiktives Projekt</span>
         <div class="px-rep" style="padding-top:22px">
@@ -123,12 +131,14 @@
           <div class="nav"><button type="button" data-dir="-1" aria-label="Vorherige Seite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" data-dir="1" aria-label="Nächste Seite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="cnt" aria-live="polite">Seite 1 / 5</span></div>
         </div>
       </div>
-      <ul class="pb-tags" aria-label="Stil"><li>Regelwerk</li><li>Zum Durchblättern</li><li>Ruhig</li><li>Immobilien</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Logo, Schutzzone, Farben, Schriften und No-Gos in einem kompakten Brand Guide.</p><p><b>Wirkung:</b> Makler, Bauschild und Website sehen gleich aus, egal wer gestaltet.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Regelwerk</li><li>Zum Durchblättern</li><li>Ruhig</li><li>Immobilien</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Logo, Schutzzone, Farben, Schriften und No-Gos in einem kompakten Brand Guide.</p><p><b>Wirkung:</b> Makler, Bauschild und Website sehen gleich aus, egal wer gestaltet.</p><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
 
     <article class="pb" id="rebrand" aria-labelledby="pb-rb">
-      <header class="pb-head"><p class="pb-type">Rebrand</p><h3 id="pb-rb">SHK KRONE <span>· Heizung &amp; Sanitär</span></h3><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></header>
+      <header class="pb-head"><p class="pb-type">Rebrand</p><h3 id="pb-rb">SHK KRONE <span>· Heizung &amp; Sanitär</span></h3></header>
       <div class="px-stage" style="--a:#DCE5F3;--c:#FCE8CF">
         <span class="px-badge">Beispiel · fiktiver Betrieb</span>
         <div class="px-ba px-glass" style="--pos:50%">
@@ -139,14 +149,11 @@
           <span class="px-handle" aria-hidden="true"></span>
         </div>
       </div>
-      <ul class="pb-tags" aria-label="Stil"><li>Vorher/Nachher</li><li>Rebrand</li><li>Modern</li><li>Handwerk</li></ul>
-      <div class="pb-foot"><div class="pb-text"><p><b>Die Idee:</b> Krone neu gedacht aus drei Rohren, eine Schrift, zwei Farben. Funktioniert auf hell, dunkel und als App-Icon.</p><p><b>Wirkung:</b> Der Betrieb bleibt erkennbar, wirkt aber zeitgemäß, auch in den <a href="ads-management.html#recruiting">Recruiting-Anzeigen</a>.</p></div></div>
+      <div class="uc-cap">
+        <ul class="pb-tags" aria-label="Stil"><li>Vorher/Nachher</li><li>Rebrand</li><li>Modern</li><li>Handwerk</li></ul>
+        <div class="uc-cap-t"><p><b>Die Idee:</b> Krone neu gedacht aus drei Rohren, eine Schrift, zwei Farben. Funktioniert auf hell, dunkel und als App-Icon.</p><p><b>Wirkung:</b> Der Betrieb bleibt erkennbar, wirkt aber zeitgemäß, auch in den <a href="ads-management.html#recruiting">Recruiting-Anzeigen</a>.</p><p class="pb-note"><b>So könnte euer Logo aussehen.</b> Inspiration mit erfundener Marke, kein Kundenprojekt.</p></div>
+      </div>
     </article>
-  </section>
-
-  <section class="block wm" aria-labelledby="wm-h">
-    <h2 id="wm-h">Was wir machen</h2>
-    <ul class="wm-grid"><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 14l3-6 3 6 2-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Logo &amp; Wortmarke</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="9" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="16" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><b>Farben &amp; Schrift</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM9 8h6M9 12h6M9 16h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><b>Brand Guide</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 10h6M7 14h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><b>Geschäfts&shy;ausstattung</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><b>Animiertes Logo</b></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Rebrand</b></li></ul>
   </section>
 
   <section class="block st" aria-labelledby="st-h">
