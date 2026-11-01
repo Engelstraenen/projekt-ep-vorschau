@@ -9,7 +9,7 @@ const tg = (k, short) => `<span class="tg ${k}">${short && k === 'auftrag' ? 'Lu
 const KAN = { tel: 'Telefon', chat: 'Chat', mail: 'E-Mail' };
 const kan = (k) => `<span class="kanal ${k}" title="${KAN[k] || k}">${ic(k === 'wa' ? 'wa' : k)}</span>`;
 const ADR = 'Chef';
-const me = () => { const L = login.get(); return { name: L?.name || 'Eugen', ini: ini(L?.name || 'Eugen K'), rolle: L?.rolle === 'ma' ? 'Mitarbeitende' : 'Geschäftsführung', da: !!L }; };
+const me = () => { const L = login.get(); return { name: L?.name || 'Max', ini: ini(L?.name || 'Max Brandt'), rolle: L?.rolle === 'ma' ? 'Mitarbeitende' : 'Geschäftsführung', da: !!L }; };
 
 // ---------------------------------------------------------------- Live-Ereignisse
 const live = { evs: [], hero: null, heroUntil: 0, filter: 'alle', stufe: null, sel: null, chatDraft: '', simIdx: { tel: 0, chat: 0 } };
@@ -178,7 +178,7 @@ function vGespraech(id, chat) {
      <div class="conv" id="conv">${lines.length ? lines.map((l, n) => lineHtml(l, chatMode, n >= prev ? 'fresh' : '')).join('') : `<p class="meta">${i.k === 'mail' ? 'E-Mail-Eingang. Der Bot hat sie gelesen, eingestuft und zusammengefasst:' : 'Kein Verlauf gespeichert.'}</p><div class="bub l" style="margin-top:8px">${esc(i.sum)}</div>`}
      ${typing ? `<div class="typing"><i></i><i></i><i></i> ${ev.mode === 'du' ? 'Bot schreibt mit …' : chatMode ? 'Chatbot tippt …' : 'Telefonbot hört zu …'}</div>` : ''}</div>
      ${chatMode ? `<form class="compose" data-form="chat" data-id="${i.id}"><input id="chatIn" name="t" autocomplete="off" placeholder="${ev?.mode === 'du' && isLive ? 'Schreib dem Besucher …' : 'Übernimm den Chat, um selbst zu schreiben'}" ${ev?.mode === 'du' && isLive ? '' : 'disabled'} value="${esc(live.chatDraft)}"><button class="btn pri" ${ev?.mode === 'du' && isLive ? '' : 'disabled'}>${ic('send')}Senden</button></form>` : ''}</section>
-   <div class="grid" style="align-content:start"><section class="card"><div class="ch">${ic('note')}KI-Zusammenfassung</div><ul class="sumlist">${sum.length ? sum.map((s, n) => `<li class="${n >= prevS ? 'fresh' : ''}">${esc(s)}</li>`).join('') : '<li>Wird beim Zuhören erstellt …</li>'}</ul></section>
+   <div class="grid" style="align-content:start"><section class="card"><div class="ch">${ic('note')}Zusammenfassung</div><ul class="sumlist">${sum.length ? sum.map((s, n) => `<li class="${n >= prevS ? 'fresh' : ''}">${esc(s)}</li>`).join('') : '<li>Wird beim Zuhören erstellt …</li>'}</ul></section>
      <section class="card"><div class="ch">${ic('check')}Deine Wahl</div>${deine}</section>
      ${i.ctx || ev?.ctx ? `<section class="card"><div class="ch">${ic('user')}Kontext</div><ul class="checks">${(i.ctx || ev.ctx).map((c) => `<li>${ic('chev')}${esc(c)}</li>`).join('')}</ul></section>` : ''}
      ${ev?.lager ? `<section class="card"><div class="ch">${ic('box')}Aus dem Lager</div><div class="meta">${esc(ev.lager.name)} · ${esc(ev.lager.color || '')} · Größe ${esc(ev.lager.size)}</div><div class="row" style="margin-top:6px"><b class="big num" style="font-size:30px">${ev.lager.n}</b><span class="meta">Stück frei · Fach ${esc(ev.lager.bin || '–')}</span></div><a class="btn ghost sm" style="margin-top:10px" href="${LINKS.lager}">${ic('box')}Im Lager zeigen</a></section>` : ''}</div></div>`;
