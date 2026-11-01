@@ -85,7 +85,8 @@ summary::after { content: '+'; color: var(--blue); font-weight: 400; font-size: 
 details[open] summary::after { rotate: 45deg; }
 details p { color: var(--ink-2); margin-top: 10px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
-.gallery img { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: 24px; display: block; }
+.gallery picture { display: block; }
+.gallery img { width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover; border-radius: 24px; display: block; }
 
 .cta-band { background: var(--night); color: #F5F5F7; border-radius: 32px; padding: clamp(40px, 6vw, 80px); margin: 40px 0 0; text-align: center; }
 .cta-band h2 { font-size: clamp(30px, 3.4vw, 52px); font-weight: 650; letter-spacing: -.04em; line-height: 1.06; max-width: 22ch; margin: 0 auto; text-wrap: balance; }

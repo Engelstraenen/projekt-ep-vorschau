@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-WzEGGxDkJc1rZyEw6m+mx8u9JaNwUueIcL11wKoGYxM=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-XmGD+jK6yWp4fFHz2f4exokWfp8Og1mKTZGzyqlm9vM=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -190,6 +190,11 @@
   #finder .swarm-slot { margin-bottom: 18px; }
   .head-row { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
   .no-gl .swarm-slot { display: none; }
+  #sharp { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  #sharp > div { position: absolute; inset: 0; transform-origin: 50% 50%; }
+  #sharp .sh { position: absolute; left: 0; top: 0; display: none; opacity: 0; overflow: hidden; }
+  #sharp picture, #sharp img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .fx section.ch[data-text]:not(.near) .dom-img picture { display: none; } /* feste Kapitel liegen alle im Bild: Fotos erst kurz vorher laden */
   html.gl .fb-img { display: none; } /* Ersatzbilder für Geräte ohne WebGL (ältere iPhones, PCs ohne Grafikbeschleunigung, manche App-Browser) */
   .card.dark .mute { color: #86868B; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
@@ -489,7 +494,7 @@
     </div>
   </section>
 
-  <section class="ch" id="websites" data-dom data-key="img:digital-design" data-side="right" data-name="Websites" data-nr="01">
+  <section class="ch" id="websites" data-dom data-key="img:websites" data-side="right" data-name="Websites" data-nr="01">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>01</span><span>Websites</span></p>
       <h2>Websites, die eine Marke unverwechselbar machen.</h2>
@@ -497,7 +502,7 @@
       <p class="tags">Website · Domain · Hosting · Business-E-Mail · Betreuung</p>
       <a class="more" href="leistungen/websites.html">Websites im Detail</a>
       <div class="sub"><small>Mit dabei</small><b>SEO &amp; Sichtbarkeit</b><p>Gefunden werden, wenn es zählt: Audit, On-page SEO, Content und lokale Suche.</p><a href="leistungen/seo.html">SEO im Detail ›</a></div>
-    </div><figure class="dom-img fb-img"><img src="lab/digital-design.webp" alt="Website auf Laptop und Smartphone" loading="lazy"></figure></div>
+    </div><figure class="dom-img fb-img"><picture><source type="image/avif" srcset="img/kapitel/websites-640.avif 640w, img/kapitel/websites-1280.avif 1280w, img/kapitel/websites-1920.avif 1920w, img/kapitel/websites-2560.avif 2560w, img/kapitel/websites-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/websites-640.webp 640w, img/kapitel/websites-1280.webp 1280w, img/kapitel/websites-1920.webp 1920w, img/kapitel/websites-2560.webp 2560w, img/kapitel/websites-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/websites-1280.webp" width="3840" height="2560" alt="Blaues Lichtband läuft durch hintereinander gestaffelte Browser- und Bildschirm-Layouts aus Glas" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
   <section class="ch" id="automatisierung" data-dom data-flock="1" data-key="flock1" data-side="left" data-name="Automatisierung &amp; Chatbots" data-nr="02">
@@ -507,17 +512,17 @@
       <p>Wir verbinden Informationen, Systeme und Freigaben. Routine wird vorbereitet oder automatisiert – wichtige Entscheidungen bleiben beim Menschen.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Zu viele manuelle Schritte</dd></div><div><dt>System</dt><dd>Chatbots, Regeln, Integrationen</dd></div><div><dt>Ergebnis</dt><dd>Weniger Aufwand, mehr Überblick</dd></div></dl>
       <a class="more" href="leistungen/automatisierung-chatbots.html">Automatisierung &amp; Chatbots im Detail</a>
-    </div><figure class="dom-img"><img src="lab/workflow.webp" alt="Kundenservice mit automatisiertem Postfach" loading="eager"></figure></div>
+    </div><figure class="dom-img"><picture><source type="image/avif" srcset="img/kapitel/automatisierung-640.avif 640w, img/kapitel/automatisierung-1280.avif 1280w, img/kapitel/automatisierung-1920.avif 1920w, img/kapitel/automatisierung-2560.avif 2560w, img/kapitel/automatisierung-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/automatisierung-640.webp 640w, img/kapitel/automatisierung-1280.webp 1280w, img/kapitel/automatisierung-1920.webp 1920w, img/kapitel/automatisierung-2560.webp 2560w, img/kapitel/automatisierung-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/automatisierung-1280.webp" width="3840" height="2560" alt="Blaues Licht fließt durch eine gläserne Workflow-Bahn, Nachrichten-Kapseln halten an einem leuchtenden Prüfpunkt kurz an" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
-  <section class="ch" id="apps" data-dom data-key="img:app-design" data-side="right" data-name="App Design" data-nr="03">
+  <section class="ch" id="apps" data-dom data-key="img:apps" data-side="right" data-name="App Design" data-nr="03">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>03</span><span>Apps</span></p>
       <h2>App Design, das sich sofort richtig anfühlt.</h2>
       <p>Von Nutzerführung und Interface Design bis zum klickbaren Prototyp und zur Entwicklung – für mobile Apps, Kundenportale und interne Tools.</p>
       <a class="more" href="leistungen/apps.html">App Design entdecken</a>
       <div class="sub"><small>Mit dabei</small><b>Game Design</b><p>Welten, die man nicht nur anschaut: Browser, Mobile, Lernspiele und Markenerlebnisse.</p><a href="leistungen/games.html">Game Design im Detail ›</a></div>
-    </div><figure class="dom-img fb-img"><img src="lab/app-design.webp" alt="Reise-App mit Karte auf einem Smartphone" loading="lazy"></figure></div>
+    </div><figure class="dom-img fb-img"><picture><source type="image/avif" srcset="img/kapitel/apps-640.avif 640w, img/kapitel/apps-1280.avif 1280w, img/kapitel/apps-1920.avif 1920w, img/kapitel/apps-2560.avif 2560w, img/kapitel/apps-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/apps-640.webp 640w, img/kapitel/apps-1280.webp 1280w, img/kapitel/apps-1920.webp 1920w, img/kapitel/apps-2560.webp 2560w, img/kapitel/apps-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/apps-1280.webp" width="3840" height="2560" alt="Gläsernes Smartphone-Layout in einem fließenden Glasstrom mit blauem Licht" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
   <section class="ch" id="film" data-dom data-flock="2" data-key="flock2" data-side="left" data-night="1" data-name="Werbeclips" data-nr="04">
@@ -528,7 +533,7 @@
       <p class="tags">Video Ads · Motion Design · Social Ads · Static Ads · Fashion-Filme · Lookbooks</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Eine Idee oder ein Produkt</dd></div><div><dt>System</dt><dd>Konzept, Generierung, Regie</dd></div><div><dt>Ergebnis</dt><dd>Creatives für jeden Kanal und jedes Format</dd></div></dl>
       <a class="more cta" href="leistungen/werbeclips.html#clips">Alle Clips ansehen</a>
-    </div><figure class="dom-img"><img src="lab/campaign.webp" alt="Filmkamera am Set einer Parfum-Kampagne" loading="eager"></figure></div>
+    </div><figure class="dom-img"><picture><source type="image/avif" srcset="img/kapitel/werbeclips-640.avif 640w, img/kapitel/werbeclips-1280.avif 1280w, img/kapitel/werbeclips-1920.avif 1920w, img/kapitel/werbeclips-2560.avif 2560w, img/kapitel/werbeclips-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/werbeclips-640.webp 640w, img/kapitel/werbeclips-1280.webp 1280w, img/kapitel/werbeclips-1920.webp 1920w, img/kapitel/werbeclips-2560.webp 2560w, img/kapitel/werbeclips-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/werbeclips-1280.webp" width="3840" height="2560" alt="Dreh im hellen Studio: Kameramann filmt mit Kamera auf einem Slider eine blaue Flasche auf weißem Sockel, daneben ein Kollege mit Kontrollmonitor" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
   <section class="ch" id="ads" data-dom data-flock="3" data-key="flock3" data-side="right" data-name="Ads-Management" data-nr="05">
@@ -539,17 +544,17 @@
       <div class="plat"><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg> Instagram &amp; Facebook</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M11 9.5v5l4-2.5z" fill="currentColor"/></svg> TikTok</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Google &amp; YouTube</span></div>
       <a class="more" href="leistungen/ads-management.html">Ads-Management im Detail</a>
       <div class="sub"><small>Passt zu</small><b>Werbeclips &amp; Ad Creatives</b><p>Die Anzeigen selbst gestalten wir auf Wunsch gleich mit. Ein Team, ein Ansprechpartner.</p><a href="#film">Zu den Werbeclips ›</a></div>
-    </div><figure class="dom-img"><picture><source type="image/avif" srcset="img/seite/ads-management-640.avif 640w, img/seite/ads-management-1280.avif 1280w, img/seite/ads-management-1920.avif 1920w, img/seite/ads-management-2560.avif 2560w" sizes="(max-width: 860px) 70vw, 50vw"><source type="image/webp" srcset="img/seite/ads-management-640.webp 640w, img/seite/ads-management-1280.webp 1280w, img/seite/ads-management-1920.webp 1920w, img/seite/ads-management-2560.webp 2560w" sizes="(max-width: 860px) 70vw, 50vw"><img src="img/seite/ads-management-1280.webp" width="2560" height="1707" alt="Zwei Kolleginnen und Kollegen besprechen am Stehtisch mit Tablet die Kampagnenergebnisse, auf dem großen Bildschirm dahinter steigende Wachstumspfeile" loading="lazy" decoding="async"></picture></figure></div>
+    </div><figure class="dom-img"><picture><source type="image/avif" srcset="img/kapitel/ads-management-640.avif 640w, img/kapitel/ads-management-1280.avif 1280w, img/kapitel/ads-management-1920.avif 1920w, img/kapitel/ads-management-2560.avif 2560w, img/kapitel/ads-management-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/ads-management-640.webp 640w, img/kapitel/ads-management-1280.webp 1280w, img/kapitel/ads-management-1920.webp 1920w, img/kapitel/ads-management-2560.webp 2560w, img/kapitel/ads-management-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/ads-management-1280.webp" width="3840" height="2560" alt="Zwei Kolleginnen und Kollegen besprechen am Stehtisch mit Tablet die Kampagnenergebnisse, auf dem großen Bildschirm dahinter steigende Wachstumspfeile" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
-  <section class="ch" id="raeume" data-dom data-key="img:spaces" data-side="left" data-name="Räume & Visualisierung" data-nr="06">
+  <section class="ch" id="raeume" data-dom data-key="img:visualisierung" data-side="left" data-name="Räume & Visualisierung" data-nr="06">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>06</span><span>Räume</span></p>
       <h2>Sehen, was möglich ist. Bevor es entsteht.</h2>
       <p>Gärten, Landschaften, Innenräume und Gebäude: Wir übersetzen eure Idee in greifbare Entwürfe – Gestaltung, Atmosphäre und Material vor der Umsetzung abstimmen.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Fotos, Skizzen oder ein Raumkonzept</dd></div><div><dt>System</dt><dd>Entwurfsrichtungen, Licht und Material</dd></div><div><dt>Ergebnis</dt><dd>Visualisierungen für Entscheidungen</dd></div></dl>
       <a class="more" href="leistungen/visualisierung.html">Visualisierungen entdecken</a>
-    </div><figure class="dom-img fb-img"><img src="lab/spaces.webp" alt="Architekturmodell einer Villa mit Visualisierung am Bildschirm" loading="lazy"></figure></div>
+    </div><figure class="dom-img fb-img"><picture><source type="image/avif" srcset="img/kapitel/visualisierung-640.avif 640w, img/kapitel/visualisierung-1280.avif 1280w, img/kapitel/visualisierung-1920.avif 1920w, img/kapitel/visualisierung-2560.avif 2560w, img/kapitel/visualisierung-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/visualisierung-640.webp 640w, img/kapitel/visualisierung-1280.webp 1280w, img/kapitel/visualisierung-1920.webp 1920w, img/kapitel/visualisierung-2560.webp 2560w, img/kapitel/visualisierung-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/visualisierung-1280.webp" width="3840" height="2560" alt="Architektin richtet ein weißes Hausmodell auf dem Arbeitstisch aus, daneben zeigt ein Kollege auf dem Tablet die Visualisierung des Hauses" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
   <section class="ch" id="print" data-dom data-flock="3" data-key="flock3" data-side="right" data-name="Print Design" data-nr="07">
@@ -559,17 +564,17 @@
       <p>Print Designs für Textilien, Objekte und Folien – von einzelnen Motiven über Kollektionen bis zur durchgängigen Gestaltung.</p>
       <p class="tags">Textildruck · Objektdruck · Folien · Packaging · Allover-Prints</p>
       <a class="more" href="leistungen/print-design.html">Print Design entdecken</a>
-    </div><figure class="dom-img"><img src="lab/print.webp" alt="Siebdruck in Blau auf einem Hoodie" loading="lazy"></figure></div>
+    </div><figure class="dom-img"><picture><source type="image/avif" srcset="img/kapitel/print-640.avif 640w, img/kapitel/print-1280.avif 1280w, img/kapitel/print-1920.avif 1920w, img/kapitel/print-2560.avif 2560w, img/kapitel/print-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/print-640.webp 640w, img/kapitel/print-1280.webp 1280w, img/kapitel/print-1920.webp 1920w, img/kapitel/print-2560.webp 2560w, img/kapitel/print-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/print-1280.webp" width="3840" height="2560" alt="Siebdrucker zieht blaue Farbe mit der Rakel durch das Sieb auf ein weißes Shirt" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
-  <section class="ch" id="logo" data-dom data-key="img:logo-design" data-side="left" data-name="Logo Design" data-nr="08">
+  <section class="ch" id="logo" data-dom data-key="img:logo" data-side="left" data-name="Logo Design" data-nr="08">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>08</span><span>Logo</span></p>
       <h2>Ein Zeichen, das man nicht mehr vergisst.</h2>
       <p>Logo, Farben, Schrift und Bildsprache als ein klares System – damit eure Marke auf Website, Print, Merch und Social Media gleich stark wirkt.</p>
       <p class="tags">Logo · Wortmarke · Corporate Identity · Brand Guide · Vorlagen</p>
       <a class="more" href="leistungen/logo-design.html">Logo Design im Detail</a>
-    </div><figure class="dom-img fb-img"><img src="lab/logo-design.webp" alt="Markenauftritt mit Logo auf Geschäftsausstattung" loading="lazy"></figure></div>
+    </div><figure class="dom-img fb-img"><picture><source type="image/avif" srcset="img/kapitel/logo-640.avif 640w, img/kapitel/logo-1280.avif 1280w, img/kapitel/logo-1920.avif 1920w, img/kapitel/logo-2560.avif 2560w, img/kapitel/logo-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/logo-640.webp 640w, img/kapitel/logo-1280.webp 1280w, img/kapitel/logo-1920.webp 1920w, img/kapitel/logo-2560.webp 2560w, img/kapitel/logo-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/logo-1280.webp" width="3840" height="2560" alt="Logo-System auf dunklem Raster: blaues Zeichen in mehreren Varianten, Farbpunkte und Anwendungen im Quer- und Hochformat" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
   <section class="ch" id="merch" data-dom data-flock="1" data-key="flock1" data-side="right" data-name="Merch-Produktion" data-nr="09">
@@ -579,17 +584,17 @@
       <p>T-Shirts, Hoodies, Sweats, Denim und Strick – gestaltet und produziert aus einer Hand, als Bulk-Produktion über Partner-Produktionsstätten ab 200 Stück je Artikel.</p>
       <dl class="chain"><div><dt>Ausgang</dt><dd>Eine Marke, ein Team oder ein Event</dd></div><div><dt>System</dt><dd>Design, Muster, Produktion</dd></div><div><dt>Ergebnis</dt><dd>Fertige Ware, die eure Marke trägt</dd></div></dl>
       <a class="more" href="leistungen/merch.html">Merch-Produktion entdecken</a>
-    </div><figure class="dom-img"><img src="lab/merch.webp" alt="Merch-Kollektion mit Hoodies, Shirts, Denim und Strick" loading="lazy"></figure></div>
+    </div><figure class="dom-img"><picture><source type="image/avif" srcset="img/kapitel/merch-640.avif 640w, img/kapitel/merch-1280.avif 1280w, img/kapitel/merch-1920.avif 1920w, img/kapitel/merch-2560.avif 2560w, img/kapitel/merch-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/merch-640.webp 640w, img/kapitel/merch-1280.webp 1280w, img/kapitel/merch-1920.webp 1920w, img/kapitel/merch-2560.webp 2560w, img/kapitel/merch-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/merch-1280.webp" width="3840" height="2560" alt="Musterabnahme im Studio: Kollegin prüft eine dunkelblaue Jacke am Kleiderständer, ein Kollege begutachtet weitere Teile am Tisch" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
-  <section class="ch" id="systeme" data-dom data-key="img:dashboards" data-side="left" data-name="Systeme & Dashboards" data-nr="10">
+  <section class="ch" id="systeme" data-dom data-key="img:systeme" data-side="left" data-name="Systeme & Dashboards" data-nr="10">
     <div class="sticky"><div class="copy">
       <p class="kicker"><span>10</span><span>Systeme</span></p>
       <h2>Alles im Blick. Ohne Tabellenchaos.</h2>
       <p>Warenwirtschaft, Personalwirtschaft und interaktive Dashboards – mit euren Tools verbunden oder passend neu gebaut.</p>
       <p class="tags">Warenwirtschaft · Personal · Schichtplanung · Dashboards · Schnittstellen</p>
       <a class="more" href="leistungen/systeme.html">Systeme im Detail</a>
-    </div><figure class="dom-img fb-img"><img src="lab/dashboards.webp" alt="Interaktives Dashboard mit Lager-, Team- und Umsatzzahlen" loading="lazy"></figure></div>
+    </div><figure class="dom-img fb-img"><picture><source type="image/avif" srcset="img/kapitel/systeme-640.avif 640w, img/kapitel/systeme-1280.avif 1280w, img/kapitel/systeme-1920.avif 1920w, img/kapitel/systeme-2560.avif 2560w, img/kapitel/systeme-3840.avif 3840w" sizes="(max-width: 860px) 100vw, 70vw"><source type="image/webp" srcset="img/kapitel/systeme-640.webp 640w, img/kapitel/systeme-1280.webp 1280w, img/kapitel/systeme-1920.webp 1920w, img/kapitel/systeme-2560.webp 2560w, img/kapitel/systeme-3840.webp 3840w" sizes="(max-width: 860px) 100vw, 70vw"><img src="img/kapitel/systeme-1280.webp" width="3840" height="2560" alt="Grafik: Tabellen- und Schichtplan-Bausteine ordnen sich diagonal zu einem Dashboard mit Balken-, Kreis- und Liniendiagramm" loading="lazy" decoding="async"></picture></figure></div>
   </section>
 
   <section class="block br" id="branchen" aria-labelledby="br-h">
@@ -829,7 +834,7 @@ async function textShape(txt, colorFn) {
 }
 const IMG_W = 4.5, IMG_H = 3.0;
 const imgCache = {};
-const loadImg = (name) => imgCache[name] ||= new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = `lab/${name}.webp`; });
+const loadImg = (name) => imgCache[name] ||= new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = `img/kapitel/${name}-640.webp`; });
 async function imageShape(name) {
   const im = await loadImg(name);
   const W = 300, H = 200, c = document.createElement('canvas'); c.width = W; c.height = H;
@@ -1206,7 +1211,8 @@ else {
   // Fotokarten: A zerfällt fleckenweise, B entsteht fleckenweise – im Takt der gelandeten Partikel
   const PAD = .5;
   const texLoader = new THREE.TextureLoader(), texCache = {};
-  const tex = (name) => texCache[name] ||= (() => { const t = texLoader.load(`lab/${name}.webp`); t.colorSpace = THREE.NoColorSpace; t.anisotropy = 8; return t; })();
+  const TEX_PX = [640, 1280, 1920, 2560].find((w) => w >= innerWidth * .6 * dpr) || 2560; // Karte ist höchstens ~58 % der Breite
+  const tex = (name) => texCache[name] ||= (() => { const t = texLoader.load(`img/kapitel/${name}-${TEX_PX}.webp`); t.colorSpace = THREE.NoColorSpace; t.anisotropy = 8; return t; })();
   chapters.forEach((s) => { if (s.dataset.key.startsWith('img:')) tex(s.dataset.key.slice(4)); });
   function makeCard(role) {
     const m = new THREE.ShaderMaterial({
@@ -1230,7 +1236,7 @@ else {
           // zarter Lichtsaum dort, wo die Partie gerade entsteht bzw. zerfällt
           c = mix(c, mix(vec3(.0,.443,.89), vec3(1.), .55), front * .35);
           float alpha = max(a, front * .22);
-          gl_FragColor = vec4(pow(c, vec3(2.2)), max(alpha, shadow * (1. - alpha)));
+          gl_FragColor = vec4(pow(c, vec3(${mobile ? '1.' : '2.2'})), max(alpha, shadow * (1. - alpha))); // mobil ohne Bloom-Pass gibt es keine sRGB-Umrechnung am Ende: Foto direkt ausgeben, sonst zu dunkel
         }`,
     });
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(IMG_W + 2 * PAD, IMG_H + 2 * PAD), m);
@@ -1243,6 +1249,20 @@ else {
     if (!card.visible) return;
     card.material.uniforms.map.value = tex(key.slice(4));
     card.position.set(pl.x, pl.y, 0); card.scale.setScalar(pl.s);
+  }
+  // Scharfe Bildebene: Sobald ein Bildkapitel steht, liegt exakt über der WebGL-Karte das echte <picture> (AVIF/WebP per
+  // srcset in voller Gerätepixeldichte). Die WebGL-Bühne rendert mobil nur mit 1,25-facher Dichte und dient für Auf- und Abbau.
+  const sharp = document.createElement('div'), sharpG = document.createElement('div'), sharpOf = new Map(), TAN16 = Math.tan(16 * Math.PI / 180);
+  sharp.id = 'sharp'; sharp.setAttribute('aria-hidden', 'true'); sharp.append(sharpG); canvas.after(sharp);
+  chapters.forEach((s) => {
+    const pic = s.dataset.key.startsWith('img:') && s.querySelector('.fb-img picture'); if (!pic) return;
+    const d = document.createElement('div'), c = pic.cloneNode(true); c.querySelector('img').alt = ''; d.className = 'sh'; d.append(c); sharpG.append(d); sharpOf.set(s, d);
+  });
+  function sharpPlace(d, pl, op) {
+    if (!pl) { if (d._v !== 'none') { d._v = 'none'; d.style.display = 'none'; } return; } // nur Bilder der beiden aktiven Kapitel laden
+    const H = innerHeight, pxU = H / (2 * TAN16 * camera.position.z), w = IMG_W * pl.s * pxU, h = IMG_H * pl.s * pxU;
+    const v = `display:block;opacity:${op.toFixed(3)};width:${w.toFixed(1)}px;height:${h.toFixed(1)}px;border-radius:${(.2 * pl.s * pxU).toFixed(1)}px;transform:translate(${(innerWidth / 2 + pl.x * pxU - w / 2).toFixed(1)}px,${(H / 2 - pl.y * pxU - h / 2).toFixed(1)}px)`;
+    if (d._v !== v) { d._v = v; d.style.cssText = v; }
   }
 
   const composer = new EffectComposer(renderer);
@@ -1368,6 +1388,7 @@ else {
     // und lösen sich bei angehefteten Kapiteln wieder auf, sobald das nächste Motiv beginnt
     for (const sec of textSecs) { // bei "Bewegung reduzieren" nur Ein-/Ausblenden (CSS nimmt Verschieben/Drehen/Zoom heraus)
       const i = chapters.indexOf(sec), pinned = sec.classList.contains('ch') && sec !== kontakt;
+      const near = i >= c.k - 1 && i <= c.k + 2; if (sec._near !== near) { sec._near = near; sec.classList.toggle('near', near); }
       let rv = 1, out = 1;
       if (i === c.k + 1 && c.u > 0) rv = clamp01((c.mix - .3) / .62);
       else if (i === c.k) out = pinned ? 1 - sm((c.u - (sec === manifest ? .25 : .1)) / .22) : 1;
@@ -1396,6 +1417,10 @@ else {
     // genau am Anker eines Bildkapitels: Foto steht komplett
     if (c.u === 0 && A.dataset.key.startsWith('img:') && !(c.k === 0)) { cardA.visible = true; placeCard(cardA, A, pa); U.uPhotoA.value = 1; }
     cardA.material.uniforms.uMix.value = mixV; cardB.material.uniforms.uMix.value = mixV;
+    // scharfe Ebene: A steht komplett bei mixV = 0, B ab mixV ≈ .965 (photoIn erreicht 1 bei landEnd + .015)
+    const opA = cardA.visible ? 1 - sm(mixV / .03) : 0, opB = imgB ? sm((mixV - .965) / .03) : 0;
+    for (const [s, d] of sharpOf) sharpPlace(d, s === A && cardA.visible ? pa : s === B && imgB ? pb : null, s === A ? opA : opB);
+    sharp.style.perspective = `${(innerHeight / (2 * TAN16)).toFixed(1)}px`;
 
     st.dark += (c.night - st.dark) * (1 - Math.exp(-6 * dt));
     U.uDark.value = st.dark; bgU.uDark.value = st.dark;
@@ -1408,6 +1433,7 @@ else {
     pointer.x += (pointer.tx - pointer.x) * .05; pointer.y += (pointer.ty - pointer.y) * .05;
     group.rotation.y = reduced ? 0 : pointer.x * .06;
     group.rotation.x = reduced ? 0 : pointer.y * .04;
+    sharpG.style.transform = group.rotation.x || group.rotation.y ? `rotateX(${(-group.rotation.x).toFixed(4)}rad) rotateY(${group.rotation.y.toFixed(4)}rad)` : '';
     camera.position.z = 11 - (reduced ? 0 : Math.sin(c.u * Math.PI) * .45);
     U.uTime.value = reduced ? time * .35 : time; // "Bewegung reduzieren": Schwarm lebt, aber deutlich ruhiger
 
