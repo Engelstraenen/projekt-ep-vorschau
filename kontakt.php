@@ -3,26 +3,37 @@
  * PROJEKT EP – Kontaktformular-Versand (IONOS Webhosting, PHP 8.x)
  * - keine Zugangsdaten im Code: Versand über PHP mail() des IONOS-Webspace
  * - Schutz: nur POST, Herkunftsprüfung, Honeypot, Mindest-Ausfüllzeit, Rate-Limit (IP nur als Hash, 1 h),
- *   Längenbegrenzung, Header-Injection-Schutz, keine Ausgabe von Nutzereingaben
+ *   Längenbegrenzung, Header-Injection-Schutz, keine Ausgabe von Nutzereingaben,
+ *   Sec-Fetch-Site-Prüfung, Größenlimit, nur Text-Felder (keine Arrays), Auswahlfelder nur mit Formularwerten
  */
 declare(strict_types=1);
 
 const TO       = 'kontakt@projekt-ep.de';
 const FROM     = 'kontakt@projekt-ep.de';           // Absender muss ein IONOS-Postfach der Domain sein
-const HOSTS    = ['projekt-ep.de', 'www.projekt-ep.de'];
+const HOSTS    = ['projekt-ep.de', 'www.projekt-ep.de', 'test.projekt-ep.de']; // test.: geschützte Test-Subdomain laut docs/IONOS-UMZUG.md
 const MIN_SECS = 4;      // schneller ausgefüllt = Bot
 const MAX_PER_HOUR = 5;  // Anfragen je IP-Hash und Stunde
+const LEISTUNGEN = ['', 'Website', 'Werbeclips', 'Logo Design', 'Print Design', 'Merch', 'SEO', 'Apps', 'Games',
+  'Automatisierung & Chatbots', 'Systeme & Dashboards', 'Visualisierung', 'Etwas anderes']; // = Optionen in kontakt.html
 
+ini_set('display_errors', '0');   // nie Fehlermeldungen/Pfade an Besucher ausgeben
 header('X-Content-Type-Options: nosniff');
+header('Referrer-Policy: same-origin');
 header('Cache-Control: no-store');
 
 function back(string $q): never { header('Location: /kontakt.html?' . $q, true, 303); exit; }
+function field(string $k): string { $v = $_POST[$k] ?? ''; return is_string($v) ? $v : ''; } // Arrays (name[]=) abweisen
 function clean(string $v, int $max): string {
+  if (!mb_check_encoding($v, 'UTF-8')) return '';
   $v = trim(str_replace("\0", '', $v));
   return mb_substr($v, 0, $max);
 }
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') { http_response_code(405); header('Allow: POST'); exit; }
+if ((int)($_SERVER['CONTENT_LENGTH'] ?? 0) > 20000) { http_response_code(413); exit; }   // übergroße Anfragen
+// Browser-Signal: nur Formularversand von der eigenen Seite (fehlt bei sehr alten Browsern -> dann Origin/Referer)
+$sfs = $_SERVER['HTTP_SEC_FETCH_SITE'] ?? '';
+if ($sfs !== '' && $sfs !== 'same-origin') back('err=origin');
 
 // Herkunft prüfen (einfacher CSRF-Schutz)
 $origin = $_SERVER['HTTP_ORIGIN'] ?? ($_SERVER['HTTP_REFERER'] ?? '');
@@ -30,27 +41,29 @@ $host = parse_url($origin, PHP_URL_HOST) ?: '';
 if (!in_array($host, HOSTS, true)) back('err=origin');
 
 // Honeypot und Zeitfalle: Bots bekommen eine neutrale Erfolgsmeldung
-if (!empty($_POST['website'])) back('ok=1');
-$ts = (int)($_POST['ts'] ?? 0);
+if (field('website') !== '') back('ok=1');
+$ts = (int)field('ts');
 if ($ts <= 0 || (time() - $ts) < MIN_SECS || (time() - $ts) > 86400) back('ok=1');
 
 // Rate-Limit: gehashte IP, Datei außerhalb des Web-Roots, wenn möglich
 $dir = rtrim(sys_get_temp_dir(), '/') . '/ep-ratelimit';
 if (!is_dir($dir)) @mkdir($dir, 0700, true);
-$key = $dir . '/' . hash('sha256', ($_SERVER['REMOTE_ADDR'] ?? '') . '|' . date('Y-m-d-H'));
+// IP nur gesalzen gehasht (Salz = Pfad dieser Datei auf dem Server, nicht im Repo erratbar), Schlüssel wechselt stündlich
+$key = $dir . '/' . hash_hmac('sha256', ($_SERVER['REMOTE_ADDR'] ?? '') . '|' . date('Y-m-d-H'), __FILE__ . php_uname('n'));
 $count = is_file($key) ? (int)file_get_contents($key) : 0;
 if ($count >= MAX_PER_HOUR) { http_response_code(429); back('err=rate'); }
 @file_put_contents($key, (string)($count + 1), LOCK_EX);
 foreach (glob($dir . '/*') ?: [] as $f) { if (filemtime($f) < time() - 3600) @unlink($f); }
 
 // Eingaben prüfen
-$name      = clean((string)($_POST['name'] ?? ''), 100);
-$email     = clean((string)($_POST['email'] ?? ''), 200);
-$firma     = clean((string)($_POST['firma'] ?? ''), 150);
-$kundentyp = clean((string)($_POST['kundentyp'] ?? ''), 40);
+$name      = clean(field('name'), 100);
+$email     = clean(field('email'), 200);
+$firma     = clean(field('firma'), 150);
+$kundentyp = clean(field('kundentyp'), 40);
 if (!in_array($kundentyp, ['', 'Unternehmen', 'Verein', 'Öffentlicher Auftraggeber', 'Privatperson'], true)) $kundentyp = '';
-$leistung  = clean((string)($_POST['leistung'] ?? ''), 60);
-$nachricht = clean((string)($_POST['nachricht'] ?? ''), 5000);
+$leistung  = clean(field('leistung'), 60);
+if (!in_array($leistung, LEISTUNGEN, true)) $leistung = '';
+$nachricht = clean(field('nachricht'), 5000);
 
 if ($name === '' || mb_strlen($nachricht) < 10) back('err=input');
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) back('err=email');
