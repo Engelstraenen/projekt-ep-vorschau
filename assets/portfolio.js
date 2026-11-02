@@ -27,6 +27,8 @@
     { id: 'spot-kleinfeld', sparte: 'ugc', quer: true, titel: 'Kleinfeld Haustechnik', zweck: 'Image-Spot für einen Kölner Handwerksbetrieb.', dauer: 20 },
     { id: 'spot-hartmann', sparte: 'ugc', quer: true, titel: 'Autoservice Hartmann', zweck: 'Kurz-Spot für eine Hamburger Kfz-Werkstatt.', dauer: 15 },
     { id: 'schlumma', sparte: 'cgi', titel: 'So weich, wie dein Montag sein sollte.', zweck: 'CGI-Spot für die erfundene Marke SCHLUMMA: eine ultraweiche Couch im Zugabteil.', dauer: 8.83 },
+    { id: 'cgi-polar-husky', sparte: 'cgi', quer: true, titel: 'POLAR · Husky', zweck: 'CGI-Spot für POLAR: Eine Dose öffnet sich, und die Küche versinkt mit einem Husky-Welpen im Schnee.', dauer: 10.14 },
+    { id: 'cgi-polar-office', sparte: 'cgi', quer: true, titel: 'POLAR · Office', zweck: 'CGI-Spot für POLAR: Ein heißer Büronachmittag, ein Schluck, und der ganze Arbeitsplatz friert ein.', dauer: 10.14 },
     { id: 'motion-zitra', sparte: 'motion', titel: 'Durst? Drei Sorten. Null Langeweile.', zweck: 'Motion-Graphics-Spot für ZITRA, eine erfundene Limonade.', dauer: 12 },
     { id: 'motion-lindholz', sparte: 'motion', titel: 'Erst eine Linie. Dann ein Plan. Dann Holz.', zweck: 'Motion-Graphics-Spot für Lindholz, eine erfundene Tischlerei für Möbel nach Maß.', dauer: 13 },
     { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für BLATTFON, eine erfundene Gieß-App, mit sprechender Pflanze.', dauer: 8.83 },
