@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-8fPFeCuLiKkRrSWg2eHTp8s4hW0kiZMxwlKjE8z2mVY=' 'sha256-T6i9WO10c4YMO/oQCAI7lRObDS/Fw2qzZcG1Rpozvr8=' 'sha256-bmhfAvXSOhcD/jjg9LeS8ibyikdbaYrMiunewYG5ebg=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-/peqWEqazhoqWMmzleg2l7sOTsq9EReP9pnCJiior3Q=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-T6i9WO10c4YMO/oQCAI7lRObDS/Fw2qzZcG1Rpozvr8=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -486,7 +486,7 @@
         <p class="eyebrow"><span class="lang">Unabhängige Kreativagentur · </span>Strategie · Gestaltung · Entwicklung</p>
         <h1>Vom ersten Gedanken. <span class="blue">Zum fertigen Ergebnis.</span></h1>
         <p class="lead">Wir machen Ideen sichtbar und auffindbar: mit Werbeclips, Logo Design, Print, Merch und SEO. Und erlebbar als Websites, Apps, Games, Dashboards und Abläufe, die von selbst laufen.</p>
-        <button class="vthumb" type="button" aria-haspopup="dialog"><video muted loop playsinline preload="none" aria-hidden="true"></video><span class="vposter" aria-hidden="true"><b>E<span>P</span></b><img src="video/erklaervideo-poster.webp" alt="" data-remove-on-error></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
+        <button class="vthumb" type="button" aria-haspopup="dialog"><video muted loop playsinline preload="none" aria-hidden="true"></video><span class="vposter" aria-hidden="true"><b>E<span>P</span></b><img src="video/erklaervideo-poster-640.webp" srcset="video/erklaervideo-poster-640.webp 640w, video/erklaervideo-poster.webp 1280w" sizes="(max-width: 440px) 100vw, 400px" alt="" loading="lazy" decoding="async" data-remove-on-error></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
       </div>
     </div>
   </section>
@@ -673,7 +673,7 @@
 <!-- es-module-shims entfernt (Audit 10/2026): löste unter strikter CSP blob:-Skripte aus; Import-Maps können alle aktuellen Browser nativ (Safari ab 16.4). -->
 <script type="importmap">
 { "imports": {
-  "three": "./assets/vendor/three/build/three.module.js",
+  "three": "./assets/vendor/three/build/three.module.min.js",
   "three/addons/": "./assets/vendor/three/examples/jsm/"
 } }
 </script>
@@ -1584,7 +1584,9 @@ show('zeit');
   P.v.addEventListener('loadedmetadata', () => {
     thumb.querySelector('.vthumb-dur').textContent = '▶ ' + P.box.querySelector('.vdur').textContent;
     const calm = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData;
-    if (!calm) { tv.src = 'video/erklaervideo-vorschau.mp4'; tv.play().then(() => thumb.classList.add('live')).catch(() => {}); }
+    // Vorschau erst laden, wenn das Vorschaubild in die Nähe des Bildschirms kommt (spart ~1 MB beim Seitenstart)
+    if (!calm) new IntersectionObserver((es, io) => { if (!es[0].isIntersecting) return; io.disconnect();
+      tv.src = 'video/erklaervideo-vorschau.mp4'; tv.play().then(() => thumb.classList.add('live')).catch(() => {}); }, { rootMargin: '800px 0px' }).observe(thumb);
   });
   // Kino öffnen/schließen; Scrollen der Seite ruht, solange das Video offen ist
   const kino = document.querySelector('.kino');
