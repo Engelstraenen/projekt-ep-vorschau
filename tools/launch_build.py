@@ -39,6 +39,39 @@ Sitemap: https://projekt-ep.de/sitemap.xml
 """
 
 S = re.S
+
+# Tracking (nur mit --tracking ga4,ads,meta,tiktok). Je Dienst: ID-Schlüssel in assets/consent.js,
+# Überschrift des Datenschutz-Abschnitts und CSP-Freigaben (Quelle: Google-/Meta-/TikTok-Doku zu CSP).
+TRACKERS = {
+  'ga4':    {'key': 'ga4', 'h3': 'Google Analytics 4',
+             'script-src': ['https://www.googletagmanager.com'],
+             'connect-src': ['https://*.google-analytics.com', 'https://*.analytics.google.com', 'https://*.googletagmanager.com'],
+             'img-src': ['https://*.google-analytics.com', 'https://*.googletagmanager.com']},
+  'ads':    {'key': 'googleAds', 'h3': 'Google Ads und Conversion-Tracking',
+             'script-src': ['https://www.googletagmanager.com', 'https://www.googleadservices.com', 'https://googleads.g.doubleclick.net'],
+             'connect-src': ['https://www.google.com', 'https://*.doubleclick.net', 'https://www.googleadservices.com', 'https://pagead2.googlesyndication.com'],
+             'img-src': ['https://www.google.com', 'https://www.google.de', 'https://*.doubleclick.net', 'https://www.googleadservices.com'],
+             'frame-src': ['https://td.doubleclick.net', 'https://www.googletagmanager.com']},
+  'meta':   {'key': 'metaPixel', 'h3': 'Meta-Pixel (Facebook/Instagram)',
+             'script-src': ['https://connect.facebook.net'],
+             'connect-src': ['https://www.facebook.com', 'https://connect.facebook.net'],
+             'img-src': ['https://www.facebook.com']},
+  'tiktok': {'key': 'tiktokPixel', 'h3': 'TikTok-Pixel',
+             'script-src': ['https://analytics.tiktok.com'],
+             'connect-src': ['https://analytics.tiktok.com', 'https://*.tiktok.com'],
+             'img-src': ['https://analytics.tiktok.com']},
+}
+
+def csp_extend(policy, add):
+    parts = [p.strip() for p in policy.split(';') if p.strip()]
+    names = [p.split()[0] for p in parts]
+    for d, srcs in add.items():
+        if d in names:
+            i = names.index(d); have = parts[i].split()
+            parts[i] = ' '.join(have + [x for x in srcs if x not in have])
+        else:
+            parts.insert(len(parts) - 1, d + " 'self' " + ' '.join(srcs)); names = [p.split()[0] for p in parts]
+    return '; '.join(parts)
 # (Kategorie, Datei, Muster (Regex), Ersatz). Jedes Muster MUSS genau einmal passen, sonst Abbruch
 # (so fällt auf, wenn sich der Quelltext geändert hat).
 RULES = [
@@ -86,10 +119,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=os.path.join(os.path.dirname(ROOT), 'ep-launch', 'dist'))
     ap.add_argument('--entfernen', default='chat,tracking')
+    ap.add_argument('--tracking', default='', help='z. B. ga4,ads,meta,tiktok – nur wenn IDs in assets/consent.js stehen')
     ap.add_argument('--hsts-start', action=argparse.BooleanOptionalAction, default=True,
                     help='HSTS max-age=300 für den ersten Tag (Standard). --no-hsts-start = 1 Jahr aus .htaccess')
     a = ap.parse_args()
     cats = {c.strip() for c in a.entfernen.split(',') if c.strip()}
+    trk = [t.strip() for t in a.tracking.split(',') if t.strip()]
+    for t in trk:
+        if t not in TRACKERS: sys.exit(f'unbekannter Dienst: {t} (erlaubt: {", ".join(TRACKERS)})')
+    if trk: cats.discard('tracking')   # Datenschutz-Abschnitte zu Analyse/Werbung bleiben dann sichtbar
     out = os.path.abspath(a.out)
     if os.path.commonpath([out, ROOT]) == ROOT: sys.exit('Zielordner darf nicht im Repo liegen')
     if os.path.isdir(out): shutil.rmtree(out)
@@ -144,6 +182,41 @@ def main():
             if not m: errors.append(f'{path}: {attr} fehlt')
             elif m.group(1).rstrip('/') != loc.rstrip('/'): errors.append(f'{path}: {attr}={m.group(1)} != {loc}')
         open(f, 'w', encoding='utf-8').write(h)
+
+    # Tracking-Schalter: IDs prüfen, CSP (Header + Meta) erweitern, Datenschutz anpassen, Banner neu fragen
+    if trk:
+        cj = open(os.path.join(out, 'assets/consent.js'), encoding='utf-8').read()
+        add = {}
+        for t in trk:
+            m = re.search(TRACKERS[t]['key'] + r":\s*'([^']*)'", cj)
+            if not m or not m.group(1): errors.append(f'Tracking {t}: keine ID in assets/consent.js ({TRACKERS[t]["key"]})')
+            for d, v in TRACKERS[t].items():
+                if d.endswith('-src'): add.setdefault(d, []).extend(x for x in v if x not in add.get(d, []))
+        # Einwilligungen, die ohne aktive Dienste erteilt wurden, neu abfragen
+        cj = re.sub(r'revision: (\d+)', lambda m: f'revision: {int(m.group(1)) + 1}', cj, count=1)
+        open(os.path.join(out, 'assets/consent.js'), 'w', encoding='utf-8').write(cj)
+        hp = os.path.join(out, '.htaccess'); ht = open(hp, encoding='utf-8').read()
+        ht = re.sub(r'(Content-Security-Policy ")([^"]+)(")', lambda m: m.group(1) + csp_extend(m.group(2), add) + m.group(3), ht, count=1)
+        open(hp, 'w', encoding='utf-8').write(ht)
+        for d, _, fs in os.walk(out):
+            if os.path.relpath(d, out).startswith('referenzen'): continue
+            for fn in fs:
+                if not fn.endswith('.html'): continue
+                f = os.path.join(d, fn); h = open(f, encoding='utf-8').read()
+                h2 = re.sub(r'(<meta http-equiv="Content-Security-Policy" content=")([^"]+)(")', lambda m: m.group(1) + csp_extend(m.group(2), add) + m.group(3), h)
+                if h2 != h: open(f, 'w', encoding='utf-8').write(h2)
+        # Datenschutz: nur gewählte Dienste behalten, Hinweis-Platzhalter dazu entfernen
+        dp = os.path.join(out, 'datenschutz.html'); h = open(dp, encoding='utf-8').read()
+        for t, cfg in TRACKERS.items():
+            sec = re.escape('<h3>' + cfg['h3'] + '</h3>') + r'\s*<p>.*?</p>'
+            if t in trk:
+                h = re.sub('(' + sec + ')', lambda m: m.group(1).replace('<span class="ph">[nur bei Einsatz]</span> ', ''), h, count=1, flags=S)
+            else:
+                h, n = re.subn(r'\s*' + sec, '', h, count=1, flags=S)
+                if n != 1: errors.append(f'Datenschutz-Abschnitt {cfg["h3"]} nicht gefunden')
+        h = re.sub(r'\s*<p><span class="ph">\[Abschnitt nur behalten, wenn.*?</p>', '', h, count=1, flags=S)
+        open(dp, 'w', encoding='utf-8').write(h)
+        print('Tracking freigeschaltet (nach Einwilligung):', ', '.join(trk))
 
     # Rechtstexte: nicht genutzte Dienste ausblenden
     for cat, fn, pat, rep in RULES:
