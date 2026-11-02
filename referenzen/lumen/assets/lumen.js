@@ -26,6 +26,21 @@
     return out;
   }
 
+
+  /* Liquid Glass: Brechung nur in Chromium (backdrop-filter mit SVG-Filter), Glanzlicht folgt dem Zeiger */
+  try {
+    const brands = (navigator.userAgentData && navigator.userAgentData.brands) || [];
+    if (brands.some((b) => /Chromium|Google Chrome|Microsoft Edge/.test(b.brand))) document.documentElement.classList.add('lg-ok');
+  } catch (e) { /* ohne Brechung */ }
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.addEventListener('pointermove', (e) => {
+      const g = e.target.closest && e.target.closest('.glass'); if (!g) return;
+      const r = g.getBoundingClientRect();
+      g.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
+      g.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
+    }, { passive: true });
+  }
+
   /* Kopf: Zustand beim Scrollen, Menü, Öffnungsstatus */
   const head = $('[data-head]');
   if (head) {

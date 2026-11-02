@@ -391,3 +391,71 @@ input{caret-color:var(--pine)}
 .js-pin .room figcaption{max-width:36ch}
 .rooms{position:relative}
 .field{min-width:0}.field input{width:100%;min-width:0}
+
+/* ===== Liquid Glass (sichtbar, aber dosiert: Kopfzeile, Karten und Labels über Fotos) ===== */
+.lg-defs{position:absolute;width:0;height:0;overflow:hidden}
+.glass{
+  --gl-tint:rgba(255,255,255,.30);
+  background:linear-gradient(155deg,rgba(255,255,255,.52) 0%,var(--gl-tint) 42%,rgba(255,255,255,.18) 100%);
+  backdrop-filter:blur(14px) saturate(1.8) brightness(1.04);-webkit-backdrop-filter:blur(14px) saturate(1.8) brightness(1.04);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.35),inset 0 0 22px rgba(255,255,255,.28),0 22px 44px -22px rgba(20,30,26,.42),0 2px 6px -2px rgba(20,30,26,.12);
+  isolation:isolate;
+}
+/* Lichtkante: heller Rand oben links, gebrochen unten rechts */
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:2;
+  background:linear-gradient(140deg,rgba(255,255,255,.95),rgba(255,255,255,.18) 38%,rgba(255,255,255,.06) 62%,rgba(255,255,255,.7));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+/* Glanzlicht, folgt dem Zeiger */
+.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:radial-gradient(380px circle at var(--mx,22%) var(--my,0%),rgba(255,255,255,.55),transparent 42%);opacity:.75;transition:opacity .3s ease}
+.lg-ok .glass--refract{backdrop-filter:url(#lg-refract) blur(10px) saturate(1.9) brightness(1.05)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:rgba(250,251,248,.93)}}
+
+/* Kopfzeile als schwebende Glas-Leiste */
+.site-head{padding-top:10px}
+.site-head.is-scrolled{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none}
+.site-head__in{min-height:64px;padding:0 10px 0 22px;border-radius:999px;position:relative}
+.site-head.is-hidden{transform:translateY(calc(-100% - 12px))}
+.home .site-head{margin-bottom:-84px}
+.home .hero{padding-top:calc(84px + clamp(28px,5vw,64px))}
+.menu{margin:8px var(--pad) 0;border-radius:24px;border-top:0}
+
+/* Hero: Fakten als Glas-Tafel über dem Foto */
+.facts.glass{position:absolute;right:clamp(14px,2.4vw,32px);bottom:clamp(14px,2.4vw,32px);margin:0;padding:16px 8px;border-radius:var(--r);grid-template-columns:repeat(3,auto);max-width:calc(100% - 420px)}
+.facts.glass li{border-top:0;padding:2px 20px;font-size:14.5px}
+.facts.glass li+li{border-left:1px solid rgba(255,255,255,.55)}
+.facts.glass span{color:#3e4743}
+.hero__frame.is-clip .facts.glass{right:calc(var(--pad) + clamp(14px,2.4vw,32px))}
+.next{--gl-tint:rgba(255,255,255,.36)}
+
+/* Behandlungen: Glas-Label auf dem Foto */
+.chap__img{position:relative}
+.chap__tag{position:absolute;left:16px;bottom:16px;padding:10px 16px;border-radius:999px;font-size:14.5px;font-weight:550;color:var(--ink)}
+
+/* Rundgang: Glas-Label */
+.room__img{position:relative}
+.room__tag{position:absolute;left:14px;top:14px;padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;color:var(--ink)}
+
+/* Termin: Formular als Glasfläche über dem Empfangsfoto */
+.booking__bg img{filter:saturate(.95)}
+.booking__bg::after{background:linear-gradient(180deg,rgba(240,242,238,.86),rgba(240,242,238,.42) 45%,rgba(240,242,238,.78))}
+.book.glass{--gl-tint:rgba(255,255,255,.55);background:linear-gradient(155deg,rgba(255,255,255,.80),rgba(255,255,255,.62) 50%,rgba(255,255,255,.70));border-radius:calc(var(--r) + 6px)}
+.book.glass .field input{background:rgba(255,255,255,.75)}
+.book.glass .chip span{background:rgba(255,255,255,.7)}
+.summary.glass{--gl-tint:rgba(255,255,255,.4)}
+
+@media (max-width:1180px){.facts.glass{max-width:none;left:auto}}
+@media (max-width:980px){
+  .facts.glass{position:static;grid-template-columns:repeat(3,1fr);margin:12px;}
+}
+@media (max-width:700px){
+  .site-head{padding-top:8px}
+  .site-head__in{min-height:56px;padding:0 6px 0 18px}
+  .home .site-head{margin-bottom:-72px}
+  .home .hero{padding-top:calc(72px + 24px)}
+  .facts.glass{position:absolute;left:12px;right:12px;bottom:12px;grid-template-columns:1fr;padding:6px 4px;display:none}
+  .chap__tag{left:10px;bottom:10px;font-size:13.5px;padding:8px 13px}
+}
+.book.glass .chip input:checked+span{background:var(--pine);border-color:var(--pine);color:#f6f4ef}.book.glass .chip input:disabled+span{background:transparent}
+.booking__bg::after{background:linear-gradient(90deg,rgba(240,242,238,.94) 0%,rgba(240,242,238,.84) 30%,rgba(240,242,238,.38) 58%,rgba(240,242,238,.6) 100%)}
+@media (max-width:980px){.booking__bg::after{background:rgba(240,242,238,.82)}}
