@@ -12,12 +12,13 @@
   if (!sec) return;
   const B = sec.dataset.pf || ''; // Pfad zur Website-Wurzel, auf der Unterseite "../"
 
+  // label = Rubrik-Label (blau, „01 · UGC-Ads“), h = Rubrik-Überschrift, lead = was die Sparte ist und was sie besonders macht
   const SPARTEN = [
-    { id: 'ugc', name: 'UGC' },
-    { id: 'cgi', name: 'CGI' },
-    { id: 'motion', name: 'Motion Graphics' },
-    { id: 'static', name: 'Static Ads' },        // typ: 'bild' – Motiv ohne Video
-    { id: 'fashion', name: 'Fashion- & Lookbook-Film' },
+    { id: 'ugc', name: 'UGC', label: 'UGC-Ads', h: 'Echte Gesichter, echter Alltag.', lead: 'Clips im Stil echter Nutzer: nahbar, mit Untertiteln und in Sekunden erklärt.' },
+    { id: 'cgi', name: 'CGI', label: 'CGI-Ads', h: 'Das Produkt in einer eigenen Welt.', lead: 'Computergenerierte Bilder, die so kaum zu drehen wären und im Feed hängen bleiben.' },
+    { id: 'motion', name: 'Motion Graphics', label: 'Motion Graphics', h: 'Auf den Punkt animiert.', lead: 'Bewegte Formen und Schrift machen auch Erklärungsbedürftiges sofort verständlich.' },
+    { id: 'static', name: 'Static Ads', label: 'Static Ads', h: 'Ein Motiv, das sofort wirkt.', lead: 'Starke Einzelmotive und Carousels, auf Wunsch mit bewegter Version für Story und Reels.' },        // typ: 'bild' – Motiv ohne Video
+    { id: 'fashion', name: 'Fashion- & Lookbook-Film', label: 'Fashion & Lookbook', h: 'Mode mit einer kleinen Geschichte.', lead: 'Kurze Filme, die Kleidung in Szene setzen, für jede Plattform im passenden Format.' },
   ];
   const CLIPS = [
     { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für SPRUZ, ein erfundenes Trockenshampoo.', dauer: 9.13 },
@@ -62,10 +63,14 @@
   // ---------- Aufbau ----------
   const used = SPARTEN.filter((s) => CLIPS.some((c) => c.sparte === s.id));
   const groups = sec.querySelector('.pf-groups');
+  let nr = 0;
   groups.innerHTML = SPARTEN.map((s) => {
     const list = CLIPS.filter((c) => c.sparte === s.id);
-    return `<section class="pf-group" data-sparte="${s.id}" aria-labelledby="pf-g-${s.id}"${list.length ? '' : ' hidden'}>` +
-      `<div class="pf-group-head"><h3 id="pf-g-${s.id}">${esc(s.name)}</h3><span class="pf-count">${list.length} ${list.length === 1 ? 'Beispiel' : 'Beispiele'}</span></div>` +
+    nr += list.length ? 1 : 0;
+    // Rubrik (assets/themen.css .rb): Linie, Nummer + Label, Überschrift, Kurztext, dann die Clips
+    return `<section class="pf-group rb" id="sparte-${s.id}" data-sparte="${s.id}" aria-labelledby="pf-g-${s.id}"${list.length ? '' : ' hidden'}>` +
+      `<header class="pf-group-head rb-head"><p class="rb-label"><span class="rb-nr">${String(nr).padStart(2, '0')}</span><span class="rb-dot" aria-hidden="true"> · </span>${esc(s.label || s.name)}</p>` +
+      `<h2 id="pf-g-${s.id}" class="rb-h">${esc(s.h || s.name)}</h2>${s.lead ? `<p class="rb-lead">${esc(s.lead)}</p>` : ''}<span class="pf-count">${list.length} ${list.length === 1 ? 'Beispiel' : 'Beispiele'}</span></header>` +
       `<ul class="pf-row" data-lenis-prevent-horizontal>` + list.map((c) => `<li class="pf-card" data-id="${c.id}" data-sparte="${c.sparte}">${media(c, '(max-width: 860px) 46vw, 240px')}${caption(c)}</li>`).join('') + `</ul></section>`;
   }).join('');
   sec.dataset.ready = '';
