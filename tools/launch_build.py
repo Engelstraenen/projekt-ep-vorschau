@@ -118,7 +118,7 @@ def public(p):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=os.path.join(os.path.dirname(ROOT), 'ep-launch', 'dist'))
-    ap.add_argument('--entfernen', default='chat,tracking')
+    ap.add_argument('--entfernen', default='chat,tracking,zahlung')
     ap.add_argument('--tracking', default='', help='z. B. ga4,ads,meta,tiktok – nur wenn IDs in assets/consent.js stehen')
     ap.add_argument('--hsts-start', action=argparse.BooleanOptionalAction, default=True,
                     help='HSTS max-age=300 für den ersten Tag (Standard). --no-hsts-start = 1 Jahr aus .htaccess')
