@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-/peqWEqazhoqWMmzleg2l7sOTsq9EReP9pnCJiior3Q=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-q65DFxqWxHNE4M2xS5C+ca3g+zE8IvaYHv2nGFNxoXc=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-/peqWEqazhoqWMmzleg2l7sOTsq9EReP9pnCJiior3Q=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-cBKZU9If80jAU232XR8EoMPTcLgsISHnWlai+Ih1psc=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -315,7 +315,7 @@
   /* Fotos hinter dem Schwarm (data-flock): +50 % breiter als vorher (Handy 70 % der Inhaltsbreite → ~92 % der Bildschirmbreite,
      16 px Rand). Der Schwarm skaliert in flockPlace() mit der Bildbreite mit und bleibt oben/unten und an den Rändern sichtbar. */
   @media (max-width: 860px) and (orientation: portrait) {
-    section[data-flock] .dom-img { --w: min(calc(100% + 2 * var(--gutter) - 32px), var(--fitw, 100vw)); width: var(--w); justify-self: start; margin-left: calc((100% - var(--w)) / 2); }
+    section[data-flock] .dom-img { --w: calc(100% + 2 * var(--gutter) - 32px); width: var(--w); max-height: none; justify-self: start; margin-left: calc((100% - var(--w)) / 2); } /* alle Schwarm-Fotos gleich groß (Bildschirmbreite − 2 × 16 px), unabhängig von der Textlänge – reicht der Platz nicht, wird das Kapitel länger (fitChapters) */
   }
   @media (max-width: 860px) and (orientation: landscape) { section[data-flock] .dom-img { width: 70%; } } /* Handy quer: wie bisher, sonst fehlt die Höhe */
   /* Desktop/Tablet quer: das Foto wächst in den äußeren Rand und bis an die Textspalte (Text bleibt frei) */
@@ -452,6 +452,35 @@
   .film-stage.done .film-cap { opacity: 1; }
   .film-stage.playing .film-cap { opacity: 1; }
   @media (max-width: 800px) { .film-stage video { aspect-ratio: 1 / 1; object-fit: cover; border-radius: 22px; } }
+
+  /* ===== Kapitel-Rhythmus (Eugen, 2.11.2026): größere Kapitel-Überschriften, klare Abstände, Kapitelkopf wie auf den Unterseiten =====
+     Kapitelkopf = feine Linie (#D2D2D7) über die Textbreite + Nummer und Label in Blau. Die Linie zieht sich im Takt des Textaufbaus
+     von links auf (--rv) und mit dem Abbau wieder zurück (--out) – nur transform, kein Layout. */
+  section.ch .copy > .kicker { position: relative; padding-top: 24px; margin-bottom: 24px; font-size: 13px; font-weight: 600; letter-spacing: .1em; line-height: 1.2; gap: 12px; }
+  section.ch .copy > .kicker > span:first-child { opacity: 1; font-variant-numeric: tabular-nums; }
+  section.ch .copy > .kicker::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--rule); transform-origin: 0 50%; transform: scaleX(min(var(--rv, 1), var(--out, 1))); }
+  section.ch .copy > h2 { font-size: clamp(32px, min(3.7vw, 6.1vh), 60px); line-height: 1.05; letter-spacing: -.04em; text-wrap: balance; }
+  section.ch .copy > p:not(.kicker) { margin-top: clamp(16px, 2.6vh, 26px); text-wrap: pretty; }
+  section.ch .copy > .plat { margin-top: 28px; }
+  section.ch .copy > .tags { margin-top: 24px; }
+  section.ch .copy > dl.chain { margin-top: 32px; gap: 10px; }
+  section.ch .copy > .more { margin-top: 32px; }
+  section.ch .copy > .sub { margin-top: 40px; padding-top: 24px; }
+  @media (min-width: 861px) and (max-height: 760px) { section.ch .copy > .kicker { padding-top: 18px; margin-bottom: 18px; } section.ch .copy > .more { margin-top: 24px; } section.ch .copy > .sub { margin-top: 28px; padding-top: 18px; } }
+  @media (max-width: 860px) {
+    section.ch .copy > .kicker { font-size: 12px; padding-top: 18px; margin-bottom: 18px; }
+    section.ch .copy > h2 { font-size: clamp(30px, min(9.6vw, 4.9vh), 40px); line-height: 1.06; }
+    section.ch .copy > p:not(.kicker) { font-size: clamp(15px, 2.1vh, 17px); line-height: 1.5; margin-top: 18px; }
+    section.ch .copy > .plat { margin-top: 24px; }
+    section.ch .copy > .more { margin-top: 26px; }
+    section.ch .copy > .sub { margin-top: 30px; padding-top: 18px; }
+    .sticky { padding-bottom: max(7vh, 40px); }
+  }
+  @media (max-width: 860px) and (orientation: landscape) and (max-height: 520px) {
+    section.ch .copy > .kicker { padding-top: 10px; margin-bottom: 10px; }
+    section.ch .copy > h2 { font-size: clamp(22px, 6.4vh, 30px); }
+    section.ch .copy > p:not(.kicker) { margin-top: 10px; } section.ch .copy > .more { margin-top: 14px; }
+  }
 </style>
 <link rel="stylesheet" href="assets/nav.css">
 <link rel="stylesheet" href="assets/vendor/cookieconsent/cookieconsent.css">
@@ -757,7 +786,7 @@ document.querySelectorAll('main > section[data-key]').forEach((sec) => {
   const pDir = Math.random() < .5 ? 1 : -1, pStyle = Math.random() < .35 ? 'fog' : 'drift';
   own('.copy > p:not(.kicker), .section-head > p:not(.kicker), #lab .head > p, #manifest .lead').forEach((e) => splitText(e, sec.id === 'manifest' ? 'blur' : pStyle, { px: (pDir * (.6 + Math.random() * .8)).toFixed(2) + 'em' }));
   const ang = Math.random() * Math.PI * 2, bx = (Math.cos(ang) * 46).toFixed(0) + 'px', by = (Math.sin(ang) * 30).toFixed(0) + 'px';
-  own('dl.chain > div, .copy > .more, .copy > .sub, .tabs, ol.steps > li, .principles > div, .prices > a, #faq details, .mf-index a, #kontakt .ctas').forEach((e) => { e.classList.add('rv', 't-block'); e.style.setProperty('--bx', bx); e.style.setProperty('--by', by); });
+  own('dl.chain > div, .copy > .plat, .copy > .more, .copy > .sub, .tabs, ol.steps > li, .principles > div, .prices > a, #faq details, .mf-index a, #kontakt .ctas').forEach((e) => { e.classList.add('rv', 't-block'); e.style.setProperty('--bx', bx); e.style.setProperty('--by', by); });
   const els = [...sec.querySelectorAll('.rv')];
   if (!els.length) return;
   els.forEach((e, i) => e.style.setProperty('--i', (i + (e.dataset.jit ? (Math.random() - .5) * 9 : (Math.random() - .5) * 1.5)).toFixed(2)));
@@ -895,25 +924,41 @@ function getShape(key) {
 const chapters = [...document.querySelectorAll('[data-key]')];
 chapters.forEach((s) => getShape(s.dataset.key));
 let anchors = [];
-// Fotos hinter dem Schwarm (Handy hochkant): so breit wie möglich, aber nur so hoch, wie über dem Text Platz ist –
-// dann bleibt das Format 3:2 und oberhalb ein Streifen für den Schwarm. Nie schmaler als vorher (70 %).
-function fitFlock() {
-  for (const s of document.querySelectorAll('section[data-flock]')) {
-    const st = s.querySelector('.sticky'), cp = s.querySelector('.copy'), fig = s.querySelector('.dom-img'), cs = getComputedStyle(st);
-    const areaW = st.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-    const areaH = st.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - cp.offsetHeight - (parseFloat(cs.rowGap) || 0);
-    const v = Math.round(Math.max((areaH - 14) * 1.5, areaW * .7)) + 'px';
-    if (fig.style.getPropertyValue('--fitw') !== v) fig.style.setProperty('--fitw', v);
+// Kapitel mit viel Text (z. B. Ads-Management): Das Foto bleibt immer gleich groß (Handy: Bildschirmbreite − 32 px).
+// Passen Foto und Text nicht zusammen in eine Bildschirmhöhe, bekommt das Kapitel einen Überhang (_over px):
+// Abschnitt und angeheftete Fläche werden um _over länger, die Fläche gleitet beim Weiterscrollen 1:1 nach oben
+// (Frame-Loop), und der Schwarm-Zeitplan steht in dieser Zeit still (timeline) – das Kapitel wird zu Ende gelesen,
+// bevor das nächste Motiv beginnt. Foto und Schwarm entstehen weiter in Endgröße an fester Stelle.
+const svhProbe = Object.assign(document.createElement('div'), { ariaHidden: 'true' });
+svhProbe.style.cssText = 'position:absolute;left:0;top:0;width:1px;height:100vh;height:100svh;visibility:hidden;pointer-events:none';
+document.body.append(svhProbe);
+function fitChapters() {
+  const W = innerWidth, svh = svhProbe.offsetHeight, stacked = W <= 860 && W < innerHeight;
+  for (const s of document.querySelectorAll('section.ch[data-dom]')) {
+    const st = s.querySelector('.sticky'), cp = s.querySelector('.copy'), cs = getComputedStyle(st);
+    const padT = parseFloat(cs.paddingTop), padB = parseFloat(cs.paddingBottom);
+    let need;
+    if (stacked) need = padT + 16 + (W - 32) * IMG_H / IMG_W + 20 + cp.offsetHeight + padB; // Kopfzeile · Foto (3:2) · Text
+    else if (W > 860) need = padT + 32 + cp.offsetHeight + 32; // Text neben dem Foto
+    else need = 0;
+    const over = Math.max(0, Math.ceil(need - svh));
+    if (s._over !== over) {
+      s._over = over;
+      s.style.height = over ? `calc(100svh + ${over}px)` : '';
+      st.style.height = over ? `calc(100svh + ${over}px)` : '';
+      if (!over) st.style.transform = '';
+    }
   }
 }
-fitFlock(); addEventListener('load', fitFlock); document.fonts && document.fonts.ready.then(fitFlock);
+fitChapters(); addEventListener('load', fitChapters); document.fonts && document.fonts.ready.then(fitChapters);
 function measure() {
-  fitFlock();
+  fitChapters();
   const vh = innerHeight;
   anchors = chapters.map((s, i) => {
     if (i === 0) return 0;
     const slot = s.querySelector('.swarm-slot, .ep-slot'); // Schluss: EP ist fertig, wenn es in der Bildmitte steht (vorher lag der Anker tief im Team-Bereich und der Slogan war beim Lesen noch halb zerfallen)
     if (slot) { const r = slot.getBoundingClientRect(); return r.top + scrollY + r.height / 2 - vh / 2; }
+    if (s._over) return (s._anchor = s.offsetTop); // Kapitel mit Überhang: Anker = Ankunft, danach gleitet der Text nach oben
     return s.offsetTop + Math.max(0, s.offsetHeight - vh) * .5 - (s.classList.contains('block') ? vh * .25 : 0);
   });
   for (let i = 1; i < anchors.length; i++) anchors[i] = Math.max(anchors[i], anchors[i - 1] + 1);
@@ -924,19 +969,19 @@ function measure() {
 const SW_K = 1.15, SW_UP = .2, SW_UP3 = .4; // Handy hochkant: Schwarm um das (jetzt fast bildschirmbreite) Foto – etwas größer als das Bild, leicht nach oben versetzt
 function flockPlace(s) {
   const r = s.querySelector('.dom-img').getBoundingClientRect(), W = innerWidth, H = innerHeight, hh = 3.154, hw = hh * W / H, pxU = H / (2 * hh);
-  const f = Math.min(1, Math.max(0, (scrollY - s.offsetTop + H) / (s.offsetHeight + H)));
+  const f = Math.min(1, Math.max(0, (scrollY - (s._shift || 0) - s.offsetTop + H) / (s.offsetHeight - (s._over || 0) + H))); // Überhang herausgerechnet: der Schwarm bleibt beim Nachobengleiten am Foto
   const stacked = s.querySelector('.copy').getBoundingClientRect().top >= r.bottom - 4, away = s.dataset.side === 'left' ? -1 : 1; // vom Text weg: Desktop zur Außenseite, Handy nach oben
   const cy = r.top + r.height / 2 + (f - .5) * r.height * .5 - (stacked ? r.height * (s.dataset.flock === '3' ? SW_UP3 : SW_UP) : 0);
   return { x: ((r.left + r.width / 2 + (stacked ? 0 : away * r.width * ({ 2: .3, 3: .32 }[s.dataset.flock] || .18))) / W * 2 - 1) * hw, y: -(cy / H * 2 - 1) * hh, s: r.width / pxU / ({ 2: 1.7, 3: 1.45 }[s.dataset.flock] || 2.2) * (stacked ? SW_K : 1) }; // Handy hochkant: Bild fast bildschirmbreit, Schwarm etwas größer als das Bild, damit er rundherum sichtbar ist
 }
 function imgPlace(s) {
   const c = s.querySelector('.copy').getBoundingClientRect(), W = innerWidth, H = innerHeight;
-  const hh = 3.154, hw = hh * W / H, pxU = H / (2 * hh), top = 64 + 16;
+  const sh = s._shift || 0, hh = 3.154, hw = hh * W / H, pxU = H / (2 * hh), top = 64 + 16 - sh; // sh: Überhang-Verschiebung, das Foto gleitet mit dem Text
   const stacked = c.width > W * .6;
   let box;
   if (stacked) box = { l: 16, r: W - 16, t: top, b: c.top - 20 };
   else {
-    const gap = Math.max(28, W * .03), edge = Math.max(16, W * .02), bottom = H - (W > 860 ? 64 : 12);
+    const gap = Math.max(28, W * .03), edge = Math.max(16, W * .02), bottom = H - (W > 860 ? 64 : 12) - sh;
     box = s.dataset.side === 'left' ? { l: edge, r: c.left - gap, t: top, b: bottom } : { l: c.right + gap, r: W - edge, t: top, b: bottom };
   }
   let w = Math.min(box.r - box.l, stacked ? W : W * .58), h = w * IMG_H / IMG_W; // untereinander volle Breite, nebeneinander max. 58 %
@@ -998,8 +1043,8 @@ function placeOf(s) {
 function timeline(y) {
   let k = 0;
   while (k < anchors.length - 1 && y >= anchors[k + 1]) k++;
-  const last = k >= anchors.length - 1;
-  const u = last ? 0 : clamp01((y - anchors[k]) / Math.max(1, anchors[k + 1] - anchors[k]));
+  const last = k >= anchors.length - 1, ov = chapters[k]._over || 0; // Überhang: Zeitplan steht, solange der Text nach oben gleitet
+  const u = last ? 0 : clamp01((y - anchors[k] - ov) / Math.max(1, anchors[k + 1] - anchors[k] - ov));
   const A = chapters[k], B = chapters[Math.min(k + 1, chapters.length - 1)];
   // linear an den Scrollweg gekoppelt: je weiter gescrollt, desto mehr vom nächsten Bild steht.
   // Kurze Haltezone nach jedem Anker (u < .1) und vor dem nächsten (u > .9): das fertige Bild steht einen Moment.
@@ -1390,6 +1435,9 @@ else {
 
     // Kamerafahrt (leichtes Heranfahren zwischen zwei Ankern) für Bildkapitel ausgleichen: Partikel, WebGL-Foto und
     // scharfes Bild liegen dadurch während des ganzen Aufbaus exakt in Endgröße und -lage – kein Nachziehen am Ende.
+    for (const s of chapters) if (s._over) { // Überhang: angeheftete Fläche gleitet 1:1 mit dem Scrollen nach oben (vor der Platzierung, damit Schwarm und Foto im selben Frame folgen)
+      const v = Math.round(Math.min(s._over, Math.max(0, y - s._anchor))); if (s._shift !== v) { s._shift = v; s.querySelector('.sticky').style.transform = v ? `translateY(${-v}px)` : ''; }
+    } else if (s._shift) { s._shift = 0; s.querySelector('.sticky').style.transform = ''; }
     const camZ = 11 - (reduced ? 0 : Math.sin(c.u * Math.PI) * .45), keep = (s, p) => s.dataset.key.startsWith('img:') ? { x: p.x * camZ / 11, y: p.y * camZ / 11, s: p.s * camZ / 11 } : p;
     camera.position.z = camZ; // sofort setzen: scharfe Ebene (sharpPlace) rechnet im selben Frame mit derselben Kamera wie WebGL
     const pa = keep(A, placeOf(A)), pb = keep(B, placeOf(B));
@@ -1494,7 +1542,7 @@ else {
   // (Seite sprang beim Hochziehen aus dem Schlussbereich zurück). Bei "Bewegung reduzieren" ebenfalls aus.
   if (!touch && !reduced && !new URLSearchParams(location.search).has('zeige')) {
     const stops = () => {
-      const list = [...new Set(anchors.map((a) => Math.round(a)))].sort((a, b) => a - b), maxY = document.documentElement.scrollHeight - innerHeight;
+      const list = [...new Set(anchors.map((a) => Math.round(a)).concat(chapters.filter((s) => s._over).map((s) => Math.round(s._anchor + s._over))))].sort((a, b) => a - b), maxY = document.documentElement.scrollHeight - innerHeight;
       if (maxY - list[list.length - 1] > innerHeight * .3) list.push(maxY);
       if (pfSec) { const t = pfTop(); list.push(t); list.sort((a, b) => a - b); }
       return list;
