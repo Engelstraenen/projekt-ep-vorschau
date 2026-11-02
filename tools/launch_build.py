@@ -27,7 +27,8 @@ EXCLUDE_RE = re.compile(r'^(img/portfolio/effekte-showreel-[^/]+'
                         r'|lab/(campaign|game|print)-gallery(-\d+)?\.webp'
                         r'|lab/plan-board(-\d+)?\.webp'
                         r'|img/seite/start-prozess-moodboard-[^/]+'
-                        r'|img/logo/(physio-kern|waermewerk)-weiss\.svg)$')
+                        r'|img/logo/(physio-kern|waermewerk)-weiss\.svg'
+                        r'|assets/vendor/three/build/three\.(core|module)\.js)$')  # Startseite nutzt three.module.min.js
 EXCLUDE_SUFFIX = ('.md', '.py', '.sh', '.log', '.bak', '.orig')
 
 ROBOTS = """User-agent: *
