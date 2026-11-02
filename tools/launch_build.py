@@ -22,6 +22,12 @@ EXCLUDE_PREFIX = ('.github/', 'docs/', 'tools/', 'node_modules/', 'steak-seite/'
 EXCLUDE_FILES = {'_config.yml', '.nojekyll', 'package.json', 'package-lock.json', '.gitignore',
                  # unverlinkt, internes Showreel – Entscheidung Eugen 02.11.: nicht ins Deploy-Paket
                  'video/portfolio/effekte-showreel-720.mp4'}
+# Nachweislich unverlinkt (Prüfung 02.11.: Dateiname bzw. Stamm in keiner HTML/CSS/JS/JSON-Datei) – nur aus dem Paket, nicht aus dem Repo
+EXCLUDE_RE = re.compile(r'^(img/portfolio/effekte-showreel-[^/]+'
+                        r'|lab/(campaign|game|print)-gallery(-\d+)?\.webp'
+                        r'|lab/plan-board(-\d+)?\.webp'
+                        r'|img/seite/start-prozess-moodboard-[^/]+'
+                        r'|img/logo/(physio-kern|waermewerk)-weiss\.svg)$')
 EXCLUDE_SUFFIX = ('.md', '.py', '.sh', '.log', '.bak', '.orig')
 
 ROBOTS = """User-agent: *
@@ -72,12 +78,15 @@ def tracked_files():
 def public(p):
     if p.startswith(EXCLUDE_PREFIX) or p in EXCLUDE_FILES or p.endswith(EXCLUDE_SUFFIX): return False
     if '/tools/' in p: return False
+    if EXCLUDE_RE.match(p): return False
     return True
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=os.path.join(os.path.dirname(ROOT), 'ep-launch', 'dist'))
     ap.add_argument('--entfernen', default='chat,tracking')
+    ap.add_argument('--hsts-start', action=argparse.BooleanOptionalAction, default=True,
+                    help='HSTS max-age=300 für den ersten Tag (Standard). --no-hsts-start = 1 Jahr aus .htaccess')
     a = ap.parse_args()
     cats = {c.strip() for c in a.entfernen.split(',') if c.strip()}
     out = os.path.abspath(a.out)
@@ -88,6 +97,8 @@ def main():
         dst = os.path.join(out, p); os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copy2(os.path.join(ROOT, p), dst)
     print(f'{len(files)} Dateien nach {out}')
+    skipped = [p for p in tracked_files() if EXCLUDE_RE.match(p)]
+    print(f'{len(skipped)} unverlinkte Dateien ausgeschlossen')
     errors, warns = [], []
 
     # GitHub-Pages-Pfadpräfix entfernen (z. B. Next-Export referenzen/nivora mit basePath /projekt-ep-vorschau)
@@ -102,6 +113,17 @@ def main():
             if b'projekt-ep-vorschau' in open(f, 'rb').read() or b'github.io' in open(f, 'rb').read():
                 errors.append(f'{os.path.relpath(f, out)}: Vorschau-Adresse (github.io/projekt-ep-vorschau) im Code')
     print(f'Pfadpräfix /projekt-ep-vorschau/ in {fixed} Dateien entfernt')
+
+    # HSTS am ersten Tag kurz (300 s, ohne preload). Nach 1–2 stabilen Tagen (HTTPS für projekt-ep.de UND www,
+    # keine Zertifikatsfehler) erhöhen: Die Repo-.htaccess enthält bereits 1 Jahr -> Paket mit --no-hsts-start bauen und hochladen.
+    if a.hsts_start:
+        hp = os.path.join(out, '.htaccess'); ht = open(hp, encoding='utf-8').read()
+        ht2, n = re.subn(r'Strict-Transport-Security "max-age=31536000; includeSubDomains"',
+                         'Strict-Transport-Security "max-age=300"', ht)
+        if n != 1: errors.append('HSTS-Zeile in .htaccess nicht gefunden')
+        ht2 = ht2.replace('# HSTS: erst aktivieren', '# GO-LIVE-TAG: HSTS bewusst nur 300 s und ohne includeSubDomains/preload.\n  # Nach 1–2 stabilen Tagen auf "max-age=31536000; includeSubDomains" erhöhen (Paket ohne --hsts-start bauen).\n  # HSTS: erst aktivieren', 1)
+        open(hp, 'w', encoding='utf-8').write(ht2)
+        print('HSTS: Startwert max-age=300')
 
     # robots.txt
     open(os.path.join(out, 'robots.txt'), 'w').write(ROBOTS)
@@ -148,6 +170,16 @@ def main():
             n = h.count('class="ph"'); ph += n
             if n: warns.append(f'{rel}: {n} offene Platzhalter (span.ph)')
             if 'ENTWURF' in h: warns.append(f'{rel}: ENTWURF-Hinweis noch enthalten')
+    # Sicherheitsnetz: ausgeschlossene Dateien dürfen nirgends im Paket referenziert sein
+    blob = []
+    for d, _, fs in os.walk(out):
+        for fn in fs:
+            if fn.endswith(('.html', '.css', '.js', '.mjs', '.json')):
+                blob.append(open(os.path.join(d, fn), encoding='utf-8', errors='ignore').read())
+    blob = '\n'.join(blob)
+    for p in skipped:
+        stem = re.sub(r'(-\d+)?\.(webp|avif|svg)$', '', os.path.basename(p))
+        if stem in blob: errors.append(f'ausgeschlossene Datei wird referenziert: {p}')
     for w in warns: print('WARNUNG', w)
     for e in errors: print('FEHLER ', e)
     print(f'offene Platzhalter gesamt: {ph}')
