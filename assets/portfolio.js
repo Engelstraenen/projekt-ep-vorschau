@@ -32,6 +32,8 @@
     { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für BLATTFON, eine erfundene Gieß-App, mit sprechender Pflanze.', dauer: 8.83 },
     { id: 'aboschere', sparte: 'motion', titel: '14 Abos bezahlt. Nur 3 genutzt.', zweck: 'Motion-Graphics-Spot für ABOSCHERE, eine erfundene App, die ungenutzte Abos kündigt.', dauer: 9.7 },
     { id: 'fleckfee', sparte: 'static', titel: 'Ein Blatt, Fleck weg.', zweck: 'Static Ad als Motion-Version für FLECKFEE, ein erfundenes Waschblatt gegen Flecken.', dauer: 7.21 },
+    { id: 'feierwarm', sparte: 'static', titel: 'Heiß bis Feierabend.', zweck: 'Static Ad als Motion-Version für FEIERWARM, ein erfundener Thermobecher.', dauer: 8.51 },
+    { id: 'durchblix', sparte: 'static', titel: 'Reinkommen. Und klar sehen.', zweck: 'Static Ad als Motion-Version für DURCHBLIX, ein erfundenes Antibeschlag-Spray für Brillen.', dauer: 8.51 },
     { id: 'kajuete', sparte: 'fashion', titel: 'Gegen Wind hilft nur eins: der richtige Mantel.', zweck: 'Mantel-Lookbook für das erfundene Label KAJÜTE, auf dem Fährdeck.', dauer: 8.83 },
     { id: 'velournacht', sparte: 'fashion', titel: 'Feinwäsche. Wie ich.', zweck: 'Fashion-Film für das erfundene Label VELOURNACHT: Samtanzug im Waschsalon.', dauer: 8.83 },
   ];
