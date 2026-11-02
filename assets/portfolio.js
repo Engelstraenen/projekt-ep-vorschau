@@ -1,6 +1,7 @@
 // Clips „Ad Creatives“ (Unterseite leistungen/werbeclips.html#clips): Sparten, Poster mit Play-Knopf, Video lädt erst beim Klick.
 // Neue Arbeit hinzufügen = Dateien ablegen + eine Zeile in CLIPS:
 //   video/portfolio/<id>-720.mp4 (H.264 720×1280, +faststart, 9:16; mit quer: true 1280×720, 16:9, eigene Reihe)
+//   mit hd: true stattdessen volle Auflösung: <id>-1440.webm (AV1 10 bit + Opus, bevorzugt) und <id>-1440.mp4 (H.264, Rückfall)
 // Pfade gelten ab Website-Wurzel; data-pf am Abschnitt gibt den Weg dorthin an (Unterseite: "../").
 //   img/portfolio/<id>-480.avif|webp und <id>-960.avif|webp (Poster bzw. Motiv)
 // Leere Sparten bleiben ausgeblendet und erscheinen von selbst, sobald ein Eintrag dazukommt.
@@ -27,8 +28,8 @@
     { id: 'spot-kleinfeld', sparte: 'ugc', quer: true, titel: 'Kleinfeld Haustechnik', zweck: 'Image-Spot für einen Kölner Handwerksbetrieb.', dauer: 20 },
     { id: 'spot-hartmann', sparte: 'ugc', quer: true, titel: 'Autoservice Hartmann', zweck: 'Kurz-Spot für eine Hamburger Kfz-Werkstatt.', dauer: 15 },
     { id: 'schlumma', sparte: 'cgi', titel: 'So weich, wie dein Montag sein sollte.', zweck: 'CGI-Spot für die erfundene Marke SCHLUMMA: eine ultraweiche Couch im Zugabteil.', dauer: 8.83 },
-    { id: 'cgi-polar-husky', sparte: 'cgi', quer: true, titel: 'POLAR · Husky', zweck: 'CGI-Spot für POLAR: Eine Dose öffnet sich, und die Küche versinkt mit einem Husky-Welpen im Schnee.', dauer: 10.14 },
-    { id: 'cgi-polar-office', sparte: 'cgi', quer: true, titel: 'POLAR · Office', zweck: 'CGI-Spot für POLAR: Ein heißer Büronachmittag, ein Schluck, und der ganze Arbeitsplatz friert ein.', dauer: 10.14 },
+    { id: 'cgi-polar-husky', sparte: 'cgi', quer: true, hd: true, titel: 'POLAR · Husky', zweck: 'CGI-Spot für POLAR: Eine Dose öffnet sich, und die Küche versinkt mit einem Husky-Welpen im Schnee.', dauer: 10.14 },
+    { id: 'cgi-polar-office', sparte: 'cgi', quer: true, hd: true, titel: 'POLAR · Office', zweck: 'CGI-Spot für POLAR: Ein heißer Büronachmittag, ein Schluck, und der ganze Arbeitsplatz friert ein.', dauer: 10.14 },
     { id: 'motion-zitra', sparte: 'motion', titel: 'Durst? Drei Sorten. Null Langeweile.', zweck: 'Motion-Graphics-Spot für ZITRA, eine erfundene Limonade.', dauer: 12 },
     { id: 'motion-lindholz', sparte: 'motion', titel: 'Erst eine Linie. Dann ein Plan. Dann Holz.', zweck: 'Motion-Graphics-Spot für Lindholz, eine erfundene Tischlerei für Möbel nach Maß.', dauer: 13 },
     { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für BLATTFON, eine erfundene Gieß-App, mit sprechender Pflanze.', dauer: 8.83 },
@@ -86,8 +87,21 @@
   // ---------- Player ----------
   let soundOn = true, current = null;
   const setHold = () => { window.__pfHold = lowPower && !!current && !current.v.paused; };
-  // Karten sind höchstens ~260 px breit: 720p ist auch auf Retina-Displays scharf genug
-  const srcFor = (box) => `${B}video/portfolio/${box.closest('[data-id]').dataset.id}-720.mp4`;
+  // Karten sind höchstens ~260 px breit: 720p ist auch auf Retina-Displays scharf genug.
+  // hd-Clips laufen in voller 1440p-Auflösung: AV1 (WebM), wenn der Browser es flüssig (auf Handys stromsparend) dekodiert, sonst H.264.
+  const AV1 = 'video/webm; codecs="av01.0.12M.10, opus"';
+  let av1 = false;
+  if (document.createElement('video').canPlayType(AV1) === 'probably') {
+    if (navigator.mediaCapabilities?.decodingInfo) {
+      navigator.mediaCapabilities.decodingInfo({ type: 'file', video: { contentType: 'video/webm; codecs="av01.0.12M.10"', width: 2560, height: 1440, bitrate: 2500000, framerate: 24 } })
+        .then((i) => { av1 = i.supported && i.smooth && (i.powerEfficient || !lowPower); }, () => {});
+    } else av1 = !lowPower;
+  }
+  const srcFor = (box) => {
+    const id = box.closest('[data-id]').dataset.id;
+    if (!CLIPS.find((c) => c.id === id)?.hd) return `${B}video/portfolio/${id}-720.mp4`;
+    return `${B}video/portfolio/${id}-1440.${av1 && !box._noAv1 ? 'webm' : 'mp4'}`;
+  };
   function wire(box) {
     if (box._p) return box._p;
     const v = box.querySelector('video'), btn = box.querySelector('.pf-play'), ic = box.querySelector('.pf-play-ic'), snd = box.querySelector('.pf-sound'), bar = box.querySelector('.pf-bar i');
@@ -100,7 +114,10 @@
     v.addEventListener('waiting', () => { if (!v.paused) box.dataset.state = 'loading'; });
     v.addEventListener('pause', () => { if (!v.ended) state('paused'); setHold(); });
     v.addEventListener('ended', () => { state('ended'); bar.style.transform = 'scaleX(1)'; setHold(); });
-    v.addEventListener('error', () => { if (!v.getAttribute('src')) return; box.dataset.state = 'error'; btn.setAttribute('aria-label', 'Video konnte nicht geladen werden'); setHold(); });
+    v.addEventListener('error', () => {
+      if (!v.getAttribute('src')) return;
+      if (/\.webm$/.test(v.getAttribute('src'))) { box._noAv1 = true; v.src = srcFor(box); v.play().catch(() => state('paused')); return; } // AV1 klappt doch nicht: H.264
+      box.dataset.state = 'error'; btn.setAttribute('aria-label', 'Video konnte nicht geladen werden'); setHold(); });
     const p = {
       box, v,
       play() {
