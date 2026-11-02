@@ -34,6 +34,7 @@
     { id: 'cgi-kleinfeld', sparte: 'cgi', quer: true, hd: 1080, titel: 'Kleinfeld Haustechnik', zweck: 'Image-Film für einen Kölner Haustechnik-Betrieb: Elektrik, Sanitär und Heizung aus einer Hand.', dauer: 19.96 },
     { id: 'cgi-lindner-kruse', sparte: 'cgi', quer: true, hd: 1080, titel: 'Lindner & Kruse Steuerberatung', zweck: 'Image-Film für eine Frankfurter Steuerkanzlei: klar, verlässlich und persönlich.', dauer: 25 },
     { id: 'cgi-hartmann', sparte: 'cgi', quer: true, hd: 1080, titel: 'Autoservice Hartmann', zweck: 'Image-Film für eine Hamburger Kfz-Werkstatt: Inspektion, Reparatur und HU/AU.', dauer: 15 },
+    { id: 'cgi-katze', sparte: 'cgi', quer: true, hd: true, titel: 'FAUCH · Spiegelbild', zweck: 'CGI-Spot für das erfundene Streetwear-Label FAUCH: Ein Kätzchen trifft auf das fauchende Motiv-Shirt und macht vorsichtshalber einen Buckel.', dauer: 10.04 },
     { id: 'motion-zitra', sparte: 'motion', titel: 'Durst? Drei Sorten. Null Langeweile.', zweck: 'Motion-Graphics-Spot für ZITRA, eine erfundene Limonade.', dauer: 12 },
     { id: 'motion-lindholz', sparte: 'motion', titel: 'Erst eine Linie. Dann ein Plan. Dann Holz.', zweck: 'Motion-Graphics-Spot für Lindholz, eine erfundene Tischlerei für Möbel nach Maß.', dauer: 13 },
     { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für BLATTFON, eine erfundene Gieß-App, mit sprechender Pflanze.', dauer: 8.83 },
