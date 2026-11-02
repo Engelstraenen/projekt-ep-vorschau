@@ -1,7 +1,8 @@
 // Clips „Ad Creatives“ (Unterseite leistungen/werbeclips.html#clips): Sparten, Poster mit Play-Knopf, Video lädt erst beim Klick.
 // Neue Arbeit hinzufügen = Dateien ablegen + eine Zeile in CLIPS:
 //   video/portfolio/<id>-720.mp4 (H.264 720×1280, +faststart, 9:16; mit quer: true 1280×720, 16:9, eigene Reihe)
-//   mit hd: true stattdessen volle Auflösung: <id>-1440.webm (AV1 10 bit + Opus, bevorzugt) und <id>-1440.mp4 (H.264, Rückfall)
+//   mit hd: true stattdessen volle Auflösung: <id>-1440.webm (AV1 10 bit + Opus, bevorzugt) und <id>-1440.mp4 (H.264, Rückfall);
+//   hd: 1080 entsprechend <id>-1080.webm/.mp4 (Original ist 1080p)
 // Pfade gelten ab Website-Wurzel; data-pf am Abschnitt gibt den Weg dorthin an (Unterseite: "../").
 //   img/portfolio/<id>-480.avif|webp und <id>-960.avif|webp (Poster bzw. Motiv)
 // Leere Sparten bleiben ausgeblendet und erscheinen von selbst, sobald ein Eintrag dazukommt.
@@ -30,6 +31,9 @@
     { id: 'schlumma', sparte: 'cgi', titel: 'So weich, wie dein Montag sein sollte.', zweck: 'CGI-Spot für die erfundene Marke SCHLUMMA: eine ultraweiche Couch im Zugabteil.', dauer: 8.83 },
     { id: 'cgi-polar-husky', sparte: 'cgi', quer: true, hd: true, titel: 'POLAR · Husky', zweck: 'CGI-Spot für POLAR: Eine Dose öffnet sich, und die Küche versinkt mit einem Husky-Welpen im Schnee.', dauer: 10.14 },
     { id: 'cgi-polar-office', sparte: 'cgi', quer: true, hd: true, titel: 'POLAR · Office', zweck: 'CGI-Spot für POLAR: Ein heißer Büronachmittag, ein Schluck, und der ganze Arbeitsplatz friert ein.', dauer: 10.14 },
+    { id: 'cgi-kleinfeld', sparte: 'cgi', quer: true, hd: 1080, titel: 'Kleinfeld Haustechnik', zweck: 'Image-Film für einen Kölner Haustechnik-Betrieb: Elektrik, Sanitär und Heizung aus einer Hand.', dauer: 19.96 },
+    { id: 'cgi-lindner-kruse', sparte: 'cgi', quer: true, hd: 1080, titel: 'Lindner & Kruse Steuerberatung', zweck: 'Image-Film für eine Frankfurter Steuerkanzlei: klar, verlässlich und persönlich.', dauer: 25 },
+    { id: 'cgi-hartmann', sparte: 'cgi', quer: true, hd: 1080, titel: 'Autoservice Hartmann', zweck: 'Image-Film für eine Hamburger Kfz-Werkstatt: Inspektion, Reparatur und HU/AU.', dauer: 15 },
     { id: 'motion-zitra', sparte: 'motion', titel: 'Durst? Drei Sorten. Null Langeweile.', zweck: 'Motion-Graphics-Spot für ZITRA, eine erfundene Limonade.', dauer: 12 },
     { id: 'motion-lindholz', sparte: 'motion', titel: 'Erst eine Linie. Dann ein Plan. Dann Holz.', zweck: 'Motion-Graphics-Spot für Lindholz, eine erfundene Tischlerei für Möbel nach Maß.', dauer: 13 },
     { id: 'blattfon', sparte: 'motion', titel: 'Na also. Geht doch.', zweck: 'Motion-Graphics-Spot für BLATTFON, eine erfundene Gieß-App, mit sprechender Pflanze.', dauer: 8.83 },
@@ -100,7 +104,8 @@
   const srcFor = (box) => {
     const id = box.closest('[data-id]').dataset.id;
     if (!CLIPS.find((c) => c.id === id)?.hd) return `${B}video/portfolio/${id}-720.mp4`;
-    return `${B}video/portfolio/${id}-1440.${av1 && !box._noAv1 ? 'webm' : 'mp4'}`;
+    const h = CLIPS.find((c) => c.id === id).hd === true ? 1440 : CLIPS.find((c) => c.id === id).hd; // hd: true = 1440p, sonst Zahl (z. B. 1080)
+    return `${B}video/portfolio/${id}-${h}.${av1 && !box._noAv1 ? 'webm' : 'mp4'}`;
   };
   function wire(box) {
     if (box._p) return box._p;
