@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-/peqWEqazhoqWMmzleg2l7sOTsq9EReP9pnCJiior3Q=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-T6i9WO10c4YMO/oQCAI7lRObDS/Fw2qzZcG1Rpozvr8=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-/peqWEqazhoqWMmzleg2l7sOTsq9EReP9pnCJiior3Q=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-q65DFxqWxHNE4M2xS5C+ca3g+zE8IvaYHv2nGFNxoXc=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -311,7 +311,26 @@
     section[data-dom] .sticky { grid-template-rows: 1fr auto; }
     section[data-dom] .dom-img { grid-column: 1; grid-row: 1; width: min(100%, calc((100% ) * 1)); max-height: 100%; align-self: center; }
     section[data-dom] .copy { grid-row: 2; }
-    section[data-flock] .dom-img { width: 70%; } /* Handy hochkant: Bild kleiner, damit der Hintergrund-Schwarm rundherum sichtbar bleibt */
+  }
+  /* Fotos hinter dem Schwarm (data-flock): +50 % breiter als vorher (Handy 70 % der Inhaltsbreite → ~92 % der Bildschirmbreite,
+     16 px Rand). Der Schwarm skaliert in flockPlace() mit der Bildbreite mit und bleibt oben/unten und an den Rändern sichtbar. */
+  @media (max-width: 860px) and (orientation: portrait) {
+    section[data-flock] .dom-img { --w: min(calc(100% + 2 * var(--gutter) - 32px), var(--fitw, 100vw)); width: var(--w); justify-self: start; margin-left: calc((100% - var(--w)) / 2); }
+  }
+  @media (max-width: 860px) and (orientation: landscape) { section[data-flock] .dom-img { width: 70%; } } /* Handy quer: wie bisher, sonst fehlt die Höhe */
+  /* Desktop/Tablet quer: das Foto wächst in den äußeren Rand und bis an die Textspalte (Text bleibt frei) */
+  @media (min-width: 861px) {
+    section[data-flock] .dom-img { --grow: calc(var(--gutter) - 24px + max(0px, 100% * .42 / .58 - 516px)); width: min(calc(100% + var(--grow) - 32px), calc((100svh - 150px) * 1.5)); }
+    section[data-flock][data-side="left"] .dom-img { justify-self: start; margin-left: calc(24px - var(--gutter)); }
+    section[data-flock][data-side="right"] .dom-img { justify-self: end; margin-right: calc(24px - var(--gutter)); }
+  }
+  /* breite Bildschirme: Textspalte etwas schmaler (420–460 px) und näher an den Rand (48 px) – das Foto bekommt den Platz:
+     Breite = Bildschirm − 24 px Foto-Rand − 48 px Abstand − Textspalte − 48 px Text-Rand (1440 px: 900 statt 735 px ≈ +50 % Fläche) */
+  @media (min-width: 1200px) {
+    section[data-flock] .copy { --cw: clamp(420px, 24vw, 460px); max-width: var(--cw); }
+    section[data-flock][data-side="left"] .copy { margin-right: calc(48px - var(--gutter)); }
+    section[data-flock][data-side="right"] .copy { justify-self: start; margin-left: calc(48px - var(--gutter)); }
+    section[data-flock] .dom-img { width: min(max(calc(100% + var(--grow) - 32px), calc(100vw - 120px - clamp(420px, 24vw, 460px))), calc((100svh - 150px) * 1.5)); }
   }
   @media (max-width: 860px) and (orientation: landscape) and (max-height: 520px) {
     section[data-dom] .sticky { grid-template-rows: none; }
@@ -321,6 +340,10 @@
   /* Variante 2 – Karte: das Bild kippt aus der Tiefe nach vorne und legt sich flach */
   .dom-img { opacity: min(1, calc(var(--d) * 1.6)); transform-origin: 50% 100%;
     transform: perspective(1400px) translateY(calc((1 - var(--d)) * 90px)) rotateX(calc((1 - var(--d)) * 24deg)) scale(calc(.86 + var(--d) * .14)); }
+  /* Fotos hinter dem Schwarm: von Anfang an in Endgröße – nur weich einblenden und leicht anheben, kein Kippen/Zoomen
+     (scale .86 → 1 und rotateX ließen das Foto während des Aufbaus sichtbar wachsen) */
+  section[data-flock] .dom-img { transform-origin: 50% 50%; transform: translateY(calc((1 - var(--d)) * 40px)); }
+  @media (prefers-reduced-motion: reduce) { .dom-img, section[data-flock] .dom-img { transform: none; } } /* Bewegung reduzieren: Foto nur weich einblenden, Box bleibt fest */
   @media (prefers-reduced-motion: reduce) { .copy, #intro .hero, .rv { translate: none !important; rotate: none !important; scale: none !important; filter: none !important; } }
 
   /* ---------- Erklärvideo ---------- */
@@ -872,7 +895,20 @@ function getShape(key) {
 const chapters = [...document.querySelectorAll('[data-key]')];
 chapters.forEach((s) => getShape(s.dataset.key));
 let anchors = [];
+// Fotos hinter dem Schwarm (Handy hochkant): so breit wie möglich, aber nur so hoch, wie über dem Text Platz ist –
+// dann bleibt das Format 3:2 und oberhalb ein Streifen für den Schwarm. Nie schmaler als vorher (70 %).
+function fitFlock() {
+  for (const s of document.querySelectorAll('section[data-flock]')) {
+    const st = s.querySelector('.sticky'), cp = s.querySelector('.copy'), fig = s.querySelector('.dom-img'), cs = getComputedStyle(st);
+    const areaW = st.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const areaH = st.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - cp.offsetHeight - (parseFloat(cs.rowGap) || 0);
+    const v = Math.round(Math.max((areaH - 14) * 1.5, areaW * .7)) + 'px';
+    if (fig.style.getPropertyValue('--fitw') !== v) fig.style.setProperty('--fitw', v);
+  }
+}
+fitFlock(); addEventListener('load', fitFlock); document.fonts && document.fonts.ready.then(fitFlock);
 function measure() {
+  fitFlock();
   const vh = innerHeight;
   anchors = chapters.map((s, i) => {
     if (i === 0) return 0;
@@ -885,12 +921,13 @@ function measure() {
 // Themenbild in den freien Raum setzen, den der Text übrig lässt – nie in die Schrift hinein.
 // Nebeneinander (Desktop, Tablet, Handy quer): Fläche zwischen Textspalte und Bildschirmrand.
 // Untereinander (Handy hochkant): Fläche zwischen Kopfzeile und Textoberkante.
+const SW_K = 1.15, SW_UP = .2, SW_UP3 = .4; // Handy hochkant: Schwarm um das (jetzt fast bildschirmbreite) Foto – etwas größer als das Bild, leicht nach oben versetzt
 function flockPlace(s) {
   const r = s.querySelector('.dom-img').getBoundingClientRect(), W = innerWidth, H = innerHeight, hh = 3.154, hw = hh * W / H, pxU = H / (2 * hh);
   const f = Math.min(1, Math.max(0, (scrollY - s.offsetTop + H) / (s.offsetHeight + H)));
   const stacked = s.querySelector('.copy').getBoundingClientRect().top >= r.bottom - 4, away = s.dataset.side === 'left' ? -1 : 1; // vom Text weg: Desktop zur Außenseite, Handy nach oben
-  const cy = r.top + r.height / 2 + (f - .5) * r.height * .5 - (stacked ? r.height * (s.dataset.flock === '3' ? .55 : .22) : 0);
-  return { x: ((r.left + r.width / 2 + (stacked ? 0 : away * r.width * ({ 2: .3, 3: .32 }[s.dataset.flock] || .18))) / W * 2 - 1) * hw, y: -(cy / H * 2 - 1) * hh, s: r.width / pxU / ({ 2: 1.7, 3: 1.45 }[s.dataset.flock] || 2.2) * (stacked ? 1.4 : 1) }; // Handy hochkant: Bild schmaler, Schwarm deutlich breiter; größer als das Bild, damit der Schwarm rundherum sichtbar ist
+  const cy = r.top + r.height / 2 + (f - .5) * r.height * .5 - (stacked ? r.height * (s.dataset.flock === '3' ? SW_UP3 : SW_UP) : 0);
+  return { x: ((r.left + r.width / 2 + (stacked ? 0 : away * r.width * ({ 2: .3, 3: .32 }[s.dataset.flock] || .18))) / W * 2 - 1) * hw, y: -(cy / H * 2 - 1) * hh, s: r.width / pxU / ({ 2: 1.7, 3: 1.45 }[s.dataset.flock] || 2.2) * (stacked ? SW_K : 1) }; // Handy hochkant: Bild fast bildschirmbreit, Schwarm etwas größer als das Bild, damit er rundherum sichtbar ist
 }
 function imgPlace(s) {
   const c = s.querySelector('.copy').getBoundingClientRect(), W = innerWidth, H = innerHeight;
@@ -1270,13 +1307,21 @@ else {
     return true; // fehlte vorher -> der Wechsel-Frame wurde mit alten Einstellungen gezeichnet = Aufblitzen
   }
 
-  let lastW = 0, lastH = 0;
-  function resize() {
-    const w = innerWidth, h = innerHeight;
-    if (w === lastW && Math.abs(h - lastH) < 120) return; // iOS-Adressleiste ein-/ausfahren: nichts neu aufbauen
-    lastW = w; lastH = h;
+  let lastW = 0, lastH = 0, stageW = 0, stageH = 0;
+  // Bühne (Zeichenfläche + Kamera) folgt immer exakt der Fenstergröße – auch wenn die iOS-Adressleiste ein-/ausfährt.
+  // Vorher blieb die Kamera dabei auf der alten Höhe stehen: Platzierung (innerHeight) und Projektion passten nicht mehr
+  // zusammen, das Schwarm-Foto entstand ~10 % schmaler und sprang am Ende auf die Größe des scharfen Bildes.
+  function stageFit() {
+    const w = innerWidth, h = innerHeight; if (w === stageW && h === stageH) return;
+    stageW = w; stageH = h;
     renderer.setSize(w, h, false); composer.setSize(w, h); bgU.uRes.value.set(w * dpr, h * dpr);
-    camera.aspect = w / h; camera.updateProjectionMatrix(); measure();
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  function resize() {
+    stageFit();
+    const w = innerWidth, h = innerHeight;
+    if (w === lastW && Math.abs(h - lastH) < 120) return; // iOS-Adressleiste ein-/ausfahren: Kapitel-Anker nicht neu vermessen (kein Springen beim Scrollen)
+    lastW = w; lastH = h; measure();
   }
   addEventListener('resize', resize); resize();
   addEventListener('load', measure);
@@ -1327,6 +1372,7 @@ else {
     timer.update(now); const dt = Math.min(timer.getDelta(), .05), time = timer.getElapsed();
     const y = lenis ? lenis.scroll : scrollY;
     const c = timeline(y);
+    stageFit(); // iOS meldet die Adressleiste teils erst verspätet per resize – jede Größenänderung sofort übernehmen
     let A = c.A, B = c.B, mixV = c.mix;
 
     // Intro: beim Laden formt sich das EP aus einer losen Wolke
@@ -1342,7 +1388,11 @@ else {
     else { finderMorph = null; ready = ensurePair(A.dataset.key, B.dataset.key); }
     if (!ready) { composer.render(); requestAnimationFrame(frame); return; } // Uniforms erst ändern, wenn die passenden Daten da sind
 
-    const pa = placeOf(A), pb = placeOf(B);
+    // Kamerafahrt (leichtes Heranfahren zwischen zwei Ankern) für Bildkapitel ausgleichen: Partikel, WebGL-Foto und
+    // scharfes Bild liegen dadurch während des ganzen Aufbaus exakt in Endgröße und -lage – kein Nachziehen am Ende.
+    const camZ = 11 - (reduced ? 0 : Math.sin(c.u * Math.PI) * .45), keep = (s, p) => s.dataset.key.startsWith('img:') ? { x: p.x * camZ / 11, y: p.y * camZ / 11, s: p.s * camZ / 11 } : p;
+    camera.position.z = camZ; // sofort setzen: scharfe Ebene (sharpPlace) rechnet im selben Frame mit derselben Kamera wie WebGL
+    const pa = keep(A, placeOf(A)), pb = keep(B, placeOf(B));
     U.uA.value.set(pa.x, pa.y, pa.s); U.uB.value.set(pb.x, pb.y, pb.s);
     U.uMix.value = mixV;
     // Hintergrund-Schwarm: etwas gedämpft auf hellem Grund (im dunklen Film-Kapitel voller), Verhalten je Abschnitt
@@ -1407,7 +1457,6 @@ else {
     group.rotation.y = reduced ? 0 : pointer.x * .06;
     group.rotation.x = reduced ? 0 : pointer.y * .04;
     sharpG.style.transform = group.rotation.x || group.rotation.y ? `rotateX(${(-group.rotation.x).toFixed(4)}rad) rotateY(${group.rotation.y.toFixed(4)}rad)` : '';
-    camera.position.z = 11 - (reduced ? 0 : Math.sin(c.u * Math.PI) * .45);
     U.uTime.value = reduced ? time * .35 : time; // "Bewegung reduzieren": Schwarm lebt, aber deutlich ruhiger
 
     for (const [s, el] of stickies) {
