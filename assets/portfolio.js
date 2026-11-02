@@ -27,7 +27,6 @@
     { id: 'ugc-knista', sparte: 'ugc', titel: 'Omi testet jetzt ASMR', zweck: 'UGC-Clip für KNISTA, erfundene Paprika-Chips.', dauer: 9.03 },
     { id: 'ugc-mochimi', sparte: 'ugc', titel: 'Kalle, 72, testet Beauty', zweck: 'UGC-Clip für MOCHIMI, eine erfundene Glow Sheet Mask.', dauer: 9.1 },
     { id: 'spot-kleinfeld', sparte: 'ugc', quer: true, titel: 'Kleinfeld Haustechnik', zweck: 'Image-Spot für einen Kölner Handwerksbetrieb.', dauer: 20 },
-    { id: 'spot-hartmann', sparte: 'ugc', quer: true, titel: 'Autoservice Hartmann', zweck: 'Kurz-Spot für eine Hamburger Kfz-Werkstatt.', dauer: 15 },
     { id: 'schlumma', sparte: 'cgi', titel: 'So weich, wie dein Montag sein sollte.', zweck: 'CGI-Spot für die erfundene Marke SCHLUMMA: eine ultraweiche Couch im Zugabteil.', dauer: 8.83 },
     { id: 'cgi-polar-husky', sparte: 'cgi', quer: true, hd: true, titel: 'POLAR · Husky', zweck: 'CGI-Spot für POLAR: Eine Dose öffnet sich, und die Küche versinkt mit einem Husky-Welpen im Schnee.', dauer: 10.14 },
     { id: 'cgi-polar-office', sparte: 'cgi', quer: true, hd: true, titel: 'POLAR · Office', zweck: 'CGI-Spot für POLAR: Ein heißer Büronachmittag, ein Schluck, und der ganze Arbeitsplatz friert ein.', dauer: 10.14 },
