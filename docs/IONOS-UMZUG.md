@@ -47,6 +47,13 @@ Ziel: Die Seite läuft unter https://projekt-ep.de bei IONOS (Webhosting, Apache
 - Achtung: Im kostenlosen GitHub-Plan endet damit GitHub Pages für dieses Repo. Deshalb erst danach.
 - Die öffentliche Git-Historie enthält bis dahin auch entfernte Vorschauen (`hq-showcase/`, ältere `steak-seite/`-Stände). Mit dem Privatstellen sind sie nicht mehr abrufbar. Bereits erstellte Forks oder Kopien Dritter lassen sich so nicht zurückholen.
 
+## Deploy-Paket (Stand 02.11.2026)
+- `python3 tools/launch_build.py` baut das Paket nach `../ep-launch/dist` (Repo bleibt unverändert; der Workflow nutzt dasselbe Skript).
+- Enthält nur von Git verfolgte, öffentliche Dateien. Ausgeschlossen: `.github/`, `docs/`, `tools/`, `_config.yml`, `package*.json`, `*.md`/`*.py` sowie `video/portfolio/effekte-showreel-720.mp4` (unverlinkt, Entscheidung Eugen 02.11.).
+- Umstellungen nur im Paket: `noindex` raus auf allen Seiten der `sitemap.xml` (404, Demos, Referenzen bleiben noindex), `robots.txt` mit `Allow` und Sitemap, GitHub-Pages-Präfix `/projekt-ep-vorschau/` raus (Next-Export `referenzen/nivora`).
+- Rechtstexte: Abschnitte zu Chat-Assistent/WhatsApp und Google Analytics/Ads/Meta-Pixel werden im Paket ausgeblendet (Launch ohne Chat und Tracking, Eugen 02.11.). Wieder einsetzen: Kategorie in `--entfernen` weglassen. Optional `--entfernen chat,tracking,zahlung`: nur Rechnung/Überweisung statt PayPal, Klarna, Karten (Datenschutz, AGB § 6 (3a), FAQ).
+- Damit entfällt `git revert 4a7bcf9` aus Punkt 1 unten: die GitHub-Pages-Vorschau bleibt auf noindex, das Paket ist indexierbar.
+
 ## Übergangslösungen auf GitHub Pages – vor dem Go-live auf projekt-ep.de prüfen bzw. zurücknehmen
 
 Stand 30.10.2026, von Eugen freigegeben. Gilt nur, solange die Seite auf GitHub Pages läuft.

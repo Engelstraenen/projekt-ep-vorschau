@@ -33,16 +33,12 @@ jobs:
           ! grep -rIl --include=*.html -E "cdn\.jsdelivr|fonts\.googleapis|fonts\.gstatic|unpkg\.com|cdnjs" . | grep -v steak-seite
           # CSP-Hashes aktuell?
           python3 tools/csp.py > /dev/null && git diff --exit-code -- '*.html' .htaccess
-          # Impressum/Datenschutz ohne offene Platzhalter? (Warnung, kein Abbruch)
-          grep -c "PLATZHALTER" impressum.html datenschutz.html || true
+          # Offene Platzhalter (span.ph) und ENTWURF-Hinweise meldet tools/launch_build.py als WARNUNG
 
-      - name: Paket bauen (ohne Vorschauen, Werkzeuge und Repo-Dateien)
-        run: |
-          mkdir dist
-          rsync -a --exclude '.git' --exclude '.github' --exclude 'steak-seite' --exclude 'hq-showcase' \
-            --exclude 'tools' --exclude 'docs' --exclude 'node_modules' --exclude '*.md' \
-            --exclude 'package.json' --exclude 'package-lock.json' --exclude '.nojekyll' --exclude '_config.yml' ./ dist/
-          find dist -type f | wc -l
+      - name: Paket bauen (nur öffentliche Dateien, Launch-Umstellung, Prüfungen)
+        # tools/launch_build.py: noindex raus, robots.txt Launch-Version, Vorschau-Pfade raus,
+        # Rechtstexte ohne nicht genutzte Dienste (Chat, Tracking). Bricht bei Fehlern ab.
+        run: python3 tools/launch_build.py --out "$RUNNER_TEMP/dist"
 
       - name: Upload per SFTP (lftp mirror)
         env:
@@ -57,7 +53,7 @@ jobs:
           mkdir -p ~/.ssh && echo "$KNOWN" > ~/.ssh/known_hosts && chmod 600 ~/.ssh/known_hosts
           FLAGS="--reverse --delete --verbose --parallel=4"
           [ "$DRY" = "true" ] && FLAGS="$FLAGS --dry-run"
-          lftp -e "set sftp:auto-confirm no; set net:max-retries 2; mirror $FLAGS dist/ $TARGET; bye" -u "$USER","$PASS" "sftp://$HOST"
+          lftp -e "set sftp:auto-confirm no; set net:max-retries 2; mirror $FLAGS $RUNNER_TEMP/dist/ $TARGET; bye" -u "$USER","$PASS" "sftp://$HOST"
 
       - name: Prüfung nach dem Deploy
         if: ${{ inputs.dry_run == false }}
