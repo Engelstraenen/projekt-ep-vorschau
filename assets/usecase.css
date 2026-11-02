@@ -140,7 +140,7 @@
 .v-hud b { font-size: clamp(24px, 3vw, 44px); letter-spacing: -.04em; line-height: 1.02; }
 .v-hud .stats { display: flex; gap: 10px; flex-wrap: wrap; }
 .v-hud .stats span { font-size: 13px; padding: 7px 12px; border-radius: 999px; background: rgba(255, 255, 255, .08); color: #D2D2D7; }
-.v-hud .cta { justify-self: start; font-size: 14px; padding: 10px 16px; border-radius: 999px; background: #2997FF; color: #fff; font-weight: 600; }
+.v-hud .cta { justify-self: start; font-size: 14px; padding: 10px 16px; border-radius: 999px; background: #0071E3; color: #fff; font-weight: 600; }
 @media (max-width: 860px) { .v-game { grid-template-columns: 1fr; justify-items: center; text-align: center; } .v-hud .stats, .v-hud .cta { justify-self: center; justify-content: center; } .v-grid { grid-template-columns: repeat(5, 13vw); } }
 
 /* --- Visual: Glücksrad / Quiz am Tresen --- */
