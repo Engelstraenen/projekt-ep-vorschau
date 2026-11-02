@@ -78,16 +78,11 @@ input{caret-color:var(--pine)}
 .btn--sm{min-height:40px;padding:0 18px;font-size:14.5px}
 .btn--lg{min-height:56px;padding:0 28px;font-size:16.5px}
 @media (hover:hover) and (pointer:fine){
-  .btn--ink:hover{background:var(--pine-2)}
-  .btn--line:hover{border-color:var(--ink);}
   .btn:hover .ar,.link-arrow:hover .ar{transform:translateX(3px)}
 }
 .link-arrow{display:inline-flex;align-items:center;gap:10px;font-weight:550;text-decoration:none;padding:10px 0;border-bottom:1px solid var(--line);transition:border-color .2s ease}
 @media (hover:hover) and (pointer:fine){.link-arrow:hover{border-color:var(--ink)}}
 
-/* Glas – nur als kleines Detail über Fotos */
-.glass{position:relative;background:linear-gradient(150deg,rgba(255,255,255,.62),rgba(255,255,255,.34));backdrop-filter:blur(18px) saturate(1.6);-webkit-backdrop-filter:blur(18px) saturate(1.6);border-radius:var(--r);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(255,255,255,.38),0 18px 40px -18px rgba(27,35,32,.35)}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:rgba(251,250,247,.94)}}
 
 /* Hero */
 .hero{padding-top:clamp(28px,5vw,64px)}
@@ -392,70 +387,198 @@ input{caret-color:var(--pine)}
 .rooms{position:relative}
 .field{min-width:0}.field input{width:100%;min-width:0}
 
-/* ===== Liquid Glass (sichtbar, aber dosiert: Kopfzeile, Karten und Labels über Fotos) ===== */
-.lg-defs{position:absolute;width:0;height:0;overflow:hidden}
-.glass{
-  --gl-tint:rgba(255,255,255,.30);
-  background:linear-gradient(155deg,rgba(255,255,255,.52) 0%,var(--gl-tint) 42%,rgba(255,255,255,.18) 100%);
-  backdrop-filter:blur(14px) saturate(1.8) brightness(1.04);-webkit-backdrop-filter:blur(14px) saturate(1.8) brightness(1.04);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.35),inset 0 0 22px rgba(255,255,255,.28),0 22px 44px -22px rgba(20,30,26,.42),0 2px 6px -2px rgba(20,30,26,.12);
-  isolation:isolate;
+/* =====================================================================
+   Liquid Glass (Apple iOS 26 / macOS Tahoe)
+   Aufbau je Glasfläche, von hinten nach vorn:
+   1 Hintergrund: Brechung an der Kante (Linse) + wenig Weichzeichner + Sättigung
+     Chromium: SVG-Verschiebungskarte direkt im backdrop-filter (lumen.js)
+     Safari/Firefox über Fotos: deckungsgleiches Spiegelbild des Fotos mit demselben
+     SVG-Filter (lumen.js); sonst geschichteter backdrop-filter
+   2 Tönung (klar: 6 bis 12 %, Karten mit Text: 20 bis 30 %)
+   3 Dickes Glas: Innenlicht an der Kante, Farbsaum (rot/blau), Innenschatten unten
+   4 Lichtkante (::before): heller Rand an Licht- und Gegenseite, dreht mit --lg-a
+   5 Glanz (::after): Glanzpunkt folgt Zeiger und Finger
+   ===================================================================== */
+:root{
+  --lg-a:-38deg;                       /* Lichtwinkel, lumen.js dreht ihn beim Scrollen */
+  --lg-ease:cubic-bezier(.22,1,.36,1);
+  --lg-spring:cubic-bezier(.34,1.56,.64,1);
+  --lg-drop:0 0 0 .5px rgba(20,30,26,.10),0 1px 2px rgba(20,30,26,.07),0 10px 28px -10px rgba(28,40,34,.32);
 }
-/* Lichtkante: heller Rand oben links, gebrochen unten rechts */
-.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:2;
-  background:linear-gradient(140deg,rgba(255,255,255,.95),rgba(255,255,255,.18) 38%,rgba(255,255,255,.06) 62%,rgba(255,255,255,.7));
+.glass,.btn,.lg{
+  --lg-tint:rgba(255,255,255,.08);
+  --lg-blur:1.5px;
+  --lg-sat:1.6;
+  position:relative;isolation:isolate;
+  background:var(--lg-tint);
+  -webkit-backdrop-filter:blur(var(--lg-blur)) saturate(var(--lg-sat)) brightness(1.08) contrast(1.04);
+  backdrop-filter:blur(var(--lg-blur)) saturate(var(--lg-sat)) brightness(1.08) contrast(1.04);
+  border:0;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.22),
+    inset 0 0 12px 1px rgba(255,255,255,.22),
+    inset 2px 0 3px -2px rgba(255,96,130,.30),
+    inset -2px 0 3px -2px rgba(70,150,255,.32),
+    inset 0 -14px 22px -18px rgba(255,255,255,.75),
+    inset 0 -2px 6px -4px rgba(20,30,26,.18),
+    var(--lg-drop);
+}
+/* Lichtkante: zwei helle Bögen an gegenüberliegenden Ecken, Seiten fast klar */
+.glass::before,.btn::before,.lg::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.25px;pointer-events:none;z-index:3;
+  background:conic-gradient(from var(--lg-a),rgba(255,255,255,1) 0deg,rgba(255,255,255,.55) 28deg,rgba(255,255,255,.06) 70deg,rgba(255,255,255,.04) 135deg,rgba(255,255,255,.8) 180deg,rgba(255,255,255,.35) 212deg,rgba(255,255,255,.05) 250deg,rgba(255,255,255,.05) 312deg,rgba(255,255,255,.6) 340deg,rgba(255,255,255,1) 360deg);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
-/* Glanzlicht, folgt dem Zeiger */
-.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
-  background:radial-gradient(380px circle at var(--mx,22%) var(--my,0%),rgba(255,255,255,.55),transparent 42%);opacity:.75;transition:opacity .3s ease}
-.lg-ok .glass--refract{backdrop-filter:url(#lg-refract) blur(10px) saturate(1.9) brightness(1.05)}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:rgba(250,251,248,.93)}}
+/* Glanz: weicher Lichtfleck oben, Glanzpunkt am Zeiger (nur sichtbar bei Hover/Druck) */
+.glass::after,.btn::after,.lg::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:
+    radial-gradient(120% 60% at 50% -18%,rgba(255,255,255,.34),rgba(255,255,255,0) 62%),
+    radial-gradient(circle at var(--mx,50%) var(--my,-80%),rgba(255,255,255,.6),rgba(255,255,255,0) 42%);
+  transition:opacity .3s var(--lg-ease)}
+/* Safari/Firefox: Brechung per Spiegelbild (siehe lumen.js) */
+.lg-mirror{position:absolute;inset:-10px;z-index:-2;pointer-events:none}
+.lg-mirror__clip{position:absolute;inset:0;overflow:hidden}
+.lg-mirror img{position:absolute;max-width:none;object-fit:cover;transform-origin:0 0}
+.lg-mirror::after{content:"";position:absolute;inset:10px;border-radius:inherit;background:var(--lg-tint)}
+.lg-mir{overflow:hidden;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass,.btn,.lg{--lg-tint:rgba(250,251,248,.88)}}
 
-/* Kopfzeile als schwebende Glas-Leiste */
+/* Getöntes Glas (Primäraktion, gewählte Pill): Praxisgrün, Licht fällt unten durch */
+.btn--ink,.next__go,.lg-thumb{
+  --lg-tint:rgba(33,64,58,.84);
+  background:radial-gradient(80% 70% at 50% 120%,rgba(130,205,175,.55),rgba(130,205,175,0) 70%),var(--lg-tint);
+  color:#fff;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.14),
+    inset 0 0 10px 1px rgba(190,240,220,.20),
+    inset 2px 0 3px -2px rgba(255,120,150,.35),
+    inset -2px 0 3px -2px rgba(90,170,255,.38),
+    inset 0 -10px 16px -12px rgba(175,235,210,.75),
+    0 0 0 .5px rgba(14,34,29,.40),0 1px 2px rgba(14,34,29,.16),0 10px 24px -10px rgba(25,70,58,.62)}
+.btn--ink::before,.next__go::before,.lg-thumb::before{opacity:.75}
+
+/* Buttons */
+.btn{--lg-blur:2px;font-weight:600;transition:transform .45s var(--lg-spring),box-shadow .3s var(--lg-ease),background-color .3s var(--lg-ease),color .3s var(--lg-ease);transform-origin:50% 55%}
+.btn--line{--lg-tint:rgba(255,255,255,.42);color:var(--ink)}
+.btn:active,.btn.is-press{transform:scale(1.06,.94);transition-duration:.12s}
+.btn:active::after,.btn.is-press::after{opacity:1}
+@media (hover:hover) and (pointer:fine){
+  .btn--ink:hover{--lg-tint:rgba(45,85,76,.84)}
+  .btn--line:hover{--lg-tint:rgba(255,255,255,.62)}
+}
+.btn:focus-visible{outline:2px solid var(--pine);outline-offset:3px}
+
+/* Kopfleiste: schwebende Glaskapsel */
 .site-head{padding-top:10px}
 .site-head.is-scrolled{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none}
-.site-head__in{min-height:64px;padding:0 10px 0 22px;border-radius:999px;position:relative}
+.site-head__in{--lg-tint:rgba(255,255,255,.2);--lg-blur:6px;min-height:64px;padding:0 10px 0 24px;border-radius:999px;transition:color .3s var(--lg-ease)}
 .site-head.is-hidden{transform:translateY(calc(-100% - 12px))}
 .home .site-head{margin-bottom:-84px}
 .home .hero{padding-top:calc(84px + clamp(28px,5vw,64px))}
-.menu{margin:8px var(--pad) 0;border-radius:24px;border-top:0}
+.site-head .btn,.site-head .menu-btn{-webkit-backdrop-filter:none;backdrop-filter:none}
+.nav{position:relative}
+.nav ul{position:relative;z-index:1;gap:4px}
+.nav a{display:block;padding:8px 16px;border-radius:999px;color:var(--ink);font-weight:500}
+.nav a::after{display:none}
+.lg-lens{position:absolute;left:0;top:0;height:40px;border-radius:999px;pointer-events:none;z-index:0;opacity:0;
+  --lg-tint:rgba(255,255,255,.34);-webkit-backdrop-filter:none;backdrop-filter:none;transition:opacity .3s var(--lg-ease)}
+.lg-lens.is-on{opacity:1}
+.menu-btn{border-radius:50%;--lg-tint:rgba(255,255,255,.3);transition:transform .45s var(--lg-spring)}
+.site-head .menu-btn:active{transform:scale(1.1,.94);transition-duration:.12s}
+.menu{margin:8px var(--pad) 0;border-radius:28px;border-top:0;--lg-tint:rgba(246,247,244,.8);--lg-blur:22px}
+/* über dunklen Flächen tönt sich das Glas dunkel (wie iOS) */
+.site-head.on-dark .site-head__in{--lg-tint:rgba(16,26,22,.36);color:#f3f5f2}
+.site-head.on-dark .nav a,.site-head.on-dark .brand__sub,.site-head.on-dark .open-state{color:#e9eeea}
+.site-head.on-dark .menu-btn i{background:#f3f5f2}
+.site-head.on-dark .menu-btn,.site-head.on-dark .lg-lens{--lg-tint:rgba(255,255,255,.14)}
 
-/* Hero: Fakten als Glas-Tafel über dem Foto */
-.facts.glass{position:absolute;right:clamp(14px,2.4vw,32px);bottom:clamp(14px,2.4vw,32px);margin:0;padding:16px 8px;border-radius:var(--r);grid-template-columns:repeat(3,auto);max-width:calc(100% - 420px)}
-.facts.glass li{border-top:0;padding:2px 20px;font-size:14.5px}
+/* Hero: Terminkarte und Fakten als Glas über dem Foto */
+.next{position:absolute;--lg-tint:rgba(255,255,255,.2);--lg-blur:5px;border-radius:28px}
+.next__label,.next__what{color:#26302c}
+.next__go{position:relative;isolation:isolate;width:48px;height:48px;-webkit-backdrop-filter:none;backdrop-filter:none;transition:transform .45s var(--lg-spring)}
+.next:active .next__go{transform:scale(1.1,.92);transition-duration:.12s}
+.facts.glass{--lg-tint:rgba(255,255,255,.2);--lg-blur:5px;position:absolute;right:clamp(14px,2.4vw,32px);bottom:clamp(14px,2.4vw,32px);margin:0;padding:16px 8px;border-radius:28px;grid-template-columns:repeat(3,auto);max-width:calc(100% - 420px)}
+.facts.glass li{border-top:0;padding:2px 20px;font-size:14px}
 .facts.glass li+li{border-left:1px solid rgba(255,255,255,.55)}
-.facts.glass span{color:#3e4743}
+.facts.glass span{color:#26302c}
 .hero__frame.is-clip .facts.glass{right:calc(var(--pad) + clamp(14px,2.4vw,32px))}
-.next{--gl-tint:rgba(255,255,255,.36)}
 
-/* Behandlungen: Glas-Label auf dem Foto */
+/* Behandlungen und Rundgang: klare Glas-Pills und Glas-Knopf auf den Fotos */
 .chap__img{position:relative}
-.chap__tag{position:absolute;left:16px;bottom:16px;padding:10px 16px;border-radius:999px;font-size:14.5px;font-weight:550;color:var(--ink)}
-
-/* Rundgang: Glas-Label */
+.chap__img picture{height:100%}
+.chap__tag{position:absolute;left:16px;bottom:16px;padding:12px 20px;border-radius:999px;font-size:14px;line-height:20px;font-weight:600;color:var(--ink);--lg-tint:rgba(255,255,255,.3);--lg-blur:3px}
+.chap__go{position:absolute;right:16px;top:16px;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;color:var(--ink);--lg-tint:rgba(255,255,255,.04);--lg-blur:.5px;
+  transition:transform .45s var(--lg-spring)}
+.chap__go .ar{width:22px;height:22px;filter:drop-shadow(0 1px 1px rgba(255,255,255,.7));transition:transform .45s var(--lg-ease)}
+.chap__img .chap__go:active{transform:scale(1.12,.9);transition-duration:.12s}
+.chap__go:active::after{opacity:1}
+@media (hover:hover) and (pointer:fine){.chap__go:hover{transform:scale(1.06)}.chap__go:hover .ar{transform:translate(2px,-2px)}}
 .room__img{position:relative}
-.room__tag{position:absolute;left:14px;top:14px;padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;color:var(--ink)}
+.room__tag{position:absolute;left:14px;top:14px;padding:8px 16px;border-radius:999px;font-size:14px;line-height:20px;font-weight:600;color:var(--ink);--lg-tint:rgba(255,255,255,.3);--lg-blur:3px}
 
-/* Termin: Formular als Glasfläche über dem Empfangsfoto */
-.booking__bg img{filter:saturate(.95)}
-.booking__bg::after{background:linear-gradient(180deg,rgba(240,242,238,.86),rgba(240,242,238,.42) 45%,rgba(240,242,238,.78))}
-.book.glass{--gl-tint:rgba(255,255,255,.55);background:linear-gradient(155deg,rgba(255,255,255,.80),rgba(255,255,255,.62) 50%,rgba(255,255,255,.70));border-radius:calc(var(--r) + 6px)}
-.book.glass .field input{background:rgba(255,255,255,.75)}
-.book.glass .chip span{background:rgba(255,255,255,.7)}
-.summary.glass{--gl-tint:rgba(255,255,255,.4)}
+/* Termin: farbiges Glasfoto dahinter, Formular als Glasplatte, Auswahl als Glaslinse */
+.booking__bg img{filter:saturate(1.1)}
+.booking__bg::after{background:linear-gradient(90deg,rgba(240,242,238,.95) 0%,rgba(240,242,238,.86) 32%,rgba(240,242,238,.2) 58%,rgba(240,242,238,.08) 100%)}
+.book.glass{--lg-tint:rgba(255,255,255,.52);--lg-blur:20px;--lg-sat:1.6;border-radius:32px}
+.summary.glass{position:sticky;--lg-tint:rgba(255,255,255,.3);--lg-blur:8px;border-radius:28px}
+.chips{position:relative}
+.chip{z-index:1}
+.chip span{position:relative;background:rgba(255,255,255,.46);border:0;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),inset 0 0 0 .5px rgba(27,35,32,.14),inset 0 -8px 12px -10px #fff,inset 0 0 8px rgba(255,255,255,.4),0 1px 2px rgba(20,30,26,.06),0 4px 10px -6px rgba(20,30,26,.18);
+  transition:color .3s var(--lg-ease),transform .45s var(--lg-spring),box-shadow .3s var(--lg-ease),background-color .3s var(--lg-ease)}
+.book.glass .chip span{background:rgba(255,255,255,.46)}
+.chip:active span{transform:scale(1.06,.94);transition-duration:.12s}
+.chip input:checked+span,.book.glass .chip input:checked+span{background:transparent;color:#fff;border:0;box-shadow:none}
+.chip input:disabled+span,.book.glass .chip input:disabled+span{background:transparent;box-shadow:inset 0 0 0 1px rgba(27,35,32,.12);color:var(--ink-3)}
+@media (hover:hover) and (pointer:fine){.chip input:not(:checked):not(:disabled)+span:hover{background:rgba(255,255,255,.72)}}
+.lg-thumb{position:absolute;left:0;top:0;z-index:0;pointer-events:none;border-radius:999px;-webkit-backdrop-filter:none;backdrop-filter:none}
+.chips--days .lg-thumb,.chip--day span{border-radius:18px}
+.chips--slots .lg-thumb,.chip--slot span{border-radius:14px}
+html:not(.lg-js) .chip input:checked+span{background:var(--pine);color:#fff}
+.step__n{background:rgba(255,255,255,.5);border:0;box-shadow:inset 0 0 0 .5px rgba(27,35,32,.2),inset 1px 1.5px 1px -1px #fff}
+.step.is-done .step__n{background:var(--pine);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.35),inset 1.5px 2px 1px -1px rgba(255,255,255,.7)}
+.field input{background:rgba(255,255,255,.5);border:0;border-radius:16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),inset 0 0 0 .5px rgba(27,35,32,.2),inset 0 2px 4px rgba(20,30,26,.09),0 1px 0 rgba(255,255,255,.9);transition:box-shadow .3s var(--lg-ease),background-color .3s var(--lg-ease)}
+.book.glass .field input{background:rgba(255,255,255,.5)}
+.field input:focus{background:rgba(255,255,255,.78);box-shadow:inset 0 0 0 1px var(--pine),inset 0 2px 4px rgba(20,30,26,.06),0 0 0 4px rgba(33,64,58,.14)}
+.field input[aria-invalid="true"]{box-shadow:inset 0 0 0 1px var(--clay)}
+/* Schalter wie iOS 26: Knopf wird beim Drücken zur klaren, größeren Glaslinse */
+.check--switch{align-items:center}
+.check--switch input{width:60px;height:28px;border-radius:999px;border:0;margin:0;background:rgba(27,35,32,.14);position:relative;display:block;flex:none;
+  box-shadow:inset 0 0 0 .5px rgba(27,35,32,.12),inset 0 1.5px 3px rgba(20,30,26,.14);transition:background-color .3s var(--lg-ease)}
+.check--switch input::after{content:"";position:absolute;left:2px;top:2px;width:38px;height:24px;border:0;border-radius:999px;opacity:1;
+  background:#fff;
+  box-shadow:0 0 0 .5px rgba(20,30,26,.08),0 2px 6px -1px rgba(20,30,26,.25);
+  transform:none;transition:transform .45s var(--lg-spring),background-color .2s var(--lg-ease),box-shadow .2s var(--lg-ease)}
+.check--switch input:checked{background:#34a06e}
+.check--switch input:checked::after{transform:translateX(18px)}
+.check--switch input:active::after{background:rgba(255,255,255,.12);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.75),inset 0 0 8px rgba(255,255,255,.6),inset 2px 0 3px -2px rgba(255,96,130,.4),inset -2px 0 3px -2px rgba(70,150,255,.45),inset 0 -6px 8px -6px #fff,0 0 0 .5px rgba(20,30,26,.12),0 6px 14px -4px rgba(20,30,26,.3);
+  transform:scale(1.4,1.5)}
+.check--switch input:checked:active::after{transform:translateX(18px) scale(1.4,1.5)}
+.check input[type=checkbox]:not([role=switch]){border:0;box-shadow:inset 0 0 0 1px rgba(27,35,32,.32),inset 1px 1.5px 1px -1px #fff;background:rgba(255,255,255,.6)}
+.check input[type=checkbox]:not([role=switch]):checked{background:var(--pine);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.4),inset 1.5px 2px 1px -1px rgba(255,255,255,.75)}
 
-@media (max-width:1180px){.facts.glass{max-width:none;left:auto}}
-@media (max-width:980px){
-  .facts.glass{position:static;grid-template-columns:repeat(3,1fr);margin:12px;}
+/* Dock (Handy): schwebende Glasleiste wie die iOS-Tab-Bar */
+@media (max-width:700px){
+  .dock.glass{position:fixed;--lg-tint:rgba(255,255,255,.14);--lg-blur:3px;background:var(--lg-tint);
+    -webkit-backdrop-filter:blur(var(--lg-blur)) saturate(var(--lg-sat)) brightness(1.08) contrast(1.04);backdrop-filter:blur(var(--lg-blur)) saturate(var(--lg-sat)) brightness(1.08) contrast(1.04);
+    padding:6px;gap:6px}
+  .dock .btn{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .dock .btn--line{--lg-tint:rgba(255,255,255,.5)}
 }
+
+@media (max-width:1180px){.facts.glass{max-width:none;left:auto}.summary.glass{position:relative}}
+@media (max-width:980px){.facts.glass{position:static;grid-template-columns:repeat(3,1fr);margin:12px}.booking__bg::after{background:rgba(240,242,238,.6)}}
 @media (max-width:700px){
   .site-head{padding-top:8px}
-  .site-head__in{min-height:56px;padding:0 6px 0 18px}
-  .home .site-head{margin-bottom:-72px}
-  .home .hero{padding-top:calc(72px + 24px)}
-  .facts.glass{position:absolute;left:12px;right:12px;bottom:12px;grid-template-columns:1fr;padding:6px 4px;display:none}
-  .chap__tag{left:10px;bottom:10px;font-size:13.5px;padding:8px 13px}
+  .site-head__in{min-height:58px;padding:0 6px 0 18px}
+  .home .site-head{margin-bottom:-74px}
+  .home .hero{padding-top:calc(74px + 24px)}
+  .facts.glass{display:none}
+  .chap__tag{left:12px;bottom:12px;padding:8px 16px}
+  .chap__go{width:56px;height:56px;right:12px;top:12px}
 }
-.book.glass .chip input:checked+span{background:var(--pine);border-color:var(--pine);color:#f6f4ef}.book.glass .chip input:disabled+span{background:transparent}
-.booking__bg::after{background:linear-gradient(90deg,rgba(240,242,238,.94) 0%,rgba(240,242,238,.84) 30%,rgba(240,242,238,.38) 58%,rgba(240,242,238,.6) 100%)}
-@media (max-width:980px){.booking__bg::after{background:rgba(240,242,238,.82)}}
+@media (prefers-contrast:more){
+  .glass,.btn--line,.lg{--lg-tint:rgba(250,251,248,.9)}
+  .glass::before,.btn::before,.lg::before{background:rgba(27,35,32,.5)}
+}
+@media (prefers-reduced-transparency:reduce){.glass,.btn--line,.lg{--lg-tint:rgba(250,251,248,.92)}}
+@media (prefers-reduced-motion:reduce){.btn,.chip span,.chap__go,.menu-btn,.next__go{transition-duration:.01s}.btn:active,.btn.is-press,.chip:active span,.chap__go:active,.chap__go:hover,.next:active .next__go{transform:none}.check--switch input::after{transition:none}}
