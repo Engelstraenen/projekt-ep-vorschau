@@ -18,7 +18,6 @@
     { id: 'motion', name: 'Motion Graphics' },
     { id: 'static', name: 'Static Ads' },        // typ: 'bild' – Motiv ohne Video
     { id: 'fashion', name: 'Fashion- & Lookbook-Film' },
-    { id: 'effekte', name: 'Effekte' },
   ];
   const CLIPS = [
     { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für SPRUZ, ein erfundenes Trockenshampoo.', dauer: 9.13 },
@@ -32,7 +31,6 @@
     { id: 'fleckfee', sparte: 'static', titel: 'Ein Blatt, Fleck weg.', zweck: 'Static Ad als Motion-Version für FLECKFEE, ein erfundenes Waschblatt gegen Flecken.', dauer: 7.21 },
     { id: 'kajuete', sparte: 'fashion', titel: 'Gegen Wind hilft nur eins: der richtige Mantel.', zweck: 'Mantel-Lookbook für das erfundene Label KAJÜTE, auf dem Fährdeck.', dauer: 8.83 },
     { id: 'velournacht', sparte: 'fashion', titel: 'Feinwäsche. Wie ich.', zweck: 'Fashion-Film für das erfundene Label VELOURNACHT: Samtanzug im Waschsalon.', dauer: 8.83 },
-    { id: 'effekte-showreel', sparte: 'effekte', titel: '17 Effekte für Short-Form-Videos', zweck: 'Showreel mit 17 Videoeffekten für Short-Form-Ads.', dauer: 42.5, ton: false, fiktiv: false },
   ];
 
   const lowPower = matchMedia('(max-width: 860px), (pointer: coarse)').matches;

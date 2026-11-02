@@ -1,6 +1,6 @@
 /* ===== Clips „Ad Creatives“ (Unterseite 04 Werbeclips: leistungen/werbeclips.html#clips) =====
    Aufbau (von Eugen gewählt, ohne Reiter): alle Sparten untereinander, je Überschrift + volle Reihe ihrer Clips im Raster.
-   Reihenfolge UGC · CGI · Motion Graphics · Static Ads · Fashion-/Lookbook-Film · Effekte; leere Sparten sind ausgeblendet.
+   Reihenfolge UGC · CGI · Motion Graphics · Static Ads · Fashion-/Lookbook-Film; leere Sparten sind ausgeblendet.
    Look wie die übrigen Blöcke der Unterseite (sub.css: .block, h2, .intro). */
 .pf { --pf-ease: cubic-bezier(.23, 1, .32, 1); --pf-r: 20px; scroll-margin-top: 72px; }
 .pf [hidden] { display: none !important; } /* leere Sparten: im Code vorbereitet, aber unsichtbar */
