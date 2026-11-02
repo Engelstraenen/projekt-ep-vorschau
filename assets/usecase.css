@@ -222,3 +222,14 @@
 .v-wall .q.hi small { color: rgba(255, 255, 255, .8); }
 .v-wall .q.hi span i { background: rgba(255, 255, 255, .2); color: #fff; }
 @media (max-width: 860px) { .v-wall { grid-template-columns: 1fr 1fr; width: 90%; } .v-wall .q { margin-top: 0 !important; } .v-wall .q:nth-child(n+7) { display: none; } }
+
+/* --- Visual: echte App-Demos (Handy-Rahmen mit Live-Aufnahme: links stummes Interaktions-Video, rechts Standbild) --- */
+.uc-vis.app-live { background: radial-gradient(120% 90% at 20% 0%, #E9EEF5, #F3F5F8 55%, #E6EAF0); }
+.uc-vis.app-live.dark { background: radial-gradient(120% 100% at 80% 0%, #2A2A2E, #0E0E10 62%); }
+.v-scr.v-media { display: block; position: relative; background: #fff; }
+.v-scr.v-media img, .v-scr.v-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.v-scr.v-media.sc-screen { aspect-ratio: auto; height: 100%; border-radius: 31px; }
+.v-scr.v-media .sc-toggle { width: 38px; height: 38px; right: 10px; bottom: 10px; }
+.v-phone > a { display: block; height: 100%; border-radius: 31px; }
+.v-phone > a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+@media (max-width: 860px) { .v-scr.v-media.sc-screen, .v-phone > a { border-radius: 24px; } .v-scr.v-media .sc-toggle { width: 34px; height: 34px; right: 6px; bottom: 6px; } }
