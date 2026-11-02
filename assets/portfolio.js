@@ -1,6 +1,6 @@
 // Clips „Ad Creatives“ (Unterseite leistungen/werbeclips.html#clips): Sparten, Poster mit Play-Knopf, Video lädt erst beim Klick.
 // Neue Arbeit hinzufügen = Dateien ablegen + eine Zeile in CLIPS:
-//   video/portfolio/<id>-720.mp4 (H.264 720×1280, +faststart, 9:16)
+//   video/portfolio/<id>-720.mp4 (H.264 720×1280, +faststart, 9:16; mit quer: true 1280×720, 16:9, eigene Reihe)
 // Pfade gelten ab Website-Wurzel; data-pf am Abschnitt gibt den Weg dorthin an (Unterseite: "../").
 //   img/portfolio/<id>-480.avif|webp und <id>-960.avif|webp (Poster bzw. Motiv)
 // Leere Sparten bleiben ausgeblendet und erscheinen von selbst, sobald ein Eintrag dazukommt.
@@ -24,6 +24,8 @@
     { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für SPRUZ, ein erfundenes Trockenshampoo.', dauer: 9.13 },
     { id: 'ugc-knista', sparte: 'ugc', titel: 'Omi testet jetzt ASMR', zweck: 'UGC-Clip für KNISTA, erfundene Paprika-Chips.', dauer: 9.03 },
     { id: 'ugc-mochimi', sparte: 'ugc', titel: 'Kalle, 72, testet Beauty', zweck: 'UGC-Clip für MOCHIMI, eine erfundene Glow Sheet Mask.', dauer: 9.1 },
+    { id: 'spot-kleinfeld', sparte: 'ugc', quer: true, titel: 'Kleinfeld Haustechnik', zweck: 'Image-Spot für einen Kölner Handwerksbetrieb.', dauer: 20 },
+    { id: 'spot-hartmann', sparte: 'ugc', quer: true, titel: 'Autoservice Hartmann', zweck: 'Kurz-Spot für eine Hamburger Kfz-Werkstatt.', dauer: 15 },
     { id: 'schlumma', sparte: 'cgi', titel: 'So weich, wie dein Montag sein sollte.', zweck: 'CGI-Spot für die erfundene Marke SCHLUMMA: eine ultraweiche Couch im Zugabteil.', dauer: 8.83 },
     { id: 'motion-zitra', sparte: 'motion', titel: 'Durst? Drei Sorten. Null Langeweile.', zweck: 'Motion-Graphics-Spot für ZITRA, eine erfundene Limonade.', dauer: 12 },
     { id: 'motion-lindholz', sparte: 'motion', titel: 'Erst eine Linie. Dann ein Plan. Dann Holz.', zweck: 'Motion-Graphics-Spot für Lindholz, eine erfundene Tischlerei für Möbel nach Maß.', dauer: 13 },
@@ -46,13 +48,13 @@
     on: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L11.5 6v12l-4.3-3.5H4z" fill="currentColor"/><path d="M15 9.2a4 4 0 0 1 0 5.6M17.6 6.8a7.4 7.4 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
     off: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L11.5 6v12l-4.3-3.5H4z" fill="currentColor"/><path d="m15.5 9.5 5 5m0-5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
   };
-  const picture = (id, sizes, eager) => `<picture>` +
+  const picture = (id, sizes, eager, quer) => `<picture>` +
     `<source type="image/avif" srcset="${B}img/portfolio/${id}-480.avif 480w, ${B}img/portfolio/${id}-960.avif 960w" sizes="${sizes}">` +
     `<source type="image/webp" srcset="${B}img/portfolio/${id}-480.webp 480w, ${B}img/portfolio/${id}-960.webp 960w" sizes="${sizes}">` +
-    `<img src="${B}img/portfolio/${id}-480.webp" width="480" height="853" alt="" ${eager ? 'fetchpriority="low"' : 'loading="lazy"'} decoding="async"></picture>`;
+    `<img src="${B}img/portfolio/${id}-480.webp" width="480" height="${quer ? 270 : 853}" alt="" ${eager ? 'fetchpriority="low"' : 'loading="lazy"'} decoding="async"></picture>`;
   const media = (c, sizes, eager) => {
     const bild = c.typ === 'bild', ton = c.ton !== false;
-    return `<div class="pf-media${bild ? ' is-bild' : ''}">${picture(c.id, sizes, eager)}<span class="pf-insp">Inspiration</span>` +
+    return `<div class="pf-media${bild ? ' is-bild' : ''}${c.quer ? ' is-quer' : ''}">${picture(c.id, sizes, eager, c.quer)}<span class="pf-insp">Inspiration</span>` +
       (bild ? '' : `<video preload="none" playsinline webkit-playsinline disablepictureinpicture disableremoteplayback aria-label="${esc(c.titel)}"></video>` +
       `<button type="button" class="pf-play" aria-label="Video abspielen: ${esc(c.titel)}"><span class="pf-play-ic">${ICON.play}</span></button>` +
       (ton ? `<button type="button" class="pf-sound" aria-label="Ton ausschalten" aria-pressed="true">${ICON.on}</button>` : '<span class="pf-mute-note">Ohne Ton</span>') +
@@ -71,7 +73,9 @@
     return `<section class="pf-group rb" id="sparte-${s.id}" data-sparte="${s.id}" aria-labelledby="pf-g-${s.id}"${list.length ? '' : ' hidden'}>` +
       `<header class="pf-group-head rb-head"><p class="rb-label"><span class="rb-nr">${String(nr).padStart(2, '0')}</span><span class="rb-dot" aria-hidden="true"> · </span>${esc(s.label || s.name)}</p>` +
       `<h2 id="pf-g-${s.id}" class="rb-h">${esc(s.h || s.name)}</h2>${s.lead ? `<p class="rb-lead">${esc(s.lead)}</p>` : ''}<span class="pf-count">${list.length} ${list.length === 1 ? 'Beispiel' : 'Beispiele'}</span></header>` +
-      `<ul class="pf-row" data-lenis-prevent-horizontal>` + list.map((c) => `<li class="pf-card" data-id="${c.id}" data-sparte="${c.sparte}">${media(c, '(max-width: 860px) 46vw, 240px')}${caption(c)}</li>`).join('') + `</ul></section>`;
+      `<ul class="pf-row" data-lenis-prevent-horizontal>` + list.filter((c) => !c.quer).map((c) => `<li class="pf-card" data-id="${c.id}" data-sparte="${c.sparte}">${media(c, '(max-width: 860px) 46vw, 240px')}${caption(c)}</li>`).join('') + `</ul>` +
+      // 16:9-Spots (quer: true): eigene zweispaltige Reihe unter den 9:16-Kacheln, ohne Beschnitt
+      (list.some((c) => c.quer) ? `<ul class="pf-row pf-row-quer">` + list.filter((c) => c.quer).map((c) => `<li class="pf-card pf-card-quer" data-id="${c.id}" data-sparte="${c.sparte}">${media(c, '(max-width: 860px) 92vw, 640px')}${caption(c)}</li>`).join('') + `</ul>` : '') + `</section>`;
   }).join('');
   sec.dataset.ready = '';
 
