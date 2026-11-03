@@ -76,8 +76,8 @@ var gsap=window.gsap;gsap.registerPlugin(window.ScrollTrigger);
 var lines=$$('.hero__h .ln>span');
 if(lines.length)gsap.fromTo(lines,{yPercent:105},{yPercent:0,duration:1.1,ease:'expo.out',stagger:.09,delay:.1});
 var fig=$('[data-hero-fig] .hero__img');
-if(fig){gsap.fromTo(fig,{clipPath:'inset(3% 4% 0% 4%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:fig,start:'top 85%',end:'top 25%',scrub:.6}});
- gsap.fromTo($('img',fig),{scale:1.08},{scale:1,ease:'none',scrollTrigger:{trigger:fig,start:'top bottom',end:'bottom top',scrub:true}});}
+if(fig){gsap.fromTo(fig,{clipPath:'inset(2% 2% 0% 2%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:fig,start:'top 85%',end:'top 25%',scrub:.6}});
+ gsap.fromTo($('img',fig),{scale:1.04},{scale:1,ease:'none',scrollTrigger:{trigger:fig,start:'top bottom',end:'bottom top',scrub:true}});}
 /* Haarlinien ziehen sich auf */
 $$('.svc,.partner,.art,.faq__i,.lead-art,.dates,.kanzlei__txt,.staff,.team__head,.rg__head').forEach(function(el){gsap.from(el,{y:24,opacity:0,duration:.9,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}});});
 /* Leitsatz Wort für Wort */
