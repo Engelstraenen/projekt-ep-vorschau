@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-/peqWEqazhoqWMmzleg2l7sOTsq9EReP9pnCJiior3Q=' 'sha256-5wotKctcDSp8tYTIUEW2GGoj+2UA/7aMKKtNcXBBpj4=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-cBKZU9If80jAU232XR8EoMPTcLgsISHnWlai+Ih1psc=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/JybvCGA7E4nnZ4BRoln7ibSw3rptSmCtgGvq3NGHkM=' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-cBKZU9If80jAU232XR8EoMPTcLgsISHnWlai+Ih1psc=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-txQiGJnVW9iuIzRAl3UP+4EJOgpNJm2T4Cu45syutAQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -363,7 +363,7 @@
 
   /* Variante A2: statt der Buttons unter dem Text eine Mini-Vorschau des Films (Kontakt steckt schon in "Projekt starten" oben) */
   #intro .sticky { padding-top: 13vh; }
-  .vthumb { position: relative; display: block; width: min(400px, 100%); margin: 30px auto 0; aspect-ratio: 16 / 9; border: 0; padding: 0; border-radius: 24px; overflow: hidden; cursor: pointer; background: #0d0d10; color: #F5F5F7; text-align: left; font: inherit;
+  .vthumb { position: relative; display: block; width: min(480px, 100%); margin: 30px auto 0; aspect-ratio: 16 / 9; border: 0; padding: 0; border-radius: 24px; overflow: hidden; cursor: pointer; background: #0d0d10; color: #F5F5F7; text-align: left; font: inherit;
     box-shadow: 0 50px 100px -45px rgba(0,40,120,.55), 0 0 0 1px rgba(0,0,0,.04); transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
   .vthumb:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 60px 110px -45px rgba(0,40,120,.65), 0 0 0 1px rgba(0,0,0,.04); }
   .vthumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s var(--ease); }
@@ -388,17 +388,17 @@
   .vthumb .vlabel strong { font-size: 14px; }
   .vthumb .vlabel small { display: none; }
   .vthumb .vlabel em { font-size: 12px; }
-  @media (min-width: 861px) and (max-height: 780px) { .vthumb { width: 340px; margin-top: 22px; } #intro .lead { margin-top: 18px; } }
+  @media (min-width: 861px) and (max-height: 780px) { .vthumb { width: 400px; margin-top: 22px; } #intro .lead { margin-top: 18px; } }
   @media (max-width: 860px) {
     #intro .sticky { padding-top: 12vh; }
     #intro .eyebrow { margin-bottom: 14px; }
     #intro .lead { margin-top: 16px; font-size: 16px; }
-    .vthumb { width: min(66vw, 400px); margin-top: 20px; }
+    .vthumb { width: min(80vw, 480px); margin-top: 20px; }
   }
   @media (prefers-reduced-motion: reduce) { .vthumb .vplay::before { animation: none; } }
   .kino { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 24px; background: rgba(10,10,14,.72); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); opacity: 0; pointer-events: none; transition: opacity .4s var(--ease); }
   .kino.open { opacity: 1; pointer-events: auto; }
-  .kino .vplayer { width: min(1200px, 100%, calc((100svh - 140px) * 16 / 9)); transform: scale(.94); transition: transform .5s var(--ease); }
+  .kino .vplayer { width: min(1360px, 100%, calc((100svh - 120px) * 16 / 9)); transform: scale(.94); transition: transform .5s var(--ease); }
   .kino.open .vplayer { transform: none; }
   .kino .close { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 22px; cursor: pointer; }
   /* Team (vor dem Footer): zwei runde Porträts (freigegebene Variante A) */
@@ -538,7 +538,7 @@
         <p class="eyebrow"><span class="lang">Unabhängige Kreativagentur · </span>Strategie · Gestaltung · Entwicklung</p>
         <h1>Vom ersten Gedanken. <span class="blue">Zum fertigen Ergebnis.</span></h1>
         <p class="lead">Wir machen Ideen sichtbar und auffindbar: mit Werbeclips, Logo Design, Print, Merch und SEO. Und erlebbar als Websites, Apps, Games, Dashboards und Abläufe, die von selbst laufen.</p>
-        <button class="vthumb" type="button" aria-haspopup="dialog"><video muted loop playsinline preload="none" aria-hidden="true"></video><span class="vposter" aria-hidden="true"><b>E<span>P</span></b><img src="video/erklaervideo-poster-640.webp" srcset="video/erklaervideo-poster-640.webp 640w, video/erklaervideo-poster.webp 1280w" sizes="(max-width: 440px) 100vw, 400px" alt="" loading="lazy" decoding="async" data-remove-on-error></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
+        <button class="vthumb" type="button" aria-haspopup="dialog" aria-label="Agentur-Film ansehen, mit Ton"><span class="vposter" aria-hidden="true"><b>E<span>P</span></b><img src="video/agenturfilm/agenturfilm-poster-640.webp" srcset="video/agenturfilm/agenturfilm-poster-640.webp 640w, video/agenturfilm/agenturfilm-poster.webp 1920w" sizes="(max-width: 860px) 80vw, 480px" width="640" height="360" alt="" loading="lazy" decoding="async" data-remove-on-error></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
       </div>
     </div>
   </section>
@@ -1653,18 +1653,18 @@ show('zeit');
   });
 })();
 </script>
-<div class="kino" role="dialog" aria-modal="true" aria-label="Erklärvideo" inert><button class="close" type="button" aria-label="Video schließen">×</button><div class="vplayer empty"><video playsinline preload="metadata" aria-label="Erklärvideo PROJEKT EP"></video><div class="vposter" aria-hidden="true"><b>E<span>P</span></b></div><button class="vplay" type="button" aria-label="Erklärvideo abspielen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></button><div class="vmeta"><span><strong>Was PROJEKT EP für euch macht</strong><span class="vstate">Video wird gerade fertiggestellt</span></span><span class="vdur"></span></div></div></div>
+<div class="kino" role="dialog" aria-modal="true" aria-label="Agentur-Film" inert><button class="close" type="button" aria-label="Video schließen">×</button><div class="vplayer empty"><video playsinline preload="metadata" aria-label="Agentur-Film PROJEKT EP, mit Ton"><track kind="subtitles" srclang="de" label="Deutsch" src="video/agenturfilm/agenturfilm.vtt"></video><div class="vposter" aria-hidden="true"><b>E<span>P</span></b></div><button class="vplay" type="button" aria-label="Agentur-Film abspielen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></button><div class="vmeta"><span><strong>Was PROJEKT EP für euch macht</strong><span class="vstate">Video wird gerade fertiggestellt</span></span><span class="vdur"></span></div></div></div>
 
 <script>
-  // Erklärvideo: lädt video/erklaervideo.mp4. Solange die Datei fehlt, bleibt der Platzhalter stehen.
+  // Agentur-Film: lädt video/agenturfilm/agenturfilm.mp4 (Untertitel: agenturfilm.vtt). Solange die Datei fehlt, bleibt der Platzhalter stehen.
   // Abgespielt wird erst auf Klick, mit Ton und Bedienleiste; außerhalb des Bildes pausiert es.
   window.__videoPlayers = [...document.querySelectorAll('.vplayer')].map((box) => {
     const v = box.querySelector('video'), state = box.querySelector('.vstate'), dur = box.querySelector('.vdur');
-    v.src = 'video/erklaervideo.mp4'; v.poster = 'video/erklaervideo-poster.webp';
+    v.src = 'video/agenturfilm/agenturfilm.mp4'; v.poster = 'video/agenturfilm/agenturfilm-poster.webp';
     v.addEventListener('loadedmetadata', () => {
       box.classList.remove('empty');
       const s = Math.round(v.duration); dur.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
-      state.textContent = 'Erklärvideo · Ton an';
+      state.textContent = 'Agentur-Film · mit Ton';
     });
     v.addEventListener('error', () => { box.classList.add('empty'); state.textContent = 'Video wird gerade fertiggestellt'; });
     const play = () => { if (box.classList.contains('empty')) return; box.classList.add('playing'); v.controls = true; v.play(); };
@@ -1675,22 +1675,16 @@ show('zeit');
   });
 </script>
 <script>
-  // Vorschaubild: stumme Endlos-Vorschau des Films (nur wenn das Video existiert, nicht bei reduzierter Bewegung/Datensparmodus)
-  const thumb = document.querySelector('.vthumb'), tv = thumb.querySelector('video');
+  // Vorschaubild: Standbild aus dem Film (kein stummes Autoplay); Klick öffnet den Film mit Ton und Bedienleiste
+  const thumb = document.querySelector('.vthumb');
   const P = window.__videoPlayers[0];
-  P.v.addEventListener('loadedmetadata', () => {
-    thumb.querySelector('.vthumb-dur').textContent = '▶ ' + P.box.querySelector('.vdur').textContent;
-    const calm = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData;
-    // Vorschau erst laden, wenn das Vorschaubild in die Nähe des Bildschirms kommt (spart ~1 MB beim Seitenstart)
-    if (!calm) new IntersectionObserver((es, io) => { if (!es[0].isIntersecting) return; io.disconnect();
-      tv.src = 'video/erklaervideo-vorschau.mp4'; tv.play().then(() => thumb.classList.add('live')).catch(() => {}); }, { rootMargin: '800px 0px' }).observe(thumb);
-  });
+  P.v.addEventListener('loadedmetadata', () => { thumb.querySelector('.vthumb-dur').textContent = '▶ ' + P.box.querySelector('.vdur').textContent; });
   // Kino öffnen/schließen; Scrollen der Seite ruht, solange das Video offen ist
   const kino = document.querySelector('.kino');
   const open = (on) => {
     kino.classList.toggle('open', on); kino.toggleAttribute('inert', !on);
-    if (on) { window.__lenis?.stop(); tv.pause(); P.v.currentTime = 0; P.play(); kino.querySelector('.close').focus(); }
-    else { P.stop(); window.__lenis?.start(); if (thumb.classList.contains('live')) tv.play().catch(() => {}); thumb.focus(); }
+    if (on) { window.__lenis?.stop(); P.v.currentTime = 0; P.play(); kino.querySelector('.close').focus(); }
+    else { P.stop(); window.__lenis?.start(); thumb.focus(); }
   };
   thumb.addEventListener('click', () => open(true));
   kino.querySelector('.close').addEventListener('click', () => open(false));
