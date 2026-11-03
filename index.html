@@ -401,7 +401,7 @@
   .kino .vplayer { width: min(1360px, 100%, calc((100svh - 120px) * 16 / 9)); transform: scale(.94); transition: transform .5s var(--ease); }
   .kino.open .vplayer { transform: none; }
   .kino .close { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 22px; cursor: pointer; }
-  /* Team (vor dem Footer): zwei runde Porträts (freigegebene Variante A) */
+  /* Team (vor dem Footer): drei runde Porträts/Kacheln (freigegebene Variante A) */
   #team { text-align: left; padding: clamp(56px, 9vh, 110px) var(--gutter) clamp(56px, 8vh, 96px); }
   .team-in { max-width: 1080px; margin: 0 auto; }
   .team-head { text-align: center; max-width: 40em; margin: 0 auto clamp(32px, 5vh, 56px); }
@@ -410,7 +410,7 @@
   #team h2 .mute { color: var(--ink-2); }
   #team .team-head, #team .person-txt { text-shadow: 0 0 3px #fff, 0 0 14px rgba(255,255,255,.95), 0 0 28px rgba(255,255,255,.8); } /* weicher heller Hof: Schrift bleibt über dem EP-Schwarm lesbar */
   .team-lead { color: var(--ink-2); font-size: clamp(16px, 1.3vw, 19px); margin-top: 14px; }
-  .team-list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+  .team-list { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
   .person { text-align: center; }
   .person-foto { width: clamp(160px, 17vw, 220px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; background: #E8E8ED; }
   .person-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -418,8 +418,11 @@
   .person-foto--leer svg { width: 78%; height: auto; display: block; }
   .person h3 { font-size: clamp(20px, 1.7vw, 24px); font-weight: 600; letter-spacing: -.02em; }
   .person-rolle { color: var(--blue-ink); font-size: 15px; margin-top: 2px; }
+  .person-info { color: var(--ink-2); font-size: 14px; line-height: 1.45; margin: 8px auto 0; max-width: 24em; }
   @media (max-width: 860px) {
-    .team-list { gap: 28px 16px; }
+    .team-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
+    .team-list > .person:first-child { grid-column: 1 / -1; } /* CEO oben mittig, darunter zwei Karten nebeneinander */
+    .person-info { font-size: 13px; }
     .person-foto { width: min(38vw, 160px); margin-bottom: 14px; }
     .person h3 { font-size: 18px; }
     .person-rolle { font-size: 14px; }
@@ -496,7 +499,7 @@
   }
 </style>
 <link rel="stylesheet" href="assets/ep-fx.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://projekt-ep.de/#organisation","name":"PROJEKT EP","url":"https://projekt-ep.de/","email":"kontakt@projekt-ep.de","description":"Kreativagentur für Websites, Werbeclips, Logo, Print, Merch, Apps und Automatisierung. Für Firmen in Deutschland, Österreich, der Schweiz und weltweit.","areaServed":[{"@type":"Country","name":"Deutschland"},{"@type":"Country","name":"Österreich"},{"@type":"Country","name":"Schweiz"},"Worldwide"],"employee":[{"@type":"Person","name":"Eugen Kelberer","jobTitle":"Head of Operations & Business Development"},{"@type":"Person","name":"Paul Haase","jobTitle":"CEO"}],"knowsAbout":["Webdesign","Online-Shops","Suchmaschinenoptimierung","Prozessautomatisierung","Chatbots","App Design","Game Design","Werbeclips","Ads-Management","Visualisierung","Print Design","Logo Design","Merch-Produktion","Dashboards"]},{"@type":"WebSite","@id":"https://projekt-ep.de/#website","url":"https://projekt-ep.de/","name":"PROJEKT EP","inLanguage":"de-DE","publisher":{"@id":"https://projekt-ep.de/#organisation"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://projekt-ep.de/#organisation","name":"PROJEKT EP","legalName":"Engelstränen UG (haftungsbeschränkt)","url":"https://projekt-ep.de/","email":"kontakt@projekt-ep.de","address":{"@type":"PostalAddress","streetAddress":"Gothaerstr. 31","postalCode":"40880","addressLocality":"Ratingen","addressCountry":"DE"},"description":"Kreativagentur für Websites, Werbeclips, Logo, Print, Merch, Apps und Automatisierung. Für Firmen in Deutschland, Österreich, der Schweiz und weltweit.","areaServed":[{"@type":"Country","name":"Deutschland"},{"@type":"Country","name":"Österreich"},{"@type":"Country","name":"Schweiz"},"Worldwide"],"employee":[{"@type":"Person","name":"Jessica Kruse","jobTitle":"CEO"},{"@type":"Person","name":"Eugen Kelberer","jobTitle":"Head of Operations & Business Development"},{"@type":"Person","name":"Paul Haase","jobTitle":"Head of Sales & Partnerships"}],"knowsAbout":["Webdesign","Online-Shops","Suchmaschinenoptimierung","Prozessautomatisierung","Chatbots","App Design","Game Design","Werbeclips","Ads-Management","Visualisierung","Print Design","Logo Design","Merch-Produktion","Dashboards"]},{"@type":"WebSite","@id":"https://projekt-ep.de/#website","url":"https://projekt-ep.de/","name":"PROJEKT EP","inLanguage":"de-DE","publisher":{"@id":"https://projekt-ep.de/#organisation"}}]}</script>
 </head>
 <body class="home">
 <a class="skip" href="#main">Direkt zum Inhalt</a>
@@ -697,10 +700,11 @@
 
     <section class="team" id="team" aria-labelledby="team-h">
       <div class="team-in">
-        <div class="team-head"><p class="team-kicker">Das Team</p><h2 id="team-h">Zwei Köpfe. <span class="mute">Ein Ergebnis.</span></h2><p class="team-lead">Ihr sprecht direkt mit uns, vom ersten Gespräch bis zum fertigen Ergebnis.</p></div>
+        <div class="team-head"><p class="team-kicker">Das Team</p><h2 id="team-h">Drei Köpfe. <span class="mute">Ein Ergebnis.</span></h2><p class="team-lead">Ihr sprecht direkt mit uns, vom ersten Gespräch bis zum fertigen Ergebnis.</p></div>
         <ul class="team-list">
+          <li class="person"><div class="person-foto person-foto--initialen" aria-hidden="true"><span>J<b>K</b></span></div><div class="person-txt"><h3>Jessica Kruse</h3><p class="person-rolle">CEO</p><p class="person-info">Geschäftsführerin der Engelstränen UG (haftungsbeschränkt).</p></div></li>
           <li class="person"><div class="person-foto"><picture><source type="image/avif" srcset="img/team/eugen-kelberer-320.avif 320w, img/team/eugen-kelberer-640.avif 640w" sizes="(max-width: 860px) 160px, 400px"><source type="image/webp" srcset="img/team/eugen-kelberer-320.webp 320w, img/team/eugen-kelberer-640.webp 640w" sizes="(max-width: 860px) 160px, 400px"><img src="img/team/eugen-kelberer-640.webp" width="640" height="640" alt="Porträt von Eugen Kelberer, Head of Operations &amp; Business Development von PROJEKT EP" loading="lazy" decoding="async"></picture></div><div class="person-txt"><h3>Eugen Kelberer</h3><p class="person-rolle">Head of Operations &amp; Business Development</p></div></li>
-          <li class="person"><div class="person-foto person-foto--mono" aria-hidden="true"><span>P<b>H</b></span></div><div class="person-txt"><h3>Paul Haase</h3><p class="person-rolle">CEO</p></div></li>
+          <li class="person"><div class="person-foto person-foto--mono" aria-hidden="true"><span>P<b>H</b></span></div><div class="person-txt"><h3>Paul Haase</h3><p class="person-rolle">Head of Sales &amp; Partnerships</p></div></li>
         </ul>
       </div>
     </section>
