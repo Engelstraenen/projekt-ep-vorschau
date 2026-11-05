@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-hvEMk0STKepmEzLwkEO/bYabZnqzUg5+xJujlPdjKCk=' 'sha256-t3UiN02yEOELy8uyYuAGfqOjM+CgL3Zld9KFKwAp/UU=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-txQiGJnVW9iuIzRAl3UP+4EJOgpNJm2T4Cu45syutAQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-hvEMk0STKepmEzLwkEO/bYabZnqzUg5+xJujlPdjKCk=' 'sha256-t3UiN02yEOELy8uyYuAGfqOjM+CgL3Zld9KFKwAp/UU=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -543,7 +543,7 @@
         <p class="eyebrow"><span class="lang">Unabhängige Kreativagentur · </span>Strategie · Gestaltung · Entwicklung</p>
         <h1>Vom ersten Gedanken. <span class="blue">Zum fertigen Ergebnis.</span></h1>
         <p class="lead">Wir machen Ideen sichtbar und auffindbar: mit Werbeclips, Logo Design, Print, Merch und SEO. Und erlebbar als Websites, Apps, Games, Dashboards und Abläufe, die von selbst laufen.</p>
-        <button class="vthumb" type="button" aria-haspopup="dialog" aria-label="Agentur-Film ansehen, mit Ton"><span class="vposter" aria-hidden="true"><b>E<span>X</span></b><img src="video/agenturfilm/agenturfilm-poster-640.webp?v=3c7d9efe" srcset="video/agenturfilm/agenturfilm-poster-640.webp?v=3c7d9efe 640w, video/agenturfilm/agenturfilm-poster.webp?v=cb1fbcab 1920w" sizes="(max-width: 860px) 80vw, 480px" width="640" height="360" alt="" loading="lazy" decoding="async" data-remove-on-error></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">▶ Film ansehen</em></span></button>
+        <button class="vthumb" type="button" aria-haspopup="dialog" aria-label="Agentur-Film ansehen, mit Ton"><span class="vposter" aria-hidden="true"><b>E<span>X</span></b><img src="video/agenturfilm/agenturfilm-poster-640.webp?v=3c7d9efe" srcset="video/agenturfilm/agenturfilm-poster-640.webp?v=3c7d9efe 640w, video/agenturfilm/agenturfilm-poster.webp?v=cb1fbcab 1920w" sizes="(max-width: 860px) 80vw, 480px" width="640" height="360" alt="" loading="lazy" decoding="async" data-remove-on-error><video class="vthumb-vid" muted loop playsinline preload="none" data-src="video/agenturfilm/agenturfilm.mp4?v=19ecda95" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none"></video></span><span class="vplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="vlabel"><span><strong>Agentur-Film</strong><small>Unsere Leistungen im Film</small></span><em class="vthumb-dur">🔊 Ton an · Film ansehen</em></span></button>
       </div>
     </div>
   </section>
@@ -738,9 +738,8 @@
 
   <section class="block film-full" id="erklaervideo" data-key="ep" data-name="Video">
     <div class="film-stage">
-      <video id="erkl" playsinline preload="metadata" poster="video/motion-swarm-poster.jpg" aria-label="Motion-Video: Haben wir euer Interesse geweckt? PROJEKT EX"><source media="(max-width: 800px)" src="video/motion-swarm-mobil.mp4" type="video/mp4"><source src="video/motion-swarm.mp4" type="video/mp4"></video>
+      <video id="erkl" data-ton muted loop playsinline preload="metadata" poster="video/motion-swarm-poster.jpg" aria-label="Motion-Video: Haben wir euer Interesse geweckt? PROJEKT EX"><source media="(max-width: 800px)" src="video/motion-swarm-mobil.mp4" type="video/mp4"><source src="video/motion-swarm.mp4" type="video/mp4"></video>
       <div class="film-cap"><p class="kicker">Zum Schluss</p><h2>Euer Projekt ist das nächste. <span class="mute">Lasst uns reden.</span></h2></div>
-      <button type="button" class="film-play" id="erklPlay" aria-label="Video ansehen (Vollbild)"><span aria-hidden="true">▶</span> Video ansehen</button>
       <a class="film-cta" href="#kontakt">Projekt starten ↗</a>
     </div>
   </section>
@@ -1712,7 +1711,7 @@ show('zeit');
   });
 })();
 </script>
-<div class="kino" role="dialog" aria-modal="true" aria-label="Agentur-Film" inert><button class="close" type="button" aria-label="Video schließen">×</button><div class="vplayer empty"><video playsinline preload="metadata" aria-label="Agentur-Film PROJEKT EX, mit Ton"><track kind="subtitles" srclang="de" label="Deutsch" src="video/agenturfilm/agenturfilm.vtt?v=ce7ad7b3"></video><div class="vposter" aria-hidden="true"><b>E<span>X</span></b></div><button class="vplay" type="button" aria-label="Agentur-Film abspielen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></button><div class="vmeta"><span><strong>Was PROJEKT EX für euch macht</strong><span class="vstate">Video wird gerade fertiggestellt</span></span><span class="vdur"></span></div></div></div>
+<div class="kino" role="dialog" aria-modal="true" aria-label="Agentur-Film" inert><button class="close" type="button" aria-label="Video schließen">×</button><div class="vplayer empty"><video data-no-auto playsinline preload="metadata" aria-label="Agentur-Film PROJEKT EX, mit Ton"><track kind="subtitles" srclang="de" label="Deutsch" src="video/agenturfilm/agenturfilm.vtt?v=ce7ad7b3"></video><div class="vposter" aria-hidden="true"><b>E<span>X</span></b></div><button class="vplay" type="button" aria-label="Agentur-Film abspielen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></button><div class="vmeta"><span><strong>Was PROJEKT EX für euch macht</strong><span class="vstate">Video wird gerade fertiggestellt</span></span><span class="vdur"></span></div></div></div>
 
 <script>
   // Agentur-Film: lädt video/agenturfilm/agenturfilm.mp4?v=19ecda95 (Untertitel: agenturfilm.vtt). Solange die Datei fehlt, bleibt der Platzhalter stehen.
@@ -1734,15 +1733,15 @@ show('zeit');
   });
 </script>
 <script>
-  // Vorschaubild: Standbild aus dem Film (kein stummes Autoplay); Klick öffnet den Film mit Ton und Bedienleiste
+  // Vorschaubild: der Film läuft stumm in Schleife (assets/autoplay.js); Klick („Ton an“) öffnet ihn von vorn mit Ton und Bedienleiste
   const thumb = document.querySelector('.vthumb');
   const P = window.__videoPlayers[0];
-  P.v.addEventListener('loadedmetadata', () => { thumb.querySelector('.vthumb-dur').textContent = '▶ ' + P.box.querySelector('.vdur').textContent; });
+  P.v.addEventListener('loadedmetadata', () => { thumb.querySelector('.vthumb-dur').textContent = '🔊 Ton an · ' + P.box.querySelector('.vdur').textContent; });
   // Kino öffnen/schließen; Scrollen der Seite ruht, solange das Video offen ist
   const kino = document.querySelector('.kino');
   const open = (on) => {
     kino.classList.toggle('open', on); kino.toggleAttribute('inert', !on);
-    if (on) { window.__lenis?.stop(); P.v.currentTime = 0; P.play(); kino.querySelector('.close').focus(); }
+    if (on) { window.__lenis?.stop(); P.v.muted = false; P.v.currentTime = 0; P.play(); kino.querySelector('.close').focus(); }
     else { P.stop(); window.__lenis?.start(); thumb.focus(); }
   };
   thumb.addEventListener('click', () => open(true));
@@ -1758,11 +1757,10 @@ show('zeit');
 </script>
 <script src="assets/nav.js" defer></script>
 <script>
-(function(){const v=document.getElementById('erkl'),b=document.getElementById('erklPlay');if(!v||!b)return;const st=v.parentNode;
-b.addEventListener('click',()=>{v.controls=true;v.play().catch(()=>{});try{(v.requestFullscreen||v.webkitRequestFullscreen||function(){}).call(v)}catch(e){}});
-v.addEventListener('play',()=>{st.classList.add('playing');st.classList.remove('done')});
-v.addEventListener('ended',()=>{v.controls=false;if(document.fullscreenElement)document.exitFullscreen();st.classList.remove('playing');st.classList.add('done');v.pause()});
-v.addEventListener('pause',()=>{if(!v.ended&&!document.fullscreenElement){st.classList.remove('playing')}});
+(function(){const v=document.getElementById('erkl');if(!v)return;const st=v.parentNode;
+/* läuft stumm in Schleife (assets/autoplay.js); „Ton an“ startet von vorn mit Ton */
+const upd=()=>st.classList.toggle('playing',!v.paused&&!v.muted);
+['play','pause','volumechange'].forEach((t)=>v.addEventListener(t,upd));
 })();
 </script>
 <script src="assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
@@ -1772,5 +1770,6 @@ v.addEventListener('pause',()=>{if(!v.ended&&!document.fullscreenElement){st.cla
 <script src="assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
 <script src="assets/tracking.js" defer></script>
 
+<script src="assets/autoplay.js?v=022f36c7" defer></script>
 </body>
 </html>

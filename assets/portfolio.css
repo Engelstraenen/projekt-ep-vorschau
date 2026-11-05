@@ -118,3 +118,7 @@
 .pf-media.is-quer picture, .pf-media.is-quer img, .pf-media.is-quer video { object-fit: contain; }
 .pf-row.pf-row-quer { margin-top: clamp(24px, 3vw, 40px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 860px) { .pf-row.pf-row-quer { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: 1fr; overflow: visible; gap: 20px; } }
+
+/* „Ton an“ als gut sichtbarer Text-Knopf */
+.pf-sound { width: auto; padding: 0 14px; gap: 6px; border-radius: 999px; display: inline-flex; align-items: center; font: 600 14px/1 inherit; font-family: inherit; background: rgba(255,255,255,.95); color: #1D1D1F; opacity: 1; pointer-events: auto; box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+.pf-sound[aria-pressed="true"] { background: rgba(0,0,0,.6); color: #fff; }

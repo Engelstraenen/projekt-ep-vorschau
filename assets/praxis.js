@@ -139,7 +139,7 @@
   if (vids.length && 'IntersectionObserver' in window) {
     const o = new IntersectionObserver((es) => es.forEach((en) => {
       const v = en.target;
-      if (en.isIntersecting && !RM) { if (v.preload === 'none') v.preload = 'auto'; v.play().catch(() => {}); } else v.pause();
+      if (en.isIntersecting && !RM) { if (v.preload === 'none') v.preload = 'auto'; v.play().catch(() => {}); } else if (!en.isIntersecting) v.pause(); // reduzierte Bewegung: kein Autoplay, aber Play darf nicht sofort wieder pausieren
     }), { threshold: 0.4 });
     vids.forEach((v) => o.observe(v));
   }

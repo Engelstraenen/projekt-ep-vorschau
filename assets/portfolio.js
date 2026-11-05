@@ -64,9 +64,9 @@
   const media = (c, sizes, eager) => {
     const bild = c.typ === 'bild', ton = c.ton !== false;
     return `<div class="pf-media${bild ? ' is-bild' : ''}${c.quer ? ' is-quer' : ''}">${picture(c.id, sizes, eager, c.quer)}<span class="pf-insp">Inspiration</span>` +
-      (bild ? '' : `<video preload="none" playsinline webkit-playsinline disablepictureinpicture disableremoteplayback aria-label="${esc(c.titel)}"></video>` +
+      (bild ? '' : `<video preload="none" muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback aria-label="${esc(c.titel)}"></video>` +
       `<button type="button" class="pf-play" aria-label="Video abspielen: ${esc(c.titel)}"><span class="pf-play-ic">${ICON.play}</span></button>` +
-      (ton ? `<button type="button" class="pf-sound" aria-label="Ton ausschalten" aria-pressed="true">${ICON.on}</button>` : '<span class="pf-mute-note">Ohne Ton</span>') +
+      (ton ? `<button type="button" class="pf-sound" aria-label="Ton an: Video von vorn mit Ton abspielen" aria-pressed="false"><span aria-hidden="true">🔊</span> Ton an</button>` : '<span class="pf-mute-note">Ohne Ton</span>') +
       `<span class="pf-dur">${mmss(c.dauer)}</span><span class="pf-bar" aria-hidden="true"><i></i></span>`) + `</div>`;
   };
   const caption = (c, tag = 'h4') => `<div class="pf-txt"><small class="pf-sparte">${c.fiktiv === false ? 'Inspiration · ' + esc(sparteName(c.sparte)) : 'Inspiration · erfundene Marke'}</small><${tag} class="pf-title">${esc(c.titel)}</${tag}><p class="pf-zweck">${esc(c.zweck)}</p></div>`;
@@ -89,7 +89,8 @@
   sec.dataset.ready = '';
 
   // ---------- Player ----------
-  let soundOn = true, current = null;
+  let soundOn = false, current = null; // Start stumm (Autoplay); „Ton an“ startet von vorn mit Ton
+  const RMQ = matchMedia('(prefers-reduced-motion: reduce)');
   const setHold = () => { window.__pfHold = lowPower && !!current && !current.v.paused; };
   // Karten sind höchstens ~260 px breit: 720p ist auch auf Retina-Displays scharf genug.
   // hd-Clips laufen in voller 1440p-Auflösung: AV1 (WebM), wenn der Browser es flüssig (auf Handys stromsparend) dekodiert, sonst H.264.
@@ -114,7 +115,9 @@
     let raf = 0;
     const tick = () => { if (v.duration) bar.style.transform = `scaleX(${(v.currentTime / v.duration).toFixed(4)})`; raf = v.paused ? 0 : requestAnimationFrame(tick); };
     const state = (s) => { box.dataset.state = s; ic.innerHTML = s === 'playing' ? ICON.pause : s === 'ended' ? ICON.replay : ICON.play; btn.setAttribute('aria-label', (s === 'playing' ? 'Pause: ' : s === 'ended' ? 'Nochmal abspielen: ' : 'Video abspielen: ') + titel); };
-    const applySound = () => { if (!snd) { v.muted = true; return; } v.muted = !soundOn; snd.innerHTML = soundOn ? ICON.on : ICON.off; snd.setAttribute('aria-pressed', String(soundOn)); snd.setAttribute('aria-label', soundOn ? 'Ton ausschalten' : 'Ton einschalten'); };
+    let snd1 = false; // Ton je Karte
+    v.muted = true; v.loop = true;
+    const applySound = () => { if (!snd) { v.muted = true; return; } v.muted = !snd1; snd.innerHTML = snd1 ? '<span aria-hidden="true">🔇</span> Ton aus' : '<span aria-hidden="true">🔊</span> Ton an'; snd.setAttribute('aria-pressed', String(snd1)); snd.setAttribute('aria-label', snd1 ? 'Ton ausschalten' : 'Ton an: Video von vorn mit Ton abspielen'); };
     v.addEventListener('playing', () => { state('playing'); if (!raf) raf = requestAnimationFrame(tick); setHold(); });
     v.addEventListener('waiting', () => { if (!v.paused) box.dataset.state = 'loading'; });
     v.addEventListener('pause', () => { if (!v.ended) state('paused'); setHold(); });
@@ -126,7 +129,7 @@
     const p = {
       box, v,
       play() {
-        if (current && current !== p) current.pause();
+        if (current && current !== p && !current.v.muted) current.pause(); // nur ein Clip mit Ton gleichzeitig
         current = p;
         const src = srcFor(box);
         if (v.getAttribute('src') !== src) { v.src = src; } // erst jetzt lädt das Video (preload none)
@@ -135,18 +138,27 @@
         box.dataset.state = 'loading';
         const pr = v.play();
         if (pr) pr.catch(() => { // Browser blockt Ton ohne Geste: stumm weiterversuchen
-          if (!v.muted) { v.muted = true; soundOn = false; applySound(); v.play().catch(() => state('paused')); } else state('paused');
+          if (!v.muted) { snd1 = false; applySound(); v.play().catch(() => state('paused')); } else state('paused');
         });
       },
       pause() { v.pause(); },
+      auto() { // stummes Autoplay, solange sichtbar
+        const src = srcFor(box); if (v.getAttribute('src') !== src) v.src = src;
+        applySound(); v.play().catch(() => {});
+      },
       reset() { v.pause(); v.removeAttribute('src'); v.load(); delete box.dataset.state; ic.innerHTML = ICON.play; bar.style.transform = 'scaleX(0)'; },
       applySound,
     };
     btn.addEventListener('click', () => {
       if (box.dataset.state === 'playing' || box.dataset.state === 'loading' && !v.paused) p.pause(); else p.play();
     });
-    snd?.addEventListener('click', () => { soundOn = !soundOn; applySound(); });
-    new IntersectionObserver(([e]) => { if (!e.isIntersecting && !v.paused) v.pause(); }, { threshold: .25 }).observe(box);
+    snd?.addEventListener('click', () => { snd1 = !snd1; if (snd1) { v.currentTime = 0; p.play(); } else applySound(); });
+    let userPaused = false;
+    btn.addEventListener('click', () => { userPaused = v.paused; }); // läuft nach dem Play/Pause-Handler
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { if (v.paused && !RMQ.matches && !userPaused) p.auto(); }
+      else if (!v.paused) v.pause();
+    }, { threshold: .25 }).observe(box);
     box._p = p;
     return p;
   }
