@@ -8,28 +8,39 @@
 <title>Ofen &amp; Olive · Bestell-App · Demo PROJEKT EX</title>
 <meta name="theme-color" content="#F3EBDD">
 <link rel="preload" href="../ofen-olive/fonts/outfit-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../ofen-olive/builder/builder.css">
 <link rel="stylesheet" href="app.css">
 <script src="../ofen-olive/config.js" defer></script>
+<script src="../ofen-olive/builder/builder.js" defer></script>
 <script src="app.js" defer></script>
 </head>
 <body>
 <div class="demo-bar" role="note">
-  <p><span class="demo-bar__dot" aria-hidden="true"></span><b>Beispiel-Visualisierung</b><span class="demo-bar__more"> · Demo von PROJEKT EX · keine echte Bestellung, keine Zahlung</span></p>
+  <p><span class="demo-bar__dot" aria-hidden="true"></span>Beispiel-Visualisierung · Demo von PROJEKT EX · erfundene Pizzeria · kein Live-Betrieb</p>
   <a href="../ofen-olive/">← Zur Website</a>
 </div>
 <div class="desk">
   <aside class="desk__side">
     <img class="desk__logo" data-logo src="../ofen-olive/img/logo-hell.png" width="200" height="51" alt="Ofen &amp; Olive">
-    <h1 class="desk__h">Pizza wählen, Extras dazu, <em>fertig.</em></h1>
-    <p class="desk__p">So könnte die eigene Bestellung einer Pizzeria aussehen: Speisekarte zuerst, Extras per Fingertipp, Abholung oder Lieferung, danach die Nachricht „Ihre Pizza ist fertig“. Probier es rechts aus.</p>
-    <ol class="desk__steps"><li>Pizza antippen</li><li>Extras wählen und hinzufügen</li><li>Abholung oder Lieferung, bestätigen</li></ol>
+    <h1 class="desk__h">Belag drauf, Größe wählen, <em>ab in den Ofen.</em></h1>
+    <p class="desk__p">Statt einer Liste baut der Gast seine Pizza selbst: Jeder Belag springt aus seinem Feld auf den Teig, die Größe sieht man sofort, und beim Bestellen wird sie im Zeitraffer gebacken. Probier es rechts aus.</p>
+    <ol class="desk__steps"><li>Größe S, M oder L wählen</li><li>Belag antippen oder auf die Pizza ziehen</li><li>In den Ofen, dann Abholung oder Lieferung</li></ol>
     <p class="desk__fine"><b>Bestell-App · Beispiel-Visualisierung.</b> Erfundene Pizzeria, fiktive Beispielpreise. Keine echte Bestellung, keine Zahlung, kein Live-Betrieb.</p>
     <a class="desk__back" href="../ofen-olive/">← Zur Website von Ofen &amp; Olive</a>
   </aside>
   <div class="phone">
     <div class="app" id="app">
-      <section class="view view--list is-on" data-view="list" aria-label="Speisekarte">
+      <section class="view view--build is-on" data-view="build" aria-label="Pizza bauen">
         <header class="top">
+          <img data-logo-dark src="../ofen-olive/img/logo-ink.png" width="128" height="33" alt="Ofen &amp; Olive">
+          <button type="button" class="top__link" data-go="list">Klassiker</button>
+        </header>
+        <div class="builder" id="builder"></div>
+        <p class="tiny">Fiktive Beispielpreise · Demo ohne echte Bestellung</p>
+      </section>
+      <section class="view view--list" data-view="list" aria-label="Speisekarte">
+        <header class="top">
+          <button type="button" class="icon-btn" data-go="build" aria-label="Zurück zum Pizza-Bauen"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <img data-logo-dark src="../ofen-olive/img/logo-ink.png" width="128" height="33" alt="Ofen &amp; Olive">
           <span class="top__open"><i aria-hidden="true"></i>Geöffnet</span>
         </header>
@@ -47,7 +58,7 @@
         <p class="tiny">Fiktive Beispielpreise · Demo ohne echte Bestellung</p>
       </section>
       <section class="view view--cart" data-view="cart" aria-label="Warenkorb" hidden>
-        <header class="bar"><button type="button" class="icon-btn" data-go="list" aria-label="Zurück zur Speisekarte"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h2>Deine Bestellung</h2><span></span></header>
+        <header class="bar"><button type="button" class="icon-btn" data-go="build" aria-label="Zurück zum Pizza-Bauen"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h2>Deine Bestellung</h2><span></span></header>
         <ul class="cart" role="list" id="cart"></ul>
         <div class="box">
           <p class="box__h">Wie möchtest du sie bekommen?</p>

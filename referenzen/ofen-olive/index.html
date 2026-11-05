@@ -11,23 +11,26 @@
 <link rel="preload" href="fonts/cormorant-garamond-normal-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/outfit-normal-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="builder/builder.css">
 <script src="config.js" defer></script>
 <script src="js/site.js" defer></script>
+<script src="builder/builder.js" defer></script>
+<script src="js/bauen.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
 
 <div class="demo-bar" role="note">
-  <p><span class="demo-bar__dot" aria-hidden="true"></span><b>Beispiel-Visualisierung</b><span class="demo-bar__more"> · Demo von PROJEKT EX · erfundene Pizzeria, kein Live-Betrieb</span></p>
+  <p><span class="demo-bar__dot" aria-hidden="true"></span>Beispiel-Visualisierung · Demo von PROJEKT EX · erfundene Pizzeria · kein Live-Betrieb</p>
   <a href="../../leistungen/websites.html#praxisbeispiele">← PROJEKT EX</a>
 </div>
 
 <header class="head" id="kopf">
   <a class="head__logo" href="#inhalt" aria-label="Ofen &amp; Olive, zum Anfang"><img data-cfg-logo="hell" src="img/logo-hell.png" width="180" height="47" alt="Ofen &amp; Olive"></a>
   <nav class="head__nav" aria-label="Hauptnavigation">
-    <a href="#karte">Speisekarte</a><a href="#zeiten">Zeiten</a><a href="#zeiten">Liefergebiet</a>
+    <a href="#bauen">Pizza bauen</a><a href="#karte">Speisekarte</a><a href="#zeiten">Zeiten</a><a href="#zeiten">Liefergebiet</a>
   </nav>
-  <a class="btn btn--fire head__cta" href="../ofen-olive-app/">Jetzt bestellen</a>
+  <a class="btn btn--fire head__cta" href="#bauen">Jetzt bestellen</a>
 </header>
 
 <main id="inhalt">
@@ -49,7 +52,7 @@
     <div class="ch__card ch__card--hero">
       <h1 class="display">Feuer, Teig<br><em>und Zeit.</em></h1>
       <p class="lead">Holzofen-Pizzeria in <span data-cfg="ort">Ratingen</span>. Neapolitanische Pizza, neunzig Sekunden bei 450 Grad. Zum Abholen oder zu dir nach Hause.</p>
-      <div class="ch__actions"><a class="btn btn--fire" href="../ofen-olive-app/">Jetzt bestellen</a><a class="btn btn--ghost" href="#karte">Speisekarte ansehen</a></div>
+      <div class="ch__actions"><a class="btn btn--fire" href="#bauen">Jetzt bestellen</a><a class="btn btn--ghost" href="#karte">Speisekarte ansehen</a></div>
       <p class="status"><span class="status__dot" aria-hidden="true"></span><span data-cfg="status">Jetzt geöffnet · Küche bis 22:00 · Abholung &amp; Lieferung</span></p>
     </div>
     <p class="scrollhint" aria-hidden="true">Scrollen <span></span></p>
@@ -99,6 +102,16 @@
   </article>
 </section>
 
+<section class="bauen" id="bauen" aria-labelledby="bauen-h">
+  <div class="bauen__copy">
+    <p class="eyebrow eyebrow--ink">Live bestellt, live gebacken</p>
+    <h2 id="bauen-h" class="display display--ink">Du belegst. <em>Der Ofen backt mit.</em></h2>
+    <p>Größe wählen, Belag antippen: Jede Zutat springt aus ihrem Feld direkt auf deinen Teig. Beim Bestellen geht die Pizza im Zeitraffer in den Ofen, bis der Rand Blasen schlägt.</p>
+    <p class="fine">Fiktive Beispielpreise · Demo ohne echte Bestellung</p>
+  </div>
+  <div class="bauen__card"><div class="builder" id="builder"></div></div>
+</section>
+
 <section class="karte" id="karte" aria-labelledby="karte-h">
   <div class="karte__film" aria-hidden="true"><video muted playsinline loop autoplay preload="none" poster="img/ofen.webp" data-lazy><source src="film/ofen.mp4" type="video/mp4"></video></div>
   <div class="karte__body">
@@ -141,6 +154,6 @@
   <p>Beispiel-Visualisierung von PROJEKT EX. Ofen &amp; Olive ist eine erfundene Marke, es gibt keinen Live-Betrieb und keine echten Bestellungen. Inspiration, kein Kundenprojekt.</p>
   <a href="../../leistungen/websites.html#praxisbeispiele">Zurück zu PROJEKT EX</a>
 </footer>
-<a class="fab" href="../ofen-olive-app/">Jetzt bestellen</a>
+<a class="fab" href="#bauen">Jetzt bestellen</a>
 </body>
 </html>

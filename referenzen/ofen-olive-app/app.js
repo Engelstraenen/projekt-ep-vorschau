@@ -17,9 +17,9 @@
 
   // Views
   const views = Object.fromEntries($$('.view').map(v => [v.dataset.view, v]));
-  const order = ['list', 'cart', 'done'];
+  const order = ['build', 'list', 'cart', 'done'];
   Object.values(views).forEach(v => { v.hidden = false; if (!v.classList.contains('is-on')) { v.classList.add('is-next'); v.inert = true; } });
-  let now = 'list';
+  let now = 'build';
   function go(to) {
     if (to === now) return;
     const fwd = order.indexOf(to) > order.indexOf(now), a = views[now], b = views[to];
@@ -88,8 +88,8 @@
   }
   $('#cartbar').addEventListener('click', () => { renderCart(); go('cart'); });
   function renderCart() {
-    $('#cart').innerHTML = S.cart.map((i, k) => `<li class="ci"><img src="${base + i.p.bild}" width="56" height="56" alt=""><div><h4>${i.qty > 1 ? i.qty + '× ' : ''}${i.p.name}</h4><p>${i.size ? 'Groß 36 cm' : 'Klassisch 30 cm'}${i.ex.length ? ' · ' + i.ex.map(x => x.name).join(', ') : ''}</p></div><div class="ci__r">${eur(i.unit * i.qty)}<button type="button" class="ci__del" data-del="${k}">Entfernen</button></div></li>`).join('');
-    $$('[data-del]').forEach(b => b.addEventListener('click', () => { S.cart.splice(+b.dataset.del, 1); if (!S.cart.length) { go('list'); return; } renderCart(); }));
+    $('#cart').innerHTML = S.cart.map((i, k) => `<li class="ci"><img src="${base + i.p.bild}" width="56" height="56" alt=""><div><h4>${i.qty > 1 ? i.qty + '× ' : ''}${i.p.name}</h4><p>${i.label || ((i.size ? 'Groß 36 cm' : 'Klassisch 30 cm') + (i.ex.length ? ' · ' + i.ex.map(x => x.name).join(', ') : ''))}</p></div><div class="ci__r">${eur(i.unit * i.qty)}<button type="button" class="ci__del" data-del="${k}">Entfernen</button></div></li>`).join('');
+    $$('[data-del]').forEach(b => b.addEventListener('click', () => { S.cart.splice(+b.dataset.del, 1); if (!S.cart.length) { go('build'); return; } renderCart(); }));
     renderSlots(); renderSum(); syncBar();
   }
   function slotTimes() {
@@ -139,10 +139,19 @@
   function closeLock() { $('#lock').hidden = true; $('#lock').inert = true; }
   $('#lock').inert = true;
   $('#lockBtn').addEventListener('click', openLock); $('#lockX').addEventListener('click', closeLock);
-  $('#again').addEventListener('click', () => { timers.forEach(clearTimeout); $('#push').hidden = true; S.cart = []; S.slot = 0; $('#name').value = ''; $('#street').value = ''; go('list'); });
+  $('#again').addEventListener('click', () => { timers.forEach(clearTimeout); $('#push').hidden = true; S.cart = []; S.slot = 0; $('#name').value = ''; $('#street').value = ''; B.reset(); go('build'); });
 
   let tt; function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('is-on'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('is-on'), 1800); }
 
+  // Pizza-Builder: Belag fliegt aus dem Feld auf die Pizza, dann Zeitraffer-Backen
+  const B = window.OOBuilder.mount($('#builder'), {
+    doneLabel: 'Fertig · Zur Bestellung',
+    onDone: o => {
+      const label = `${o.size.name} ${o.size.cm} cm` + (o.belag.length ? ' · ' + o.belag.map(t => (t.x > 1 ? t.x + '× ' : '') + t.name).join(', ') : ' · Tomate & Teig');
+      S.cart.push({ p: { id: 'eigene', name: 'Deine Pizza', bild: 'img/p-margherita.webp' }, size: 0, ex: [], label, unit: o.preis, qty: 1 });
+      renderCart(); go('cart'); B.reset();
+    }
+  });
   setMode('abholung');
   const q = new URLSearchParams(location.search).get('pizza'); if (q) setTimeout(() => openSheet(q), 350);
 })();

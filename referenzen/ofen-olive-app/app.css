@@ -197,3 +197,15 @@ button{cursor:pointer;background:none;border:0}
 @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 .view:not(.is-on){pointer-events:none}
 .view--done:not(.is-on) .tick *{animation:none}
+/* Rechtlicher Hinweis oben links, immer sichtbar */
+.demo-bar{justify-content:flex-start}.demo-bar p{white-space:normal;line-height:1.25;flex:1;min-width:0}
+.demo-bar a{margin-left:auto}
+@media (max-width:600px){:root{--bar:46px}.demo-bar{font-size:.68rem;padding:0 .75rem}}
+/* Builder-Ansicht */
+.view--build{background:var(--creme)}
+.view--build .top{padding-bottom:.2rem}
+.top__link{border:1px solid rgba(28,26,23,.16);background:none;border-radius:999px;padding:.45rem .9rem;font:500 .8rem/1 var(--sans);color:inherit;cursor:pointer}
+.builder{padding:.4rem 1.1rem 0}
+.view--build{padding-bottom:2rem}
+.view--list .top .icon-btn{margin-right:auto}
+.view--list .top img{margin-right:auto}
