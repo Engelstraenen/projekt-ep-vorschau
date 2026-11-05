@@ -34,13 +34,16 @@
     { id: 'rucola', name: 'Rucola', preis: 1.0, sz: .12, late: 1 },
     { id: 'basilikum', name: 'Basilikum', preis: .5, sz: .10, late: 1 }
   ];
-  const CHEESE = { id: 'mozzarella', name: 'Fior di Latte', sz: .125, n: 9 };
+  const CHEESE = { id: 'mozzarella', name: 'Fior di Latte', sz: .095, n: 16 };
   const OILS = [
     { id: 'knoblauch', name: 'Knoblauchöl', preis: .5 },
     { id: 'chili', name: 'Chiliöl', preis: .5 }
   ];
   const ALL = [...TOPS, CHEESE];
-  const PER = 5, VAR = 3, R_IN = .80; // Soßenspiegel endet bei ~0.78 des Radius
+  const VAR = 3, R_IN = .80; // Soßenspiegel endet bei ~0.78 des Radius
+  const BAKE_MS = 1300; // Mitte der Spanne 1–1,5 s
+  // Stuecke pro Tippen: klein ~14, mittel ~10, grosse Scheiben ~8 (mehrere Radien)
+  const perTap = t => t.id === 'mozzarella' ? t.n : t.sz < .08 ? 14 : t.sz < .115 ? 10 : 8;
   const src = (id, v) => `${BASE}${id}-${v}.webp`;
   const img = (id, v = 1) => `<img src="${src(id, v)}" alt="" draggable="false" decoding="async">`;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
@@ -69,10 +72,9 @@
           <span class="bz__char" aria-hidden="true"></span>
           <div class="bz__oils"></div><div class="bz__tops"></div><div class="bz__late"></div>
         </div>
-        <div class="bz__steam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="bz__steam" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
         <p class="bz__cm" aria-live="polite"></p>
         <div class="bz__heat" aria-hidden="true"><span></span></div>
-      </div>
       </div>
       <div class="bz__dock">
         <button type="button" class="bz__reset">Neu</button>
@@ -92,7 +94,7 @@
     const sauceOf = () => SAUCES.find(s => s.id === st.sauce);
 
     const price = () => SIZES[st.size].preis + sauceOf().preis
-      + TOPS.reduce((s, t) => s + (st.n[t.id] ? t.preis * Math.ceil(st.n[t.id] / PER) : 0), 0)
+      + TOPS.reduce((s, t) => s + (st.n[t.id] ? t.preis * Math.ceil(st.n[t.id] / perTap(t)) : 0), 0)
       + OILS.reduce((s, o) => s + o.preis * st.oil[o.id], 0);
     function sync() {
       const s = SIZES[st.size];
@@ -108,7 +110,7 @@
         const b = q(sel + ' .bz__badge'); b.hidden = !k; b.textContent = k > 1 ? '×' + k : '✓';
         q(sel).classList.toggle('is-on', !!k); q(`[data-m="${minus}"]`).hidden = !k;
       };
-      TOPS.forEach(t => badge(`[data-t="${t.id}"]`, Math.ceil(st.n[t.id] / PER), t.id));
+      TOPS.forEach(t => badge(`[data-t="${t.id}"]`, Math.ceil(st.n[t.id] / perTap(t)), t.id));
       OILS.forEach(o => badge(`[data-o="${o.id}"]`, st.oil[o.id], o.id));
       badge('[data-c="mozzarella"]', +st.cheese, 'mozzarella');
       q('[data-c="mozzarella"]').setAttribute('aria-label', st.cheese ? 'Fior di Latte, inklusive' : 'Fior di Latte wieder hinzufügen');
@@ -119,32 +121,41 @@
     }
     function bump(el) { el.classList.remove('is-bump'); void el.offsetWidth; el.classList.add('is-bump'); }
 
-    // Verteilung wie beim Pizzaiolo (Radius-Einheiten -1..1, Soßenspiegel bis R_IN, Cornicione frei).
-    // Je Tipp ein Ring aus PER Stuecken (regelmaessiges Polygon + Jitter); jeder weitere Tipp liegt auf
-    // einem versetzten Ring mit anderem Radius. Danach Feinsuche um jedes Ziel: Abstand zu allem, was
-    // schon liegt (gleiche Sorte staerker), damit nichts stapelt und keine Mitte verklumpt.
+    // Verteilung wie beim Pizzaiolo: pro Tippen MEHRERE konzentrische Ringe (außen + mitte + innen),
+    // mit Winkel-/Radius-Jitter. Kein center-bias; Kruste frei via lim(). spot() hält Abstände.
     const seed = Math.random() * 6.283, GOLD = 2.39996;
-    const RINGS_BIG = [.74, .4, .97, .58, .2, .86, .5], RINGS_SMALL = [.8, .5, 1, .66, .3, .9, .58];
     const lim = t => R_IN - t.sz * .8;
     function targets(t, count) {
-      const rmax = lim(t), out = [], j = Math.floor(st.pieces.filter(p => p.t === t.id).length / PER);
-      const off = seed + t.id.length * 1.3 + j * GOLD + Math.random() * .5;
-      if (t.id === 'mozzarella') { // Fior di Latte: ein paar Pools innen, der Rest auf einem Ring
-        const inner = 3;
-        for (let i = 0; i < count; i++) {
-          const ring = i < inner, n = ring ? inner : count - inner, k = ring ? i : i - inner;
-          const a = off + (ring ? 0 : .5) + k / n * 6.283 + (Math.random() - .5) * .45;
-          const r = rmax * ((ring ? .36 : .86) + (Math.random() - .5) * .14);
+      const rmax = lim(t), out = [], batch = Math.max(1, perTap(t));
+      const j = Math.floor(st.pieces.filter(p => p.t === t.id).length / batch);
+      const off = seed + t.id.length * 1.3 + j * GOLD + Math.random() * .45;
+      // Mehrere Radien gleichzeitig: innen (nicht tot Mitte) + mitte + außen nah am Soßenrand
+      const fracs = t.id === 'mozzarella'
+        ? [.2, .4, .62, .9]
+        : t.sz >= .1 ? [.22, .5, .92] : [.24, .52, .96];
+      const nR = fracs.length;
+      // Außen bekommt klar die Mehrheit
+      const shares = nR === 4
+        ? [Math.max(2, Math.round(count * .15)), Math.max(3, Math.round(count * .22)), Math.max(4, Math.round(count * .28))]
+        : [Math.max(1, Math.round(count * .18)), Math.max(2, Math.round(count * .28))];
+      const plan = [];
+      let used = 0;
+      for (let ring = 0; ring < nR - 1; ring++) {
+        const take = Math.min(shares[ring], count - used - (nR - 1 - ring));
+        plan.push([fracs[ring], Math.max(0, take)]); used += Math.max(0, take);
+      }
+      plan.push([fracs[nR - 1], Math.max(0, count - used)]);
+      plan.forEach(([f, take], ring) => {
+        if (!take) return;
+        const ringOff = off + ring * (.62 + j * .19);
+        for (let i = 0; i < take; i++) {
+          const a = ringOff + i / take * 6.283 + (Math.random() - .5) * (6.283 / take) * .38;
+          // Jitter asymmetrisch nach außen, damit Soßenrand gefüllt bleibt
+          const jitter = (Math.random() * .14) - .04;
+          const r = Math.max(rmax * .14, Math.min(rmax, rmax * (f + jitter)));
           out.push({ x: Math.cos(a) * r, y: Math.sin(a) * r });
         }
-        return out;
-      }
-      const rings = t.sz >= .1 ? RINGS_BIG : RINGS_SMALL, f = rings[j % rings.length];
-      for (let i = 0; i < count; i++) {
-        const a = off + i / count * 6.283 + (Math.random() - .5) * 6.283 / count * .35;
-        const r = Math.max(0, rmax * (f + (Math.random() - .5) * .12));
-        out.push({ x: Math.cos(a) * r, y: Math.sin(a) * r });
-      }
+      });
       return out;
     }
     function clampIn(x, y, rmax) { const rr = Math.hypot(x, y); return rr > rmax ? { x: x * rmax / rr, y: y * rmax / rr } : { x, y }; }
@@ -159,7 +170,7 @@
           const k = p.t === t.id ? 1 : p.t === 'mozzarella' || t.id === 'mozzarella' ? .4 : .62;
           d = Math.min(d, Math.hypot(p.x - c.x, p.y - c.y) / k);
         }
-        d = Math.min(d, t.sz * 3.2) - Math.hypot(c.x - goal.x, c.y - goal.y) * 1.2;
+        d = Math.min(d, t.sz * 3.2) - Math.hypot(c.x - goal.x, c.y - goal.y) * (near ? 1.2 : 2.1);
         if (d > bd) { bd = d; best = c; }
       }
       return { x: best.x, y: best.y };
@@ -210,7 +221,7 @@
         const el = st.pieces[i].el; st.pieces.splice(i, 1); k++;
         if (id in st.n) st.n[id]--;
         el.classList.add('is-out'); setTimeout(() => el.remove(), 260);
-        if (!all && (k >= PER || st.n[id] % PER === 0)) break;
+        if (!all && (k >= perTap(tOf(id)) || st.n[id] % perTap(tOf(id)) === 0)) break;
       }
       sync();
     }
@@ -280,7 +291,7 @@
       b.addEventListener('pointerup', end); b.addEventListener('pointercancel', end);
       b.addEventListener('click', () => {
         if (b.dataset.dragged || st.phase !== 'build') return;
-        const t = b.dataset.t; fly(t, b.querySelector('.bz__ico'), st.n[t] % PER === 0 ? PER : PER - st.n[t] % PER);
+        const t = b.dataset.t, n = perTap(tOf(t)); fly(t, b.querySelector('.bz__ico'), st.n[t] % n === 0 ? n : n - st.n[t] % n);
       });
     });
     TOPS.forEach(t => q(`[data-m="${t.id}"]`).addEventListener('click', () => { if (st.phase === 'build') removeTop(t.id); }));
@@ -294,8 +305,8 @@
       root.classList.add('is-baking');
       const top = q('.bz__top'), r = top.getBoundingClientRect();
       if (r.top < 0 || r.bottom > innerHeight) top.scrollIntoView({ block: 'nearest', behavior: reduce.matches ? 'auto' : 'smooth' });
-      const dur = reduce.matches ? 0 : 3200, t0 = performance.now(), lbl = q('.bz__ctal');
-      q('.bz__hint').textContent = 'Zeitraffer: 90 Sekunden bei 450 Grad.';
+      const dur = reduce.matches ? 0 : BAKE_MS, t0 = performance.now(), lbl = q('.bz__ctal');
+      q('.bz__hint').textContent = 'Zeitraffer: knusprig bei 450 Grad.';
       (function tick(now) {
         const u = dur ? Math.min(1, (now - t0) / dur) : 1;
         root.style.setProperty('--bake', u.toFixed(3));
@@ -309,7 +320,7 @@
     });
     function order() {
       const s = SIZES[st.size], so = sauceOf();
-      const belag = TOPS.filter(t => st.n[t.id]).map(t => ({ ...t, x: Math.ceil(st.n[t.id] / PER) }))
+      const belag = TOPS.filter(t => st.n[t.id]).map(t => ({ ...t, x: Math.ceil(st.n[t.id] / perTap(t)) }))
         .concat(OILS.filter(o => st.oil[o.id]).map(o => ({ ...o, x: st.oil[o.id] })));
       const parts = [so.name, st.cheese ? 'Fior di Latte' : 'ohne Käse', ...belag.map(t => (t.x > 1 ? t.x + '× ' : '') + t.name)];
       return { size: s, preis: price(), sauce: so, kaese: st.cheese, belag, label: `${s.name} ${s.cm} cm · ${parts.join(', ')}` };
