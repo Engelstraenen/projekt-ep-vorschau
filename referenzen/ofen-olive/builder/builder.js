@@ -34,7 +34,7 @@
     { id: 'rucola', name: 'Rucola', preis: 1.0, sz: .12, late: 1 },
     { id: 'basilikum', name: 'Basilikum', preis: .5, sz: .10, late: 1 }
   ];
-  const CHEESE = { id: 'mozzarella', name: 'Fior di Latte', sz: .088, n: 56 };
+  const CHEESE = { id: 'mozzarella', name: 'Fior di Latte', sz: .08, n: 36 };
   const OILS = [
     { id: 'knoblauch', name: 'Knoblauchöl', preis: .5 },
     { id: 'chili', name: 'Chiliöl', preis: .5 }
@@ -132,43 +132,68 @@
     function bump(el) { el.classList.remove('is-bump'); void el.offsetWidth; el.classList.add('is-bump'); }
 
     // Verteilung wie beim Pizzaiolo: Beläge auf konzentrischen Ringen mit Jitter.
-    // Mozzarella separat: flächendeckende, gleichmäßig-unregelmäßige Streuung (keine Cluster/Ringe).
-    // Kruste frei via lim(); spot() hält Abstände weich.
+    // Mozzarella: stratifizierte Zellen — jede Flächezelle bekommt genau eine Flocke
+    // (Zufall nur INNERHALB der Zelle). Garantiert gleichmäßige Abdeckung bei jedem Reload.
+    // Kruste frei via lim(); spot() hält Aims weitgehend.
     const seed = Math.random() * 6.283, GOLD = 2.39996;
     const lim = t => R_IN - t.sz * .8;
-    // Fior di Latte: viele kleine Flocken über die ganze Soßenfläche, leicht überlappend,
-    // zufällige Winkel/Scales — wie handverteilter Käse, fast jeder Bereich etwas, keine Häufchen.
     function mozzarellaTargets(count) {
       const rmax = lim(CHEESE), out = [];
-      // Verrauschtes Kartesisches Gitter → flächig, gleichmäßig-unregelmäßig, keine Ringe/Cluster
-      const cell = (rmax * 2) / Math.sqrt(count * 1.55);
-      const half = rmax + cell * .15;
-      const candidates = [];
-      for (let y = -half; y <= half; y += cell) {
-        for (let x = -half; x <= half; x += cell) {
-          const jx = (Math.random() - .5) * cell * .92;
-          const jy = (Math.random() - .5) * cell * .92;
-          const px = x + jx, py = y + jy;
-          const rr = Math.hypot(px, py);
-          if (rr > rmax) continue;
-          candidates.push({ x: px, y: py, rr, score: Math.random() });
+      // Gitter so wählen, dass ≥ count Zellen mit Zentrum in der Soßenfläche liegen
+      let k = Math.max(4, Math.round(Math.sqrt(count * 4 / Math.PI)));
+      const cellsOf = kk => {
+        const cell = (2 * rmax) / kk, list = [];
+        for (let iy = 0; iy < kk; iy++) {
+          for (let ix = 0; ix < kk; ix++) {
+            const cx = -rmax + (ix + .5) * cell;
+            const cy = -rmax + (iy + .5) * cell;
+            if (Math.hypot(cx, cy) <= rmax) list.push({ cx, cy, cell });
+          }
         }
-      }
-      // Leicht mischen, dann per weichem Mindestabstand auswählen (kein starres Raster)
-      candidates.sort((a, b) => a.score - b.score);
-      const minD = cell * (.22 + Math.random() * .1);
-      for (const c of candidates) {
-        if (out.length >= count) break;
-        if (out.every(o => Math.hypot(c.x - o.x, c.y - o.y) >= minD * (.55 + Math.random() * .7))) {
-          out.push({ x: c.x, y: c.y });
+        return list;
+      };
+      let cells = cellsOf(k);
+      while (cells.length < count && k < 16) { k++; cells = cellsOf(k); }
+      // Genau `count` Zellen mit maximaler Abdeckung (Farthest-Point), falls zu viele
+      if (cells.length > count) {
+        const picked = [];
+        // Start: Zelle nächst der Mitte, dann immer die am weitesten von allen Gewählten
+        cells.sort((a, b) => Math.hypot(a.cx, a.cy) - Math.hypot(b.cx, b.cy));
+        picked.push(cells[0]);
+        const left = cells.slice(1);
+        while (picked.length < count && left.length) {
+          let bi = 0, best = -1;
+          for (let i = 0; i < left.length; i++) {
+            const c = left[i];
+            let nearest = Infinity;
+            for (const p of picked) nearest = Math.min(nearest, Math.hypot(c.cx - p.cx, c.cy - p.cy));
+            if (nearest > best) { best = nearest; bi = i; }
+          }
+          picked.push(left.splice(bi, 1)[0]);
         }
+        cells = picked;
       }
-      // Lücken stopfen bis count — verhindert große käsefreie Soßenflächen
+      // Pro Zelle genau eine Position: Zufall nur innerhalb der Zelle, in der Scheibe gehalten
+      for (const c of cells) {
+        const j = c.cell * .82; // bleibt klar in der Zelle → keine Cluster, keine Lücken
+        let x, y, ok = false;
+        for (let t = 0; t < 10; t++) {
+          x = c.cx + (Math.random() - .5) * j;
+          y = c.cy + (Math.random() - .5) * j;
+          if (Math.hypot(x, y) <= rmax) { ok = true; break; }
+        }
+        if (!ok) {
+          const rr = Math.hypot(c.cx, c.cy) || 1;
+          const s = Math.min(1, (rmax * .96) / rr);
+          x = c.cx * s; y = c.cy * s;
+        }
+        out.push({ x, y });
+      }
+      // Auf exakt count bringen (falls Gitter zu knapp)
       while (out.length < count) {
         let best = null, bestScore = -1;
-        for (let k = 0; k < 60; k++) {
-          const a = Math.random() * 6.283;
-          const r = rmax * Math.pow(Math.random(), .55); // etwas mehr Außenanteil, Mitte nicht leer
+        for (let t = 0; t < 40; t++) {
+          const a = Math.random() * 6.283, r = rmax * Math.sqrt(Math.random());
           const c = { x: Math.cos(a) * r, y: Math.sin(a) * r };
           let nearest = out.length ? Infinity : rmax;
           for (const o of out) nearest = Math.min(nearest, Math.hypot(c.x - o.x, c.y - o.y));
@@ -177,15 +202,7 @@
         if (!best) break;
         out.push(best);
       }
-      // Feiner End-Jitter
-      for (const p of out) {
-        const j = cell * .16;
-        p.x += (Math.random() - .5) * j;
-        p.y += (Math.random() - .5) * j;
-        const rr = Math.hypot(p.x, p.y);
-        if (rr > rmax) { p.x *= rmax / rr; p.y *= rmax / rr; }
-      }
-      return out;
+      return out.slice(0, count);
     }
     function targets(t, count) {
       if (t.id === 'mozzarella') return mozzarellaTargets(count);
@@ -219,14 +236,14 @@
     }
     function clampIn(x, y, rmax) { const rr = Math.hypot(x, y); return rr > rmax ? { x: x * rmax / rr, y: y * rmax / rr } : { x, y }; }
     function spot(near, t, aim) {
-      const rmax = lim(t), goal = near ? clampIn(near.x, near.y, rmax) : aim || { x: 0, y: 0 }, reach = near ? .16 : (t.id === 'mozzarella' ? .035 : .09);
+      const rmax = lim(t), goal = near ? clampIn(near.x, near.y, rmax) : aim || { x: 0, y: 0 }, reach = near ? .16 : (t.id === 'mozzarella' ? .02 : .09);
       let best = goal, bd = -Infinity;
       for (let i = 0; i < 24; i++) {
         const a = Math.random() * 6.283, r = i ? Math.sqrt(Math.random()) * reach : 0;
         const c = clampIn(goal.x + Math.cos(a) * r, goal.y + Math.sin(a) * r, rmax);
         let d = 9;
         for (const p of st.pieces) {
-          const k = p.t === t.id ? (t.id === 'mozzarella' ? .42 : .88) : p.t === 'mozzarella' || t.id === 'mozzarella' ? .32 : .52;
+          const k = p.t === t.id ? (t.id === 'mozzarella' ? .55 : .88) : p.t === 'mozzarella' || t.id === 'mozzarella' ? .32 : .52;
           d = Math.min(d, Math.hypot(p.x - c.x, p.y - c.y) / k);
         }
         d = Math.min(d, t.sz * 3.2) - Math.hypot(c.x - goal.x, c.y - goal.y) * (near ? 1.2 : 2.1);
@@ -238,7 +255,7 @@
       const el = document.createElement('span');
       el.className = 'bz__pc bz__pc--' + t.id + (t.late ? ' bz__pc--late' : '');
       p.v = p.v || 1 + Math.floor(Math.random() * VAR);
-      p.sc = p.sc || (t.id === 'mozzarella' ? .5 + Math.random() * .62 : .82 + Math.random() * .32);
+      p.sc = p.sc || (t.id === 'mozzarella' ? .55 + Math.random() * .4 : .82 + Math.random() * .32);
       p.rot = p.rot ?? Math.random() * 360;
       el.innerHTML = imgPair(t.id, p.v, !!t.late);
       el.style.cssText = `left:${50 + p.x * 50}%;top:${50 + p.y * 50}%;width:${t.sz * p.sc * 100}%;--r:${p.rot}deg`;
