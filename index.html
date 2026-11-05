@@ -21,9 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="Kreativagentur für Websites, Werbeclips, Logo, Print, Merch, Apps und Automatisierung. Für Firmen in Deutschland, Österreich, der Schweiz und weltweit.">
 <link rel="canonical" href="https://projektex.de/">
-<link rel="icon" type="image/png" sizes="32x32" href="img/brand/favicon-32.png?v=3bf98e7c">
-<link rel="icon" type="image/png" sizes="48x48" href="img/brand/favicon-48.png?v=f647653f">
-<link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png?v=b1e848b9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2714%27 fill=%27none%27 stroke=%27%230071E3%27 stroke-width=%273%27/%3E%3C/svg%3E">
 <style>
   :root {
     --bg: #FFFFFF; --bg-2: #F5F5F7; --ink: #1D1D1F; --ink-2: #6E6E73; --line: #D2D2D7;
@@ -49,12 +47,10 @@
   header.top { position: fixed; inset: 0 0 auto 0; z-index: 30; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--gutter);
     background: color-mix(in srgb, color-mix(in srgb, #fff, var(--night) calc(var(--dark) * 100%)), transparent 18%); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid color-mix(in srgb, var(--rule), transparent 40%); }
-  .brand { display: grid; grid-template-columns: auto auto; align-items: center; column-gap: 10px; line-height: 0; }
-  .brand img { display: block; width: auto; transition: opacity .2s linear; }
-  .brand__mark { grid-area: 1 / 1; height: 22px; }
-  .brand__word { grid-area: 1 / 2; height: 20px; }
-  .brand__mark--pos, .brand__word--pos { opacity: calc(1 - var(--dark, 0)); }
-  .brand__mark--inv, .brand__word--inv { opacity: var(--dark, 0); }
+  .brand { font-size: 17px; font-weight: 500; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px; }
+  .brand b { color: var(--blue); font-weight: 650; }
+  .brand i { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--blue); display: inline-block; position: relative; }
+  .brand i::after { content: '···'; position: absolute; inset: 0; display: grid; place-items: center; color: var(--blue); font-style: normal; font-size: 10px; letter-spacing: -.5px; }
   nav.links { display: flex; gap: 32px; font-size: 14px; align-items: center; }
   nav.links a { color: var(--fg); opacity: .88; }
   nav.links a:hover { opacity: 1; }
@@ -288,9 +284,7 @@
     .block { padding: 72px 16px; }
   }
   @media (max-width: 400px) {
-    .brand { grid-template-columns: auto; }
-    .brand .brand__mark { display: none; }
-    .brand__word { grid-area: 1 / 1; }
+    .brand i { display: none; }
     header.top .menu-mobile { font-size: 0; gap: 0; } /* nur das Symbol, Beschriftung steckt im aria-label */
   }
   /* niedrige Bildschirme (Laptops, Querformat): Zusatzzeilen weglassen, damit Text und Bild nebeneinander Platz haben */
@@ -514,7 +508,7 @@
 <canvas id="stage" aria-hidden="true"></canvas>
 
 <header class="top">
-  <a class="brand" href="#intro" aria-label="PROJEKT EX"><img class="brand__mark brand__mark--pos" src="img/brand/ex-a2-kompakt.webp?v=08e25a0d" alt="" width="35" height="22"><img class="brand__mark brand__mark--inv" src="img/brand/ex-a2-negativ.webp?v=99a20193" alt="" width="34" height="22"><img class="brand__word brand__word--pos" src="img/brand/wordmark-horizontal-positiv.webp?v=622a52a5" alt="" width="164" height="20"><img class="brand__word brand__word--inv" src="img/brand/wordmark-horizontal-invert.webp?v=f9fee4eb" alt="" width="164" height="20"></a>
+  <a class="brand" href="#intro">PROJEKT <b>EX</b><i aria-hidden="true"></i></a>
   <nav class="links" aria-label="Hauptnavigation"><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mega">Leistungen <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a href="leistungen/werbeclips.html#clips">Arbeiten</a><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a></nav>
   <div class="right"><button class="menu-mobile" type="button" aria-expanded="false" aria-controls="mega" aria-label="Menü öffnen"><i aria-hidden="true"></i>Menü</button><a class="btn small" href="#kontakt">Projekt starten ↗</a></div>
 </header>
@@ -778,7 +772,7 @@
     <nav aria-label="Studio"><p class="epf-h">Studio</p><ul><li><a href="index.html">Start</a></li><li><a href="prozess.html">Prozess</a></li><li><a href="faq.html">FAQ</a></li><li><a href="index.html#finder">Potenzialfinder</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav>
     <nav aria-label="Rechtliches"><p class="epf-h">Rechtliches</p><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="rechtliches.html#cookies">Cookie-Policy</a></li><li><a href="rechtliches.html#agb">AGB</a></li><li><a href="widerruf.html">Widerruf</a></li><li><a href="rechtliches.html#barrierefreiheit">Barrierefreiheit</a></li><li><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></li></ul></nav>
   </div>
-  <div class="epf-mark" aria-hidden="true"><img src="img/brand/wordmark-horizontal-invert.png?v=6fe6d137" alt="" width="2459" height="299" loading="lazy" decoding="async"></div>
+  <div class="epf-mark" aria-hidden="true"><span>PROJEKT</span><b>EX</b></div>
   <p class="epf-legal"><span>© 2026 PROJEKT EX</span><span>Vom ersten Gedanken. Zum fertigen Ergebnis.</span></p>
 </footer>
     </div>
