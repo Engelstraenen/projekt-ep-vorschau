@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/JybvCGA7E4nnZ4BRoln7ibSw3rptSmCtgGvq3NGHkM=' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-ppGfKsTmDK22gkXUqDzTeZ89xSNLqaoBh1675VN7s0A=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-txQiGJnVW9iuIzRAl3UP+4EJOgpNJm2T4Cu45syutAQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/JybvCGA7E4nnZ4BRoln7ibSw3rptSmCtgGvq3NGHkM=' 'sha256-/gHcORVryR88gRVVgXAuiU8nevyapI9DApdVqBtXaic=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-DwJE1gs4G6UJM3NuKCsFLydCEtWbkGZHxrj058XjS30=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-txQiGJnVW9iuIzRAl3UP+4EJOgpNJm2T4Cu45syutAQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -895,10 +895,11 @@ async function textShape(txt, colorFn) {
   const d = g.getImageData(0, 0, c.width, c.height).data, pts = [];
   for (let y = 0; y < c.height; y += 2) for (let x = 0; x < c.width; x += 2) if (d[(y * c.width + x) * 4 + 3] > 140) pts.push([x, y]);
   const pos = new Float32Array(N * 3), col = colorFn ? new Float32Array(N * 3) : null;
+  const split = (500 - g.measureText(txt).width / 2 + g.measureText(txt[0]).width) / 1000; // Grenze erstes/zweites Zeichen: X komplett blau
   for (let i = 0; i < N; i++) {
     const p = pts[Math.floor(R() * pts.length)];
     pos[i * 3] = (p[0] - 500) / 118 + gauss() * .01; pos[i * 3 + 1] = -(p[1] - 215) / 118 + gauss() * .01; pos[i * 3 + 2] = gauss() * .14;
-    if (col) col.set(colorFn(p[0] / 1000), i * 3);
+    if (col) col.set(colorFn(p[0] / 1000, split), i * 3);
   }
   return { pos, col };
 }
@@ -919,7 +920,7 @@ async function imageShape(name) {
   }
   return { pos, col };
 }
-const epColor = (u) => u < .5 ? [.114, .114, .122] : [0, .443, .89];
+const epColor = (u, s = .5) => u < s ? [.114, .114, .122] : [0, .443, .89];
 // Symbole für den Weg zum Kontakt: Frage -> Lösung -> Pfeil -> Gespräch -> Häkchen (fast geschafft) -> EX + Papierflieger
 const ICON_SIZE = 2.6; // Kantenlänge der Zeichenfläche in Szenen-Einheiten
 const BLUE = [0, .443, .89], INK = [.114, .114, .122];
