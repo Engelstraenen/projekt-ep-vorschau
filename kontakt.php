@@ -8,9 +8,9 @@
  */
 declare(strict_types=1);
 
-const TO       = 'kontakt@projekt-ep.de';
-const FROM     = 'kontakt@projekt-ep.de';           // Absender muss ein IONOS-Postfach der Domain sein
-const HOSTS    = ['projekt-ep.de', 'www.projekt-ep.de', 'test.projekt-ep.de']; // test.: geschützte Test-Subdomain laut docs/IONOS-UMZUG.md
+const TO       = 'kontakt@projektex.de';
+const FROM     = 'kontakt@projektex.de';           // Absender muss ein IONOS-Postfach der Domain sein
+const HOSTS    = ['projektex.de', 'www.projektex.de', 'test.projektex.de']; // test.: geschützte Test-Subdomain laut docs/IONOS-UMZUG.md
 const MIN_SECS = 4;      // schneller ausgefüllt = Bot
 const MAX_PER_HOUR = 5;  // Anfragen je IP-Hash und Stunde
 const LEISTUNGEN = ['', 'Website', 'Werbeclips', 'Logo Design', 'Print Design', 'Merch', 'SEO', 'Apps', 'Games',
@@ -70,7 +70,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) back('err=email');
 if (preg_match('/[\r\n]/', $name . $email . $firma . $leistung)) back('err=input'); // Header-Injection
 if (preg_match_all('~https?://~i', $nachricht) > 3) back('ok=1');                    // Link-Spam
 
-$subject = '=?UTF-8?B?' . base64_encode('Anfrage über projekt-ep.de: ' . ($leistung !== '' ? $leistung : 'Allgemein')) . '?=';
+$subject = '=?UTF-8?B?' . base64_encode('Anfrage über projektex.de: ' . ($leistung !== '' ? $leistung : 'Allgemein')) . '?=';
 $body = "Neue Anfrage über das Kontaktformular\n\n"
       . "Name: $name\nE-Mail: $email\nAnfrage als: $kundentyp\nUnternehmen/Verein: $firma\nLeistung: $leistung\n\nNachricht:\n$nachricht\n";
 $headers = implode("\r\n", [

@@ -10,15 +10,15 @@
     close: "Close chat", menu: "Options", human: "Talk to a person", del: "Delete conversation", privacy: "Privacy notice", restart: "New conversation",
     notice: "You're chatting with an automated assistant (AI system under the EU AI Act), not a person. Messages are stored to handle your request and deleted after {d} days.",
     src: "Source", formTitle: "How can we reach you?", formSub: "The team gets your request including this chat summary.", name: "Name *", email: "E-mail", tel: "Phone",
-    msg: "Your request", cb: "Please call me back", when: "Best time", whenOpts: ["any time", "morning", "afternoon", "evening"], consent: "I consent to Projekt EX storing my details from this chat to handle my request and contact me about it. Deleted after 30 days or on completion; withdraw anytime at kontakt@projekt-ep.de.",
-    privacyLink: "Privacy notice", submit: "Send to the team", cancel: "Not now", needConsent: "Please confirm your consent so we may store your details.", deleted: "Conversation deleted.", footL: "Automated assistant", err: "Connection problem – please try again or write to kontakt@projekt-ep.de."
+    msg: "Your request", cb: "Please call me back", when: "Best time", whenOpts: ["any time", "morning", "afternoon", "evening"], consent: "I consent to Projekt EX storing my details from this chat to handle my request and contact me about it. Deleted after 30 days or on completion; withdraw anytime at kontakt@projektex.de.",
+    privacyLink: "Privacy notice", submit: "Send to the team", cancel: "Not now", needConsent: "Please confirm your consent so we may store your details.", deleted: "Conversation deleted.", footL: "Automated assistant", err: "Connection problem – please try again or write to kontakt@projektex.de."
   } : {
     launch: "Fragen? Frag uns", hi: "Hey, ich bin Bit!", team: "Mit dem Team sprechen", sent: "Gesendet", bitl: "Bit, der Projekt-EX-Assistent", title: "Chat mit Projekt EX", status: "Automatischer Assistent · antwortet sofort", ph: "Deine Frage …", send: "Senden",
     close: "Chat schließen", menu: "Optionen", human: "Mit Mensch sprechen", del: "Verlauf löschen", privacy: "Datenschutzhinweise", restart: "Neues Gespräch",
     notice: "Demo: Du schreibst mit einem automatischen Assistenten (KI-System im Sinne der EU-KI-Verordnung), nicht mit einem Menschen. Alles läuft in deinem Browser, nichts wird gespeichert oder gesendet.",
     src: "Quelle", formTitle: "Wie erreichen wir dich?", formSub: "Demo: Das Formular zeigt nur den Ablauf. Es wird nichts gesendet oder gespeichert.", name: "Name *", email: "E-Mail", tel: "Telefon",
     msg: "Dein Anliegen", cb: "Bitte ruft mich zurück", when: "Am besten erreichbar", whenOpts: ["egal", "vormittags", "nachmittags", "abends"], consent: "",
-    privacyLink: "Datenschutzhinweise", submit: "Ans Team senden", cancel: "Jetzt nicht", needConsent: "Bitte bestätige die Einwilligung, damit wir deine Angaben speichern dürfen.", deleted: "Verlauf gelöscht.", footL: "Automatischer Assistent", err: "Verbindung gestört – bitte nochmal versuchen oder an kontakt@projekt-ep.de schreiben."
+    privacyLink: "Datenschutzhinweise", submit: "Ans Team senden", cancel: "Jetzt nicht", needConsent: "Bitte bestätige die Einwilligung, damit wir deine Angaben speichern dürfen.", deleted: "Verlauf gelöscht.", footL: "Automatischer Assistent", err: "Verbindung gestört – bitte nochmal versuchen oder an kontakt@projektex.de schreiben."
   };
   const ICON = {
     close: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
