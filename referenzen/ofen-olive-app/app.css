@@ -75,6 +75,19 @@ button{cursor:pointer;background:none;border:0}
 .card__p{font-weight:500;font-variant-numeric:tabular-nums}
 .card__plus{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--creme);font-size:1.1rem;line-height:1}
 .card__in{font-size:.78rem;color:var(--terra);font-weight:500}
+.sec-h small{display:block;font:400 .76rem/1.35 var(--sans);color:var(--ink-s);margin-top:.3rem;letter-spacing:.02em}
+.kn{position:sticky;top:0;z-index:3;display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;padding:.7rem 1rem;margin-top:1.4rem;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-block:1px solid var(--line)}
+.kn a{flex:none;font-size:.8rem;font-weight:500;color:var(--ink-s);text-decoration:none;padding:.4rem .8rem;border-radius:999px;border:1px solid var(--line);transition:color .2s ease,border-color .2s ease}
+.kn a:active{transform:scale(.97)}
+.dl{list-style:none;padding:0 1.25rem;margin:0}
+.dish{display:grid;grid-template-columns:1fr auto 30px;gap:.8rem;align-items:center;width:100%;padding:.8rem 0;text-align:left;border-bottom:1px solid var(--line);transition:transform .16s var(--ease-out)}
+.dl li:last-child .dish{border-bottom:0}
+.dish:active{transform:scale(.985)}
+.dish__t b{display:block;font:500 1.18rem/1.15 var(--serif)}
+.dish__t b i{font:500 .62rem/1 var(--sans);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);vertical-align:.2em}
+.dish__t span{display:block;font-size:.8rem;color:var(--ink-s);margin-top:.15rem;text-wrap:pretty}
+.dish__r{display:flex;flex-direction:column;align-items:flex-end;gap:.15rem}
+.ci.ci--t{grid-template-columns:1fr auto}
 .tiny{font-size:.8rem;color:var(--ink-s);text-align:center;margin:1.4rem 1rem 0}
 .tiny--l{color:rgba(243,235,221,.65)}
 
@@ -209,3 +222,4 @@ button{cursor:pointer;background:none;border:0}
 .view--build{padding-bottom:2rem}
 .view--list .top .icon-btn{margin-right:auto}
 .view--list .top img{margin-right:auto}
+.sheet__img[hidden]{display:none}

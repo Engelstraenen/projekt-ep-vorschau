@@ -38,8 +38,18 @@
   $$('[data-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
 
   // Liste
+  const K = C.karte || [], ALL = [...C.pizzen, ...K.flatMap(s => s.gerichte)];
+  const find = id => ALL.find(p => p.id === id);
+  $('#kn').innerHTML = [['ofen', 'Holzofen'], ...K.map(s => [s.id, s.titel.replace('Weitere ', '')])].map(([id, t]) => `<a href="#k-${id}">${t}</a>`).join('');
+  $$('#kn a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const t = $(a.getAttribute('href')); if (t) views.list.scrollTo({ top: t.offsetTop - 64, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }));
+  $('#karte').innerHTML = K.map(s => `<h3 class="sec-h" id="k-${s.id}">${s.titel}${s.unter ? `<small>${s.unter}</small>` : ''}</h3><ul class="dl" role="list">${s.gerichte.map(g => `<li><button type="button" class="dish" data-${g.typ === 'pizza' ? 'id' : 'add'}="${g.id}"><span class="dish__t"><b>${g.name}${g.tag ? ` <i>${g.tag}</i>` : ''}</b><span>${g.text}</span></span><span class="dish__r"><span class="card__p">${eur(g.preis)}</span><span class="card__in" data-in="${g.id}"></span></span><span class="card__plus" aria-hidden="true">+</span></button></li>`).join('')}</ul>`).join('');
+  $$('[data-add]').forEach(b => b.addEventListener('click', () => {
+    const g = find(b.dataset.add), hit = S.cart.find(i => i.p === g && i.label);
+    hit ? hit.qty++ : S.cart.push({ p: g, size: 0, ex: [], qty: 1, unit: g.preis, label: K.find(s => s.gerichte.includes(g)).titel });
+    syncBar(true); toast(`${g.name} im Warenkorb`);
+  }));
   $('#list').innerHTML = C.pizzen.map(p => `<li><button type="button" class="card" data-id="${p.id}"><img src="${base + p.bild}" width="96" height="96" alt="" loading="lazy"><div><h4>${p.name}</h4><p>${p.text}</p><div class="card__row"><span class="card__p">${eur(p.preis)}</span><span class="card__in" data-in="${p.id}"></span><span class="card__plus" aria-hidden="true">+</span></div></div></button></li>`).join('');
-  $$('.card').forEach(c => c.addEventListener('click', () => openSheet(c.dataset.id)));
+  $$('.card, .dish[data-id]').forEach(c => c.addEventListener('click', () => openSheet(c.dataset.id)));
 
   // Detail-Sheet
   const sheet = $('#sheet'), scrim = $('#scrim');
@@ -53,10 +63,10 @@
   function price() { $('#qN').textContent = S.qty; $('#addP').textContent = eur(unit() * S.qty); }
   let lastFocus = null;
   function openSheet(id) {
-    S.cur = C.pizzen.find(p => p.id === id); if (!S.cur) return;
+    S.cur = find(id); if (!S.cur) return;
     S.size = 0; S.qty = 1; S.extras.clear(); seg($('#size'), 0);
     $$('.xt').forEach(b => b.setAttribute('aria-pressed', 'false'));
-    $('#dImg').src = base + S.cur.bild; $('#dImg').alt = S.cur.name; $('#dName').textContent = S.cur.name; $('#dText').textContent = S.cur.text;
+    $('#dImg').hidden = !S.cur.bild; if (S.cur.bild) $('#dImg').src = base + S.cur.bild; $('#dImg').alt = S.cur.name; $('#dName').textContent = S.cur.name; $('#dText').textContent = S.cur.text;
     sheet.querySelector('.sheet__scroll').scrollTop = 0; price();
     lastFocus = document.activeElement; scrim.hidden = false; sheet.hidden = false; sheet.inert = false;
     setTimeout(() => $('#sheetX').focus({ preventScroll: true }), 50);
@@ -84,11 +94,11 @@
     const bar = $('#cartbar'); bar.hidden = !(count() && now === 'list');
     $('#cartN').textContent = count(); $('#cartS').textContent = eur(sub());
     if (bump) { bar.classList.remove('bump'); bar.offsetWidth; bar.classList.add('bump'); }
-    C.pizzen.forEach(p => { const n = S.cart.filter(i => i.p.id === p.id).reduce((s, i) => s + i.qty, 0); const el = document.querySelector(`[data-in="${p.id}"]`); if (el) el.textContent = n ? `${n} im Korb` : ''; });
+    ALL.forEach(p => { const n = S.cart.filter(i => i.p.id === p.id).reduce((s, i) => s + i.qty, 0); const el = document.querySelector(`[data-in="${p.id}"]`); if (el) el.textContent = n ? `${n} im Korb` : ''; });
   }
   $('#cartbar').addEventListener('click', () => { renderCart(); go('cart'); });
   function renderCart() {
-    $('#cart').innerHTML = S.cart.map((i, k) => `<li class="ci"><img src="${base + i.p.bild}" width="56" height="56" alt=""><div><h4>${i.qty > 1 ? i.qty + '× ' : ''}${i.p.name}</h4><p>${i.label || ((i.size ? 'Groß 36 cm' : 'Klassisch 30 cm') + (i.ex.length ? ' · ' + i.ex.map(x => x.name).join(', ') : ''))}</p></div><div class="ci__r">${eur(i.unit * i.qty)}<button type="button" class="ci__del" data-del="${k}">Entfernen</button></div></li>`).join('');
+    $('#cart').innerHTML = S.cart.map((i, k) => `<li class="ci${i.p.bild ? '' : ' ci--t'}">${i.p.bild ? `<img src="${base + i.p.bild}" width="56" height="56" alt="">` : ''}<div><h4>${i.qty > 1 ? i.qty + '× ' : ''}${i.p.name}</h4><p>${i.label || ((i.size ? 'Groß 36 cm' : 'Klassisch 30 cm') + (i.ex.length ? ' · ' + i.ex.map(x => x.name).join(', ') : ''))}</p></div><div class="ci__r">${eur(i.unit * i.qty)}<button type="button" class="ci__del" data-del="${k}">Entfernen</button></div></li>`).join('');
     $$('[data-del]').forEach(b => b.addEventListener('click', () => { S.cart.splice(+b.dataset.del, 1); if (!S.cart.length) { go('build'); return; } renderCart(); }));
     renderSlots(); renderSum(); syncBar();
   }

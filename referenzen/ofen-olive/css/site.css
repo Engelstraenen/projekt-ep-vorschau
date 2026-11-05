@@ -113,6 +113,21 @@ h1.display{font-size:clamp(3.2rem,9vw,8.4rem);line-height:.92}
 @media (hover:hover) and (pointer:fine){.menu__item:hover img{transform:rotate(-8deg) scale(1.05)}.menu__add:hover{background:var(--terra);color:#fff;border-color:var(--terra)}}
 .fine{font-size:.8rem;color:#6b6258;margin-top:1.4rem}
 .fine--light{color:rgba(243,235,221,.7)}
+.kn{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:1.6rem;font:500 .76rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.kn a{color:var(--oliv);text-decoration:none;padding:.35rem 0;border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease}
+@media (hover:hover) and (pointer:fine){.kn a:hover{color:var(--terra);border-color:currentColor}}
+.kh{font:500 clamp(1.7rem,2.6vw,2.2rem)/1.05 var(--serif);margin-top:3.4rem;scroll-margin-top:5rem;text-wrap:balance}
+.kh small{display:block;font:400 .82rem/1.4 var(--sans);letter-spacing:.04em;color:#6d6458;margin-top:.45rem}
+.karte__body>.kh{margin-top:3rem}.karte__body>.kh+.menu{margin-top:1.4rem}
+.ks .kh{margin-top:3.6rem}
+.kl{list-style:none;padding:0;margin:1.3rem 0 0}
+.kl li{display:grid;grid-template-columns:minmax(0,46ch) minmax(1rem,1fr) auto;align-items:baseline;gap:.8rem;padding:.75rem 0}
+.kl h4{font:500 1.3rem/1.15 var(--serif)}
+.kl h4 i{font:500 .66rem/1 var(--sans);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);vertical-align:.25em;margin-left:.35rem}
+.kl p{font-size:.9rem;font-weight:300;color:#5a5249;margin-top:.15rem;text-wrap:pretty}
+.kl__d{align-self:start;margin-top:1.05rem;border-bottom:1px dotted rgba(28,26,23,.28);min-width:1rem}
+.kl__p{align-self:start;margin-top:.2rem;font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap}
+.karte__body>.btn{margin-top:3rem}
 @media (max-width:900px){.karte{grid-template-columns:1fr}.karte__film{height:46vh}.karte__film video{position:static;height:100%}.menu__item{grid-template-columns:64px 1fr auto;gap:1rem}.menu__item img{width:64px;height:64px}.menu__add{display:none}}
 
 /* Zeiten */

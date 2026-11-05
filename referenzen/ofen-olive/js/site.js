@@ -5,6 +5,12 @@
   $$('[data-cfg]').forEach(el => { const v = C[el.dataset.cfg]; if (v) el.textContent = v; });
   $$('[data-cfg-logo]').forEach(el => { const v = el.dataset.cfgLogo === 'hell' ? C.logoHell : C.logo; if (v) el.src = v; if (C.name) el.alt = C.name; });
   if (C.zeiten) { const dl = $('[data-cfg-hours]'); if (dl) dl.innerHTML = C.zeiten.map(([d, t]) => `<div><dt>${d}</dt><dd>${t}</dd></div>`).join(''); }
+  if (C.karte) {
+    const e = n => n.toLocaleString('de-DE', { minimumFractionDigits: 2 }) + ' €';
+    const k = $('[data-cfg-karte]'), n = $('[data-cfg-kn]');
+    if (k) k.innerHTML = C.karte.map(s => `<section class="ks" aria-labelledby="karte-${s.id}"><h3 class="kh" id="karte-${s.id}">${s.titel}${s.unter ? ` <small>${s.unter}</small>` : ''}</h3><ul class="kl" role="list">${s.gerichte.map(g => `<li><div><h4>${g.name}${g.tag ? ` <i>${g.tag}</i>` : ''}</h4><p>${g.text}</p></div><span class="kl__d" aria-hidden="true"></span><span class="kl__p">${e(g.preis)}</span></li>`).join('')}</ul></section>`).join('');
+    if (n) n.innerHTML = [['ofen', 'Holzofen'], ...C.karte.map(s => [s.id, s.titel.replace('Weitere ', '')])].map(([id, t]) => `<a href="#karte-${id}">${t}</a>`).join('');
+  }
   if (C.liefergebiet) { const ul = $('[data-cfg-areas]'); if (ul) ul.innerHTML = C.liefergebiet.map(a => `<li>${a}</li>`).join(''); }
   if (C.name) document.title = `${C.name} · Holzofen-Pizzeria ${C.ort || ''} · Demo PROJEKT EX`;
 
