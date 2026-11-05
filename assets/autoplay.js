@@ -28,7 +28,7 @@
     }
   });
   const css = document.createElement('style');
-  css.textContent = '.ton-an{position:absolute;left:14px;top:14px;z-index:5;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:999px;border:0;background:#fff;color:#1D1D1F;font:600 16px/1 inherit;font-family:inherit;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.35)}.ton-an:hover{background:#F5F5F7}.ton-an:focus-visible{outline:3px solid #0071E3;outline-offset:2px}';
+  css.textContent = '.ton-an{position:absolute;left:14px;top:14px;z-index:5;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:999px;border:0;background:#fff;color:#1D1D1F;font:600 16px/1 inherit;font-family:inherit;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.35)}.ton-an:hover{background:#F5F5F7}.ton-an:focus-visible{outline:3px solid #0071E3;outline-offset:2px}.film-stage .ton-an{left:50%;top:50%;transform:translate(-50%,-50%);height:56px;padding:0 28px;font-size:17px}.film-stage .ton-an[aria-pressed="true"]{left:14px;top:84px;transform:none;height:44px;padding:0 18px;font-size:15px}';
   document.head.appendChild(css);
   const auto = (v) => !RM.matches && !v._user;
   if ('IntersectionObserver' in window) {
