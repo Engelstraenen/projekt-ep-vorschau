@@ -18,7 +18,7 @@
 .bz__base.is-on{opacity:1}
 .bz__base.is-on{filter:saturate(calc(1 - var(--bake,0) * .04)) brightness(calc(1 - var(--bake,0) * .02)) sepia(calc(var(--bake,0) * .1))}
 /* gebackener Rand: bei Tomate ganzes Foto, sonst nur der Cornicione */
-.bz__baked{opacity:calc(var(--bake,0) * .78);-webkit-mask:radial-gradient(closest-side,transparent 0 77%,#000 83%);mask:radial-gradient(closest-side,transparent 0 77%,#000 83%)}
+.bz__baked{opacity:calc(var(--bake,0) * .72);filter:brightness(1.12) contrast(.9) saturate(1.05);-webkit-mask:radial-gradient(closest-side,transparent 0 77%,#000 83%);mask:radial-gradient(closest-side,transparent 0 77%,#000 83%)}
 .bz[data-sauce="tomate"] .bz__baked{-webkit-mask:none;mask:none}
 .bz__oils{position:absolute;inset:11%;border-radius:50%;overflow:hidden;pointer-events:none}
 .bz__oil{position:absolute;inset:0;width:100%;height:100%;opacity:calc(.88 + var(--bake,0) * .1);filter:drop-shadow(0 0 .5px rgba(60,20,0,.4)) brightness(calc(1 + var(--bake,0) * .18)) saturate(calc(1 + var(--bake,0) * .2));transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(var(--s));transition:opacity .3s,transform .3s var(--bz-ease);
