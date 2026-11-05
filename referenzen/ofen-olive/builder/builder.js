@@ -34,7 +34,7 @@
     { id: 'rucola', name: 'Rucola', preis: 1.0, sz: .12, late: 1 },
     { id: 'basilikum', name: 'Basilikum', preis: .5, sz: .10, late: 1 }
   ];
-  const CHEESE = { id: 'mozzarella', name: 'Fior di Latte', sz: .095, n: 16 };
+  const CHEESE = { id: 'mozzarella', name: 'Fior di Latte', sz: .108, n: 15 };
   const OILS = [
     { id: 'knoblauch', name: 'Knoblauchöl', preis: .5 },
     { id: 'chili', name: 'Chiliöl', preis: .5 }
@@ -167,7 +167,7 @@
         const c = clampIn(goal.x + Math.cos(a) * r, goal.y + Math.sin(a) * r, rmax);
         let d = 9;
         for (const p of st.pieces) {
-          const k = p.t === t.id ? 1 : p.t === 'mozzarella' || t.id === 'mozzarella' ? .4 : .62;
+          const k = p.t === t.id ? .88 : p.t === 'mozzarella' || t.id === 'mozzarella' ? .32 : .52;
           d = Math.min(d, Math.hypot(p.x - c.x, p.y - c.y) / k);
         }
         d = Math.min(d, t.sz * 3.2) - Math.hypot(c.x - goal.x, c.y - goal.y) * (near ? 1.2 : 2.1);
@@ -179,7 +179,7 @@
       const el = document.createElement('span');
       el.className = 'bz__pc bz__pc--' + t.id;
       p.v = p.v || 1 + Math.floor(Math.random() * VAR);
-      p.sc = p.sc || .88 + Math.random() * .24;
+      p.sc = p.sc || (t.id === 'mozzarella' ? .78 + Math.random() * .38 : .82 + Math.random() * .32);
       p.rot = p.rot ?? Math.random() * 360;
       el.innerHTML = img(t.id, p.v);
       el.style.cssText = `left:${50 + p.x * 50}%;top:${50 + p.y * 50}%;width:${t.sz * p.sc * 100}%;--r:${p.rot}deg`;
