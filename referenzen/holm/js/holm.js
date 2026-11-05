@@ -45,7 +45,7 @@
 
   // Überschriften: Wort für Wort aus der Maske
   document.querySelectorAll('.sec__head h2, .werk h2, .kontakt h2').forEach(function (h) {
-    gsap.from(h, { yPercent: 40, autoAlpha: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 85%' } });
+    gsap.from(h, { y: 48, clipPath: 'inset(0 0 100% 0)', duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 88%' } });
   });
 
   // Leistungen: gepinntes Bild links wechselt, Text rechts mit Fokus
@@ -54,7 +54,7 @@
     rows.forEach(function (r) {
       gsap.fromTo(r.querySelector('.svc__img'), { clipPath: 'inset(18% 14% 18% 14% round 4px)' }, { clipPath: 'inset(0% 0% 0% 0% round 4px)', ease: 'none', scrollTrigger: { trigger: r, start: 'top 90%', end: 'top 30%', scrub: true } });
       gsap.fromTo(r.querySelector('.svc__img img'), { scale: 1.25 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: true } });
-      gsap.fromTo(r.querySelector('.svc__txt'), { autoAlpha: .15, y: 60 }, { autoAlpha: 1, y: 0, ease: 'none', scrollTrigger: { trigger: r, start: 'top 75%', end: 'top 35%', scrub: true } });
+      gsap.fromTo(r.querySelector('.svc__txt'), { y: 60 }, { y: 0, ease: 'none', scrollTrigger: { trigger: r, start: 'top 75%', end: 'top 35%', scrub: true } });
     });
     // Projekte: vertikales Scrollen wird seitliche Fahrt
     var rail = document.querySelector('.rail');
@@ -79,9 +79,9 @@
   var steps = document.querySelector('.steps');
   if (steps) {
     gsap.fromTo('.steps__line i', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: steps, start: 'top 80%', end: 'bottom 50%', scrub: true } });
-    gsap.from('.steps li', { y: 50, autoAlpha: 0, stagger: .12, duration: .9, ease: 'expo.out', scrollTrigger: { trigger: steps, start: 'top 75%' } });
+    gsap.from('.steps li', { y: 50, stagger: .12, duration: .9, ease: 'expo.out', scrollTrigger: { trigger: steps, start: 'top 75%' } });
   }
-  gsap.from('.quotes li', { y: 70, rotate: function (i) { return (i - 1) * 3; }, autoAlpha: 0, stagger: .12, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.quotes', start: 'top 80%' } });
+  gsap.from('.quotes li', { y: 70, rotate: function (i) { return (i - 1) * 2; }, stagger: .12, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.quotes', start: 'top 80%' } });
 
   // Fuß: riesiger Schriftzug wächst aus dem Boden
   gsap.fromTo('.foot__big', { yPercent: 60, scaleY: .6, transformOrigin: '50% 100%' }, { yPercent: 0, scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.foot', start: 'top bottom', end: 'top 30%', scrub: true } });
