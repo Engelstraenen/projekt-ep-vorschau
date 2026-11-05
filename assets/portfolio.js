@@ -16,6 +16,7 @@
 
   // label = Rubrik-Label (blau, „01 · UGC-Ads“), h = Rubrik-Überschrift, lead = was die Sparte ist und was sie besonders macht
   const SPARTEN = [
+    { id: 'viral', name: 'Virale Ads', label: 'Virale Ads', h: 'Clips, die man weiterleitet.', lead: 'Kurze Filme mit einem starken ersten Moment, die im Feed halten und zum Mitreden einladen.' },
     { id: 'ugc', name: 'UGC', label: 'UGC-Ads', h: 'Echte Gesichter, echter Alltag.', lead: 'Clips im Stil echter Nutzer: nahbar, mit Untertiteln und in Sekunden erklärt.' },
     { id: 'cgi', name: 'CGI', label: 'CGI-Ads', h: 'Das Produkt in einer eigenen Welt.', lead: 'Computergenerierte Bilder, die so kaum zu drehen wären und im Feed hängen bleiben.' },
     { id: 'motion', name: 'Motion Graphics', label: 'Motion Graphics', h: 'Auf den Punkt animiert.', lead: 'Bewegte Formen und Schrift machen auch Erklärungsbedürftiges sofort verständlich.' },
@@ -23,6 +24,7 @@
     { id: 'fashion', name: 'Fashion- & Lookbook-Film', label: 'Fashion & Lookbook', h: 'Mode mit einer kleinen Geschichte.', lead: 'Kurze Filme, die Kleidung in Szene setzen, für jede Plattform im passenden Format.' },
   ];
   const CLIPS = [
+    { id: 'studio', sparte: 'viral', titel: 'Studio', zweck: 'Ein Blick ins Studio von PROJEKT EX — ein Clip, der im Feed hält und zum Mitreden einlädt.', dauer: 25.4, hd: 1080, fiktiv: false },
     { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für SPRUZ, ein erfundenes Trockenshampoo.', dauer: 9.13 },
     { id: 'ugc-knista', sparte: 'ugc', titel: 'Omi testet jetzt ASMR', zweck: 'UGC-Clip für KNISTA, erfundene Paprika-Chips.', dauer: 9.03 },
     { id: 'ugc-mochimi', sparte: 'ugc', titel: 'Kalle, 72, testet Beauty', zweck: 'UGC-Clip für MOCHIMI, eine erfundene Glow Sheet Mask.', dauer: 9.1 },
