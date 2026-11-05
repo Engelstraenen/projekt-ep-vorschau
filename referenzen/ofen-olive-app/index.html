@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Ofen &amp; Olive · Bestell-App · Demo PROJEKT EX</title>
+<meta name="theme-color" content="#F3EBDD">
+<link rel="preload" href="../ofen-olive/fonts/outfit-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+<script src="../ofen-olive/config.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<div class="demo-bar" role="note">
+  <p><span class="demo-bar__dot" aria-hidden="true"></span><b>Beispiel-Visualisierung</b><span class="demo-bar__more"> · Demo von PROJEKT EX · keine echte Bestellung, keine Zahlung</span></p>
+  <a href="../ofen-olive/">← Zur Website</a>
+</div>
+<div class="desk">
+  <aside class="desk__side">
+    <img class="desk__logo" data-logo src="../ofen-olive/img/logo-hell.png" width="200" height="51" alt="Ofen &amp; Olive">
+    <h1 class="desk__h">Pizza wählen, Extras dazu, <em>fertig.</em></h1>
+    <p class="desk__p">So könnte die eigene Bestellung einer Pizzeria aussehen: Speisekarte zuerst, Extras per Fingertipp, Abholung oder Lieferung, danach die Nachricht „Ihre Pizza ist fertig“. Probier es rechts aus.</p>
+    <ol class="desk__steps"><li>Pizza antippen</li><li>Extras wählen und hinzufügen</li><li>Abholung oder Lieferung, bestätigen</li></ol>
+    <p class="desk__fine"><b>Bestell-App · Beispiel-Visualisierung.</b> Erfundene Pizzeria, fiktive Beispielpreise. Keine echte Bestellung, keine Zahlung, kein Live-Betrieb.</p>
+    <a class="desk__back" href="../ofen-olive/">← Zur Website von Ofen &amp; Olive</a>
+  </aside>
+  <div class="phone">
+    <div class="app" id="app">
+      <section class="view view--list is-on" data-view="list" aria-label="Speisekarte">
+        <header class="top">
+          <img data-logo-dark src="../ofen-olive/img/logo-ink.png" width="128" height="33" alt="Ofen &amp; Olive">
+          <span class="top__open"><i aria-hidden="true"></i>Geöffnet</span>
+        </header>
+        <div class="hero">
+          <video muted playsinline loop autoplay preload="metadata" poster="../ofen-olive/img/ofen.webp" aria-hidden="true"><source src="../ofen-olive/film/ofen.mp4" type="video/mp4"></video>
+          <div class="hero__t"><p data-status>Jetzt geöffnet · Küche bis 22:00 · Abholung &amp; Lieferung</p><h2>Was darf heute<br><em>in den Ofen?</em></h2></div>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Bestellart">
+          <button type="button" role="radio" aria-checked="true" data-mode="abholung">Abholung <small>ca. 20 Min.</small></button>
+          <button type="button" role="radio" aria-checked="false" data-mode="lieferung">Lieferung <small>ca. 40 Min.</small></button>
+          <span class="seg__pill" aria-hidden="true"></span>
+        </div>
+        <h3 class="sec-h">Pizze aus dem Holzofen</h3>
+        <ul class="list" role="list" id="list"></ul>
+        <p class="tiny">Fiktive Beispielpreise · Demo ohne echte Bestellung</p>
+      </section>
+      <section class="view view--cart" data-view="cart" aria-label="Warenkorb" hidden>
+        <header class="bar"><button type="button" class="icon-btn" data-go="list" aria-label="Zurück zur Speisekarte"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h2>Deine Bestellung</h2><span></span></header>
+        <ul class="cart" role="list" id="cart"></ul>
+        <div class="box">
+          <p class="box__h">Wie möchtest du sie bekommen?</p>
+          <div class="seg seg--sm" role="radiogroup" aria-label="Bestellart">
+            <button type="button" role="radio" aria-checked="true" data-mode="abholung">Abholung</button>
+            <button type="button" role="radio" aria-checked="false" data-mode="lieferung">Lieferung</button>
+            <span class="seg__pill" aria-hidden="true"></span>
+          </div>
+          <div class="deliv" id="deliv" hidden>
+            <label class="fld"><span>Liefergebiet</span><select id="area"></select></label>
+            <label class="fld"><span>Straße und Hausnummer</span><input id="street" autocomplete="off" placeholder="z. B. Düsseldorfer Str. 12"></label>
+          </div>
+          <label class="fld"><span>Name für die Bestellung</span><input id="name" autocomplete="off" placeholder="Vorname"></label>
+          <p class="box__h box__h--t">Wann?</p>
+          <div class="slots" id="slots" role="radiogroup" aria-label="Zeitpunkt"></div>
+        </div>
+        <dl class="sum" id="sum"></dl>
+        <p class="tiny">Demo: Es wird nichts bestellt und nichts bezahlt.</p>
+        <div class="dock"><button type="button" class="cta" id="confirm">Bestellung bestätigen</button></div>
+      </section>
+      <section class="view view--done" data-view="done" aria-label="Bestellung bestätigt" hidden>
+        <div class="done__film"><video muted playsinline loop preload="none" poster="../ofen-olive/img/trattoria.webp" aria-hidden="true"><source src="../ofen-olive/film/trattoria.mp4" type="video/mp4"></video></div>
+        <div class="done__card">
+          <svg class="tick" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none"/><path d="M15 27l7 7 15-16" fill="none"/></svg>
+          <p class="done__k" id="doneNr">Bestellung #OO-0000</p>
+          <h2 class="done__h">Bestellung bestätigt</h2>
+          <p class="done__when" id="doneWhen">Abholung 18:40</p>
+          <ol class="track" id="track" aria-live="polite">
+            <li class="is-on"><b>Angenommen</b><span>Die Küche hat deine Bestellung.</span></li>
+            <li><b>Im Ofen</b><span>90 Sekunden bei 450 Grad.</span></li>
+            <li><b>Fertig</b><span id="doneLast">Liegt an der Theke bereit.</span></li>
+          </ol>
+          <p class="tiny tiny--l">Zeitraffer für die Demo. Am Ende kommt die Push-Nachricht.</p>
+          <div class="done__act"><button type="button" class="ghost" id="lockBtn">Push-Vorschau ansehen</button><button type="button" class="ghost" id="again">Neue Bestellung</button></div>
+        </div>
+      </section>
+      <button type="button" class="cartbar" id="cartbar" hidden><span class="cartbar__n" id="cartN">1</span><span>Warenkorb ansehen</span><span class="cartbar__s" id="cartS">0,00 €</span></button>
+      <div class="scrim" id="scrim" hidden></div>
+      <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="dName" hidden>
+        <span class="sheet__grip" aria-hidden="true"></span>
+        <button type="button" class="icon-btn sheet__x" id="sheetX" aria-label="Schließen"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <div class="sheet__scroll">
+          <img class="sheet__img" id="dImg" src="../ofen-olive/img/p-margherita.webp" width="720" height="720" alt="">
+          <div class="sheet__in">
+            <h2 id="dName">Pizza</h2>
+            <p id="dText"></p>
+            <p class="box__h">Größe</p>
+            <div class="seg seg--sm" role="radiogroup" aria-label="Größe" id="size">
+              <button type="button" role="radio" aria-checked="true" data-size="0">Klassisch 30 cm</button>
+              <button type="button" role="radio" aria-checked="false" data-size="1">Groß 36 cm <small>+3,00 €</small></button>
+              <span class="seg__pill" aria-hidden="true"></span>
+            </div>
+            <p class="box__h">Extras</p>
+            <ul class="extras" role="list" id="extras"></ul>
+            <div class="qty"><span>Anzahl</span><div class="step"><button type="button" id="qMinus" aria-label="Eine weniger">−</button><output id="qN">1</output><button type="button" id="qPlus" aria-label="Eine mehr">+</button></div></div>
+          </div>
+        </div>
+        <div class="dock"><button type="button" class="cta" id="addBtn">Hinzufügen · <span id="addP">9,50 €</span></button></div>
+      </div>
+      <div class="push" id="push" role="status" aria-live="polite" hidden>
+        <img data-icon src="../ofen-olive/img/icon.png" width="40" height="40" alt="">
+        <div><p class="push__a"><b data-name>Ofen &amp; Olive</b><span>jetzt</span></p><p class="push__t" id="pushT">Ihre Pizza ist fertig</p><p class="push__s" id="pushS">Liegt an der Theke bereit.</p></div>
+      </div>
+      <div class="lock" id="lock" hidden>
+        <img class="lock__bg" src="../ofen-olive/img/kaese.webp" alt="">
+        <div class="lock__clock"><p id="lockDate">Donnerstag, 5. November</p><p class="lock__time" id="lockTime">18:40</p></div>
+        <div class="lock__stack">
+          <div class="push push--lock"><img data-icon src="../ofen-olive/img/icon.png" width="40" height="40" alt=""><div><p class="push__a"><b data-name>Ofen &amp; Olive</b><span>jetzt</span></p><p class="push__t" id="lockT">Ihre Pizza ist fertig</p><p class="push__s" id="lockS">Liegt an der Theke bereit.</p></div></div>
+          <div class="push push--lock push--old"><img data-icon src="../ofen-olive/img/icon.png" width="40" height="40" alt=""><div><p class="push__a"><b data-name>Ofen &amp; Olive</b><span>Di.</span></p><p class="push__t">Dienstag ist Pizza-Abend</p><p class="push__s">Zur zweiten Pizza gibt es eine Limonade dazu.</p></div></div>
+        </div>
+        <button type="button" class="lock__x" id="lockX">Zurück zur App</button>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
