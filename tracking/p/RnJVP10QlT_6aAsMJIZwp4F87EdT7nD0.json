@@ -1,0 +1,22 @@
+{
+  "projekt": "BEISPIEL",
+  "typ": "website",
+  "titel": "Website Musterfirma",
+  "station": "design",
+  "aktualisiert": "2026-11-03",
+  "stationen": {
+    "eingegangen": {
+      "datum": "2026-10-20",
+      "notiz": "Auftrag bestätigt, Ansprechpartner zugeteilt."
+    },
+    "konzept": {
+      "datum": "2026-10-24",
+      "notiz": "Ziele, Seitenstruktur und Inhalte abgestimmt."
+    },
+    "design": {
+      "datum": "2026-11-03",
+      "notiz": "Drei Entwürfe in Arbeit, Favorit wird gemeinsam gewählt.",
+      "link": "https://engelstraenen.github.io/projekt-ep-vorschau/"
+    }
+  }
+}
