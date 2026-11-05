@@ -28,6 +28,7 @@
 .lk-sub { color: #0071E3; }
 .lk-soonchip { position: absolute; right: 12px; top: 12px; z-index: 2; padding: 4px 10px; border-radius: 999px; background: rgba(29,29,31,.8); color: #FFFFFF; font-size: 12px; font-weight: 600; opacity: 0; transform: translateY(-4px); transition: opacity .2s var(--lk-ease), transform .2s var(--lk-ease); }
 .lk-card:not(.lk-own) .lk-soonchip { opacity: 1; transform: none; }
+.lk-card.lk-mood .lk-soonchip { opacity: 1; transform: none; background: rgba(0,113,227,.88); }
 
 /* Holo: dunkles Glas, blaues Licht */
 [data-look="holo"] .lk-card .sd-shot { background: #1D1D1F; box-shadow: 0 0 0 1px rgba(0,113,227,.55), 0 18px 50px -18px rgba(0,113,227,.7); }
