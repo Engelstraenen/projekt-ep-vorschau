@@ -2,132 +2,192 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; media-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Feld & Partner – Steuerberatung in Berlin (Demo)</title>
-<meta name="description" content="Feld und Partner, fiktive Steuerkanzlei am Savignyplatz in Berlin, gegründet von Dr. Johannes Feld: zwölf Menschen für laufende Steuerberatung, Nachfolge, Erbschaft, Gründung und Betriebsprüfung. Demo-Projekt von Projekt EX.">
-<meta name="theme-color" content="#f6f6f3">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23151515'/%3E%3Cpath d='M11 8h11M11 8v16M11 15h8' fill='none' stroke='%23f6f6f3' stroke-width='2.2'/%3E%3C/svg%3E">
+<title>Feld &amp; Partner – Steuerberatung in Berlin (Demo)</title>
+<meta name="description" content="Feld und Partner, fiktive Steuerkanzlei am Savignyplatz in Berlin: Laufende Steuerberatung, Nachfolge, Erbschaft, Gründung und Betriebsprüfung. Demo-Projekt von PROJEKT EX.">
+<meta name="theme-color" content="#f4f2ec">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231a1814'/%3E%3Cpath d='M11 8h11M11 8v16M11 15h8' fill='none' stroke='%23f4f2ec' stroke-width='2.2'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/source-serif-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/schibsted-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/feld.css?v=20261103a">
+<link rel="preload" href="film/d/001.webp" as="image" type="image/webp">
+<link rel="stylesheet" href="assets/feld.css?v=20261105d">
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
-<script src="assets/feld.js?v=20261103a" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/feld.js?v=20261105d" defer></script>
+<script src="assets/feldfilm.js?v=20261105d" defer></script>
 </head>
 <body class="home">
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
-<aside class="demo-bar" aria-label="Hinweis zum Demo-Projekt"><div class="wrap demo-bar__in"><p>Demo-Projekt von Projekt EX, fiktive Kanzlei</p><a href="../../leistungen/websites.html#praxisbeispiele">← Zurück zu Projekt EX</a></div></aside>
+<aside class="demo-bar" aria-label="Hinweis zum Demo-Projekt"><div class="wrap demo-bar__in"><p>Demo-Projekt von PROJEKT EX, fiktive Kanzlei</p><a href="../../leistungen/websites.html#feld">← Zurück zu PROJEKT EX</a></div></aside>
 <header class="site-head" data-head>
   <div class="wrap site-head__in">
     <a class="brand" href="./" aria-label="Feld und Partner Steuerberatung, Startseite"><span class="brand__word">Feld <i>&amp;</i> Partner</span><span class="brand__sub">Steuerberatung</span></a>
-    <nav class="nav" id="nav" aria-label="Hauptnavigation"><ul><li><a href="#leistungen">Leistungen</a></li><li><a href="#kanzlei">Kanzlei</a></li><li><a href="#team">Team</a></li><li><a href="#ratgeber">Ratgeber</a></li><li><a href="#fragen">Fragen</a></li><li class="nav__cta-m"><a href="#erstgespraech">Erstgespräch</a></li></ul></nav>
+    <nav class="nav" id="nav" aria-label="Hauptnavigation"><ul>
+      <li><a href="#geschichte">Geschichte</a></li>
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#kanzlei">Kanzlei</a></li>
+      <li><a href="#ratgeber">Ratgeber</a></li>
+      <li><a href="#fragen">Fragen</a></li>
+      <li class="nav__cta-m"><a href="#erstgespraech">Erstgespräch</a></li>
+    </ul></nav>
     <a class="head-cta" href="#erstgespraech">Erstgespräch</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu><span class="menu-btn__l" aria-hidden="true"></span><span class="menu-btn__t">Menü</span></button>
   </div>
 </header>
 <main id="inhalt">
 
-<section class="hero" aria-labelledby="h-hero">
-  <div class="wrap">
-    <p class="mast"><span>Steuerberatung in Berlin-Charlottenburg</span><span>Savignyplatz 9</span><span>Seit 1987</span></p>
+<section class="hero" aria-labelledby="h-hero" data-bg="#16130f">
+  <div class="hero__bg" aria-hidden="true">
+    <video class="bgv" src="film/loop-desk.mp4" poster="film/poster.webp" muted loop playsinline autoplay preload="metadata"></video>
+  </div>
+  <div class="mg-layer" aria-hidden="true">
+    <span class="mg mg--1">Savignyplatz 9</span>
+    <span class="mg mg--2">Seit 1987</span>
+    <span class="mg mg--3">Charlottenburg</span>
+  </div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <p class="mast"><span>Steuerberatung in Berlin</span><span>Savignyplatz 9</span><span>Seit 1987</span></p>
     <h1 class="hero__h" id="h-hero"><span class="ln"><span>Steuerberatung,</span></span><span class="ln"><span>die man <em>versteht.</em></span></span></h1>
     <div class="hero__row">
       <p class="hero__lead">Wir begleiten Familienunternehmen, Selbstständige und Erben, oft über Generationen. Gründlich, ruhig und so verständlich, dass Sie jede Entscheidung selbst erklären können.</p>
-      <div class="hero__cta"><a class="btn" href="#erstgespraech">Erstgespräch vereinbaren <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="link" href="tel:+493001234567">030 0123 4567</a></div>
+      <div class="hero__cta">
+        <a class="btn" href="#erstgespraech">Erstgespräch vereinbaren <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="link" href="#geschichte">Die Geschichte ↓</a>
+      </div>
     </div>
-  </div>
-  <figure class="hero__fig wrap" data-hero-fig>
-    <div class="hero__img"><picture><source type="image/avif" srcset="img/team-960.avif 960w, img/team-1600.avif 1600w, img/team-2400.avif 2400w, img/team-3840.avif 3840w" sizes="(max-width: 700px) 100vw, (max-width: 1360px) 92vw, 1248px"><source type="image/webp" srcset="img/team-960.webp 960w, img/team-1600.webp 1600w, img/team-2400.webp 2400w, img/team-3840.webp 3840w" sizes="(max-width: 700px) 100vw, (max-width: 1360px) 92vw, 1248px"><img src="img/team-1600.jpg" srcset="img/team-960.jpg 960w, img/team-1600.jpg 1600w, img/team-2400.jpg 2400w, img/team-3840.jpg 3840w" sizes="(max-width: 700px) 100vw, (max-width: 1360px) 92vw, 1248px" width="3840" height="2160" alt="Das Team von Feld und Partner, zwölf Personen in dunklen Anzügen, Blazern und Blusen, steht lächelnd in zwei Reihen in einem hellen Kanzleibüro mit Bücherregalen. In der Mitte Seniorpartner Dr. Johannes Feld mit grauem Haar, Brille und dunkelblauem Anzug." fetchpriority="high" decoding="async"></picture></div>
-    <figcaption>Das ganze Team am Savignyplatz, in der Mitte Gründer und Seniorpartner Dr. Johannes Feld.</figcaption>
-  </figure>
-  <div class="wrap">
-    <dl class="facts">
-      <div><dt>Zulassung</dt><dd>Steuerberaterkammer Berlin</dd></div>
-      <div><dt>Qualifikation</dt><dd>Fachberatung für Unternehmensnachfolge (DStV&nbsp;e.&nbsp;V.)</dd></div>
-      <div><dt>Vergütung</dt><dd>nach StBVV, vorab schriftlich vereinbart</dd></div>
-      <div><dt>Antwort</dt><dd>innerhalb eines Werktags</dd></div>
-    </dl>
   </div>
 </section>
 
-<section class="sec svcs" id="leistungen" aria-labelledby="h-leistungen">
-  <div class="wrap svcs__grid">
-    <div class="svcs__side">
-      <h2 class="h2" id="h-leistungen">Leistungen</h2>
-      <p class="intro">Wir sind keine Kanzlei für alles. Dafür kennen wir diese fünf Felder bis ins Detail.</p>
-      <nav aria-label="Leistungen"><ol class="svcs__idx" role="list"><li><a href="#l-laufend" data-idx="laufend">Laufende Steuerberatung</a></li><li><a href="#l-nachfolge" data-idx="nachfolge">Unternehmensnachfolge</a></li><li><a href="#l-erbschaft" data-idx="erbschaft">Erbschaft und Schenkung</a></li><li><a href="#l-gruendung" data-idx="gruendung">Gründung und Rechtsform</a></li><li><a href="#l-pruefung" data-idx="pruefung">Betriebsprüfung</a></li></ol></nav>
+<section class="film" id="geschichte" aria-labelledby="h-geschichte" data-film data-bg="#16130f">
+  <div class="film__pin">
+    <canvas class="film__cv" role="img" aria-label="Durchgehender Film: Füllfeder schreibt, Akte öffnet sich, Blick durch den Besprechungsraum zum Savignyplatz, Gespräch, Unterschrift."></canvas>
+    <div class="film__shade" aria-hidden="true"></div>
+    <div class="film__words" aria-hidden="true"><span>Stift</span><span>Akte</span><span>Raum</span><span>1987</span><span>Gespräch</span><span>Klar</span></div>
+    <p class="film__kick" aria-hidden="true">Stift</p>
+    <div class="wrap film__txt">
+      <h2 class="sr" id="h-geschichte" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Vom Stift zur Klarheit</h2>
+      <ol class="film__list">
+        <li class="film__st"><span>01 · Stift</span><h2>Jedes Mandat beginnt mit einer Linie.</h2><p>Nicht mit einer Software. Mit dem Moment, in dem jemand zuhört und die Sache aufschreibt, die wirklich zählt.</p></li>
+        <li class="film__st"><span>02 · Akte</span><h2>Die Akte kennt Namen, nicht Nummern.</h2><p>Zwei feste Ansprechpartner. Wer anruft, spricht mit jemandem, der Ihre Geschichte schon gelesen hat.</p></li>
+        <li class="film__st"><span>03 · Raum</span><h2>Ein Raum, der Ruhe hält.</h2><p>Im dritten Stock eines Gründerzeithauses. Hier werden Übergaben geplant, bevor sie eilig werden.</p></li>
+        <li class="film__st"><span>04 · Fassade</span><h2>Seit 1987 am Savignyplatz.</h2><p>Gegründet in einer Zweizimmerwohnung. Geblieben ist die Haltung: nur so viele Mandate, wie wir gründlich betreuen können.</p></li>
+        <li class="film__st"><span>05 · Gespräch</span><h2>Dreißig Minuten, die etwas ändern.</h2><p>Sie erzählen. Wir hören zu. Am Ende wissen Sie, ob wir passen – und was als Nächstes kommt.</p></li>
+        <li class="film__st"><span>06 · Klarheit</span><h2>Unterschrieben, verstanden.</h2><p>Ein Fahrplan mit Prioritäten, Fristen und klaren Zuständigkeiten. Keine Fachsprache ohne Übersetzung.</p></li>
+      </ol>
     </div>
-    <div class="svcs__main"><article class="svc" id="l-laufend" data-svc="laufend">
-      <h3 class="svc__t">Laufende Steuerberatung</h3>
-      <p class="svc__p">Buchhaltung, Lohn, Jahresabschluss und Erklärungen, digital organisiert. Sie haben zwei feste Ansprechpartner, die Ihre Akte kennen, und bekommen jeden Monat eine Auswertung, die man ohne Fachwissen lesen kann.</p>
-      <ul class="svc__list" role="list"><li>Finanz- und Lohnbuchhaltung, auch für mehrere Gesellschaften</li><li>Jahresabschluss mit Besprechung statt nur Versand</li><li>Belege per App, Auswertung bis zum 20. des Folgemonats</li><li>Steuererklärungen für Betrieb und Familie aus einer Hand</li></ul>
-      <p class="svc__who"><span>Für wen</span>Familienunternehmen, Praxen, Selbstständige</p>
-      <a class="link" href="#erstgespraech" data-topic="laufend">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </article><article class="svc" id="l-nachfolge" data-svc="nachfolge">
-      <h3 class="svc__t">Unternehmensnachfolge</h3>
-      <p class="svc__p">Übergabe an die nächste Generation oder Verkauf an Dritte. Wir planen steuerlich sauber und oft Jahre im Voraus, damit am Tag der Übergabe nichts mehr überraschen kann.</p>
-      <ul class="svc__list" role="list"><li>Nachfolgefahrplan mit Zeitachse und zwei bis drei Varianten</li><li>Unternehmensbewertung und Gestaltung der Übertragung</li><li>Verträge mit unseren Rechtsanwälten im Haus, Abstimmung mit Notariat und Hausbank</li><li>Begleitung der Übergabe-Gespräche in der Familie</li></ul>
-      <p class="svc__who"><span>Für wen</span>Inhaberinnen und Inhaber ab etwa 55</p>
-      <a class="link" href="#erstgespraech" data-topic="nachfolge">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </article><article class="svc" id="l-erbschaft" data-svc="erbschaft">
-      <h3 class="svc__t">Erbschaft und Schenkung</h3>
-      <p class="svc__p">Vermögen klug übertragen, Freibeträge nutzen und Streit vermeiden, bevor er entsteht. Wir rechnen jede Variante mit Ihren echten Zahlen, nicht mit Faustregeln.</p>
-      <ul class="svc__list" role="list"><li>Schenkungen zu Lebzeiten im Zehn-Jahres-Rhythmus</li><li>Immobilien und Familienheim richtig übertragen</li><li>Erbschaftsteuererklärung und Bewertung</li><li>Testamentsgestaltung gemeinsam mit Ihrer Notarin</li></ul>
-      <p class="svc__who"><span>Für wen</span>Familien mit Immobilien oder Betriebsvermögen</p>
-      <a class="link" href="#erstgespraech" data-topic="erbschaft">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </article><article class="svc" id="l-gruendung" data-svc="gruendung">
-      <h3 class="svc__t">Gründung und Rechtsform</h3>
-      <p class="svc__p">GmbH, GbR, UG oder Einzelunternehmen: Wir vergleichen die Varianten mit Ihren Zahlen und richten das erste Jahr so ein, dass Buchhaltung und Fristen von Anfang an laufen.</p>
-      <ul class="svc__list" role="list"><li>Rechtsformvergleich mit Steuerbelastung über fünf Jahre</li><li>Anmeldung beim Finanzamt und Fragebogen zur steuerlichen Erfassung</li><li>Holding-Strukturen, wenn sie sich rechnen</li><li>Erstes Jahr mit festem Monatsrhythmus</li></ul>
-      <p class="svc__who"><span>Für wen</span>Gründerinnen, Gründer und Neuaufstellungen</p>
-      <a class="link" href="#erstgespraech" data-topic="gruendung">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </article><article class="svc" id="l-pruefung" data-svc="pruefung">
-      <h3 class="svc__t">Betriebsprüfung</h3>
-      <p class="svc__p">Wenn das Finanzamt prüft, sind wir dabei: vorbereitet, sachlich und mit klarer Linie. Die meisten Prüfungen enden ruhiger, als sie angekündigt wurden.</p>
-      <ul class="svc__list" role="list"><li>Vorbereitung der Unterlagen und Ihrer Gesprächspartner</li><li>Begleitung vor Ort in der Kanzlei oder digital</li><li>Schlussbesprechung, Einspruch und Klage, falls nötig</li><li>Nachbereitung, damit die nächste Prüfung kürzer wird</li></ul>
-      <p class="svc__who"><span>Für wen</span>Alle, die Post vom Finanzamt bekommen haben</p>
-      <a class="link" href="#erstgespraech" data-topic="pruefung">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </article></div>
+    <div class="film__mm" aria-hidden="true"><i class="film__bar"><i></i></i><b>1987</b><span>Jahr</span></div>
   </div>
 </section>
 
-<section class="quote" aria-label="Leitsatz der Kanzlei">
+<section class="wrap" aria-label="Kurz und knapp" data-bg="#f4f2ec">
+  <dl class="facts">
+  <div><dt>Zulassung</dt><dd>Berlin</dd></div>
+  <div><dt>Mandate</dt><dd><span data-count="380">380</span></dd></div>
+  <div><dt>Jahre im Schnitt</dt><dd><span data-count="11">11</span></dd></div>
+  <div><dt>Antwort</dt><dd>1 Tag</dd></div>
+  </dl>
+</section>
+
+<section class="sec" id="leistungen" aria-labelledby="h-leistungen" data-bg="#f4f2ec" data-split>
+  <div class="wrap split">
+    <div class="split__stage" aria-hidden="true">
+      <div class="split__pic is-on" data-spic="laufend"><img src="img/schreibtisch-1080.webp" srcset="img/schreibtisch-640.webp 640w, img/schreibtisch-1080.webp 1080w, img/schreibtisch-1600.webp 1600w" sizes="(max-width:960px) 100vw, 48vw" width="1600" height="1070" alt="" loading="lazy" decoding="async"></div>
+      <div class="split__pic" data-spic="nachfolge"><img src="img/gespraech-1080.webp" srcset="img/gespraech-640.webp 640w, img/gespraech-1080.webp 1080w, img/gespraech-1600.webp 1600w" sizes="(max-width:960px) 100vw, 48vw" width="1600" height="1070" alt="" loading="lazy" decoding="async"></div>
+      <div class="split__pic" data-spic="erbschaft"><img src="img/treppe-1080.webp" srcset="img/treppe-640.webp 640w, img/treppe-1080.webp 1080w, img/treppe-1600.webp 1600w" sizes="(max-width:960px) 100vw, 48vw" width="1600" height="1070" alt="" loading="lazy" decoding="async"></div>
+      <div class="split__pic" data-spic="gruendung"><img src="img/fassade-1080.webp" srcset="img/fassade-640.webp 640w, img/fassade-1080.webp 1080w, img/fassade-1600.webp 1600w" sizes="(max-width:960px) 100vw, 48vw" width="1600" height="1070" alt="" loading="lazy" decoding="async"></div>
+      <div class="split__pic" data-spic="pruefung"><img src="img/schreibtisch-1080.webp" srcset="img/schreibtisch-640.webp 640w, img/schreibtisch-1080.webp 1080w" sizes="(max-width:960px) 100vw, 48vw" width="1600" height="1070" alt="" loading="lazy" decoding="async"></div>
+    </div>
+    <div class="split__side">
+      <h2 class="h2" id="h-leistungen">Fünf Felder,<br>die wir wirklich können.</h2>
+      <p class="intro">Wir sind keine Kanzlei für alles. Dafür kennen wir diese Themen bis ins Detail.</p>
+      <nav aria-label="Leistungen"><ol class="svcs__idx" role="list">
+        <li><a href="#l-laufend" data-idx="laufend">Laufende Steuerberatung</a></li>
+        <li><a href="#l-nachfolge" data-idx="nachfolge">Unternehmensnachfolge</a></li>
+        <li><a href="#l-erbschaft" data-idx="erbschaft">Erbschaft und Schenkung</a></li>
+        <li><a href="#l-gruendung" data-idx="gruendung">Gründung und Rechtsform</a></li>
+        <li><a href="#l-pruefung" data-idx="pruefung">Betriebsprüfung</a></li>
+      </ol></nav>
+      <article class="svc is-on" id="l-laufend" data-svc="laufend">
+        <h3 class="svc__t">Laufende Steuerberatung</h3>
+        <p class="svc__p">Buchhaltung, Lohn, Jahresabschluss und Erklärungen, digital organisiert. Zwei feste Ansprechpartner, Auswertung bis zum 20. des Folgemonats.</p>
+        <ul class="svc__list" role="list"><li>Finanz- und Lohnbuchhaltung, auch für mehrere Gesellschaften</li><li>Jahresabschluss mit Besprechung statt nur Versand</li><li>Belege per App, Mandantenportal inklusive</li></ul>
+        <p class="svc__who"><span>Für wen</span>Familienunternehmen, Praxen, Selbstständige</p>
+        <a class="link" href="#erstgespraech" data-topic="laufend">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="svc" id="l-nachfolge" data-svc="nachfolge">
+        <h3 class="svc__t">Unternehmensnachfolge</h3>
+        <p class="svc__p">Übergabe an die nächste Generation oder Verkauf an Dritte. Wir planen steuerlich sauber und oft Jahre im Voraus.</p>
+        <ul class="svc__list" role="list"><li>Nachfolgefahrplan mit Zeitachse und Varianten</li><li>Bewertung und Gestaltung der Übertragung</li><li>Abstimmung mit Notariat und Hausbank</li></ul>
+        <p class="svc__who"><span>Für wen</span>Inhaberinnen und Inhaber ab etwa 55</p>
+        <a class="link" href="#erstgespraech" data-topic="nachfolge">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="svc" id="l-erbschaft" data-svc="erbschaft">
+        <h3 class="svc__t">Erbschaft und Schenkung</h3>
+        <p class="svc__p">Vermögen klug übertragen, Freibeträge nutzen und Streit vermeiden, bevor er entsteht.</p>
+        <ul class="svc__list" role="list"><li>Schenkungen zu Lebzeiten im Zehn-Jahres-Rhythmus</li><li>Immobilien und Familienheim richtig übertragen</li><li>Erbschaftsteuererklärung und Bewertung</li></ul>
+        <p class="svc__who"><span>Für wen</span>Familien mit Immobilien oder Betriebsvermögen</p>
+        <a class="link" href="#erstgespraech" data-topic="erbschaft">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="svc" id="l-gruendung" data-svc="gruendung">
+        <h3 class="svc__t">Gründung und Rechtsform</h3>
+        <p class="svc__p">GmbH, GbR, UG oder Einzelunternehmen: Wir vergleichen die Varianten mit Ihren Zahlen und richten das erste Jahr ein.</p>
+        <ul class="svc__list" role="list"><li>Rechtsformvergleich über fünf Jahre</li><li>Anmeldung beim Finanzamt</li><li>Holding-Strukturen, wenn sie sich rechnen</li></ul>
+        <p class="svc__who"><span>Für wen</span>Gründerinnen, Gründer und Neuaufstellungen</p>
+        <a class="link" href="#erstgespraech" data-topic="gruendung">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="svc" id="l-pruefung" data-svc="pruefung">
+        <h3 class="svc__t">Betriebsprüfung</h3>
+        <p class="svc__p">Wenn das Finanzamt prüft, sind wir dabei: vorbereitet, sachlich und mit klarer Linie.</p>
+        <ul class="svc__list" role="list"><li>Vorbereitung der Unterlagen</li><li>Begleitung vor Ort oder digital</li><li>Schlussbesprechung und Einspruch, falls nötig</li></ul>
+        <p class="svc__who"><span>Für wen</span>Alle mit Post vom Finanzamt</p>
+        <a class="link" href="#erstgespraech" data-topic="pruefung">Erstgespräch zu diesem Thema <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="quote" aria-label="Leitsatz" data-bg="#ebe7de">
   <div class="wrap">
     <blockquote><p class="quote__t" data-quote>Eine gute Steuerberatung merkt man daran, dass man am Ende weniger Fragen hat als am Anfang.</p><footer>Dr. Johannes Feld, Steuerberater, Gründer und Seniorpartner</footer></blockquote>
   </div>
 </section>
 
-<section class="sec kanzlei" id="kanzlei" aria-labelledby="h-kanzlei">
+<section class="sec kanzlei" id="kanzlei" aria-labelledby="h-kanzlei" data-bg="#f4f2ec">
   <div class="wrap kanzlei__grid">
-    <figure class="kanzlei__fig"><picture class=""><source type="image/avif" srcset="img/fassade-640.avif 640w, img/fassade-1080.avif 1080w, img/fassade-1600.avif 1600w, img/fassade-2400.avif 2400w" sizes="(max-width: 900px) 100vw, 58vw"><img src="img/fassade-1080.webp" srcset="img/fassade-640.webp 640w, img/fassade-1080.webp 1080w, img/fassade-1600.webp 1600w, img/fassade-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 58vw" width="2400" height="1340" alt="Gründerzeitfassade am Savignyplatz mit hellem Putz, Balkonen und einer dunklen Holztür" loading="lazy" decoding="async"></picture><figcaption>Savignyplatz 9, seit 1994 unser Haus.</figcaption></figure>
+    <figure class="kanzlei__fig arch" data-arch>
+      <img src="img/fassade-1080.webp" srcset="img/fassade-640.webp 640w, img/fassade-1080.webp 1080w, img/fassade-1600.webp 1600w" sizes="(max-width:900px) 100vw, 55vw" width="2400" height="1340" alt="Gründerzeitfassade am Savignyplatz mit hellem Putz und dunkler Holztür" loading="lazy" decoding="async">
+    </figure>
     <div class="kanzlei__txt">
       <h2 class="h2" id="h-kanzlei">Seit 1987 in Charlottenburg.</h2>
-      <p>Gegründet in einer Zweizimmerwohnung, heute im dritten Stock eines Gründerzeithauses. Geblieben ist die Haltung: Wir nehmen nur so viele Mandate an, wie wir gründlich betreuen können.</p>
-      <p>Jedes Mandat hat zwei feste Ansprechpartner. Wer anruft, spricht mit jemandem, der die Akte kennt, und wartet nie länger als einen Werktag auf eine Antwort.</p>
+      <p class="intro" style="max-width:40ch">Gegründet in einer Zweizimmerwohnung, heute im dritten Stock. Geblieben ist die Haltung: nur so viele Mandate, wie wir gründlich betreuen können.</p>
+      <p style="color:var(--ink-2);margin-top:16px;max-width:40ch">Jedes Mandat hat zwei feste Ansprechpartner. Wer anruft, wartet nie länger als einen Werktag auf eine Antwort.</p>
       <dl class="nums">
         <div><dt>Mandate</dt><dd><span data-count="380">380</span></dd></div>
-        <div><dt>Jahre bleiben Mandanten im Schnitt</dt><dd><span data-count="11">11</span></dd></div>
-        <div><dt>Menschen im Team</dt><dd><span data-count="12">12</span></dd></div>
+        <div><dt>Jahre bleiben</dt><dd><span data-count="11">11</span></dd></div>
+        <div><dt>Menschen</dt><dd><span data-count="12">12</span></dd></div>
       </dl>
     </div>
   </div>
 </section>
 
-<section class="sec team" id="team" aria-labelledby="h-team">
+<section class="sec team" id="team" aria-labelledby="h-team" data-bg="#f4f2ec">
   <div class="wrap">
-    <div class="team__head"><h2 class="h2" id="h-team">Team</h2><p class="intro">Zwölf Menschen, zwei Partner. Steuerberatung und Recht unter einem Dach, damit Sie Ihr Anliegen nur einmal erzählen müssen. Ihr Team lernen Sie im Erstgespräch kennen, nicht erst bei der ersten Rechnung.</p></div>
-    <ul class="partners" role="list"><li class="partner" data-person="johannes-feld"><h3 class="partner__n">Dr. Johannes Feld</h3><p class="partner__r">Steuerberater, Gründer und Seniorpartner</p><p class="partner__f">Fachberater für Unternehmensnachfolge (DStV&nbsp;e.&nbsp;V.)</p><dl class="partner__d"><div><dt>Schwerpunkt</dt><dd>Nachfolge, Familienunternehmen</dd></div><div><dt>In der Kanzlei</dt><dd>seit 1987</dd></div></dl></li><li class="partner" data-person="malik-oezdemir"><h3 class="partner__n">Malik Özdemir</h3><p class="partner__r">Steuerberater, Partner</p><p class="partner__f">Fachberater für internationales Steuerrecht</p><dl class="partner__d"><div><dt>Schwerpunkt</dt><dd>Gründung, Holding, Betriebsprüfung</dd></div><div><dt>In der Kanzlei</dt><dd>seit 2009</dd></div></dl></li></ul>
-    <div class="staff"><h3 class="staff__h">Steuerberatung</h3><ul class="staff__l" role="list"><li data-person="clara-weiss"><span>Clara Weiß</span><span>Steuerberaterin, Erbschaft</span></li><li data-person="thomas-brandt"><span>Thomas Brandt</span><span>Steuerberater, Jahresabschluss</span></li></ul></div>
-    <div class="staff"><h3 class="staff__h">Recht</h3><ul class="staff__l" role="list"><li data-person="sophie-lang"><span>Dr. Sophie Lang</span><span>Rechtsanwältin, Gesellschaftsrecht</span></li><li data-person="jonas-richter"><span>Dr. Jonas Richter</span><span>Rechtsanwalt, Erbrecht</span></li></ul></div>
-    <div class="staff"><h3 class="staff__h">Sekretariat</h3><ul class="staff__l" role="list"><li data-person="petra-hoffmann"><span>Petra Hoffmann</span><span>Sekretärin, Termine und Empfang</span></li></ul></div>
-    <div class="staff"><h3 class="staff__h">Steuerfachangestellte</h3><ul class="staff__l" role="list"><li data-person="lena-schulz"><span>Lena Schulz</span><span>Finanzbuchhaltung</span></li><li data-person="david-nguyen"><span>David Nguyen</span><span>Lohn und Gehalt</span></li><li data-person="aylin-kaya"><span>Aylin Kaya</span><span>Finanzbuchhaltung</span></li><li data-person="markus-wolf"><span>Markus Wolf</span><span>Jahresabschluss</span></li><li data-person="mia-becker"><span>Mia Becker</span><span>Lohn und Gehalt</span></li></ul></div>
+    <div class="team__head"><h2 class="h2" id="h-team">Team</h2><p class="intro">Zwölf Menschen, zwei Partner. Steuerberatung und Recht unter einem Dach.</p></div>
+    <ul class="partners" role="list">
+      <li class="partner"><h3 class="partner__n">Dr. Johannes Feld</h3><p class="partner__r">Steuerberater, Gründer und Seniorpartner</p><p class="partner__f">Fachberater für Unternehmensnachfolge (DStV e. V.)</p><dl class="partner__d"><div><dt>Schwerpunkt</dt><dd>Nachfolge, Familienunternehmen</dd></div><div><dt>In der Kanzlei</dt><dd>seit 1987</dd></div></dl></li>
+      <li class="partner"><h3 class="partner__n">Malik Özdemir</h3><p class="partner__r">Steuerberater, Partner</p><p class="partner__f">Fachberater für internationales Steuerrecht</p><dl class="partner__d"><div><dt>Schwerpunkt</dt><dd>Gründung, Holding, Betriebsprüfung</dd></div><div><dt>In der Kanzlei</dt><dd>seit 2009</dd></div></dl></li>
+    </ul>
+    <div class="staff"><h3 class="staff__h">Steuerberatung</h3><ul class="staff__l" role="list"><li><span>Clara Weiß</span><span>Steuerberaterin, Erbschaft</span></li><li><span>Thomas Brandt</span><span>Steuerberater, Jahresabschluss</span></li></ul></div>
+    <div class="staff"><h3 class="staff__h">Recht</h3><ul class="staff__l" role="list"><li><span>Dr. Sophie Lang</span><span>Rechtsanwältin, Gesellschaftsrecht</span></li><li><span>Dr. Jonas Richter</span><span>Rechtsanwalt, Erbrecht</span></li></ul></div>
+    <div class="staff"><h3 class="staff__h">Fachangestellte &amp; Sekretariat</h3><ul class="staff__l" role="list"><li><span>Petra Hoffmann</span><span>Termine und Empfang</span></li><li><span>Lena Schulz</span><span>Finanzbuchhaltung</span></li><li><span>David Nguyen</span><span>Lohn und Gehalt</span></li><li><span>Aylin Kaya</span><span>Finanzbuchhaltung</span></li></ul></div>
   </div>
 </section>
 
-<section class="sec ablauf" id="ablauf" aria-labelledby="h-ablauf">
+<section class="sec" id="ablauf" aria-labelledby="h-ablauf" data-bg="#f4f2ec">
   <div class="wrap">
     <h2 class="h2" id="h-ablauf">So beginnt ein Mandat.</h2>
     <div class="steps" data-steps>
@@ -135,59 +195,56 @@
       <ol role="list">
         <li><p class="step__w">Tag 1</p><h3>Erstgespräch</h3><p>Dreißig Minuten. Sie erzählen, wir hören zu und sagen ehrlich, ob wir passen.</p></li>
         <li><p class="step__w">Woche 1–2</p><h3>Bestandsaufnahme</h3><p>Wir sichten Bescheide, Verträge und Zahlen der letzten Jahre.</p></li>
-        <li><p class="step__w">Woche 3</p><h3>Fahrplan</h3><p>Ein schriftlicher Plan mit Prioritäten, Fristen und klaren Zuständigkeiten.</p></li>
+        <li><p class="step__w">Woche 3</p><h3>Fahrplan</h3><p>Ein schriftlicher Plan mit Prioritäten, Fristen und Zuständigkeiten.</p></li>
         <li><p class="step__w">Laufend</p><h3>Begleitung</h3><p>Feste Ansprechpartner und ein Jahresgespräch jeden Herbst.</p></li>
       </ol>
     </div>
   </div>
 </section>
 
-<section class="sec ratgeber" id="ratgeber" aria-labelledby="h-ratgeber">
-  <div class="wrap">
-    <div class="rg__head"><h2 class="h2" id="h-ratgeber">Ratgeber</h2><p class="intro">Einmal im Monat erklären wir ein Thema so, dass es ohne Fachwissen trägt.</p></div>
-    <div class="rg__grid">
-      <article class="lead-art">
-        <figure><picture class=""><source type="image/avif" srcset="img/schreibtisch-640.avif 640w, img/schreibtisch-1080.avif 1080w, img/schreibtisch-1600.avif 1600w, img/schreibtisch-2400.avif 2400w" sizes="(max-width: 900px) 100vw, 60vw"><img src="img/schreibtisch-1080.webp" srcset="img/schreibtisch-640.webp 640w, img/schreibtisch-1080.webp 1080w, img/schreibtisch-1600.webp 1600w, img/schreibtisch-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 60vw" width="2400" height="1610" alt="Schreibtisch aus dunklem Holz mit einem Stapel Papier, Füllfederhalter, Lesebrille, Stempel aus Messing und einer Tasse Kaffee" loading="lazy" decoding="async"></picture></figure>
-        <p class="art__c">Nachfolge · 6 Min. Lesezeit · Oktober 2026</p>
-        <h3 class="lead-art__t">Warum die Übergabe zehn Jahre vorher beginnt</h3>
-        <p class="lead-art__p">Wer sein Unternehmen übergeben will, denkt zuerst an den Käufer oder die Kinder. Steuerlich entscheidet sich vieles lange vorher: bei Haltefristen, Pensionszusagen und der Frage, was zum Betriebsvermögen gehört.</p>
-        <details class="more"><summary>Weiterlesen</summary>
-          <div class="more__b">
-          <p>Drei Punkte entscheiden fast immer über die Steuerlast einer Übergabe. Erstens: Was gehört eigentlich zum Betrieb? Ein Grundstück, das seit Jahren an die eigene GmbH vermietet ist, kann bei einer unbedachten Übertragung plötzlich als Privatvermögen gelten.</p>
-          <p>Zweitens: Pensionszusagen. Sie belasten die Bewertung und müssen oft vor der Übergabe neu geordnet werden, was Jahre dauern kann.</p>
-          <p>Drittens: Haltefristen. Wer Anteile oder Betriebsvermögen begünstigt übertragen will, muss Bedingungen über fünf oder sieben Jahre einhalten. Wer zehn Jahre vorher plant, hat Spielraum. Wer drei Jahre vorher beginnt, nur noch Varianten.</p>
-          </div>
-        </details>
-      </article>
-      <aside class="dates" aria-labelledby="h-dates">
-        <h3 id="h-dates">Nächste Steuertermine</h3>
-        <ol class="dates__l" role="list" data-dates>
-          <li><time datetime="2026-11-10">Di, 10.11.2026</time><span>Umsatzsteuer-Voranmeldung, Lohnsteuer-Anmeldung</span></li>
-          <li><time datetime="2026-11-16">Mo, 16.11.2026</time><span>Gewerbesteuer und Grundsteuer, Vorauszahlung</span></li>
-          <li><time datetime="2026-12-10">Do, 10.12.2026</time><span>Umsatzsteuer, Lohnsteuer, Einkommen- und Körperschaftsteuer, Vorauszahlung</span></li>
-        </ol>
-        <p class="dates__n">Allgemeine Termine ohne Gewähr. Fällt ein Termin auf ein Wochenende, gilt der nächste Werktag.</p>
-      </aside>
-    </div>
-    <ol class="arts" role="list"><li class="art"><details><summary><span class="art__c">Erben</span><span class="art__t">Das Familienheim steuerfrei vererben: die drei Bedingungen</span><span class="art__m">4 Min. Lesezeit · September 2026</span><span class="art__x" aria-hidden="true"></span></summary><div class="art__b"><p>Wer die selbst genutzte Wohnung erbt und zehn Jahre selbst darin wohnt, kann sie steuerfrei übernehmen. Entscheidend sind Einzug ohne Verzögerung, die Wohnfläche bei Kindern und was passiert, wenn man vorher auszieht.</p><a class="link" href="#erstgespraech" data-topic="frage">Frage dazu stellen <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></details></li><li class="art"><details><summary><span class="art__c">Selbstständige</span><span class="art__t">Belege digital: was Sie wirklich aufbewahren müssen</span><span class="art__m">5 Min. Lesezeit · August 2026</span><span class="art__x" aria-hidden="true"></span></summary><div class="art__b"><p>Seit 2025 gelten für Buchungsbelege acht statt zehn Jahre. Was das für Papierbelege, E-Rechnungen und den Scan im Handy bedeutet, und welche Unterlagen Sie trotzdem länger behalten sollten.</p><a class="link" href="#erstgespraech" data-topic="frage">Frage dazu stellen <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></details></li><li class="art"><details><summary><span class="art__c">Schenkung</span><span class="art__t">Freibeträge alle zehn Jahre: ein Rechenbeispiel</span><span class="art__m">3 Min. Lesezeit · Juli 2026</span><span class="art__x" aria-hidden="true"></span></summary><div class="art__b"><p>Eltern können jedem Kind alle zehn Jahre einen Freibetrag übertragen. An einer fiktiven Familie mit Haus und Depot zeigen wir, wie sich ein früher Start über dreißig Jahre auswirkt.</p><a class="link" href="#erstgespraech" data-topic="frage">Frage dazu stellen <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></details></li><li class="art"><details><summary><span class="art__c">Unternehmen</span><span class="art__t">Die E-Rechnung im Alltag: was sich 2027 ändert</span><span class="art__m">4 Min. Lesezeit · Juni 2026</span><span class="art__x" aria-hidden="true"></span></summary><div class="art__b"><p>Ab 2027 müssen größere Betriebe E-Rechnungen ausstellen, ab 2028 alle. Welche Formate gelten, was Ihre Software können muss und warum ein PDF per E-Mail dann nicht mehr reicht.</p><a class="link" href="#erstgespraech" data-topic="frage">Frage dazu stellen <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></details></li></ol>
-    <p class="small">Beispielartikel einer fiktiven Kanzlei, keine Beratung im Einzelfall.</p>
+<section class="sec rail" id="ratgeber" aria-labelledby="h-ratgeber" data-bg="#ebe7de" data-rail>
+  <div class="wrap rail__head"><h2 class="h2" id="h-ratgeber">Ratgeber</h2><p class="intro">Einmal im Monat erklären wir ein Thema so, dass es ohne Fachwissen trägt. Seitlich scrollen oder wischen.</p></div>
+  <div class="rail__track">
+    <article class="rail__card">
+      <figure><img src="img/schreibtisch-1080.webp" srcset="img/schreibtisch-640.webp 640w, img/schreibtisch-1080.webp 1080w" sizes="520px" width="1600" height="1000" alt="Schreibtisch mit Füllfeder und Unterlagen" loading="lazy" decoding="async"></figure>
+      <div class="body"><p class="art__c">Nachfolge · 6 Min.</p><h3>Warum die Übergabe zehn Jahre vorher beginnt</h3><p>Haltefristen, Pensionszusagen und Betriebsvermögen entscheiden über die Steuerlast – lange bevor der Käufer kommt.</p></div>
+    </article>
+    <article class="rail__card">
+      <figure><img src="img/treppe-1080.webp" srcset="img/treppe-640.webp 640w, img/treppe-1080.webp 1080w" sizes="520px" width="1600" height="1000" alt="Treppe in einem Altbau" loading="lazy" decoding="async"></figure>
+      <div class="body"><p class="art__c">Erben · 4 Min.</p><h3>Das Familienheim steuerfrei vererben</h3><p>Drei Bedingungen: Einzug ohne Verzögerung, Wohnfläche bei Kindern, und was passiert, wenn man vorher auszieht.</p></div>
+    </article>
+    <article class="rail__card">
+      <figure><img src="img/gespraech-1080.webp" srcset="img/gespraech-640.webp 640w, img/gespraech-1080.webp 1080w" sizes="520px" width="1600" height="1000" alt="Beratungsgespräch am Tisch" loading="lazy" decoding="async"></figure>
+      <div class="body"><p class="art__c">Selbstständige · 5 Min.</p><h3>Belege digital: was Sie wirklich aufbewahren müssen</h3><p>Seit 2025 gelten acht statt zehn Jahre. Was das für Scan, E-Rechnung und Papier bedeutet.</p></div>
+    </article>
+    <aside class="dates" aria-labelledby="h-dates">
+      <h3 id="h-dates">Nächste Steuertermine</h3>
+      <ol class="dates__l" role="list" data-dates></ol>
+      <p class="dates__n">Allgemeine Termine ohne Gewähr. Fällt ein Termin auf ein Wochenende, gilt der nächste Werktag.</p>
+    </aside>
   </div>
 </section>
 
-<section class="sec fragen" id="fragen" aria-labelledby="h-fragen">
+<section class="sec fragen" id="fragen" aria-labelledby="h-fragen" data-bg="#f4f2ec">
   <div class="wrap fragen__grid">
     <h2 class="h2" id="h-fragen">Häufige Fragen</h2>
-    <div class="faq"><details class="faq__i"><summary><span>Wie läuft das Erstgespräch ab?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Dreißig Minuten, persönlich am Savignyplatz, per Video oder am Telefon. Sie erzählen, was Sie beschäftigt, wir stellen Fragen und sagen ehrlich, ob wir die richtige Kanzlei für Sie sind. Unterlagen brauchen Sie dafür noch nicht.</p></details><details class="faq__i"><summary><span>Wie wird die Steuerberatung abgerechnet?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Nach der Steuerberatervergütungsverordnung, also nach festen gesetzlichen Regeln. Für laufende Mandate vereinbaren wir vorab eine schriftliche Pauschale, damit Sie nicht mit jeder Rechnung rechnen müssen.</p></details><details class="faq__i"><summary><span>Arbeiten Sie digital?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Ja. Belege laden Sie per App oder Upload hoch, Auswertungen liegen im Mandantenportal, Besprechungen gehen auch per Video. Wer lieber Papier bringt, kann das weiterhin tun.</p></details><details class="faq__i"><summary><span>Nehmen Sie neue Mandate an?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Ja, aber nur so viele, wie wir gründlich betreuen können. Wenn wir gerade keine Kapazität haben, sagen wir das im Erstgespräch und empfehlen Ihnen eine Kollegin oder einen Kollegen.</p></details><details class="faq__i"><summary><span>Ich habe Post vom Finanzamt mit Frist. Was jetzt?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Rufen Sie uns direkt an. Fristen für Einsprüche betragen meist einen Monat, und viele Schreiben lassen sich mit einem kurzen Anruf beim Finanzamt klären.</p></details></div>
+    <div class="faq">
+      <details class="faq__i"><summary><span>Wie läuft das Erstgespräch ab?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Dreißig Minuten, persönlich am Savignyplatz, per Video oder am Telefon. Unterlagen brauchen Sie dafür noch nicht.</p></details>
+      <details class="faq__i"><summary><span>Wie wird abgerechnet?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Nach der Steuerberatervergütungsverordnung. Für laufende Mandate vereinbaren wir vorab eine schriftliche Pauschale.</p></details>
+      <details class="faq__i"><summary><span>Arbeiten Sie digital?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Ja. Belege per App oder Upload, Auswertungen im Mandantenportal, Besprechungen auch per Video. Papier geht weiterhin.</p></details>
+      <details class="faq__i"><summary><span>Nehmen Sie neue Mandate an?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Ja, aber nur so viele, wie wir gründlich betreuen können. Wenn wir keine Kapazität haben, sagen wir das im Erstgespräch.</p></details>
+      <details class="faq__i"><summary><span>Post vom Finanzamt mit Frist – was jetzt?</span><span class="faq__x" aria-hidden="true"></span></summary><p>Rufen Sie uns direkt an. Fristen für Einsprüche betragen meist einen Monat.</p></details>
+    </div>
   </div>
 </section>
 
-<section class="sec erst" id="erstgespraech" aria-labelledby="h-erst">
+<section class="erst" id="erstgespraech" aria-labelledby="h-erst" data-bg="#1c1915">
   <span id="kontakt" class="anchor-alias" aria-hidden="true"></span>
+  <video class="bgv" src="film/loop-bogen.mp4" poster="film/poster.webp" muted loop playsinline preload="none" aria-hidden="true"></video>
   <div class="wrap erst__grid">
     <div class="erst__side">
       <h2 class="h2" id="h-erst">Erstgespräch</h2>
       <p class="intro">Dreißig Minuten, unverbindlich. Sie erzählen, wir hören zu und sagen ehrlich, ob wir die Richtigen sind.</p>
-      <figure class="erst__fig"><picture class=""><source type="image/avif" srcset="img/gespraech-640.avif 640w, img/gespraech-1080.avif 1080w, img/gespraech-1600.avif 1600w, img/gespraech-2400.avif 2400w" sizes="(max-width: 900px) 100vw, 36vw"><img src="img/gespraech-1080.webp" srcset="img/gespraech-640.webp 640w, img/gespraech-1080.webp 1080w, img/gespraech-1600.webp 1600w, img/gespraech-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 36vw" width="2400" height="1610" alt="Beratungsgespräch an einem Holztisch vor einem Rundbogenfenster, zwei Personen mit Unterlagen, unscharf" loading="lazy" decoding="async"></picture></figure>
       <dl class="contact">
         <div><dt>Adresse</dt><dd>Savignyplatz 9<br>10623 Berlin-Charlottenburg</dd></div>
         <div><dt>Telefon</dt><dd><a href="tel:+493001234567">030 0123 4567</a></dd></div>
@@ -196,33 +253,44 @@
       </dl>
     </div>
     <form class="form" action="danke.html" method="get" novalidate data-form>
-  <fieldset class="form__g"><legend>Worum geht es?</legend><div class="opts"><label class="opt"><input type="radio" name="thema" value="laufend" required checked><span>Laufende Steuerberatung</span></label><label class="opt"><input type="radio" name="thema" value="nachfolge" required><span>Unternehmensnachfolge</span></label><label class="opt"><input type="radio" name="thema" value="erbschaft" required><span>Erbschaft und Schenkung</span></label><label class="opt"><input type="radio" name="thema" value="gruendung" required><span>Gründung und Rechtsform</span></label><label class="opt"><input type="radio" name="thema" value="pruefung" required><span>Betriebsprüfung</span></label><label class="opt"><input type="radio" name="thema" value="frage" required><span>Eine konkrete Frage</span></label></div></fieldset>
-  <fieldset class="form__g"><legend>Wie möchten Sie sprechen?</legend><div class="opts"><label class="opt"><input type="radio" name="weg" value="kanzlei" checked><span>In der Kanzlei</span></label><label class="opt"><input type="radio" name="weg" value="video"><span>Per Video</span></label><label class="opt"><input type="radio" name="weg" value="telefon"><span>Am Telefon</span></label></div></fieldset>
-  <div class="form__row">
-    <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required aria-describedby="e-name"><p class="err" id="e-name" hidden>Bitte geben Sie Ihren Namen an.</p></div>
-    <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" name="mail" type="email" autocomplete="email" required aria-describedby="e-mail"><p class="err" id="e-mail" hidden>Bitte prüfen Sie die E-Mail-Adresse.</p></div>
-  </div>
-  <div class="field"><label for="f-tel">Telefon <span class="opt-l">(optional)</span></label><input id="f-tel" name="tel" type="tel" autocomplete="tel"></div>
-  <div class="field"><label for="f-msg">Ihre Situation in zwei, drei Sätzen <span class="opt-l">(optional)</span></label><textarea id="f-msg" name="nachricht" rows="4"></textarea></div>
-  <label class="check"><input type="checkbox" name="datenschutz" value="ja" required aria-describedby="e-ds"><span>Ich habe die <a href="datenschutz.html">Datenschutzhinweise</a> gelesen. Meine Angaben werden nur zur Bearbeitung der Anfrage verwendet.</span></label>
-  <p class="err" id="e-ds" hidden>Bitte bestätigen Sie die Datenschutzhinweise.</p>
-  <div class="form__end"><button class="btn" type="submit">Erstgespräch anfragen <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><p>Antwort innerhalb eines Werktags. Alles bleibt vertraulich, auch wenn kein Mandat entsteht.</p></div>
-</form>
+      <fieldset class="form__g"><legend>Worum geht es?</legend><div class="opts">
+        <label class="opt"><input type="radio" name="thema" value="laufend" required checked><span>Laufende Steuerberatung</span></label>
+        <label class="opt"><input type="radio" name="thema" value="nachfolge"><span>Unternehmensnachfolge</span></label>
+        <label class="opt"><input type="radio" name="thema" value="erbschaft"><span>Erbschaft und Schenkung</span></label>
+        <label class="opt"><input type="radio" name="thema" value="gruendung"><span>Gründung und Rechtsform</span></label>
+        <label class="opt"><input type="radio" name="thema" value="pruefung"><span>Betriebsprüfung</span></label>
+        <label class="opt"><input type="radio" name="thema" value="frage"><span>Eine konkrete Frage</span></label>
+      </div></fieldset>
+      <fieldset class="form__g"><legend>Wie möchten Sie sprechen?</legend><div class="opts">
+        <label class="opt"><input type="radio" name="weg" value="kanzlei" checked><span>In der Kanzlei</span></label>
+        <label class="opt"><input type="radio" name="weg" value="video"><span>Per Video</span></label>
+        <label class="opt"><input type="radio" name="weg" value="telefon"><span>Am Telefon</span></label>
+      </div></fieldset>
+      <div class="form__row">
+        <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required aria-describedby="e-name"><p class="err" id="e-name" hidden>Bitte geben Sie Ihren Namen an.</p></div>
+        <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" name="mail" type="email" autocomplete="email" required aria-describedby="e-mail"><p class="err" id="e-mail" hidden>Bitte prüfen Sie die E-Mail-Adresse.</p></div>
+      </div>
+      <div class="field"><label for="f-tel">Telefon <span class="opt-l">(optional)</span></label><input id="f-tel" name="tel" type="tel" autocomplete="tel"></div>
+      <div class="field"><label for="f-msg">Ihre Situation in zwei, drei Sätzen <span class="opt-l">(optional)</span></label><textarea id="f-msg" name="nachricht" rows="4"></textarea></div>
+      <label class="check"><input type="checkbox" name="datenschutz" value="ja" required aria-describedby="e-ds"><span>Ich habe die <a href="datenschutz.html">Datenschutzhinweise</a> gelesen.</span></label>
+      <p class="err" id="e-ds" hidden>Bitte bestätigen Sie die Datenschutzhinweise.</p>
+      <div class="form__end"><button class="btn" type="submit">Erstgespräch anfragen <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><p>Antwort innerhalb eines Werktags. Demo: Es werden keine Daten übertragen.</p></div>
+    </form>
   </div>
 </section>
 <a class="dock" href="#erstgespraech" data-dock>Erstgespräch vereinbaren <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-
 </main>
-<footer class="foot">
+<footer class="foot" data-foot>
+  <video class="bgv" src="film/loop-desk.mp4" poster="film/poster.webp" muted loop playsinline preload="none" aria-hidden="true"></video>
   <div class="wrap">
-    <div class="foot__mark" data-foot><svg class="foot__word" viewBox="0 0 1000 150" role="img" aria-label="Feld und Partner"><text x="0" y="122" textLength="1000" lengthAdjust="spacingAndGlyphs">Feld &amp; Partner</text></svg></div>
+    <p class="foot__big" aria-hidden="true">Versteht.</p>
     <div class="foot__cols">
-      <p>Feld &amp; Partner Steuerberatungsgesellschaft mbB<br>Savignyplatz 9, 10623 Berlin</p>
+      <p>Feld &amp; Partner<br>Steuerberatungsgesellschaft mbB<br>Savignyplatz 9, 10623 Berlin</p>
       <p><a href="tel:+493001234567">030 0123 4567</a><br><a href="mailto:kanzlei@feld-partner.example">kanzlei@feld-partner.example</a></p>
       <p>Mitglied der Steuerberaterkammer Berlin<br>Berufsbezeichnung verliehen in Deutschland</p>
-      <ul class="foot__links"><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="../../leistungen/websites.html#praxisbeispiele">Projekt EX</a></li></ul>
+      <ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="../../leistungen/websites.html#feld">PROJEKT EX</a></li></ul>
     </div>
-    <p class="foot__note">Demo-Projekt von Projekt EX. Kanzlei, Personen und Zitate sind frei erfunden.</p>
+    <p class="foot__note">Demo-Projekt von PROJEKT EX. Kanzlei, Personen und Zitate sind frei erfunden.</p>
   </div>
 </footer>
 </body>
