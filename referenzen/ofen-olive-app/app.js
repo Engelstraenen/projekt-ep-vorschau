@@ -147,7 +147,7 @@
   const B = window.OOBuilder.mount($('#builder'), {
     doneLabel: 'Fertig · Zur Bestellung',
     onDone: o => {
-      const label = `${o.size.name} ${o.size.cm} cm` + (o.belag.length ? ' · ' + o.belag.map(t => (t.x > 1 ? t.x + '× ' : '') + t.name).join(', ') : ' · Tomate & Teig');
+      const label = o.label;
       S.cart.push({ p: { id: 'eigene', name: 'Deine Pizza', bild: 'img/p-margherita.webp' }, size: 0, ex: [], label, unit: o.preis, qty: 1 });
       renderCart(); go('cart'); B.reset();
     }

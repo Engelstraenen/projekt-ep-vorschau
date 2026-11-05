@@ -13,25 +13,33 @@
 .bz__plate{position:absolute;inset:3%;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0 60%,#EDE3D2 72%,rgba(237,227,210,0) 73%);box-shadow:0 18px 40px -18px rgba(28,26,23,.35)}
 .bz__pie{position:relative;width:calc(var(--d,1) * 86%);aspect-ratio:1;border-radius:50%;transition:width .55s var(--bz-spring);
   filter:saturate(calc(1 + var(--bake,0) * .3)) brightness(calc(1 - var(--bake,0) * .1)) drop-shadow(0 10px 14px rgba(80,40,10,.25))}
-.bz__crust{position:absolute;inset:0;border-radius:50%;
-  background:radial-gradient(circle at 50% 50%,#EED9AE 0 76%,#E3C08A 82%,#D4A766 92%,#C38E4E 100%)}
-.bz__sauce{position:absolute;inset:11%;border-radius:50%;background:radial-gradient(circle at 42% 38%,#D9452C,#B8301E 70%,#A32A1A);box-shadow:inset 0 0 0 3px rgba(163,42,26,.5),inset 0 0 18px rgba(90,20,10,.35)}
-.bz__sauce::after{content:"";position:absolute;inset:0;border-radius:50%;opacity:calc(var(--bake,0) * .9);
-  background:radial-gradient(circle at 30% 35%,rgba(255,240,205,.0) 0 10%,transparent 11%),radial-gradient(closest-side,rgba(250,236,200,.55),rgba(250,236,200,.15) 80%,transparent)}
-.bz__char{position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:var(--bake,0);mix-blend-mode:multiply;
-  background:
-   radial-gradient(circle at 50% 3%,#3a1f0e 0 2.2%,transparent 2.6%),radial-gradient(circle at 84% 14%,#4a2812 0 2%,transparent 2.4%),radial-gradient(circle at 97% 46%,#3a1f0e 0 2.6%,transparent 3%),radial-gradient(circle at 88% 80%,#4a2812 0 1.8%,transparent 2.2%),radial-gradient(circle at 60% 97%,#3a1f0e 0 2.3%,transparent 2.7%),radial-gradient(circle at 22% 90%,#4a2812 0 2.6%,transparent 3%),radial-gradient(circle at 4% 58%,#3a1f0e 0 2%,transparent 2.4%),radial-gradient(circle at 10% 22%,#4a2812 0 2.4%,transparent 2.8%),radial-gradient(circle at 32% 5%,#4a2812 0 1.6%,transparent 2%),radial-gradient(circle at 72% 4%,#3a1f0e 0 1.4%,transparent 1.8%),
-   radial-gradient(circle,transparent 0 80%,rgba(150,80,30,.55) 92%,rgba(110,55,20,.7) 100%)}
-.bz__tops{position:absolute;inset:0}
-.bz__pc{position:absolute;aspect-ratio:1;translate:-50% -50%;rotate:var(--r);transition:opacity .2s,scale .26s var(--bz-ease)}
-.bz__pc svg,.bz__ghost svg,.bz__ico svg{display:block;width:100%;height:100%;filter:drop-shadow(0 1.5px 1.5px rgba(60,20,5,.3))}
-.bz__pc--mozzarella{scale:calc(1 + var(--bake,0) * .35);filter:blur(calc(var(--bake,0) * .6px))}
-.bz__pc--salami svg{filter:drop-shadow(0 1.5px 1.5px rgba(60,20,5,.3)) brightness(calc(1 - var(--bake,0) * .18))}
+.bz__base,.bz__baked{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover;pointer-events:none;user-select:none}
+.bz__base{opacity:0;transition:opacity .45s var(--bz-ease)}
+.bz__base.is-on{opacity:1}
+.bz__base.is-on{filter:saturate(calc(1 - var(--bake,0) * .08)) brightness(calc(1 - var(--bake,0) * .06)) sepia(calc(var(--bake,0) * .12))}
+/* gebackener Rand: bei Tomate ganzes Foto, sonst nur der Cornicione */
+.bz__baked{opacity:var(--bake,0);-webkit-mask:radial-gradient(closest-side,transparent 0 77%,#000 83%);mask:radial-gradient(closest-side,transparent 0 77%,#000 83%)}
+.bz[data-sauce="tomate"] .bz__baked{-webkit-mask:none;mask:none}
+.bz__oils{position:absolute;inset:11%;border-radius:50%;overflow:hidden;pointer-events:none}
+.bz__oil{position:absolute;inset:0;width:100%;height:100%;opacity:.9;filter:drop-shadow(0 0 .5px rgba(60,20,0,.4));transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(var(--s));transition:opacity .3s,transform .3s var(--bz-ease);
+  -webkit-mask:radial-gradient(closest-side,#000 70%,transparent 100%);mask:radial-gradient(closest-side,#000 70%,transparent 100%)}
+.bz__oil--chili{opacity:.9}
+.bz__oil.is-pour{animation:bzPour .9s var(--bz-ease) both}
+.bz__oil.is-out{opacity:0}
+@keyframes bzPour{0%{opacity:0;transform:translate(var(--x),var(--y)) rotate(calc(var(--r) - 70deg)) scale(calc(var(--s) * .4))}100%{opacity:.85}}
+.bz__tops,.bz__late{position:absolute;inset:0}
+.bz__pc{position:absolute;translate:-50% -50%;rotate:var(--r);transition:opacity .2s,scale .26s var(--bz-ease);
+  filter:drop-shadow(0 1px 1.2px rgba(70,25,5,.38)) contrast(calc(1 + var(--bake,0) * .06)) sepia(calc(var(--bake,0) * .14)) brightness(calc(1 - var(--bake,0) * .06))}
+.bz__pc img,.bz__ghost img{display:block;width:100%;height:auto;pointer-events:none;user-select:none}
+/* Fior di Latte schmilzt: weicher, breiter, leicht gebräunt */
+.bz__pc--mozzarella{scale:calc(1 + var(--bake,0) * .3);filter:drop-shadow(0 1px 1px rgba(70,25,5,.25)) blur(calc(var(--bake,0) * .5px)) sepia(calc(var(--bake,0) * .18))}
+.bz__pc--salami{filter:drop-shadow(0 1px 1.2px rgba(70,25,5,.38)) brightness(calc(1 - var(--bake,0) * .14)) saturate(calc(1 + var(--bake,0) * .15))}
+.bz__late .bz__pc{filter:drop-shadow(0 1px 1.4px rgba(40,20,5,.35))}
 .bz__pc.is-land{animation:bzLand .42s var(--bz-spring)}
 .bz__pc.is-out{scale:0;opacity:0}
 @keyframes bzLand{0%{scale:1.35}55%{scale:.86}100%{scale:1}}
 .bz__ghost{position:fixed;z-index:9999;pointer-events:none;will-change:transform}
-.bz__ghost--drag{width:56px;height:56px;scale:1.1;filter:drop-shadow(0 10px 12px rgba(0,0,0,.3))}
+.bz__ghost--drag{width:56px;scale:1.1;filter:drop-shadow(0 10px 12px rgba(0,0,0,.3))}
 .bz__pie.is-bump{animation:bzBump .45s var(--bz-spring)}
 @keyframes bzBump{0%{scale:1}35%{scale:1.03}100%{scale:1}}
 .bz__cm{position:absolute;bottom:-.2rem;left:50%;translate:-50% 0;font-size:.78rem;letter-spacing:.04em;padding:.25rem .7rem;border-radius:999px;background:var(--bz-ink);color:var(--bz-creme);white-space:nowrap}
@@ -39,7 +47,16 @@
 .bz__grid{position:relative;z-index:2;list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem .4rem}
 .bz__grid li{position:relative}
 .bz__chip{width:100%;display:flex;flex-direction:column;align-items:center;gap:.3rem;border:0;background:none;padding:.2rem 0;font:inherit;color:inherit;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}
-.bz__ico{position:relative;width:3.4rem;height:3.4rem;border-radius:50%;padding:.55rem;background:#fff;box-shadow:0 0 0 1px rgba(28,26,23,.08),0 4px 12px -6px rgba(28,26,23,.3);transition:transform .16s var(--bz-ease),box-shadow .2s}
+.bz__ico{position:relative;width:3.4rem;height:3.4rem;border-radius:50%;padding:.4rem;display:grid;place-items:center;background:#fff;box-shadow:0 0 0 1px rgba(28,26,23,.08),0 4px 12px -6px rgba(28,26,23,.3);transition:transform .16s var(--bz-ease),box-shadow .2s}
+.bz__ico img{max-width:100%;max-height:100%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(60,20,5,.25))}
+.bz__ico--sauce{padding:0;overflow:hidden}
+.bz__ico--sauce img,.bz__ico .bz__oilico{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;border-radius:50%;filter:none}
+.bz__ico--sauce img{transform:scale(1.9)}
+.bz__ico:has(.bz__oilico){padding:0;background:#141210}
+.bz__sec{position:relative;z-index:2;display:flex;flex-direction:column;gap:.5rem}
+.bz__st{font:500 .72rem/1 var(--sans,Outfit,sans-serif);letter-spacing:.12em;text-transform:uppercase;opacity:.75;display:flex;gap:.5rem;align-items:baseline}
+.bz__st span{letter-spacing:.02em;text-transform:none;opacity:.7;font-weight:400}
+.bz__grid--sauce{grid-template-columns:repeat(5,1fr)}
 .bz__chip:active .bz__ico{transform:scale(.92)}
 .bz__chip.is-on .bz__ico{box-shadow:0 0 0 2px var(--bz-terra),0 6px 16px -6px rgba(180,83,42,.5)}
 .bz__chip.is-bump .bz__ico{animation:bzChip .36s var(--bz-ease)}
@@ -56,7 +73,7 @@
 .bz__prog{position:absolute!important;inset:0;z-index:0!important;background:linear-gradient(90deg,#E07A2E,#F2A23A);transform-origin:left;transform:scaleX(var(--bake,0));opacity:0}
 .bz.is-baking .bz__prog{opacity:1}
 .bz.is-done .bz__cta{background:var(--bz-oliv);box-shadow:0 10px 24px -10px rgba(94,107,58,.8)}
-.bz.is-baking .bz__chip,.bz.is-done .bz__chip,.bz.is-baking .bz__size,.bz.is-done .bz__size{opacity:.45;pointer-events:none;transition:opacity .3s}
+.bz.is-baking .bz__chip,.bz.is-done .bz__chip,.bz.is-baking .bz__minus,.bz.is-done .bz__minus,.bz.is-baking .bz__size,.bz.is-done .bz__size{opacity:.45;pointer-events:none;transition:opacity .3s}
 .bz.is-drag .bz__pie{outline:2px dashed var(--bz-terra);outline-offset:6px}
 /* Ofen-Feuer */
 .bz__fire{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .5s;
