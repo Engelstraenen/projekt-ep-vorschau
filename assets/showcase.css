@@ -70,7 +70,8 @@
 .pb-note b { color: var(--ink); font-weight: 600; }
 .pb-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
 .pb-tags li { font-size: 13px; color: var(--ink); background: var(--bg-2); border-radius: 999px; padding: 6px 13px; }
-.pb-tags li:first-child { background: var(--ink); color: #fff; }
+/* erster Tag: Grauglas in liquid-glass.css */
+.pb-tags li:first-child { color: var(--ink); }
 .pb-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 48px; align-items: center; margin-top: 18px; }
 .pb-text { color: var(--ink-2); font-size: 16px; line-height: 1.55; display: grid; gap: 2px; }
 .pb-text b { color: var(--ink); font-weight: 600; }

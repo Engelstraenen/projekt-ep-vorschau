@@ -205,7 +205,8 @@
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
   .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
   .tabs button { font: inherit; font-size: 15px; height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; transition: border-color .2s, background .2s, color .2s; }
-  .tabs button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  /* aktiver Engpass-Tab: Grauglas in liquid-glass.css */
+  .tabs button[aria-pressed="true"] { background: transparent; color: var(--ink); border-color: transparent; }
   .answer { background: #fff; border-radius: 22px; padding: 28px; }
   .answer strong { display: block; font-size: 26px; font-weight: 650; letter-spacing: -.03em; line-height: 1.15; }
   .answer p { color: var(--ink-2); margin-top: 10px; }

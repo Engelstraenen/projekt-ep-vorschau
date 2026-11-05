@@ -141,8 +141,9 @@ nav.links a[aria-current="page"] { opacity: 1; font-weight: 600; }
 .filter { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
 .filter button { font: inherit; font-size: 15px; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
 .filter button span { color: var(--ink-2); font-size: 13px; margin-left: 4px; }
-.filter button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
-.filter button[aria-pressed="true"] span { color: #A1A1A6; }
+/* aktiver Filter: Grauglas in liquid-glass.css (nicht Lackschwarz) */
+.filter button[aria-pressed="true"] { background: transparent; color: var(--ink); border-color: transparent; }
+.filter button[aria-pressed="true"] span { color: var(--ink-2); }
 .qa summary { align-items: baseline; }
 .qa summary .tag { flex: 0 0 auto; font-size: 12px; font-weight: 500; color: var(--blue-ink); background: #EAF2FF; border-radius: 999px; padding: 3px 10px; letter-spacing: 0; }
 .qa summary .q { flex: 1; }

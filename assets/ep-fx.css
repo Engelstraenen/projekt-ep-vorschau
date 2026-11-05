@@ -394,7 +394,7 @@ main > .hero:not(.solo) .hero-img,
   height: 38px; padding: 0 15px; font-size: 14px;
   border-color: rgba(0, 0, 0, .1); background: #FAFAFB; transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
 }
-.filter button[aria-pressed="true"] { box-shadow: var(--shadow-quiet); }
+/* aktiver Filter-Schatten kommt aus liquid-glass.css (Grauglas), nicht quiet */
 details { padding: 24px 0; }
 summary { font-size: 18px; letter-spacing: -.022em; font-weight: 600; }
 details p { margin-top: 12px; line-height: 1.55; }
