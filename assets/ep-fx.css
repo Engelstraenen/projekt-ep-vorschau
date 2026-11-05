@@ -271,3 +271,187 @@ body:not(.home) .st-steps b { font-size: clamp(20px, 1.7vw, 26px); letter-spacin
 /* Demo-Adresszeile: lange Namen auf dem Handy kürzen statt seitlich überlaufen */
 @media (max-width: 860px) { .sc-url { min-width: 0; overflow: hidden; white-space: nowrap; display: inline-block; line-height: 26px; text-overflow: ellipsis; } .sc-url svg { display: none; } }
 body:not(.home) { overflow-x: clip; } /* kein seitliches Wackeln auf dem Handy */
+
+/* ===== look-2026 pass 1 · Editorial air + quieter surfaces (05.11.2026) =====
+   Typo, Rhythm, Flächen, Chrome — Liquid Glass und Header-Schriftzug unangetastet. */
+:root {
+  --space-1: 8px; --space-2: 12px; --space-3: 16px; --space-4: 24px; --space-5: 32px; --space-6: 48px; --space-7: 72px; --space-8: 96px;
+  --radius-card: clamp(24px, 2.4vw, 36px);
+  --radius-soft: clamp(18px, 1.8vw, 28px);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, .04), 0 24px 48px -28px rgba(0, 0, 0, .18);
+  --shadow-quiet: 0 1px 2px rgba(0, 0, 0, .03);
+  --hairline: rgba(0, 0, 0, .06);
+  --sep: rgba(0, 0, 0, .045);
+}
+
+/* ---------- Header-Chrome (kein Logo/Brand-Markup) ---------- */
+header.top {
+  height: 60px;
+  border-bottom-color: rgba(210, 210, 215, .35);
+  background: rgba(255, 255, 255, .78);
+}
+.home header.top {
+  background: color-mix(in srgb, color-mix(in srgb, #fff, var(--night) calc(var(--dark) * 100%)), transparent 22%);
+  border-bottom-color: color-mix(in srgb, var(--rule), transparent 55%);
+}
+.brand { letter-spacing: -.018em; font-weight: 510; }
+nav.links { gap: clamp(22px, 2.4vw, 36px); font-size: 13.5px; letter-spacing: -.005em; }
+nav.links a { opacity: .72; transition: opacity .2s ease; }
+nav.links a:hover, nav.links a[aria-current="page"] { opacity: 1; }
+.menu-btn { opacity: .72; letter-spacing: -.005em; transition: opacity .2s ease; }
+.menu-btn:hover, .menu-btn[aria-expanded="true"] { opacity: 1; }
+.mega { top: 60px; padding-top: 32px; padding-bottom: 40px; box-shadow: 0 40px 80px -48px rgba(0, 0, 0, .22); border-bottom-color: rgba(210, 210, 215, .45); }
+.scrollbar { top: 59px; height: 1.5px; }
+.mega-head p { letter-spacing: .12em; font-size: 11px; }
+.tile { border-radius: 20px; padding: 12px; gap: 16px; }
+.tile b { letter-spacing: -.02em; font-weight: 600; }
+.tile span { margin-top: 4px; line-height: 1.4; }
+
+/* ---------- Typo-Hierarchie & Leserythmus ---------- */
+body { line-height: 1.55; letter-spacing: -.011em; }
+.kicker {
+  font-size: 12px; font-weight: 580; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: clamp(16px, 2.2vh, 24px); gap: 12px; align-items: center;
+}
+.kicker > span:not(:first-child), .kicker span + span { letter-spacing: .1em; }
+/* Hero-Nummern-Kapsel: Fill bleibt liquid-glass — nur Typo/Abstand */
+main > .hero .kicker { font-size: 12px; letter-spacing: .14em; margin-bottom: clamp(16px, 2.6vh, 28px); }
+main > .hero .lead { margin-top: clamp(18px, 2.8vh, 28px); line-height: 1.5; }
+.block h2, body:not(.home) main .block > h2 {
+  font-size: clamp(34px, 3.8vw, 60px); font-weight: 650; letter-spacing: -.045em; line-height: 1.03;
+  max-width: 18ch; margin-top: 0;
+}
+.block .intro { font-size: clamp(17px, 1.25vw, 20px); line-height: 1.5; margin-top: clamp(14px, 2vh, 22px); max-width: 58ch; }
+.card h3 { font-size: clamp(20px, 1.5vw, 24px); letter-spacing: -.028em; line-height: 1.18; }
+.card p { font-size: 15.5px; line-height: 1.5; margin-top: 12px; }
+.section-head { display: grid; gap: 0; margin-bottom: clamp(8px, 1.5vh, 16px); }
+.section-head .kicker { margin-bottom: clamp(12px, 1.8vh, 18px); }
+.section-head h2 { letter-spacing: -.045em; }
+.crumbs { padding-top: 28px; font-size: 12.5px; letter-spacing: -.005em; }
+
+/* ---------- Sektionen: Luft statt harter Kästen ---------- */
+.block {
+  padding: clamp(72px, 11vh, 128px) 0;
+  border-top: 1px solid var(--sep);
+}
+.block:first-of-type, .hero + .block { border-top-color: transparent; }
+body:not(.home) main .cta-band { margin-top: clamp(24px, 4vh, 48px); }
+body:not(.home) main .cta-band h2 { letter-spacing: -.048em; }
+
+/* ---------- Karten / Rails / Steps: ruhige Flächen ---------- */
+body:not(.home) main .card,
+.cards > .card {
+  background: #FAFAFB;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  padding: clamp(26px, 2.8vw, 38px);
+  box-shadow: var(--shadow-quiet);
+}
+@media (hover: hover) and (pointer: fine) {
+  body:not(.home) main .cards > .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+    background: #fff;
+  }
+}
+.chips { gap: 6px; padding-top: 22px; }
+.chips li {
+  font-size: 12.5px; font-weight: 500; letter-spacing: -.01em;
+  background: transparent; border: 1px solid rgba(0, 0, 0, .1);
+  padding: 5px 11px; color: var(--ink-2, #6E6E73);
+}
+ol.steps { gap: clamp(12px, 1.4vw, 18px); margin-top: clamp(32px, 5vh, 48px); }
+ol.steps li {
+  background: #FAFAFB; border: 1px solid var(--hairline); border-radius: var(--radius-soft);
+  padding: clamp(22px, 2.4vw, 30px); box-shadow: var(--shadow-quiet);
+}
+ol.steps b { font-size: clamp(18px, 1.5vw, 22px); margin: 12px 0 8px; letter-spacing: -.03em; }
+ol.steps p { font-size: 14.5px; line-height: 1.5; }
+.pager { gap: 12px; margin-top: clamp(36px, 6vh, 56px); }
+.pager a {
+  border-radius: var(--radius-soft); padding: 24px 28px;
+  border: 1px solid var(--hairline); background: #FAFAFB; box-shadow: var(--shadow-quiet);
+  transition: background .25s ease, border-color .25s ease;
+}
+.pager a:hover { background: #fff; border-color: rgba(0, 0, 0, .1); }
+
+/* Hero-Bilder: weichere Tiefe statt harter Drop-Shadow */
+main > .hero:not(.solo) .hero-img,
+.hero-img {
+  box-shadow: 0 28px 64px -40px rgba(0, 0, 0, .28), 0 2px 6px rgba(0, 0, 0, .04);
+  border-radius: clamp(24px, 2.8vw, 40px);
+}
+.rc-img { border-radius: var(--radius-soft); margin-bottom: 16px; }
+.rc small { letter-spacing: .1em; font-size: 11px; }
+.rc b { letter-spacing: -.032em; }
+.ep-rail h2 { letter-spacing: -.048em; }
+.rail-head { align-items: flex-end; margin-bottom: 4px; }
+.rail-btn { width: 48px; height: 48px; border-color: rgba(0, 0, 0, .1); box-shadow: var(--shadow-quiet); }
+
+/* ---------- FAQ / Filter / Details ---------- */
+.filter { gap: 8px; margin-bottom: 32px; }
+.filter button {
+  height: 38px; padding: 0 15px; font-size: 14px;
+  border-color: rgba(0, 0, 0, .1); background: #FAFAFB; transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
+}
+.filter button[aria-pressed="true"] { box-shadow: var(--shadow-quiet); }
+details { padding: 24px 0; }
+summary { font-size: 18px; letter-spacing: -.022em; font-weight: 600; }
+details p { margin-top: 12px; line-height: 1.55; }
+.qa details p { font-size: 16.5px; }
+
+/* ---------- Footer (epf): ruhiger, klarer ---------- */
+footer#epf { padding-top: clamp(64px, 10vw, 140px); }
+.epf-kicker { letter-spacing: .16em; font-size: 12px; margin-bottom: clamp(14px, 2.4vh, 24px); }
+.epf-big a { letter-spacing: -.05em; }
+.epf-cols { gap: 48px clamp(28px, 4vw, 72px); margin-top: clamp(64px, 11vh, 128px); padding-top: 36px; border-top-color: #26262A; }
+.epf-cols .epf-h { letter-spacing: .16em; font-size: 11px; margin-bottom: 20px; }
+.epf-cols ul { gap: 12px; }
+.epf-cols a { color: #C7C7CC; }
+.epf-legal { margin-top: 32px; padding-top: 20px; border-top-color: #26262A; font-size: 12.5px; letter-spacing: -.005em; }
+.epf-mark { letter-spacing: -.06em; margin-top: clamp(48px, 9vh, 104px); }
+
+/* ---------- Startseite: Kickers & Kapitel-Luft ---------- */
+.home .kicker, section.ch .copy > .kicker {
+  font-size: 12px; font-weight: 580; letter-spacing: .12em; gap: 12px;
+}
+section.ch .copy > .kicker { padding-top: 28px; margin-bottom: 26px; }
+section.ch .copy > .kicker::before { height: 1px; background: color-mix(in srgb, var(--rule), transparent 20%); }
+.home .block { padding: clamp(96px, 14vh, 140px) var(--gutter); }
+#intro .eyebrow { letter-spacing: .12em; font-size: 12px; font-weight: 580; margin-bottom: 28px; }
+#intro h1 { letter-spacing: -.052em; line-height: 1.01; }
+#intro .lead { margin-top: 28px; line-height: 1.5; }
+#intro .ctas { margin-top: 38px; gap: 20px; }
+.home h2 { letter-spacing: -.042em; }
+.home .copy > p:not(.kicker) { line-height: 1.55; }
+.home .more { margin-top: 26px; letter-spacing: -.01em; }
+.home .sub { margin-top: 30px; padding-top: 20px; }
+.home ol.steps li { border: 1px solid var(--hairline); border-radius: var(--radius-soft); box-shadow: var(--shadow-quiet); }
+.home .tabs button { border-color: rgba(0, 0, 0, .1); background: #FAFAFB; height: 38px; }
+.home .answer { border-radius: var(--radius-soft); border: 1px solid var(--hairline); box-shadow: var(--shadow-quiet); }
+.home .principles { gap: clamp(28px, 4vw, 48px); margin-top: clamp(40px, 6vh, 56px); }
+.home .principles b { letter-spacing: -.025em; margin-bottom: 10px; }
+
+/* Flow / Loop auf Prozess-Seiten */
+.flow b { letter-spacing: -.035em; }
+.flow .node { box-shadow: 0 0 0 5px #fff, 0 1px 2px rgba(0, 0, 0, .06); }
+.loop li { border-radius: var(--radius-card); border: 1px solid var(--hairline); }
+.loop::after { box-shadow: var(--shadow-soft); }
+
+/* Dauer-Karte: etwas ruhiger */
+.ep-dauer {
+  border-radius: var(--radius-soft);
+  border-color: var(--hairline);
+  box-shadow: var(--shadow-quiet);
+  padding: 18px 22px 18px 18px;
+}
+
+@media (max-width: 860px) {
+  header.top { height: 56px; }
+  .mega { top: 56px; }
+  .scrollbar { top: 55px; }
+  .block { padding: clamp(56px, 8vh, 88px) 0; }
+  .home .block { padding: clamp(64px, 10vh, 96px) 16px; }
+  section.ch .copy > .kicker { padding-top: 20px; margin-bottom: 18px; }
+  nav.links { gap: 20px; }
+}

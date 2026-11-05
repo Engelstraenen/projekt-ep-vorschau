@@ -140,7 +140,7 @@ main .block.rb { border-top: 1px solid #D2D2D7; padding-top: var(--rb-pad); }
 /* ---------- Glas-Look (Apple-Stil): Sprungleiste und Unterarten-Knöpfe ----------
    halbtransparentes Weiß + backdrop-filter, feine Kante #D2D2D7, weicher Schatten; aktiv = Blau #0071E3.
    Kontrast (gemessen, ungünstigster Fall dunkle Bühne #161619 hinter dem Glas): Leiste Text #1D1D1F 11,5:1 (Knöpfe 9,1:1), aktiv Weiß auf #0071E3 4,7:1; Label Blau auf Weiß 4,7:1. */
-.rb-jump { position: sticky; top: 64px; z-index: 25; height: 0; pointer-events: none; }
+.rb-jump { position: sticky; top: 60px; z-index: 25; height: 0; pointer-events: none; }
 .rb-jump-in { display: flex; align-items: center; gap: 4px 14px; width: max-content; max-width: 100%; margin: 12px auto 0; padding: 5px;
   border-radius: 999px; background: rgba(255, 255, 255, .82); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%);
   box-shadow: 0 0 0 1px #D2D2D7, inset 0 1px 0 rgba(255, 255, 255, .6), 0 10px 30px -14px rgba(0, 0, 0, .28);
