@@ -131,23 +131,82 @@
     }
     function bump(el) { el.classList.remove('is-bump'); void el.offsetWidth; el.classList.add('is-bump'); }
 
-    // Verteilung wie beim Pizzaiolo: pro Tippen MEHRERE konzentrische Ringe (außen + mitte + innen),
-    // mit Winkel-/Radius-Jitter. Kein center-bias; Kruste frei via lim(). spot() hält Abstände.
+    // Verteilung wie beim Pizzaiolo: Beläge auf konzentrischen Ringen mit Jitter.
+    // Mozzarella separat: handverteilte Scatter-Cluster (keine sichtbaren Ringe/Raster).
+    // Kruste frei via lim(); spot() hält Abstände weich.
     const seed = Math.random() * 6.283, GOLD = 2.39996;
     const lim = t => R_IN - t.sz * .8;
+    // Fior di Latte: 5–7 lockere Gruppen à 2–3 Fäden, unregelmäßige Abstände/Winkel,
+    // Soße dazwischen sichtbar, nicht am Rand klebend, nicht nur Mitte.
+    function mozzarellaTargets(count) {
+      const rmax = lim(CHEESE), out = [], centers = [];
+      const nC = Math.min(count, (Math.random() < .22 ? 5 : 6 + Math.floor(Math.random() * 2))); // 5–7, meist 6–7
+      // Poisson-ähnlich: unregelmäßige Cluster-Zentren, flächengewichtet (mehr außen),
+      // Mindestabstand weich — keine Sektoren/Ringe/Raster.
+      for (let tries = 0; tries < 200 && centers.length < nC; tries++) {
+        const a = Math.random() * 6.283;
+        const r = rmax * Math.sqrt(.1 + Math.random() * .78); // Band ~0.32–0.94 · rmax
+        const c = { x: Math.cos(a) * r, y: Math.sin(a) * r };
+        if (centers.some(o => Math.hypot(c.x - o.x, c.y - o.y) < rmax * .28)) continue;
+        centers.push(c);
+      }
+      // Falls zu wenige: lockern und nachfüllen
+      while (centers.length < Math.min(5, count)) {
+        const a = Math.random() * 6.283;
+        const r = rmax * (.35 + Math.random() * .5);
+        centers.push({ x: Math.cos(a) * r, y: Math.sin(a) * r });
+      }
+      const sizes = Array(centers.length).fill(0);
+      for (let i = 0; i < count; i++) {
+        let best = 0, score = Infinity;
+        for (let c = 0; c < centers.length; c++) {
+          const pref = sizes[c] >= 3 ? sizes[c] + 1.6 : sizes[c] < 2 ? sizes[c] - .25 : sizes[c];
+          const v = pref + Math.random() * .3;
+          if (v < score) { score = v; best = c; }
+        }
+        sizes[best]++;
+      }
+      centers.forEach((c, ci) => {
+        const n = sizes[ci], base = Math.random() * 6.283;
+        for (let i = 0; i < n; i++) {
+          // Kleine Gruppe: 2–3 Freisteller versetzt nebeneinander, unterschiedliche Winkel
+          const a = base + (n <= 1 ? Math.random() * 6.283 : i * (2.1 + Math.random() * .9) / n + (Math.random() - .5) * .8);
+          const d = rmax * (n <= 1 ? (.03 + Math.random() * .04) : (.08 + Math.random() * .12));
+          let x = c.x + Math.cos(a) * d, y = c.y + Math.sin(a) * d;
+          const rr = Math.hypot(x, y);
+          if (rr > rmax) { x *= rmax / rr; y *= rmax / rr; }
+          if (rr < rmax * .12 && rr > 1e-6) { x *= rmax * .18 / rr; y *= rmax * .18 / rr; }
+          for (let k = 0; k < 5; k++) {
+            let bx = 0, by = 0, bump = 0;
+            for (let oi = 0; oi < out.length; oi++) {
+              const o = out[oi], same = oi >= out.length - i;
+              const dx = x - o.x, dy = y - o.y, h = Math.hypot(dx, dy);
+              const minD = same ? rmax * .055 : rmax * .09;
+              if (h < minD && h > 1e-6) {
+                const f = (minD - h) / h;
+                bx += dx * f; by += dy * f; bump++;
+              }
+            }
+            if (!bump) break;
+            x += bx * .45; y += by * .45;
+            const r2 = Math.hypot(x, y);
+            if (r2 > rmax) { x *= rmax / r2; y *= rmax / r2; }
+          }
+          out.push({ x, y });
+        }
+      });
+      return out;
+    }
     function targets(t, count) {
+      if (t.id === 'mozzarella') return mozzarellaTargets(count);
       const rmax = lim(t), out = [], batch = Math.max(1, perTap(t));
       const j = Math.floor(st.pieces.filter(p => p.t === t.id).length / batch);
       const off = seed + t.id.length * 1.3 + j * GOLD + Math.random() * .45;
       // Mehrere Radien gleichzeitig: innen (nicht tot Mitte) + mitte + außen nah am Soßenrand
-      const fracs = t.id === 'mozzarella'
-        ? [.2, .4, .62, .9]
-        : t.sz >= .1 ? [.22, .5, .92] : [.24, .52, .96];
+      const fracs = t.sz >= .1 ? [.22, .5, .92] : [.24, .52, .96];
       const nR = fracs.length;
       // Außen bekommt klar die Mehrheit
-      const shares = nR === 4
-        ? [Math.max(2, Math.round(count * .15)), Math.max(3, Math.round(count * .22)), Math.max(4, Math.round(count * .28))]
-        : [Math.max(1, Math.round(count * .18)), Math.max(2, Math.round(count * .28))];
+      const shares = [Math.max(1, Math.round(count * .18)), Math.max(2, Math.round(count * .28))];
       const plan = [];
       let used = 0;
       for (let ring = 0; ring < nR - 1; ring++) {
@@ -177,7 +236,7 @@
         const c = clampIn(goal.x + Math.cos(a) * r, goal.y + Math.sin(a) * r, rmax);
         let d = 9;
         for (const p of st.pieces) {
-          const k = p.t === t.id ? .88 : p.t === 'mozzarella' || t.id === 'mozzarella' ? .32 : .52;
+          const k = p.t === t.id ? (t.id === 'mozzarella' ? .48 : .88) : p.t === 'mozzarella' || t.id === 'mozzarella' ? .32 : .52;
           d = Math.min(d, Math.hypot(p.x - c.x, p.y - c.y) / k);
         }
         d = Math.min(d, t.sz * 3.2) - Math.hypot(c.x - goal.x, c.y - goal.y) * (near ? 1.2 : 2.1);
@@ -189,7 +248,7 @@
       const el = document.createElement('span');
       el.className = 'bz__pc bz__pc--' + t.id + (t.late ? ' bz__pc--late' : '');
       p.v = p.v || 1 + Math.floor(Math.random() * VAR);
-      p.sc = p.sc || (t.id === 'mozzarella' ? .78 + Math.random() * .38 : .82 + Math.random() * .32);
+      p.sc = p.sc || (t.id === 'mozzarella' ? .72 + Math.random() * .48 : .82 + Math.random() * .32);
       p.rot = p.rot ?? Math.random() * 360;
       el.innerHTML = imgPair(t.id, p.v, !!t.late);
       el.style.cssText = `left:${50 + p.x * 50}%;top:${50 + p.y * 50}%;width:${t.sz * p.sc * 100}%;--r:${p.rot}deg`;
