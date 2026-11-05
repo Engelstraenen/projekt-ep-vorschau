@@ -8,15 +8,26 @@
   var LOOKS = [
     { id: 'klassisch', name: 'Klassisch', desc: 'Warmes Licht, ruhige Flächen. Der Standard für jeden Tag.', sys: {} },
     { id: 'holo', name: 'Holo', desc: 'Dunkles Glas, Neonlicht, die Paketstadt als Insel bei Nacht.', sys: {
-      paketstadt: { href: D + 'paketstadt3d/?style=B', img: 'paketstadt3d-b', alt: 'Paketstadt im Holo-Look: Neon-Insel bei Nacht' },
-      lager: { href: D + 'paketstadt3d/?style=B&view=lager', img: 'lager3d-b', alt: 'Lager in 3D im Holo-Look' },
-      shopraum: { href: D + 'holo/', img: 'holo', alt: 'Shopraum im Holo-Look mit Globus voller Bestellungen' } } },
+      paketstadt: { href: D + 'holo-3d/', img: 'paketstadt3d-b', alt: 'Paketstadt im Holo-Look: Neon-Insel bei Nacht' },
+      lager: { href: D + 'holo-3d/?geb=lager', img: 'lager3d-b', alt: 'Lager in 3D im Holo-Look' },
+      shopraum: { href: D + 'holo-3d/?geb=shop', img: 'holo', alt: 'Shopraum im Holo-Look mit Globus voller Bestellungen' },
+      problemcenter: { href: D + 'holo-3d/?geb=support', img: 'paketstadt3d-b', alt: 'Problemcenter im Holo-Look' },
+      team: { href: D + 'holo-3d/?geb=personal', img: 'paketstadt3d-b', alt: 'Personal im Holo-Look' },
+      bots: { href: D + 'holo-3d/?geb=bots', img: 'paketstadt3d-b', alt: 'Bots im Holo-Look' } } },
     { id: 'liquid', name: 'Liquid', desc: 'Weiche Formen, viel Licht, Produkte im Mittelpunkt.', sys: {
-      paketstadt: { href: D + 'paketstadt3d/?style=C', img: 'paketstadt3d-c', alt: 'Paketstadt im Liquid-Look: Spielzeugstadt im Tageslicht' },
-      lager: { href: D + 'paketstadt3d/?style=C&view=lager', img: 'lager3d-c', alt: 'Lager in 3D im Liquid-Look' },
-      shopraum: { href: D + 'liquid/', img: 'liquid', alt: 'Shopraum im Liquid-Look' } } },
+      paketstadt: { href: D + 'liquid-3d/', img: 'paketstadt3d-c', alt: 'Paketstadt im Liquid-Look: Spielzeugstadt im Tageslicht' },
+      lager: { href: D + 'liquid-3d/?geb=lager', img: 'lager3d-c', alt: 'Lager in 3D im Liquid-Look' },
+      shopraum: { href: D + 'liquid-3d/?geb=shop', img: 'liquid', alt: 'Shopraum im Liquid-Look' },
+      problemcenter: { href: D + 'liquid-3d/?geb=support', img: 'paketstadt3d-c', alt: 'Problemcenter im Liquid-Look' },
+      team: { href: D + 'liquid-3d/?geb=personal', img: 'paketstadt3d-c', alt: 'Personal im Liquid-Look' },
+      bots: { href: D + 'liquid-3d/?geb=bots', img: 'paketstadt3d-c', alt: 'Bots im Liquid-Look' } } },
     { id: 'shopcontrol', name: 'ShopControl', desc: 'Kompakt und sachlich wie ein Leitstand.', sys: {
-      shopraum: { href: D + 'shop-control/', img: 'shop-control', alt: 'Shopraum im ShopControl-Look' } } }
+      paketstadt: { href: D + 'shop-control-3d/', img: 'shop-control', alt: 'Paketstadt im ShopControl-Look' },
+      lager: { href: D + 'shop-control-3d/?geb=lager', img: 'shop-control', alt: 'Lager im ShopControl-Look' },
+      shopraum: { href: D + 'shop-control-3d/?geb=shop', img: 'shop-control', alt: 'Shopraum im ShopControl-Look' },
+      problemcenter: { href: D + 'shop-control-3d/?geb=support', img: 'shop-control', alt: 'Problemcenter im ShopControl-Look' },
+      team: { href: D + 'shop-control-3d/?geb=personal', img: 'shop-control', alt: 'Personal im ShopControl-Look' },
+      bots: { href: D + 'shop-control-3d/?geb=bots', img: 'shop-control', alt: 'Bots im ShopControl-Look' } } }
   ];
   var root = document.querySelector('[data-looks]');
   if (!root) return;
