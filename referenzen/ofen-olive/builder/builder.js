@@ -34,7 +34,7 @@
     { id: 'rucola', name: 'Rucola', preis: 1.0, sz: .12, late: 1 },
     { id: 'basilikum', name: 'Basilikum', preis: .5, sz: .10, late: 1 }
   ];
-  const CHEESE = { id: 'mozzarella', name: 'Fior di Latte', sz: .108, n: 15 };
+  const CHEESE = { id: 'mozzarella', name: 'Fior di Latte', sz: .088, n: 56 };
   const OILS = [
     { id: 'knoblauch', name: 'Knoblauchöl', preis: .5 },
     { id: 'chili', name: 'Chiliöl', preis: .5 }
@@ -132,69 +132,59 @@
     function bump(el) { el.classList.remove('is-bump'); void el.offsetWidth; el.classList.add('is-bump'); }
 
     // Verteilung wie beim Pizzaiolo: Beläge auf konzentrischen Ringen mit Jitter.
-    // Mozzarella separat: handverteilte Scatter-Cluster (keine sichtbaren Ringe/Raster).
+    // Mozzarella separat: flächendeckende, gleichmäßig-unregelmäßige Streuung (keine Cluster/Ringe).
     // Kruste frei via lim(); spot() hält Abstände weich.
     const seed = Math.random() * 6.283, GOLD = 2.39996;
     const lim = t => R_IN - t.sz * .8;
-    // Fior di Latte: 5–7 lockere Gruppen à 2–3 Fäden, unregelmäßige Abstände/Winkel,
-    // Soße dazwischen sichtbar, nicht am Rand klebend, nicht nur Mitte.
+    // Fior di Latte: viele kleine Flocken über die ganze Soßenfläche, leicht überlappend,
+    // zufällige Winkel/Scales — wie handverteilter Käse, fast jeder Bereich etwas, keine Häufchen.
     function mozzarellaTargets(count) {
-      const rmax = lim(CHEESE), out = [], centers = [];
-      const nC = Math.min(count, (Math.random() < .22 ? 5 : 6 + Math.floor(Math.random() * 2))); // 5–7, meist 6–7
-      // Poisson-ähnlich: unregelmäßige Cluster-Zentren, flächengewichtet (mehr außen),
-      // Mindestabstand weich — keine Sektoren/Ringe/Raster.
-      for (let tries = 0; tries < 200 && centers.length < nC; tries++) {
-        const a = Math.random() * 6.283;
-        const r = rmax * Math.sqrt(.1 + Math.random() * .78); // Band ~0.32–0.94 · rmax
-        const c = { x: Math.cos(a) * r, y: Math.sin(a) * r };
-        if (centers.some(o => Math.hypot(c.x - o.x, c.y - o.y) < rmax * .28)) continue;
-        centers.push(c);
-      }
-      // Falls zu wenige: lockern und nachfüllen
-      while (centers.length < Math.min(5, count)) {
-        const a = Math.random() * 6.283;
-        const r = rmax * (.35 + Math.random() * .5);
-        centers.push({ x: Math.cos(a) * r, y: Math.sin(a) * r });
-      }
-      const sizes = Array(centers.length).fill(0);
-      for (let i = 0; i < count; i++) {
-        let best = 0, score = Infinity;
-        for (let c = 0; c < centers.length; c++) {
-          const pref = sizes[c] >= 3 ? sizes[c] + 1.6 : sizes[c] < 2 ? sizes[c] - .25 : sizes[c];
-          const v = pref + Math.random() * .3;
-          if (v < score) { score = v; best = c; }
+      const rmax = lim(CHEESE), out = [];
+      // Verrauschtes Kartesisches Gitter → flächig, gleichmäßig-unregelmäßig, keine Ringe/Cluster
+      const cell = (rmax * 2) / Math.sqrt(count * 1.55);
+      const half = rmax + cell * .15;
+      const candidates = [];
+      for (let y = -half; y <= half; y += cell) {
+        for (let x = -half; x <= half; x += cell) {
+          const jx = (Math.random() - .5) * cell * .92;
+          const jy = (Math.random() - .5) * cell * .92;
+          const px = x + jx, py = y + jy;
+          const rr = Math.hypot(px, py);
+          if (rr > rmax) continue;
+          candidates.push({ x: px, y: py, rr, score: Math.random() });
         }
-        sizes[best]++;
       }
-      centers.forEach((c, ci) => {
-        const n = sizes[ci], base = Math.random() * 6.283;
-        for (let i = 0; i < n; i++) {
-          // Kleine Gruppe: 2–3 Freisteller versetzt nebeneinander, unterschiedliche Winkel
-          const a = base + (n <= 1 ? Math.random() * 6.283 : i * (2.1 + Math.random() * .9) / n + (Math.random() - .5) * .8);
-          const d = rmax * (n <= 1 ? (.03 + Math.random() * .04) : (.08 + Math.random() * .12));
-          let x = c.x + Math.cos(a) * d, y = c.y + Math.sin(a) * d;
-          const rr = Math.hypot(x, y);
-          if (rr > rmax) { x *= rmax / rr; y *= rmax / rr; }
-          if (rr < rmax * .12 && rr > 1e-6) { x *= rmax * .18 / rr; y *= rmax * .18 / rr; }
-          for (let k = 0; k < 5; k++) {
-            let bx = 0, by = 0, bump = 0;
-            for (let oi = 0; oi < out.length; oi++) {
-              const o = out[oi], same = oi >= out.length - i;
-              const dx = x - o.x, dy = y - o.y, h = Math.hypot(dx, dy);
-              const minD = same ? rmax * .055 : rmax * .09;
-              if (h < minD && h > 1e-6) {
-                const f = (minD - h) / h;
-                bx += dx * f; by += dy * f; bump++;
-              }
-            }
-            if (!bump) break;
-            x += bx * .45; y += by * .45;
-            const r2 = Math.hypot(x, y);
-            if (r2 > rmax) { x *= rmax / r2; y *= rmax / r2; }
-          }
-          out.push({ x, y });
+      // Leicht mischen, dann per weichem Mindestabstand auswählen (kein starres Raster)
+      candidates.sort((a, b) => a.score - b.score);
+      const minD = cell * (.22 + Math.random() * .1);
+      for (const c of candidates) {
+        if (out.length >= count) break;
+        if (out.every(o => Math.hypot(c.x - o.x, c.y - o.y) >= minD * (.55 + Math.random() * .7))) {
+          out.push({ x: c.x, y: c.y });
         }
-      });
+      }
+      // Lücken stopfen bis count — verhindert große käsefreie Soßenflächen
+      while (out.length < count) {
+        let best = null, bestScore = -1;
+        for (let k = 0; k < 60; k++) {
+          const a = Math.random() * 6.283;
+          const r = rmax * Math.pow(Math.random(), .55); // etwas mehr Außenanteil, Mitte nicht leer
+          const c = { x: Math.cos(a) * r, y: Math.sin(a) * r };
+          let nearest = out.length ? Infinity : rmax;
+          for (const o of out) nearest = Math.min(nearest, Math.hypot(c.x - o.x, c.y - o.y));
+          if (nearest > bestScore) { bestScore = nearest; best = c; }
+        }
+        if (!best) break;
+        out.push(best);
+      }
+      // Feiner End-Jitter
+      for (const p of out) {
+        const j = cell * .16;
+        p.x += (Math.random() - .5) * j;
+        p.y += (Math.random() - .5) * j;
+        const rr = Math.hypot(p.x, p.y);
+        if (rr > rmax) { p.x *= rmax / rr; p.y *= rmax / rr; }
+      }
       return out;
     }
     function targets(t, count) {
@@ -229,14 +219,14 @@
     }
     function clampIn(x, y, rmax) { const rr = Math.hypot(x, y); return rr > rmax ? { x: x * rmax / rr, y: y * rmax / rr } : { x, y }; }
     function spot(near, t, aim) {
-      const rmax = lim(t), goal = near ? clampIn(near.x, near.y, rmax) : aim || { x: 0, y: 0 }, reach = near ? .16 : .09;
+      const rmax = lim(t), goal = near ? clampIn(near.x, near.y, rmax) : aim || { x: 0, y: 0 }, reach = near ? .16 : (t.id === 'mozzarella' ? .035 : .09);
       let best = goal, bd = -Infinity;
       for (let i = 0; i < 24; i++) {
         const a = Math.random() * 6.283, r = i ? Math.sqrt(Math.random()) * reach : 0;
         const c = clampIn(goal.x + Math.cos(a) * r, goal.y + Math.sin(a) * r, rmax);
         let d = 9;
         for (const p of st.pieces) {
-          const k = p.t === t.id ? (t.id === 'mozzarella' ? .48 : .88) : p.t === 'mozzarella' || t.id === 'mozzarella' ? .32 : .52;
+          const k = p.t === t.id ? (t.id === 'mozzarella' ? .42 : .88) : p.t === 'mozzarella' || t.id === 'mozzarella' ? .32 : .52;
           d = Math.min(d, Math.hypot(p.x - c.x, p.y - c.y) / k);
         }
         d = Math.min(d, t.sz * 3.2) - Math.hypot(c.x - goal.x, c.y - goal.y) * (near ? 1.2 : 2.1);
@@ -248,7 +238,7 @@
       const el = document.createElement('span');
       el.className = 'bz__pc bz__pc--' + t.id + (t.late ? ' bz__pc--late' : '');
       p.v = p.v || 1 + Math.floor(Math.random() * VAR);
-      p.sc = p.sc || (t.id === 'mozzarella' ? .72 + Math.random() * .48 : .82 + Math.random() * .32);
+      p.sc = p.sc || (t.id === 'mozzarella' ? .5 + Math.random() * .62 : .82 + Math.random() * .32);
       p.rot = p.rot ?? Math.random() * 360;
       el.innerHTML = imgPair(t.id, p.v, !!t.late);
       el.style.cssText = `left:${50 + p.x * 50}%;top:${50 + p.y * 50}%;width:${t.sz * p.sc * 100}%;--r:${p.rot}deg`;
