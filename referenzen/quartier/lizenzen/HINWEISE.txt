@@ -1,0 +1,4 @@
+GSAP (inkl. ScrollTrigger) – GreenSock Standard "No Charge" License, https://gsap.com/standard-license
+Lenis – MIT License, (c) darkroom.engineering
+Newsreader, Hanken Grotesk – SIL Open Font License 1.1 (siehe fonts/)
+HDRI "Kloofendal 43d Clear (Pure Sky)" – Poly Haven, CC0
