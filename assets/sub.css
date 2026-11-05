@@ -26,8 +26,8 @@ header.top { position: sticky; top: 0; z-index: 30; height: 64px; display: flex;
 nav.links { display: flex; gap: 32px; font-size: 14px; align-items: center; }
 nav.links a { color: var(--ink); opacity: .88; }
 .right { display: flex; align-items: center; gap: 12px; }
-.btn { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 20px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 15px; font-weight: 500; transition: background .2s; }
-.btn:hover { background: #0077ED; text-decoration: none; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 20px; border-radius: 999px; color: #fff; font-size: 15px; font-weight: 500; transition: transform .16s cubic-bezier(.23,1,.32,1); /* Fill: liquid-glass.css */ }
+.btn:hover { text-decoration: none; }
 .btn.small { height: 36px; padding: 0 17px; font-size: 14px; }
 .btn.ghost { background: transparent; color: var(--blue); padding: 0 6px; }
 .btn.ghost:hover { text-decoration: underline; }

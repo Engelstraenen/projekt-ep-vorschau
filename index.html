@@ -54,8 +54,7 @@
   nav.links { display: flex; gap: 32px; font-size: 14px; align-items: center; }
   nav.links a { color: var(--fg); opacity: .88; }
   nav.links a:hover { opacity: 1; }
-  .btn { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 20px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 15px; font-weight: 500; transition: background .2s, transform .2s var(--ease); }
-  .btn:hover { background: #0077ED; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 20px; border-radius: 999px; color: #fff; font-size: 15px; font-weight: 500; transition: transform .2s var(--ease); /* Fill: liquid-glass.css */ }
   .btn.small { height: 36px; padding: 0 17px; font-size: 14px; }
   .btn.ghost { background: transparent; color: var(--blue); padding: 0 6px; }
   .btn.ghost:hover { text-decoration: underline; }
@@ -88,11 +87,11 @@
   .tags { margin-top: 18px; font-size: 14px; color: var(--fg-2); }
   .more { display: inline-flex; margin-top: 22px; color: var(--blue-ink); font-size: 17px; }
   [data-dark-on] .more { color: #2997FF; }
-  .more::after { content: '›'; margin-left: 6px; transition: translate .2s var(--ease); }
-  .more:hover::after { translate: 3px 0; }
-  .more.cta { align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; background: var(--blue); font-size: 15px; font-weight: 500; transition: background .2s; }
+  .more:not(.cta)::after { content: '›'; margin-left: 6px; transition: translate .2s var(--ease); }
+  .more:not(.cta):hover::after { translate: 3px 0; }
+  .more.cta { align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; font-size: 15px; font-weight: 500; /* Fill: liquid-glass.css kräftig */ }
   .more.cta, [data-dark-on] .more.cta { color: #fff; }
-  .more.cta:hover { background: #0077ED; text-decoration: none; }
+  .more.cta:hover { text-decoration: none; }
 
   #intro .sticky { display: block; text-align: center; padding-top: 18vh; }
   #intro .hero { opacity: clamp(0, calc((.62 - var(--f)) * 3.2), 1); translate: 0 calc(var(--f) * -60px); }
@@ -185,7 +184,7 @@
   .film-cap h2 { color: #F5F5F7; max-width: 14em; }
   .film-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font: inherit; font-size: 17px; height: 56px; padding: 0 28px; border-radius: 999px; border: 0; background: #fff; color: #1D1D1F; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,.35); transition: transform .25s, opacity .3s; }
   .film-play:hover { transform: translate(-50%,-50%) scale(1.04); }
-  .film-cta { position: absolute; left: 50%; bottom: clamp(24px, 7vh, 72px); transform: translateX(-50%) translateY(12px); font-size: 18px; height: 56px; padding: 0 32px; display: inline-flex; align-items: center; border-radius: 999px; background: #0071E3; color: #fff; text-decoration: none; opacity: 0; pointer-events: none; transition: opacity .5s, transform .5s; box-shadow: 0 10px 40px rgba(0,113,227,.45); }
+  .film-cta { position: absolute; left: 50%; bottom: clamp(24px, 7vh, 72px); transform: translateX(-50%) translateY(12px); font-size: 18px; height: 56px; padding: 0 32px; display: inline-flex; align-items: center; border-radius: 999px; color: #fff; text-decoration: none; opacity: 0; pointer-events: none; transition: opacity .5s, transform .5s; /* Fill+Schatten: liquid-glass.css */ }
   .film-stage.done .film-cta { opacity: 1; transform: translateX(-50%); pointer-events: auto; }
   .film-stage.done .film-cap { opacity: 0; }
   .film-stage.done .film-play { opacity: 0; pointer-events: none; }
@@ -500,6 +499,7 @@
 </style>
 <link rel="stylesheet" href="assets/ep-fx.css">
 <link rel="stylesheet" href="assets/tracking.css">
+<link rel="stylesheet" href="assets/liquid-glass.css">
 
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://projektex.de/#organisation","name":"PROJEKT EX","legalName":"Engelstränen UG (haftungsbeschränkt)","url":"https://projektex.de/","email":"kontakt@projektex.de","address":{"@type":"PostalAddress","streetAddress":"Gothaerstr. 31","postalCode":"40880","addressLocality":"Ratingen","addressCountry":"DE"},"description":"Kreativagentur für Websites, Werbeclips, Logo, Print, Merch, Apps und Automatisierung. Für Firmen in Deutschland, Österreich, der Schweiz und weltweit.","areaServed":[{"@type":"Country","name":"Deutschland"},{"@type":"Country","name":"Österreich"},{"@type":"Country","name":"Schweiz"},"Worldwide"],"employee":[{"@type":"Person","name":"Jessica Kruse","jobTitle":"CEO"},{"@type":"Person","name":"Eugen Kelberer","jobTitle":"Head of Operations & Business Development"},{"@type":"Person","name":"Paul Haase","jobTitle":"Head of Sales & Partnerships"}],"knowsAbout":["Webdesign","Online-Shops","Suchmaschinenoptimierung","Prozessautomatisierung","Chatbots","App Design","Game Design","Werbeclips","Ads-Management","Visualisierung","Print Design","Logo Design","Merch-Produktion","Dashboards"]},{"@type":"WebSite","@id":"https://projektex.de/#website","url":"https://projektex.de/","name":"PROJEKT EX","inLanguage":"de-DE","publisher":{"@id":"https://projektex.de/#organisation"}}]}</script>
 </head>

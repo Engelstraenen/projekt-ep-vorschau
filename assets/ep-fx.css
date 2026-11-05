@@ -19,7 +19,7 @@
 /* ---------- Hero der Leistungsseiten: markante Typografie ---------- */
 main > .hero h1, .sc-hero h1, .pf-hero h1 { font-size: clamp(44px, 6.4vw, 112px); line-height: .98; letter-spacing: -.055em; font-weight: 650; white-space: normal; max-width: 15ch; }
 main > .hero .kicker { font-size: 13px; letter-spacing: .14em; margin-bottom: clamp(14px, 2.4vh, 26px); align-items: center; }
-main > .hero .kicker span:first-child { display: inline-grid; place-items: center; min-width: 38px; height: 26px; padding: 0 10px; border-radius: 999px; background: var(--blue); color: #fff; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+main > .hero .kicker span:first-child { display: inline-grid; place-items: center; min-width: 38px; height: 26px; padding: 0 10px; border-radius: 999px; color: #fff; letter-spacing: .04em; font-variant-numeric: tabular-nums; /* Fill: liquid-glass.css kräftig */ }
 main > .hero .kicker span:first-child:empty { display: none; }
 main > .hero .lead { font-size: clamp(18px, 1.5vw, 23px); line-height: 1.45; color: var(--ink-2); max-width: 44ch; }
 .sc-hero, .pf-hero { padding-top: clamp(36px, 7vh, 88px); padding-bottom: clamp(28px, 5vh, 56px); }

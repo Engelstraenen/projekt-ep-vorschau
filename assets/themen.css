@@ -157,13 +157,13 @@ main .block.rb { border-top: 1px solid #D2D2D7; padding-top: var(--rb-pad); }
 .rb-jump a .rb-nr { font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; color: inherit; opacity: .9; }
 @media (hover: hover) and (pointer: fine) { .rb-jump a:hover { background: rgba(0, 0, 0, .05); } }
 .rb-jump a:active { transform: scale(.97); }
-.rb-jump a[aria-current] { background: #0071E3; color: #fff; }
+.rb-jump a[aria-current] { color: #fff; /* Fill: Liquid Glass kräftig → assets/liquid-glass.css */ }
 .rb-jump a:focus-visible { outline: 2px solid #0071E3; outline-offset: 1px; }
 /* Unterarten im Intro als Glas-Knöpfe */
 .th-kinds-links li { padding: 0; }
 .th-kinds-links a { display: block; padding: 8px 14px; border-radius: inherit; transition: background-color .2s cubic-bezier(.23, 1, .32, 1), color .2s cubic-bezier(.23, 1, .32, 1), transform .16s cubic-bezier(.23, 1, .32, 1); }
 @media (hover: hover) and (pointer: fine) { .th-kinds-links a:hover { background: rgba(0, 0, 0, .04); } }
-.th-kinds-links a:active { transform: scale(.97); background: #0071E3; color: #fff; }
+.th-kinds-links a:active { transform: scale(.97); /* kurz kräftiges Glas auf li → liquid-glass.css */ }
 /* ohne backdrop-filter: fast deckendes Weiß, damit nichts durchscheint */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .rb-jump-in { background: rgba(255, 255, 255, .97); }
@@ -183,11 +183,8 @@ main .block.rb { border-top: 1px solid #D2D2D7; padding-top: var(--rb-pad); }
    Dicke, konvexe Glaskapseln statt Frosted-Chips: SVG-Brechung (feDisplacementMap, #lg-refract,
    per rubriken.js eingefügt; nur Chromium kann url() im backdrop-filter), Glanzlicht ::before,
    Randverdunklung + Innenlicht per inset-Schatten, Kontaktschatten. Pastell-Blau nur für gefüllte Knopf-Flächen;
-   --blue #0071E3 bleibt für Links, Icons, Fokus. */
+   Tokens + gefüllte Blau-Buttons: assets/liquid-glass.css. --blue #0071E3 bleibt für Links/Icons/Fokus. */
 :root {
-  --lg-blue-core: #6FA6D3;  /* tiefer Kern für Kontrast */
-  --lg-blue: #84B5DE;       /* Pastell-Körper */
-  --lg-blue-rim: #4F86B8;   /* dunklere Glaskante */
   --lg-ease: cubic-bezier(.23, 1, .32, 1);
 }
 .th-kinds { gap: 10px; }
@@ -211,13 +208,13 @@ main .block.rb { border-top: 1px solid #D2D2D7; padding-top: var(--rb-pad); }
     0 16px 28px -18px rgba(29,29,31,.28);
 }
 /* Spekularer Glanz: weiche Linsen-Spiegelung oben + Randlicht */
-.th-kinds li::before, .pb-tags li::before, .btn:not(.ghost)::before {
+.th-kinds li::before, .pb-tags li::before {
   content: ''; position: absolute; inset: 1.5px 6% auto; height: 48%; border-radius: 999px 999px 60% 60% / 999px 999px 100% 100%;
   pointer-events: none; z-index: -1;
   background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.18) 75%, rgba(255,255,255,0));
   opacity: .85;
 }
-.th-kinds li::after, .pb-tags li::after, .btn:not(.ghost)::after {
+.th-kinds li::after, .pb-tags li::after {
   content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; z-index: -1;
   background: linear-gradient(160deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.1) 30%, rgba(255,255,255,0) 60%, rgba(255,255,255,.7) 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
@@ -249,30 +246,7 @@ main .block.rb { border-top: 1px solid #D2D2D7; padding-top: var(--rb-pad); }
 .pb-tags li:first-child::before { opacity: .32; }
 .pb-tags li:first-child::after { opacity: .45; }
 
-/* --- Pastell-Blau-Glas: primäre Knöpfe (.btn, .btn.small) --- */
-.btn:not(.ghost) {
-  position: relative; isolation: isolate; color: #FFFFFF; font-weight: 600;
-  text-shadow: 0 1px 1.5px rgba(30,70,110,.45);
-  background:
-    radial-gradient(120% 90% at 50% 120%, rgba(214,234,250,.55), rgba(214,234,250,0) 60%),   /* Licht sammelt sich unten */
-    linear-gradient(180deg, var(--lg-blue) 0%, var(--lg-blue-core) 60%, #6C9FCB 100%);
-  box-shadow:
-    inset 0 0 0 1px rgba(79,134,184,.55),            /* dunklere Glaskante */
-    inset 0 1.5px 1px rgba(255,255,255,.75),
-    inset 0 -2px 4px rgba(225,241,255,.65),
-    inset 0 -8px 12px -8px rgba(40,85,130,.45),
-    inset 4px 0 8px -6px rgba(40,85,130,.35), inset -4px 0 8px -6px rgba(40,85,130,.35),
-    0 1px 1px rgba(40,85,130,.18),
-    0 8px 16px -8px rgba(60,110,160,.45),
-    0 18px 30px -20px rgba(60,110,160,.5);
-  transition: transform .16s var(--lg-ease), box-shadow .22s var(--lg-ease), filter .22s var(--lg-ease);
-}
-.btn:not(.ghost)::before { opacity: .7; }
-@media (hover: hover) and (pointer: fine) { .btn:not(.ghost):hover { background:
-    radial-gradient(120% 90% at 50% 120%, rgba(214,234,250,.6), rgba(214,234,250,0) 60%),
-    linear-gradient(180deg, #8DBCE2 0%, #76ABD7 60%, #70A3CF 100%); filter: saturate(1.05); } }
-.btn:not(.ghost):active { transform: scale(.97); }
-.btn:not(.ghost):focus-visible { outline: 2px solid #0071E3; outline-offset: 3px; }
+/* Pastell-/Markenblau-Buttons: assets/liquid-glass.css (kräftig = Default .btn, Pastell = .btn.pastel / Live-Demo) */
 
 /* --- Brechung: SVG-Displacement hinter dem Glas (Chromium) --- */
 html.lg-svg .th-kinds li, html.lg-svg .pb-tags li:not(:first-child) {
@@ -293,10 +267,9 @@ html.lg-svg .th-kinds li, html.lg-svg .pb-tags li:not(:first-child) {
 @media (prefers-reduced-transparency: reduce) {
   html .th-kinds li, html .pb-tags li:not(:first-child) { background: #FFFFFF; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: inset 0 0 0 1px #D2D2D7, 0 4px 10px -6px rgba(29,29,31,.2); }
   .pb-tags li:first-child { background: #1D1D1F; }
-  .btn:not(.ghost) { background: #6FA6D3; text-shadow: none; }
-  .th-kinds li::before, .pb-tags li::before, .btn::before, .th-kinds li::after, .pb-tags li::after, .btn::after { display: none; }
+  .th-kinds li::before, .pb-tags li::before, .th-kinds li::after, .pb-tags li::after { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .th-kinds-links li, .btn:not(.ghost) { transition: none; transform: none !important; } }
+@media (prefers-reduced-motion: reduce) { .th-kinds-links li { transition: none; transform: none !important; } }
 
 /* ---------- Erklärvideo größer · 05.11.: volle Spalte, leichter Ausbruch auf Desktop, näher an die Headline ---------- */
 .pb-sub > .pb-head.rb-head + .px-film, .pb > .pb-head.rb-head + .px-film { margin-top: calc(-1 * clamp(4px, .8vw, 16px)); }
