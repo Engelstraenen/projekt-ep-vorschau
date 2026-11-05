@@ -20,11 +20,11 @@
   --lg-brand-hover-top: rgba(120, 175, 230, .30);
   --lg-brand-hover-core: rgba(75, 145, 205, .16);
   --lg-brand-hover-deep: rgba(45, 115, 180, .26);
-  /* Neutrales Grauglas (aktive Chips/Filter/Segmente) — kühles helles Silber/Graphit, durchscheinend */
-  --lg-gray-top: rgba(255, 255, 255, .62);
-  --lg-gray-core: rgba(220, 226, 234, .12);
-  --lg-gray-deep: rgba(168, 176, 188, .24);
-  --lg-gray-wash: rgba(155, 162, 174, .14);
+  /* Neutrales Grauglas (aktive Chips/Filter/Segmente) — kühles mittleres Graphit, durchscheinend */
+  --lg-gray-top: rgba(255, 255, 255, .52);
+  --lg-gray-core: rgba(186, 194, 206, .18);
+  --lg-gray-deep: rgba(128, 136, 148, .34);
+  --lg-gray-wash: rgba(125, 132, 144, .24);
   --lg-gray-ink: #1D1D1F;
   /* Text: Tinte auf hellem Grund (klares Glas); Weiß nur wo nötig / auf Dunkel */
   --lg-ink: #0A3A6E;
@@ -494,22 +494,22 @@ html.lg-svg [data-look="shopcontrol"] .lk-live {
   -webkit-backdrop-filter: blur(4px) saturate(165%) contrast(1.05);
   backdrop-filter: blur(4px) saturate(165%) contrast(1.05);
   box-shadow:
-    inset 0 0 0 .5px rgba(29, 29, 31, .18),
-    inset 0 1.5px 1px rgba(255, 255, 255, .92),
-    inset 0 -2px 3px rgba(255, 255, 255, .72),
-    inset 0 -7px 10px -6px rgba(29, 29, 31, .18),
-    inset 3px 0 6px -4px rgba(29, 29, 31, .10),
-    inset -3px 0 6px -4px rgba(29, 29, 31, .10),
-    0 1px 1px rgba(29, 29, 31, .08),
-    0 6px 14px -6px rgba(29, 29, 31, .22),
-    0 16px 28px -18px rgba(29, 29, 31, .26);
+    inset 0 0 0 .5px rgba(29, 29, 31, .30),
+    inset 0 1.5px 1px rgba(255, 255, 255, .88),
+    inset 0 -2px 3px rgba(255, 255, 255, .62),
+    inset 0 -7px 10px -6px rgba(29, 29, 31, .24),
+    inset 3px 0 6px -4px rgba(29, 29, 31, .14),
+    inset -3px 0 6px -4px rgba(29, 29, 31, .14),
+    0 1px 1px rgba(29, 29, 31, .10),
+    0 6px 14px -6px rgba(29, 29, 31, .26),
+    0 16px 28px -18px rgba(29, 29, 31, .30);
 }
 
 /* Spekular an Stil-Chips (erster Tag) wieder hell — war bei Dunklem Glas gedämpft */
 .pb-tags li:first-child::before,
-.uc-cap .pb-tags li:first-child::before { opacity: .78; }
+.uc-cap .pb-tags li:first-child::before { opacity: .70; }
 .pb-tags li:first-child::after,
-.uc-cap .pb-tags li:first-child::after { opacity: .88; }
+.uc-cap .pb-tags li:first-child::after { opacity: .80; }
 
 /* FAQ-Zähler auf aktivem Filter: Graphit-Nebenfarbe statt hellgrau-auf-schwarz */
 .filter button[aria-pressed="true"] span { color: #6E6E73; }
@@ -521,16 +521,16 @@ html.lg-svg [data-look="shopcontrol"] .lk-live {
   .px-seg button[aria-pressed="true"]:hover {
     color: var(--lg-gray-ink);
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, .68) 0%, rgba(220, 226, 236, .22) 48%, rgba(165, 172, 186, .36) 100%),
-      rgba(160, 166, 178, .28);
+      linear-gradient(180deg, rgba(255, 255, 255, .58) 0%, rgba(186, 194, 206, .28) 48%, rgba(125, 133, 145, .42) 100%),
+      rgba(130, 137, 149, .34);
     box-shadow:
-      inset 0 0 0 .5px rgba(29, 29, 31, .16),
-      inset 0 1.5px 1px rgba(255, 255, 255, .96),
-      inset 0 -2px 3px rgba(255, 255, 255, .78),
-      inset 0 -7px 10px -6px rgba(29, 29, 31, .16),
-      0 1px 1px rgba(29, 29, 31, .07),
-      0 8px 16px -6px rgba(29, 29, 31, .24),
-      0 18px 30px -18px rgba(29, 29, 31, .28);
+      inset 0 0 0 .5px rgba(29, 29, 31, .28),
+      inset 0 1.5px 1px rgba(255, 255, 255, .90),
+      inset 0 -2px 3px rgba(255, 255, 255, .68),
+      inset 0 -7px 10px -6px rgba(29, 29, 31, .22),
+      0 1px 1px rgba(29, 29, 31, .09),
+      0 8px 16px -6px rgba(29, 29, 31, .28),
+      0 18px 30px -18px rgba(29, 29, 31, .32);
   }
 }
 
@@ -552,7 +552,7 @@ html.lg-svg .px-seg button[aria-pressed="true"] {
   .tabs button[aria-pressed="true"],
   .lk-btn[aria-pressed="true"],
   .px-seg button[aria-pressed="true"] {
-    background: linear-gradient(180deg, #F4F5F7, #E4E6EC);
+    background: linear-gradient(180deg, #E6E8ED, #CFD3DB);
     color: #1D1D1F;
   }
 }
@@ -566,10 +566,10 @@ html.lg-svg .px-seg button[aria-pressed="true"] {
   .px-seg button[aria-pressed="true"] {
     color: #1D1D1F;
     text-shadow: none;
-    background: #E5E7EB;
+    background: #D1D5DB;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    box-shadow: inset 0 0 0 1px #D2D2D7, 0 4px 10px -6px rgba(29, 29, 31, .18);
+    box-shadow: inset 0 0 0 1px #B8BBC2, 0 4px 10px -6px rgba(29, 29, 31, .22);
   }
   .filter button[aria-pressed="true"] span { color: #6E6E73; }
   .pb-tags li:first-child::before,
