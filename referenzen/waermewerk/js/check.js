@@ -1,4 +1,4 @@
-/* WÄRMEWERK Demo (Projekt EP): Wärmepumpen-Check. Vanilla JS, keine Bibliotheken, keine Datenübertragung.
+/* WÄRMEWERK Demo (Projekt EX): Wärmepumpen-Check. Vanilla JS, keine Bibliotheken, keine Datenübertragung.
    Antworten bleiben nur im LocalStorage dieses Browsers. Rechenwerte sind grobe Demo-Annahmen. */
 (() => {
   const root = document.querySelector('[data-check]');

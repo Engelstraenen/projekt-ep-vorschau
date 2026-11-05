@@ -1,4 +1,4 @@
-// Projekt EP · Personalmanagement · Shell + Router (BEISPIELDATEN)
+// Projekt EX · Personalmanagement · Shell + Router (BEISPIELDATEN)
 import { ic, esc, av, get, login, isGF, connect, onLive, live, toast, LINKS, link3d } from './core.js';
 import { uebersicht, stempel, plan } from './views1.js';
 import { abwesenheiten, akte, freigaben, leistung, lohn, onoff, rollen, protokoll, bots, loginView } from './views2.js';
@@ -19,7 +19,7 @@ async function load() { const L = login.get(); S = await get('/state' + (L?.roll
 function topbar(cur) {
   const L = login.get(); const me = S?.mitarbeiter?.find((m) => m.id === L?.ma) || S?.ich || { anzeige: L?.name, abteilung_id: L?.rolle === 'gf' ? 'gf' : '' };
   const sw = [['stadt', 'building', 'Stadt'], ['lager', 'box', 'Lager'], ['dashboard', 'grid', 'Dashboard'], ['personal', 'users', 'Personal'], ['bots', 'bot', 'Bots']];
-  return `<header class="top"><a class="brand" href="#/${isGF() ? '' : 'stempel'}"><span class="lg">EP</span><span><b>Personal</b><small>Projekt EP · Personalmanagement</small></span></a>
+  return `<header class="top"><a class="brand" href="#/${isGF() ? '' : 'stempel'}"><span class="lg">EX</span><span><b>Personal</b><small>Projekt EX · Personalmanagement</small></span></a>
     <nav class="sw" aria-label="Bereiche">${sw.map(([k, i, n]) => `<a href="${k === 'personal' ? '#/' + (isGF() ? '' : 'stempel') : LINKS[k]}" class="${(k === 'personal' && cur !== 'bots') || (k === 'bots' && cur === 'bots') ? 'on' : ''}">${ic(i)}<span>${n}</span></a>`).join('')}</nav>
     <div class="tr"><span class="clock ${live.on ? '' : 'off'}" title="${live.on ? 'Live verbunden' : 'nicht live'}"><i></i>${S?.jetzt || '–'} <span class="hide-m">Demo-Uhr</span></span><span class="bd">BEISPIELDATEN</span>
     ${L ? `<button class="me" id="me" title="Rolle wechseln / abmelden">${av(me)}<span><b>${esc(me.anzeige)}</b><small>${L.rolle === 'gf' ? 'Geschäftsführung' : 'Mitarbeitende'}</small></span></button>` : ''}</div></header>`;
@@ -46,7 +46,7 @@ async function render(full = true) {
     const ctx = { ...ctxBase, param: p, refresh: () => render(true) };
     const out = await VIEWS[key](S, ctx);
     const y = scrollY; app.innerHTML = shell(key, out); out.bind?.(app.querySelector('#main'), ctx);
-    bindTop(); if (!full) scrollTo(0, y); document.title = (out.title?.replace(/<[^>]+>/g, '') || 'Personal') + ' · Personal · Projekt EP';
+    bindTop(); if (!full) scrollTo(0, y); document.title = (out.title?.replace(/<[^>]+>/g, '') || 'Personal') + ' · Personal · Projekt EX';
   } catch (e) { console.error(e); app.innerHTML = `<div class="empty" style="padding:80px">Personal-Daten nicht erreichbar (${esc(e.message)}). Bitte die Seite neu laden.<br><br><button class="btn" type="button" data-reload>Neu laden</button></div>`; app.querySelector('[data-reload]')?.addEventListener('click', () => location.reload()); }
   finally { busy = false; if (again) { again = false; render(true); } }
 }

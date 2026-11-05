@@ -1,6 +1,6 @@
 <?php
 /**
- * PROJEKT EP – Kontaktformular-Versand (IONOS Webhosting, PHP 8.x)
+ * PROJEKT EX – Kontaktformular-Versand (IONOS Webhosting, PHP 8.x)
  * - keine Zugangsdaten im Code: Versand über PHP mail() des IONOS-Webspace
  * - Schutz: nur POST, Herkunftsprüfung, Honeypot, Mindest-Ausfüllzeit, Rate-Limit (IP nur als Hash, 1 h),
  *   Längenbegrenzung, Header-Injection-Schutz, keine Ausgabe von Nutzereingaben,
@@ -74,7 +74,7 @@ $subject = '=?UTF-8?B?' . base64_encode('Anfrage über projekt-ep.de: ' . ($leis
 $body = "Neue Anfrage über das Kontaktformular\n\n"
       . "Name: $name\nE-Mail: $email\nAnfrage als: $kundentyp\nUnternehmen/Verein: $firma\nLeistung: $leistung\n\nNachricht:\n$nachricht\n";
 $headers = implode("\r\n", [
-  'From: PROJEKT EP Website <' . FROM . '>',
+  'From: PROJEKT EX Website <' . FROM . '>',
   'Reply-To: ' . $email,
   'Content-Type: text/plain; charset=UTF-8',
   'Content-Transfer-Encoding: 8bit',

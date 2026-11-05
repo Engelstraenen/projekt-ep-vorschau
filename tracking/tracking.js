@@ -3,7 +3,7 @@
   var ST=[['eingegangen','Auftrag eingegangen','Bestätigung und Ansprechpartner'],['konzept','Konzept','Ziele, Struktur, Inhalte'],['design','Design','Entwürfe und Favorit'],['umsetzung','Umsetzung','Entwicklung und Inhalte'],['pruefung','Prüfung','Test auf allen Geräten, Freigabe'],['live','Live','Ihr Projekt ist online']];
   var TYP={website:'Website',app:'App',shop:'Online-Shop',system:'System',design:'Design',video:'Werbeclip'};
   var $=function(i){return document.getElementById(i)};
-  function err(){$('tp-card').hidden=true;$('tp-err').hidden=false;document.title='Link nicht gefunden · PROJEKT EP'}
+  function err(){$('tp-card').hidden=true;$('tp-err').hidden=false;document.title='Link nicht gefunden · PROJEKT EX'}
   function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
   function fmt(d){if(!d)return'';var p=d.split('-');return p.length===3?p[2]+'.'+p[1]+'.'+p[0]:d}
   function safeUrl(u){try{var x=new URL(u,location.href);return(x.protocol==='https:'||x.origin===location.origin)?x.href:null}catch(e){return null}}

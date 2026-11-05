@@ -1,4 +1,4 @@
-/* PROJEKT EP · Themen-Unterseiten (leistungen/*.html), ein Muster für alle (Eugen, 1.11.2026)
+/* PROJEKT EX · Themen-Unterseiten (leistungen/*.html), ein Muster für alle (Eugen, 1.11.2026)
    1. Kurz-Intro: Titel, zwei Zeilen, Unterarten als Liste (.th-kinds)
    2. Use Case für Use Case (.pb): Kopf (Art + Name), Arbeit groß, direkt darunter .uc-cap = Stil-Tags + 2–3 Zeilen
    3. Rest kompakt: Umsetzung, Ablauf, Fragen, CTA
@@ -81,7 +81,7 @@ main > .hero.th-hero .lead { max-width: 50ch; text-wrap: pretty; }
 @keyframes th-rise { from { opacity: 0; transform: translateY(16px); } }
 @keyframes th-media { from { opacity: .35; transform: translateY(32px) scale(.985); } }
 
-/* Foto als Use Case (z. B. Studio-Arbeitstisch) und EP-Lab-Galerie */
+/* Foto als Use Case (z. B. Studio-Arbeitstisch) und EX-Lab-Galerie */
 .th-photo { margin: 0; border-radius: clamp(22px, 2.6vw, 36px); overflow: hidden; background: var(--bg-2); box-shadow: 0 50px 100px -60px rgba(0, 0, 0, .4); }
 .th-photo picture, .th-photo img { display: block; width: 100%; height: auto; }
 .th-photo img { aspect-ratio: 21 / 10; object-fit: cover; }

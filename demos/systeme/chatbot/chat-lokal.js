@@ -1,4 +1,4 @@
-/* Projekt EP · Chat-Demo ohne Server.
+/* Projekt EX · Chat-Demo ohne Server.
    Regeln (Vorrang) → Suche in der Wissensbasis (BM25 + Stichworte + Tippfehler-Toleranz) → ehrlicher Fallback.
    Läuft komplett im Browser: keine Netzaufrufe, nichts wird gespeichert oder gesendet. */
 (() => {

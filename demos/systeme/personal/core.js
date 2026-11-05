@@ -1,4 +1,4 @@
-// Projekt EP · Personal · Kern: API, Login/Rolle, Live-Bus, UI-Helfer (BEISPIELDATEN)
+// Projekt EX · Personal · Kern: API, Login/Rolle, Live-Bus, UI-Helfer (BEISPIELDATEN)
 import { ic } from './icons.js';
 export { ic };
 export const ROOT = new URL('../', location.href).href.replace(/\/$/, '');

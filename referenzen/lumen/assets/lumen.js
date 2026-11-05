@@ -1,4 +1,4 @@
-/* LUMEN Zahnmedizin – Demo von Projekt EP. Eigenes Script; GSAP/ScrollTrigger lokal. */
+/* LUMEN Zahnmedizin – Demo von Projekt EX. Eigenes Script; GSAP/ScrollTrigger lokal. */
 (() => {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);

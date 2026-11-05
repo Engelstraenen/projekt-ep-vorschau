@@ -1,4 +1,4 @@
-// Projekt EP · Shop-Raum · Raum „Bots“ (Entwurf A, freigegeben 01.11.2026) · BEISPIELDATEN, Du-Form, keine Preise
+// Projekt EX · Shop-Raum · Raum „Bots“ (Entwurf A, freigegeben 01.11.2026) · BEISPIELDATEN, Du-Form, keine Preise
 import { ic } from './icons.js';
 import { LINKS, CAPTURE, TEMPO, login, now, nowMin, hm, TAG, loadBase, BASE, mitarbeiter, artikel, bestand, rueckrufer, ini, items, SCRIPTS, store, STATS0 } from './data.js';
 
@@ -272,7 +272,7 @@ function draw() {
   const c2 = document.getElementById('conv'); if (c2 && atBottom) c2.scrollTop = c2.scrollHeight;
   const i2 = document.getElementById('chatIn'); if (i2 && hadFocus && !i2.disabled) { i2.focus(); i2.setSelectionRange(i2.value.length, i2.value.length); }
   const nv = app.querySelector('.mainnav'); if (nv && nv.scrollWidth > nv.clientWidth) nv.scrollLeft = nv.scrollWidth;
-  document.title = 'Bots & Meldungen · Shop-Raum · Projekt EP (Beispieldaten)';
+  document.title = 'Bots & Meldungen · Shop-Raum · Projekt EX (Beispieldaten)';
 }
 addEventListener('hashchange', () => { scrollTo(0, 0); live.chatDraft = ''; render(); });
 document.addEventListener('click', (e) => {

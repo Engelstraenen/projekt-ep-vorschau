@@ -1,4 +1,4 @@
-// PROJEKT EP – kleine Interaktionen der High-End-Schicht. Alles optional: ohne JS bleibt die Seite vollständig nutzbar.
+// PROJEKT EX – kleine Interaktionen der High-End-Schicht. Alles optional: ohne JS bleibt die Seite vollständig nutzbar.
 (() => {
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 

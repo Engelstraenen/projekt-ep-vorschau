@@ -1,4 +1,4 @@
-/* WÄRMEWERK Demo (Projekt EP): Wärmebild-Regler, Einblenden, Zähler, Kopfzeile. Vanilla JS, keine Bibliotheken. */
+/* WÄRMEWERK Demo (Projekt EX): Wärmebild-Regler, Einblenden, Zähler, Kopfzeile. Vanilla JS, keine Bibliotheken. */
 (() => {
   const d = document, root = d.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -1,4 +1,4 @@
-// Projekt EP · Raum „Bots“ · Daten, gemeinsame Datenbasis, Simulation (BEISPIELDATEN – alles erfunden, keine Preise)
+// Projekt EX · Raum „Bots“ · Daten, gemeinsame Datenbasis, Simulation (BEISPIELDATEN – alles erfunden, keine Preise)
 export const ROOT = new URL('../', location.href).href.replace(/\/$/, '');
 export const LINKS = { stadt: ROOT + '/paketstadt3d/?style=A', lager: ROOT + '/paketstadt3d/?style=A&view=lager', dashboard: ROOT + '/shop-raum/', personal: ROOT + '/personal/', plan: ROOT + '/personal/#/plan', login: ROOT + '/personal/#/login', bots: ROOT + '/bots/' };
 const Q = new URLSearchParams(location.search);

@@ -1,4 +1,4 @@
-/* Projekt-EP-Chat-Widget (öffentliche Demo-Fassung, Antworten kommen aus chat-lokal.js im Browser) – Einbindung: <script src="/chatbot/widget/ep-chat.js" data-api="/chatbot" defer></script>
+/* Projekt-EX-Chat-Widget (öffentliche Demo-Fassung, Antworten kommen aus chat-lokal.js im Browser) – Einbindung: <script src="/chatbot/widget/ep-chat.js" data-api="/chatbot" defer></script>
    Vanilla JS, Shadow DOM (keine Stil-Konflikte mit der Seite), barrierearm (Dialog, Live-Region, Tastatur, Fokus-Rückgabe). */
 (() => {
   const me = document.currentScript;
@@ -6,14 +6,14 @@
   const BASE = new URL(".", me ? me.src : location.href).href;
   const LANG = (me && me.dataset.lang) || (document.documentElement.lang || "de").slice(0, 2);
   const T = LANG === "en" ? {
-    launch: "Questions? Ask us", hi: "Hey, I'm Bit!", team: "Talk to the team", sent: "Sent", bitl: "Bit, the Projekt EP assistant", title: "Chat with Projekt EP", status: "Automated assistant · replies instantly", ph: "Type your question …", send: "Send",
+    launch: "Questions? Ask us", hi: "Hey, I'm Bit!", team: "Talk to the team", sent: "Sent", bitl: "Bit, the Projekt EX assistant", title: "Chat with Projekt EX", status: "Automated assistant · replies instantly", ph: "Type your question …", send: "Send",
     close: "Close chat", menu: "Options", human: "Talk to a person", del: "Delete conversation", privacy: "Privacy notice", restart: "New conversation",
     notice: "You're chatting with an automated assistant (AI system under the EU AI Act), not a person. Messages are stored to handle your request and deleted after {d} days.",
     src: "Source", formTitle: "How can we reach you?", formSub: "The team gets your request including this chat summary.", name: "Name *", email: "E-mail", tel: "Phone",
-    msg: "Your request", cb: "Please call me back", when: "Best time", whenOpts: ["any time", "morning", "afternoon", "evening"], consent: "I consent to Projekt EP storing my details from this chat to handle my request and contact me about it. Deleted after 30 days or on completion; withdraw anytime at kontakt@projekt-ep.de.",
+    msg: "Your request", cb: "Please call me back", when: "Best time", whenOpts: ["any time", "morning", "afternoon", "evening"], consent: "I consent to Projekt EX storing my details from this chat to handle my request and contact me about it. Deleted after 30 days or on completion; withdraw anytime at kontakt@projekt-ep.de.",
     privacyLink: "Privacy notice", submit: "Send to the team", cancel: "Not now", needConsent: "Please confirm your consent so we may store your details.", deleted: "Conversation deleted.", footL: "Automated assistant", err: "Connection problem – please try again or write to kontakt@projekt-ep.de."
   } : {
-    launch: "Fragen? Frag uns", hi: "Hey, ich bin Bit!", team: "Mit dem Team sprechen", sent: "Gesendet", bitl: "Bit, der Projekt-EP-Assistent", title: "Chat mit Projekt EP", status: "Automatischer Assistent · antwortet sofort", ph: "Deine Frage …", send: "Senden",
+    launch: "Fragen? Frag uns", hi: "Hey, ich bin Bit!", team: "Mit dem Team sprechen", sent: "Gesendet", bitl: "Bit, der Projekt-EX-Assistent", title: "Chat mit Projekt EX", status: "Automatischer Assistent · antwortet sofort", ph: "Deine Frage …", send: "Senden",
     close: "Chat schließen", menu: "Optionen", human: "Mit Mensch sprechen", del: "Verlauf löschen", privacy: "Datenschutzhinweise", restart: "Neues Gespräch",
     notice: "Demo: Du schreibst mit einem automatischen Assistenten (KI-System im Sinne der EU-KI-Verordnung), nicht mit einem Menschen. Alles läuft in deinem Browser, nichts wird gespeichert oder gesendet.",
     src: "Quelle", formTitle: "Wie erreichen wir dich?", formSub: "Demo: Das Formular zeigt nur den Ablauf. Es wird nichts gesendet oder gespeichert.", name: "Name *", email: "E-Mail", tel: "Telefon",
@@ -34,7 +34,7 @@
     <div class="backdrop" aria-hidden="true"></div>
     <section class="panel" id="ep-panel" role="dialog" aria-modal="false" aria-labelledby="ep-title" hidden>
       <div class="grip" aria-hidden="true"></div>
-      <header><span class="hav" aria-hidden="true"><span class="hb"></span><i class="on"></i></span><div class="who"><div class="brand" id="ep-title"><span>PROJEKT <b>EP</b></span><span class="sr">${T.title}</span></div><div class="status">${T.status}</div></div>
+      <header><span class="hav" aria-hidden="true"><span class="hb"></span><i class="on"></i></span><div class="who"><div class="brand" id="ep-title"><span>PROJEKT <b>EX</b></span><span class="sr">${T.title}</span></div><div class="status">${T.status}</div></div>
         <button class="icon-btn m" type="button" aria-label="${T.menu}" aria-haspopup="menu" aria-expanded="false">${ICON.more}</button>
         <button class="icon-btn x" type="button" aria-label="${T.close}">${ICON.close}</button>
         <div class="menu" role="menu" hidden><button role="menuitem" data-a="human">${T.human}</button><a role="menuitem" class="pl" href="#" target="_blank" rel="noopener">${T.privacy}</a><button role="menuitem" data-a="restart">${T.restart}</button><button role="menuitem" data-a="delete" class="danger">${T.del}</button></div>

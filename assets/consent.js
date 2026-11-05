@@ -1,4 +1,4 @@
-/* PROJEKT EP – Einwilligungs-Banner (TDDDG § 25 / DSGVO Art. 6 Abs. 1 lit. a)
+/* PROJEKT EX – Einwilligungs-Banner (TDDDG § 25 / DSGVO Art. 6 Abs. 1 lit. a)
  * Basis: orestbida/cookieconsent v3 (MIT), lokal unter assets/vendor/cookieconsent.
  * Regeln: Kein Tracking vor Opt-in. "Alle ablehnen" gleichwertig zu "Alle akzeptieren", keine Vorauswahl.
  * Tracking einschalten: siehe docs/tracking-einschalten.md (IDs hier eintragen + Paket mit --tracking bauen,

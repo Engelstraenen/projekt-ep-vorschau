@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CSP-Generator für PROJEKT EP.
+"""CSP-Generator für PROJEKT EX.
 Berechnet SHA-256-Hashes aller ausführbaren Inline-Skripte je Seite und schreibt
 1) ein <meta http-equiv="Content-Security-Policy"> in jede Seite (wirkt auch auf GitHub Pages),
 2) die Gesamt-Policy (alle Hashes) in .htaccess zwischen den Markern CSP-BEGIN/CSP-END.

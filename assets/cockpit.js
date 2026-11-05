@@ -1,4 +1,4 @@
-/* NIVORA Cockpit: Live-Demo eines Business-Dashboards für einen Ski-Shop. Alle Zahlen sind Beispielwerte, NIVORA ist ein eigenes Projekt von PROJEKT EP.
+/* NIVORA Cockpit: Live-Demo eines Business-Dashboards für einen Ski-Shop. Alle Zahlen sind Beispielwerte, NIVORA ist ein eigenes Projekt von PROJEKT EX.
    Rendert in jedes [data-cockpit]. Ohne Abhängigkeiten. Bewegung: kurz, ease-out, prefers-reduced-motion respektiert. */
 (() => {
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -47,7 +47,7 @@
           <div class="ck-scroll"><table><thead><tr><th scope="col">Produkt</th><th scope="col"><button type="button" data-sort="u">Verkauft</button></th><th scope="col"><button type="button" data-sort="r">Umsatz</button></th><th scope="col"><button type="button" data-sort="s">Lager</button></th></tr></thead><tbody></tbody></table></div></section>
         <section class="ck-card ck-alert" aria-label="Lager-Warnungen"><header><h4>${svg('bell')} Nachbestellen</h4><span class="ck-cnt"></span></header><ul class="ck-al"></ul><p class="ck-toast" role="status" aria-live="polite"></p></section>
       </div>
-      <p class="ck-foot">Beispielwerte · NIVORA ist ein eigenes Projekt von PROJEKT EP · Daten aus Shop, Kasse und Lager in einer Ansicht</p>`;
+      <p class="ck-foot">Beispielwerte · NIVORA ist ein eigenes Projekt von PROJEKT EX · Daten aus Shop, Kasse und Lager in einer Ansicht</p>`;
     const $ = (s) => root.querySelector(s); const $$ = (s) => [...root.querySelectorAll(s)];
     const sel = () => P.map((p, i) => i).filter((i) => S.cat === 'Alle' || P[i][1] === S.cat);
     const series = (k, f = 1) => { const ids = sel(); const n = PER[k].n; return Array.from({ length: n }, (_, t) => ids.reduce((a, i) => a + DATA[k][i][t] * P[i][2] * f, 0)); };

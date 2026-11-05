@@ -1,4 +1,4 @@
-/* Projekt-EP-Chat-Widget · CI der Projekt-EP-Webseite (Farben, Systemschrift, Pillen-Buttons, 28-px-Karten) · lebt im Shadow DOM */
+/* Projekt-EX-Chat-Widget · CI der Projekt-EX-Webseite (Farben, Systemschrift, Pillen-Buttons, 28-px-Karten) · lebt im Shadow DOM */
 :host { all: initial; }
 * { box-sizing: border-box; }
 .root {
