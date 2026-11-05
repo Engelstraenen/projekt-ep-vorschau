@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="robots" content="noindex,nofollow">
 <title>ALMA Rösterei – Von der Bohne zur Tasse (Demo)</title>
 <meta name="description" content="ALMA Rösterei, Leipzig-Plagwitz: Die Reise einer Kaffeebohne von der Plantage bis in Ihre Tasse, erzählt beim Scrollen.">
 <meta name="theme-color" content="#120c09">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23120c09'/%3E%3Cpath d='M16 7c-5 3-5 15 0 18M16 7c5 3 5 15 0 18' fill='none' stroke='%23e8622c' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/scrolly.css?v=1">
+<link rel="stylesheet" href="assets/scrolly.css?v=2">
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
-<script type="module" src="assets/scrolly.js?v=1"></script>
+<script src="assets/scrolly.js?v=2" defer></script>
 </head>
 <body>
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
@@ -26,74 +26,59 @@
   <div class="prog" aria-hidden="true"><i></i></div>
 </header>
 
-<!-- Hauptfigur: eine 3D-Bohne (Three.js), die durch alle Kapitel morpht -->
-<canvas class="stage" aria-hidden="true"></canvas>
-<div class="nojs-bean" aria-hidden="true"></div>
 
 <main id="inhalt">
-  <!-- 0 HERO -->
   <section class="scene hero" id="start" aria-labelledby="h-hero">
     <div class="pin">
-      <img class="hero__bg" src="img/hero-1600.webp" srcset="img/hero-1080.webp 1080w, img/hero-1600.webp 1600w" sizes="100vw" alt="" width="1600" height="1000">
-      <div class="hero__veil"></div>
-      <p class="kicker">Rösterei &amp; Café · Leipzig-Plagwitz · seit 2014</p>
+      <video class="bgv" src="film/hero.mp4" poster="film/hero-poster.webp" autoplay muted loop playsinline aria-hidden="true"></video><div class="shade"></div>
       <h1 id="h-hero" class="kin"><span class="kin__l">Von der Bohne</span><span class="kin__l"><em>zur Tasse.</em></span></h1>
-      <p class="hero__lead">Eine Kirsche, zehntausend Kilometer, zwölf Minuten Feuer. Scrollen Sie mit, die Bohne erzählt den Rest.</p>
+      <p class="hero__lead">Eine Kirsche, zehntausend Kilometer, zwölf Minuten Feuer. Scrollen Sie mit, der Film läuft mit Ihnen.</p>
+      <p class="sig">ALMA Rösterei &amp; Café, Leipzig-Plagwitz, seit 2014</p>
       <p class="cue" aria-hidden="true"><span></span>Scrollen</p>
     </div>
   </section>
 
-  <!-- 1 PLANTAGE -->
-  <section class="scene plantage" id="plantage" data-word="HUILA" aria-labelledby="h-pl">
-    <div class="pin">
-      <svg class="hills" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-        <path class="hill h1" d="M0 520 C240 380 420 430 620 360 C860 280 1080 390 1440 300 L1440 900 L0 900Z" fill="#2f4a2a"/>
-        <path class="hill h2" d="M0 640 C200 540 460 600 700 520 C960 440 1180 560 1440 500 L1440 900 L0 900Z" fill="#243b22"/>
-        <path class="hill h3" d="M0 760 C260 680 520 740 760 690 C1000 640 1220 720 1440 680 L1440 900 L0 900Z" fill="#18291a"/>
-      </svg>
+  <section class="scene" id="plantage" data-word="HUILA" aria-labelledby="h-pl">
+    <div class="pin"><canvas class="film" data-clip="c1" data-n="73" role="img" aria-label="Filmszene: Tau auf roten Kaffeekirschen im Nebel, eine Hand pflückt sie"></canvas><div class="shade"></div>
       <div class="txt">
         <p class="num">Kapitel I · Plantage</p>
         <h2 id="h-pl" class="big">Alles beginnt auf <span class="count" data-to="1850" data-sep="1">0</span>&nbsp;Metern.</h2>
-        <p>Im Hochland von Huila reifen die Kirschen langsam, weil die Nächte kühl sind. Das gibt der Bohne Zeit für Süße. Drei Familienhöfe, jedes Jahr im Februar besucht.</p>
+        <p>Im Hochland von Huila reifen die Kirschen langsam, weil die Nächte kühl sind. Das gibt der Bohne Zeit für Süße.</p>
         <dl class="facts"><div><dt>Partnerhöfe</dt><dd class="count" data-to="3">0</dd></div><div><dt>Reifezeit</dt><dd><span class="count" data-to="9">0</span> Monate</dd></div></dl>
       </div>
     </div>
   </section>
 
-  <!-- 2 ERNTE: Sticky-Split mit Fokus-Fade -->
-  <section class="scene ernte" id="ernte" data-word="ERNTE" aria-labelledby="h-er">
-    <div class="split">
-      <div class="split__media"><img src="img/ernte-1080.webp" srcset="img/ernte-1080.webp 1080w, img/ernte-1600.webp 1600w" sizes="(max-width:800px) 100vw, 50vw" alt="Hände pflücken reife rote Kaffeekirschen vom Strauch" width="1080" height="1350" loading="lazy"></div>
-      <div class="split__steps">
+  <section class="scene" id="ernte" data-word="ERNTE" aria-labelledby="h-er">
+    <div class="pin"><canvas class="film" data-clip="c2" data-n="73" role="img" aria-label="Filmszene: Kirschen rollen aus der Hand, grüne Bohnen fallen in einen Jutesack"></canvas><div class="shade"></div>
+      <div class="txt txt--r">
         <p class="num">Kapitel II · Ernte</p>
         <h2 id="h-er" class="big">Nur die roten.</h2>
-        <article class="step"><h3>Runde eins</h3><p>Gepflückt wird nur, was wirklich reif ist. Grün bleibt hängen, egal wie eilig es ist.</p></article>
-        <article class="step"><h3>Fünf Runden</h3><p>Dieselben Sträucher, fünfmal in sechs Wochen. Langsam, von Hand, Kirsche für Kirsche.</p></article>
-        <article class="step"><h3>Die Bohne zeigt sich</h3><p>Unter dem Fruchtfleisch: zwei grüne Samen. Achtzehn Tage Sonne auf Hochbeeten, dann zweimal sortiert.</p></article>
+        <div class="steps">
+          <article class="step"><h3>Fünf Runden</h3><p>Dieselben Sträucher, fünfmal in sechs Wochen. Gepflückt wird nur, was wirklich reif ist.</p></article>
+          <article class="step"><h3>Zwei Samen</h3><p>Unter dem Fruchtfleisch liegen zwei grüne Bohnen. Achtzehn Tage Sonne, dann zweimal sortiert.</p></article>
+          <article class="step"><h3>Ein Sack, ein Hof</h3><p>Jede Ernte bleibt für sich. So schmecken Sie später genau, woher sie kommt.</p></article>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 3 REISE: horizontal -->
-  <section class="scene reise" id="reise" data-word="REISE" aria-labelledby="h-re">
-    <div class="pin">
+  <section class="scene" id="reise" data-word="REISE" aria-labelledby="h-re">
+    <div class="pin"><canvas class="film" data-clip="c3" data-n="73" role="img" aria-label="Filmszene: Grüne Bohnen im Jutesack im Schiffsbauch, dann fallen sie in die Rösttrommel"></canvas><div class="shade"></div>
       <div class="track">
         <div class="panel panel--intro"><p class="num">Kapitel III · Reise</p><h2 id="h-re" class="big">Zehntausend Kilometer im Jutesack.</h2></div>
         <div class="panel"><p class="stop">Huila</p><p>Abfüllung in Jute, ein Sack, ein Hof, eine Ernte.</p></div>
         <div class="panel"><p class="stop">Cartagena</p><p>Verladung. Ab hier zählt jede Woche Seeluft.</p></div>
         <div class="panel"><p class="stop">Atlantik</p><p>Drei Wochen auf See, kühl und trocken gelagert.</p></div>
-        <div class="panel"><p class="stop">Leipzig</p><p>Ankunft im Speicherhof. Die Bohne ist zuhause.</p></div>
+        <div class="panel"><p class="stop">Leipzig</p><p>Ankunft im Speicherhof. Ab in die Trommel.</p></div>
       </div>
-      <svg class="route" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C200 0 300 60 500 30 C700 0 800 60 1000 30" fill="none" stroke="#e8622c" stroke-width="2" stroke-dasharray="6 8"/></svg>
       <p class="km"><span class="count" data-to="10000" data-sep="1">0</span> km</p>
     </div>
   </section>
 
-  <!-- 4 RÖSTEN -->
-  <section class="scene roesten" id="roesten" aria-labelledby="h-ro">
-    <div class="pin">
-      <p class="water" aria-hidden="true">205°</p>
-      <div class="txt txt--c">
+  <section class="scene" id="roesten" data-word="205°" aria-labelledby="h-ro">
+    <div class="pin"><canvas class="film" data-clip="c4" data-n="85" role="img" aria-label="Filmszene: Bohnen wirbeln in der Rösttrommel und färben sich von Grün über Gelb zu Dunkelbraun, Rauch steigt auf"></canvas><div class="shade"></div>
+      <div class="txt">
         <p class="num">Kapitel IV · Rösten</p>
         <h2 id="h-ro" class="big">Zwölf Minuten, die alles entscheiden.</h2>
       </div>
@@ -102,63 +87,46 @@
     </div>
   </section>
 
-  <!-- 5 MAHLEN -->
-  <section class="scene mahlen" id="mahlen" data-word="MAHLEN" aria-labelledby="h-ma">
-    <div class="pin">
-      <div class="txt">
+  <section class="scene" id="mahlen" data-word="MAHLEN" aria-labelledby="h-ma">
+    <div class="pin"><canvas class="film" data-clip="c5" data-n="73" role="img" aria-label="Filmszene: Geröstete Bohnen fallen in die Mühle, frisches Mehl rieselt in den Filter"></canvas><div class="shade"></div>
+      <div class="txt txt--r">
         <p class="num">Kapitel V · Mahlen</p>
         <h2 id="h-ma" class="big">Frisch gemahlen, passend zur Methode.</h2>
-        <p>Erst kurz vor dem Brühen bricht die Bohne auf. Die Mahlgrad-Wahl entscheidet über Klarheit und Körper.</p>
+        <p>Erst kurz vor dem Brühen bricht die Bohne auf. Der Mahlgrad entscheidet über Klarheit und Körper.</p>
+        <ul class="grind" role="list"><li>Espresso<span>fein</span></li><li>Filter<span>mittel</span></li><li>French Press<span>grob</span></li></ul>
       </div>
-      <ul class="grind" role="list">
-        <li><b style="--s:2px"></b>Espresso<span>fein</span></li>
-        <li><b style="--s:4px"></b>Filter<span>mittel</span></li>
-        <li><b style="--s:6px"></b>French Press<span>grob</span></li>
-      </ul>
     </div>
   </section>
 
-  <!-- 6 BRÜHEN -->
-  <section class="scene bruehen" id="bruehen" data-word="BRÜHEN" aria-labelledby="h-br">
-    <div class="pin">
+  <section class="scene" id="bruehen" data-word="BRÜHEN" aria-labelledby="h-br">
+    <div class="pin"><canvas class="film" data-clip="c6" data-n="85" role="img" aria-label="Filmszene: Heißes Wasser kreist aus dem Kessel über das Kaffeemehl, dann dampft die volle Tasse"></canvas><div class="shade"></div>
       <div class="txt">
         <p class="num">Kapitel VI · Brühen</p>
-        <h2 id="h-br" class="big">93 Grad. Vier Minuten. Geduld.</h2>
+        <h2 id="h-br" class="big"><span class="count" data-to="93">0</span> Grad. Vier Minuten. Geduld.</h2>
         <p>Das Wasser findet seinen Weg durch das Mehl und nimmt mit, wofür der lange Weg gegangen wurde.</p>
       </div>
-      <svg class="cup" viewBox="0 0 300 260" aria-hidden="true">
-        <defs><clipPath id="cupclip"><path d="M40 70 L260 70 L236 220 C232 240 216 250 196 250 L104 250 C84 250 68 240 64 220Z"/></clipPath></defs>
-        <g clip-path="url(#cupclip)"><rect class="cup__fill" x="0" y="250" width="300" height="200" fill="#3b2316"/></g>
-        <path d="M40 70 L260 70 L236 220 C232 240 216 250 196 250 L104 250 C84 250 68 240 64 220Z" fill="none" stroke="#f4ead9" stroke-width="5" stroke-linejoin="round"/>
-        <path d="M258 100 C300 100 300 170 246 175" fill="none" stroke="#f4ead9" stroke-width="5" stroke-linecap="round"/>
-        <g class="steam" fill="none" stroke="#f4ead9" stroke-width="3" stroke-linecap="round" opacity="0"><path d="M120 55 C105 35 135 25 120 5"/><path d="M150 55 C135 35 165 25 150 5"/><path d="M180 55 C165 35 195 25 180 5"/></g>
-      </svg>
     </div>
   </section>
 
-  <!-- 7 TASSE: Vollbild zoomt in Rahmen -->
   <section class="scene tasse" id="tasse" aria-labelledby="h-ta">
-    <div class="pin">
-      <div class="frame"><img src="img/tasse-1600.webp" srcset="img/tasse-1080.webp 1080w, img/tasse-1600.webp 1600w" sizes="100vw" alt="Eine Tasse Filterkaffee auf einem Holztisch im Morgenlicht" width="1600" height="1000" loading="lazy"></div>
+    <div class="pin"><canvas class="film" data-clip="c7" data-n="73" role="img" aria-label="Filmszene: Die Kamera taucht von oben in die Tasse, die Crema dreht sich"></canvas><div class="shade"></div>
       <h2 id="h-ta" class="mega"><span>Kakao.</span><span>Rote Beere.</span><span><em>Ein Hauch Honig.</em></span></h2>
     </div>
   </section>
 
-  <!-- 8 SHOP -->
-  <svg class="drip" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V40C1400 40 1395 95 1370 95S1345 40 1300 40 1240 60 1220 60 1190 40 1120 40 1060 110 1030 110 1000 40 940 40 880 70 850 70 820 40 760 40 700 100 670 100 640 40 560 40 520 55 500 55 470 40 400 40 350 115 320 115 290 40 220 40 170 75 140 75 110 40 0 40Z" fill="#120c09"/></svg>
   <section class="shop" id="shop" aria-labelledby="h-sh">
-    <p class="num">Kapitel VII · Ihre Tasse</p>
-    <h2 id="h-sh" class="big">Die Reise endet bei Ihnen.</h2>
-    <ul class="cards" role="list">
-      <li class="card"><span class="dot" style="--c:#b06a3b"></span><h3>Huila Finca Alta</h3><p>Hell geröstet · Kakao, rote Beere, Honig</p><a href="#kontakt">Anfragen</a></li>
-      <li class="card"><span class="dot" style="--c:#7a4a28"></span><h3>Speicherhof Espresso</h3><p>Mittel geröstet · Haselnuss, dunkle Schokolade</p><a href="#kontakt">Anfragen</a></li>
-      <li class="card"><span class="dot" style="--c:#4a2c1a"></span><h3>Plagwitz Morgen</h3><p>Filter · Karamell, Orange, mild</p><a href="#kontakt">Anfragen</a></li>
-    </ul>
-    <div class="contact" id="kontakt"><p>Probierpaket, Abo oder Röstkurs? Schreiben Sie uns.</p><a class="btn" href="impressum.html">Kontakt aufnehmen</a></div>
+    <video class="bgv" src="film/cafe.mp4" poster="film/cafe-poster.webp" autoplay muted loop playsinline preload="none" aria-hidden="true"></video><div class="shade shade--deep"></div>
+    <div class="shop__in">
+      <p class="num">Kapitel VII · Ihre Tasse</p>
+      <h2 id="h-sh" class="big">Die Reise endet bei Ihnen.</h2>
+      <ul class="menu" role="list"><li><a class="row" href="#kontakt"><span class="row__n">01</span><span class="row__t">Huila Finca Alta</span><span class="row__r">Hell geröstet</span><span class="row__d">Kakao, rote Beere, Honig</span><span class="row__go" aria-hidden="true">→</span></a></li><li><a class="row" href="#kontakt"><span class="row__n">02</span><span class="row__t">Speicherhof Espresso</span><span class="row__r">Mittel geröstet</span><span class="row__d">Haselnuss, dunkle Schokolade</span><span class="row__go" aria-hidden="true">→</span></a></li><li><a class="row" href="#kontakt"><span class="row__n">03</span><span class="row__t">Plagwitz Morgen</span><span class="row__r">Filter</span><span class="row__d">Karamell, Orange, mild</span><span class="row__go" aria-hidden="true">→</span></a></li></ul>
+      <div class="contact" id="kontakt"><p>Probierpaket, Abo oder Röstkurs? Kommen Sie vorbei oder schreiben Sie uns.</p><a class="btn" href="impressum.html">Kontakt aufnehmen</a></div>
+    </div>
   </section>
 </main>
 
 <footer class="foot">
+  <video class="bgv" src="film/roaster.mp4" poster="film/roaster-poster.webp" autoplay muted loop playsinline preload="none" aria-hidden="true"></video><div class="shade shade--deep"></div>
   <p class="foot__big" aria-hidden="true">ALMA<em>.</em></p>
   <div class="foot__grid">
     <p>Kleine Chargen, langsam geröstet.<br>Rösterei &amp; Café in Leipzig-Plagwitz.</p>
