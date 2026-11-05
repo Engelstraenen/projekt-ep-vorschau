@@ -146,5 +146,5 @@ h1.display{font-size:clamp(3.2rem,9vw,8.4rem);line-height:.92}
 .bauen{max-width:none;padding-inline:max(clamp(1.25rem,5vw,4rem),calc((100vw - 1180px)/2))}
 .bauen__copy p{max-width:34rem;margin-top:1rem;color:#4a443c}
 .eyebrow--ink{color:var(--terra)}
-.bauen__card{background:#FBF6EE;border-radius:28px;padding:1.4rem 1.2rem 1.2rem;box-shadow:0 0 0 1px rgba(28,26,23,.06),0 30px 60px -30px rgba(28,26,23,.35)}
+.bauen__card{--bz-top:calc(var(--bar) + 3.5rem);background:#FBF6EE;border-radius:28px;padding:1.4rem 1.2rem 1.2rem;box-shadow:0 0 0 1px rgba(28,26,23,.06),0 30px 60px -30px rgba(28,26,23,.35)}
 @media (max-width:860px){.bauen{grid-template-columns:1fr}.bauen__card{padding:1rem .8rem}}

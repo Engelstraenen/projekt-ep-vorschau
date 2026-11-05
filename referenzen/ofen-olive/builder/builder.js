@@ -51,7 +51,6 @@
     TOPS.forEach(t => st.n[t.id] = 0); OILS.forEach(o => st.oil[o.id] = 0);
     root.classList.add('bz');
     root.innerHTML = `
-      <div class="bz__fire" aria-hidden="true">${'<i></i>'.repeat(9)}</div>
       <div class="bz__head">
         <h2 class="bz__h">${opt.title || 'Bau dir deine <em>Pizza</em>'}</h2>
         <div class="bz__size" role="radiogroup" aria-label="Größe">
@@ -59,27 +58,35 @@
           <span class="bz__sizepill" aria-hidden="true"></span>
         </div>
       </div>
+      <div class="bz__top">
       <div class="bz__stage">
         <div class="bz__plate" aria-hidden="true"></div>
+        <div class="bz__oven" aria-hidden="true"></div>
+        <div class="bz__fire" aria-hidden="true">${Array.from({ length: 14 }, (_, k) => `<i style="--k:${k}"></i>`).join('')}</div>
         <div class="bz__pie" role="img" aria-label="Deine Pizza">
           ${SAUCES.map(s => `<img class="bz__base" data-b="${s.id}" src="${BASE}${s.img}.webp" alt="" draggable="false"${s.id === 'tomate' ? '' : ' loading="lazy"'}>`).join('')}
           <img class="bz__baked" src="${BASE}base-gebacken.webp" alt="" draggable="false">
+          <span class="bz__char" aria-hidden="true"></span>
           <div class="bz__oils"></div><div class="bz__tops"></div><div class="bz__late"></div>
         </div>
+        <div class="bz__steam" aria-hidden="true"><i></i><i></i><i></i></div>
         <p class="bz__cm" aria-live="polite"></p>
         <div class="bz__heat" aria-hidden="true"><span></span></div>
       </div>
+      </div>
+      <div class="bz__dock">
+        <button type="button" class="bz__reset">Neu</button>
+        <button type="button" class="bz__cta"><span class="bz__ctal">In den Ofen</span><span class="bz__ctap"></span><span class="bz__prog" aria-hidden="true"></span></button>
+      </div>
       <p class="bz__hint" aria-live="polite"></p>
+      </div>
       <div class="bz__sec"><h3 class="bz__st">Belag <span>antippen oder ziehen</span></h3>
         <ul class="bz__grid" role="list">${TOPS.map(t => chip('', `data-t="${t.id}"`, t.name, img(t.id, 1), `${t.name} hinzufügen, ${eur(t.preis)}`)).join('')}</ul></div>
       <div class="bz__sec"><h3 class="bz__st">Soße <span>eine zur Wahl</span></h3>
         <ul class="bz__grid bz__grid--sauce" role="radiogroup" aria-label="Soße">${SAUCES.map(s => `<li><button type="button" role="radio" class="bz__chip is-radio" data-sauce="${s.id}" aria-label="${s.name}${s.preis ? ', ' + eur(s.preis) : ''}"><span class="bz__ico bz__ico--sauce"><img src="${BASE}${s.img}.webp" alt="" draggable="false" loading="lazy"></span><span class="bz__lbl">${s.short}</span></button></li>`).join('')}</ul></div>
       <div class="bz__sec"><h3 class="bz__st">Käse &amp; Öl</h3>
         <ul class="bz__grid">${chip('', 'data-c="mozzarella"', CHEESE.name, img('mozzarella', 1), 'Fior di Latte, inklusive')}${OILS.map(o => chip('', `data-o="${o.id}"`, o.name, `<img src="${BASE}oel-${o.id}.webp" alt="" draggable="false" class="bz__oilico">`, `${o.name} hinzufügen, ${eur(o.preis)}`)).join('')}</ul></div>
-      <div class="bz__dock">
-        <button type="button" class="bz__reset">Neu</button>
-        <button type="button" class="bz__cta"><span class="bz__ctal">In den Ofen</span><span class="bz__ctap"></span><span class="bz__prog" aria-hidden="true"></span></button>
-      </div>`;
+`;
     const q = s => root.querySelector(s), qa = s => [...root.querySelectorAll(s)];
     const pie = q('.bz__pie'), tops = q('.bz__tops'), late = q('.bz__late'), oils = q('.bz__oils'), cta = q('.bz__cta');
     const sauceOf = () => SAUCES.find(s => s.id === st.sauce);
@@ -112,28 +119,50 @@
     }
     function bump(el) { el.classList.remove('is-bump'); void el.offsetWidth; el.classList.add('is-bump'); }
 
-    // Freie Position im Soßenspiegel (Radius-Einheiten -1..1).
-    // Best-Candidate-Sampling (Poisson-artig): flaechengleich gezogen, maximaler Abstand zu allen
-    // Stuecken (gleiche Sorte staerker), Abstand zum Spiegelrand -> gleichmaessig wie vom Pizzaiolo.
-    function spot(near, t) {
-      const rmax = R_IN - t.sz * .9;
-      let best = null, bd = -Infinity;
-      for (let i = 0; i < 48; i++) {
-        let x, y;
-        if (near) { const a = Math.random() * 6.283, r = Math.sqrt(Math.random()) * .16; x = near.x + Math.cos(a) * r; y = near.y + Math.sin(a) * r; }
-        else { const a = Math.random() * 6.283, r = Math.sqrt(Math.random()) * rmax; x = Math.cos(a) * r; y = Math.sin(a) * r; }
-        const rr = Math.hypot(x, y);
-        if (rr > rmax) { x *= rmax / rr; y *= rmax / rr; }
+    // Verteilung wie beim Pizzaiolo (Radius-Einheiten -1..1, Soßenspiegel bis R_IN, Cornicione frei).
+    // Je Tipp ein Ring aus PER Stuecken (regelmaessiges Polygon + Jitter); jeder weitere Tipp liegt auf
+    // einem versetzten Ring mit anderem Radius. Danach Feinsuche um jedes Ziel: Abstand zu allem, was
+    // schon liegt (gleiche Sorte staerker), damit nichts stapelt und keine Mitte verklumpt.
+    const seed = Math.random() * 6.283, GOLD = 2.39996;
+    const RINGS_BIG = [.74, .4, .97, .58, .2, .86, .5], RINGS_SMALL = [.8, .5, 1, .66, .3, .9, .58];
+    const lim = t => R_IN - t.sz * .8;
+    function targets(t, count) {
+      const rmax = lim(t), out = [], j = Math.floor(st.pieces.filter(p => p.t === t.id).length / PER);
+      const off = seed + t.id.length * 1.3 + j * GOLD + Math.random() * .5;
+      if (t.id === 'mozzarella') { // Fior di Latte: ein paar Pools innen, der Rest auf einem Ring
+        const inner = 3;
+        for (let i = 0; i < count; i++) {
+          const ring = i < inner, n = ring ? inner : count - inner, k = ring ? i : i - inner;
+          const a = off + (ring ? 0 : .5) + k / n * 6.283 + (Math.random() - .5) * .45;
+          const r = rmax * ((ring ? .36 : .86) + (Math.random() - .5) * .14);
+          out.push({ x: Math.cos(a) * r, y: Math.sin(a) * r });
+        }
+        return out;
+      }
+      const rings = t.sz >= .1 ? RINGS_BIG : RINGS_SMALL, f = rings[j % rings.length];
+      for (let i = 0; i < count; i++) {
+        const a = off + i / count * 6.283 + (Math.random() - .5) * 6.283 / count * .35;
+        const r = Math.max(0, rmax * (f + (Math.random() - .5) * .12));
+        out.push({ x: Math.cos(a) * r, y: Math.sin(a) * r });
+      }
+      return out;
+    }
+    function clampIn(x, y, rmax) { const rr = Math.hypot(x, y); return rr > rmax ? { x: x * rmax / rr, y: y * rmax / rr } : { x, y }; }
+    function spot(near, t, aim) {
+      const rmax = lim(t), goal = near ? clampIn(near.x, near.y, rmax) : aim || { x: 0, y: 0 }, reach = near ? .16 : .09;
+      let best = goal, bd = -Infinity;
+      for (let i = 0; i < 24; i++) {
+        const a = Math.random() * 6.283, r = i ? Math.sqrt(Math.random()) * reach : 0;
+        const c = clampIn(goal.x + Math.cos(a) * r, goal.y + Math.sin(a) * r, rmax);
         let d = 9;
         for (const p of st.pieces) {
-          const k = p.t === t.id ? 1 : p.t === 'mozzarella' || t.id === 'mozzarella' ? .45 : .6;
-          d = Math.min(d, Math.hypot(p.x - x, p.y - y) / k);
+          const k = p.t === t.id ? 1 : p.t === 'mozzarella' || t.id === 'mozzarella' ? .4 : .62;
+          d = Math.min(d, Math.hypot(p.x - c.x, p.y - c.y) / k);
         }
-        d = Math.min(d, (rmax - Math.hypot(x, y)) * 2.2 + .12);
-        if (near) d -= Math.hypot(x - near.x, y - near.y) * 1.5;
-        if (d > bd) { bd = d; best = { x, y }; }
+        d = Math.min(d, t.sz * 3.2) - Math.hypot(c.x - goal.x, c.y - goal.y) * 1.2;
+        if (d > bd) { bd = d; best = c; }
       }
-      return best || { x: 0, y: 0 };
+      return { x: best.x, y: best.y };
     }
     function place(t, p) {
       const el = document.createElement('span');
@@ -148,9 +177,9 @@
     const tOf = id => ALL.find(x => x.id === id);
     // Belag springt aus dem Feld auf die Pizza
     function fly(id, from, count) {
-      const tt = tOf(id), pr = pie.getBoundingClientRect();
+      const tt = tOf(id), pr = pie.getBoundingClientRect(), aims = targets(tt, count);
       for (let i = 0; i < count; i++) {
-        const piece = { t: id, ...spot(null, tt) };
+        const piece = { t: id, ...spot(null, tt, aims[i]) };
         st.pieces.push(piece); if (id in st.n) st.n[id]++;
         const land = place(tt, piece); piece.el = land;
         if (reduce.matches || !from) continue;
@@ -263,6 +292,8 @@
       if (st.phase !== 'build') return;
       st.phase = 'bake'; cta.disabled = true;
       root.classList.add('is-baking');
+      const top = q('.bz__top'), r = top.getBoundingClientRect();
+      if (r.top < 0 || r.bottom > innerHeight) top.scrollIntoView({ block: 'nearest', behavior: reduce.matches ? 'auto' : 'smooth' });
       const dur = reduce.matches ? 0 : 3200, t0 = performance.now(), lbl = q('.bz__ctal');
       q('.bz__hint').textContent = 'Zeitraffer: 90 Sekunden bei 450 Grad.';
       (function tick(now) {
