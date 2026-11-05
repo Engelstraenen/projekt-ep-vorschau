@@ -181,3 +181,70 @@ main .block.rb { border-top: 1px solid #D2D2D7; padding-top: var(--rb-pad); }
 @media (prefers-reduced-motion: reduce) {
   .rb-jump-in, .rb-jump a, .th-kinds-links a { transition-duration: .01ms; transform: none; }
 }
+
+/* ---------- Liquid Glass: Themen-Pills (.th-kinds) + Stil-Chips (.pb-tags) · 05.11. ----------
+   Mehrschichtig statt Frosted-Box: Brechung (blur + Sättigung + Helligkeit), Glanzkante oben,
+   Spiegelrand per Masken-Border, weiche Kontaktschatten. CI #1D1D1F / #0071E3 / #FFFFFF. */
+.th-kinds { gap: 10px; }
+.th-kinds li, .pb-tags li {
+  position: relative; isolation: isolate; color: #1D1D1F;
+  background:
+    radial-gradient(120% 140% at 18% -20%, rgba(255,255,255,.95), rgba(255,255,255,0) 52%),
+    linear-gradient(180deg, rgba(255,255,255,.58), rgba(245,247,252,.34));
+  -webkit-backdrop-filter: blur(14px) saturate(190%) brightness(1.06) contrast(1.04);
+  backdrop-filter: blur(14px) saturate(190%) brightness(1.06) contrast(1.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),          /* Glanzkante oben */
+    inset 0 -1px 0 rgba(255,255,255,.35),         /* Lichtfang unten */
+    inset 0 0 0 .5px rgba(29,29,31,.10),          /* feine Kontur */
+    inset 0 -8px 16px -10px rgba(0,113,227,.10),  /* Brechung: Blau-Stich im Körper */
+    0 1px 2px rgba(29,29,31,.06),
+    0 10px 24px -14px rgba(29,29,31,.28);
+}
+/* Spiegelrand: Verlaufsrahmen, der Licht oben links fängt und unten rechts ausläuft */
+.th-kinds li::before, .pb-tags li::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; z-index: -1;
+  background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.2) 38%, rgba(29,29,31,.08) 62%, rgba(255,255,255,.75) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.th-kinds li { font-size: 15.5px; font-weight: 500; letter-spacing: -.012em; line-height: 1.2; padding: 10px 18px; }
+.th-kinds-links li { padding: 0; }
+.th-kinds-links a { padding: 10px 18px; }
+@media (hover: hover) and (pointer: fine) {
+  .th-kinds-links li { transition: transform .22s cubic-bezier(.23,1,.32,1), box-shadow .22s cubic-bezier(.23,1,.32,1); }
+  .th-kinds-links li:hover { transform: translateY(-1px); }
+  .th-kinds-links a:hover { background: rgba(255,255,255,.35); }
+}
+.pb-tags li, .uc-cap .pb-tags li { font-size: 13.5px; font-weight: 500; letter-spacing: -.01em; padding: 7px 14px; }
+/* erster Tag = Art: dunkles Glas statt flacher Schwarz-Fläche */
+.pb-tags li:first-child, .uc-cap .pb-tags li:first-child {
+  color: #FFFFFF;
+  background: radial-gradient(120% 140% at 18% -20%, rgba(255,255,255,.22), rgba(255,255,255,0) 50%), linear-gradient(180deg, rgba(29,29,31,.92), rgba(29,29,31,.80));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 0 .5px rgba(255,255,255,.12), 0 10px 22px -14px rgba(29,29,31,.55);
+}
+.pb-tags li:first-child::before { background: linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,.05) 45%, rgba(255,255,255,.25)); }
+@media (max-width: 860px) {
+  .th-kinds { gap: 8px; }
+  .th-kinds li { font-size: 14.5px; padding: 9px 15px; }
+  .th-kinds-links li { padding: 0; }
+  .th-kinds-links a { padding: 9px 15px; }
+}
+/* solider Fallback: kein Backdrop-Support oder reduzierte Transparenz gewünscht */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .th-kinds li, .pb-tags li:not(:first-child) { background: #FFFFFF; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .th-kinds li, .pb-tags li:not(:first-child) { background: #FFFFFF; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: inset 0 0 0 1px #D2D2D7; }
+  .pb-tags li:first-child { background: #1D1D1F; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .th-kinds li::before, .pb-tags li::before { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .th-kinds-links li { transition: none; transform: none; } }
+
+/* ---------- Erklärvideo größer · 05.11.: volle Spalte, leichter Ausbruch auf Desktop, näher an die Headline ---------- */
+.pb-sub > .pb-head.rb-head + .px-film, .pb > .pb-head.rb-head + .px-film { margin-top: calc(-1 * clamp(4px, .8vw, 16px)); }
+.px-film { padding: 4px; border-radius: 26px; }
+.px-film video { border-radius: 22px; }
+@media (min-width: 1100px) {
+  .pb-sub > .px-film, .pb > .px-film, .pb-list > .px-film { margin-inline: clamp(-72px, -4.5vw, -32px); }
+}
