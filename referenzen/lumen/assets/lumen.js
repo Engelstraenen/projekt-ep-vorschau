@@ -181,15 +181,17 @@
     const vids = $$('video[data-bgv]'); if (!vids.length) return;
     const mob = window.matchMedia('(max-width: 700px)').matches;
     const still = reduceM.matches || (navigator.connection && navigator.connection.saveData);
-    const load = (v) => { if (v.dataset.on) return; v.dataset.on = '1'; v.src = (mob && v.dataset.srcM) || v.dataset.src; v.muted = true; };
+    const av1 = (() => { try { return !!document.createElement('video').canPlayType('video/webm; codecs="av01.0.05M.08"'); } catch (e) { return false; } })();
+    const load = (v) => { if (v.dataset.on) return; v.dataset.on = '1'; const s = (mob && v.dataset.srcM) || v.dataset.src; v.src = av1 ? s.replace(/\.mp4$/, '.webm') : s; v.muted = true; };
     const play = (v) => { if (still) return; load(v); const p = v.play(); if (p && p.catch) p.catch(() => {}); };
-    vids.forEach((v) => { if (v.hasAttribute('data-eager') || v.classList.contains('ambient__v')) play(v); });
-    if (!('IntersectionObserver' in window)) { vids.forEach(play); return; }
-    const io = new IntersectionObserver((ents) => ents.forEach((en) => {
+    const kick = () => { vids.forEach((v) => io && io.observe(v)); vids.forEach((v) => { if (v.hasAttribute('data-eager') || v.classList.contains('ambient__v')) play(v); }); };
+    /* erst nach dem ersten Bild: Poster steht sofort, Film kommt danach */
+    if (document.readyState === 'complete') setTimeout(kick, 200); else window.addEventListener('load', () => setTimeout(kick, 200), { once: true });
+    const io = !('IntersectionObserver' in window) ? null : new IntersectionObserver((ents) => ents.forEach((en) => {
       const v = en.target; if (v.classList.contains('ambient__v')) return;
       if (en.isIntersecting) play(v); else if (v.dataset.on) v.pause();
     }), { rootMargin: '300px 0px' });
-    vids.forEach((v) => io.observe(v));
+    if (!io) { window.addEventListener('load', () => vids.forEach(play)); }
     document.addEventListener('visibilitychange', () => { if (document.hidden) vids.forEach((v) => v.pause()); else vids.forEach((v) => { if (v.dataset.on && v.getBoundingClientRect().bottom > -300 && v.getBoundingClientRect().top < innerHeight + 300) play(v); }); });
   })();
   /* Glasknöpfe: Lichtstreif für den Hover */
