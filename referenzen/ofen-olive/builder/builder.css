@@ -9,7 +9,7 @@
 .bz__size button[aria-checked="true"]{opacity:1}
 .bz__sizepill{position:absolute;top:3px;left:3px;width:2.5rem;height:2.2rem;border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(28,26,23,.14);transition:transform .35s var(--bz-ease)}
 .bz__size[data-i="1"] .bz__sizepill{transform:translateX(2.5rem)}.bz__size[data-i="2"] .bz__sizepill{transform:translateX(5rem)}
-.bz__stage{position:relative;z-index:2;width:min(100%,360px);aspect-ratio:1;margin:0 auto;display:grid;place-items:center;overflow:visible}
+.bz__stage{position:relative;z-index:2;width:min(100%,360px);aspect-ratio:1;margin:0 auto 4.15rem;display:grid;place-items:center;overflow:visible}
 /* Reel: verschwommener orange-roter Holzofen/Feuer-Glow hinter der Pizza */
 .bz__ovenbg{position:absolute;inset:-18%;border-radius:28%;pointer-events:none;opacity:0;z-index:0;transition:opacity .45s var(--bz-ease);
   background:
@@ -24,7 +24,7 @@
   background:radial-gradient(circle,#ffe7a0,#ff8a2a 55%,transparent 70%);
   animation:bzSpark calc(.9s + var(--k) * .05s) ease-out infinite;animation-delay:calc(var(--k) * -.11s);opacity:0}
 @keyframes bzSpark{0%{opacity:0;transform:translate(0,10px) scale(.4)}18%{opacity:1}100%{opacity:0;transform:translate(calc((var(--k) % 5 - 2) * 6px),-72px) scale(.15)}}
-.bz__plate{position:absolute;inset:3%;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0 60%,#EDE3D2 72%,rgba(237,227,210,0) 73%);box-shadow:0 18px 40px -18px rgba(28,26,23,.35);transition:opacity .4s,background .4s,box-shadow .4s;z-index:1}
+.bz__plate{position:absolute;left:50%;top:50%;translate:-50% -50%;width:calc(var(--d,1) * 88%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0 60%,#EDE3D2 72%,rgba(237,227,210,0) 73%);box-shadow:0 6px 14px -12px rgba(28,26,23,.22);transition:opacity .4s,background .4s,box-shadow .4s,width .55s var(--bz-spring);z-index:1}
 .bz.is-baking .bz__plate,.bz.is-done .bz__plate{opacity:.35;background:radial-gradient(circle at 50% 45%,rgba(40,14,6,.55) 0 58%,rgba(90,30,10,.2) 72%,transparent 78%);box-shadow:0 0 40px rgba(255,120,40,.35)}
 .bz__pie{position:relative;z-index:3;width:calc(var(--d,1) * 86%);aspect-ratio:1;border-radius:50%;transition:width .55s var(--bz-spring);
   filter:saturate(calc(1 + var(--bake,0) * .12)) brightness(calc(1 + var(--bake,0) * .02)) drop-shadow(0 10px 14px rgba(80,40,10,.22))}
@@ -70,7 +70,7 @@
 .bz__ghost--drag{width:56px;scale:1.1;filter:drop-shadow(0 10px 12px rgba(0,0,0,.3))}
 .bz__pie.is-bump{animation:bzBump .45s var(--bz-spring)}
 @keyframes bzBump{0%{scale:1}35%{scale:1.03}100%{scale:1}}
-.bz__cm{position:absolute;bottom:-.2rem;left:50%;translate:-50% 0;font-size:.78rem;letter-spacing:.04em;padding:.25rem .7rem;border-radius:999px;background:var(--bz-ink);color:var(--bz-creme);white-space:nowrap}
+.bz__cm{position:absolute;top:calc(100% + .9rem);bottom:auto;left:50%;translate:-50% 0;z-index:5;font-size:.78rem;letter-spacing:.04em;padding:.25rem .7rem;border-radius:999px;background:var(--bz-ink);color:var(--bz-creme);white-space:nowrap;pointer-events:none}
 .bz__hint{position:relative;z-index:2;text-align:center;font-size:.84rem;opacity:.7;min-height:1.4em;margin:-.2rem 0 0}
 .bz__grid{position:relative;z-index:2;list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem .4rem}
 .bz__grid li{position:relative}
@@ -105,14 +105,13 @@
 .bz.is-baking .bz__chip,.bz.is-done .bz__chip,.bz.is-baking .bz__minus,.bz.is-done .bz__minus,.bz.is-baking .bz__size,.bz.is-done .bz__size{opacity:.45;pointer-events:none;transition:opacity .3s}
 .bz.is-drag .bz__pie{outline:2px dashed var(--bz-terra);outline-offset:6px}
 /* Bühne + Dock: auf schmalen Breiten sticky, damit Pizza und Ofen-Knopf beim Belegen sichtbar bleiben */
-.bz__top{position:relative;z-index:3;display:flex;flex-direction:column;gap:.7rem;scroll-margin-top:var(--bz-top,.5rem)}
+.bz__top{position:relative;z-index:3;display:flex;flex-direction:column;gap:1.05rem;scroll-margin-top:var(--bz-top,.5rem)}
 @container (max-width:560px){
-  .bz__top{position:sticky;top:var(--bz-top,0px);margin-inline:-.4rem;padding:.35rem .4rem .55rem;background:var(--bz-bg,#FBF6EE);border-radius:0 0 22px 22px;box-shadow:0 14px 18px -16px rgba(28,26,23,.35)}
-  .bz__stage{width:min(100%,300px,36svh)}
+  .bz__top{position:sticky;top:var(--bz-top,0px);margin-inline:-.4rem;padding:.35rem .4rem .85rem;background:var(--bz-bg,#FBF6EE);border-radius:0 0 22px 22px;box-shadow:0 14px 18px -16px rgba(28,26,23,.35)}
+  .bz__stage{width:min(100%,300px,36svh);margin-bottom:4rem}
 }
 /* Ofen: Teller wird zum glühenden Steinboden, Flammen lecken unter dem Rand hervor */
-.bz__oven{position:absolute;inset:3%;border-radius:50%;pointer-events:none;opacity:0;z-index:2;transition:opacity .55s var(--bz-ease);
-  background:radial-gradient(closest-side,#1e0d06 0 62%,#3a1709 76%,#7a2e10 88%,#c4561c 96%,rgba(214,96,34,.6) 100%);box-shadow:0 0 40px 4px rgba(230,110,40,.45),inset 0 0 30px rgba(255,140,60,.25)}
+.bz__oven{position:absolute;left:50%;top:50%;translate:-50% -50%;width:calc(var(--d,1) * 88%);aspect-ratio:1;border-radius:50%;pointer-events:none;opacity:0;z-index:2;transition:opacity .55s var(--bz-ease),width .55s var(--bz-spring);background:radial-gradient(closest-side,#1e0d06 0 62%,#3a1709 76%,#7a2e10 88%,#c4561c 96%,rgba(214,96,34,.6) 100%);box-shadow:0 0 40px 4px rgba(230,110,40,.45),inset 0 0 30px rgba(255,140,60,.25)}
 .bz.is-baking .bz__oven{opacity:1;transition-duration:.28s}
 .bz__fire{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:2;transition:opacity .45s var(--bz-ease)}
 .bz.is-baking .bz__fire{opacity:1;transition-duration:.22s}
@@ -141,7 +140,7 @@
 .bz.is-baking .bz__steam i:nth-child(4),.bz.is-done .bz__steam i:nth-child(4){animation-delay:.7s}
 .bz.is-baking .bz__steam i:nth-child(5),.bz.is-done .bz__steam i:nth-child(5){animation-delay:.95s}
 .bz.is-done .bz__steam i{animation-iteration-count:2}
-.bz__heat{position:absolute;width:calc(var(--d,1) * 92%);aspect-ratio:1;mix-blend-mode:screen;border-radius:50%;pointer-events:none;opacity:0;z-index:2;transition:opacity .4s;background:conic-gradient(from 0deg,rgba(255,140,50,.0),rgba(255,140,50,.55),rgba(255,200,90,.1),rgba(255,120,40,.5),rgba(255,140,50,0));-webkit-mask:radial-gradient(closest-side,transparent 82%,#000 86%,transparent 100%);mask:radial-gradient(closest-side,transparent 82%,#000 86%,transparent 100%);animation:bzSpin 1.4s linear infinite}
+.bz__heat{position:absolute;width:calc(var(--d,1) * 88%);aspect-ratio:1;mix-blend-mode:screen;border-radius:50%;pointer-events:none;opacity:0;z-index:2;transition:opacity .4s;background:conic-gradient(from 0deg,rgba(255,140,50,.0),rgba(255,140,50,.55),rgba(255,200,90,.1),rgba(255,120,40,.5),rgba(255,140,50,0));-webkit-mask:radial-gradient(closest-side,transparent 82%,#000 86%,transparent 100%);mask:radial-gradient(closest-side,transparent 82%,#000 86%,transparent 100%);animation:bzSpin 1.4s linear infinite}
 .bz.is-baking .bz__heat{opacity:1}
 @keyframes bzSpin{to{transform:rotate(1turn)}}
 @keyframes bzSteam{0%{opacity:0;transform:translateY(28%) scale(.55,.45) translateX(0)}20%{opacity:.9}50%{opacity:.45;transform:translateY(-40%) scale(1.15,1.5) translateX(4%)}100%{opacity:0;transform:translateY(-95%) scale(1.45,2.1) translateX(-3%)}}
