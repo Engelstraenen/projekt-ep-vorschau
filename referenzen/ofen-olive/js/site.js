@@ -8,8 +8,12 @@
   if (C.karte) {
     const e = n => n.toLocaleString('de-DE', { minimumFractionDigits: 2 }) + ' €';
     const k = $('[data-cfg-karte]'), n = $('[data-cfg-kn]');
-    if (k) k.innerHTML = C.karte.map(s => `<section class="ks" aria-labelledby="karte-${s.id}"><h3 class="kh" id="karte-${s.id}">${s.titel}${s.unter ? ` <small>${s.unter}</small>` : ''}</h3><ul class="kl" role="list">${s.gerichte.map(g => `<li><div><h4>${g.name}${g.tag ? ` <i>${g.tag}</i>` : ''}</h4><p>${g.text}</p></div><span class="kl__d" aria-hidden="true"></span><span class="kl__p">${e(g.preis)}</span></li>`).join('')}</ul></section>`).join('');
-    if (n) n.innerHTML = [['ofen', 'Holzofen'], ...C.karte.map(s => [s.id, s.titel.replace('Weitere ', '')])].map(([id, t]) => `<a href="#karte-${id}">${t}</a>`).join('');
+    const esc = t => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+    const item = g => { const href = `../ofen-olive-app/?${g.typ === 'pizza' ? 'pizza' : 'gericht'}=${g.id}`;
+      return `<li class="menu__item"><img src="${g.bild}" width="720" height="720" alt="${esc(g.name)}" loading="lazy" decoding="async"><div><h3>${g.name}${g.tag ? ` <i>${g.tag}</i>` : ''}</h3><p>${g.text}</p></div><span class="menu__p">${e(g.preis)}</span><a class="menu__add" href="${href}" aria-label="${esc(g.name)} bestellen">+</a></li>`; };
+    if (k) k.innerHTML = C.karte.map(s => `<section class="ks" aria-labelledby="karte-${s.id}"><h3 class="kh" id="karte-${s.id}">${s.titel}${s.unter ? ` <small>${s.unter}</small>` : ''}</h3><ul class="menu" role="list">${s.gerichte.map(item).join('')}</ul></section>`).join('');
+    if (n) n.innerHTML = C.karte.map(s => `<a href="#karte-${s.id}">${s.titel}</a>`).join('');
+    if (k && location.hash.startsWith('#karte-')) requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView());
   }
   if (C.liefergebiet) { const ul = $('[data-cfg-areas]'); if (ul) ul.innerHTML = C.liefergebiet.map(a => `<li>${a}</li>`).join(''); }
   if (C.name) document.title = `${C.name} · Holzofen-Pizzeria ${C.ort || ''} · Demo PROJEKT EX`;

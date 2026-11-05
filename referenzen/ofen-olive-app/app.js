@@ -38,18 +38,19 @@
   $$('[data-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
 
   // Liste
-  const K = C.karte || [], ALL = [...C.pizzen, ...K.flatMap(s => s.gerichte)];
-  const find = id => ALL.find(p => p.id === id);
-  $('#kn').innerHTML = [['ofen', 'Holzofen'], ...K.map(s => [s.id, s.titel.replace('Weitere ', '')])].map(([id, t]) => `<a href="#k-${id}">${t}</a>`).join('');
+  const K = C.karte || [], ALL = K.flatMap(s => s.gerichte);
+  const find = id => ALL.find(p => p.id === id) || C.pizzen.find(p => p.id === id);
+  $('#kn').innerHTML = K.map(s => `<a href="#k-${s.id}">${s.titel}</a>`).join('');
   $$('#kn a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const t = $(a.getAttribute('href')); if (t) views.list.scrollTo({ top: t.offsetTop - 64, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }));
-  $('#karte').innerHTML = K.map(s => `<h3 class="sec-h" id="k-${s.id}">${s.titel}${s.unter ? `<small>${s.unter}</small>` : ''}</h3><ul class="dl" role="list">${s.gerichte.map(g => `<li><button type="button" class="dish" data-${g.typ === 'pizza' ? 'id' : 'add'}="${g.id}"><span class="dish__t"><b>${g.name}${g.tag ? ` <i>${g.tag}</i>` : ''}</b><span>${g.text}</span></span><span class="dish__r"><span class="card__p">${eur(g.preis)}</span><span class="card__in" data-in="${g.id}"></span></span><span class="card__plus" aria-hidden="true">+</span></button></li>`).join('')}</ul>`).join('');
-  $$('[data-add]').forEach(b => b.addEventListener('click', () => {
-    const g = find(b.dataset.add), hit = S.cart.find(i => i.p === g && i.label);
+  const card = g => `<li><button type="button" class="card" data-${g.typ === 'pizza' ? 'id' : 'add'}="${g.id}"><img src="${base + g.bild}" width="96" height="96" alt="" loading="lazy" decoding="async"><div><h4>${g.name}${g.tag ? ` <i>${g.tag}</i>` : ''}</h4><p>${g.text}</p><div class="card__row"><span class="card__p">${eur(g.preis)}</span><span class="card__in" data-in="${g.id}"></span><span class="card__plus" aria-hidden="true">+</span></div></div></button></li>`;
+  $('#karte').innerHTML = K.map(s => `<h3 class="sec-h" id="k-${s.id}">${s.titel}${s.unter ? `<small>${s.unter}</small>` : ''}</h3><ul class="list" role="list">${s.gerichte.map(card).join('')}</ul>`).join('');
+  const addDish = id => {
+    const g = find(id); if (!g) return; const hit = S.cart.find(i => i.p === g && i.label);
     hit ? hit.qty++ : S.cart.push({ p: g, size: 0, ex: [], qty: 1, unit: g.preis, label: K.find(s => s.gerichte.includes(g)).titel });
     syncBar(true); toast(`${g.name} im Warenkorb`);
-  }));
-  $('#list').innerHTML = C.pizzen.map(p => `<li><button type="button" class="card" data-id="${p.id}"><img src="${base + p.bild}" width="96" height="96" alt="" loading="lazy"><div><h4>${p.name}</h4><p>${p.text}</p><div class="card__row"><span class="card__p">${eur(p.preis)}</span><span class="card__in" data-in="${p.id}"></span><span class="card__plus" aria-hidden="true">+</span></div></div></button></li>`).join('');
-  $$('.card, .dish[data-id]').forEach(c => c.addEventListener('click', () => openSheet(c.dataset.id)));
+  };
+  $$('[data-add]').forEach(b => b.addEventListener('click', () => addDish(b.dataset.add)));
+  $$('.card[data-id]').forEach(c => c.addEventListener('click', () => openSheet(c.dataset.id)));
 
   // Detail-Sheet
   const sheet = $('#sheet'), scrim = $('#scrim');
@@ -164,4 +165,5 @@
   });
   setMode('abholung');
   const q = new URLSearchParams(location.search).get('pizza'); if (q) setTimeout(() => openSheet(q), 350);
+  const qg = new URLSearchParams(location.search).get('gericht'); if (qg && find(qg)) setTimeout(() => { go('list'); addDish(qg); const t = document.querySelector(`[data-add="${qg}"]`); if (t) views.list.scrollTo({ top: t.offsetTop - 120 }); }, 350);
 })();

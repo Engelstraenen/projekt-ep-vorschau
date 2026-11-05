@@ -88,6 +88,8 @@ button{cursor:pointer;background:none;border:0}
 .dish__t span{display:block;font-size:.8rem;color:var(--ink-s);margin-top:.15rem;text-wrap:pretty}
 .dish__r{display:flex;flex-direction:column;align-items:flex-end;gap:.15rem}
 .ci.ci--t{grid-template-columns:1fr auto}
+.card h4 i{font:500 .62rem/1 var(--sans);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);vertical-align:.25em}
+.list+.sec-h{margin-top:2rem}
 .tiny{font-size:.8rem;color:var(--ink-s);text-align:center;margin:1.4rem 1rem 0}
 .tiny--l{color:rgba(243,235,221,.65)}
 

@@ -116,10 +116,11 @@ h1.display{font-size:clamp(3.2rem,9vw,8.4rem);line-height:.92}
 .kn{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:1.6rem;font:500 .76rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
 .kn a{color:var(--oliv);text-decoration:none;padding:.35rem 0;border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease}
 @media (hover:hover) and (pointer:fine){.kn a:hover{color:var(--terra);border-color:currentColor}}
-.kh{font:500 clamp(1.7rem,2.6vw,2.2rem)/1.05 var(--serif);margin-top:3.4rem;scroll-margin-top:5rem;text-wrap:balance}
+.kh{font:500 clamp(1.7rem,2.6vw,2.2rem)/1.05 var(--serif);margin-top:3.4rem;scroll-margin-top:7.5rem;text-wrap:balance}
 .kh small{display:block;font:400 .82rem/1.4 var(--sans);letter-spacing:.04em;color:#6d6458;margin-top:.45rem}
 .karte__body>.kh{margin-top:3rem}.karte__body>.kh+.menu{margin-top:1.4rem}
-.ks .kh{margin-top:3.6rem}
+.ks .kh{margin-top:3.6rem}.ks .menu{margin:1.4rem 0 0}
+.menu__item h3 i{font:500 .66rem/1 var(--sans);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);vertical-align:.3em;margin-left:.35rem}
 .kl{list-style:none;padding:0;margin:1.3rem 0 0}
 .kl li{display:grid;grid-template-columns:minmax(0,46ch) minmax(1rem,1fr) auto;align-items:baseline;gap:.8rem;padding:.75rem 0}
 .kl h4{font:500 1.3rem/1.15 var(--serif)}
