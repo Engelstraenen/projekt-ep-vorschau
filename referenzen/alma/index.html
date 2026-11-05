@@ -10,32 +10,46 @@
 <meta name="theme-color" content="#120c09">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23120c09'/%3E%3Cpath d='M16 7c-5 3-5 15 0 18M16 7c5 3 5 15 0 18' fill='none' stroke='%23e8622c' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="film/ot/d/001.webp" as="image" media="(min-width:801px)">
-<link rel="stylesheet" href="assets/scrolly.css?v=3">
+<link rel="stylesheet" href="assets/scrolly.css?v=10">
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
-<script src="assets/scrolly.js?v=3" defer></script>
+<script src="assets/scrolly.js?v=10" defer></script>
 </head>
 <body>
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
-<p class="demo-note">Demo-Projekt von Projekt EX, fiktive Marke · <a href="../../leistungen/websites.html#praxisbeispiele">← Zurück zu Projekt EX</a></p>
+<p class="demo-note">Demo-Projekt von PROJEKT EX, fiktive Marke · <a href="../../leistungen/websites.html#praxisbeispiele">← Zurück zu PROJEKT EX</a></p>
 <header class="top">
   <a class="logo" href="./">ALMA<em>.</em><span>Rösterei</span></a>
   <nav aria-label="Kapitel"><ol class="chap" role="list">
-    <li><a href="#plantage">Plantage</a></li><li><a href="#ernte">Ernte</a></li><li><a href="#reise">Reise</a></li><li><a href="#roesten">Rösten</a></li><li><a href="#mahlen">Mahlen</a></li><li><a href="#bruehen">Brühen</a></li><li><a href="#shop">Shop</a></li>
+    <li><a href="#plantage">Plantage</a></li><li><a href="#ernte">Ernte</a></li><li><a href="#band">Band</a></li><li><a href="#reise">Schiff</a></li><li><a href="#roesten">Rösten</a></li><li><a href="#mahlen">Mahlen</a></li><li><a href="#bruehen">Brühen</a></li><li><a href="#shop">Shop</a></li>
   </ol></nav>
   <div class="prog" aria-hidden="true"><i></i></div>
 </header>
 
 
 <div class="stage" aria-hidden="true">
-  <canvas class="film" data-n="386"></canvas>
+  <canvas class="film" data-n="240"></canvas>
   <div class="shade"></div>
   <div class="fx">
-    <img class="dust d1" src="img/bohne.webp" alt=""><img class="dust d2" src="img/bohne-gruen.webp" alt=""><img class="dust d3" src="img/bohne.webp" alt=""><img class="dust d4" src="img/bohne-gruen.webp" alt="">
+    <img class="dust d1" src="img/bohne.webp" alt="" width="70" height="70"><img class="dust d2" src="img/bohne.webp" alt="" width="44" height="44"><img class="dust d3" src="img/bohne.webp" alt="" width="90" height="90"><img class="dust d4" src="img/bohne.webp" alt="" width="38" height="38">
     <svg class="route" viewBox="0 0 600 240"><path class="route__bg" d="M30 190 C 150 40, 300 40, 400 120 S 540 180, 570 60"/><path class="route__p" d="M30 190 C 150 40, 300 40, 400 120 S 540 180, 570 60"/><circle cx="30" cy="190" r="5"/><circle cx="570" cy="60" r="5"/><text x="30" y="222">Huila</text><text x="570" y="40" text-anchor="end">Leipzig</text></svg>
     <svg class="ring" viewBox="0 0 200 200"><circle class="ring__bg" cx="100" cy="100" r="88"/><circle class="ring__p" cx="100" cy="100" r="88"/></svg>
-    <div class="hb"><img class="hb__g" src="img/bohne-gruen.webp" alt=""><img class="hb__r" src="img/bohne.webp" alt=""><p class="hb__tag"><span>Bohne Nr. 1</span><b class="hb__st">Kirsche</b></p></div>
+    <div class="hb">
+      <img class="hb__g" src="img/bohne-gruen.webp" alt="" width="560" height="560">
+      <img class="hb__r" src="img/bohne.webp" alt="" width="560" height="560">
+      <aside class="hb__card" aria-live="polite">
+        <p class="hb__kicker"><span>Bohne Nr. 1</span><b class="hb__st">Kirsche</b></p>
+        <dl class="hb__facts">
+          <div><dt>Hof</dt><dd class="hb__farm">Finca Alta, Huila</dd></div>
+          <div><dt>Höhe</dt><dd class="hb__alt">1.850 m</dd></div>
+          <div><dt>Varietät</dt><dd class="hb__var">Caturra</dd></div>
+          <div><dt>Detail</dt><dd class="hb__det">Reife Kirsche am Strauch</dd></div>
+        </dl>
+      </aside>
+    </div>
   </div>
   <p class="tc"><span class="tc__t">00:00</span><i><b></b></i><span class="tc__c">Plantage</span></p>
 </div>
@@ -63,16 +77,39 @@
     <div class="txt txt--r">
       <p class="num">Kapitel II · Ernte</p>
       <h2 id="h-er" class="big">Nur die roten.</h2>
-      <article class="step"><h3>Fünf Runden</h3><p>Dieselben Sträucher, fünfmal in sechs Wochen. Gepflückt wird nur, was wirklich reif ist.</p></article>
-      <article class="step"><h3>Zwei Samen</h3><p>Unter dem Fruchtfleisch liegen zwei grüne Bohnen. Achtzehn Tage Sonne, dann zweimal sortiert.</p></article>
-      <article class="step"><h3>Ein Sack, ein Hof</h3><p>Jede Ernte bleibt für sich. So schmecken Sie später genau, woher sie kommt.</p></article>
+      <article class="step"><h3>Die Kirsche öffnet sich</h3><p>Die Bohne fällt heraus – die Kamera fällt mit.</p></article>
+      <article class="step"><h3>In der Hand</h3><p>Aufgefangen, geprüft, weitergegeben. Nur was dicht und ganz ist, bleibt.</p></article>
+      <article class="step"><h3>Aufs Band</h3><p>Ab hier wendet sich die Geschichte: nicht mehr nach unten, sondern seitlich.</p></article>
+    </div>
+  </section>
+
+
+  <section class="scene scene--hz" id="band" data-st="Auf dem Band" aria-labelledby="h-ba">
+    <div class="hz" id="hz-track">
+      <div class="hz__panel">
+        <p class="num">Kapitel III · Band</p>
+        <h2 id="h-ba" class="big">Links rein. Rechts hinaus.</h2>
+        <p>Die Bohne legt sich aufs Band. Ab hier geht die Reise seitlich – Sortierung, Jute, Stempel, bereit für die See.</p>
+      </div>
+      <div class="hz__panel">
+        <h3 class="hz__h">Sortiert</h3>
+        <p>Nur ganze, dichte Bohnen. Defekte fallen seitlich ab.</p>
+      </div>
+      <div class="hz__panel">
+        <h3 class="hz__h">In Jute</h3>
+        <p>Ein Sack, ein Hof. Die Charge bleibt für sich.</p>
+      </div>
+      <div class="hz__panel">
+        <h3 class="hz__h">Richtung Hafen</h3>
+        <p>Cartagena wartet. Die Kamera schwenkt mit dem Band.</p>
+      </div>
     </div>
   </section>
 
   <section class="scene" id="reise" data-st="Auf Reisen" aria-labelledby="h-re">
     <div class="txt">
-      <p class="num">Kapitel III · Reise</p>
-      <h2 id="h-re" class="big">Zehntausend Kilometer im Jutesack.</h2>
+      <p class="num">Kapitel IV · Schiff</p>
+      <h2 id="h-re" class="big">Über See. Zehntausend Kilometer.</h2>
       <ol class="stops" role="list"><li><b>Huila</b>Abfüllung in Jute, ein Sack, ein Hof.</li><li><b>Cartagena</b>Verladung, ab hier zählt jede Woche Seeluft.</li><li><b>Atlantik</b>Drei Wochen auf See, kühl und trocken.</li><li><b>Leipzig</b>Ankunft im Speicherhof. Ab in die Trommel.</li></ol>
       <p class="km"><span class="count" data-to="10000" data-sep="1">0</span> km</p>
     </div>
@@ -80,7 +117,7 @@
 
   <section class="scene" id="roesten" data-st="Im Feuer" aria-labelledby="h-ro">
     <div class="txt txt--r">
-      <p class="num">Kapitel IV · Rösten</p>
+      <p class="num">Kapitel V · Rösten</p>
       <h2 id="h-ro" class="big">Zwölf Minuten, die alles entscheiden.</h2>
       <p class="temp"><span class="count" data-to="205" data-from="20">20</span>°C</p>
       <ol class="phases" role="list"><li>Trocknen</li><li>Maillard</li><li>First Crack</li><li>Entwicklung</li></ol>
@@ -89,7 +126,7 @@
 
   <section class="scene" id="mahlen" data-st="Gemahlen" aria-labelledby="h-ma">
     <div class="txt">
-      <p class="num">Kapitel V · Mahlen</p>
+      <p class="num">Kapitel VI · Mahlen</p>
       <h2 id="h-ma" class="big">Erst jetzt bricht sie auf.</h2>
       <p>Kurz vor dem Brühen geht unsere Bohne durch das Mahlwerk. Der Mahlgrad entscheidet über Klarheit und Körper.</p>
       <ul class="grind" role="list"><li>Espresso<span>fein</span></li><li>Filter<span>mittel</span></li><li>French Press<span>grob</span></li></ul>
@@ -98,7 +135,7 @@
 
   <section class="scene" id="bruehen" data-st="Gebrüht" aria-labelledby="h-br">
     <div class="txt txt--r">
-      <p class="num">Kapitel VI · Brühen</p>
+      <p class="num">Kapitel VII · Brühen</p>
       <h2 id="h-br" class="big"><span class="count" data-to="93">0</span> Grad. Geduld.</h2>
       <p>Das Wasser findet seinen Weg durch das Mehl und nimmt mit, wofür der lange Weg gegangen wurde.</p>
     </div>
@@ -111,10 +148,10 @@
   <section class="shop" id="shop" aria-labelledby="h-sh">
     <video class="bgv" src="film/cafe.mp4" poster="film/cafe-poster.webp" autoplay muted loop playsinline preload="none" aria-hidden="true"></video><div class="shade shade--deep"></div>
     <div class="shop__in">
-      <p class="num">Kapitel VII · Ihre Tasse</p>
+      <p class="num">Kapitel VIII · Ihre Tasse</p>
       <h2 id="h-sh" class="big">Die Reise endet bei Ihnen.</h2>
       <ul class="menu" role="list"><li><a class="row" href="#kontakt"><span class="row__n">01</span><span class="row__t">Huila Finca Alta</span><span class="row__r">Hell geröstet</span><span class="row__d">Kakao, rote Beere, Honig</span><span class="row__go" aria-hidden="true">→</span></a></li><li><a class="row" href="#kontakt"><span class="row__n">02</span><span class="row__t">Speicherhof Espresso</span><span class="row__r">Mittel geröstet</span><span class="row__d">Haselnuss, dunkle Schokolade</span><span class="row__go" aria-hidden="true">→</span></a></li><li><a class="row" href="#kontakt"><span class="row__n">03</span><span class="row__t">Plagwitz Morgen</span><span class="row__r">Filter</span><span class="row__d">Karamell, Orange, mild</span><span class="row__go" aria-hidden="true">→</span></a></li></ul>
-      <div class="contact" id="kontakt"><p>Probierpaket, Abo oder Röstkurs? Kommen Sie vorbei oder schreiben Sie uns.</p><a class="btn" href="impressum.html">Kontakt aufnehmen</a></div>
+      <div class="contact" id="kontakt"><p>Probierpaket, Abo oder Röstkurs – kommen Sie in den Speicherhof oder schreiben Sie uns.</p><a class="btn" href="impressum.html">Nachricht schreiben</a></div>
     </div>
   </section>
 </main>
@@ -125,9 +162,9 @@
   <div class="foot__grid">
     <p>Kleine Chargen, langsam geröstet.<br>Rösterei &amp; Café in Leipzig-Plagwitz.</p>
     <p>Speicherhof 3<br>04229 Leipzig<br>Di–Sa 8–18 Uhr</p>
-    <nav aria-label="Rechtliches"><ul role="list"><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="../../leistungen/websites.html#praxisbeispiele">Zurück zu Projekt EX</a></li></ul></nav>
+    <nav aria-label="Rechtliches"><ul role="list"><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="../../leistungen/websites.html#praxisbeispiele">Zurück zu PROJEKT EX</a></li></ul></nav>
   </div>
-  <p class="foot__legal">© 2026 ALMA Rösterei · Demo-Projekt von Projekt EX, fiktive Marke. Rösterei, Adresse, Herkunft, Kaffees und alle Angaben sind erfunden.</p>
+  <p class="foot__legal">© 2026 ALMA Rösterei · Demo-Projekt von PROJEKT EX, fiktive Marke. Rösterei, Adresse, Herkunft, Kaffees und alle Angaben sind erfunden.</p>
 </footer>
 </body>
 </html>
