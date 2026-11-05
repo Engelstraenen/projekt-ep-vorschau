@@ -8,20 +8,20 @@ Aufruf: python3 tools/shared.py [datei ...]   (ohne Argumente: alle Seiten)
 import os, re, sys, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAIL = 'kontakt@projekt-ep.de'
-# Reihenfolge und Nummern = zehn Themen/Kapitel der Startseite (SEO gehört zu 01, Games zu 03)
+# Reihenfolge und Nummern = Kapitel der Startseite (Games teilt 05 mit Apps; Print/Merch/Räume am Ende)
 S = [
- ('websites', '01', 'Design', 'Websites', 'Design, Entwicklung, SEO &amp; Sichtbarkeit', 'digital-design'),
- ('seo', '01', 'Find', 'SEO &amp; Sichtbarkeit', 'Audit, On-page, Content', 'seo'),
- ('automatisierung-chatbots', '02', 'Connect', 'Automatisierung &amp; Chatbots', 'Chatbots, Integrationen, Abläufe', 'workflow'),
- ('apps', '03', 'Develop', 'App Design', 'UX, UI, Prototyp, Entwicklung', 'app-design'),
- ('games', '03', 'Play', 'Game Design', 'Browser, Mobile, Serious Games', 'game'),
- ('werbeclips', '04', 'Create', 'Werbeclips', 'Werbefilme, Motion Design, Social Ads', 'campaign'),
- ('ads-management', '05', 'Run', 'Ads-Management', 'Meta, TikTok, Google, laufend betreut', 'ads'),
- ('visualisierung', '06', 'Envision', 'Räume &amp; Visualisierung', 'Garten, Interior, Architektur', 'spaces'),
- ('print-design', '07', 'Craft', 'Print Design', 'Textil, Objekte, Packaging', 'print'),
+ ('websites', '01', 'Design', 'Websites', 'Design, Entwicklung, Hosting &amp; Betreuung', 'digital-design'),
+ ('seo', '02', 'Find', 'SEO &amp; Sichtbarkeit', 'Audit, On-page, Content', 'seo'),
+ ('systeme', '03', 'Manage', 'Systeme &amp; Dashboards', 'Warenwirtschaft, Personal, Dashboards', 'dashboards'),
+ ('automatisierung-chatbots', '04', 'Connect', 'Automatisierung &amp; Chatbots', 'Chatbots, Integrationen, Abläufe', 'workflow'),
+ ('apps', '05', 'Develop', 'App Design', 'UX, UI, Prototyp, Entwicklung', 'app-design'),
+ ('games', '05', 'Play', 'Game Design', 'Browser, Mobile, Serious Games', 'game'),
+ ('werbeclips', '06', 'Create', 'Werbeclips', 'Werbefilme, Motion Design, Social Ads', 'campaign'),
+ ('ads-management', '07', 'Run', 'Ads-Management', 'Meta, TikTok, Google, laufend betreut', 'ads'),
  ('logo-design', '08', 'Brand', 'Logo Design', 'Logo, Farben, Schrift, Brand Guide', 'logo-design'),
- ('merch', '09', 'Produce', 'Merch-Produktion', 'Jersey, Denim, Strick, Kollektionen', 'merch'),
- ('systeme', '10', 'Manage', 'Systeme &amp; Dashboards', 'Warenwirtschaft, Personal, Dashboards', 'dashboards'),
+ ('print-design', '09', 'Craft', 'Print Design', 'Textil, Objekte, Packaging', 'print'),
+ ('merch', '10', 'Produce', 'Merch-Produktion', 'Jersey, Denim, Strick, Kollektionen', 'merch'),
+ ('visualisierung', '11', 'Envision', 'Räume &amp; Visualisierung', 'Garten, Interior, Architektur', 'spaces'),
  ('individuelle-auftraege', '', 'Mehr', 'Individuelle Aufträge', 'Wenn deine Idee in kein Raster passt', 'produkt'),
 ]
 ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -113,5 +113,4 @@ if __name__ == '__main__':
     files = sys.argv[1:] or [os.path.join(ROOT, 'index.html'), os.path.join(ROOT, 'kontakt.html'), os.path.join(ROOT, 'prozess.html'), os.path.join(ROOT, 'faq.html')] + \
         [os.path.join(ROOT, 'leistungen', s[0] + '.html') for s in S]
     for f in files: process(os.path.abspath(f))
-    # Zeit-Element aus assets/dauer.json
-    import runpy; runpy.run_path(os.path.join(ROOT, 'tools', 'dauer.py'), run_name='__main__')
+    # Hinweis: tools/dauer.py bewusst nicht automatisch aufrufen (manuell nur bei Dauer-Pflege).
