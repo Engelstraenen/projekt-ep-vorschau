@@ -20,11 +20,11 @@
   --lg-brand-hover-top: rgba(120, 175, 230, .30);
   --lg-brand-hover-core: rgba(75, 145, 205, .16);
   --lg-brand-hover-deep: rgba(45, 115, 180, .26);
-  /* Neutrales Grauglas (aktive Chips/Filter/Segmente) — kühles mittleres Graphit, durchscheinend */
-  --lg-gray-top: rgba(255, 255, 255, .52);
-  --lg-gray-core: rgba(186, 194, 206, .18);
-  --lg-gray-deep: rgba(128, 136, 148, .34);
-  --lg-gray-wash: rgba(125, 132, 144, .24);
+  /* Neutrales Grauglas (aktive Chips/Filter/Segmente) — sichtbares Mittelgrau, durchscheinend */
+  --lg-gray-top: rgba(255, 255, 255, .50);
+  --lg-gray-core: rgba(155, 161, 171, .22);
+  --lg-gray-deep: rgba(150, 156, 166, .28);
+  --lg-gray-wash: rgba(148, 154, 164, .22);
   --lg-gray-ink: #1D1D1F;
   /* Text: Tinte auf hellem Grund (klares Glas); Weiß nur wo nötig / auf Dunkel */
   --lg-ink: #0A3A6E;
@@ -494,15 +494,15 @@ html.lg-svg [data-look="shopcontrol"] .lk-live {
   -webkit-backdrop-filter: blur(4px) saturate(165%) contrast(1.05);
   backdrop-filter: blur(4px) saturate(165%) contrast(1.05);
   box-shadow:
-    inset 0 0 0 .5px rgba(29, 29, 31, .30),
+    inset 0 0 0 .5px rgba(29, 29, 31, .24),
     inset 0 1.5px 1px rgba(255, 255, 255, .88),
     inset 0 -2px 3px rgba(255, 255, 255, .62),
-    inset 0 -7px 10px -6px rgba(29, 29, 31, .24),
+    inset 0 -7px 10px -6px rgba(29, 29, 31, .22),
     inset 3px 0 6px -4px rgba(29, 29, 31, .14),
     inset -3px 0 6px -4px rgba(29, 29, 31, .14),
     0 1px 1px rgba(29, 29, 31, .10),
-    0 6px 14px -6px rgba(29, 29, 31, .26),
-    0 16px 28px -18px rgba(29, 29, 31, .30);
+    0 6px 14px -6px rgba(29, 29, 31, .24),
+    0 16px 28px -18px rgba(29, 29, 31, .28);
 }
 
 /* Spekular an Stil-Chips (erster Tag) wieder hell — war bei Dunklem Glas gedämpft */
@@ -521,8 +521,8 @@ html.lg-svg [data-look="shopcontrol"] .lk-live {
   .px-seg button[aria-pressed="true"]:hover {
     color: var(--lg-gray-ink);
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, .58) 0%, rgba(186, 194, 206, .28) 48%, rgba(125, 133, 145, .42) 100%),
-      rgba(130, 137, 149, .34);
+      linear-gradient(180deg, rgba(255, 255, 255, .55) 0%, rgba(155, 161, 171, .30) 48%, rgba(145, 151, 161, .36) 100%),
+      rgba(148, 154, 164, .30);
     box-shadow:
       inset 0 0 0 .5px rgba(29, 29, 31, .28),
       inset 0 1.5px 1px rgba(255, 255, 255, .90),
@@ -552,7 +552,7 @@ html.lg-svg .px-seg button[aria-pressed="true"] {
   .tabs button[aria-pressed="true"],
   .lk-btn[aria-pressed="true"],
   .px-seg button[aria-pressed="true"] {
-    background: linear-gradient(180deg, #E6E8ED, #CFD3DB);
+    background: linear-gradient(180deg, #D8DCE3, #C5CAD3);
     color: #1D1D1F;
   }
 }
@@ -566,10 +566,10 @@ html.lg-svg .px-seg button[aria-pressed="true"] {
   .px-seg button[aria-pressed="true"] {
     color: #1D1D1F;
     text-shadow: none;
-    background: #D1D5DB;
+    background: #C9CED6;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    box-shadow: inset 0 0 0 1px #B8BBC2, 0 4px 10px -6px rgba(29, 29, 31, .22);
+    box-shadow: inset 0 0 0 1px #B0B4BC, 0 4px 10px -6px rgba(29, 29, 31, .22);
   }
   .filter button[aria-pressed="true"] span { color: #6E6E73; }
   .pb-tags li:first-child::before,
