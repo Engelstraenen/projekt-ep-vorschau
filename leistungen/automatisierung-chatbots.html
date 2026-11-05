@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-vzPd/MYSBsdJoRUl7pVtuXcDdgXfGSghjrXWN7qBmws='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-jRmPsbsPwu8oEM8kbjPs5Zz0wagNXEpsG6Wg1pI6/m4='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
@@ -83,9 +83,9 @@
         <header class="pb-head rb-head"><p class="rb-label">Erklärvideo</p><h2 id="ev-h" class="rb-h th-ev-h">Die Helferlein bei der Arbeit.</h2><p class="rb-lead">Anfragen, Chat und Belege laufen von selbst. Euer Team sieht nur noch, was wirklich eine Entscheidung braucht.</p></header>
         <figure class="px-film ev-film">
           <video id="ev-video" controls playsinline preload="metadata" width="2560" height="1440" poster="../img/systeme/helferlein-16x9-poster.webp" aria-label="Erklärvideo mit Sprecher und Musik: Anfragen werden automatisch geprüft und als Termin bestätigt, ein Chat-Assistent antwortet auch am Sonntagabend, Belege landen von selbst im richtigen Ordner">
-            <source media="(max-width: 600px) and (orientation: portrait)" src="../video/systeme/helferlein-9x16.mp4" type="video/mp4">
-            <source src="../video/systeme/helferlein-16x9.mp4" type="video/mp4">
-            <track kind="subtitles" srclang="de" label="Deutsch" src="../video/systeme/helferlein-16x9.vtt">
+            <source media="(max-width: 600px) and (orientation: portrait)" src="../video/systeme/helferlein-9x16.mp4?v=e3b6f8b4" type="video/mp4">
+            <source src="../video/systeme/helferlein-16x9.mp4?v=3cb5dc2a" type="video/mp4">
+            <track kind="subtitles" srclang="de" label="Deutsch" src="../video/systeme/helferlein-16x9.vtt?v=fd7549c3">
           </video>
           <figcaption><span><b>Die Helferlein</b> · <span class="ev-dur">40 s</span> · mit Ton</span><span>Zum Abspielen klicken</span></figcaption>
         </figure>
@@ -93,7 +93,7 @@
           // Hochformat-Handy: 9:16-Fassung (über <source media>), dazu passendes Standbild und Untertitel
           (function () { var v = document.getElementById('ev-video'); if (!v || !matchMedia('(max-width: 600px) and (orientation: portrait)').matches) return;
             v.poster = '../img/systeme/helferlein-9x16-poster.webp'; v.setAttribute('width', '1440'); v.setAttribute('height', '2560'); v.classList.add('ev-hoch');
-            var t = v.querySelector('track'); if (t) t.src = '../video/systeme/helferlein-9x16.vtt';
+            var t = v.querySelector('track'); if (t) t.src = '../video/systeme/helferlein-9x16.vtt?v=b1632178';
             var d = document.querySelector('#erklaervideo .ev-dur'); if (d) d.textContent = '30 s'; })();
         </script>
         <div class="uc-cap">
