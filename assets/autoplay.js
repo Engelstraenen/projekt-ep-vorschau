@@ -12,8 +12,8 @@
   vids.forEach((v) => {
     v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true;
     v.setAttribute('muted', ''); v.setAttribute('loop', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
-    if (!RM.matches) v.autoplay = true;
-    else if (v.preload === 'none') { if (!v.getAttribute('src') && v.dataset.src) v.src = v.dataset.src; v.preload = 'metadata'; } // Bedienleiste/Play muss sofort reagieren
+    if (RM.matches) { v.autoplay = false; v.removeAttribute('autoplay'); if (v.preload === 'none') { if (!v.getAttribute('src') && v.dataset.src) v.src = v.dataset.src; v.preload = 'metadata'; } }
+    else v.autoplay = true;
     v.addEventListener('pause', () => { if (!v._auto && !document.hidden && v._vis) v._user = true; v._auto = false; });
     v.addEventListener('play', () => { v._user = false; });
     // Klick auf die Videofläche startet/pausiert (nur ohne native Bedienleiste, die das selbst macht)
