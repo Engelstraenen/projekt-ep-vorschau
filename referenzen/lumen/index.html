@@ -2,24 +2,24 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Lumen Zahnmedizin am Lindenhof, München – Online-Termin (Demo)</title>
 <meta name="description" content="Demo einer Praxis-Website: Lumen Zahnmedizin in München, Vorsorge, Ästhetik, Implantate und sanfte Behandlung, mit Online-Termin in einer Minute. Fiktive Praxis, Demo-Projekt von Projekt EX.">
-<meta name="theme-color" content="#f0f2ee">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2321403a'/%3E%3Cpath d='M11 8v16h10' fill='none' stroke='%23f0f2ee' stroke-width='2.4'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#eef4fa">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d4f86'/%3E%3Cpath d='M11 8v16h10' fill='none' stroke='%23eef4fa' stroke-width='2.4'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/hanken-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" type="image/avif" media="(max-width: 700px) and (orientation: portrait)" imagesrcset="img/hero-m-480.avif 480w, img/hero-m-828.avif 828w" imagesizes="100vw" fetchpriority="high">
-<link rel="preload" as="image" type="image/avif" media="not all and (max-width: 700px) and (orientation: portrait)" imagesrcset="img/hero-640.avif 640w, img/hero-1080.avif 1080w, img/hero-1600.avif 1600w, img/hero-2400.avif 2400w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/lumen.css?v=20261102h">
+<link rel="preload" as="image" type="image/webp" href="video/hero-poster.webp" fetchpriority="high">
+<link rel="stylesheet" href="assets/lumen.css?v=20261105g">
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
-<script src="assets/lumen.js?v=20261102h" defer></script>
+<script src="assets/lumen.js?v=20261105g" defer></script>
 </head>
 <body class="home">
+<div class="ambient" aria-hidden="true"><video class="ambient__v" data-bgv data-src="video/caustics.mp4" data-src-m="video/caustics-m.mp4" poster="video/caustics-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
 <aside class="demo-bar" aria-label="Hinweis zum Demo-Projekt"><div class="wrap demo-bar__in"><p>Demo-Projekt von Projekt EX, fiktive Praxis</p><a href="../../leistungen/websites.html#praxisbeispiele">← Zurück zu Projekt EX</a></div></aside>
 <header class="site-head" data-head>
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="hero__frame" data-frame>
-      <picture class="hero__pic"><source media="(max-width: 700px) and (orientation: portrait)" type="image/avif" srcset="img/hero-m-480.avif 480w, img/hero-m-828.avif 828w" sizes="100vw"><source media="(max-width: 700px) and (orientation: portrait)" type="image/webp" srcset="img/hero-m-480.webp 480w, img/hero-m-828.webp 828w" sizes="100vw"><source type="image/avif" srcset="img/hero-640.avif 640w, img/hero-1080.avif 1080w, img/hero-1600.avif 1600w, img/hero-2400.avif 2400w" sizes="100vw"><img src="img/hero-1080.webp" srcset="img/hero-640.webp 640w, img/hero-1080.webp 1080w, img/hero-1600.webp 1600w, img/hero-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="Empfang der Praxis Lumen: geschwungene Theke aus hellem Stein, Olivenbaum, Glaswand und Morgenlicht auf dem Boden" fetchpriority="high"></picture>
+      <div class="hero__pic"><video class="hero__vid" data-bgv data-src="video/hero.mp4" data-src-m="video/hero-m.mp4" poster="video/hero-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-eager></video></div>
       <a class="next glass" href="#termin" data-next data-lg-photo>
         <span class="next__label">Nächster freier Termin</span>
         <span class="next__when" data-next-when>Di, 10.11. · 08:00</span>
@@ -63,14 +63,14 @@
   </section>
 
   <section class="stance" aria-labelledby="stance-h">
-    <div class="wrap">
+    <div class="wrap"><div class="stance__slab glass">
       <h2 id="stance-h" class="sr">Unsere Haltung</h2>
       <p class="stance__text" data-words>Wir behandeln nur, was Ihren Zähnen wirklich guttut, <span class="stance__img" aria-hidden="true"><picture class=""><source type="image/avif" srcset="img/detail-640.avif 640w, img/detail-1080.avif 1080w, img/detail-1600.avif 1600w, img/detail-2400.avif 2400w" sizes="160px"><img src="img/detail-1080.webp" srcset="img/detail-640.webp 640w, img/detail-1080.webp 1080w, img/detail-1600.webp 1600w, img/detail-2400.webp 2400w" sizes="160px" width="2400" height="1593" alt="" loading="lazy" decoding="async"></picture></span> erklären vorher jeden Schritt und planen so, dass Sie nicht warten. Die erste halbe Stunde gehört Ihren Fragen.</p>
       <div class="stance__name">
         <p class="stance__latin" lang="la">lumen, <i>das Licht</i></p>
         <p>Alle fünf Behandlungsräume haben Tageslicht, keiner liegt im Keller. Licht ist für uns aber auch eine Arbeitsweise: Sie sehen Röntgenbild, Scan und Plan, bevor wir anfangen, und entscheiden dann.</p>
       </div>
-    </div>
+    </div></div>
   </section>
 
   <section class="services" id="leistungen" aria-labelledby="l-h">
@@ -82,7 +82,7 @@
       </div>
       <div class="services__list">
       <article class="chap" id="vorsorge" aria-labelledby="vorsorge-h" data-chap>
-        <figure class="chap__img" data-clip><picture class=""><source type="image/avif" srcset="img/behandlung-640.avif 640w, img/behandlung-1080.avif 1080w, img/behandlung-1600.avif 1600w, img/behandlung-2400.avif 2400w" sizes="(max-width: 900px) 92vw, 46vw"><img src="img/behandlung-1080.webp" srcset="img/behandlung-640.webp 640w, img/behandlung-1080.webp 1080w, img/behandlung-1600.webp 1600w, img/behandlung-2400.webp 2400w" sizes="(max-width: 900px) 92vw, 46vw" width="2400" height="1593" alt="Behandlungsraum mit Fenster ins Grüne, heller Behandlungsstuhl und Holzschränke" loading="lazy" decoding="async"></picture><figcaption class="chap__tag glass" data-lg-photo>60 Minuten für jede Zahnreinigung</figcaption><a class="chap__go glass" href="#termin" data-pick="reinigung" data-lg-photo aria-label="Termin zur Zahnreinigung"><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></figure>
+        <figure class="chap__img" data-clip><video class="chap__vid" data-bgv data-src="video/room.mp4" data-src-m="video/room-m.mp4" poster="video/room-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video><figcaption class="chap__tag glass" data-lg-photo>60 Minuten für jede Zahnreinigung</figcaption><a class="chap__go glass" href="#termin" data-pick="reinigung" data-lg-photo aria-label="Termin zur Zahnreinigung"><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></figure>
         <div class="chap__body">
           <h3 id="vorsorge-h" class="chap__h">Vorsorge und Prophylaxe</h3>
           <p class="chap__text">Die meisten Probleme sieht man, lange bevor sie wehtun. Deshalb nehmen wir uns für Kontrolle und Zahnreinigung mehr Zeit als üblich und zeigen Ihnen auf dem Bildschirm, was wir sehen.</p>
@@ -122,6 +122,7 @@
   </section>
 
   <section class="practice" id="praxis" aria-labelledby="p-h" data-practice>
+    <div class="practice__bg" aria-hidden="true"><video class="practice__v" data-bgv data-src="video/lounge.mp4" data-src-m="video/lounge-m.mp4" poster="video/lounge-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
     <div class="practice__pin" data-pin>
       <div class="wrap practice__head">
         <h2 id="p-h" class="h2">Ein heller Ort, an dem man nicht lange wartet.</h2>
@@ -145,7 +146,7 @@
   </section>
 
   <section class="costs" id="kosten" aria-labelledby="k-h">
-    <div class="wrap">
+    <div class="wrap"><div class="costs__slab glass">
       <h2 id="k-h" class="h2 costs__h">Was die Kasse zahlt, und was nicht.</h2>
       <div class="costs__cols">
         <div class="cost"><h3>Gesetzlich versichert</h3><p>Kontrolle, Füllungen, Wurzelbehandlung und ein Zuschuss zum Zahnersatz zahlt Ihre Kasse. Wo es eine bessere Lösung mit Zuzahlung gibt, sagen wir es Ihnen und Sie entscheiden.</p></div>
@@ -153,11 +154,11 @@
         <div class="cost"><h3>Mit Zusatzversicherung</h3><p>Viele Tarife übernehmen Zahnreinigung, Aligner oder Implantate anteilig. Bringen Sie Ihre Unterlagen mit, wir prüfen gemeinsam, was Ihr Tarif abdeckt.</p></div>
       </div>
       <p class="costs__note">Immer gleich: Vor jeder Behandlung, die etwas kostet, bekommen Sie einen schriftlichen Heil- und Kostenplan. Ohne Ihre Unterschrift fangen wir nicht an.</p>
-    </div>
+    </div></div>
   </section>
 
   <section class="booking" id="termin" aria-labelledby="t-h">
-    <div class="booking__bg" aria-hidden="true"><picture class=""><source type="image/avif" srcset="img/glas-640.avif 640w, img/glas-1080.avif 1080w, img/glas-1600.avif 1600w, img/glas-2400.avif 2400w" sizes="100vw"><img src="img/glas-1080.webp" srcset="img/glas-640.webp 640w, img/glas-1080.webp 1080w, img/glas-1600.webp 1600w, img/glas-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="" loading="lazy" decoding="async"></picture></div>
+    <div class="booking__bg" aria-hidden="true"><video class="booking__v" data-bgv data-src="video/lounge.mp4" data-src-m="video/lounge-m.mp4" poster="video/lounge-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
     <div class="wrap booking__grid">
       <div class="booking__intro">
         <h2 id="t-h" class="h2">Ihr Termin, in einer Minute.</h2>
@@ -249,6 +250,7 @@
 
 </main>
 <footer class="foot">
+  <div class="foot__bg" aria-hidden="true"><video class="foot__v" data-bgv data-src="video/hero.mp4" data-src-m="video/hero-m.mp4" poster="video/hero-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
   <div class="wrap foot__grid">
     <div class="foot__col"><p class="foot__lead">Zahnmedizin mit Zeit, für Kassen- und Privatpatienten.</p><p>Lindenhof 4<br>80331 München</p><p><a href="tel:+498901234567">089 0123 4567</a><br><a href="./#kontakt">Anfahrt und Sprechzeiten</a></p></div>
     <div class="foot__col"><p class="foot__h">Sprechzeiten</p><p>Mo–Do 8–19 Uhr<br>Fr 8–15 Uhr</p></div>

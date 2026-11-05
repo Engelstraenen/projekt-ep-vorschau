@@ -117,16 +117,17 @@
   const small = window.matchMedia('(max-width: 700px)').matches;
   /* Glasarten: Radius, Lünettenbreite, Brechungsstärke, Weichzeichner, Sättigung */
   const KINDS = [
-    ['.site-head__in', { radius: (w, h) => h / 2, bezel: 18, scale: 80, blur: 3, sat: 1.7, chroma: true }],
-    ['.dock', { radius: (w, h) => h / 2, bezel: 18, scale: 76, blur: 2.4, sat: 1.7, chroma: true }],
-    ['.next', { radius: () => 28, bezel: 22, scale: 90, blur: 3.2, sat: 1.6, chroma: true }],
-    ['.facts', { radius: () => 28, bezel: 22, scale: 90, blur: 3.2, sat: 1.6, chroma: true }],
+    ['.site-head__in', { radius: (w, h) => h / 2, bezel: 18, scale: 80, blur: 14, sat: 1.9, chroma: true }],
+    ['.dock', { radius: (w, h) => h / 2, bezel: 18, scale: 76, blur: 14, sat: 1.9, chroma: true }],
+    ['.next', { radius: () => 28, bezel: 22, scale: 90, blur: 14, sat: 1.9, chroma: true }],
+    ['.facts', { radius: () => 28, bezel: 22, scale: 90, blur: 14, sat: 1.9, chroma: true }],
     ['.chap__go', { radius: (w, h) => h / 2, bezel: 15, scale: 72, blur: 0.3, sat: 1.45, chroma: true }],
-    ['.chap__tag,.room__tag', { radius: (w, h) => h / 2, bezel: 13, scale: 54, blur: 1.6, sat: 1.5, chroma: !small }],
-    ['.summary', { radius: () => 28, bezel: 22, scale: 84, blur: 5, sat: 1.5, chroma: true }],
+    ['.chap__tag,.room__tag', { radius: (w, h) => h / 2, bezel: 13, scale: 54, blur: 7, sat: 1.8, chroma: !small }],
+    ['.summary', { radius: () => 28, bezel: 22, scale: 84, blur: 16, sat: 1.8, chroma: true }],
   ];
   // große Formularfläche nur auf dem Desktop brechen (Leistung auf Handys)
-  if (!small) KINDS.push(['.book', { radius: () => 32, bezel: 34, scale: 90, blur: 12, sat: 1.5, chroma: false }]);
+  if (!small) KINDS.push(['.book', { radius: () => 32, bezel: 34, scale: 90, blur: 22, sat: 1.8, chroma: false }]);
+  if (!small) KINDS.push(['.stance__slab,.costs__slab', { radius: () => 40, bezel: 44, scale: 120, blur: 24, sat: 1.9, chroma: true }]);
   const lgEls = [];
   KINDS.forEach(([sel, o]) => $$(sel).forEach((el) => lgEls.push([el, o])));
 
@@ -174,6 +175,25 @@
     if (mirrors.length) { let t = 0; const loop = () => { if (document.visibilityState === 'visible') tick(); t = setTimeout(loop, 250); }; loop(); }
   }
 
+
+  /* Filme: Hintergrund-Clips laden erst nahe am Bildschirm, laufen nur sichtbar, Handy bekommt kleinere Fassung */
+  (function films() {
+    const vids = $$('video[data-bgv]'); if (!vids.length) return;
+    const mob = window.matchMedia('(max-width: 700px)').matches;
+    const still = reduceM.matches || (navigator.connection && navigator.connection.saveData);
+    const load = (v) => { if (v.dataset.on) return; v.dataset.on = '1'; v.src = (mob && v.dataset.srcM) || v.dataset.src; v.muted = true; };
+    const play = (v) => { if (still) return; load(v); const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    vids.forEach((v) => { if (v.hasAttribute('data-eager') || v.classList.contains('ambient__v')) play(v); });
+    if (!('IntersectionObserver' in window)) { vids.forEach(play); return; }
+    const io = new IntersectionObserver((ents) => ents.forEach((en) => {
+      const v = en.target; if (v.classList.contains('ambient__v')) return;
+      if (en.isIntersecting) play(v); else if (v.dataset.on) v.pause();
+    }), { rootMargin: '300px 0px' });
+    vids.forEach((v) => io.observe(v));
+    document.addEventListener('visibilitychange', () => { if (document.hidden) vids.forEach((v) => v.pause()); else vids.forEach((v) => { if (v.dataset.on && v.getBoundingClientRect().bottom > -300 && v.getBoundingClientRect().top < innerHeight + 300) play(v); }); });
+  })();
+  /* Glasknöpfe: Lichtstreif für den Hover */
+  $$('.btn').forEach((b) => { if (!b.querySelector('.sheen')) { const s = document.createElement('span'); s.className = 'sheen'; s.setAttribute('aria-hidden', 'true'); b.appendChild(s); } });
   /* Licht: Glanzpunkt folgt dem Zeiger, Lichtrichtung dreht sich leicht beim Scrollen */
   const aim = (g, x, y) => {
     const r = g.getBoundingClientRect();
@@ -449,7 +469,7 @@
         clipPath: 'inset(0px 0px 0px 0px round 0px)', ease: 'none',
         scrollTrigger: { trigger: frame, start: 'top 75%', end: 'top 8%', scrub: 0.6, invalidateOnRefresh: true },
       });
-      gsap.fromTo($('img', frame), { scale: 1.1 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.fromTo($('img, video', frame), { scale: 1.1 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: true } });
     }
 
     // 3) Haltung: Wort für Wort ins Licht (Signature)
@@ -458,10 +478,21 @@
       gsap.from('.stance__img', { scale: 0.6, opacity: 0, ease: 'none', scrollTrigger: { trigger: words, start: 'top 75%', end: 'top 45%', scrub: 0.4 } });
     }
 
+
+    // 3b) Eisplatten steigen aus dem Wasserlicht, Kante schärft sich
+    $$('.stance__slab, .costs__slab').forEach((el) => {
+      gsap.fromTo(el, { y: 70, scale: 0.96, opacity: 0.4 }, { y: 0, scale: 1, opacity: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 45%', scrub: 0.6 } });
+    });
+    // 3c) Grundlicht driftet langsam mit dem Scroll (Tiefe)
+    if ($('.ambient__v')) gsap.fromTo('.ambient__v', { yPercent: -3, scale: 1.08 }, { yPercent: 3, scale: 1.16, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: true } });
+    // 3d) Lounge-Film: Parallax hinter dem Rundgang
+    if ($('.practice__v')) gsap.fromTo('.practice__v', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.practice', start: 'top bottom', end: 'bottom top', scrub: true } });
+    // 3e) Kosten: Spalten fächern gestaffelt auf
+    if ($('.costs__cols')) gsap.from($$('.cost'), { y: 40, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.07, scrollTrigger: { trigger: '.costs__cols', start: 'top 85%', once: true } });
     // 4) Behandlungsbilder: öffnen sich einmal aus der Mitte
     $$('[data-clip]').forEach((el) => {
       gsap.fromTo(el, { clipPath: 'inset(10% 8% 10% 8% round 22px)' }, { clipPath: 'inset(0% 0% 0% 0% round 22px)', duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 82%', once: true } });
-      gsap.fromTo($('img', el), { scale: 1.14 }, { scale: 1, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 82%', once: true } });
+      gsap.fromTo($('img, video', el), { scale: 1.14 }, { scale: 1, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 82%', once: true } });
     });
 
     // 5) Praxis: horizontaler Rundgang (nur Desktop)
