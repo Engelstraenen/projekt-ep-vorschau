@@ -207,7 +207,7 @@ function objUpdate() {
   let p0 = POS[c], p1 = p0, m = 0, ca = c, cb = c;
   if (b >= 1 && b <= N - 1 && Math.abs(pc - b) < W) { ca = b - 1; cb = b; p0 = POS[ca]; p1 = POS[cb]; m = eio((pc - (b - W)) / (2 * W)); }
   /* Fester Platz in der Mitte — nur Motiv/Scale morphen, nicht über den Frame wandern */
-  const x = .5, y = MOB ? .42 : .46;
+  const x = .5, y = MOB ? .42 : .62; // Desktop: unter dem mittigen Textblock
   const s = lerp(p0[2], p1[2], m);
   const fl = RM ? 0 : Math.sin(performance.now() / 1800) * 3;
   const fadeIn = clamp((P + .4) / .4);

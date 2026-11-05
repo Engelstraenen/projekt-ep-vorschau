@@ -208,3 +208,51 @@ img{display:block;max-width:100%}a{color:inherit}
 .ch__txt,.ch__hud{will-change:opacity}
 .ch__h .w>span{transform:none!important}
 .obj{transition:none}
+
+/* Layout-Fix (Eugen Screenvideo): Overline fest, Headline mittig, zueinander fluchtend.
+   Ursache Drift: .ch__txt war bottom-anchored → längere Headlines schoben .ch__k nach oben.
+   Ursache Rechts/Off-Center: left:var(--pad) + schmale Spalte → Block links der Viewport-Mitte. */
+.ch__txt{
+  left:0;right:0;margin-inline:auto;
+  width:min(52vw,860px);
+  top:clamp(118px,20vh,176px);
+  bottom:auto;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+}
+.ch__k{
+  justify-content:center;
+  width:100%;
+  margin-bottom:18px;
+}
+.ch__h{
+  width:100%;
+  text-wrap:balance;
+}
+.ch__lead{
+  margin-inline:auto;
+  max-width:38ch;
+}
+/* HUD bleibt rechts; etwas schmaler, damit die mittige Headline Luft hat */
+.ch__hud{
+  right:var(--pad);
+  top:50%;
+  translate:0 -42%;
+}
+/* Probe unter dem Textblock, damit Mitte für Typo frei bleibt */
+@media (min-width:801px){
+  .obj{ /* Position kommt aus JS; hier nur z-index unter Typo */
+    z-index:1;
+  }
+  .ch__txt{z-index:3}
+  .ch__hud{z-index:3}
+}
+@media (max-width:800px){
+  .ch__txt{
+    left:18px;right:18px;width:auto;margin-inline:0;
+    top:96px;bottom:auto;
+    text-align:left;align-items:flex-start;
+  }
+  .ch__k{justify-content:flex-start}
+  .ch__lead{margin-inline:0}
+}
