@@ -49,11 +49,15 @@
   const img = (id, v = 1) => `<img src="${src(id, v)}" alt="" draggable="false" decoding="async">`;
   const imgPair = (id, v = 1, late = false) => late
     ? `<img class="bz__pc-raw" src="${src(id, v)}" alt="" draggable="false" decoding="async">`
-    : `<img class="bz__pc-raw" src="${src(id, v)}" alt="" draggable="false" decoding="async"><img class="bz__pc-baked" src="${srcBaked(id, v)}" alt="" draggable="false" decoding="async" loading="lazy">`;
+    : `<img class="bz__pc-raw" src="${src(id, v)}" alt="" draggable="false" decoding="async"><img class="bz__pc-baked" src="${srcBaked(id, v)}" alt="" draggable="false" decoding="sync" fetchpriority="low">`;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const chip = (cls, data, label, ico, aria) => `<li><button type="button" class="bz__chip ${cls}" ${data} aria-label="${aria}"><span class="bz__ico">${ico}</span><span class="bz__lbl">${label}</span><span class="bz__badge" hidden>1</span></button>${cls === 'is-radio' ? '' : `<button type="button" class="bz__minus" data-m="${data.split('"')[1]}" aria-label="${label} entfernen" hidden>−</button>`}</li>`;
 
+  // Gebackene Fotos sofort vorladen + dekodieren (nicht erst beim Backen)
+  const PRE = [];
+  const preloadBaked = () => ALL.filter(t => !t.late).forEach(t => { for (let v = 1; v <= VAR; v++) { const i = new Image(); i.decoding = 'async'; i.src = srcBaked(t.id, v); i.decode && i.decode().catch(() => {}); PRE.push(i); } });
   function mount(root, opt = {}) {
+    if (!PRE.length) preloadBaked();
     const st = { size: 1, sauce: 'tomate', cheese: true, n: {}, oil: {}, pieces: [], phase: 'build' };
     TOPS.forEach(t => st.n[t.id] = 0); OILS.forEach(o => st.oil[o.id] = 0);
     root.classList.add('bz');
