@@ -12,13 +12,13 @@
 .bz__stage{position:relative;z-index:2;width:min(100%,360px);aspect-ratio:1;margin:0 auto;display:grid;place-items:center}
 .bz__plate{position:absolute;inset:3%;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0 60%,#EDE3D2 72%,rgba(237,227,210,0) 73%);box-shadow:0 18px 40px -18px rgba(28,26,23,.35)}
 .bz__pie{position:relative;width:calc(var(--d,1) * 86%);aspect-ratio:1;border-radius:50%;transition:width .55s var(--bz-spring);
-  filter:saturate(calc(1 + var(--bake,0) * .3)) brightness(calc(1 - var(--bake,0) * .1)) drop-shadow(0 10px 14px rgba(80,40,10,.25))}
+  filter:saturate(calc(1 + var(--bake,0) * .18)) brightness(calc(1 - var(--bake,0) * .03)) drop-shadow(0 10px 14px rgba(80,40,10,.22))}
 .bz__base,.bz__baked{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover;pointer-events:none;user-select:none}
 .bz__base{opacity:0;transition:opacity .45s var(--bz-ease)}
 .bz__base.is-on{opacity:1}
-.bz__base.is-on{filter:saturate(calc(1 - var(--bake,0) * .12)) brightness(calc(1 - var(--bake,0) * .08)) sepia(calc(var(--bake,0) * .2))}
+.bz__base.is-on{filter:saturate(calc(1 - var(--bake,0) * .04)) brightness(calc(1 - var(--bake,0) * .02)) sepia(calc(var(--bake,0) * .1))}
 /* gebackener Rand: bei Tomate ganzes Foto, sonst nur der Cornicione */
-.bz__baked{opacity:var(--bake,0);-webkit-mask:radial-gradient(closest-side,transparent 0 77%,#000 83%);mask:radial-gradient(closest-side,transparent 0 77%,#000 83%)}
+.bz__baked{opacity:calc(var(--bake,0) * .78);-webkit-mask:radial-gradient(closest-side,transparent 0 77%,#000 83%);mask:radial-gradient(closest-side,transparent 0 77%,#000 83%)}
 .bz[data-sauce="tomate"] .bz__baked{-webkit-mask:none;mask:none}
 .bz__oils{position:absolute;inset:11%;border-radius:50%;overflow:hidden;pointer-events:none}
 .bz__oil{position:absolute;inset:0;width:100%;height:100%;opacity:calc(.88 + var(--bake,0) * .1);filter:drop-shadow(0 0 .5px rgba(60,20,0,.4)) brightness(calc(1 + var(--bake,0) * .18)) saturate(calc(1 + var(--bake,0) * .2));transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(var(--s));transition:opacity .3s,transform .3s var(--bz-ease);
@@ -29,11 +29,11 @@
 @keyframes bzPour{0%{opacity:0;transform:translate(var(--x),var(--y)) rotate(calc(var(--r) - 70deg)) scale(calc(var(--s) * .4))}100%{opacity:.85}}
 .bz__tops,.bz__late{position:absolute;inset:0}
 .bz__pc{position:absolute;translate:-50% -50%;rotate:var(--r);transition:opacity .2s,scale .26s var(--bz-ease);
-  filter:drop-shadow(0 1px 1.2px rgba(70,25,5,.38)) contrast(calc(1 + var(--bake,0) * .22)) saturate(calc(1 + var(--bake,0) * .38)) sepia(calc(var(--bake,0) * .26)) brightness(calc(1 - var(--bake,0) * .15))}
+  filter:drop-shadow(0 1px 1.2px rgba(70,25,5,.38)) contrast(calc(1 + var(--bake,0) * .1)) saturate(calc(1 + var(--bake,0) * .2)) sepia(calc(var(--bake,0) * .12)) brightness(calc(1 - var(--bake,0) * .06))}
 .bz__pc img,.bz__ghost img{display:block;width:100%;height:auto;pointer-events:none;user-select:none}
 /* Fior di Latte schmilzt: weicher, breiter, leicht gebräunt */
-.bz__pc--mozzarella{scale:calc(1 + var(--bake,0) * .85) calc(1 + var(--bake,0) * .68);filter:drop-shadow(0 calc(1px - var(--bake,0) * 1px) 1.4px rgba(70,25,5,.18)) blur(calc(var(--bake,0) * 2.1px)) brightness(calc(1 + var(--bake,0) * .14)) contrast(calc(1 + var(--bake,0) * .16)) sepia(calc(var(--bake,0) * .38)) saturate(calc(1 + var(--bake,0) * .7))}
-.bz__pc--salami{filter:drop-shadow(0 1px 1.2px rgba(70,25,5,.38)) brightness(calc(1 - var(--bake,0) * .26)) saturate(calc(1 + var(--bake,0) * .38)) contrast(calc(1 + var(--bake,0) * .2)) sepia(calc(var(--bake,0) * .12))}
+.bz__pc--mozzarella{scale:calc(1 + var(--bake,0) * .85) calc(1 + var(--bake,0) * .68);filter:drop-shadow(0 calc(1px - var(--bake,0) * 1px) 1.4px rgba(70,25,5,.18)) blur(calc(var(--bake,0) * 2.1px)) brightness(calc(1 + var(--bake,0) * .1)) contrast(calc(1 + var(--bake,0) * .08)) sepia(calc(var(--bake,0) * .16)) saturate(calc(1 + var(--bake,0) * .35))}
+.bz__pc--salami{filter:drop-shadow(0 1px 1.2px rgba(70,25,5,.38)) brightness(calc(1 - var(--bake,0) * .1)) saturate(calc(1 + var(--bake,0) * .2)) contrast(calc(1 + var(--bake,0) * .08)) sepia(calc(var(--bake,0) * .06))}
 .bz__late .bz__pc{filter:drop-shadow(0 1px 1.4px rgba(40,20,5,.35))}
 .bz__pc.is-land{animation:bzLand .42s var(--bz-spring)}
 .bz__pc.is-out{scale:0;opacity:0}
@@ -97,8 +97,8 @@
 .bz.is-baking .bz__pie{animation:bzRise 1.3s var(--bz-ease) both}
 @keyframes bzRise{0%{scale:1}60%{scale:1.025}100%{scale:1.015}}
 /* zusätzliche Leoparden-Flecken am Cornicione */
-.bz__char{position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:calc(var(--bake,0) * .85);mix-blend-mode:multiply;
-  background:radial-gradient(5% 4% at 14% 30%,#2a140a 40%,transparent 100%),radial-gradient(4% 5% at 30% 9%,#3a1a0c 35%,transparent 100%),radial-gradient(6% 4% at 72% 8%,#2a140a 40%,transparent 100%),radial-gradient(4% 4% at 91% 36%,#3a1a0c 35%,transparent 100%),radial-gradient(5% 6% at 88% 72%,#2a140a 40%,transparent 100%),radial-gradient(4% 4% at 62% 93%,#3a1a0c 35%,transparent 100%),radial-gradient(6% 4% at 30% 90%,#2a140a 40%,transparent 100%),radial-gradient(4% 5% at 7% 62%,#3a1a0c 35%,transparent 100%),radial-gradient(closest-side,transparent 80%,rgba(120,55,20,.55) 90%,rgba(90,40,15,.2) 100%);
+.bz__char{position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:calc(var(--bake,0) * .42);mix-blend-mode:multiply;
+  background:radial-gradient(5% 4% at 14% 30%,#6b3a1e 35%,transparent 100%),radial-gradient(4% 5% at 30% 9%,#7a4524 30%,transparent 100%),radial-gradient(6% 4% at 72% 8%,#5e341a 35%,transparent 100%),radial-gradient(4% 4% at 91% 36%,#744226 30%,transparent 100%),radial-gradient(5% 6% at 88% 72%,#6b3a1e 35%,transparent 100%),radial-gradient(4% 4% at 62% 93%,#7a4524 30%,transparent 100%),radial-gradient(6% 4% at 30% 90%,#5e341a 35%,transparent 100%),radial-gradient(4% 5% at 7% 62%,#744226 30%,transparent 100%),radial-gradient(closest-side,transparent 80%,rgba(160,90,40,.28) 90%,rgba(140,75,30,.1) 100%);
   -webkit-mask:radial-gradient(closest-side,transparent 79%,#000 85%);mask:radial-gradient(closest-side,transparent 79%,#000 85%)}
 /* Qualm/Dampf: während des Backens sichtbar, klingt danach kurz nach — keine Nebelwand */
 .bz__steam{position:absolute;left:14%;right:14%;top:-10%;height:52%;z-index:4;pointer-events:none;opacity:0;transition:opacity .3s var(--bz-ease)}
