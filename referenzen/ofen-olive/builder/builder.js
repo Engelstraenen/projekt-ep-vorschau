@@ -21,9 +21,9 @@
     { id: 'salami', name: 'Salami', preis: 1.5, sz: .12 },
     { id: 'schinken', name: 'Kochschinken', preis: 1.5, sz: .13 },
     { id: 'parma', name: 'Parmaschinken', preis: 2.5, sz: .13, late: 1 },
-    { id: 'champignon', name: 'Champignon', preis: 1.0, sz: .10 },
+    { id: 'champignon', name: 'Champignon', preis: 1.0, sz: .095 },
     { id: 'artischocke', name: 'Artischocke', preis: 1.5, sz: .09 },
-    { id: 'oliven', name: 'Oliven', preis: 1.2, sz: .062 },
+    { id: 'oliven', name: 'Oliven', preis: 1.2, sz: .055 },
     { id: 'kapern', name: 'Kapern', preis: .9, sz: .045 },
     { id: 'peperoni', name: 'Peperoni', preis: .9, sz: .07 },
     { id: 'paprika', name: 'Paprika', preis: .9, sz: .12 },
@@ -40,12 +40,16 @@
     { id: 'chili', name: 'Chiliöl', preis: .5 }
   ];
   const ALL = [...TOPS, CHEESE];
-  const VAR = 3, R_IN = .80; // Soßenspiegel endet bei ~0.78 des Radius
-  const BAKE_MS = 1300; // Mitte der Spanne 1–1,5 s
+  const VAR = 3, R_IN = .76; // Soßenspiegel: Belag bleibt klar im Soßenkreis
+  const BAKE_MS = 1700; // Reel: Zeitraffer ca. 1,5–2 s
   // Stuecke pro Tippen: klein ~14, mittel ~10, grosse Scheiben ~8 (mehrere Radien)
   const perTap = t => t.id === 'mozzarella' ? t.n : t.sz < .08 ? 14 : t.sz < .115 ? 10 : 8;
   const src = (id, v) => `${BASE}${id}-${v}.webp`;
+  const srcBaked = (id, v) => `${BASE}${id}-${v}-baked.webp`;
   const img = (id, v = 1) => `<img src="${src(id, v)}" alt="" draggable="false" decoding="async">`;
+  const imgPair = (id, v = 1, late = false) => late
+    ? `<img class="bz__pc-raw" src="${src(id, v)}" alt="" draggable="false" decoding="async">`
+    : `<img class="bz__pc-raw" src="${src(id, v)}" alt="" draggable="false" decoding="async"><img class="bz__pc-baked" src="${srcBaked(id, v)}" alt="" draggable="false" decoding="async" loading="lazy">`;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const chip = (cls, data, label, ico, aria) => `<li><button type="button" class="bz__chip ${cls}" ${data} aria-label="${aria}"><span class="bz__ico">${ico}</span><span class="bz__lbl">${label}</span><span class="bz__badge" hidden>1</span></button>${cls === 'is-radio' ? '' : `<button type="button" class="bz__minus" data-m="${data.split('"')[1]}" aria-label="${label} entfernen" hidden>−</button>`}</li>`;
 
@@ -63,6 +67,8 @@
       </div>
       <div class="bz__top">
       <div class="bz__stage">
+        <div class="bz__ovenbg" aria-hidden="true"></div>
+        <div class="bz__sparks" aria-hidden="true">${Array.from({ length: 18 }, (_, k) => `<i style="--k:${k}"></i>`).join('')}</div>
         <div class="bz__plate" aria-hidden="true"></div>
         <div class="bz__oven" aria-hidden="true"></div>
         <div class="bz__fire" aria-hidden="true">${Array.from({ length: 14 }, (_, k) => `<i style="--k:${k}"></i>`).join('')}</div>
@@ -177,11 +183,11 @@
     }
     function place(t, p) {
       const el = document.createElement('span');
-      el.className = 'bz__pc bz__pc--' + t.id;
+      el.className = 'bz__pc bz__pc--' + t.id + (t.late ? ' bz__pc--late' : '');
       p.v = p.v || 1 + Math.floor(Math.random() * VAR);
       p.sc = p.sc || (t.id === 'mozzarella' ? .78 + Math.random() * .38 : .82 + Math.random() * .32);
       p.rot = p.rot ?? Math.random() * 360;
-      el.innerHTML = img(t.id, p.v);
+      el.innerHTML = imgPair(t.id, p.v, !!t.late);
       el.style.cssText = `left:${50 + p.x * 50}%;top:${50 + p.y * 50}%;width:${t.sz * p.sc * 100}%;--r:${p.rot}deg`;
       (t.late ? late : tops).appendChild(el); return el;
     }
@@ -257,7 +263,11 @@
     // Groesse
     qa('.bz__size button').forEach(b => b.addEventListener('click', () => { if (st.phase !== 'build') return; st.size = +b.dataset.s; sync(); bump(pie); }));
     // Soße (eine zur Zeit)
-    qa('[data-sauce]').forEach(b => b.addEventListener('click', () => { if (st.phase !== 'build' || st.sauce === b.dataset.sauce) return; st.sauce = b.dataset.sauce; bump(b); bump(pie); sync(); }));
+    qa('[data-sauce]').forEach(b => b.addEventListener('click', () => {
+      if (st.phase !== 'build' || st.sauce === b.dataset.sauce) return;
+      st.sauce = b.dataset.sauce; bump(b); bump(pie); sync();
+      pie.classList.remove('is-sauce-pour'); void pie.offsetWidth; pie.classList.add('is-sauce-pour');
+    }));
     // Käse + Öl
     q('[data-c]').addEventListener('click', e => { if (st.phase === 'build' && !st.cheese) setCheese(true, e.currentTarget.querySelector('.bz__ico')); });
     q('[data-m="mozzarella"]').addEventListener('click', () => { if (st.phase === 'build') setCheese(false); });
@@ -306,7 +316,7 @@
       const top = q('.bz__top'), r = top.getBoundingClientRect();
       if (r.top < 0 || r.bottom > innerHeight) top.scrollIntoView({ block: 'nearest', behavior: reduce.matches ? 'auto' : 'smooth' });
       const dur = reduce.matches ? 0 : BAKE_MS, t0 = performance.now(), lbl = q('.bz__ctal');
-      q('.bz__hint').textContent = 'Zeitraffer: knusprig bei 450 Grad.';
+      q('.bz__hint').textContent = 'Zeitraffer im Holzofen — Belag backt mit.';
       (function tick(now) {
         const u = dur ? Math.min(1, (now - t0) / dur) : 1;
         root.style.setProperty('--bake', u.toFixed(3));
@@ -314,7 +324,7 @@
         if (u < 1) return requestAnimationFrame(tick);
         st.phase = 'done'; root.classList.remove('is-baking'); root.classList.add('is-done'); cta.disabled = false;
         lbl.textContent = opt.doneLabel || 'Fertig · Bestellen';
-        q('.bz__hint').textContent = 'Fertig gebacken. Knusprig, mit Leopardenmuster.';
+        q('.bz__hint').textContent = 'Fertig gebacken. Neu starten oder bestellen.';
         bump(pie); opt.onBaked && opt.onBaked(order());
       })(t0);
     });
@@ -328,6 +338,7 @@
     root.style.setProperty('--bake', 0);
     fly('mozzarella', null, CHEESE.n);
     sync();
+    requestAnimationFrame(() => { pie.classList.add('is-sauce-pour'); });
     return { reset, order };
   }
   window.OOBuilder = { mount, eur };

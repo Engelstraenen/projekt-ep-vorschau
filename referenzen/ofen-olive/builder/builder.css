@@ -9,16 +9,31 @@
 .bz__size button[aria-checked="true"]{opacity:1}
 .bz__sizepill{position:absolute;top:3px;left:3px;width:2.5rem;height:2.2rem;border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(28,26,23,.14);transition:transform .35s var(--bz-ease)}
 .bz__size[data-i="1"] .bz__sizepill{transform:translateX(2.5rem)}.bz__size[data-i="2"] .bz__sizepill{transform:translateX(5rem)}
-.bz__stage{position:relative;z-index:2;width:min(100%,360px);aspect-ratio:1;margin:0 auto;display:grid;place-items:center}
-.bz__plate{position:absolute;inset:3%;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0 60%,#EDE3D2 72%,rgba(237,227,210,0) 73%);box-shadow:0 18px 40px -18px rgba(28,26,23,.35)}
-.bz__pie{position:relative;width:calc(var(--d,1) * 86%);aspect-ratio:1;border-radius:50%;transition:width .55s var(--bz-spring);
-  filter:saturate(calc(1 + var(--bake,0) * .18)) brightness(calc(1 - var(--bake,0) * .03)) drop-shadow(0 10px 14px rgba(80,40,10,.22))}
+.bz__stage{position:relative;z-index:2;width:min(100%,360px);aspect-ratio:1;margin:0 auto;display:grid;place-items:center;overflow:visible}
+/* Reel: verschwommener orange-roter Holzofen/Feuer-Glow hinter der Pizza */
+.bz__ovenbg{position:absolute;inset:-18%;border-radius:28%;pointer-events:none;opacity:0;z-index:0;transition:opacity .45s var(--bz-ease);
+  background:
+    radial-gradient(closest-side at 50% 55%,rgba(255,160,60,.55) 0 28%,rgba(220,70,20,.35) 48%,rgba(80,20,8,.15) 70%,transparent 78%),
+    radial-gradient(ellipse 90% 70% at 50% 60%,#3a1208 0%,#1a0804 55%,transparent 75%);
+  filter:blur(14px) saturate(1.25);transform:scale(1.02)}
+.bz.is-baking .bz__ovenbg,.bz.is-done .bz__ovenbg{opacity:1}
+.bz.is-done .bz__ovenbg{opacity:.72;transition:opacity 1.2s ease-out}
+.bz__sparks{position:absolute;inset:-6%;pointer-events:none;opacity:0;z-index:1;transition:opacity .35s}
+.bz.is-baking .bz__sparks{opacity:1}
+.bz__sparks i{position:absolute;left:calc(8% + (var(--k) * 4.7%) );bottom:18%;width:3px;height:3px;border-radius:50%;
+  background:radial-gradient(circle,#ffe7a0,#ff8a2a 55%,transparent 70%);
+  animation:bzSpark calc(.9s + var(--k) * .05s) ease-out infinite;animation-delay:calc(var(--k) * -.11s);opacity:0}
+@keyframes bzSpark{0%{opacity:0;transform:translate(0,10px) scale(.4)}18%{opacity:1}100%{opacity:0;transform:translate(calc((var(--k) % 5 - 2) * 6px),-72px) scale(.15)}}
+.bz__plate{position:absolute;inset:3%;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0 60%,#EDE3D2 72%,rgba(237,227,210,0) 73%);box-shadow:0 18px 40px -18px rgba(28,26,23,.35);transition:opacity .4s,background .4s,box-shadow .4s;z-index:1}
+.bz.is-baking .bz__plate,.bz.is-done .bz__plate{opacity:.35;background:radial-gradient(circle at 50% 45%,rgba(40,14,6,.55) 0 58%,rgba(90,30,10,.2) 72%,transparent 78%);box-shadow:0 0 40px rgba(255,120,40,.35)}
+.bz__pie{position:relative;z-index:3;width:calc(var(--d,1) * 86%);aspect-ratio:1;border-radius:50%;transition:width .55s var(--bz-spring);
+  filter:saturate(calc(1 + var(--bake,0) * .12)) brightness(calc(1 + var(--bake,0) * .02)) drop-shadow(0 10px 14px rgba(80,40,10,.22))}
 .bz__base,.bz__baked{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover;pointer-events:none;user-select:none}
 .bz__base{opacity:0;transition:opacity .45s var(--bz-ease)}
 .bz__base.is-on{opacity:1}
 .bz__base.is-on{filter:saturate(calc(1 - var(--bake,0) * .04)) brightness(calc(1 - var(--bake,0) * .02)) sepia(calc(var(--bake,0) * .1))}
 /* gebackener Rand: bei Tomate ganzes Foto, sonst nur der Cornicione */
-.bz__baked{opacity:calc(var(--bake,0) * .72);filter:brightness(1.12) contrast(.9) saturate(1.05);-webkit-mask:radial-gradient(closest-side,transparent 0 77%,#000 83%);mask:radial-gradient(closest-side,transparent 0 77%,#000 83%)}
+.bz__baked{opacity:calc(var(--bake,0) * .88);filter:brightness(1.08) contrast(.92) saturate(1.08);-webkit-mask:radial-gradient(closest-side,transparent 0 77%,#000 83%);mask:radial-gradient(closest-side,transparent 0 77%,#000 83%)}
 .bz[data-sauce="tomate"] .bz__baked{-webkit-mask:none;mask:none}
 .bz__oils{position:absolute;inset:11%;border-radius:50%;overflow:hidden;pointer-events:none}
 .bz__oil{position:absolute;inset:0;width:100%;height:100%;opacity:calc(.88 + var(--bake,0) * .1);filter:drop-shadow(0 0 .5px rgba(60,20,0,.4)) brightness(calc(1 + var(--bake,0) * .18)) saturate(calc(1 + var(--bake,0) * .2));transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(var(--s));transition:opacity .3s,transform .3s var(--bz-ease);
@@ -28,12 +43,20 @@
 .bz__oil.is-out{opacity:0}
 @keyframes bzPour{0%{opacity:0;transform:translate(var(--x),var(--y)) rotate(calc(var(--r) - 70deg)) scale(calc(var(--s) * .4))}100%{opacity:.85}}
 .bz__tops,.bz__late{position:absolute;inset:0}
-.bz__pc{position:absolute;translate:-50% -50%;rotate:var(--r);transition:opacity .2s,scale .26s var(--bz-ease);
-  filter:drop-shadow(0 .5px .9px rgba(60,22,6,.22)) drop-shadow(0 1.5px 2.4px rgba(50,18,5,.16)) contrast(calc(1 + var(--bake,0) * .1)) saturate(calc(1 + var(--bake,0) * .2)) sepia(calc(var(--bake,0) * .12)) brightness(calc(1 - var(--bake,0) * .06))}
+/* Dual-State: echte Roh-/Gebacken-Fotos überblenden (kein reiner Sepia-Filter) */
+.bz__pc{position:absolute;translate:-50% -50%;rotate:var(--r);transition:opacity .2s,scale .35s var(--bz-ease);
+  filter:drop-shadow(0 .5px .9px rgba(60,22,6,.22)) drop-shadow(0 1.5px 2.4px rgba(50,18,5,.16))}
 .bz__pc img,.bz__ghost img{display:block;width:100%;height:auto;pointer-events:none;user-select:none}
-/* Fior di Latte schmilzt: weicher, breiter, leicht gebräunt */
-.bz__pc--mozzarella{scale:calc(1 + var(--bake,0) * .85) calc(1 + var(--bake,0) * .68);filter:drop-shadow(0 calc(.4px - var(--bake,0) * .4px) 1.1px rgba(60,22,6,.14)) drop-shadow(0 1px 2px rgba(50,18,5,.1)) blur(calc(var(--bake,0) * 2.1px)) brightness(calc(1 + var(--bake,0) * .1)) contrast(calc(1 + var(--bake,0) * .08)) sepia(calc(var(--bake,0) * .16)) saturate(calc(1 + var(--bake,0) * .35))}
-.bz__pc--salami{filter:drop-shadow(0 .5px .9px rgba(60,22,6,.22)) drop-shadow(0 1.5px 2.2px rgba(50,18,5,.14)) brightness(calc(1 - var(--bake,0) * .1)) saturate(calc(1 + var(--bake,0) * .2)) contrast(calc(1 + var(--bake,0) * .08)) sepia(calc(var(--bake,0) * .06))}
+.bz__pc{display:grid}
+.bz__pc > .bz__pc-raw,.bz__pc > .bz__pc-baked{grid-area:1/1;width:100%;height:auto}
+.bz__pc-raw{opacity:calc(1 - var(--bake,0));transition:opacity .05s linear}
+.bz__pc-baked{opacity:var(--bake,0);transition:opacity .05s linear}
+/* Käse: Melt-Foto weitet sich leicht, Roh-Fäden weichen dem Puddle */
+.bz__pc--mozzarella{scale:calc(1 + var(--bake,0) * .55) calc(1 + var(--bake,0) * .42);filter:drop-shadow(0 calc(.4px - var(--bake,0) * .4px) 1.1px rgba(60,22,6,.14)) drop-shadow(0 1px 2px rgba(50,18,5,.1))}
+.bz__pc--salami{filter:drop-shadow(0 .5px .9px rgba(60,22,6,.22)) drop-shadow(0 1.5px 2.2px rgba(50,18,5,.14))}
+/* Frische Kräuter nach dem Backen: bleiben roh */
+.bz__pc--late .bz__pc-raw,.bz__late .bz__pc-raw{opacity:1}
+.bz__pc--late .bz__pc-baked,.bz__late .bz__pc-baked{opacity:0}
 .bz__late .bz__pc{filter:drop-shadow(0 .5px 1px rgba(40,20,5,.2)) drop-shadow(0 1.5px 2.2px rgba(30,15,4,.12))}
 .bz__pc.is-land{animation:bzLand .42s var(--bz-spring)}
 .bz__pc.is-out{scale:0;opacity:0}
@@ -83,10 +106,10 @@
   .bz__stage{width:min(100%,300px,36svh)}
 }
 /* Ofen: Teller wird zum glühenden Steinboden, Flammen lecken unter dem Rand hervor */
-.bz__oven{position:absolute;inset:3%;border-radius:50%;pointer-events:none;opacity:0;transition:opacity .55s var(--bz-ease);
+.bz__oven{position:absolute;inset:3%;border-radius:50%;pointer-events:none;opacity:0;z-index:2;transition:opacity .55s var(--bz-ease);
   background:radial-gradient(closest-side,#1e0d06 0 62%,#3a1709 76%,#7a2e10 88%,#c4561c 96%,rgba(214,96,34,.6) 100%);box-shadow:0 0 40px 4px rgba(230,110,40,.45),inset 0 0 30px rgba(255,140,60,.25)}
 .bz.is-baking .bz__oven{opacity:1;transition-duration:.28s}
-.bz__fire{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .45s var(--bz-ease)}
+.bz__fire{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:2;transition:opacity .45s var(--bz-ease)}
 .bz.is-baking .bz__fire{opacity:1;transition-duration:.22s}
 .bz__fire i{position:absolute;inset:0;rotate:calc(var(--k) * 25.7deg + 7deg)}
 .bz__fire i::before{content:"";position:absolute;left:50%;bottom:calc(50% + var(--d,1) * 43% - 5%);width:calc(var(--d,1) * 15%);height:calc(var(--d,1) * 20%);translate:-50% 0;transform-origin:50% 100%;
@@ -94,16 +117,14 @@
   filter:blur(2.5px);mix-blend-mode:screen;animation:bzFlame calc(.7s + var(--k) * .037s) ease-in-out infinite alternate;animation-delay:calc(var(--k) * -.19s);transition:bottom .55s var(--bz-spring)}
 .bz__fire i:nth-child(odd)::before{height:calc(var(--d,1) * 14%);opacity:.8}
 @keyframes bzFlame{0%{transform:scale(.8,.7) skewX(-6deg)}50%{transform:scale(1,1.08) skewX(3deg)}100%{transform:scale(.9,1.28) skewX(-2deg)}}
-.bz.is-baking .bz__pie{animation:bzRise 1.3s var(--bz-ease) both}
-@keyframes bzRise{0%{scale:1}60%{scale:1.025}100%{scale:1.015}}
 /* zusätzliche Leoparden-Flecken am Cornicione */
 .bz__char{position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:calc(var(--bake,0) * .42);mix-blend-mode:multiply;
   background:radial-gradient(5% 4% at 14% 30%,#6b3a1e 35%,transparent 100%),radial-gradient(4% 5% at 30% 9%,#7a4524 30%,transparent 100%),radial-gradient(6% 4% at 72% 8%,#5e341a 35%,transparent 100%),radial-gradient(4% 4% at 91% 36%,#744226 30%,transparent 100%),radial-gradient(5% 6% at 88% 72%,#6b3a1e 35%,transparent 100%),radial-gradient(4% 4% at 62% 93%,#7a4524 30%,transparent 100%),radial-gradient(6% 4% at 30% 90%,#5e341a 35%,transparent 100%),radial-gradient(4% 5% at 7% 62%,#744226 30%,transparent 100%),radial-gradient(closest-side,transparent 80%,rgba(160,90,40,.28) 90%,rgba(140,75,30,.1) 100%);
   -webkit-mask:radial-gradient(closest-side,transparent 79%,#000 85%);mask:radial-gradient(closest-side,transparent 79%,#000 85%)}
 /* Qualm/Dampf: während des Backens sichtbar, klingt danach kurz nach — keine Nebelwand */
 .bz__steam{position:absolute;left:14%;right:14%;top:-10%;height:52%;z-index:4;pointer-events:none;opacity:0;transition:opacity .3s var(--bz-ease)}
-.bz.is-baking .bz__steam{opacity:1;transition-duration:.2s}
-.bz.is-done .bz__steam{opacity:.45;transition:opacity 1.5s ease-out .25s}
+.bz.is-baking .bz__steam{opacity:.35;transition-duration:.2s}
+.bz.is-done .bz__steam{opacity:.15;transition:opacity 1.2s ease-out .2s}
 .bz__steam i{position:absolute;bottom:2%;left:calc(var(--x) * 1%);width:30%;height:88%;border-radius:50%;
   background:radial-gradient(ellipse closest-side,rgba(255,255,252,.82) 0%,rgba(230,226,218,.4) 36%,rgba(190,186,180,0) 72%);
   filter:blur(7px);opacity:0;will-change:transform,opacity}
@@ -115,8 +136,19 @@
 .bz.is-baking .bz__steam i:nth-child(4),.bz.is-done .bz__steam i:nth-child(4){animation-delay:.7s}
 .bz.is-baking .bz__steam i:nth-child(5),.bz.is-done .bz__steam i:nth-child(5){animation-delay:.95s}
 .bz.is-done .bz__steam i{animation-iteration-count:2}
-.bz__heat{position:absolute;width:calc(var(--d,1) * 92%);aspect-ratio:1;mix-blend-mode:screen;border-radius:50%;pointer-events:none;opacity:0;transition:opacity .4s;background:conic-gradient(from 0deg,rgba(255,140,50,.0),rgba(255,140,50,.55),rgba(255,200,90,.1),rgba(255,120,40,.5),rgba(255,140,50,0));-webkit-mask:radial-gradient(closest-side,transparent 82%,#000 86%,transparent 100%);mask:radial-gradient(closest-side,transparent 82%,#000 86%,transparent 100%);animation:bzSpin 1.4s linear infinite}
+.bz__heat{position:absolute;width:calc(var(--d,1) * 92%);aspect-ratio:1;mix-blend-mode:screen;border-radius:50%;pointer-events:none;opacity:0;z-index:2;transition:opacity .4s;background:conic-gradient(from 0deg,rgba(255,140,50,.0),rgba(255,140,50,.55),rgba(255,200,90,.1),rgba(255,120,40,.5),rgba(255,140,50,0));-webkit-mask:radial-gradient(closest-side,transparent 82%,#000 86%,transparent 100%);mask:radial-gradient(closest-side,transparent 82%,#000 86%,transparent 100%);animation:bzSpin 1.4s linear infinite}
 .bz.is-baking .bz__heat{opacity:1}
 @keyframes bzSpin{to{transform:rotate(1turn)}}
 @keyframes bzSteam{0%{opacity:0;transform:translateY(28%) scale(.55,.45) translateX(0)}20%{opacity:.9}50%{opacity:.45;transform:translateY(-40%) scale(1.15,1.5) translateX(4%)}100%{opacity:0;transform:translateY(-95%) scale(1.45,2.1) translateX(-3%)}}
-@media (prefers-reduced-motion:reduce){.bz__fire i::before,.bz__heat,.bz.is-baking .bz__steam i,.bz.is-done .bz__steam i,.bz.is-baking .bz__pie{animation:none}.bz.is-baking .bz__steam,.bz.is-done .bz__steam{opacity:.35}.bz.is-done .bz__steam i:nth-child(2){opacity:.4}.bz__pie{transition:none}}
+
+/* Soße: kurze Kreisspur wie vom Pizzaiolo mit dem Kelch */
+.bz__pie::after{content:"";position:absolute;inset:12%;border-radius:50%;pointer-events:none;opacity:0;z-index:2;
+  background:conic-gradient(from -20deg,transparent 0 8%,rgba(190,40,28,.0) 12%,rgba(190,40,28,.22) 18%,transparent 26%,rgba(170,35,24,.18) 38%,transparent 46%,rgba(190,40,28,.16) 58%,transparent 68%,rgba(160,30,20,.12) 80%,transparent 90%);
+  -webkit-mask:radial-gradient(closest-side,transparent 8%,#000 18% 78%,transparent 92%);mask:radial-gradient(closest-side,transparent 8%,#000 18% 78%,transparent 92%);
+  mix-blend-mode:multiply}
+.bz__pie.is-sauce-pour::after{animation:bzSaucePour .95s var(--bz-ease) both}
+@keyframes bzSaucePour{0%{opacity:0;transform:rotate(-80deg) scale(.55)}35%{opacity:.9;transform:rotate(40deg) scale(.92)}70%{opacity:.55;transform:rotate(160deg) scale(1)}100%{opacity:0;transform:rotate(260deg) scale(1.02)}}
+.bz[data-sauce="creme"] .bz__pie.is-sauce-pour::after,.bz[data-sauce="hollandaise"] .bz__pie.is-sauce-pour::after{background:conic-gradient(from -20deg,transparent 0 10%,rgba(245,235,210,.35) 18%,transparent 28%,rgba(240,230,200,.28) 42%,transparent 55%,rgba(245,235,210,.22) 70%,transparent 88%)}
+.bz[data-sauce="bbq"] .bz__pie.is-sauce-pour::after{background:conic-gradient(from -20deg,transparent 0 10%,rgba(90,35,18,.28) 18%,transparent 30%,rgba(70,28,14,.22) 45%,transparent 60%,rgba(90,35,18,.18) 75%,transparent 90%)}
+.bz[data-sauce="pesto"] .bz__pie.is-sauce-pour::after{background:conic-gradient(from -20deg,transparent 0 10%,rgba(70,110,40,.3) 18%,transparent 30%,rgba(55,95,35,.22) 48%,transparent 62%,rgba(70,110,40,.18) 78%,transparent 90%)}
+@media (prefers-reduced-motion:reduce){.bz__fire i::before,.bz__heat,.bz.is-baking .bz__steam i,.bz.is-done .bz__steam i,.bz__sparks i,.bz__pie.is-sauce-pour::after{animation:none}.bz.is-baking .bz__steam,.bz.is-done .bz__steam{opacity:.2}.bz.is-done .bz__steam i:nth-child(2){opacity:.25}.bz__pie{transition:none}.bz.is-baking .bz__ovenbg,.bz.is-done .bz__ovenbg{filter:blur(10px)}}
