@@ -71,9 +71,14 @@
   @media (max-width: 680px) { .ph { white-space: normal; } }
   /* Audit: Links im Text unterstreichen (WCAG 1.4.1) */
   section.legal p a, section.legal li a, .updated a, .notice a { text-decoration: underline; text-underline-offset: 2px; }
+
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 20px; border-radius: 999px; font-size: 15px; font-weight: 500; text-decoration: none !important; /* Fill: liquid-glass.css */ }
+  .btn.pastel { /* Fill: liquid-glass.css pastell */ }
+  .updated { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 </style>
 <link rel="stylesheet" href="/assets/vendor/cookieconsent/cookieconsent.css">
 <link rel="stylesheet" href="/assets/consent-theme.css">
+<link rel="stylesheet" href="/assets/liquid-glass.css">
 </head>
 <body>
 <a class="skip" href="#main">Direkt zum Inhalt</a>
@@ -85,10 +90,11 @@
 <main id="main">
   <p class="kicker">PROJEKT EX / 404</p>
   <h1>Seite nicht gefunden. <span class="mute">Der Link ist alt oder falsch.</span></h1>
-  <p class="updated"><a href="/">Zur Startseite</a> · <a href="/kontakt">Kontakt</a></p>
+  <p class="updated"><a class="btn" href="/">Zur Startseite ↗</a> <a class="btn pastel" href="/kontakt">Kontakt</a></p>
 </main>
 
 <footer><span>© 2026 PROJEKT EX · projektex.de</span><a href="/kontakt">Kontakt</a><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></footer>
+<script src="/assets/liquid-glass.js" defer></script>
 <script src="/assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body>

@@ -34,7 +34,9 @@ main > .hero .kicker span:first-child,
 .lk-live,
 .trk-live,
 .trk-btn,
-form.contact button.send {
+form.contact button.send,
+.btn-widerruf,
+header.top a.back {
   position: relative;
   isolation: isolate;
   overflow: visible;
@@ -49,7 +51,9 @@ main > .hero .kicker span:first-child::before,
 .lk-live::before,
 .trk-live::before,
 .trk-btn::before,
-form.contact button.send::before {
+form.contact button.send::before,
+.btn-widerruf::before,
+header.top a.back::before {
   content: '';
   position: absolute;
   inset: 1.5px 6% auto;
@@ -69,7 +73,9 @@ main > .hero .kicker span:first-child::after,
 .lk-live::after,
 .trk-live::after,
 .trk-btn::after,
-form.contact button.send::after {
+form.contact button.send::after,
+.btn-widerruf::after,
+header.top a.back::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -90,7 +96,9 @@ form.contact button.send::after {
 .lk-live > *,
 .trk-live > *,
 .trk-btn > *,
-form.contact button.send > * { position: relative; z-index: 1; }
+form.contact button.send > *,
+.btn-widerruf > *,
+header.top a.back > * { position: relative; z-index: 1; }
 
 /* CTA-Pills: kein Textlink-Chevron (Rim braucht ::after) */
 .more.cta::after { content: ''; margin: 0; translate: none; }
@@ -114,7 +122,8 @@ main > .hero .kicker span:first-child,
 .lk-live,
 .trk-live,
 .trk-btn,
-form.contact button.send {
+form.contact button.send,
+.btn-widerruf {
   color: var(--lg-ink);
   font-weight: 600;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .45);
@@ -174,7 +183,8 @@ form.contact button.send {
   .film-cta:hover,
   .lk-live:hover,
   .trk-live:hover,
-  form.contact button.send:hover {
+  form.contact button.send:hover,
+  .btn-widerruf:hover {
     background:
       radial-gradient(120% 90% at 50% 120%, rgba(230, 245, 255, .30), rgba(230, 245, 255, 0) 58%),
       linear-gradient(180deg, var(--lg-brand-hover-top) 0%, var(--lg-brand-hover-core) 52%, var(--lg-brand-hover-deep) 100%);
@@ -213,6 +223,8 @@ form.contact button.send {
 .trk-live:active,
 .trk-btn:active,
 form.contact button.send:active,
+.btn-widerruf:active,
+header.top a.back:active,
 .rb-jump a[aria-current]:active {
   transform: scale(.97);
 }
@@ -222,7 +234,9 @@ form.contact button.send:active,
 .film-cta:focus-visible,
 .lk-live:focus-visible,
 .trk-live:focus-visible,
-form.contact button.send:focus-visible {
+form.contact button.send:focus-visible,
+.btn-widerruf:focus-visible,
+header.top a.back:focus-visible {
   outline: 2px solid #0071E3;
   outline-offset: 3px;
 }
@@ -290,7 +304,8 @@ main > .hero .kicker span:first-child::before {
 /* ---------- 2) Pastellblau-Glas (Neben-Buttons / Live-Demo) — heller, noch klarer ---------- */
 .btn.pastel,
 .pb-foot .btn:not(.ghost),
-.uc-cap-t > .btn:not(.ghost) {
+.uc-cap-t > .btn:not(.ghost),
+header.top a.back {
   color: var(--lg-ink);
   font-weight: 600;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .55);
@@ -313,12 +328,14 @@ main > .hero .kicker span:first-child::before {
 }
 .btn.pastel::before,
 .pb-foot .btn:not(.ghost)::before,
-.uc-cap-t > .btn:not(.ghost)::before { opacity: .82; }
+.uc-cap-t > .btn:not(.ghost)::before,
+header.top a.back::before { opacity: .82; }
 
 @media (hover: hover) and (pointer: fine) {
   .btn.pastel:hover,
   .pb-foot .btn:not(.ghost):hover,
-  .uc-cap-t > .btn:not(.ghost):hover {
+  .uc-cap-t > .btn:not(.ghost):hover,
+  header.top a.back:hover {
     background:
       radial-gradient(120% 90% at 50% 120%, rgba(245, 252, 255, .36), rgba(245, 252, 255, 0) 60%),
       linear-gradient(180deg, var(--lg-blue-hover-top) 0%, var(--lg-blue-hover-core) 60%, var(--lg-blue-hover-deep) 100%);
@@ -349,7 +366,9 @@ html.lg-svg .trk-btn,
 html.lg-svg form.contact button.send,
 html.lg-svg .btn.pastel,
 html.lg-svg .pb-foot .btn:not(.ghost),
-html.lg-svg .uc-cap-t > .btn:not(.ghost) {
+html.lg-svg .uc-cap-t > .btn:not(.ghost),
+html.lg-svg .btn-widerruf,
+html.lg-svg header.top a.back {
   -webkit-backdrop-filter: url(#lg-refract) blur(6px) saturate(160%) contrast(1.05);
   backdrop-filter: url(#lg-refract) blur(6px) saturate(160%) contrast(1.05);
 }
@@ -369,12 +388,14 @@ html.lg-svg [data-look="shopcontrol"] .lk-live {
   .lk-live,
   .trk-live,
   .trk-btn,
-  form.contact button.send {
+  form.contact button.send,
+  .btn-widerruf {
     background: linear-gradient(180deg, rgba(90, 155, 220, .72), rgba(50, 125, 195, .78) 55%, rgba(35, 100, 170, .85));
   }
   .btn.pastel,
   .pb-foot .btn:not(.ghost),
-  .uc-cap-t > .btn:not(.ghost) {
+  .uc-cap-t > .btn:not(.ghost),
+  header.top a.back {
     background: linear-gradient(180deg, rgba(180, 210, 235, .78), rgba(155, 190, 225, .72) 60%, rgba(140, 180, 215, .80));
   }
   [data-dark-on] .more.cta,
@@ -394,7 +415,8 @@ html.lg-svg [data-look="shopcontrol"] .lk-live {
   .lk-live,
   .trk-live,
   .trk-btn,
-  form.contact button.send {
+  form.contact button.send,
+  .btn-widerruf {
     color: #FFFFFF;
     background: #0071E3;
     text-shadow: none;
@@ -404,7 +426,8 @@ html.lg-svg [data-look="shopcontrol"] .lk-live {
   }
   .btn.pastel,
   .pb-foot .btn:not(.ghost),
-  .uc-cap-t > .btn:not(.ghost) {
+  .uc-cap-t > .btn:not(.ghost),
+  header.top a.back {
     color: #FFFFFF;
     background: #6FA6D3;
     text-shadow: none;
@@ -421,7 +444,9 @@ html.lg-svg [data-look="shopcontrol"] .lk-live {
   .lk-live::before, .lk-live::after,
   .trk-live::before, .trk-live::after,
   .trk-btn::before, .trk-btn::after,
-  form.contact button.send::before, form.contact button.send::after {
+  form.contact button.send::before, form.contact button.send::after,
+  .btn-widerruf::before, .btn-widerruf::after,
+  header.top a.back::before, header.top a.back::after {
     display: none;
   }
 }
@@ -434,8 +459,31 @@ html.lg-svg [data-look="shopcontrol"] .lk-live {
   .trk-live,
   .trk-btn,
   form.contact button.send,
+  .btn-widerruf,
+  header.top a.back,
   .rb-jump a[aria-current] {
     transition: none;
     transform: none !important;
   }
+}
+
+
+/* Simple-Seiten (Kontakt/Legal/404): Zurück-Link & Widerruf-CTA als Glaskapseln */
+header.top a.back {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 17px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+.btn-widerruf {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 999px;
+  text-decoration: none !important;
 }
