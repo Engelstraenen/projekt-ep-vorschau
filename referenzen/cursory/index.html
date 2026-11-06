@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#161412">
+<meta name="description" content="Interaktive Konzeptdemo: Cursory setzt eine Weingut-Seite aus Knoten zusammen. Eigene Marke Elmen, kein Cursor-Produkt.">
+<title>Cursory – Elmen (Konzeptdemo)</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23161412'/%3E%3Cpath d='M8 23V9h8.2a6.2 6.2 0 0 1 0 12.4H8' fill='none' stroke='%23e6d2ae' stroke-width='1.7'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/cursory.css">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+<p class="demo-tag">Interaktive Konzeptdemo</p>
+<main class="shell">
+  <div class="controls">
+    <aside class="side">
+      <p class="brand">Cursory</p>
+      <p class="prompt">Baue eine Seite für Elmen, ein Weingut an der Mosel.</p>
+      <p class="fine">Konzept, kein Cursor-Produkt. Nichts wird gesendet.</p>
+    </aside>
+    <aside class="inspector" aria-label="Auftrag">
+      <ol class="steps" id="steps">
+        <li data-step="0">Prompt gelesen</li>
+        <li data-step="1">Knoten stehen</li>
+        <li data-step="2">Bild gewählt</li>
+        <li data-step="3">Seite gesetzt</li>
+        <li data-step="4">Vorschau</li>
+      </ol>
+      <div class="picks" role="group" aria-label="Hero-Bild">
+        <button type="button" class="pick" data-pick="reben" aria-pressed="true">
+          <img src="img/reben.webp" alt="" width="180" height="120">
+          <span>Reben</span>
+        </button>
+        <button type="button" class="pick" data-pick="glas" aria-pressed="false">
+          <img src="img/glas.webp" alt="" width="180" height="120">
+          <span>Glas</span>
+        </button>
+        <button type="button" class="pick" data-pick="hang" aria-pressed="false">
+          <img src="img/hang.webp" alt="" width="180" height="120">
+          <span>Hang</span>
+        </button>
+      </div>
+      <p class="status" id="status" aria-live="polite">Knoten liegen bereit.</p>
+      <div class="actions">
+        <button type="button" class="button button-primary" id="build">Bauen</button>
+        <button type="button" class="button button-ghost" id="restart">Nochmal</button>
+        <button type="button" class="button button-ghost" id="calm" aria-pressed="false">Ruhig</button>
+      </div>
+    </aside>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="dots" aria-hidden="true"></div>
+    <svg class="wires" id="wires" aria-hidden="true"></svg>
+    <div class="frames" id="frames" aria-hidden="true"></div>
+    <div class="page" id="page">
+      <section class="piece hero" data-id="hero" id="auftakt">
+        <img id="hero-img" src="img/reben.webp" alt="Trauben in der Abendsonne" width="1800" height="1200">
+        <p class="hero-line" id="hero-line">Trauben in der Abendsonne</p>
+      </section>
+
+      <nav class="piece" data-id="nav" aria-label="Seitennavigation">
+        <div class="pill">
+          <a href="#weine">Weine</a>
+          <a href="#lage">Lage</a>
+          <a href="#keller">Keller</a>
+          <a href="#besuch">Besuch</a>
+          <span class="sigil" aria-hidden="true">E</span>
+        </div>
+      </nav>
+
+      <section class="piece signet" data-id="signet" id="weine">
+        <svg class="monogram" viewBox="0 0 72 72" aria-hidden="true">
+          <circle cx="36" cy="36" r="28" fill="none" stroke="currentColor" stroke-width="1"></circle>
+          <path d="M26 24h20M26 36h16M26 48h20M26 24v24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+        <p class="eyebrow">Weingut</p>
+        <h1>Elmen</h1>
+        <p class="lede">Steile Lagen, ruhige Weine, ein Haus an der Mosel.</p>
+      </section>
+
+      <section class="piece split" data-id="rebe" id="lage">
+        <figure>
+          <img src="img/still.webp" alt="Weinglas mit Trauben auf dunklem Stein" width="1200" height="1500">
+        </figure>
+        <div class="copy">
+          <p class="eyebrow">Riesling</p>
+          <h2>Alte Reben</h2>
+          <p>Die Reben stehen am Schiefer. Wir lesen von Hand und lassen dem Wein Zeit.</p>
+        </div>
+      </section>
+
+      <section class="piece split split-dark" data-id="keller" id="keller">
+        <figure>
+          <img src="img/keller.webp" alt="Flaschen liegen im dunklen Kellerregal" width="1600" height="1100">
+        </figure>
+        <div class="copy">
+          <p class="eyebrow">Keller</p>
+          <h2>Großes Holz</h2>
+          <p>Kühler Keller, wenig Eingriff. Der Wein bleibt klar, nicht laut.</p>
+        </div>
+      </section>
+
+      <section class="piece visit" data-id="besuch" id="besuch">
+        <p class="eyebrow">Besuch</p>
+        <blockquote>Wer den Hang gesehen hat, versteht den Wein.</blockquote>
+        <figure>
+          <img src="img/probe.webp" alt="Gläser werden über dem Tisch gehoben" width="1400" height="1000">
+        </figure>
+        <p class="lede">Probe nach Vereinbarung. Das Gut liegt über der Lage.</p>
+      </section>
+
+      <section class="piece cards" data-id="termine" id="termine">
+        <p class="eyebrow">Termine</p>
+        <div class="card-row">
+          <figure class="card">
+            <img src="img/probe.webp" alt="Mehrere Gläser beim Anstoßen" width="1400" height="1000">
+            <figcaption><b>Probe</b><span>Freitag, 16 Uhr</span></figcaption>
+          </figure>
+          <figure class="card">
+            <img src="img/tafel.webp" alt="Gedeckter Tisch mit Glas und Teller" width="1400" height="1000">
+            <figcaption><b>Tafel</b><span>Zwölf Plätze</span></figcaption>
+          </figure>
+          <figure class="card">
+            <img src="img/hang.webp" alt="Weite Hügel im warmen Licht" width="1800" height="1200">
+            <figcaption><b>Gang</b><span>Durch die Lage</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <footer class="piece footer" data-id="haus" id="haus">
+        <div class="foot-top">
+          <figure>
+            <img src="img/keller.webp" alt="" width="1600" height="1100">
+          </figure>
+          <div>
+            <p class="eyebrow">Haus Elmen</p>
+            <p>Mosel · seit 1924<br>Konzeptdemo, frei erfunden.</p>
+            <button type="button" class="button button-gold" id="ask">Besuch anfragen</button>
+          </div>
+          <ul>
+            <li><a href="#weine">Weine</a></li>
+            <li><a href="#lage">Lage</a></li>
+            <li><a href="#keller">Keller</a></li>
+            <li><a href="#besuch">Besuch</a></li>
+          </ul>
+        </div>
+        <p class="word">Elmen</p>
+      </footer>
+    </div>
+    <div class="convert">
+      <span>Besuch auf dem Gut</span>
+      <button type="button" class="button button-gold" id="ask-bar">Besuch anfragen</button>
+    </div>
+  </div>
+</main>
+<noscript><p class="demo-tag">Ohne JavaScript steht die Seite fertig. Bewegung entfällt.</p></noscript>
+<script src="js/gsap.min.js" defer></script>
+<script src="js/cursory.js" defer></script>
+</body>
+</html>
