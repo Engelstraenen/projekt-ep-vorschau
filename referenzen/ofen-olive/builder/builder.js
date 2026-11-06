@@ -41,7 +41,7 @@
   ];
   const ALL = [...TOPS, CHEESE];
   const VAR = 3, R_IN = .76; // Soßenspiegel: Belag bleibt klar im Soßenkreis
-  const BAKE_MS = 1700; // Reel: Zeitraffer ca. 1,5–2 s
+  const BAKE_MS = 1000; // Reel: exakt 1 s Roh→Gebacken
   // Stuecke pro Tippen: klein ~14, mittel ~10, grosse Scheiben ~8 (mehrere Radien)
   const perTap = t => t.id === 'mozzarella' ? t.n : t.sz < .08 ? 14 : t.sz < .115 ? 10 : 8;
   const src = (id, v) => `${BASE}${id}-${v}.webp`;
@@ -388,7 +388,7 @@
       const dur = reduce.matches ? 0 : BAKE_MS, t0 = performance.now(), lbl = q('.bz__ctal');
       q('.bz__hint').textContent = 'Zeitraffer im Holzofen — Belag backt mit.';
       (function tick(now) {
-        const u = dur ? Math.min(1, (now - t0) / dur) : 1;
+        const u = dur ? Math.min(1, Math.max(0, (now - t0) / dur)) : 1;
         root.style.setProperty('--bake', u.toFixed(3));
         lbl.textContent = `Im Ofen · ${Math.round(u * 450)} °C`;
         if (u < 1) return requestAnimationFrame(tick);

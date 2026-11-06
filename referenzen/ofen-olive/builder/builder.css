@@ -11,7 +11,7 @@
 .bz__size[data-i="1"] .bz__sizepill{transform:translateX(2.5rem)}.bz__size[data-i="2"] .bz__sizepill{transform:translateX(5rem)}
 .bz__stage{position:relative;z-index:2;width:min(100%,360px);aspect-ratio:1;margin:0 auto 4.15rem;display:grid;place-items:center;overflow:visible}
 /* Reel: verschwommener orange-roter Holzofen/Feuer-Glow hinter der Pizza */
-.bz__ovenbg{position:absolute;inset:-18%;border-radius:28%;pointer-events:none;opacity:0;z-index:0;transition:opacity .45s var(--bz-ease);
+.bz__ovenbg{position:absolute;inset:-18%;border-radius:28%;pointer-events:none;opacity:0;z-index:0;transition:opacity .22s var(--bz-ease);
   background:
     radial-gradient(closest-side at 50% 55%,rgba(255,160,60,.55) 0 28%,rgba(220,70,20,.35) 48%,rgba(80,20,8,.15) 70%,transparent 78%),
     radial-gradient(ellipse 90% 70% at 50% 60%,#3a1208 0%,#1a0804 55%,transparent 75%);
@@ -112,9 +112,11 @@
 }
 /* Ofen: Teller wird zum glühenden Steinboden, Flammen lecken unter dem Rand hervor */
 .bz__oven{position:absolute;left:50%;top:50%;translate:-50% -50%;width:calc(var(--d,1) * 88%);aspect-ratio:1;border-radius:50%;pointer-events:none;opacity:0;z-index:2;transition:opacity .55s var(--bz-ease),width .55s var(--bz-spring);background:radial-gradient(closest-side,#1e0d06 0 62%,#3a1709 76%,#7a2e10 88%,#c4561c 96%,rgba(214,96,34,.6) 100%);box-shadow:0 0 40px 4px rgba(230,110,40,.45),inset 0 0 30px rgba(255,140,60,.25)}
-.bz.is-baking .bz__oven{opacity:1;transition-duration:.28s}
-.bz__fire{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:2;transition:opacity .45s var(--bz-ease)}
-.bz.is-baking .bz__fire{opacity:1;transition-duration:.22s}
+.bz.is-baking .bz__oven{opacity:1;transition-duration:.2s}
+.bz.is-done .bz__oven{opacity:.55;transition-duration:.35s}
+.bz.is-done .bz__fire{opacity:.35;transition-duration:.35s}
+.bz__fire{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:2;transition:opacity .2s var(--bz-ease)}
+.bz.is-baking .bz__fire{opacity:1;transition-duration:.18s}
 .bz__fire i{position:absolute;inset:0;rotate:calc(var(--k) * 25.7deg + 7deg)}
 .bz__fire i::before{content:"";position:absolute;left:50%;bottom:calc(50% + var(--d,1) * 43% - 5%);width:calc(var(--d,1) * 15%);height:calc(var(--d,1) * 20%);translate:-50% 0;transform-origin:50% 100%;
   border-radius:50% 50% 42% 42%/68% 68% 32% 32%;background:radial-gradient(ellipse 50% 70% at 50% 82%,#FFF1C2 0 14%,#FFC25A 32%,#F0702A 58%,rgba(190,50,12,0) 78%);
