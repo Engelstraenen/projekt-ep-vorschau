@@ -1,499 +1,364 @@
-import * as THREE from '../../../assets/vendor/three/build/three.module.min.js';
+import * as THREE from "../../../assets/vendor/three/build/three.module.js";
+import {
+  displaceBlob,
+  makeDarkRig,
+  makeDevice,
+  makeFragments,
+  makeHand,
+  makeScreenTexture,
+  makeShadowTexture,
+  makeWorkObjects,
+} from "./geometry.js";
 
-/**
- * Eigenes ORBIT-Feldgerät. Kein importiertes Modell, keine Textur aus der Referenz.
- * Die Kamerafahrt sitzt in den Keyframes: Ruhepose rechts, Orbit, Vorbeizug, Dolly ins Dunkel.
- */
-
-function roundedRect(w, h, r) {
-  const s = new THREE.Shape();
-  const x = -w / 2;
-  const y = -h / 2;
-  s.moveTo(x + r, y);
-  s.lineTo(x + w - r, y);
-  s.absarc(x + w - r, y + r, r, -Math.PI / 2, 0, false);
-  s.lineTo(x + w, y + h - r);
-  s.absarc(x + w - r, y + h - r, r, 0, Math.PI / 2, false);
-  s.lineTo(x + r, y + h);
-  s.absarc(x + r, y + h - r, r, Math.PI / 2, Math.PI, false);
-  s.lineTo(x, y + r);
-  s.absarc(x + r, y + r, r, Math.PI, Math.PI * 1.5, false);
-  return s;
+function studioTexture(renderer) {
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const room = new THREE.Scene();
+  room.background = new THREE.Color(0x07080c);
+  const add = (color, x, y, z, w, h, rx = 0, ry = 0) => {
+    const mesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(w, h),
+      new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide })
+    );
+    mesh.position.set(x, y, z);
+    mesh.rotation.set(rx, ry, 0);
+    room.add(mesh);
+  };
+  room.background = new THREE.Color(0x6a7078);
+  add(0xffffff, 0, 4.2, 0, 10, 6, Math.PI / 2, 0);
+  add(0xfffaf2, -2.6, 1.8, 3.2, 4.2, 3.6, 0, 0.45);
+  add(0xd5e4ff, 3.4, 1.2, 2.4, 2.8, 3.2, 0, -0.55);
+  add(0xffc48a, 0.4, 2.2, -3.4, 5.5, 2.2);
+  add(0x8d93a0, 0, -2.5, 0, 12, 8, -Math.PI / 2, 0);
+  const target = pmrem.fromScene(room, 0.03, 0.1, 24);
+  pmrem.dispose();
+  return target.texture;
 }
 
-function makeScreen() {
-  const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 320;
-  const g = canvas.getContext('2d');
-  const tex = new THREE.CanvasTexture(canvas);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.anisotropy = 4;
-
-  function draw(mode) {
-    g.clearRect(0, 0, 512, 320);
-    g.fillStyle = '#16130f';
-    g.fillRect(0, 0, 512, 320);
-    g.fillStyle = '#2a241c';
-    roundRect(g, 28, 26, 456, 188, 18);
-    g.fill();
-    g.strokeStyle = mode > 1 ? '#ffb15a' : '#6d6458';
-    g.lineWidth = 3;
-    g.beginPath();
-    const bars = mode === 0 ? 7 : 11;
-    for (let i = 0; i < bars; i += 1) {
-      const x = 70 + i * 36;
-      const h = 28 + ((i * 47 + mode * 30) % 90);
-      g.moveTo(x, 150);
-      g.lineTo(x, 150 - h);
-    }
-    g.stroke();
-    g.fillStyle = '#ff7a00';
-    g.beginPath();
-    g.arc(430, 250, 16, 0, Math.PI * 2);
-    g.fill();
-    g.fillStyle = mode === 2 ? '#ffb15a' : '#3a342c';
-    g.fillRect(48, 248, mode === 2 ? 180 : 92, 10);
-    tex.needsUpdate = true;
-  }
-
-  draw(0);
-  return { tex, draw };
+function makeMaterials(screenTex) {
+  const physical = (opts) => new THREE.MeshPhysicalMaterial({
+    envMapIntensity: 1.15,
+    ...opts,
+  });
+  return {
+    hero: {
+      plastic: physical({ color: 0x141414, roughness: 0.28, metalness: 0.04, clearcoat: 0.9, clearcoatRoughness: 0.16 }),
+      chrome: physical({ color: 0xd5dae1, roughness: 0.12, metalness: 1, clearcoat: 0.35, clearcoatRoughness: 0.08, envMapIntensity: 1.45 }),
+      orange: physical({ color: 0xff7a00, roughness: 0.26, metalness: 0.12, clearcoat: 0.85, clearcoatRoughness: 0.12 }),
+      face: physical({ color: 0x0c0d10, roughness: 0.4, metalness: 0.2, clearcoat: 0.4 }),
+      glass: physical({ color: 0x1a1e26, roughness: 0.06, metalness: 0.08, clearcoat: 1, clearcoatRoughness: 0.04, transparent: true, opacity: 0.55 }),
+      screen: physical({ map: screenTex, roughness: 0.4, metalness: 0.05, emissive: 0x1a1e28, emissiveIntensity: 0.35 }),
+      blob: physical({ color: 0x090909, roughness: 0.62, metalness: 0.02, clearcoat: 0.15 }),
+    },
+    world: {
+      plastic: physical({ color: 0x161616, roughness: 0.3, metalness: 0.06, clearcoat: 0.75, clearcoatRoughness: 0.18 }),
+      chrome: physical({ color: 0xd5dae1, roughness: 0.11, metalness: 1, envMapIntensity: 1.5 }),
+      orange: physical({ color: 0xff7a00, roughness: 0.28, metalness: 0.14, clearcoat: 0.8 }),
+      face: physical({ color: 0x101114, roughness: 0.42, metalness: 0.18 }),
+      glass: physical({ color: 0x202632, roughness: 0.05, metalness: 0.05, clearcoat: 1, transparent: true, opacity: 0.5 }),
+      screen: physical({ map: screenTex, roughness: 0.45, metalness: 0.04, emissive: 0x222838, emissiveIntensity: 0.4 }),
+      metal: physical({ color: 0x8d939c, roughness: 0.22, metalness: 1, envMapIntensity: 1.3 }),
+      metalDark: physical({ color: 0x2a2e34, roughness: 0.28, metalness: 0.9 }),
+      brass: physical({ color: 0xb08d57, roughness: 0.24, metalness: 1, envMapIntensity: 1.25 }),
+    },
+    dark: {
+      chrome: physical({ color: 0xf3f5f8, roughness: 0.06, metalness: 1, clearcoat: 0.55, clearcoatRoughness: 0.04, envMapIntensity: 1.8 }),
+      metal: physical({ color: 0x9aa1ab, roughness: 0.18, metalness: 1, envMapIntensity: 1.4 }),
+      metalDark: physical({ color: 0x23272d, roughness: 0.24, metalness: 0.92 }),
+      glass: physical({ color: 0xc5d4e8, roughness: 0.04, metalness: 0.02, clearcoat: 1, clearcoatRoughness: 0.02, transparent: true, opacity: 0.45 }),
+      orange: physical({ color: 0xff7a00, roughness: 0.24, metalness: 0.2, clearcoat: 0.9 }),
+      mirror: physical({ color: 0x12141a, roughness: 0.14, metalness: 1, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 1.65 }),
+    },
+  };
 }
 
-function roundRect(ctx, x, y, w, h, r) {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
+function smoothstep(t) {
+  const x = Math.min(1, Math.max(0, t));
+  return x * x * (3 - 2 * x);
 }
 
-function shadowTexture() {
-  const c = document.createElement('canvas');
-  c.width = 256;
-  c.height = 128;
-  const g = c.getContext('2d');
-  const grd = g.createRadialGradient(128, 64, 8, 128, 64, 120);
-  grd.addColorStop(0, 'rgba(0,0,0,0.38)');
-  grd.addColorStop(1, 'rgba(0,0,0,0)');
-  g.fillStyle = grd;
-  g.fillRect(0, 0, 256, 128);
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  return tex;
+function span(p, a, b) {
+  return smoothstep((p - a) / (b - a));
 }
 
-const REST = { t: 0, px: -0.15, py: 0.42, pz: 5.55, lx: -0.05, ly: 0.15, lz: 0, ry: -0.88, rx: 0.4, rz: 0.32, ox: 1.18, oy: -0.42, oz: 0, fov: 30 };
-const KEYS_DESK = [
-  REST,
-  { t: 0.22, px: 0.85, py: 0.55, pz: 4.35, lx: 0.55, ly: 0.12, lz: 0, ry: -0.15, rx: 0.28, rz: 0.08, ox: 0.72, oy: 0.08, oz: 0, fov: 30 },
-  { t: 0.42, px: -0.15, py: 0.62, pz: 3.55, lx: 0.05, ly: 0.1, lz: 0, ry: 0.55, rx: 0.16, rz: -0.04, ox: 0.12, oy: 0.06, oz: 0, fov: 28 },
-  { t: 0.58, px: -1.15, py: 0.28, pz: 2.85, lx: -0.15, ly: 0.04, lz: 0, ry: 1.25, rx: 0.08, rz: 0.02, ox: -0.05, oy: 0.02, oz: 0, fov: 26 },
-  { t: 0.74, px: 0.02, py: 0.12, pz: 1.85, lx: 0, ly: 0.02, lz: 0.05, ry: 0.18, rx: 0.04, rz: 0, ox: 0, oy: 0, oz: 0, fov: 22 },
-  { t: 0.9, px: 0, py: 0.02, pz: 0.78, lx: 0, ly: 0, lz: 0.12, ry: 0.02, rx: 0, rz: 0, ox: 0, oy: 0, oz: 0.04, fov: 18 },
-  { t: 1, px: 0, py: 0, pz: 0.42, lx: 0, ly: 0, lz: 0.2, ry: 0, rx: 0, rz: 0, ox: 0, oy: 0, oz: 0.08, fov: 16 },
-];
-const KEYS_MOBILE = [
-  { t: 0, px: 0, py: 0.15, pz: 6.8, lx: 0, ly: 0.05, lz: 0, ry: -0.8, rx: 0.32, rz: 0.22, ox: 0.05, oy: -0.78, oz: 0, fov: 34 },
-  { t: 0.34, px: 0.15, py: 0.05, pz: 5.6, lx: 0, ly: -0.7, lz: 0, ry: 0.15, rx: 0.22, rz: 0.08, ox: 0.05, oy: -0.65, oz: 0, fov: 28 },
-  { t: 0.68, px: 0, py: 0.04, pz: 2.1, lx: 0, ly: 0, lz: 0.02, ry: 0.08, rx: 0.04, rz: 0, ox: 0, oy: 0, oz: 0, fov: 22 },
-  { t: 1, px: 0, py: 0, pz: 0.48, lx: 0, ly: 0, lz: 0.14, ry: 0, rx: 0, rz: 0, ox: 0, oy: 0, oz: 0.05, fov: 16 },
-];
-
-function sample(keys, t, out) {
-  let i = 0;
-  const last = keys.length - 1;
-  while (i < last - 1 && t >= keys[i + 1].t) i += 1;
-  const a = keys[i];
-  const b = keys[Math.min(i + 1, last)];
-  const span = (b.t - a.t) || 1;
-  let u = (t - a.t) / span;
-  if (u < 0) u = 0;
-  if (u > 1) u = 1;
-  u = u * u * (3 - 2 * u);
-  out.px = a.px + (b.px - a.px) * u;
-  out.py = a.py + (b.py - a.py) * u;
-  out.pz = a.pz + (b.pz - a.pz) * u;
-  out.lx = a.lx + (b.lx - a.lx) * u;
-  out.ly = a.ly + (b.ly - a.ly) * u;
-  out.lz = a.lz + (b.lz - a.lz) * u;
-  out.ry = a.ry + (b.ry - a.ry) * u;
-  out.rx = a.rx + (b.rx - a.rx) * u;
-  out.rz = a.rz + (b.rz - a.rz) * u;
-  out.ox = a.ox + (b.ox - a.ox) * u;
-  out.oy = a.oy + (b.oy - a.oy) * u;
-  out.oz = a.oz + (b.oz - a.oz) * u;
-  out.fov = a.fov + (b.fov - a.fov) * u;
-  return out;
+function lerp(a, b, t) {
+  return a + (b - a) * t;
 }
 
-export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: !mobile,
-      powerPreference: 'high-performance',
-      failIfMajorPerformanceCaveat: false,
-    });
-  } catch (err) {
-    return null;
-  }
-  if (!renderer.getContext()) {
-    renderer.dispose();
-    return null;
-  }
-
+function makeRenderer(canvas, shadows) {
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+    powerPreference: "high-performance",
+  });
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.08;
+  renderer.shadowMap.enabled = shadows;
+  if (shadows) renderer.shadowMap.type = THREE.PCFShadowMap;
+  return renderer;
+}
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(30, 1, 0.08, 40);
+export function createScene(heroCanvas, worldCanvas, piecesCanvas) {
+  const heroRenderer = makeRenderer(heroCanvas, false);
+  const worldRenderer = makeRenderer(worldCanvas, true);
+  const piecesRenderer = makeRenderer(piecesCanvas, false);
 
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  const env = new THREE.Scene();
-  const room = new THREE.Mesh(
-    new THREE.SphereGeometry(8, 24, 16),
-    new THREE.MeshBasicMaterial({ color: 0x2a2a2a, side: THREE.BackSide }),
-  );
-  env.add(room);
-  const panel = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.2), new THREE.MeshBasicMaterial({ color: 0xfff6d0 }));
-  panel.position.set(1.5, 2.2, 3);
-  env.add(panel);
-  const warm = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 2.2), new THREE.MeshBasicMaterial({ color: 0xff7a18 }));
-  warm.position.set(-2.4, -0.2, 2);
-  env.add(warm);
-  scene.environment = pmrem.fromScene(env, 0.04).texture;
-  pmrem.dispose();
+  const env = studioTexture(heroRenderer);
+  const screenTex = makeScreenTexture();
+  const mats = makeMaterials(screenTex);
 
-  scene.add(new THREE.AmbientLight(0xfff4cc, 0.35));
-  const key = new THREE.DirectionalLight(0xfffaf0, 2.8);
-  key.position.set(3.2, 4.2, 6);
-  scene.add(key);
-  const fill = new THREE.DirectionalLight(0xffffff, 0.7);
-  fill.position.set(-2, 1.2, 4);
-  scene.add(fill);
-  const rim = new THREE.DirectionalLight(0xffe08a, 1.6);
-  rim.position.set(-4.5, 2.2, -3);
-  scene.add(rim);
-  const kick = new THREE.PointLight(0xff6a00, 6, 8);
-  kick.position.set(1.4, 0.2, 2.2);
-  scene.add(kick);
+  const heroScene = new THREE.Scene();
+  const worldScene = new THREE.Scene();
+  const piecesScene = new THREE.Scene();
+  for (const target of [heroScene, worldScene, piecesScene]) {
+    target.environment = env;
+    target.environmentIntensity = 1.12;
+  }
 
-  const bodyMat = new THREE.MeshPhysicalMaterial({
-    color: 0x0c0c0c,
-    metalness: 0.22,
-    roughness: 0.34,
-    clearcoat: 1,
-    clearcoatRoughness: 0.08,
-    envMapIntensity: 0.55,
-  });
-  const metal = new THREE.MeshPhysicalMaterial({
-    color: 0xf4f4f6,
-    metalness: 1,
-    roughness: 0.12,
-    clearcoat: 0.5,
-    envMapIntensity: 1.45,
-  });
-  const orange = new THREE.MeshPhysicalMaterial({
-    color: 0xff7a00,
-    metalness: 0.12,
-    roughness: 0.32,
-    clearcoat: 0.85,
-    emissive: 0xff5a00,
-    emissiveIntensity: 0.18,
-  });
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 40);
+  const worldCamera = new THREE.PerspectiveCamera(30, 1, 0.1, 40);
+  const piecesCamera = new THREE.PerspectiveCamera(30, 1, 0.1, 40);
 
-  const bodyGeo = new THREE.ExtrudeGeometry(roundedRect(1.28, 1.92, 0.46), {
-    depth: 0.32,
-    bevelEnabled: true,
-    bevelThickness: 0.07,
-    bevelSize: 0.06,
-    bevelSegments: 5,
-    curveSegments: 16,
-  });
-  bodyGeo.translate(0, 0, -0.22);
-  const rig = new THREE.Group();
-  const body = new THREE.Mesh(bodyGeo, bodyMat);
-  rig.add(body);
+  const key = new THREE.DirectionalLight(0xfff6ea, 3.4);
+  key.position.set(4.2, 6.4, 5.2);
+  key.castShadow = true;
+  key.shadow.mapSize.set(1024, 1024);
+  key.shadow.camera.near = 0.5;
+  key.shadow.camera.far = 18;
+  key.shadow.camera.left = -4;
+  key.shadow.camera.right = 4;
+  key.shadow.camera.top = 4;
+  key.shadow.camera.bottom = -4;
+  key.shadow.bias = -0.0004;
+  const fill = new THREE.DirectionalLight(0xd5e2ff, 1.15);
+  fill.position.set(-5.2, 2.2, 3.4);
+  const rim = new THREE.DirectionalLight(0xffc27a, 2.2);
+  rim.position.set(-1.5, 3.2, -4.5);
+  const hemi = new THREE.HemisphereLight(0xfff4d4, 0x1a1c22, 0.38);
+  const face = new THREE.DirectionalLight(0xffffff, 1.6);
+  face.position.set(0.2, 0.6, 7);
+  const lights = () => [key.clone(), fill.clone(), rim.clone(), hemi.clone(), face.clone()];
+  heroScene.add(...lights());
+  worldScene.add(key, fill, rim, hemi, face);
+  piecesScene.add(...lights());
 
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(1, 0.026, 10, 72), metal);
-  ring.scale.set(0.74, 1.08, 0.7);
-  ring.position.z = 0.16;
-  rig.add(ring);
-
-  const screen = makeScreen();
-  const glass = new THREE.Mesh(
-    new THREE.PlaneGeometry(0.86, 0.52),
-    new THREE.MeshPhysicalMaterial({
-      map: screen.tex,
-      color: 0xffffff,
-      roughness: 0.18,
-      metalness: 0.05,
-      clearcoat: 1,
-      clearcoatRoughness: 0.08,
-    }),
-  );
-  glass.position.set(0, 0.18, 0.2);
-  rig.add(glass);
-
-  const slot = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.08, 0.02), metal);
-  slot.position.set(0, -0.28, 0.2);
-  rig.add(slot);
-
-  [[0.34, -0.52], [-0.05, -0.62], [0.28, -0.78]].forEach(([x, y], index) => {
-    const btn = new THREE.Mesh(new THREE.CylinderGeometry(index === 1 ? 0.09 : 0.07, index === 1 ? 0.09 : 0.07, 0.05, 20), orange);
-    btn.rotation.x = Math.PI / 2;
-    btn.position.set(x, y, 0.2);
-    rig.add(btn);
-  });
-
-  const ear = new THREE.Mesh(new THREE.CapsuleGeometry(0.16, 0.28, 4, 12), bodyMat);
-  ear.position.set(0.42, 0.98, -0.02);
-  ear.rotation.z = -0.5;
-  rig.add(ear);
-  const earRing = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.018, 8, 24), metal);
-  earRing.position.copy(ear.position);
-  earRing.rotation.z = ear.rotation.z;
-  rig.add(earRing);
-
-  rig.scale.setScalar(mobile ? 0.62 : 0.74);
-  scene.add(rig);
-
-  const darkGroup = new THREE.Group();
-  darkGroup.visible = false;
-  const disc = new THREE.Mesh(new THREE.TorusGeometry(1.15, 0.07, 14, 72), metal);
-  const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.48, 0.16, 40), bodyMat);
-  drum.rotation.x = Math.PI / 2;
-  const sideRing = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.028, 10, 36), metal);
-  sideRing.position.set(-1.35, 0.35, 0.25);
-  const puck = new THREE.Mesh(new THREE.SphereGeometry(0.26, 24, 16), metal);
-  puck.position.set(1.25, -0.28, 0.35);
-  darkGroup.add(disc, drum, sideRing, puck);
-  scene.add(darkGroup);
-
-  const fragGroup = new THREE.Group();
-  fragGroup.visible = false;
-  const shardMat = new THREE.MeshPhysicalMaterial({ color: 0x161616, roughness: 0.28, metalness: 0.55, clearcoat: 1, clearcoatRoughness: 0.12 });
-  const plate = new THREE.ExtrudeGeometry(roundedRect(0.82, 0.46, 0.1), {
-    depth: 0.1, bevelEnabled: true, bevelThickness: 0.025, bevelSize: 0.02, bevelSegments: 3, curveSegments: 8,
-  });
-  plate.translate(0, 0, -0.05);
-  const shards = [
-    new THREE.Mesh(plate, shardMat),
-    new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.05, 12, 36), metal),
-    new THREE.Mesh(new THREE.SphereGeometry(0.2, 28, 18), orange),
-  ];
-  shards.forEach((mesh, index) => {
-    mesh.position.y = (index - 1) * 0.42;
-    fragGroup.add(mesh);
-  });
-  scene.add(fragGroup);
-
-  const worksGroup = new THREE.Group();
-  worksGroup.visible = false;
-  const workPlate = new THREE.ExtrudeGeometry(roundedRect(0.7, 0.46, 0.12), {
-    depth: 0.12, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.025, bevelSegments: 3, curveSegments: 10,
-  });
-  workPlate.translate(0, 0, -0.06);
-  const puckGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.12, 40);
-  const workMeshes = [
-    new THREE.Mesh(puckGeo, orange),
-    new THREE.Mesh(workPlate, shardMat),
-    new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 20), metal),
-  ];
-  const puckRim = new THREE.Mesh(new THREE.TorusGeometry(0.32, 0.018, 8, 40), metal);
-  puckRim.rotation.x = Math.PI / 2;
-  workMeshes[0].add(puckRim);
-  workMeshes.forEach((mesh, index) => {
-    mesh.position.x = (index - 1) * 1.55;
-    worksGroup.add(mesh);
-  });
-  scene.add(worksGroup);
-
-  const contactMark = new THREE.Group();
-  contactMark.visible = false;
-  const arc = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.06, 12, 40, Math.PI * 1.2), metal);
-  const bead = new THREE.Mesh(new THREE.SphereGeometry(0.16, 20, 14), orange);
-  bead.position.set(0.15, 0.2, 0.2);
-  contactMark.add(arc, bead);
-  scene.add(contactMark);
-
-  const blob = new THREE.Mesh(
-    new THREE.SphereGeometry(0.72, 32, 24),
-    new THREE.MeshPhysicalMaterial({
-      color: 0x0c0c0c,
-      metalness: 0.35,
-      roughness: 0.42,
-      clearcoat: 0.6,
-    }),
-  );
-  blob.scale.set(1.35, 0.82, 0.7);
-  scene.add(blob);
-
+  const hero = new THREE.Group();
+  const device = makeDevice(mats.hero);
+  const blob = new THREE.Mesh(displaceBlob(0.78), mats.hero.blob);
+  blob.position.set(2.8, 0.05, -0.6);
   const shadow = new THREE.Mesh(
-    new THREE.PlaneGeometry(3.4, 1.6),
-    new THREE.MeshBasicMaterial({ map: shadowTexture(), transparent: true, depthWrite: false }),
+    new THREE.PlaneGeometry(2.4, 1.15),
+    new THREE.MeshBasicMaterial({ map: makeShadowTexture(), transparent: true, depthWrite: false })
   );
-  shadow.rotation.x = -Math.PI / 2;
-  shadow.position.y = -1.22;
-  scene.add(shadow);
+  hero.add(blob, shadow, device);
+  heroScene.add(hero);
 
-  const keys = mobile ? KEYS_MOBILE : KEYS_DESK;
-  const pose = { ...REST };
-  const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+  const dark = makeDarkRig(mats.dark);
+  dark.scale.setScalar(0.62);
+  dark.visible = false;
+  worldScene.add(dark);
+
+  const fragments = makeFragments(mats.world);
+  fragments.forEach((item) => {
+    item.mesh.visible = false;
+    piecesScene.add(item.mesh);
+  });
+
+  const works = makeWorkObjects(mats.world);
+  works.forEach((item) => {
+    item.mesh.visible = false;
+    piecesScene.add(item.mesh);
+  });
+
+  const hand = makeHand(mats.world);
+  hand.visible = false;
+  hand.scale.setScalar(0.92);
+  piecesScene.add(hand);
+  const shard = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.075, 16, 48), mats.world.chrome);
+  shard.visible = false;
+  piecesScene.add(shard);
+
+  const pointer = new THREE.Vector2();
+  const pointerTarget = new THREE.Vector2();
+  const started = performance.now();
+  let narrow = false;
   let progress = 0;
-  let beat = 'hero';
-  let screenMode = 0;
-  let looping = false;
-  let raf = 0;
-  let alive = true;
+  let velocity = 0;
 
   function resize() {
-    const w = canvas.clientWidth || window.innerWidth;
-    const h = canvas.clientHeight || window.innerHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.6);
-    renderer.setPixelRatio(dpr);
-    renderer.setSize(w, h, false);
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    narrow = w < 860;
+    const dpr = Math.min(window.devicePixelRatio || 1, narrow ? 1.25 : 1.5);
+    for (const renderer of [heroRenderer, worldRenderer, piecesRenderer]) {
+      renderer.setPixelRatio(dpr);
+      renderer.setSize(w, h, false);
+    }
     camera.aspect = w / Math.max(1, h);
     camera.updateProjectionMatrix();
   }
 
-  function render(now) {
-    if (!alive) return;
-    const time = (now || performance.now()) * 0.001;
-    sample(keys, progress, pose);
-    pointer.x += (pointer.tx - pointer.x) * 0.08;
-    pointer.y += (pointer.ty - pointer.y) * 0.08;
-    const showHero = beat === 'hero';
-    const showDark = beat === 'wipe' || beat === 'dark';
-    rig.visible = showHero;
-    blob.visible = showHero;
-    shadow.visible = showHero;
-    darkGroup.visible = showDark;
-    fragGroup.visible = beat === 'manifest';
-    worksGroup.visible = beat === 'works';
-    contactMark.visible = beat === 'contact';
-    renderer.setClearColor(showDark ? 0x070707 : 0x000000, showDark ? 1 : 0);
+  function frameCamera(heroMix, darkMix, worksMix) {
+    const heroPos = narrow ? new THREE.Vector3(0, 0.35, 7.5) : new THREE.Vector3(0, 0.08, 6.55);
+    const darkPos = new THREE.Vector3(0.1, 0.42, narrow ? 5.8 : 5.05);
+    const workPos = new THREE.Vector3(0, 0.05, narrow ? 7.8 : 7.15);
+    const pos = heroPos.clone().lerp(darkPos, darkMix).lerp(workPos, worksMix);
+    if (heroMix > 0.2 && darkMix < 0.5) pos.copy(heroPos).lerp(darkPos, darkMix);
+    camera.position.copy(pos);
+    const look = new THREE.Vector3(narrow ? 0 : 0.15, narrow ? -0.15 : 0, 0);
+    if (darkMix > 0.35 && worksMix < 0.5) look.set(0, 0, 0);
+    camera.lookAt(look);
+    camera.fov = lerp(narrow ? 34 : 30, 33, worksMix);
+    camera.updateProjectionMatrix();
+    for (const extra of [worldCamera, piecesCamera]) {
+      extra.position.copy(camera.position);
+      extra.quaternion.copy(camera.quaternion);
+      extra.fov = camera.fov;
+      extra.aspect = camera.aspect;
+      extra.updateProjectionMatrix();
+    }
+  }
 
-    if (showHero) {
-      const idle = progress < 0.04 && !reduced ? Math.sin(time * 0.7) * 0.08 : 0;
-      sample(keys, progress * 0.35, pose);
-      const side = mobile ? 0.02 : 1.05;
-      const drop = mobile ? -1.05 : 0.08;
-      rig.position.set(side + pointer.x * 0.16, drop + pointer.y * -0.08, 0);
-      rig.rotation.set(0.42 + pointer.y * -0.08, -0.7 + idle + progress * 0.85 + pointer.x * 0.32, mobile ? 0.18 : 0.28);
-      camera.position.set((mobile ? 0 : -0.05) + pointer.x * 0.4, (mobile ? 0.35 : 0.16) + pointer.y * -0.18, mobile ? 6.6 : 5.15);
-      camera.lookAt(mobile ? 0 : 0.15, mobile ? -0.85 : 0, 0);
-      blob.position.set(
-        (mobile ? 0.02 : 0.35) - progress * (mobile ? 0.3 : 0.9) + pointer.x * 0.7,
-        (mobile ? drop + 0.62 : 0.55) + pointer.y * 0.15,
-        mobile ? -0.5 : -0.35,
+  function update(p, v) {
+    progress = p;
+    velocity = v;
+    const time = (performance.now() - started) / 1000;
+    const heroMix = 1 - span(p, 0.16, 0.3);
+    const wipe = span(p, 0.17, 0.31);
+    const darkIn = span(p, 0.24, 0.34);
+    const darkOut = span(p, 0.4, 0.5);
+    const darkMix = darkIn * (1 - darkOut);
+    const reveal = span(p, 0.42, 0.54);
+    const fly = span(p, 0.5, 0.68);
+    const grid = span(p, 0.64, 0.86);
+    const contact = span(p, 0.82, 0.96);
+
+    const halfW = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * (narrow ? 7.4 : 6.55) * camera.aspect;
+
+    pointer.lerp(pointerTarget, 0.08);
+    const orbit = span(p, 0.0, 0.16);
+    device.rotation.set(
+      0.42 + Math.sin(orbit * Math.PI) * 0.08 + pointer.y * -0.1 + Math.sin(time * 0.7) * 0.02,
+      -0.48 + orbit * 0.62 + pointer.x * 0.16,
+      -0.62
+    );
+    const restX = narrow ? 0.05 : Math.min(1.72, halfW * 0.48);
+    const restY = narrow ? -1.05 : -0.02;
+    device.position.set(
+      restX + pointer.x * 0.1,
+      restY + Math.sin(time * 0.9) * 0.04 + orbit * 0.08,
+      0
+    );
+    device.scale.setScalar(narrow ? 0.78 : 1);
+    device.visible = wipe < 0.98;
+    shadow.position.set(device.position.x, narrow ? -1.72 : -1.28, -0.05);
+    shadow.scale.set(narrow ? 0.8 : 1, 1, 1);
+    shadow.visible = device.visible;
+    const blobIn = span(p, 0.06, 0.17);
+    blob.position.set(
+      lerp(restX + 1.8, restX - 0.15, blobIn) + Math.sin(time * 0.45) * 0.05,
+      restY + 0.15 - blobIn * 0.05,
+      -0.85
+    );
+    blob.rotation.y = time * 0.15;
+    blob.scale.setScalar(lerp(0.3, narrow ? 0.7 : 0.95, blobIn));
+    blob.visible = blobIn > 0.02 && wipe < 0.98;
+
+    dark.visible = darkMix > 0.04;
+    dark.rotation.y = time * 0.08 + span(p, 0.26, 0.44) * 0.45;
+    dark.position.y = Math.sin(time * 0.6) * 0.03;
+
+    const showFly = fly > 0.02 && fly < 0.98 && grid < 0.35;
+    fragments.forEach((item, i) => {
+      const local = span(p, 0.5 + i * 0.012, 0.66 + i * 0.01);
+      item.mesh.visible = showFly && local > 0 && local < 1;
+      const dir = i % 2 === 0 ? 1 : -1;
+      const travel = lerp(-dir * (halfW + 1.4), dir * (halfW + 1.4), local);
+      item.mesh.position.set(travel * item.speed, item.y + Math.sin(local * Math.PI + i) * 0.25, item.z);
+      item.mesh.rotation.set(local * item.spin, time * 0.4 + i, local * 0.6);
+      const chroma = Math.min(0.22, velocity * 0.18);
+      item.mesh.scale.setScalar(1 + chroma * 0.04);
+    });
+
+    const showGrid = grid > 0.02 && reveal > 0.65;
+    works.forEach((item, i) => {
+      item.mesh.visible = showGrid;
+      const delay = span(p, 0.64 + i * 0.012, 0.84);
+      const gx = item.grid[0] * (narrow ? 0.48 : 1);
+      const gy = item.grid[1] * (narrow ? 0.72 : 1);
+      const gz = item.grid[2];
+      const stripX = lerp(-halfW * 0.72, halfW * 0.72, i / (works.length - 1));
+      const stripY = narrow ? 1.25 : 1.15;
+      item.mesh.position.set(
+        lerp(gx, stripX, delay),
+        lerp(gy, stripY, delay) + Math.sin(time * 0.8 + i) * 0.03 * (1 - delay),
+        lerp(gz, 0.05 + (i % 3) * 0.08, delay)
       );
-      blob.scale.set(mobile ? 0.4 : 0.72, mobile ? 0.26 : 0.46, mobile ? 0.24 : 0.4);
-      shadow.position.x = rig.position.x;
-      shadow.material.opacity = 0.9;
-    } else if (showDark) {
-      camera.position.set(pointer.x * 0.3, 0.05, 3.1 - progress * 0.7);
-      camera.lookAt(0, 0, 0);
-      darkGroup.rotation.y = progress * 1.1 + pointer.x * 0.4;
-      darkGroup.rotation.x = pointer.y * 0.15;
-    } else if (beat === 'manifest') {
-      camera.position.set(0, 0, 4.2);
-      camera.lookAt(0, 0, 0);
-      shards.forEach((mesh, index) => {
-        const travel = progress * 2.2 + index * 0.33;
-        mesh.position.x = 2.6 - (travel % 1) * 5.2;
-        mesh.rotation.z = travel * 2;
-      });
-    } else if (beat === 'works') {
-      camera.position.set(0, 0.2, 4.4);
-      camera.lookAt(0, 0, 0);
-      workMeshes.forEach((mesh, index) => {
-        const depth = (index - 1) * 0.35;
-        mesh.position.x = (index - 1) * 1.45 + progress * (index - 1) * 0.4;
-        mesh.position.y = 0.35 - progress * 0.9 + depth * 0.2;
-        mesh.position.z = depth + pointer.x * 0.1;
-        mesh.rotation.y = progress * 1.4 + pointer.x * 0.3;
-      });
-    } else if (beat === 'contact') {
-      camera.position.set(0.2, 0, 3.3);
-      camera.lookAt(0, 0, 0);
-      contactMark.position.set(1.15 + pointer.x * 0.15, 0.05, 0.55);
-      contactMark.rotation.z = -0.2 + Math.sin(time * 0.8) * 0.06;
-      contactMark.rotation.y = pointer.x * 0.4;
-    }
-    if (camera.fov !== 32) {
-      camera.fov = 32;
-      camera.updateProjectionMatrix();
-    }
-    const mode = progress > 0.55 ? 2 : progress > 0.25 ? 1 : 0;
-    if (mode !== screenMode) {
-      screenMode = mode;
-      screen.draw(mode);
-    }
-    renderer.render(scene, camera);
+      item.mesh.rotation.set(
+        lerp(item.rot[0], 0.18, delay) + Math.sin(time * 0.5 + i) * 0.05 * (1 - delay),
+        lerp(item.rot[1], -0.25, delay) + time * 0.05,
+        lerp(item.rot[2], 0.04, delay)
+      );
+      const s = narrow ? 0.62 : 0.78;
+      if (item.baseScale === undefined) item.baseScale = item.mesh.scale.x;
+      item.mesh.scale.setScalar(item.baseScale * s);
+    });
+
+    const showHand = contact > 0.62;
+    hand.visible = showHand;
+    hand.position.set(narrow ? 1.15 : 0.55, narrow ? 0.15 : -0.15, 1.45);
+    hand.rotation.set(0.15, -0.4 + Math.sin(time * 0.7) * 0.08, 0.15 + contact * 0.2);
+    hand.position.y += Math.sin(time * 1.1) * 0.04;
+
+    const showShard = fly > 0.15 && fly < 0.92 && contact < 0.2;
+    shard.visible = showShard;
+    const shardT = span(p, 0.52, 0.7);
+    shard.position.set(lerp(halfW + 0.4, -halfW - 0.4, shardT), 0.15, 1.6);
+    shard.rotation.set(0.4, shardT * 2.2, 0.6);
+
+    const worksMix = Math.max(reveal * 0.85, grid);
+    frameCamera(heroMix, darkMix, Math.min(1, worksMix));
   }
 
-  function loop(now) {
-    if (!looping || !alive) return;
-    render(now);
-    raf = requestAnimationFrame(loop);
+  function project(mesh) {
+    const vector = new THREE.Vector3();
+    mesh.getWorldPosition(vector);
+    vector.project(camera);
+    return {
+      x: (vector.x * 0.5 + 0.5) * window.innerWidth,
+      y: (-vector.y * 0.5 + 0.5) * window.innerHeight,
+      z: vector.z,
+    };
   }
 
-  function setLoop(on) {
-    if (reduced) return;
-    if (on && !looping) {
-      looping = true;
-      raf = requestAnimationFrame(loop);
-    } else if (!on && looping) {
-      looping = false;
-      cancelAnimationFrame(raf);
-    }
+  function render() {
+    worldRenderer.render(worldScene, worldCamera);
+    heroRenderer.render(heroScene, camera);
+    piecesRenderer.render(piecesScene, piecesCamera);
+  }
+
+  function setPointer(x, y) {
+    pointerTarget.set(x, y);
   }
 
   resize();
-  render(0);
-  if (!reduced) setLoop(true);
+  update(0, 0);
+  render();
 
   return {
-    setProgress(value) {
-      progress = value < 0 ? 0 : value > 1 ? 1 : value;
-      if (!looping) render();
-    },
-    setBeat(name, value) {
-      beat = name || 'hero';
-      progress = value < 0 ? 0 : value > 1 ? 1 : value;
-      if (!looping) render();
-    },
-    setPointer(x, y) {
-      if (reduced) return;
-      pointer.tx = x;
-      pointer.ty = y;
-    },
-    resize,
+    update,
     render,
-    setActive(on) {
-      if (on) setLoop(true);
-      else {
-        setLoop(false);
-        render();
-      }
+    resize,
+    setPointer,
+    project,
+    works,
+    get progress() {
+      return progress;
     },
-    dispose() {
-      alive = false;
-      looping = false;
-      cancelAnimationFrame(raf);
-      screen.tex.dispose();
-      shadow.material.map.dispose();
-      scene.environment.dispose();
-      renderer.dispose();
+    get velocity() {
+      return velocity;
     },
   };
 }

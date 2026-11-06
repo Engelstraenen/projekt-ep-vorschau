@@ -1,11 +1,12 @@
-# ORBIT – umgesetzte Reel-Sequenz
+# ORBIT – Bewegungsablauf
 
-Quelle: öffentliches Reel `DfWbHvERnE6`, dazu die beigelegte Datei `reference.mp4` und die Frames 02–06. Marke, Texte und 3D-Objekte bleiben ORBIT. Übernommen ist nur der Scroll-Ablauf.
+Die frühere Motion-Umsetzung ist verworfen. Dieser Stand folgt der Reel-Reihenfolge, mit ORBIT-Texten und eigenen Geometrien.
 
-1. **Hero, gepinnt, gelb.** Das eigene Feldgerät orbitet und kippt mit dem Scrollen. Die Maus zieht es zusätzlich. Der schwarze Blob läuft mit anderer Geschwindigkeit als die sticky Headline.
-2. **Harter Masken-Wipe.** Die gelbe Fläche fährt mit einer scharfen organischen Kante nach oben. Darunter liegt eine dunkle, glänzende 3D-Szene. Kein Deckkraft-Fade.
-3. **Sticky Riesentypo auf Gelb.** Der Satz bleibt stehen, drei eigene Fragmente ziehen quer darüber. Bei schnellem Scrollen eine kleine chromatische Kante an der Schrift.
-4. **Arbeiten als schwebende 3D-Reihe auf Gelb.** Drei eigene Körper, Tiefe und seitlicher Drift. Keine vollflächigen Karten, kein Crossfade.
-5. **Streifen nach oben, Kontakt gepinnt und dunkel.** Riesige gelbe Zeile, gelber Flächensplash, eigenes Vordergrundobjekt vor der Schrift. Der Knopf sendet nichts.
+1. **Hero, gelb, gepinnt.** Die Headline bleibt HTML und scharf. Das Feldgerät aus eigener Geometrie macht einen kurzen Orbit und reagiert auf die Maus. Der schwarze Blob kommt erst mit dem Scrollen, damit der Ruhezustand näher am freigegebenen ersten Bild liegt.
+2. **Harter organischer Wipe.** Gelbfläche und Hero-Typo teilen sich eine Clip-Kante aus mehreren Wellen und Beulen, keine Sinuslinie und kein Fade. Dieselbe Kante schneidet das Gerät im Shader. Darunter liegt die dunkle Szene.
+3. **Dunkle Glanzszene.** Metall, Glas, Chromring, Boden mit kontrollierter Rauheit. Umgebung kommt aus einer Studio-PMREM plus Key, Fill und Rim. Die Szene hält, bevor Gelb zurückkehrt.
+4. **Manifesto auf Gelb.** Große schwarze Typo bleibt HTML. Fragmente ziehen mit unterschiedlicher Tiefe und Geschwindigkeit durch. Ein Ring liegt vor der Schrift. Chromatische Kante nur an der schwarzen Form, und nur während schneller Bewegung.
+5. **Arbeiten.** Acht schwebende Objekte stehen im Raum und laufen in einen horizontalen Streifen. Funke, Nordlicht und Salon tragen Beschriftungen.
+6. **Kontakt.** Der dunkle Block fährt von unten ein und bleibt stehen. Davor eine eigene metallische Geste, kein Handschuh aus dem Reel.
 
-Reduced Motion stapelt dieselben Zustände ohne Pin und ohne verdeckte Inhalte.
+Reduzierte Bewegung zeigt dieselben Abschnitte untereinander, ohne Pin und ohne WebGL.

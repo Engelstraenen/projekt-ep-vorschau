@@ -1,224 +1,179 @@
-import Lenis from '../../../assets/vendor/lenis/lenis.mjs';
-import { mountScene } from './scene.js';
+import Lenis from "../../../assets/vendor/lenis/lenis.mjs";
+import { HERO_EDGE, MANIFEST_EDGE, clipPolygon } from "./clip.js";
+import { createScene } from "./scene.js";
 
-const root = document.documentElement;
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const mobile = window.matchMedia('(max-width: 899px)').matches;
-const gsap = window.gsap;
-const ScrollTrigger = window.ScrollTrigger;
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const fine = window.matchMedia("(pointer: fine)").matches;
 
-const canvas = document.getElementById('stage');
-const dialog = document.getElementById('projekt');
-const form = document.getElementById('projekt-form');
-const result = document.getElementById('projekt-result');
-const menuBtn = document.querySelector('[data-menu]');
-const menu = document.getElementById('menu');
-const bar = document.querySelector('.bar');
-
-const scene = canvas ? mountScene(canvas, { mobile, reduced: reduce }) : null;
-if (scene) {
-  document.body.classList.add('has-webgl');
-  canvas.classList.add('is-live');
+function span(p, a, b) {
+  const t = Math.min(1, Math.max(0, (p - a) / (b - a)));
+  return t * t * (3 - 2 * t);
 }
 
-function closeMenu() {
-  if (!menuBtn || !menu) return;
-  menuBtn.setAttribute('aria-expanded', 'false');
-  menu.classList.remove('is-open');
+function lerp(a, b, t) {
+  return a + (b - a) * t;
 }
 
-if (menuBtn && menu) {
-  menuBtn.addEventListener('click', () => {
-    const open = menuBtn.getAttribute('aria-expanded') === 'true';
-    menuBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
-    menu.classList.toggle('is-open', !open);
+function bootChrome() {
+  const menu = document.querySelector("[data-menu]");
+  const links = document.querySelector("#menu");
+  menu?.addEventListener("click", () => {
+    const open = links.classList.toggle("is-open");
+    menu.setAttribute("aria-expanded", open ? "true" : "false");
   });
-  menu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMenu);
+  links?.addEventListener("click", (event) => {
+    if (event.target.closest("a")) {
+      links.classList.remove("is-open");
+      menu?.setAttribute("aria-expanded", "false");
+    }
   });
-}
 
-function openDialog() {
-  if (!dialog) return;
-  if (result) result.hidden = true;
-  if (form) form.hidden = false;
-  dialog.showModal();
-}
-
-document.querySelectorAll('[data-open-projekt]').forEach((btn) => {
-  btn.addEventListener('click', openDialog);
-});
-
-if (dialog) {
-  dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
+  const dialog = document.querySelector("#projekt");
+  const form = document.querySelector("#projekt-form");
+  const result = document.querySelector("#projekt-result");
+  const error = document.querySelector("[data-error]");
+  document.querySelectorAll("[data-open-projekt]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      form.hidden = false;
+      result.hidden = true;
+      dialog.showModal();
+    });
   });
-  dialog.querySelectorAll('[data-close]').forEach((btn) => {
-    btn.addEventListener('click', () => dialog.close());
+  dialog.querySelectorAll("[data-close]").forEach((btn) => {
+    btn.addEventListener("click", () => dialog.close());
   });
-}
-
-if (form) {
-  form.addEventListener('submit', (event) => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(form);
-    const name = String(data.get('name') || '').trim();
-    const email = String(data.get('email') || '').trim();
-    const error = form.querySelector('[data-error]');
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!name || !emailOk) {
-      if (error) {
-        error.hidden = false;
-        error.textContent = name
-          ? 'Die E-Mail braucht ein @ und eine Domain.'
-          : 'Bitte Namen und E-Mail eintragen. Es wird trotzdem nichts gesendet.';
-      }
-      const field = form.querySelector(name ? '[name="email"]' : '[name="name"]');
-      field?.focus();
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    if (name.length < 2 || !email.includes("@")) {
+      error.hidden = false;
+      error.textContent = "Name und E-Mail werden nur hier geprüft. Nichts wird verschickt.";
       return;
     }
-    if (error) error.hidden = true;
+    error.hidden = true;
+    result.querySelector("[data-who]").textContent = name;
     form.hidden = true;
-    if (result) {
-      result.hidden = false;
-      const who = result.querySelector('[data-who]');
-      if (who) who.textContent = name;
-    }
+    result.hidden = false;
   });
 }
 
-let parked = false;
-function parkCanvas(next) {
-  if (!canvas || next === parked) return;
-  parked = next;
-  canvas.classList.toggle('is-parked', next);
-  if (scene) scene.setActive(!next);
-}
+function bootMotion() {
+  const stage = document.querySelector("#stage");
+  const world = document.querySelector("#world");
+  const pieces = document.querySelector("#pieces");
+  let scene;
+  try {
+    scene = createScene(stage, world, pieces);
+  } catch (error) {
+    console.error(error && error.stack ? error.stack : error);
+    return;
+  }
+  document.body.classList.add("is-motion");
 
-if (gsap && ScrollTrigger && scene) {
-  window.addEventListener('resize', () => scene.resize(), { passive: true });
-}
+  const heroSheet = document.querySelector("#hero");
+  const heroUi = document.querySelector(".hero-ui");
+  const manifestSheet = document.querySelector(".manifest-sheet");
+  const manifestCopy = document.querySelector(".manifest-copy");
+  const ink = document.querySelector("#ink");
+  const inkB = document.querySelector("#ink-b");
+  const contact = document.querySelector("#kontakt");
+  const darkNote = document.querySelector(".dark-note");
+  const bar = document.querySelector(".bar");
+  const dots = [...document.querySelectorAll(".dots i")];
+  const captions = [...document.querySelectorAll("#captions li")];
 
-if (!reduce && window.matchMedia('(pointer: fine)').matches && scene) {
-  window.addEventListener('pointermove', (event) => {
-    scene.setPointer((event.clientX / window.innerWidth) * 2 - 1, (event.clientY / window.innerHeight) * 2 - 1);
-  }, { passive: true });
-}
-
-if (gsap && ScrollTrigger) {
+  const lenis = new Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.92 });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
   gsap.registerPlugin(ScrollTrigger);
-  ScrollTrigger.config({ ignoreMobileResize: true });
-  const mm = gsap.matchMedia();
 
-  mm.add('(prefers-reduced-motion: no-preference) and (pointer: fine) and (min-width: 900px)', () => {
-    const lenis = new Lenis({
-      lerp: 0.085,
-      smoothWheel: true,
-      syncTouch: false,
-      autoRaf: false,
-      anchors: true,
-    });
-    lenis.on('scroll', ScrollTrigger.update);
-    const tick = (time) => lenis.raf(time * 1000);
-    gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
-    return () => {
-      gsap.ticker.remove(tick);
-      lenis.destroy();
-    };
+  let progress = 0;
+  let velocity = 0;
+  ScrollTrigger.create({
+    trigger: "#track",
+    start: "top top",
+    end: "bottom bottom",
+    onUpdate: (self) => {
+      progress = self.progress;
+      velocity = Math.min(1, Math.abs(self.getVelocity()) / 2800);
+    },
   });
 
-  mm.add('(prefers-reduced-motion: no-preference)', () => {
-    root.classList.add('is-motion');
-    const wide = window.matchMedia('(min-width: 900px)').matches;
-    const heroEnd = wide ? '+=300%' : '+=165%';
-    const studioEnd = wide ? '+=190%' : '+=130%';
-    const workEnd = wide ? '+=240%' : '+=170%';
-
-    const chroma = document.querySelector('[data-chroma]');
-    ScrollTrigger.create({
-      trigger: '#hero',
-      start: 'top top',
-      end: heroEnd,
-      pin: '.hero-pin',
-      scrub: true,
-      anticipatePin: 1,
-      onUpdate: (self) => scene?.setBeat('hero', self.progress),
+  document.querySelectorAll("[data-jump]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const trigger = ScrollTrigger.getAll()[0];
+      const target = trigger.start + (trigger.end - trigger.start) * Number(link.dataset.jump);
+      lenis.scrollTo(target, { duration: 1.15 });
     });
-
-    gsap.timeline({
-      defaults: { ease: 'none' },
-      scrollTrigger: {
-        trigger: '#wipe',
-        start: 'top top',
-        end: wide ? '+=150%' : '+=110%',
-        pin: '.wipe-pin',
-        scrub: true,
-        onUpdate: (self) => scene?.setBeat('wipe', self.progress),
-      },
-    }).to('.wipe-sheet', { yPercent: -108 }, 0);
-
-    ScrollTrigger.create({
-      trigger: '#studio',
-      start: 'top top',
-      end: studioEnd,
-      pin: '.manifest-pin',
-      scrub: true,
-      onUpdate: (self) => {
-        scene?.setBeat('manifest', self.progress);
-        if (!chroma) return;
-        const shift = gsap.utils.clamp(-2, 2, self.getVelocity() / 2400);
-        chroma.style.textShadow = shift
-          ? `${shift}px 0 rgba(255,42,106,.7), ${-shift}px 0 rgba(42,212,255,.7)`
-          : 'none';
-      },
-    });
-
-    ScrollTrigger.create({
-      trigger: '#arbeiten',
-      start: 'top top',
-      end: workEnd,
-      pin: '.works-pin',
-      scrub: true,
-      onUpdate: (self) => scene?.setBeat('works', self.progress),
-    });
-
-    gsap.timeline({
-      defaults: { ease: 'none' },
-      scrollTrigger: {
-        trigger: '#kontakt',
-        start: 'top top',
-        end: wide ? '+=160%' : '+=120%',
-        pin: '.reach-pin',
-        scrub: true,
-        onUpdate: (self) => scene?.setBeat('contact', self.progress),
-      },
-    })
-      .to('[data-strip]', { yPercent: -130 }, 0)
-      .fromTo('.splash', { scale: 0.92 }, { scale: 1.08 }, 0);
-
-    ScrollTrigger.create({
-      trigger: '#wipe',
-      start: 'top 80px',
-      endTrigger: '#studio',
-      end: 'top 80px',
-      toggleClass: { targets: bar, className: 'is-solid' },
-    });
-    ScrollTrigger.create({
-      trigger: '#kontakt',
-      start: 'top 80px',
-      end: 'bottom top',
-      toggleClass: { targets: bar, className: 'is-solid' },
-    });
-
-    return () => {
-      root.classList.remove('is-motion');
-      bar?.classList.remove('is-solid', 'on-cobalt');
-      parkCanvas(false);
-      if (scene) scene.setProgress(0);
-    };
   });
-} else if (scene && reduce) {
-  scene.setProgress(0);
-  scene.render();
+
+  if (fine) {
+    window.addEventListener("pointermove", (event) => {
+      const x = (event.clientX / window.innerWidth) * 2 - 1;
+      const y = (event.clientY / window.innerHeight) * 2 - 1;
+      scene.setPointer(x, y);
+    });
+  }
+  window.addEventListener("resize", () => {
+    scene.resize();
+    ScrollTrigger.refresh();
+  });
+
+  function paint(p, v) {
+    const wipe = span(p, 0.17, 0.31);
+    const reveal = span(p, 0.42, 0.54);
+    const fly = span(p, 0.5, 0.68);
+    const grid = span(p, 0.64, 0.86);
+    const contactIn = span(p, 0.82, 0.95);
+    const heroClip = clipPolygon(HERO_EDGE, wipe, "hero");
+    const manifestClip = clipPolygon(MANIFEST_EDGE, reveal, "manifest");
+    heroSheet.style.clipPath = heroClip;
+    heroUi.style.clipPath = heroClip;
+    stage.style.clipPath = heroClip;
+    manifestSheet.style.clipPath = manifestClip;
+    manifestCopy.style.clipPath = manifestClip;
+    pieces.style.clipPath = manifestClip;
+    manifestCopy.style.opacity = String(1 - span(p, 0.6, 0.7));
+    if (ink) {
+      ink.style.transform = `translate3d(${lerp(62, -78, fly)}vw, ${Math.sin(fly * Math.PI) * 4}vh, 0) rotate(${lerp(-12, 8, fly)}deg)`;
+      ink.classList.toggle("is-hot", v > 0.28 && fly > 0.08 && fly < 0.9);
+    }
+    if (inkB) {
+      inkB.style.transform = `translate3d(${lerp(-70, 74, span(p, 0.54, 0.72))}vw, ${lerp(8, -6, fly)}vh, 0) rotate(${lerp(16, -6, fly)}deg)`;
+    }
+    contact.style.transform = `translate3d(0, ${(1 - contactIn) * 112}%, 0)`;
+    if (darkNote) darkNote.style.opacity = String(span(p, 0.26, 0.34) * (1 - span(p, 0.4, 0.48)));
+    const solid = (p > 0.22 && p < 0.48) || p > 0.86;
+    bar.classList.toggle("is-solid", solid);
+    const dot = p < 0.2 ? 0 : p < 0.62 ? 1 : 2;
+    dots.forEach((node, index) => node.classList.toggle("is-on", index === dot));
+    const cue = document.querySelector(".scroll-cue");
+    if (cue) cue.style.opacity = String(1 - span(p, 0.04, 0.14));
+
+    captions.forEach((li) => {
+      const found = scene.works.find((item) => item.name === li.dataset.name);
+      if (!found || !found.mesh.visible || grid < 0.55) {
+        li.style.opacity = "0";
+        return;
+      }
+      const point = scene.project(found.mesh);
+      const onScreen = point.z < 1 && point.x > 80 && point.x < window.innerWidth - 80;
+      li.style.opacity = onScreen ? String(Math.min(1, (grid - 0.55) * 3)) : "0";
+      li.style.transform = `translate3d(${point.x}px, ${point.y + (window.innerWidth < 860 ? 46 : 72)}px, 0) translate(-50%, 0)`;
+    });
+  }
+
+  gsap.ticker.add(() => {
+    scene.update(progress, velocity);
+    scene.render();
+    paint(progress, velocity);
+  });
+  paint(0, 0);
 }
+
+bootChrome();
+if (!reduced) bootMotion();
