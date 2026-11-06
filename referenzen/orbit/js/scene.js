@@ -52,9 +52,8 @@ function makeScreen() {
     g.beginPath();
     g.arc(430, 250, 16, 0, Math.PI * 2);
     g.fill();
-    g.fillStyle = mode === 2 ? '#ffe08a' : '#8d8376';
-    g.font = '600 28px sans-serif';
-    g.fillText(mode === 2 ? 'ORBIT' : 'FELD', 48, 268);
+    g.fillStyle = mode === 2 ? '#ffb15a' : '#3a342c';
+    g.fillRect(48, 248, mode === 2 ? 180 : 92, 10);
     tex.needsUpdate = true;
   }
 
@@ -173,12 +172,15 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
   scene.environment = pmrem.fromScene(env, 0.04).texture;
   pmrem.dispose();
 
-  scene.add(new THREE.AmbientLight(0xfff4cc, 0.45));
-  const key = new THREE.DirectionalLight(0xfffaf0, 2.4);
-  key.position.set(4, 5, 6);
+  scene.add(new THREE.AmbientLight(0xfff4cc, 0.35));
+  const key = new THREE.DirectionalLight(0xfffaf0, 2.8);
+  key.position.set(3.2, 4.2, 6);
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0xffe08a, 1.35);
-  rim.position.set(-5, 2.5, -2);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.7);
+  fill.position.set(-2, 1.2, 4);
+  scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffe08a, 1.6);
+  rim.position.set(-4.5, 2.2, -3);
   scene.add(rim);
   const kick = new THREE.PointLight(0xff6a00, 6, 8);
   kick.position.set(1.4, 0.2, 2.2);
@@ -190,7 +192,7 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
     roughness: 0.34,
     clearcoat: 1,
     clearcoatRoughness: 0.08,
-    envMapIntensity: 0.32,
+    envMapIntensity: 0.55,
   });
   const metal = new THREE.MeshPhysicalMaterial({
     color: 0xf4f4f6,
@@ -209,12 +211,12 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
   });
 
   const bodyGeo = new THREE.ExtrudeGeometry(roundedRect(1.28, 1.92, 0.46), {
-    depth: 0.34,
+    depth: 0.32,
     bevelEnabled: true,
-    bevelThickness: 0.055,
-    bevelSize: 0.05,
-    bevelSegments: 3,
-    curveSegments: 10,
+    bevelThickness: 0.07,
+    bevelSize: 0.06,
+    bevelSegments: 5,
+    curveSegments: 16,
   });
   bodyGeo.translate(0, 0, -0.22);
   const rig = new THREE.Group();
@@ -261,7 +263,7 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
   earRing.rotation.z = ear.rotation.z;
   rig.add(earRing);
 
-  rig.scale.setScalar(0.86);
+  rig.scale.setScalar(mobile ? 0.62 : 0.74);
   scene.add(rig);
 
   const darkGroup = new THREE.Group();
@@ -278,11 +280,15 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
 
   const fragGroup = new THREE.Group();
   fragGroup.visible = false;
-  const shardMat = new THREE.MeshPhysicalMaterial({ color: 0x141414, roughness: 0.32, metalness: 0.45, clearcoat: 1 });
+  const shardMat = new THREE.MeshPhysicalMaterial({ color: 0x161616, roughness: 0.28, metalness: 0.55, clearcoat: 1, clearcoatRoughness: 0.12 });
+  const plate = new THREE.ExtrudeGeometry(roundedRect(0.82, 0.46, 0.1), {
+    depth: 0.1, bevelEnabled: true, bevelThickness: 0.025, bevelSize: 0.02, bevelSegments: 3, curveSegments: 8,
+  });
+  plate.translate(0, 0, -0.05);
   const shards = [
-    new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.42, 0.08), shardMat),
-    new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.055, 10, 28), metal),
-    new THREE.Mesh(new THREE.SphereGeometry(0.2, 20, 14), orange),
+    new THREE.Mesh(plate, shardMat),
+    new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.05, 12, 36), metal),
+    new THREE.Mesh(new THREE.SphereGeometry(0.2, 28, 18), orange),
   ];
   shards.forEach((mesh, index) => {
     mesh.position.y = (index - 1) * 0.42;
@@ -292,11 +298,19 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
 
   const worksGroup = new THREE.Group();
   worksGroup.visible = false;
+  const workPlate = new THREE.ExtrudeGeometry(roundedRect(0.7, 0.46, 0.12), {
+    depth: 0.12, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.025, bevelSegments: 3, curveSegments: 10,
+  });
+  workPlate.translate(0, 0, -0.06);
+  const puckGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.12, 40);
   const workMeshes = [
-    new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.1, 32), orange),
-    new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.4, 0.1), shardMat),
-    new THREE.Mesh(new THREE.SphereGeometry(0.28, 24, 16), metal),
+    new THREE.Mesh(puckGeo, orange),
+    new THREE.Mesh(workPlate, shardMat),
+    new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 20), metal),
   ];
+  const puckRim = new THREE.Mesh(new THREE.TorusGeometry(0.32, 0.018, 8, 40), metal);
+  puckRim.rotation.x = Math.PI / 2;
+  workMeshes[0].add(puckRim);
   workMeshes.forEach((mesh, index) => {
     mesh.position.x = (index - 1) * 1.55;
     worksGroup.add(mesh);
@@ -371,12 +385,18 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
     if (showHero) {
       const idle = progress < 0.04 && !reduced ? Math.sin(time * 0.7) * 0.08 : 0;
       sample(keys, progress * 0.35, pose);
-      rig.position.set(0.95 + pointer.x * 0.18, pose.oy * 0.2 + pointer.y * -0.1, pose.oz);
-      rig.rotation.set(pose.rx + pointer.y * -0.08, pose.ry + idle + progress * 0.9 + pointer.x * 0.35, pose.rz);
-      camera.position.set(0.05 + pointer.x * 0.45, 0.18 + pointer.y * -0.22, 4.7);
-      camera.lookAt(0.2, 0.02, 0);
-      blob.position.set(1.15 - progress * 1.5 + pointer.x * 0.85, 0.35 + pointer.y * 0.2, 0.75);
-      blob.scale.set(1.25, 0.72, 0.58);
+      const side = mobile ? 0.02 : 1.05;
+      const drop = mobile ? -1.05 : 0.08;
+      rig.position.set(side + pointer.x * 0.16, drop + pointer.y * -0.08, 0);
+      rig.rotation.set(0.42 + pointer.y * -0.08, -0.7 + idle + progress * 0.85 + pointer.x * 0.32, mobile ? 0.18 : 0.28);
+      camera.position.set((mobile ? 0 : -0.05) + pointer.x * 0.4, (mobile ? 0.35 : 0.16) + pointer.y * -0.18, mobile ? 6.6 : 5.15);
+      camera.lookAt(mobile ? 0 : 0.15, mobile ? -0.85 : 0, 0);
+      blob.position.set(
+        (mobile ? 0.02 : 0.35) - progress * (mobile ? 0.3 : 0.9) + pointer.x * 0.7,
+        (mobile ? drop + 0.62 : 0.55) + pointer.y * 0.15,
+        mobile ? -0.5 : -0.35,
+      );
+      blob.scale.set(mobile ? 0.4 : 0.72, mobile ? 0.26 : 0.46, mobile ? 0.24 : 0.4);
       shadow.position.x = rig.position.x;
       shadow.material.opacity = 0.9;
     } else if (showDark) {

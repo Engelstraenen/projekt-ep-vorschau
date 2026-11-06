@@ -167,7 +167,7 @@ if (gsap && ScrollTrigger) {
       onUpdate: (self) => {
         scene?.setBeat('manifest', self.progress);
         if (!chroma) return;
-        const shift = gsap.utils.clamp(-4.5, 4.5, self.getVelocity() / 1400);
+        const shift = gsap.utils.clamp(-2, 2, self.getVelocity() / 2400);
         chroma.style.textShadow = shift
           ? `${shift}px 0 rgba(255,42,106,.7), ${-shift}px 0 rgba(42,212,255,.7)`
           : 'none';

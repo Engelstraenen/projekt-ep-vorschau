@@ -707,6 +707,7 @@ dialog h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 8px; }
   .works-captions, .strip { grid-template-columns: 1fr; min-height: 0; padding-top: 24px; }
   .works-captions { min-height: 70svh; }
   .manifest h2 { max-width: 12ch; }
+  .splash { left: auto; right: -18vw; top: auto; bottom: 4%; width: 78vw; }
   h1 { white-space: normal; }
   .line { white-space: normal; }
 }
