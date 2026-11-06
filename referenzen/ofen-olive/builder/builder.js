@@ -47,15 +47,36 @@
   const src = (id, v) => `${BASE}${id}-${v}.webp`;
   const srcBaked = (id, v) => `${BASE}${id}-${v}-baked.webp`;
   const img = (id, v = 1) => `<img src="${src(id, v)}" alt="" draggable="false" decoding="async">`;
-  const imgPair = (id, v = 1, late = false) => late
-    ? `<img class="bz__pc-raw" src="${src(id, v)}" alt="" draggable="false" decoding="async">`
-    : `<img class="bz__pc-raw" src="${src(id, v)}" alt="" draggable="false" decoding="async"><img class="bz__pc-baked" src="${srcBaked(id, v)}" alt="" draggable="false" decoding="sync" fetchpriority="low">`;
+  const imgPair = (id, v = 1) =>
+    `<img class="bz__pc-raw" src="${src(id, v)}" alt="" draggable="false" decoding="async"><img class="bz__pc-baked" src="${srcBaked(id, v)}" alt="" draggable="false" decoding="async">`;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const chip = (cls, data, label, ico, aria) => `<li><button type="button" class="bz__chip ${cls}" ${data} aria-label="${aria}"><span class="bz__ico">${ico}</span><span class="bz__lbl">${label}</span><span class="bz__badge" hidden>1</span></button>${cls === 'is-radio' ? '' : `<button type="button" class="bz__minus" data-m="${data.split('"')[1]}" aria-label="${label} entfernen" hidden>−</button>`}</li>`;
 
-  // Gebackene Fotos sofort vorladen + dekodieren (nicht erst beim Backen)
+  // Gebackene Fotos sofort vorladen + dekodieren, ohne den Aufbau zu blockieren.
+  // decoding=sync am Bild selbst würde beim ersten Sichtbarwerden den Hauptthread
+  // einfrieren und die 1s-Spur auf den Endzustand springen lassen.
   const PRE = [];
-  const preloadBaked = () => ALL.filter(t => !t.late).forEach(t => { for (let v = 1; v <= VAR; v++) { const i = new Image(); i.decoding = 'async'; i.src = srcBaked(t.id, v); i.decode && i.decode().catch(() => {}); PRE.push(i); } });
+  const warmMap = new Map();
+  const warm = url => {
+    let p = warmMap.get(url);
+    if (p) return p;
+    p = new Promise(resolve => {
+      const i = new Image();
+      i.decoding = 'async';
+      const done = () => resolve();
+      i.onerror = done;
+      i.src = url;
+      if (i.decode) i.decode().then(done, done);
+      else { i.onload = done; if (i.complete) done(); }
+      PRE.push(i);
+    });
+    warmMap.set(url, p);
+    return p;
+  };
+  const preloadBaked = () => {
+    warm(`${BASE}base-gebacken.webp`);
+    ALL.forEach(t => { for (let v = 1; v <= VAR; v++) warm(srcBaked(t.id, v)); });
+  };
   function mount(root, opt = {}) {
     if (!PRE.length) preloadBaked();
     const st = { size: 1, sauce: 'tomate', cheese: true, n: {}, oil: {}, pieces: [], phase: 'build' };
@@ -101,6 +122,7 @@
 `;
     const q = s => root.querySelector(s), qa = s => [...root.querySelectorAll(s)];
     const pie = q('.bz__pie'), tops = q('.bz__tops'), late = q('.bz__late'), oils = q('.bz__oils'), cta = q('.bz__cta');
+    let bakeGen = 0;
     const sauceOf = () => SAUCES.find(s => s.id === st.sauce);
 
     const price = () => SIZES[st.size].preis + sauceOf().preis
@@ -257,7 +279,7 @@
       p.v = p.v || 1 + Math.floor(Math.random() * VAR);
       p.sc = p.sc || (t.id === 'mozzarella' ? .55 + Math.random() * .4 : .82 + Math.random() * .32);
       p.rot = p.rot ?? Math.random() * 360;
-      el.innerHTML = imgPair(t.id, p.v, !!t.late);
+      el.innerHTML = imgPair(t.id, p.v);
       el.style.cssText = `left:${50 + p.x * 50}%;top:${50 + p.y * 50}%;width:${t.sz * p.sc * 100}%;--r:${p.rot}deg`;
       (t.late ? late : tops).appendChild(el); return el;
     }
@@ -323,6 +345,7 @@
       sync();
     }
     function reset() {
+      bakeGen++;
       st.phase = 'build'; root.classList.remove('is-baking', 'is-done'); root.style.setProperty('--bake', 0);
       st.pieces = []; tops.innerHTML = ''; late.innerHTML = ''; oils.innerHTML = '';
       TOPS.forEach(t => st.n[t.id] = 0); OILS.forEach(o => st.oil[o.id] = 0);
@@ -377,26 +400,45 @@
     TOPS.forEach(t => q(`[data-m="${t.id}"]`).addEventListener('click', () => { if (st.phase === 'build') removeTop(t.id); }));
     q('.bz__reset').addEventListener('click', reset);
 
-    // Backen: Zeitraffer, gebackener Rand blendet ein, Belag wird waermer
+    // Backen: genau 1 s Roh→Gebacken. Nie auf 0 ms kürzen — auch nicht bei
+    // prefers-reduced-motion, sonst ist der erste Frame schon der Endzustand.
     cta.addEventListener('click', () => {
       if (st.phase === 'done') { opt.onDone && opt.onDone(order()); return; }
       if (st.phase !== 'build') return;
       st.phase = 'bake'; cta.disabled = true;
-      root.classList.add('is-baking');
-      const top = q('.bz__top'), r = top.getBoundingClientRect();
-      if (r.top < 0 || r.bottom > innerHeight) top.scrollIntoView({ block: 'nearest', behavior: reduce.matches ? 'auto' : 'smooth' });
-      const dur = reduce.matches ? 0 : BAKE_MS, t0 = performance.now(), lbl = q('.bz__ctal');
+      q('.bz__ctal').textContent = 'Im Ofen';
       q('.bz__hint').textContent = 'Zeitraffer im Holzofen — Belag backt mit.';
-      (function tick(now) {
-        const u = dur ? Math.min(1, Math.max(0, (now - t0) / dur)) : 1;
-        root.style.setProperty('--bake', u.toFixed(3));
-        lbl.textContent = `Im Ofen · ${Math.round(u * 450)} °C`;
-        if (u < 1) return requestAnimationFrame(tick);
-        st.phase = 'done'; root.classList.remove('is-baking'); root.classList.add('is-done'); cta.disabled = false;
-        lbl.textContent = opt.doneLabel || 'Fertig · Bestellen';
-        q('.bz__hint').textContent = 'Fertig gebacken. Neu starten oder bestellen.';
-        bump(pie); opt.onBaked && opt.onBaked(order());
-      })(t0);
+      const gen = ++bakeGen;
+      const top = q('.bz__top'), r = top.getBoundingClientRect();
+      // Vor der Spur, nicht währenddessen: die Pizza bleibt im Bild stehen.
+      if (r.top < 0 || r.bottom > innerHeight) top.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+      const urls = new Set([`${BASE}base-gebacken.webp`]);
+      st.pieces.forEach(p => { if (tOf(p.t)) urls.add(srcBaked(p.t, p.v || 1)); });
+      let started = false;
+      const begin = () => {
+        if (started || gen !== bakeGen || st.phase !== 'bake') return;
+        started = true;
+        root.classList.add('is-baking');
+        root.style.setProperty('--bake', '0');
+        const t0 = performance.now(), lbl = q('.bz__ctal');
+        q('.bz__hint').textContent = 'Zeitraffer im Holzofen — Belag backt mit.';
+        const tick = now => {
+          if (gen !== bakeGen || st.phase !== 'bake') return;
+          const u = Math.min(1, Math.max(0, (now - t0) / BAKE_MS));
+          root.style.setProperty('--bake', u.toFixed(3));
+          lbl.textContent = `Im Ofen · ${Math.round(u * 450)} °C`;
+          if (u < 1) { requestAnimationFrame(tick); return; }
+          st.phase = 'done'; root.classList.remove('is-baking'); root.classList.add('is-done'); cta.disabled = false;
+          lbl.textContent = opt.doneLabel || 'Fertig · Bestellen';
+          q('.bz__hint').textContent = 'Fertig gebacken. Neu starten oder bestellen.';
+          bump(pie); opt.onBaked && opt.onBaked(order());
+        };
+        requestAnimationFrame(tick);
+      };
+      // Bilder sind meist schon dekodiert (Vorladen ab Aufbau). Sonst kurz warten,
+      // damit der Verlauf nicht in einen leeren Frame springt. Aufbau bleibt vorher frei.
+      const cap = new Promise(res => setTimeout(res, 2000));
+      Promise.race([Promise.all([...urls].map(warm)), cap]).then(begin);
     });
     function order() {
       const s = SIZES[st.size], so = sauceOf();
