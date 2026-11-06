@@ -1,11 +1,12 @@
-# ORBIT – umgesetzte Reel-Sequenz
+# ORBIT – Scroll am Reel
 
-Quelle: öffentliches Reel `DfWbHvERnE6`, dazu die beigelegte Datei `reference.mp4` und die Frames 02–06. Marke, Texte und 3D-Objekte bleiben ORBIT. Übernommen ist nur der Scroll-Ablauf.
+Die Route `referenzen/orbit/` folgt der Website im Reel, nicht dem Zimmer und nicht dem Social-Overlay. Marke, Satz und Gerät bleiben ORBIT.
 
-1. **Hero, gepinnt, gelb.** Das eigene Feldgerät orbitet und kippt mit dem Scrollen. Die Maus zieht es zusätzlich. Der schwarze Blob läuft mit anderer Geschwindigkeit als die sticky Headline.
-2. **Harter Masken-Wipe.** Die gelbe Fläche fährt mit einer scharfen organischen Kante nach oben. Darunter liegt eine dunkle, glänzende 3D-Szene. Kein Deckkraft-Fade.
-3. **Sticky Riesentypo auf Gelb.** Der Satz bleibt stehen, drei eigene Fragmente ziehen quer darüber. Bei schnellem Scrollen eine kleine chromatische Kante an der Schrift.
-4. **Arbeiten als schwebende 3D-Reihe auf Gelb.** Drei eigene Körper, Tiefe und seitlicher Drift. Keine vollflächigen Karten, kein Crossfade.
-5. **Streifen nach oben, Kontakt gepinnt und dunkel.** Riesige gelbe Zeile, gelber Flächensplash, eigenes Vordergrundobjekt vor der Schrift. Der Knopf sendet nichts.
+1. **Hero, gepinnt, gelb.** Überschrift links, HTML, scharf. Das Feldgerät steht groß mittig rechts, dreht, kippt und schwebt mit dem Scrollen. Die Maus zieht es zusätzlich. Der schwarze Fleck ist ein eigenes Element und läuft schneller als die Schrift.
+2. **Harter organischer Masken-Wipe.** Die gelbe Fläche wird von einem Loch in der Form des Flecks aufgefressen. Darunter liegt die dunkle Metallszene, kein Deckkraft-Übergang.
+3. **Dunkle Szene.** Lautsprecher, Rolle, Ringe, Kante. Studio-Umgebungslicht, Key, Fill, Rim. Die Kamera fährt hinein, die Glanzkanten wandern.
+4. **Sticky Studio-Satz auf Gelb.** Drei Zeilen bleiben stehen. Zwei Körper laufen hinter der Schrift, zwei davor, mit unterschiedlicher Tiefe und seitlichem Drift. Keine chromatische Unschärfe auf der Schrift.
+5. **Sechs Körper.** Funke, Nordlicht, Salon, Feldgerät, Bake, Spule. Zuerst ein Raster mit Tiefe und Drehung, dann eine horizontale Reihe. Keine flachen Tafeln.
+6. **Kontakt.** Die Reihe fährt nach oben. Dunkles Feld, große gelbe Zeile, gelber Fleck, eine eigene Metallgeste vor der Fläche. Der Knopf sendet nichts.
 
-Reduced Motion stapelt dieselben Zustände ohne Pin und ohne verdeckte Inhalte.
+Reduced Motion: dieselben Abschnitte untereinander, ohne Pin und ohne WebGL. Das Gerät im Hero ist dann die CSS-Zeichnung.
