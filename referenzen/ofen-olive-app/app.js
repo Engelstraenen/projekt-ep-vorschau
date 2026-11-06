@@ -130,11 +130,12 @@
   // Bestaetigung + Push
   let timers = [];
   $('#confirm').addEventListener('click', () => {
-    const t = slotTimes()[S.slot], nr = 'OO-' + Math.floor(1000 + Math.random() * 9000), first = S.cart[0].p.name;
+    const t = slotTimes()[S.slot], nr = 'OO-' + Math.floor(1000 + Math.random() * 9000);
     const label = S.mode === 'lieferung' ? `Lieferung gegen ${hm(t)}` : `Abholung ${hm(t)}`;
     $('#doneNr').textContent = `Bestellung #${nr}`; $('#doneWhen').textContent = label;
     $('#doneLast').textContent = S.mode === 'lieferung' ? 'Ist unterwegs nach ' + $('#area').value + '.' : 'Liegt an der Theke bereit.';
-    const title = S.mode === 'lieferung' ? `Ihre ${first} ist unterwegs` : `Ihre ${first} ist fertig`;
+    // Exakt diese Push-Texte (kein „Ihre Deine Pizza …“ aus dem Builder-Namen)
+    const title = S.mode === 'lieferung' ? 'Ihre Pizza ist unterwegs' : 'Ihre Pizza ist fertig';
     const sub2 = S.mode === 'lieferung' ? `Fahrer ist auf dem Weg · #${nr}` : `Abholbereit an der Theke · #${nr}`;
     ['#pushT', '#lockT'].forEach(s => $(s).textContent = title); ['#pushS', '#lockS'].forEach(s => $(s).textContent = sub2);
     $('#lockTime').textContent = hm(t);
@@ -146,7 +147,13 @@
   });
   function showPush() { const p = $('#push'); p.hidden = false; timers.push(setTimeout(() => p.hidden = true, 5200)); }
   $('#push').addEventListener('click', () => { $('#push').hidden = true; openLock(); });
-  function openLock() { $('#lock').hidden = false; $('#lock').inert = false; $('#lockX').focus({ preventScroll: true }); }
+  function openLock() {
+    $('#push').hidden = true;
+    const sheet = $('#sheet'), scrim = $('#scrim');
+    if (sheet) sheet.hidden = true;
+    if (scrim) scrim.hidden = true;
+    $('#lock').hidden = false; $('#lock').inert = false; $('#lockX').focus({ preventScroll: true });
+  }
   function closeLock() { $('#lock').hidden = true; $('#lock').inert = true; }
   $('#lock').inert = true;
   $('#lockBtn').addEventListener('click', openLock); $('#lockX').addEventListener('click', closeLock);
