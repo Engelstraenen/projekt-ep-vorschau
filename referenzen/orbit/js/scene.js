@@ -261,8 +261,55 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
   earRing.rotation.z = ear.rotation.z;
   rig.add(earRing);
 
-  rig.scale.setScalar(0.78);
+  rig.scale.setScalar(0.86);
   scene.add(rig);
+
+  const darkGroup = new THREE.Group();
+  darkGroup.visible = false;
+  const disc = new THREE.Mesh(new THREE.TorusGeometry(1.15, 0.07, 14, 72), metal);
+  const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.48, 0.16, 40), bodyMat);
+  drum.rotation.x = Math.PI / 2;
+  const sideRing = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.028, 10, 36), metal);
+  sideRing.position.set(-1.35, 0.35, 0.25);
+  const puck = new THREE.Mesh(new THREE.SphereGeometry(0.26, 24, 16), metal);
+  puck.position.set(1.25, -0.28, 0.35);
+  darkGroup.add(disc, drum, sideRing, puck);
+  scene.add(darkGroup);
+
+  const fragGroup = new THREE.Group();
+  fragGroup.visible = false;
+  const shardMat = new THREE.MeshPhysicalMaterial({ color: 0x141414, roughness: 0.32, metalness: 0.45, clearcoat: 1 });
+  const shards = [
+    new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.42, 0.08), shardMat),
+    new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.055, 10, 28), metal),
+    new THREE.Mesh(new THREE.SphereGeometry(0.2, 20, 14), orange),
+  ];
+  shards.forEach((mesh, index) => {
+    mesh.position.y = (index - 1) * 0.42;
+    fragGroup.add(mesh);
+  });
+  scene.add(fragGroup);
+
+  const worksGroup = new THREE.Group();
+  worksGroup.visible = false;
+  const workMeshes = [
+    new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.1, 32), orange),
+    new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.4, 0.1), shardMat),
+    new THREE.Mesh(new THREE.SphereGeometry(0.28, 24, 16), metal),
+  ];
+  workMeshes.forEach((mesh, index) => {
+    mesh.position.x = (index - 1) * 1.55;
+    worksGroup.add(mesh);
+  });
+  scene.add(worksGroup);
+
+  const contactMark = new THREE.Group();
+  contactMark.visible = false;
+  const arc = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.06, 12, 40, Math.PI * 1.2), metal);
+  const bead = new THREE.Mesh(new THREE.SphereGeometry(0.16, 20, 14), orange);
+  bead.position.set(0.15, 0.2, 0.2);
+  contactMark.add(arc, bead);
+  scene.add(contactMark);
 
   const blob = new THREE.Mesh(
     new THREE.SphereGeometry(0.72, 32, 24),
@@ -288,6 +335,7 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
   const pose = { ...REST };
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
   let progress = 0;
+  let beat = 'hero';
   let screenMode = 0;
   let looping = false;
   let raf = 0;
@@ -309,23 +357,63 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
     sample(keys, progress, pose);
     pointer.x += (pointer.tx - pointer.x) * 0.08;
     pointer.y += (pointer.ty - pointer.y) * 0.08;
-    const idle = progress < 0.03 && !reduced ? Math.sin(time * 0.55) * 0.07 : 0;
-    rig.position.set(pose.ox, pose.oy, pose.oz);
-    rig.rotation.set(pose.rx, pose.ry + idle + pointer.x * 0.12, pose.rz + pointer.y * -0.05);
-    camera.position.set(pose.px + pointer.x * 0.28, pose.py + pointer.y * -0.16, pose.pz);
-    camera.lookAt(pose.lx, pose.ly, pose.lz);
-    if (camera.fov !== pose.fov) {
-      camera.fov = pose.fov;
+    const showHero = beat === 'hero';
+    const showDark = beat === 'wipe' || beat === 'dark';
+    rig.visible = showHero;
+    blob.visible = showHero;
+    shadow.visible = showHero;
+    darkGroup.visible = showDark;
+    fragGroup.visible = beat === 'manifest';
+    worksGroup.visible = beat === 'works';
+    contactMark.visible = beat === 'contact';
+    renderer.setClearColor(showDark ? 0x070707 : 0x000000, showDark ? 1 : 0);
+
+    if (showHero) {
+      const idle = progress < 0.04 && !reduced ? Math.sin(time * 0.7) * 0.08 : 0;
+      sample(keys, progress * 0.35, pose);
+      rig.position.set(0.95 + pointer.x * 0.18, pose.oy * 0.2 + pointer.y * -0.1, pose.oz);
+      rig.rotation.set(pose.rx + pointer.y * -0.08, pose.ry + idle + progress * 0.9 + pointer.x * 0.35, pose.rz);
+      camera.position.set(0.05 + pointer.x * 0.45, 0.18 + pointer.y * -0.22, 4.7);
+      camera.lookAt(0.2, 0.02, 0);
+      blob.position.set(1.15 - progress * 1.5 + pointer.x * 0.85, 0.35 + pointer.y * 0.2, 0.75);
+      blob.scale.set(1.25, 0.72, 0.58);
+      shadow.position.x = rig.position.x;
+      shadow.material.opacity = 0.9;
+    } else if (showDark) {
+      camera.position.set(pointer.x * 0.3, 0.05, 3.1 - progress * 0.7);
+      camera.lookAt(0, 0, 0);
+      darkGroup.rotation.y = progress * 1.1 + pointer.x * 0.4;
+      darkGroup.rotation.x = pointer.y * 0.15;
+    } else if (beat === 'manifest') {
+      camera.position.set(0, 0, 4.2);
+      camera.lookAt(0, 0, 0);
+      shards.forEach((mesh, index) => {
+        const travel = progress * 2.2 + index * 0.33;
+        mesh.position.x = 2.6 - (travel % 1) * 5.2;
+        mesh.rotation.z = travel * 2;
+      });
+    } else if (beat === 'works') {
+      camera.position.set(0, 0.2, 4.4);
+      camera.lookAt(0, 0, 0);
+      workMeshes.forEach((mesh, index) => {
+        const depth = (index - 1) * 0.35;
+        mesh.position.x = (index - 1) * 1.45 + progress * (index - 1) * 0.4;
+        mesh.position.y = 0.35 - progress * 0.9 + depth * 0.2;
+        mesh.position.z = depth + pointer.x * 0.1;
+        mesh.rotation.y = progress * 1.4 + pointer.x * 0.3;
+      });
+    } else if (beat === 'contact') {
+      camera.position.set(0.2, 0, 3.3);
+      camera.lookAt(0, 0, 0);
+      contactMark.position.set(1.15 + pointer.x * 0.15, 0.05, 0.55);
+      contactMark.rotation.z = -0.2 + Math.sin(time * 0.8) * 0.06;
+      contactMark.rotation.y = pointer.x * 0.4;
+    }
+    if (camera.fov !== 32) {
+      camera.fov = 32;
       camera.updateProjectionMatrix();
     }
-    const passU = progress < 0.08 ? 0 : progress > 0.62 ? 1 : (progress - 0.08) / 0.54;
-    blob.position.set(5.2 - passU * 9.4, 0.05 + Math.sin(passU * Math.PI) * 0.2, 1.05);
-    blob.scale.set(1.15, 0.68, 0.55);
-    blob.visible = progress > 0.08 && progress < 0.64;
-    shadow.position.x = pose.ox;
-    shadow.position.z = 0.2;
-    shadow.material.opacity = 1 - Math.min(1, progress * 1.15);
-    const mode = progress > 0.62 ? 2 : progress > 0.28 ? 1 : 0;
+    const mode = progress > 0.55 ? 2 : progress > 0.25 ? 1 : 0;
     if (mode !== screenMode) {
       screenMode = mode;
       screen.draw(mode);
@@ -356,6 +444,11 @@ export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
 
   return {
     setProgress(value) {
+      progress = value < 0 ? 0 : value > 1 ? 1 : value;
+      if (!looping) render();
+    },
+    setBeat(name, value) {
+      beat = name || 'hero';
       progress = value < 0 ? 0 : value > 1 ? 1 : value;
       if (!looping) render();
     },

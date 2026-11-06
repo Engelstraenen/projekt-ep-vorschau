@@ -14,8 +14,6 @@ const result = document.getElementById('projekt-result');
 const menuBtn = document.querySelector('[data-menu]');
 const menu = document.getElementById('menu');
 const bar = document.querySelector('.bar');
-const workCount = document.querySelector('[data-work-count]');
-const workNames = ['Beispiel 1 von 3, Funke', 'Beispiel 2 von 3, Nordlicht', 'Beispiel 3 von 3, Salon'];
 
 const scene = canvas ? mountScene(canvas, { mobile, reduced: reduce }) : null;
 if (scene) {
@@ -137,119 +135,79 @@ if (gsap && ScrollTrigger) {
     const studioEnd = wide ? '+=190%' : '+=130%';
     const workEnd = wide ? '+=240%' : '+=170%';
 
-    const hero = gsap.timeline({
+    const chroma = document.querySelector('[data-chroma]');
+    ScrollTrigger.create({
+      trigger: '#hero',
+      start: 'top top',
+      end: heroEnd,
+      pin: '.hero-pin',
+      scrub: true,
+      anticipatePin: 1,
+      onUpdate: (self) => scene?.setBeat('hero', self.progress),
+    });
+
+    gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
-        trigger: '#hero',
+        trigger: '#wipe',
         start: 'top top',
-        end: heroEnd,
-        pin: '.hero-pin',
+        end: wide ? '+=150%' : '+=110%',
+        pin: '.wipe-pin',
         scrub: true,
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          if (scene) scene.setProgress(self.progress);
-          if (canvas) {
-            const fade = self.progress <= 0.82 ? 1 : Math.max(0, 1 - (self.progress - 0.82) / 0.16);
-            canvas.style.opacity = fade.toFixed(3);
-          }
-          parkCanvas(self.progress > 0.98);
-        },
-        onLeave: () => parkCanvas(true),
-        onEnterBack: () => parkCanvas(false),
+        onUpdate: (self) => scene?.setBeat('wipe', self.progress),
       },
-    });
-    hero
-      .to('.hero-copy', { yPercent: -16, opacity: 0, duration: 0.38 }, 0.4)
-      .to('.bubble', { y: 30, opacity: 0, duration: 0.22 }, 0.28)
-      .to('#hero', { backgroundColor: '#111111', duration: 0.26 }, 0.64);
+    }).to('.wipe-sheet', { yPercent: -108 }, 0);
 
-    const lines = gsap.utils.toArray('.statements p');
-    if (lines.length) {
-      gsap.set(lines, { opacity: (i) => (i === 0 ? 1 : 0), yPercent: (i) => (i === 0 ? 0 : 28) });
-      const studio = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#studio',
-          start: 'top top',
-          end: studioEnd,
-          pin: '.studio-pin',
-          scrub: true,
-        },
-      });
-      lines.forEach((line, index) => {
-        if (index === 0) return;
-        const at = index * 1.4;
-        studio
-          .to(lines[index - 1], { opacity: 0, yPercent: -18, duration: 0.45 }, at)
-          .to(line, { opacity: 1, yPercent: 0, duration: 0.5 }, at + 0.2);
-      });
-    }
-
-    const panels = gsap.utils.toArray('#arbeiten article');
-    if (panels.length > 1) {
-      gsap.set(panels.slice(1), { opacity: 0, rotateY: 16, z: 80 });
-      const works = gsap.timeline({
-        defaults: { ease: 'none' },
-        scrollTrigger: {
-          trigger: '#arbeiten',
-          start: 'top top',
-          end: workEnd,
-          pin: '.work-pin',
-          scrub: true,
-          onUpdate: (self) => {
-            const index = Math.min(panels.length - 1, Math.floor(self.progress * panels.length * 0.999));
-            if (workCount && workCount.textContent !== workNames[index]) workCount.textContent = workNames[index];
-            bar?.classList.toggle('on-cobalt', index === 1);
-          },
-        },
-      });
-      let at = 0;
-      for (let i = 1; i < panels.length; i += 1) {
-        at += 1.15;
-        works
-          .to(panels[i - 1], { opacity: 0, rotateY: -12, z: -80, duration: 0.4 }, at)
-          .to(panels[i], { opacity: 1, rotateY: 0, z: 0, duration: 0.4 }, at);
-        at += 0.4;
-      }
-      if (workCount) workCount.textContent = workNames[0];
-    }
-
-    const steps = gsap.utils.toArray('.steps li');
-    if (steps.length) {
-      const rail = document.querySelector('.steps-rail i');
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: '#zusammenarbeit',
-          start: 'top 72%',
-          end: 'bottom 55%',
-          scrub: true,
-        },
-      }).to(rail, { scaleX: 1, ease: 'none', duration: steps.length }, 0);
-      steps.forEach((step) => {
-        ScrollTrigger.create({
-          trigger: step,
-          start: 'top 75%',
-          end: 'bottom 45%',
-          toggleClass: 'is-on',
-        });
-      });
-    }
-
-    gsap.to('.swoosh path', {
-      strokeDashoffset: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#kontakt',
-        start: 'top 75%',
-        end: 'bottom 70%',
-        scrub: true,
+    ScrollTrigger.create({
+      trigger: '#studio',
+      start: 'top top',
+      end: studioEnd,
+      pin: '.manifest-pin',
+      scrub: true,
+      onUpdate: (self) => {
+        scene?.setBeat('manifest', self.progress);
+        if (!chroma) return;
+        const shift = gsap.utils.clamp(-4.5, 4.5, self.getVelocity() / 1400);
+        chroma.style.textShadow = shift
+          ? `${shift}px 0 rgba(255,42,106,.7), ${-shift}px 0 rgba(42,212,255,.7)`
+          : 'none';
       },
     });
 
     ScrollTrigger.create({
-      trigger: '#studio',
-      start: 'top 72px',
-      endTrigger: '#kontakt',
-      end: 'top 72px',
+      trigger: '#arbeiten',
+      start: 'top top',
+      end: workEnd,
+      pin: '.works-pin',
+      scrub: true,
+      onUpdate: (self) => scene?.setBeat('works', self.progress),
+    });
+
+    gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger: '#kontakt',
+        start: 'top top',
+        end: wide ? '+=160%' : '+=120%',
+        pin: '.reach-pin',
+        scrub: true,
+        onUpdate: (self) => scene?.setBeat('contact', self.progress),
+      },
+    })
+      .to('[data-strip]', { yPercent: -130 }, 0)
+      .fromTo('.splash', { scale: 0.92 }, { scale: 1.08 }, 0);
+
+    ScrollTrigger.create({
+      trigger: '#wipe',
+      start: 'top 80px',
+      endTrigger: '#studio',
+      end: 'top 80px',
+      toggleClass: { targets: bar, className: 'is-solid' },
+    });
+    ScrollTrigger.create({
+      trigger: '#kontakt',
+      start: 'top 80px',
+      end: 'bottom top',
       toggleClass: { targets: bar, className: 'is-solid' },
     });
 
