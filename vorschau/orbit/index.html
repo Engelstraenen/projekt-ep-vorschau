@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="ORBIT ist ein fiktives Digitalstudio. Demo von Projekt EX: gelbe Startseite, Kamerafahrt um ein eigenes 3D-Gerät, Studio, Beispielarbeiten und ein Projektstart ohne Versand.">
+<title>ORBIT – Ideen, die hängen bleiben (Demo)</title>
+<meta name="theme-color" content="#ffd000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23ffd000' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/schibsted-latin-900.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/vendor/lenis/lenis.css">
+<link rel="stylesheet" href="css/orbit.css">
+</head>
+<body>
+<a class="skip" href="#inhalt">Direkt zum Inhalt</a>
+<p class="demo"><span>Demo · nichts wird gesendet</span><a href="../../leistungen/websites.html">Zu Projekt EX</a></p>
+<header class="bar">
+  <div class="bar-in">
+    <a class="mark" href="#hero">ORBIT</a>
+    <nav class="links" id="menu" aria-label="Hauptnavigation">
+      <a href="#studio">Studio</a>
+      <a href="#arbeiten">Arbeiten</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <button class="menu-btn" type="button" data-menu aria-expanded="false" aria-controls="menu">Menü</button>
+    <a class="cta" href="#kontakt">Projekt starten <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</header>
+<div class="cursors" aria-hidden="true">
+  <div class="cursor"><i></i><b>Eugen</b></div>
+  <div class="cursor"><i></i><b>Jessica</b></div>
+  <div class="cursor"><i></i><b>Paul</b></div>
+</div>
+<canvas id="stage" aria-hidden="true"></canvas>
+<canvas id="front" aria-hidden="true"></canvas>
+<svg class="portal-svg" aria-hidden="true">
+  <defs>
+    <filter id="liquid" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.009 0.014" numOctaves="4" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="42" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <mask id="portal" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+      <rect width="1" height="1" fill="white"></rect>
+      <g id="portal-hole" fill="black" filter="url(#liquid)" transform="translate(0.58 0.5) scale(0.7)">
+        <path d="M0.02-0.16C0.12-0.2 0.2-0.08 0.16 0.02C0.24 0.08 0.14 0.18 0.04 0.16C-0.08 0.22-0.2 0.1-0.18-0.02C-0.24-0.12-0.1-0.2 0.02-0.16Z"/>
+        <path d="M-0.02 0.02C0.08-0.02 0.16 0.08 0.1 0.16C0.02 0.22-0.1 0.16-0.12 0.06C-0.14-0.02-0.08 0.04-0.02 0.02Z"/>
+      </g>
+    </mask>
+  </defs>
+</svg>
+<main id="inhalt">
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+    <div class="hero-pin">
+      <div class="hero-sheet" data-sheet>
+        <div class="hero-copy">
+          <h1 id="hero-title"><span class="line"><span>Ideen, die</span></span><span class="line"><span>hängen bleiben.</span></span></h1>
+          <p class="sr">Schwarzes Feldgerät mit Chromrand und orangen Tasten, rechts neben der Überschrift.</p>
+        </div>
+        <div class="fallback" data-fallback aria-hidden="true">
+          <div class="pebble">
+            <span class="ear"></span>
+            <span class="body"></span>
+            <span class="glass"></span>
+            <span class="knob k1"></span>
+            <span class="knob k2"></span>
+            <span class="knob k3"></span>
+          </div>
+        </div>
+        <p class="bubble"><svg class="blob" viewBox="0 0 220 120" aria-hidden="true"><path fill="#fff" d="M28 62c0-28 26-46 66-46 30 0 42 10 64 8 24-2 48 8 46 30-2 28-24 46-62 48-34 2-46-10-78-8-20 2-36-8-36-32z"/></svg><span>Digital mit<br>Charakter.</span><svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 11 11 4M6 4h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+        <a class="scroll-cue" href="#dunkel">Weiter <i aria-hidden="true"></i></a>
+      </div>
+      <svg class="ink" data-ink viewBox="-160 -160 320 320" aria-hidden="true">
+        <path class="ink-solid" fill="#111" d="M18-124C96-140 156-74 136-8C176 28 148 104 74 124C14 148-58 122-104 72C-164 18-158-62-104-104C-58-140-42-112 18-124Z"/>
+        <path class="ink-ring" fill="#111" fill-rule="evenodd" d="M18-124C96-140 156-74 136-8C176 28 148 104 74 124C14 148-58 122-104 72C-164 18-158-62-104-104C-58-140-42-112 18-124Z M12-78C62-88 98-46 86-8C108 14 92 62 48 74C12 86-28 70-54 40C-88 8-84-40-54-64C-28-84-22-72 12-78Z"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="pass" id="dunkel" aria-labelledby="pass-title">
+    <div class="pass-pin">
+      <div class="pass-copy">
+        <h2 id="pass-title">Glanz, Kante, Konus.</h2>
+        <p>Kurzer Durchgang durch eigenes Metall. Lautsprecher, Rollen, Ringe. Kein Foto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifest" id="studio" aria-labelledby="studio-title">
+    <div class="manifest-pin">
+      <svg class="wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><path fill="#ffd000" d="M0 78C30 8 70 130 180 48C250 0 290 150 430 72C520 12 560 160 740 64C860 4 940 150 1120 58C1240 8 1340 120 1440 46V160H0Z"/></svg>
+      <h2 id="studio-title">
+        <span class="line">Form, die bleibt.</span>
+        <span class="line">Bewegung, die hält.</span>
+        <span class="line">Charakter vor Lautstärke.</span>
+      </h2>
+    </div>
+  </section>
+
+  <section class="works" id="arbeiten" aria-labelledby="work-title">
+    <div class="works-pin">
+      <h2 id="work-title" class="sr">Arbeiten</h2>
+      <ul class="works-captions" data-caps>
+        <li><b>Funke</b><span>Nachtkiosk · frei erfunden</span></li>
+        <li><b>Nordlicht</b><span>Heft · frei erfunden</span></li>
+        <li><b>Salon</b><span>Raum · frei erfunden</span></li>
+        <li><b>Feldgerät</b><span>Studiomodell</span></li>
+        <li><b>Bake</b><span>Studiomodell</span></li>
+        <li><b>Spule</b><span>Studiomodell</span></li>
+        <li><b>Hörer</b><span>Studiomodell</span></li>
+        <li><b>Zeiger</b><span>Studiomodell</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="reach" id="kontakt" aria-labelledby="contact-title">
+    <div class="reach-pin">
+      <ul class="strip" data-strip>
+        <li><b>Funke</b><span>2026</span></li>
+        <li><b>Nordlicht</b><span>2026</span></li>
+        <li><b>Salon</b><span>2026</span></li>
+        <li><b>Feldgerät</b><span>2026</span></li>
+        <li><b>Bake</b><span>2026</span></li>
+        <li><b>Spule</b><span>2026</span></li>
+        <li><b>Hörer</b><span>2026</span></li>
+        <li><b>Zeiger</b><span>2026</span></li>
+      </ul>
+      <div class="reach-stage">
+        <svg class="splash" viewBox="0 0 900 420" aria-hidden="true"><path fill="#ffd000" d="M70 240C40 90 210 20 340 70C450 110 470 190 600 170C760 146 820 230 860 300C760 360 690 400 540 380C400 362 340 300 230 310C100 322 90 300 70 240Z"/></svg>
+        <h2 id="contact-title"><span class="line">Was soll</span><span class="line">bewegt</span><span class="line">werden?</span></h2>
+        <p class="lead">ORBIT ist frei erfunden. Demo von Projekt EX. Nichts wird gespeichert oder verschickt.</p>
+        <button class="open-btn" type="button" data-open-projekt>Projekt starten <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+  </section>
+</main>
+<nav class="dots" aria-label="Abschnitte">
+  <a href="#hero" aria-current="true"><span class="sr">Start</span></a>
+  <a href="#dunkel"><span class="sr">Metall</span></a>
+  <a href="#studio"><span class="sr">Studio</span></a>
+  <a href="#arbeiten"><span class="sr">Arbeiten</span></a>
+  <a href="#kontakt"><span class="sr">Kontakt</span></a>
+</nav>
+<footer class="foot">
+  <p>ORBIT ist eine fiktive Marke. Demo von Projekt EX. Keine Angebote, keine Kundinnen, keine Testimonials.</p>
+  <nav aria-label="Rechtliches">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="../../index.html">Projekt EX</a>
+  </nav>
+</footer>
+
+<dialog id="projekt" aria-labelledby="dialog-title">
+  <h2 id="dialog-title">Projekt starten</h2>
+  <p>Demo. Nichts verlässt diesen Browser.</p>
+  <form id="projekt-form">
+    <div class="fields">
+      <label>Name <input name="name" type="text" autocomplete="name" required maxlength="80"></label>
+      <label>E-Mail <input name="email" type="email" autocomplete="email" required maxlength="120" inputmode="email"></label>
+      <label>Was soll sich bewegen? <textarea name="idea" maxlength="400"></textarea></label>
+    </div>
+    <p class="form-error" data-error hidden></p>
+    <div class="dialog-actions">
+      <button class="open-btn" type="submit">Vormerken</button>
+      <button class="ghost" type="button" data-close>Schließen</button>
+    </div>
+  </form>
+  <div id="projekt-result" hidden>
+    <p>Danke, <span data-who></span>. Nichts wurde gesendet. In einer echten Seite würde hier das Gespräch weitergehen.</p>
+    <div class="dialog-actions"><button class="open-btn" type="button" data-close>Schließen</button></div>
+  </div>
+</dialog>
+
+<script src="../../assets/vendor/gsap/gsap.min.js" defer></script>
+<script src="../../assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
+<script type="module" src="js/orbit.js"></script>
+</body>
+</html>
