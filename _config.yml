@@ -4,6 +4,7 @@ exclude:
   - kontakt.php          # PHP läuft auf Pages nicht, sonst Download des Quelltexts
   - docs
   - tools
+  - intern               # internes Backend, läuft nicht auf GitHub Pages
   - package.json
   - package-lock.json
   - _config.yml
