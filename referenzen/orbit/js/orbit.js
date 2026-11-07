@@ -51,7 +51,10 @@ function setPortal(amount) {
     const scale = 0.9 + portal * 11;
     hole.setAttribute('transform', `translate(0.64 0.48) scale(${scale})`);
   }
-  if (sheet) sheet.style.visibility = portal > 0.97 ? 'hidden' : 'visible';
+  if (sheet) {
+    sheet.style.visibility = portal > 0.97 ? 'hidden' : 'visible';
+    sheet.style.transform = portal > 0.02 ? `translate3d(0, ${-portal * 108}%, 0)` : '';
+  }
   if (ink) ink.style.visibility = portal > 0.9 ? 'hidden' : 'visible';
   layoutPointer();
 }
@@ -261,5 +264,58 @@ if (gsap && ScrollTrigger && !reduce) {
   caps?.classList.add('is-in');
 }
 
+function playBuild() {
+  if (!gsap || reduce) return;
+  const layer = document.querySelector('.cursors');
+  if (!layer) return;
+  const cursors = [...layer.children];
+  const picks = [
+    ['.mark', 0],
+    ['.links', 1],
+    ['.cta', 2],
+    ['#hero-title', 0],
+    ['.ink', 1],
+    ['.bubble', 2],
+  ];
+  const els = picks.map(([sel]) => document.querySelector(sel)).filter(Boolean);
+  gsap.set(els, { autoAlpha: 0 });
+  scene?.setIntro(0);
+  const tl = gsap.timeline();
+  picks.forEach(([sel, ci], index) => {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    const at = index * 0.34;
+    tl.add(() => {
+      const rect = el.getBoundingClientRect();
+      gsap.to(cursors[ci], {
+        left: rect.left + Math.min(rect.width * 0.25, 80),
+        top: rect.top + 6,
+        duration: 0.42,
+        ease: 'power2.inOut',
+      });
+    }, at);
+    tl.fromTo(el, {
+      x: (ci - 1) * 110,
+      y: -24,
+      autoAlpha: 0,
+    }, {
+      x: 0,
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.5,
+      ease: 'power3.out',
+    }, at + 0.1);
+  });
+  const introState = { p: 0 };
+  tl.to(introState, {
+    p: 1,
+    duration: 1.05,
+    ease: 'power2.out',
+    onUpdate: () => scene?.setIntro(introState.p),
+  }, 0.45);
+  tl.to(cursors, { autoAlpha: 0, duration: 0.3 }, '>-0.05');
+}
+
 setPortal(0);
 layoutPointer();
+playBuild();

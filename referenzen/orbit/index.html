@@ -29,14 +29,24 @@
     <a class="cta" href="#kontakt">Projekt starten <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
 </header>
+<div class="cursors" aria-hidden="true">
+  <div class="cursor"><i></i><b>Eugen</b></div>
+  <div class="cursor"><i></i><b>Jessica</b></div>
+  <div class="cursor"><i></i><b>Paul</b></div>
+</div>
 <canvas id="stage" aria-hidden="true"></canvas>
 <canvas id="front" aria-hidden="true"></canvas>
 <svg class="portal-svg" aria-hidden="true">
   <defs>
+    <filter id="liquid" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.009 0.014" numOctaves="4" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="42" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
     <mask id="portal" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
       <rect width="1" height="1" fill="white"></rect>
-      <g id="portal-hole" fill="black" transform="translate(0.64 0.48) scale(0.85)">
-        <path d="M0.02-0.12C0.09-0.14 0.15-0.07 0.13-0.01C0.17 0.03 0.14 0.1 0.07 0.12C0.01 0.15-0.06 0.12-0.1 0.07C-0.16 0.02-0.16-0.06-0.1-0.1C-0.05-0.14-0.04-0.11 0.02-0.12Z"/>
+      <g id="portal-hole" fill="black" filter="url(#liquid)" transform="translate(0.58 0.5) scale(0.7)">
+        <path d="M0.02-0.16C0.12-0.2 0.2-0.08 0.16 0.02C0.24 0.08 0.14 0.18 0.04 0.16C-0.08 0.22-0.2 0.1-0.18-0.02C-0.24-0.12-0.1-0.2 0.02-0.16Z"/>
+        <path d="M-0.02 0.02C0.08-0.02 0.16 0.08 0.1 0.16C0.02 0.22-0.1 0.16-0.12 0.06C-0.14-0.02-0.08 0.04-0.02 0.02Z"/>
       </g>
     </mask>
   </defs>
@@ -80,7 +90,7 @@
 
   <section class="manifest" id="studio" aria-labelledby="studio-title">
     <div class="manifest-pin">
-      <svg class="wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><path fill="#ffd000" d="M0 78C90 20 160 108 280 64C390 24 430 96 560 70C710 38 760 112 920 58C1060 12 1140 96 1280 46C1360 18 1400 70 1440 40V140H0Z"/></svg>
+      <svg class="wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><path fill="#ffd000" d="M0 78C30 8 70 130 180 48C250 0 290 150 430 72C520 12 560 160 740 64C860 4 940 150 1120 58C1240 8 1340 120 1440 46V160H0Z"/></svg>
       <h2 id="studio-title">
         <span class="line">Form, die bleibt.</span>
         <span class="line">Bewegung, die hält.</span>
@@ -99,6 +109,8 @@
         <li><b>Feldgerät</b><span>Studiomodell</span></li>
         <li><b>Bake</b><span>Studiomodell</span></li>
         <li><b>Spule</b><span>Studiomodell</span></li>
+        <li><b>Hörer</b><span>Studiomodell</span></li>
+        <li><b>Zeiger</b><span>Studiomodell</span></li>
       </ul>
     </div>
   </section>
@@ -112,6 +124,8 @@
         <li><b>Feldgerät</b><span>2026</span></li>
         <li><b>Bake</b><span>2026</span></li>
         <li><b>Spule</b><span>2026</span></li>
+        <li><b>Hörer</b><span>2026</span></li>
+        <li><b>Zeiger</b><span>2026</span></li>
       </ul>
       <div class="reach-stage">
         <svg class="splash" viewBox="0 0 900 420" aria-hidden="true"><path fill="#ffd000" d="M70 240C40 90 210 20 340 70C450 110 470 190 600 170C760 146 820 230 860 300C760 360 690 400 540 380C400 362 340 300 230 310C100 322 90 300 70 240Z"/></svg>

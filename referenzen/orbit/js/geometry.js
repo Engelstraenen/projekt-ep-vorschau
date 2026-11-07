@@ -385,9 +385,35 @@ export function makeShard(mats, materialKey, w, h) {
   return new THREE.Mesh(geo, mats[materialKey]);
 }
 
+export function makeHandset(mats) {
+  const group = new THREE.Group();
+  const cradle = new THREE.Mesh(roundedBox(1.15, 0.32, 0.38, 0.1, 0.02), mats.plastic);
+  const bar = new THREE.Mesh(new THREE.CapsuleGeometry(0.1, 0.95, 6, 12), mats.chrome);
+  bar.rotation.z = Math.PI / 2;
+  bar.position.y = 0.24;
+  const ear = new THREE.Mesh(new THREE.SphereGeometry(0.16, 18, 12), mats.orange);
+  ear.position.set(-0.52, 0.24, 0);
+  const mic = ear.clone();
+  mic.position.x = 0.52;
+  group.add(cradle, bar, ear, mic);
+  return group;
+}
+
+export function makePointer(mats) {
+  const group = new THREE.Group();
+  const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.045, 1.7, 14), mats.plastic);
+  const tip = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.32, 14), mats.orange);
+  tip.position.y = 0.95;
+  const band = new THREE.Mesh(new THREE.TorusGeometry(0.09, 0.02, 8, 18), mats.chrome);
+  band.rotation.x = Math.PI / 2;
+  band.position.y = 0.15;
+  group.add(shaft, tip, band);
+  return group;
+}
+
 export function makeGesture(mats) {
   const hand = new THREE.Group();
-  const palm = new THREE.Mesh(roundedBox(0.86, 0.92, 0.16, 0.24, 0.03), mats.plastic);
+  const palm = new THREE.Mesh(roundedBox(0.86, 0.92, 0.16, 0.24, 0.03), mats.chrome);
   const wrist = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.2, 0.16, 16), mats.steel);
   wrist.position.y = -0.52;
   hand.add(palm, wrist);

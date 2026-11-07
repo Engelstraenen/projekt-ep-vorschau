@@ -5,6 +5,8 @@ import {
   makeCrt,
   makeFieldDevice,
   makeGesture,
+  makeHandset,
+  makePointer,
   makeMaterials,
   makePlate,
   makeRadio,
@@ -14,6 +16,7 @@ import {
   makeSpeaker,
   makeSpool,
   phosphorTexture,
+  roundedBox,
   shadowMesh,
   shadowTexture,
 } from './geometry.js';
@@ -23,7 +26,7 @@ function studioEnvironment(renderer) {
   const room = new THREE.Scene();
   room.add(new THREE.Mesh(
     new THREE.SphereGeometry(14, 32, 16),
-    new THREE.MeshBasicMaterial({ color: 0x2a3038, side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ color: 0x050608, side: THREE.BackSide }),
   ));
   const panel = (w, h, color, x, y, z) => {
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color }));
@@ -31,11 +34,10 @@ function studioEnvironment(renderer) {
     mesh.lookAt(0, 0, 0);
     room.add(mesh);
   };
-  panel(12, 5, 0xffffff, 0, 6.2, 2);
-  panel(4, 8, 0xd5e2ff, -7, 0.4, 2);
-  panel(3.2, 3.2, 0xffc48a, 6.2, -0.6, 3);
-  panel(8, 2.4, 0xf7f7f7, 0.4, -5.5, 2);
-  panel(2, 2, 0xfff2c9, 2.2, 2.4, 6);
+  panel(7, 2.4, 0xffffff, 0.4, 2.2, 5.2);
+  panel(2.2, 6, 0xdbe7ff, -4.2, 0.2, 4.4);
+  panel(2.4, 2.4, 0xffd7a1, 3.6, -0.4, 4.8);
+  panel(5, 1.4, 0xffffff, 0, -3.2, 4);
   const target = pmrem.fromScene(room, 0.04);
   pmrem.dispose();
   room.traverse((obj) => {
@@ -71,9 +73,9 @@ function makeRenderer(canvas) {
 }
 
 function addLights(scene, dark) {
-  scene.add(new THREE.AmbientLight(0xfff6ea, dark ? 0.55 : 0.7));
-  scene.add(new THREE.HemisphereLight(0xfff4e5, 0x243040, dark ? 0.85 : 0.55));
-  const key = new THREE.DirectionalLight(0xfffaf2, dark ? 3.2 : 2.4);
+  scene.add(new THREE.AmbientLight(0xfff6ea, dark ? 0.16 : 0.45));
+  scene.add(new THREE.HemisphereLight(0xfff4e5, 0x10141c, dark ? 0.28 : 0.4));
+  const key = new THREE.DirectionalLight(0xfffaf2, dark ? 4.4 : 2.6);
   key.position.set(3.4, 4.6, 5.5);
   scene.add(key);
   const rim = new THREE.DirectionalLight(0xd5e4ff, dark ? 2.2 : 1.1);
@@ -108,7 +110,7 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
   frontScene.environment = studioEnvironment(frontRenderer);
   backScene.environment = studioEnvironment(backRenderer);
   frontScene.environmentIntensity = 1.15;
-  backScene.environmentIntensity = 1.35;
+  backScene.environmentIntensity = 2.1;
 
   const frontCam = new THREE.PerspectiveCamera(26, 1, 0.08, 40);
   const backCam = new THREE.PerspectiveCamera(32, 1, 0.08, 50);
@@ -119,8 +121,8 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
   const gpuInfo = glInfo.getExtension('WEBGL_debug_renderer_info');
   const gpuName = gpuInfo ? String(glInfo.getParameter(gpuInfo.UNMASKED_RENDERER_WEBGL)) : '';
   const software = /swiftshader|llvmpipe|softpipe|software/i.test(gpuName);
-  const frontMats = makeMaterials(software ? 'fast' : 'studio');
-  const darkMats = makeMaterials(software ? 'fast-dark' : 'dark');
+  const frontMats = makeMaterials('studio');
+  const darkMats = makeMaterials('dark');
   const cassette = cassetteTexture();
   const warmScreen = phosphorTexture('#ffb15a');
   const coolScreen = phosphorTexture('#9fd6ff');
@@ -128,11 +130,11 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
   const shade = shadowTexture();
 
   const hero = makeFieldDevice(frontMats, cassette);
-  hero.scale.setScalar(mobile ? 0.74 : 0.86);
+  hero.scale.setScalar(mobile ? 0.7 : 0.78);
   const heroShadow = shadowMesh(shade, 2.6, 1.25);
   frontScene.add(hero, heroShadow);
 
-  const fragMats = makeMaterials(software ? 'fast' : 'studio');
+  const fragMats = makeMaterials('studio');
   const backFrags = [
     makeShard(fragMats, 'chrome', 1.15, 0.72),
     makeBeacon(fragMats),
@@ -142,7 +144,7 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
   backFrags.forEach((mesh) => backFragGroup.add(mesh));
   backScene.add(backFragGroup);
 
-  const frontFragMats = makeMaterials(software ? 'fast' : 'studio');
+  const frontFragMats = makeMaterials('studio');
   const frontFrags = [
     makeShard(frontFragMats, 'magenta', 0.9, 0.55),
     (() => {
@@ -165,6 +167,8 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
     { build: () => makeScanner(frontMats, greenScreen), scale: 0.58, shadow: [0.7, 0.4, -0.7] },
     { build: () => makeBeacon(frontMats), scale: 0.62, shadow: [0.7, 0.36, -0.7] },
     { build: () => makeSpool(frontMats), scale: 0.72, shadow: [0.9, 0.36, -0.45] },
+    { build: () => makeHandset(frontMats), scale: 0.7, shadow: [1, 0.36, -0.4] },
+    { build: () => makePointer(frontMats), scale: 0.62, shadow: [0.4, 0.7, -0.9] },
   ];
   const works = workDefs.map((def) => {
     const mesh = def.build();
@@ -181,11 +185,17 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
   frontScene.add(gesture, gestureShadow);
 
   const darkGroup = new THREE.Group();
-  const speakerA = makeSpeaker(darkMats, 1.35);
-  speakerA.position.set(-0.15, 0.05, 0);
-  const speakerB = makeSpeaker(darkMats, 0.72);
-  speakerB.position.set(1.65, -0.45, -1.55);
-  speakerB.rotation.y = -0.7;
+  const speakerA = makeSpeaker(darkMats, 2.15);
+  speakerA.position.set(-1.15, 0.05, 0.35);
+  const speakerB = makeSpeaker(darkMats, 1.85);
+  speakerB.position.set(1.25, 0.12, 0.15);
+  speakerB.rotation.y = -0.35;
+  const ochre = new THREE.Mesh(
+    roundedBox(1.4, 0.9, 0.7, 0.08, 0.04),
+    new THREE.MeshStandardMaterial({ color: 0x8a5a32, metalness: 0.82, roughness: 0.28, envMapIntensity: 1.4 }),
+  );
+  ochre.position.set(0.15, -0.35, -0.8);
+  ochre.rotation.set(0.4, 0.5, 0.1);
   const roller = makeRoller(darkMats);
   roller.position.set(-1.35, -0.15, -0.35);
   roller.rotation.z = 0.35;
@@ -204,12 +214,13 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
     bulb.position.set(x, y, z);
     return bulb;
   });
-  darkGroup.add(speakerA, speakerB, roller, plate, ring, ringB, ...bulbs);
+  darkGroup.add(speakerA, speakerB, ochre, roller, plate, ring, ringB, ...bulbs);
   backScene.add(darkGroup);
 
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
   let beat = 'hero';
   let progress = 0;
+  let intro = 1;
   let width = 1;
   let height = 1;
   let looping = false;
@@ -219,7 +230,7 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
   function resize() {
     width = backCanvas.clientWidth || window.innerWidth;
     height = backCanvas.clientHeight || window.innerHeight;
-    const dpr = software ? 0.65 : Math.min(window.devicePixelRatio || 1, width < 900 ? 1.15 : 1.35);
+    const dpr = Math.min(window.devicePixelRatio || 1, software ? 1 : (width < 900 ? 1.15 : 1.35));
     [frontRenderer, backRenderer].forEach((renderer) => {
       renderer.setPixelRatio(dpr);
       renderer.setSize(width, height, false);
@@ -231,14 +242,14 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
   }
 
   function placeWorks(t, narrow) {
-      const span = narrow ? 0.58 : 0.92;
+      const span = narrow ? 0.42 : 0.72;
     const grid = [
-      [-1.45, 0.72, 0.55], [0.05, 0.95, -0.85], [1.5, 0.58, 0.25],
-      [-1.35, -0.55, -0.45], [0.1, -0.72, 0.7], [1.45, -0.38, -0.2],
+      [-1.7, 0.9, 1.1], [-0.4, 1.15, -1.2], [1.1, 0.8, 0.4], [2.0, 0.35, -0.6],
+      [-1.5, -0.7, -0.9], [-0.2, -0.95, 0.9], [1.2, -0.45, -0.3], [2.1, -0.15, 0.7],
     ];
     works.forEach((item, index) => {
       const home = grid[index];
-      const stripX = (index - 2.5) * span;
+      const stripX = (index - 3.5) * span;
       const u = t < 0.62 ? t / 0.62 : 1;
       const settle = t < 0.62 ? 0 : (t - 0.62) / 0.38;
       const ease = settle * settle * (3 - 2 * settle);
@@ -289,7 +300,7 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
       const orbit = beat === 'hero' ? progress : 1;
       const wipe = beat === 'wipe' ? progress : 0;
       hero.position.set(
-        (narrow ? 0 : 1.32) + pointer.x * 0.18,
+        (narrow ? 0 : 1.22) + (1 - intro) * 2.4 + pointer.x * 0.18,
         (narrow ? -1.15 : 0.08) + Math.sin(time * 1.15) * 0.055 + pointer.y * -0.08,
         0,
       );
@@ -310,7 +321,7 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
     if (showDark) {
       const dive = beat === 'dark' ? progress : beat === 'wipe' ? progress * 0.35 : 0;
       backCam.fov = 33;
-      backCam.position.set(0.15 + dive * 0.45 + pointer.x * 0.15, 0.05 + pointer.y * 0.08, 4.7 - dive * 2.15);
+      backCam.position.set(0.05 + dive * 0.25 + pointer.x * 0.1, 0.02, 4.35 - dive * 0.7);
       backCam.lookAt(0.05, 0, -0.4);
       backCam.updateProjectionMatrix();
       darkGroup.rotation.y = dive * 0.45 + time * 0.05;
@@ -356,7 +367,7 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
 
     if (showGesture) {
       const rise = Math.min(1, progress / 0.45);
-      gesture.position.set(narrow ? 0.05 : 1.72, -1.05 + rise * 0.2 + Math.sin(time * 0.9) * 0.03, 0.1);
+      gesture.position.set(narrow ? 0.05 : 0.85, -0.15 + rise * 0.15 + Math.sin(time * 0.9) * 0.03, 0.35);
       gesture.rotation.set(0.15 + Math.sin(time * 0.7) * 0.03, 0.02 + pointer.x * 0.1, 0);
       frontCam.position.set(0, 0.05, narrow ? 7.4 : 6.5);
       frontCam.fov = narrow ? 34 : 28;
@@ -386,6 +397,9 @@ export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
   raf = requestAnimationFrame(loop);
 
   return {
+    setIntro(value) {
+      intro = value < 0 ? 0 : value > 1 ? 1 : value;
+    },
     setBeat(name, value) {
       beat = name || 'hero';
       progress = value < 0 ? 0 : value > 1 ? 1 : value;

@@ -1,0 +1,6 @@
+# ORBIT-Demo. Nur fuer Apache/IONOS relevant, GitHub Pages ignoriert diese Datei.
+# Skripte und Schriften lokal, keine Drittanbieter. CSP entspricht dem Meta-Tag, plus frame-ancestors.
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'; manifest-src 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>

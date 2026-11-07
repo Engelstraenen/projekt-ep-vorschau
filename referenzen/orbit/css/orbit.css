@@ -199,7 +199,7 @@ body.is-portaling #front {
   left: var(--pad);
   top: 48%;
   translate: 0 -54%;
-  width: min(46vw, 620px);
+  width: min(86vw, 1180px);
 }
 h1, h2, .pass-copy h2 {
   font-weight: 900;
@@ -207,7 +207,7 @@ h1, h2, .pass-copy h2 {
   line-height: 0.88;
   margin: 0;
 }
-h1 { font-size: clamp(2.7rem, 4.7vw, 5.15rem); }
+h1 { font-size: clamp(3.1rem, 6.5vw, 7.2rem); }
 .line { display: block; }
 .ink {
   position: absolute;
@@ -329,7 +329,7 @@ html.is-motion body.has-webgl.is-studio .manifest { background: transparent; }
   align-items: center;
   padding: calc(var(--header) + 12px) var(--pad) 8vh;
 }
-.wave { position: absolute; left: 0; right: 0; top: -78px; width: 100%; height: 90px; }
+.wave { position: absolute; left: -4%; right: -4%; top: -120px; width: 108%; height: 140px; }
 .manifest h2 {
   position: relative;
   z-index: 2;
@@ -344,7 +344,7 @@ html.is-motion body.has-webgl.is-studio .manifest { background: transparent; }
   margin: 0;
   padding: 0 calc(var(--pad) + 8px) 7vh calc(var(--pad) + 36px);
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: 14px;
   position: relative;
   z-index: 2;
@@ -522,3 +522,33 @@ dialog h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 8px; }
   html { scroll-behavior: auto; }
 }
 body:not(.has-webgl) .ink { display: none; }
+.cursors { position: fixed; inset: 0; z-index: 36; pointer-events: none; }
+.cursor { position: fixed; left: 6vw; top: 78vh; width: 16px; height: 16px; }
+.cursor i {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 42%, 54% 48%, 72% 100%, 46% 100%, 36% 54%, 0 68%);
+}
+.cursor b {
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  padding: 2px 7px;
+  border-radius: 7px;
+  background: currentColor;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+.cursor:nth-child(1) { color: #111; }
+.cursor:nth-child(1) b { color: var(--yellow); }
+.cursor:nth-child(2) { color: #ff7a00; }
+.cursor:nth-child(2) b { color: #111; }
+.cursor:nth-child(3) { color: #1026d6; }
+@media (prefers-reduced-motion: reduce) {
+  .cursors { display: none; }
+}
