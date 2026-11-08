@@ -12,6 +12,10 @@ GitHub main: `package.json`, `kontakt.html`, `assets/kontakt.js`, `kontakt.php`,
 - Keine Rechnungs-/Buchhaltungsintegration in den geprüften Bestandsdateien oder SDK-Abhängigkeiten gefunden. `package.json` führt Lenis, Three und Vanilla CookieConsent.
 - Bestehende AGB § 6 enthalten **50 %**, 14 Tage Zahlungsziel und teils Leistungsbeginn nach Zahlung. Diese wurden NICHT live geändert. Vor Livegang müssen § 6 Abs. 2, 2a und 3 sowie Angebot/Auftragsbestätigung konsistent geprüft werden; alte Bedingungen nicht stillschweigend fortschreiben.
 
+## Bestätigter Rechtsträger und offene Pflichtangaben
+
+Rechtsträgerin, Betreiberin und Vertragspartnerin ist die Engelstränen UG (haftungsbeschränkt). PROJEKT EX ist eine Marke der Engelstränen UG (haftungsbeschränkt). Bestätigung durch Eugen am 08.11.2026; keine Registerprüfung. Anschrift: Gothaerstr. 31, 40880 Ratingen **[zu bestätigen]**. Geschäftsführung / Vertretung: Jessica Kruse **[zu bestätigen]**. Registergericht, Registernummer, Telefonnummer, Kontaktstelle und USt-IdNr. (soweit vorhanden): jeweils **[zu bestätigen]**. Alle gekennzeichneten Altwerte bleiben Platzhalter; keine Produktivfreigabe.
+
 ## Regeln
 
 Reguläre Aufträge: 30 % Anzahlung; tatsächliche Zahlung wird mit Nettoanteil und USt. in der Schlussrechnung abgesetzt. Fälligkeit, Leistungsbeginn und Zeitpunkt der Restzahlung bleiben offen. 19 % USt. ist nur eine Testannahme.
