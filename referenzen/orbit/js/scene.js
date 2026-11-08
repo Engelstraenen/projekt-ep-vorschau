@@ -1,499 +1,443 @@
 import * as THREE from '../../../assets/vendor/three/build/three.module.min.js';
+import {
+  cassetteTexture,
+  makeBeacon,
+  makeCrt,
+  makeFieldDevice,
+  makeGesture,
+  makeHandset,
+  makePointer,
+  makeMaterials,
+  makePlate,
+  makeRadio,
+  makeRoller,
+  makeScanner,
+  makeShard,
+  makeSpeaker,
+  makeSpool,
+  phosphorTexture,
+  roundedBox,
+  shadowMesh,
+  shadowTexture,
+} from './geometry.js';
 
-/**
- * Eigenes ORBIT-Feldgerät. Kein importiertes Modell, keine Textur aus der Referenz.
- * Die Kamerafahrt sitzt in den Keyframes: Ruhepose rechts, Orbit, Vorbeizug, Dolly ins Dunkel.
- */
-
-function roundedRect(w, h, r) {
-  const s = new THREE.Shape();
-  const x = -w / 2;
-  const y = -h / 2;
-  s.moveTo(x + r, y);
-  s.lineTo(x + w - r, y);
-  s.absarc(x + w - r, y + r, r, -Math.PI / 2, 0, false);
-  s.lineTo(x + w, y + h - r);
-  s.absarc(x + w - r, y + h - r, r, 0, Math.PI / 2, false);
-  s.lineTo(x + r, y + h);
-  s.absarc(x + r, y + h - r, r, Math.PI / 2, Math.PI, false);
-  s.lineTo(x, y + r);
-  s.absarc(x + r, y + r, r, Math.PI, Math.PI * 1.5, false);
-  return s;
-}
-
-function makeScreen() {
-  const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 320;
-  const g = canvas.getContext('2d');
-  const tex = new THREE.CanvasTexture(canvas);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.anisotropy = 4;
-
-  function draw(mode) {
-    g.clearRect(0, 0, 512, 320);
-    g.fillStyle = '#16130f';
-    g.fillRect(0, 0, 512, 320);
-    g.fillStyle = '#2a241c';
-    roundRect(g, 28, 26, 456, 188, 18);
-    g.fill();
-    g.strokeStyle = mode > 1 ? '#ffb15a' : '#6d6458';
-    g.lineWidth = 3;
-    g.beginPath();
-    const bars = mode === 0 ? 7 : 11;
-    for (let i = 0; i < bars; i += 1) {
-      const x = 70 + i * 36;
-      const h = 28 + ((i * 47 + mode * 30) % 90);
-      g.moveTo(x, 150);
-      g.lineTo(x, 150 - h);
+function studioEnvironment(renderer) {
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const room = new THREE.Scene();
+  room.add(new THREE.Mesh(
+    new THREE.SphereGeometry(14, 32, 16),
+    new THREE.MeshBasicMaterial({ color: 0x050608, side: THREE.BackSide }),
+  ));
+  const panel = (w, h, color, x, y, z) => {
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color }));
+    mesh.position.set(x, y, z);
+    mesh.lookAt(0, 0, 0);
+    room.add(mesh);
+  };
+  panel(7, 2.4, 0xffffff, 0.4, 2.2, 5.2);
+  panel(2.2, 6, 0xdbe7ff, -4.2, 0.2, 4.4);
+  panel(2.4, 2.4, 0xffd7a1, 3.6, -0.4, 4.8);
+  panel(5, 1.4, 0xffffff, 0, -3.2, 4);
+  const target = pmrem.fromScene(room, 0.04);
+  pmrem.dispose();
+  room.traverse((obj) => {
+    if (obj.isMesh) {
+      obj.geometry.dispose();
+      obj.material.dispose();
     }
-    g.stroke();
-    g.fillStyle = '#ff7a00';
-    g.beginPath();
-    g.arc(430, 250, 16, 0, Math.PI * 2);
-    g.fill();
-    g.fillStyle = mode === 2 ? '#ffb15a' : '#3a342c';
-    g.fillRect(48, 248, mode === 2 ? 180 : 92, 10);
-    tex.needsUpdate = true;
-  }
-
-  draw(0);
-  return { tex, draw };
+  });
+  return target.texture;
 }
 
-function roundRect(ctx, x, y, w, h, r) {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
-}
-
-function shadowTexture() {
-  const c = document.createElement('canvas');
-  c.width = 256;
-  c.height = 128;
-  const g = c.getContext('2d');
-  const grd = g.createRadialGradient(128, 64, 8, 128, 64, 120);
-  grd.addColorStop(0, 'rgba(0,0,0,0.38)');
-  grd.addColorStop(1, 'rgba(0,0,0,0)');
-  g.fillStyle = grd;
-  g.fillRect(0, 0, 256, 128);
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  return tex;
-}
-
-const REST = { t: 0, px: -0.15, py: 0.42, pz: 5.55, lx: -0.05, ly: 0.15, lz: 0, ry: -0.88, rx: 0.4, rz: 0.32, ox: 1.18, oy: -0.42, oz: 0, fov: 30 };
-const KEYS_DESK = [
-  REST,
-  { t: 0.22, px: 0.85, py: 0.55, pz: 4.35, lx: 0.55, ly: 0.12, lz: 0, ry: -0.15, rx: 0.28, rz: 0.08, ox: 0.72, oy: 0.08, oz: 0, fov: 30 },
-  { t: 0.42, px: -0.15, py: 0.62, pz: 3.55, lx: 0.05, ly: 0.1, lz: 0, ry: 0.55, rx: 0.16, rz: -0.04, ox: 0.12, oy: 0.06, oz: 0, fov: 28 },
-  { t: 0.58, px: -1.15, py: 0.28, pz: 2.85, lx: -0.15, ly: 0.04, lz: 0, ry: 1.25, rx: 0.08, rz: 0.02, ox: -0.05, oy: 0.02, oz: 0, fov: 26 },
-  { t: 0.74, px: 0.02, py: 0.12, pz: 1.85, lx: 0, ly: 0.02, lz: 0.05, ry: 0.18, rx: 0.04, rz: 0, ox: 0, oy: 0, oz: 0, fov: 22 },
-  { t: 0.9, px: 0, py: 0.02, pz: 0.78, lx: 0, ly: 0, lz: 0.12, ry: 0.02, rx: 0, rz: 0, ox: 0, oy: 0, oz: 0.04, fov: 18 },
-  { t: 1, px: 0, py: 0, pz: 0.42, lx: 0, ly: 0, lz: 0.2, ry: 0, rx: 0, rz: 0, ox: 0, oy: 0, oz: 0.08, fov: 16 },
-];
-const KEYS_MOBILE = [
-  { t: 0, px: 0, py: 0.15, pz: 6.8, lx: 0, ly: 0.05, lz: 0, ry: -0.8, rx: 0.32, rz: 0.22, ox: 0.05, oy: -0.78, oz: 0, fov: 34 },
-  { t: 0.34, px: 0.15, py: 0.05, pz: 5.6, lx: 0, ly: -0.7, lz: 0, ry: 0.15, rx: 0.22, rz: 0.08, ox: 0.05, oy: -0.65, oz: 0, fov: 28 },
-  { t: 0.68, px: 0, py: 0.04, pz: 2.1, lx: 0, ly: 0, lz: 0.02, ry: 0.08, rx: 0.04, rz: 0, ox: 0, oy: 0, oz: 0, fov: 22 },
-  { t: 1, px: 0, py: 0, pz: 0.48, lx: 0, ly: 0, lz: 0.14, ry: 0, rx: 0, rz: 0, ox: 0, oy: 0, oz: 0.05, fov: 16 },
-];
-
-function sample(keys, t, out) {
-  let i = 0;
-  const last = keys.length - 1;
-  while (i < last - 1 && t >= keys[i + 1].t) i += 1;
-  const a = keys[i];
-  const b = keys[Math.min(i + 1, last)];
-  const span = (b.t - a.t) || 1;
-  let u = (t - a.t) / span;
-  if (u < 0) u = 0;
-  if (u > 1) u = 1;
-  u = u * u * (3 - 2 * u);
-  out.px = a.px + (b.px - a.px) * u;
-  out.py = a.py + (b.py - a.py) * u;
-  out.pz = a.pz + (b.pz - a.pz) * u;
-  out.lx = a.lx + (b.lx - a.lx) * u;
-  out.ly = a.ly + (b.ly - a.ly) * u;
-  out.lz = a.lz + (b.lz - a.lz) * u;
-  out.ry = a.ry + (b.ry - a.ry) * u;
-  out.rx = a.rx + (b.rx - a.rx) * u;
-  out.rz = a.rz + (b.rz - a.rz) * u;
-  out.ox = a.ox + (b.ox - a.ox) * u;
-  out.oy = a.oy + (b.oy - a.oy) * u;
-  out.oz = a.oz + (b.oz - a.oz) * u;
-  out.fov = a.fov + (b.fov - a.fov) * u;
-  return out;
-}
-
-export function mountScene(canvas, { mobile = false, reduced = false } = {}) {
-  let renderer;
+function makeRenderer(canvas) {
   try {
-    renderer = new THREE.WebGLRenderer({
+    const renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
-      antialias: !mobile,
+      antialias: false,
       powerPreference: 'high-performance',
       failIfMajorPerformanceCaveat: false,
     });
+    if (!renderer.getContext()) {
+      renderer.dispose();
+      return null;
+    }
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.12;
+    renderer.setClearColor(0x000000, 0);
+    return renderer;
   } catch (err) {
     return null;
   }
-  if (!renderer.getContext()) {
-    renderer.dispose();
+}
+
+function addLights(scene, dark) {
+  scene.add(new THREE.AmbientLight(0xfff6ea, dark ? 0.16 : 0.45));
+  scene.add(new THREE.HemisphereLight(0xfff4e5, 0x10141c, dark ? 0.28 : 0.4));
+  const key = new THREE.DirectionalLight(0xfffaf2, dark ? 4.4 : 2.6);
+  key.position.set(3.4, 4.6, 5.5);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0xd5e4ff, dark ? 2.2 : 1.1);
+  rim.position.set(-4.5, 2.2, -3);
+  scene.add(rim);
+  return { key, rim };
+}
+
+function holder(mesh, shadowMap, shadowW, shadowH, drop) {
+  const group = new THREE.Group();
+  group.add(mesh);
+  if (shadowMap) {
+    const shadow = shadowMesh(shadowMap, shadowW, shadowH);
+    shadow.position.set(0, drop, -0.05);
+    group.add(shadow);
+  }
+  group.userData.mesh = mesh;
+  return group;
+}
+
+export function mountScene(backCanvas, frontCanvas, { mobile = false } = {}) {
+  const frontRenderer = makeRenderer(frontCanvas);
+  const backRenderer = makeRenderer(backCanvas);
+  if (!frontRenderer || !backRenderer) {
+    frontRenderer?.dispose();
+    backRenderer?.dispose();
     return null;
   }
 
-  renderer.setClearColor(0x000000, 0);
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.08;
+  const frontScene = new THREE.Scene();
+  const backScene = new THREE.Scene();
+  frontScene.environment = studioEnvironment(frontRenderer);
+  backScene.environment = studioEnvironment(backRenderer);
+  frontScene.environmentIntensity = 1.15;
+  backScene.environmentIntensity = 2.1;
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(30, 1, 0.08, 40);
+  const frontCam = new THREE.PerspectiveCamera(26, 1, 0.08, 40);
+  const backCam = new THREE.PerspectiveCamera(32, 1, 0.08, 50);
+  const frontLights = addLights(frontScene, false);
+  const backLights = addLights(backScene, true);
 
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  const env = new THREE.Scene();
-  const room = new THREE.Mesh(
-    new THREE.SphereGeometry(8, 24, 16),
-    new THREE.MeshBasicMaterial({ color: 0x2a2a2a, side: THREE.BackSide }),
-  );
-  env.add(room);
-  const panel = new THREE.Mesh(new THREE.PlaneGeometry(5, 2.2), new THREE.MeshBasicMaterial({ color: 0xfff6d0 }));
-  panel.position.set(1.5, 2.2, 3);
-  env.add(panel);
-  const warm = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 2.2), new THREE.MeshBasicMaterial({ color: 0xff7a18 }));
-  warm.position.set(-2.4, -0.2, 2);
-  env.add(warm);
-  scene.environment = pmrem.fromScene(env, 0.04).texture;
-  pmrem.dispose();
+  const glInfo = frontRenderer.getContext();
+  const gpuInfo = glInfo.getExtension('WEBGL_debug_renderer_info');
+  const gpuName = gpuInfo ? String(glInfo.getParameter(gpuInfo.UNMASKED_RENDERER_WEBGL)) : '';
+  const software = /swiftshader|llvmpipe|softpipe|software/i.test(gpuName);
+  const frontMats = makeMaterials('studio');
+  const darkMats = makeMaterials('dark');
+  const cassette = cassetteTexture();
+  const warmScreen = phosphorTexture('#ffb15a');
+  const coolScreen = phosphorTexture('#9fd6ff');
+  const greenScreen = phosphorTexture('#d6ef3a');
+  const shade = shadowTexture();
 
-  scene.add(new THREE.AmbientLight(0xfff4cc, 0.35));
-  const key = new THREE.DirectionalLight(0xfffaf0, 2.8);
-  key.position.set(3.2, 4.2, 6);
-  scene.add(key);
-  const fill = new THREE.DirectionalLight(0xffffff, 0.7);
-  fill.position.set(-2, 1.2, 4);
-  scene.add(fill);
-  const rim = new THREE.DirectionalLight(0xffe08a, 1.6);
-  rim.position.set(-4.5, 2.2, -3);
-  scene.add(rim);
-  const kick = new THREE.PointLight(0xff6a00, 6, 8);
-  kick.position.set(1.4, 0.2, 2.2);
-  scene.add(kick);
+  const hero = makeFieldDevice(frontMats, cassette);
+  hero.scale.setScalar(mobile ? 0.7 : 0.78);
+  const heroShadow = shadowMesh(shade, 2.6, 1.25);
+  frontScene.add(hero, heroShadow);
 
-  const bodyMat = new THREE.MeshPhysicalMaterial({
-    color: 0x0c0c0c,
-    metalness: 0.22,
-    roughness: 0.34,
-    clearcoat: 1,
-    clearcoatRoughness: 0.08,
-    envMapIntensity: 0.55,
+  const fragMats = makeMaterials('studio');
+  const backFrags = [
+    makeShard(fragMats, 'chrome', 1.15, 0.72),
+    makeBeacon(fragMats),
+  ];
+  backFrags[1].scale.setScalar(0.55);
+  const backFragGroup = new THREE.Group();
+  backFrags.forEach((mesh) => backFragGroup.add(mesh));
+  backScene.add(backFragGroup);
+
+  const frontFragMats = makeMaterials('studio');
+  const frontFrags = [
+    makeShard(frontFragMats, 'magenta', 0.9, 0.55),
+    (() => {
+      const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.12, 28), frontFragMats.lime);
+      disc.rotation.x = Math.PI / 2;
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.03, 8, 24), frontFragMats.chrome);
+      const g = new THREE.Group();
+      g.add(disc, ring);
+      return g;
+    })(),
+  ];
+  const frontFragGroup = new THREE.Group();
+  frontFrags.forEach((mesh) => frontFragGroup.add(mesh));
+  frontScene.add(frontFragGroup);
+
+  const workDefs = [
+    { build: () => makeFieldDevice(frontMats, cassette), scale: 0.42, shadow: [0.9, 0.42, -0.55] },
+    { build: () => makeRadio(frontMats, warmScreen), scale: 0.7, shadow: [1, 0.46, -0.5] },
+    { build: () => makeCrt(frontMats, coolScreen), scale: 0.58, shadow: [1.15, 0.42, -0.48] },
+    { build: () => makeScanner(frontMats, greenScreen), scale: 0.58, shadow: [0.7, 0.4, -0.7] },
+    { build: () => makeBeacon(frontMats), scale: 0.62, shadow: [0.7, 0.36, -0.7] },
+    { build: () => makeSpool(frontMats), scale: 0.72, shadow: [0.9, 0.36, -0.45] },
+    { build: () => makeHandset(frontMats), scale: 0.7, shadow: [1, 0.36, -0.4] },
+    { build: () => makePointer(frontMats), scale: 0.62, shadow: [0.4, 0.7, -0.9] },
+  ];
+  const works = workDefs.map((def) => {
+    const mesh = def.build();
+    mesh.scale.setScalar(def.scale);
+    return holder(mesh, shade, def.shadow[0], def.shadow[1], def.shadow[2]);
   });
-  const metal = new THREE.MeshPhysicalMaterial({
-    color: 0xf4f4f6,
-    metalness: 1,
-    roughness: 0.12,
-    clearcoat: 0.5,
-    envMapIntensity: 1.45,
-  });
-  const orange = new THREE.MeshPhysicalMaterial({
-    color: 0xff7a00,
-    metalness: 0.12,
-    roughness: 0.32,
-    clearcoat: 0.85,
-    emissive: 0xff5a00,
-    emissiveIntensity: 0.18,
-  });
+  const worksGroup = new THREE.Group();
+  works.forEach((item) => worksGroup.add(item));
+  frontScene.add(worksGroup);
 
-  const bodyGeo = new THREE.ExtrudeGeometry(roundedRect(1.28, 1.92, 0.46), {
-    depth: 0.32,
-    bevelEnabled: true,
-    bevelThickness: 0.07,
-    bevelSize: 0.06,
-    bevelSegments: 5,
-    curveSegments: 16,
-  });
-  bodyGeo.translate(0, 0, -0.22);
-  const rig = new THREE.Group();
-  const body = new THREE.Mesh(bodyGeo, bodyMat);
-  rig.add(body);
-
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(1, 0.026, 10, 72), metal);
-  ring.scale.set(0.74, 1.08, 0.7);
-  ring.position.z = 0.16;
-  rig.add(ring);
-
-  const screen = makeScreen();
-  const glass = new THREE.Mesh(
-    new THREE.PlaneGeometry(0.86, 0.52),
-    new THREE.MeshPhysicalMaterial({
-      map: screen.tex,
-      color: 0xffffff,
-      roughness: 0.18,
-      metalness: 0.05,
-      clearcoat: 1,
-      clearcoatRoughness: 0.08,
-    }),
-  );
-  glass.position.set(0, 0.18, 0.2);
-  rig.add(glass);
-
-  const slot = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.08, 0.02), metal);
-  slot.position.set(0, -0.28, 0.2);
-  rig.add(slot);
-
-  [[0.34, -0.52], [-0.05, -0.62], [0.28, -0.78]].forEach(([x, y], index) => {
-    const btn = new THREE.Mesh(new THREE.CylinderGeometry(index === 1 ? 0.09 : 0.07, index === 1 ? 0.09 : 0.07, 0.05, 20), orange);
-    btn.rotation.x = Math.PI / 2;
-    btn.position.set(x, y, 0.2);
-    rig.add(btn);
-  });
-
-  const ear = new THREE.Mesh(new THREE.CapsuleGeometry(0.16, 0.28, 4, 12), bodyMat);
-  ear.position.set(0.42, 0.98, -0.02);
-  ear.rotation.z = -0.5;
-  rig.add(ear);
-  const earRing = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.018, 8, 24), metal);
-  earRing.position.copy(ear.position);
-  earRing.rotation.z = ear.rotation.z;
-  rig.add(earRing);
-
-  rig.scale.setScalar(mobile ? 0.62 : 0.74);
-  scene.add(rig);
+  const gesture = makeGesture(frontMats);
+  gesture.scale.setScalar(mobile ? 0.92 : 1.02);
+  const gestureShadow = shadowMesh(shade, 1.4, 0.6);
+  frontScene.add(gesture, gestureShadow);
 
   const darkGroup = new THREE.Group();
-  darkGroup.visible = false;
-  const disc = new THREE.Mesh(new THREE.TorusGeometry(1.15, 0.07, 14, 72), metal);
-  const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.48, 0.16, 40), bodyMat);
-  drum.rotation.x = Math.PI / 2;
-  const sideRing = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.028, 10, 36), metal);
-  sideRing.position.set(-1.35, 0.35, 0.25);
-  const puck = new THREE.Mesh(new THREE.SphereGeometry(0.26, 24, 16), metal);
-  puck.position.set(1.25, -0.28, 0.35);
-  darkGroup.add(disc, drum, sideRing, puck);
-  scene.add(darkGroup);
-
-  const fragGroup = new THREE.Group();
-  fragGroup.visible = false;
-  const shardMat = new THREE.MeshPhysicalMaterial({ color: 0x161616, roughness: 0.28, metalness: 0.55, clearcoat: 1, clearcoatRoughness: 0.12 });
-  const plate = new THREE.ExtrudeGeometry(roundedRect(0.82, 0.46, 0.1), {
-    depth: 0.1, bevelEnabled: true, bevelThickness: 0.025, bevelSize: 0.02, bevelSegments: 3, curveSegments: 8,
-  });
-  plate.translate(0, 0, -0.05);
-  const shards = [
-    new THREE.Mesh(plate, shardMat),
-    new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.05, 12, 36), metal),
-    new THREE.Mesh(new THREE.SphereGeometry(0.2, 28, 18), orange),
-  ];
-  shards.forEach((mesh, index) => {
-    mesh.position.y = (index - 1) * 0.42;
-    fragGroup.add(mesh);
-  });
-  scene.add(fragGroup);
-
-  const worksGroup = new THREE.Group();
-  worksGroup.visible = false;
-  const workPlate = new THREE.ExtrudeGeometry(roundedRect(0.7, 0.46, 0.12), {
-    depth: 0.12, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.025, bevelSegments: 3, curveSegments: 10,
-  });
-  workPlate.translate(0, 0, -0.06);
-  const puckGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.12, 40);
-  const workMeshes = [
-    new THREE.Mesh(puckGeo, orange),
-    new THREE.Mesh(workPlate, shardMat),
-    new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 20), metal),
-  ];
-  const puckRim = new THREE.Mesh(new THREE.TorusGeometry(0.32, 0.018, 8, 40), metal);
-  puckRim.rotation.x = Math.PI / 2;
-  workMeshes[0].add(puckRim);
-  workMeshes.forEach((mesh, index) => {
-    mesh.position.x = (index - 1) * 1.55;
-    worksGroup.add(mesh);
-  });
-  scene.add(worksGroup);
-
-  const contactMark = new THREE.Group();
-  contactMark.visible = false;
-  const arc = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.06, 12, 40, Math.PI * 1.2), metal);
-  const bead = new THREE.Mesh(new THREE.SphereGeometry(0.16, 20, 14), orange);
-  bead.position.set(0.15, 0.2, 0.2);
-  contactMark.add(arc, bead);
-  scene.add(contactMark);
-
-  const blob = new THREE.Mesh(
-    new THREE.SphereGeometry(0.72, 32, 24),
-    new THREE.MeshPhysicalMaterial({
-      color: 0x0c0c0c,
-      metalness: 0.35,
-      roughness: 0.42,
-      clearcoat: 0.6,
-    }),
+  const speakerA = makeSpeaker(darkMats, 2.15);
+  speakerA.position.set(-1.15, 0.05, 0.35);
+  const speakerB = makeSpeaker(darkMats, 1.85);
+  speakerB.position.set(1.25, 0.12, 0.15);
+  speakerB.rotation.y = -0.35;
+  const ochre = new THREE.Mesh(
+    roundedBox(1.4, 0.9, 0.7, 0.08, 0.04),
+    new THREE.MeshStandardMaterial({ color: 0x8a5a32, metalness: 0.82, roughness: 0.28, envMapIntensity: 1.4 }),
   );
-  blob.scale.set(1.35, 0.82, 0.7);
-  scene.add(blob);
+  ochre.position.set(0.15, -0.35, -0.8);
+  ochre.rotation.set(0.4, 0.5, 0.1);
+  const roller = makeRoller(darkMats);
+  roller.position.set(-1.35, -0.15, -0.35);
+  roller.rotation.z = 0.35;
+  roller.rotation.y = 0.4;
+  const plate = makePlate(darkMats);
+  plate.position.set(-1.25, 0.85, -0.9);
+  plate.rotation.set(0.4, 0.5, 0.2);
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.72, 0.07, 16, 48), darkMats.chrome);
+  ring.position.set(0.85, 0.7, -0.45);
+  ring.rotation.x = 0.8;
+  const ringB = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.05, 12, 32), darkMats.chrome);
+  ringB.position.set(1.15, -0.15, 0.85);
+  ringB.rotation.y = 0.6;
+  const bulbs = [[-0.9, 0.35, 0.4], [1.4, 0.55, -0.2], [0.2, -0.55, 0.55]].map(([x, y, z]) => {
+    const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 10), darkMats.bulb);
+    bulb.position.set(x, y, z);
+    return bulb;
+  });
+  darkGroup.add(speakerA, speakerB, ochre, roller, plate, ring, ringB, ...bulbs);
+  backScene.add(darkGroup);
 
-  const shadow = new THREE.Mesh(
-    new THREE.PlaneGeometry(3.4, 1.6),
-    new THREE.MeshBasicMaterial({ map: shadowTexture(), transparent: true, depthWrite: false }),
-  );
-  shadow.rotation.x = -Math.PI / 2;
-  shadow.position.y = -1.22;
-  scene.add(shadow);
-
-  const keys = mobile ? KEYS_MOBILE : KEYS_DESK;
-  const pose = { ...REST };
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
-  let progress = 0;
   let beat = 'hero';
-  let screenMode = 0;
+  let progress = 0;
+  let intro = 1;
+  let width = 1;
+  let height = 1;
   let looping = false;
   let raf = 0;
   let alive = true;
 
   function resize() {
-    const w = canvas.clientWidth || window.innerWidth;
-    const h = canvas.clientHeight || window.innerHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.6);
-    renderer.setPixelRatio(dpr);
-    renderer.setSize(w, h, false);
-    camera.aspect = w / Math.max(1, h);
-    camera.updateProjectionMatrix();
+    width = backCanvas.clientWidth || window.innerWidth;
+    height = backCanvas.clientHeight || window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, software ? 1 : (width < 900 ? 1.15 : 1.35));
+    [frontRenderer, backRenderer].forEach((renderer) => {
+      renderer.setPixelRatio(dpr);
+      renderer.setSize(width, height, false);
+    });
+    [frontCam, backCam].forEach((camera) => {
+      camera.aspect = width / Math.max(1, height);
+      camera.updateProjectionMatrix();
+    });
   }
 
-  function render(now) {
+  function placeWorks(t, narrow) {
+      const span = narrow ? 0.42 : 0.72;
+    const grid = [
+      [-1.7, 0.9, 1.1], [-0.4, 1.15, -1.2], [1.1, 0.8, 0.4], [2.0, 0.35, -0.6],
+      [-1.5, -0.7, -0.9], [-0.2, -0.95, 0.9], [1.2, -0.45, -0.3], [2.1, -0.15, 0.7],
+    ];
+    works.forEach((item, index) => {
+      const home = grid[index];
+      const stripX = (index - 3.5) * span;
+      const u = t < 0.62 ? t / 0.62 : 1;
+      const settle = t < 0.62 ? 0 : (t - 0.62) / 0.38;
+      const ease = settle * settle * (3 - 2 * settle);
+      const drift = Math.sin(t * Math.PI) * (index - 2.5) * 0.22;
+      item.position.set(
+        home[0] + (stripX - home[0]) * ease + drift,
+        home[1] + ((narrow ? 0.05 : 0.72) - home[1]) * ease,
+        home[2] * (1 - ease),
+      );
+      const mesh = item.userData.mesh;
+      mesh.rotation.y = home[2] + t * (0.7 + index * 0.08);
+      mesh.rotation.x = (1 - ease) * (index % 2 === 0 ? 0.35 : -0.25);
+      mesh.rotation.z = (1 - ease) * (index - 2.5) * 0.08;
+      const s = (1 - ease * 0.28) * (narrow ? 0.62 : 1);
+      mesh.scale.setScalar(workDefs[index].scale * s);
+    });
+  }
+
+  function frame(now) {
     if (!alive) return;
     const time = (now || performance.now()) * 0.001;
-    sample(keys, progress, pose);
+    const narrow = width < 900;
     pointer.x += (pointer.tx - pointer.x) * 0.08;
     pointer.y += (pointer.ty - pointer.y) * 0.08;
-    const showHero = beat === 'hero';
+      const showHero = beat === 'hero' || (beat === 'wipe' && progress < 0.45);
     const showDark = beat === 'wipe' || beat === 'dark';
-    rig.visible = showHero;
-    blob.visible = showHero;
-    shadow.visible = showHero;
+    const showManifest = beat === 'manifest';
+    const showWorks = beat === 'works' || beat === 'contact';
+    const showGesture = beat === 'contact';
+
+    hero.visible = showHero;
+    heroShadow.visible = showHero;
+    frontFragGroup.visible = showManifest;
+    worksGroup.visible = showWorks;
+    gesture.visible = showGesture && progress > 0.28;
+    gestureShadow.visible = gesture.visible;
     darkGroup.visible = showDark;
-    fragGroup.visible = beat === 'manifest';
-    worksGroup.visible = beat === 'works';
-    contactMark.visible = beat === 'contact';
-    renderer.setClearColor(showDark ? 0x070707 : 0x000000, showDark ? 1 : 0);
+    backFragGroup.visible = showManifest;
+
+    document.body.classList.toggle('is-studio', showManifest);
+    frontRenderer.toneMappingExposure = 1.08;
+    backRenderer.toneMappingExposure = showDark ? 1.5 : 1.08;
+    if (showDark) backRenderer.setClearColor(0x30363f, 1);
+    else if (showManifest) backRenderer.setClearColor(0xffd000, 1);
+    else backRenderer.setClearColor(0x000000, 0);
 
     if (showHero) {
-      const idle = progress < 0.04 && !reduced ? Math.sin(time * 0.7) * 0.08 : 0;
-      sample(keys, progress * 0.35, pose);
-      const side = mobile ? 0.02 : 1.05;
-      const drop = mobile ? -1.05 : 0.08;
-      rig.position.set(side + pointer.x * 0.16, drop + pointer.y * -0.08, 0);
-      rig.rotation.set(0.42 + pointer.y * -0.08, -0.7 + idle + progress * 0.85 + pointer.x * 0.32, mobile ? 0.18 : 0.28);
-      camera.position.set((mobile ? 0 : -0.05) + pointer.x * 0.4, (mobile ? 0.35 : 0.16) + pointer.y * -0.18, mobile ? 6.6 : 5.15);
-      camera.lookAt(mobile ? 0 : 0.15, mobile ? -0.85 : 0, 0);
-      blob.position.set(
-        (mobile ? 0.02 : 0.35) - progress * (mobile ? 0.3 : 0.9) + pointer.x * 0.7,
-        (mobile ? drop + 0.62 : 0.55) + pointer.y * 0.15,
-        mobile ? -0.5 : -0.35,
+      const orbit = beat === 'hero' ? progress : 1;
+      const wipe = beat === 'wipe' ? progress : 0;
+      hero.position.set(
+        (narrow ? 0 : 1.22) + (1 - intro) * 2.4 + pointer.x * 0.18,
+        (narrow ? -1.15 : 0.08) + Math.sin(time * 1.15) * 0.055 + pointer.y * -0.08,
+        0,
       );
-      blob.scale.set(mobile ? 0.4 : 0.72, mobile ? 0.26 : 0.46, mobile ? 0.24 : 0.4);
-      shadow.position.x = rig.position.x;
-      shadow.material.opacity = 0.9;
-    } else if (showDark) {
-      camera.position.set(pointer.x * 0.3, 0.05, 3.1 - progress * 0.7);
-      camera.lookAt(0, 0, 0);
-      darkGroup.rotation.y = progress * 1.1 + pointer.x * 0.4;
-      darkGroup.rotation.x = pointer.y * 0.15;
-    } else if (beat === 'manifest') {
-      camera.position.set(0, 0, 4.2);
-      camera.lookAt(0, 0, 0);
-      shards.forEach((mesh, index) => {
-        const travel = progress * 2.2 + index * 0.33;
-        mesh.position.x = 2.6 - (travel % 1) * 5.2;
-        mesh.rotation.z = travel * 2;
+      hero.rotation.set(
+        0.28 + orbit * 0.16 + pointer.y * -0.14,
+        -0.72 + orbit * 0.85 + Math.sin(time * 0.8) * 0.05 + pointer.x * 0.32,
+        (narrow ? -0.18 : -0.38) + orbit * 0.12,
+      );
+      hero.position.z = -wipe * 0.4;
+      heroShadow.position.set(hero.position.x, hero.position.y - 1.25, -0.4);
+      heroShadow.material.opacity = 0.95 - wipe * 0.8;
+      frontCam.position.set(pointer.x * 0.18, narrow ? 0.2 : 0.12, narrow ? 8.1 : 7.35);
+      frontCam.lookAt(narrow ? 0 : 0.25, narrow ? -0.95 : 0, 0);
+      frontCam.fov = narrow ? 32 : 26;
+      frontCam.updateProjectionMatrix();
+    }
+
+    if (showDark) {
+      const dive = beat === 'dark' ? progress : beat === 'wipe' ? progress * 0.35 : 0;
+      backCam.fov = 33;
+      backCam.position.set(0.05 + dive * 0.25 + pointer.x * 0.1, 0.02, 4.35 - dive * 0.7);
+      backCam.lookAt(0.05, 0, -0.4);
+      backCam.updateProjectionMatrix();
+      darkGroup.rotation.y = dive * 0.45 + time * 0.05;
+      speakerA.rotation.z = Math.sin(time * 0.6) * 0.04;
+      ring.rotation.z = time * 0.25 + dive;
+      roller.rotation.x = dive * 1.4;
+      backLights.key.position.set(3.2 + dive * 2.4, 4.2, 5 - dive * 2);
+    }
+
+    if (showManifest) {
+      frontCam.position.set(0, 0, 6.4);
+      frontCam.fov = 30;
+      frontCam.lookAt(0, 0, 0);
+      frontCam.updateProjectionMatrix();
+      backCam.position.set(0, 0, 7.2);
+      backCam.fov = 30;
+      backCam.lookAt(0, 0, 0);
+      backCam.updateProjectionMatrix();
+      backFrags.forEach((mesh, index) => {
+        const dir = index === 0 ? -1 : 1;
+        const speed = 0.72 + index * 0.08;
+        mesh.position.set(dir * (2.15 - progress * 4.3 * speed), index === 0 ? 0.35 : -0.55, -0.6 - index * 0.45);
+        mesh.rotation.set(progress * 1.4, progress * 2.1 + index, 0.2);
       });
-    } else if (beat === 'works') {
-      camera.position.set(0, 0.2, 4.4);
-      camera.lookAt(0, 0, 0);
-      workMeshes.forEach((mesh, index) => {
-        const depth = (index - 1) * 0.35;
-        mesh.position.x = (index - 1) * 1.45 + progress * (index - 1) * 0.4;
-        mesh.position.y = 0.35 - progress * 0.9 + depth * 0.2;
-        mesh.position.z = depth + pointer.x * 0.1;
-        mesh.rotation.y = progress * 1.4 + pointer.x * 0.3;
-      });
-    } else if (beat === 'contact') {
-      camera.position.set(0.2, 0, 3.3);
-      camera.lookAt(0, 0, 0);
-      contactMark.position.set(1.15 + pointer.x * 0.15, 0.05, 0.55);
-      contactMark.rotation.z = -0.2 + Math.sin(time * 0.8) * 0.06;
-      contactMark.rotation.y = pointer.x * 0.4;
+      frontFrags[0].scale.setScalar(0.62);
+      frontFrags[0].position.set(2.5 - progress * 5.2, 0.95, 0.45);
+      frontFrags[0].rotation.set(0.4, progress * 2.4, 0.3);
+      frontFrags[1].position.set(-2.3 + progress * 4.8, -1.05, 0.55);
+      frontFrags[1].rotation.set(0.2, progress * -2.2, progress);
     }
-    if (camera.fov !== 32) {
-      camera.fov = 32;
-      camera.updateProjectionMatrix();
+
+    if (showWorks) {
+      const lift = beat === 'contact' ? progress : 0;
+      const local = beat === 'works' ? progress : 1;
+      placeWorks(local, narrow);
+      worksGroup.position.set(0, (narrow ? 0.25 : 0.05) + lift * 5.2, 0);
+      frontCam.position.set(0, narrow ? 0.05 : 0.2, narrow ? 8.4 : 7.1);
+      frontCam.fov = narrow ? 34 : 30;
+      frontCam.lookAt(0, 0.05, 0);
+      frontCam.updateProjectionMatrix();
+      if (lift > 0.34 || (narrow && lift > 0.02)) worksGroup.visible = false;
     }
-    const mode = progress > 0.55 ? 2 : progress > 0.25 ? 1 : 0;
-    if (mode !== screenMode) {
-      screenMode = mode;
-      screen.draw(mode);
+
+    if (showGesture) {
+      const rise = Math.min(1, progress / 0.45);
+      gesture.position.set(narrow ? 0.05 : 0.85, -0.15 + rise * 0.15 + Math.sin(time * 0.9) * 0.03, 0.35);
+      gesture.rotation.set(0.15 + Math.sin(time * 0.7) * 0.03, 0.02 + pointer.x * 0.1, 0);
+      frontCam.position.set(0, 0.05, narrow ? 7.4 : 6.5);
+      frontCam.fov = narrow ? 34 : 28;
+      frontCam.lookAt(0.15, -0.05, 0);
+      frontCam.updateProjectionMatrix();
+      gestureShadow.position.set(gesture.position.x, gesture.position.y - 0.85, 0);
+      gestureShadow.material.opacity = 0.35;
     }
-    renderer.render(scene, camera);
+
+    const needFront = showHero || showManifest || showWorks || showGesture;
+    const needBack = showDark || showManifest;
+    frontCanvas.style.visibility = needFront ? 'visible' : 'hidden';
+    backCanvas.style.visibility = needBack ? 'visible' : 'hidden';
+    if (needFront) frontRenderer.render(frontScene, frontCam);
+    if (needBack) backRenderer.render(backScene, backCam);
   }
 
   function loop(now) {
     if (!looping || !alive) return;
-    render(now);
+    frame(now);
     raf = requestAnimationFrame(loop);
   }
 
-  function setLoop(on) {
-    if (reduced) return;
-    if (on && !looping) {
-      looping = true;
-      raf = requestAnimationFrame(loop);
-    } else if (!on && looping) {
-      looping = false;
-      cancelAnimationFrame(raf);
-    }
-  }
-
   resize();
-  render(0);
-  if (!reduced) setLoop(true);
+  frame(0);
+  looping = true;
+  raf = requestAnimationFrame(loop);
 
   return {
-    setProgress(value) {
-      progress = value < 0 ? 0 : value > 1 ? 1 : value;
-      if (!looping) render();
+    setIntro(value) {
+      intro = value < 0 ? 0 : value > 1 ? 1 : value;
     },
     setBeat(name, value) {
       beat = name || 'hero';
       progress = value < 0 ? 0 : value > 1 ? 1 : value;
-      if (!looping) render();
+      if (!looping) frame();
     },
     setPointer(x, y) {
-      if (reduced) return;
       pointer.tx = x;
       pointer.ty = y;
     },
     resize,
-    render,
+    render: frame,
     setActive(on) {
-      if (on) setLoop(true);
-      else {
-        setLoop(false);
-        render();
+      if (on && !looping) {
+        looping = true;
+        raf = requestAnimationFrame(loop);
+      } else if (!on && looping) {
+        looping = false;
+        cancelAnimationFrame(raf);
       }
     },
     dispose() {
       alive = false;
       looping = false;
       cancelAnimationFrame(raf);
-      screen.tex.dispose();
-      shadow.material.map.dispose();
-      scene.environment.dispose();
-      renderer.dispose();
+      [frontScene, backScene].forEach((scene) => {
+        scene.environment?.dispose();
+        scene.traverse((obj) => {
+          if (!obj.isMesh) return;
+          obj.geometry?.dispose();
+          const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+          mats.forEach((mat) => {
+            mat.map?.dispose();
+            mat.dispose();
+          });
+        });
+      });
+      frontRenderer.dispose();
+      backRenderer.dispose();
     },
   };
 }
