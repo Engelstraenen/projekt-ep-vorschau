@@ -14,7 +14,7 @@ const HOSTS    = ['projektex.de', 'www.projektex.de', 'test.projektex.de']; // t
 const MIN_SECS = 4;      // schneller ausgefüllt = Bot
 const MAX_PER_HOUR = 5;  // Anfragen je IP-Hash und Stunde
 const LEISTUNGEN = ['', 'Website', 'Werbeclips', 'Logo Design', 'Print Design', 'Merch', 'SEO', 'Apps', 'Games',
-  'Automatisierung & Chatbots', 'Systeme & Dashboards', 'Visualisierung', 'Etwas anderes']; // = Optionen in kontakt.html
+  'Automatisierung & Chatbots', 'Systeme & Dashboards', 'Visualisierung', 'Bewertungs-Löschservice', 'Etwas anderes']; // = Optionen in kontakt.html
 
 ini_set('display_errors', '0');   // nie Fehlermeldungen/Pfade an Besucher ausgeben
 header('X-Content-Type-Options: nosniff');

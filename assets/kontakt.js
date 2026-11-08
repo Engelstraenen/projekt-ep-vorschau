@@ -8,6 +8,8 @@
   function val(id) { var el = document.getElementById(id); return el ? String(el.value || '').trim() : ''; }
   if (MAILTO) { var btn = f.querySelector('button[type=submit]'); if (btn) btn.textContent = 'Anfrage per E-Mail senden'; }
   var q = new URLSearchParams(location.search);
+  var pre = q.get('leistung'), sel = document.getElementById('f-leistung');
+  if (pre && sel) { for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].text === pre) { sel.selectedIndex = i; break; } } }
   if (q.get('ok') === '1') status.textContent = 'Danke! Deine Anfrage ist angekommen. Wir melden uns in der Regel innerhalb von zwei Werktagen.';
   if (q.get('err')) status.textContent = 'Das hat leider nicht geklappt. Bitte prüfe die Angaben oder schreib direkt an kontakt@projektex.de.';
   var msgs = {
