@@ -4,7 +4,7 @@ if(!send)return;
 const upd=()=>{const k=Math.max(1,Math.min(500,parseInt(n.value,10)||1));
 $('count').textContent=k+(k===1?' Bewertung':' Bewertungen');$('potential').textContent=(k*10)+' € netto';
 $('profile-label').textContent='Link zum '+p.value+'-Profil';
-const body=['Hallo PROJEKT EX,','','wir möchten Bewertungen prüfen lassen.','','Plattform: '+p.value,'Unternehmen: '+(c.value||'-'),'Profil: '+(u.value||'-'),'Anzahl Bewertungen: '+k,'','Details:',t.value||'-','','Preis: 10 € netto zzgl. MwSt. pro erfolgreich gelöschter Bewertung, Rechnung sofort je Löschung, ohne Löschung keine Kosten.'].join('\n');
+const body=['Hallo PROJEKT EX,','','wir möchten Bewertungen prüfen lassen.','','Plattform: '+p.value,'Unternehmen: '+(c.value||'-'),'Profil: '+(u.value||'-'),'Anzahl Bewertungen: '+k,'','Details:',t.value||'-','','Preis: 10 € netto zzgl. MwSt. pro erfolgreich gelöschter Bewertung, Sammelrechnung alle 2 Wochen, ohne Löschung keine Kosten.'].join('\n');
 send.href='mailto:kontakt@projektex.de?subject='+encodeURIComponent('Bewertungs-Löschservice: '+p.value+(c.value?' – '+c.value:''))+'&body='+encodeURIComponent(body);};
 [p,c,u,n,t].forEach(e=>e.addEventListener('input',upd));p.addEventListener('change',upd);
 send.addEventListener('click',e=>{if(u.value&&!/^https?:\/\/\S+\.\S+/.test(u.value)){e.preventDefault();err.textContent='Bitte einen vollständigen Link angeben (beginnt mit https://).';u.focus();}else err.textContent='';});
