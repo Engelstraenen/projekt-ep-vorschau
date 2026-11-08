@@ -65,7 +65,9 @@
   const sum = $('[data-sum]');
   const hzName = { oel: 'Öl', gas: 'Gas', nsp: 'Nachtspeicher' }, hfName = { fbh: 'Fußbodenheizung', gross: 'Große Heizkörper', klein: 'Alte Heizkörper' };
   const calc = () => {
-    const f = new FormData(konf);
+    const f = new Map(Array.from(konf.querySelectorAll('[name]'))
+      .filter(el => !['radio', 'checkbox'].includes(el.type) || el.checked)
+      .map(el => [el.name, el.value]));
     S.fl = +f.get('fl'); S.bj = +f.get('bj'); S.hz = f.get('hz'); S.hf = f.get('hf');
     S.w = wpm(S.bj); S.kw = S.fl * S.w / 1000 * 1.05;
     S.vl = { fbh: 35, gross: 45, klein: 55 }[S.hf] + (S.bj < 1978 && S.hf !== 'fbh' ? 4 : 0) - (S.bj > 2002 ? 3 : 0);
@@ -138,7 +140,7 @@
     ctx.font = '500 11px Onest, sans-serif'; ctx.fillStyle = '#ffffff99'; ctx.fillText('WÄRMEVERLUST', 18, gY - hh - roof * .2); ctx.fillStyle = '#7fb2c6'; ctx.fillText('UMWELTWÄRME', Math.min(W - 100, ux - 10), uy - 16);
   };
   const loop = () => { running = true; const f = n => { if (visible.get(cv) === false || reduce) { running = false; if (reduce) draw(n); return; } draw(n); requestAnimationFrame(f); }; requestAnimationFrame(f); };
-  if (konf && cv) { size(); addEventListener('resize', size); konf.addEventListener('input', calc); konf.addEventListener('submit', e => e.preventDefault()); io.observe(cv); new IntersectionObserver(([e]) => { if (e.isIntersecting && !running) loop(); }).observe(cv); calc(); }
+  if (konf && cv) { size(); addEventListener('resize', size); konf.addEventListener('input', calc); io.observe(cv); new IntersectionObserver(([e]) => { if (e.isIntersecting && !running) loop(); }).observe(cv); calc(); }
 
   /* Scroll-Film */
   const film = $('[data-film]'), fc = $('[data-film-c]');

@@ -58,34 +58,8 @@ if (dialog) {
   });
 }
 
-if (form) {
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const name = String(data.get('name') || '').trim();
-    const email = String(data.get('email') || '').trim();
-    const error = form.querySelector('[data-error]');
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!name || !emailOk) {
-      if (error) {
-        error.hidden = false;
-        error.textContent = name
-          ? 'Die E-Mail braucht ein @ und eine Domain.'
-          : 'Bitte Namen und E-Mail eintragen. Es wird trotzdem nichts gesendet.';
-      }
-      const field = form.querySelector(name ? '[name="email"]' : '[name="name"]');
-      field?.focus();
-      return;
-    }
-    if (error) error.hidden = true;
-    form.hidden = true;
-    if (result) {
-      result.hidden = false;
-      const who = result.querySelector('[data-who]');
-      if (who) who.textContent = name;
-    }
-  });
-}
+// Demo confirmation is handled locally by assets/demo-local.js.
+
 
 let parked = false;
 function parkCanvas(next) {

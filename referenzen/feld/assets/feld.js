@@ -137,19 +137,7 @@
     });
   }
 
-  /* Form */
-  var form = $('[data-form]');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      var bad = [];
-      var chk = function (el, ok, err) { el.setAttribute('aria-invalid', ok ? 'false' : 'true'); $('#' + err).hidden = ok; if (!ok) bad.push(el); };
-      var n = $('#f-name'), m = $('#f-mail'), ds = $('input[name="datenschutz"]', form);
-      chk(n, n.value.trim().length > 1, 'e-name');
-      chk(m, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.value.trim()), 'e-mail');
-      chk(ds, ds.checked, 'e-ds');
-      if (bad.length) { e.preventDefault(); bad[0].focus(); }
-    });
-  }
+  /* Demo confirmation: shared local handler, no HTML form submission. */
 
   /* Danke */
   var sum = $('[data-sum]');

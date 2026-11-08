@@ -252,7 +252,7 @@
     let first = true;
     const upd = () => { glide(lens, null, cur(), first); first = false; };
     group.addEventListener('change', upd);
-    group.closest('form').addEventListener('change', () => requestAnimationFrame(upd)); // Uhrzeit kann sich mit dem Tag ändern
+    group.closest('[data-local-demo]').addEventListener('change', () => requestAnimationFrame(upd)); // Uhrzeit kann sich mit dem Tag ändern
     if ('ResizeObserver' in window) new ResizeObserver(() => { first = true; upd(); }).observe(group);
     window.addEventListener('load', () => { first = true; upd(); });
     upd();
@@ -351,7 +351,7 @@
       const when = d && z ? `${d.dataset.label} · ${z.dataset.label}` : '';
       if (sumWhat && sumWhat.textContent !== what) { sumWhat.textContent = what; if (changed) flash(sumWhat); }
       if (sumWhen && sumWhen.textContent !== when) { sumWhen.textContent = when; if (changed) flash(sumWhen); }
-      const name = form.elements.name.value.trim(), kontakt = form.elements.kontakt.value.trim(), ds = form.elements.datenschutz.checked;
+      const name = form.querySelector('[name="name"]').value.trim(), kontakt = form.querySelector('[name="kontakt"]').value.trim(), ds = form.querySelector('[name="datenschutz"]').checked;
       const done = [!!a, !!d, !!z, !!(name && kontakt && ds)];
       steps.forEach((s, i) => s.classList.toggle('is-done', done[i]));
       prog.forEach((p, i) => p.classList.toggle('is-on', done[i]));
@@ -371,10 +371,7 @@
       const e = document.getElementById(errs[el.name]); if (e) { e.hidden = ok; if (!ok) el.setAttribute('aria-describedby', e.id); else el.removeAttribute('aria-describedby'); }
       return ok;
     }
-    form.addEventListener('submit', (e) => {
-      const bad = ['name', 'kontakt', 'datenschutz'].map((n) => form.elements[n]).filter((el) => !validate(el));
-      if (bad.length) { e.preventDefault(); bad[0].focus(); }
-    });
+
 
     /* Links aus den Behandlungen wählen das passende Anliegen vor */
     $$('a[data-pick]').forEach((a) => a.addEventListener('click', () => {

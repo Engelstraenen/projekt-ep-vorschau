@@ -13,7 +13,7 @@
 <link rel="preload" href="fonts/schibsted-latin-900.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/vendor/lenis/lenis.css">
 <link rel="stylesheet" href="css/orbit.css">
-</head>
+<link rel="stylesheet" href="../../assets/demo-local.css"></head>
 <body>
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
 <p class="demo"><span>Demo · nur Testdaten verwenden</span><a href="../../leistungen/websites.html">Zu Projekt EX</a></p>
@@ -155,7 +155,7 @@
 <dialog id="projekt" aria-labelledby="dialog-title">
   <h2 id="dialog-title">Projekt starten</h2>
   <p>Demo. Nichts verlässt diesen Browser.</p>
-  <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Benannte Formularfelder können bei GET-Navigation, auch ohne JavaScript, in die URL und Hostingprotokolle gelangen. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><form id="projekt-form">
+  <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Eingaben bleiben lokal: keine Formularübermittlung und keine Übernahme in die URL, auch ohne JavaScript. Eine Demo-Bestätigung ist nur mit JavaScript verfügbar. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><div id="projekt-form" data-local-demo>
     <div class="fields">
       <label>Name <input name="name" type="text" autocomplete="name" required maxlength="80"></label>
       <label>E-Mail <input name="email" type="email" autocomplete="email" required maxlength="120" inputmode="email"></label>
@@ -163,10 +163,10 @@
     </div>
     <p class="form-error" data-error hidden></p>
     <div class="dialog-actions">
-      <button class="open-btn" type="submit">Vormerken</button>
+      <button class="open-btn" type="button" data-local-confirm>Vormerken</button>
       <button class="ghost" type="button" data-close>Schließen</button>
     </div>
-  </form>
+  <p class="demo-local-status" role="status" aria-live="polite">Reine Demo: kein Versand, keine echte Anfrage oder Anmeldung. Eingaben bleiben lokal, ohne URL-Übernahme oder Speicherung durch die Seite. Nur fiktive Testdaten. Bestätigung nur mit JavaScript.</p></div>
   <div id="projekt-result" hidden>
     <p>Danke, <span data-who></span>. Nichts wurde gesendet. In einer echten Seite würde hier das Gespräch weitergehen.</p>
     <div class="dialog-actions"><button class="open-btn" type="button" data-close>Schließen</button></div>
@@ -176,5 +176,5 @@
 <script src="../../assets/vendor/gsap/gsap.min.js" defer></script>
 <script src="../../assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
 <script type="module" src="js/orbit.js"></script>
-</body>
+<script src="../../assets/demo-local.js" defer></script></body>
 </html>

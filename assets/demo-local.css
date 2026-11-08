@@ -1,0 +1,8 @@
+/* Keep the privacy notice readable across the independent demo themes. */
+html body [data-local-demo] p.demo-local-status {
+  font-size: 14px;
+  line-height: 1.55;
+  color: inherit;
+  max-width: 65ch;
+  margin-block: 1em;
+}

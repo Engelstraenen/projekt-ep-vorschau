@@ -11,7 +11,7 @@
 <link rel="preload" href="fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/onest-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
-</head>
+<link rel="stylesheet" href="../../assets/demo-local.css"></head>
 <body>
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="thermal" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues="0.05 0.25 0.85 1 1"/><feFuncG type="table" tableValues="0.02 0.05 0.25 0.65 0.98"/><feFuncB type="table" tableValues="0.25 0.55 0.35 0.08 0.6"/></feComponentTransfer></filter></svg>
@@ -58,7 +58,7 @@
           <div><dt>CO₂ weniger</dt><dd><span data-o="co2">62</span><small>%</small></dd></div>
         </dl>
       </div>
-      <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Benannte Formularfelder können bei GET-Navigation, auch ohne JavaScript, in die URL und Hostingprotokolle gelangen. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><form class="ctrl" data-konf>
+      <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Eingaben bleiben lokal: keine Formularübermittlung und keine Übernahme in die URL, auch ohne JavaScript. Eine Demo-Bestätigung ist nur mit JavaScript verfügbar. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><div class="ctrl" data-konf data-local-calculator>
         <div class="ctrl__f"><div class="ctrl__l"><label for="k-fl">Beheizte Wohnfläche</label><output for="k-fl" data-o="fl">140 m²</output></div><input class="sl" id="k-fl" name="fl" type="range" min="60" max="320" step="5" value="140"><div class="ticks" aria-hidden="true"><span>60 m²</span><span>320 m²</span></div></div>
         <div class="ctrl__f"><div class="ctrl__l"><label for="k-bj">Baujahr oder letzte Sanierung</label><output for="k-bj" data-o="bj">1985</output></div><input class="sl" id="k-bj" name="bj" type="range" min="1950" max="2024" step="1" value="1985"><div class="ticks" aria-hidden="true"><span>1950</span><span>2024</span></div></div>
         <fieldset class="seg"><legend>Heute geheizt mit</legend>
@@ -69,7 +69,7 @@
         </fieldset>
         <div class="verdict" aria-live="polite"><h3><i data-o="dot"></i><span data-o="verdict">Gut geeignet</span></h3><p data-o="text">Mit Ihren Heizkörpern reicht ein Vorlauf um 45 °C.</p><small>Beispielrechnung, ersetzt keine Heizlastberechnung vor Ort.</small></div>
         <p><a class="btn btn--heat" href="#anfrage">Mit diesem Ergebnis anfragen <span class="arr" aria-hidden="true">→</span></a></p>
-      </form>
+      </div>
     </div>
   </div>
 </section>
@@ -214,14 +214,14 @@
       <p class="kontakt__lead">Wir melden uns innerhalb von zwei Werktagen und vereinbaren einen Termin vor Ort.</p>
       <div class="summary"><p class="summary__h">Ihre Konfiguration</p><dl data-sum><dt>Wohnfläche</dt><dd>140 m²</dd></dl></div>
     </div>
-    <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Benannte Formularfelder können bei GET-Navigation, auch ohne JavaScript, in die URL und Hostingprotokolle gelangen. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><form class="form" action="danke.html" method="get" aria-describedby="form-hint">
+    <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Eingaben bleiben lokal: keine Formularübermittlung und keine Übernahme in die URL, auch ohne JavaScript. Eine Demo-Bestätigung ist nur mit JavaScript verfügbar. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><div class="form" aria-describedby="form-hint" data-local-demo>
       <p class="form__hint" id="form-hint">Demo: Dieses Formular überträgt und speichert keine Daten.</p>
       <div class="form__row"><div class="field"><label for="f-name">Name</label><input id="f-name" type="text" autocomplete="name" required></div><div class="field"><label for="f-plz">Postleitzahl</label><input id="f-plz" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" required></div></div>
       <div class="form__row"><div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" type="email" autocomplete="email" required></div><div class="field"><label for="f-tel">Telefon <span class="optional">(optional)</span></label><input id="f-tel" type="tel" autocomplete="tel"></div></div>
       <div class="field"><label for="f-msg">Nachricht <span class="optional">(optional)</span></label><textarea id="f-msg" rows="3"></textarea></div>
       <div class="ok"><input id="f-ok" type="checkbox" required><label for="f-ok">Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden (siehe <a href="datenschutz.html">Datenschutz</a>).</label></div>
-      <p><button class="btn btn--heat" type="submit">Anfrage senden <span class="arr" aria-hidden="true">→</span></button></p>
-    </form>
+      <p><button class="btn btn--heat" type="button" data-local-confirm>Anfrage senden <span class="arr" aria-hidden="true">→</span></button></p>
+    <p class="demo-local-status" role="status" aria-live="polite">Reine Demo: kein Versand, keine echte Anfrage oder Anmeldung. Eingaben bleiben lokal, ohne URL-Übernahme oder Speicherung durch die Seite. Nur fiktive Testdaten. Bestätigung nur mit JavaScript.</p></div>
   </div>
 </section>
 </main>
@@ -239,5 +239,5 @@
 <script src="js/gsap.min.js" defer></script>
 <script src="js/ScrollTrigger.min.js" defer></script>
 <script src="js/app.js" defer></script>
-</body>
+<script src="../../assets/demo-local.js" defer></script></body>
 </html>

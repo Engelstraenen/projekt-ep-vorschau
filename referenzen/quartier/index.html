@@ -155,7 +155,7 @@ body.in-film .scrim{background:linear-gradient(90deg,rgba(14,11,9,.55) 0%,rgba(1
 @media (prefers-reduced-motion:reduce){.w>span{transition:none;transform:none}.scrollhint i{animation:none}.veil{transition:none}}
 </style>
 <noscript><style>.blk{opacity:1!important;visibility:visible!important;position:relative;inset:auto;margin:20px}.stick{height:auto}.veil{display:none}[data-ch]{height:auto!important}</style></noscript>
-</head>
+<link rel="stylesheet" href="../../assets/demo-local.css"></head>
 <body>
 <a class="skip" href="#kontakt">Direkt zum Exposé</a>
 <canvas id="world" aria-hidden="true"></canvas>
@@ -260,14 +260,14 @@ body.in-film .scrim{background:linear-gradient(90deg,rgba(14,11,9,.55) 0%,rgba(1
         <li><div><b>Schlüssel im Herbst 2027</b><span>Gemeinsame Abnahme, Einweisung, dann sind Sie zu Hause.</span></div></li>
       </ol>
     </div>
-    <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Benannte Formularfelder können bei GET-Navigation, auch ohne JavaScript, in die URL und Hostingprotokolle gelangen. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><form class="form" action="danke.html" method="get" aria-describedby="fo-hint">
+    <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Eingaben bleiben lokal: keine Formularübermittlung und keine Übernahme in die URL, auch ohne JavaScript. Eine Demo-Bestätigung ist nur mit JavaScript verfügbar. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><div class="form" aria-describedby="fo-hint" data-local-demo>
       <div class="row"><label>Vorname<input name="vorname" autocomplete="given-name" required></label><label>Nachname<input name="nachname" autocomplete="family-name" required></label></div>
       <label>E-Mail<input type="email" name="email" autocomplete="email" required></label>
       <div class="row"><label>Interesse<select name="interesse"><option>Kaufen</option><option>Mieten</option><option>Noch offen</option></select></label><label>Größe<select name="groesse"><option>2 Zimmer</option><option>3 Zimmer</option><option selected>4 Zimmer</option><option>5 Zimmer</option><option>Penthouse</option></select></label></div>
       <label>Nachricht (optional)<textarea name="nachricht" rows="3"></textarea></label>
-      <button class="btn" type="submit">Exposé anfordern</button>
+      <button class="btn" type="button" data-local-confirm>Exposé anfordern</button>
       <p class="hint" id="fo-hint">Demo-Formular: Es werden keine Daten gesendet oder gespeichert.</p>
-    </form>
+    <p class="demo-local-status" role="status" aria-live="polite">Reine Demo: kein Versand, keine echte Anfrage oder Anmeldung. Eingaben bleiben lokal, ohne URL-Übernahme oder Speicherung durch die Seite. Nur fiktive Testdaten. Bestätigung nur mit JavaScript.</p></div>
   </div>
 </section>
 <footer class="foot">
@@ -275,5 +275,5 @@ body.in-film .scrim{background:linear-gradient(90deg,rgba(14,11,9,.55) 0%,rgba(1
   <nav aria-label="Rechtliches"><span>Demo-Projekt von Projekt EX, fiktive Marke. Visualisierungen und Filmszenen sind Beispiele.</span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="lizenzen/LICENSE-three.txt">Lizenzen</a><a href="../../leistungen/websites.html#quartier">Zurück zu Projekt EX</a></nav>
 </footer>
 <script type="module" src="js/main.js"></script>
-</body>
+<script src="../../assets/demo-local.js" defer></script></body>
 </html>

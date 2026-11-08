@@ -17,7 +17,7 @@
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/lumen.js?v=20261105p" defer></script>
-</head>
+<link rel="stylesheet" href="../../assets/demo-local.css"></head>
 <body class="home">
 <div class="ambient" aria-hidden="true"><video class="ambient__v" data-bgv data-src="video/caustics.mp4" data-src-m="video/caustics-m.mp4" poster="video/caustics-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
@@ -168,7 +168,7 @@
         <p class="booking__pain">Schmerzen? Bitte rufen Sie an: <a href="tel:+498901234567">089 0123 4567</a></p>
       </div>
       <div class="booking__card">
-        <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Benannte Formularfelder können bei GET-Navigation, auch ohne JavaScript, in die URL und Hostingprotokolle gelangen. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><form class="book glass" action="danke.html" method="get" data-book novalidate>
+        <p class="small" role="note"><strong>DEMO · nur erfundene Testdaten.</strong> Kein echter Auftrag oder Termin. Eingaben bleiben lokal: keine Formularübermittlung und keine Übernahme in die URL, auch ohne JavaScript. Eine Demo-Bestätigung ist nur mit JavaScript verfügbar. Keine echten Kontakt-, Gesundheits- oder vertraulichen Angaben. <a href="../../datenschutz.html#hosting">Datenschutzhinweise</a>.</p><div class="book glass" data-book data-local-demo>
         <fieldset class="step" data-step>
           <legend><span class="step__n" aria-hidden="true"></span>Worum geht es?</legend>
           <div class="chips"><label class="chip"><input type="radio" name="anliegen" value="kontrolle" data-label="Kontrolle und Beratung" checked required><span>Kontrolle und Beratung</span></label><label class="chip"><input type="radio" name="anliegen" value="reinigung" data-label="Zahnreinigung" required><span>Zahnreinigung</span></label><label class="chip"><input type="radio" name="anliegen" value="aesthetik" data-label="Ästhetik-Beratung" required><span>Ästhetik-Beratung</span></label><label class="chip"><input type="radio" name="anliegen" value="beratung" data-label="Zahnersatz, Implantate" required><span>Zahnersatz, Implantate</span></label><label class="chip"><input type="radio" name="anliegen" value="schmerz" data-label="Schmerzen, akut" required><span>Schmerzen, akut</span></label></div>
@@ -193,10 +193,10 @@
           <span class="field__err" id="f-ds-err" hidden>Bitte bestätigen Sie die Datenschutzhinweise.</span>
         </fieldset>
         <div class="book__foot">
-          <button class="btn btn--ink btn--lg" type="submit">Termin anfragen<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="btn btn--ink btn--lg" type="button" data-local-confirm>Termin anfragen<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <p class="hint">Demo: Es werden keine Daten übertragen oder gespeichert.</p>
         </div>
-      </form>
+      <p class="demo-local-status" role="status" aria-live="polite">Reine Demo: kein Versand, keine echte Anfrage oder Anmeldung. Eingaben bleiben lokal, ohne URL-Übernahme oder Speicherung durch die Seite. Nur fiktive Testdaten. Bestätigung nur mit JavaScript.</p></div>
         <aside class="summary glass" aria-label="Ihre Auswahl" data-summary>
           <p class="summary__h">Ihre Auswahl</p>
           <p class="summary__what" data-sum-what>Kontrolle und Beratung</p>
@@ -260,5 +260,5 @@
   <svg class="foot__word" viewBox="0 0 1000 230" aria-hidden="true" focusable="false"><text x="500" y="196" text-anchor="middle" textLength="960" lengthAdjust="spacing">Lumen</text></svg>
   <div class="wrap"><p class="foot__note">© 2026 Lumen Zahnmedizin · Demo-Projekt von Projekt EX, fiktive Praxis. Praxis, Adresse, Telefonnummer, Team und alle Angaben sind erfunden. Keine medizinische Beratung.</p></div>
 </footer>
-</body>
+<script src="../../assets/demo-local.js" defer></script></body>
 </html>
