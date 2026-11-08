@@ -10,6 +10,8 @@
   var q = new URLSearchParams(location.search);
   var pre = q.get('leistung'), sel = document.getElementById('f-leistung');
   if (pre && sel) { for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].text === pre) { sel.selectedIndex = i; break; } } }
+  var prof = q.get('profil'), ta = document.getElementById('f-nachricht');
+  if (prof && ta && !ta.value) ta.value = 'Google-Profil: ' + prof.slice(0, 300) + '\n\nDiese Bewertungen möchten wir prüfen lassen (mit Grund):\n';
   if (q.get('ok') === '1') status.textContent = 'Danke! Deine Anfrage ist angekommen. Wir melden uns in der Regel innerhalb von zwei Werktagen.';
   if (q.get('err')) status.textContent = 'Das hat leider nicht geklappt. Bitte prüfe die Angaben oder schreib direkt an kontakt@projektex.de.';
   var msgs = {

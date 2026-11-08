@@ -1,0 +1,28 @@
+.ls-search{margin-top:28px;max-width:640px}
+.ls-search label{display:block;font-weight:700;margin-bottom:8px}
+.ls-search-row{display:flex;gap:10px}
+.ls-search input{flex:1;min-width:0;font:inherit;font-size:17px;padding:14px 16px;border:1px solid var(--line,#d2d2d7);border-radius:14px;background:#fff;color:var(--ink,#1d1d1f)}
+.ls-search input:focus-visible{outline:3px solid var(--blue,#0071e3);outline-offset:2px}
+.ls-search input[aria-invalid=true]{border-color:#c62828}
+.ls-search .btn{white-space:nowrap}
+.ls-fine{font-size:14px;color:#6e6e73;margin-top:10px}
+.ls-prose{max-width:960px!important}
+.ls-cards,.ls-steps,.ls-pay{list-style:none;padding:0;margin:0 0 16px;display:grid;gap:14px}
+.ls-cards{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.ls-steps{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:24px}
+.ls-cards li,.ls-steps li{border:1px solid var(--line,#d2d2d7);border-radius:18px;padding:18px;background:#fff;display:flex;flex-direction:column;gap:6px}
+.ls-cards span,.ls-steps li>span:last-child{color:#515154;font-size:15px}
+.ls-n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--blue,#0071e3);color:#fff;font-weight:700}
+.ls-zero{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 20px}
+.ls-zero div{border:1px solid var(--line,#d2d2d7);border-radius:18px;padding:18px;text-align:center;background:#fff}
+.ls-zero dt{color:#6e6e73;font-size:14px}.ls-zero dd{margin:4px 0 0;font-size:34px;font-weight:800;color:var(--blue,#0071e3)}
+.ls-pay{display:flex;flex-wrap:wrap;gap:10px}
+.ls-pay li{border:1px solid var(--line,#d2d2d7);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;background:#fff}
+.ls-pk{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ls-pk article{border:1px solid var(--line,#d2d2d7);border-radius:20px;padding:22px;background:#fff}
+.ls-price{font-weight:700;color:var(--ink,#1d1d1f)}
+.ls-faq-h{margin:26px 0 8px;font-size:19px}
+.ls-prose details{border-bottom:1px solid var(--line,#d2d2d7);padding:12px 0}
+.ls-prose summary{cursor:pointer;font-weight:600}
+.ls-prose details p{margin:8px 0 0;color:#515154}
+@media (max-width:680px){.ls-search-row{flex-direction:column}.ls-search .btn{width:100%;justify-content:center}.ls-zero{grid-template-columns:1fr}.ls-zero dd{font-size:28px}.ls-pk{grid-template-columns:1fr}}
