@@ -25,6 +25,7 @@
   ];
   const CLIPS = [
     { id: 'viral-friseur', sparte: 'viral', titel: 'Friseur', zweck: 'Viraler Clip für den erfundenen Salon Schnittwerk: ein Haarschnitt mit Pointe.', dauer: 10, hd: 1080, av1: false },
+    { id: 'viral-optiker', sparte: 'viral', titel: 'Optiker', zweck: 'Viraler Clip für den erfundenen Optiker SEHECHT OPTIK: eine Brillenanprobe mit Lichtgag.', dauer: 9, hd: 1080, av1: false },
     { id: 'studio', sparte: 'viral', titel: 'Studio', zweck: 'Ein Blick ins Studio von PROJEKT EX — ein Clip, der im Feed hält und zum Mitreden einlädt.', dauer: 25.4, hd: 1080, fiktiv: false },
     { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für SPRUZ, ein erfundenes Trockenshampoo.', dauer: 9.13 },
     { id: 'ugc-knista', sparte: 'ugc', titel: 'Omi testet jetzt ASMR', zweck: 'UGC-Clip für KNISTA, erfundene Paprika-Chips.', dauer: 9.03 },
