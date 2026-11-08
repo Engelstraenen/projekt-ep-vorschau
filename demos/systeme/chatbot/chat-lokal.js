@@ -112,7 +112,7 @@ dass the a an is are do does you your we i me my of to for and or in on it this 
   function api(path, d) {
     if (path === '/api/session') { const sid = 'demo_' + Date.now().toString(36) + '_' + (++n); const lang = String(d.lang || '').startsWith('en') ? 'en' : 'de'; SESS.set(sid, { lang, flags: {} });
       return [200, Object.assign({ sid }, begruessung(lang), { datenschutz_url: lang === 'en' ? 'This demo runs entirely in your browser. Nothing is stored or sent.' : 'Diese Demo läuft komplett in deinem Browser. Es wird nichts gespeichert oder gesendet.', loeschfrist_tage: 0,
-        einwilligung_text: lang === 'en' ? 'Demo: I understand that nothing is sent or stored here.' : 'Demo: Mir ist klar, dass hier nichts gesendet oder gespeichert wird.' })]; }
+        einwilligung_text: lang === 'en' ? 'Demo: I use fictitious test data; there is no real team transmission.' : 'Demo: Ich verwende Testdaten; es wird keine echte Teamnachricht übertragen.' })]; }
     const s = SESS.get(String(d.sid || '')); if (!s) return [404, { fehler: 'Sitzung abgelaufen – bitte neu starten.' }];
     if (path === '/api/message') { const r = antwort(s, d.text); return [200, r]; }
     if (path === '/api/contact') { const vn = String(d.name || '').trim().split(/\s+/)[0] || ''; if (!vn) return [400, { fehler: s.lang === 'en' ? 'Please enter your name.' : 'Bitte gib deinen Namen an.' }];

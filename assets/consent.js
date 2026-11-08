@@ -100,7 +100,7 @@
         de: {
           consentModal: {
             title: 'Datenschutz-Einstellungen',
-            description: 'Ohne deine Zustimmung nutzen wir nur technisch notwendige Speicherung. Statistik- und Werbedienste laden wir erst, wenn du zustimmst. Du kannst deine Wahl jederzeit über „Cookie-Einstellungen“ im Footer ändern.',
+            description: 'Hier steuerst du optionale Statistik- und Werbedienste. Deren Kennungen sind in dieser Vorschau nicht aktiviert. Deine Auswahl speichert dieses Banner lokal. Hinweise zu separaten Demo-Speichern und offenen Prüfungen stehen in der Datenschutzerklärung. Du kannst deine Wahl über „Cookie-Einstellungen“ ändern.',
             acceptAllBtn: 'Alle akzeptieren',
             acceptNecessaryBtn: 'Alle ablehnen',
             showPreferencesBtn: 'Einstellungen',
@@ -113,8 +113,8 @@
             savePreferencesBtn: 'Auswahl speichern',
             closeIconLabel: 'Schließen',
             sections: [
-              { title: 'Deine Wahl', description: 'Hier entscheidest du, welche Dienste wir nutzen dürfen. Ohne Zustimmung laden wir keine Dienste von Drittanbietern.' },
-              { title: 'Notwendig', description: 'Speichert nur deine Auswahl in diesem Banner (Cookie „cc_cookie“, 6 Monate). Immer aktiv.', linkedCategory: 'necessary' },
+              { title: 'Deine Wahl', description: 'Hier entscheidest du über optionale Statistik und Werbung. Hostingzugriffe und gesonderte Demo-Funktionen sind davon zu unterscheiden; siehe Datenschutzhinweise.' },
+              { title: 'Notwendig', description: 'Speichert nur deine Auswahl in diesem Banner (Cookie „cc_cookie“, 182 Tage). Immer aktiv.', linkedCategory: 'necessary' },
               { title: 'Statistik', description: list([['Google Analytics 4', TRACKING.ga4]]) + '. Hilft uns zu verstehen, wie die Seite genutzt wird.', linkedCategory: 'analytics' },
               { title: 'Marketing', description: list([['Google Ads Conversion-Tracking', TRACKING.googleAds], ['Meta-Pixel', TRACKING.metaPixel], ['TikTok-Pixel', TRACKING.tiktokPixel]]) + '. Misst die Wirkung unserer Anzeigen.', linkedCategory: 'marketing' },
               { title: 'Mehr Informationen', description: 'Details in der <a href="' + root + 'datenschutz.html#cookies">Datenschutzerklärung</a>.' }
