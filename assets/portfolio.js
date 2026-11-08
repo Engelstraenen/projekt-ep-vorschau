@@ -24,6 +24,7 @@
     { id: 'fashion', name: 'Fashion- & Lookbook-Film', label: 'Fashion & Lookbook', h: 'Mode mit einer kleinen Geschichte.', lead: 'Kurze Filme, die Kleidung in Szene setzen, für jede Plattform im passenden Format.' },
   ];
   const CLIPS = [
+    { id: 'viral-friseur', sparte: 'viral', titel: 'Friseur', zweck: 'Viraler Clip für den erfundenen Salon Schnittwerk: ein Haarschnitt mit Pointe.', dauer: 10, hd: 1080, av1: false },
     { id: 'studio', sparte: 'viral', titel: 'Studio', zweck: 'Ein Blick ins Studio von PROJEKT EX — ein Clip, der im Feed hält und zum Mitreden einlädt.', dauer: 25.4, hd: 1080, fiktiv: false },
     { id: 'ugc-spruz', sparte: 'ugc', titel: 'Gründerin dreht Werbung selbst', zweck: 'UGC-Clip für SPRUZ, ein erfundenes Trockenshampoo.', dauer: 9.13 },
     { id: 'ugc-knista', sparte: 'ugc', titel: 'Omi testet jetzt ASMR', zweck: 'UGC-Clip für KNISTA, erfundene Paprika-Chips.', dauer: 9.03 },
@@ -108,7 +109,7 @@
     const id = box.closest('[data-id]').dataset.id;
     if (!CLIPS.find((c) => c.id === id)?.hd) return `${B}video/portfolio/${id}-720.mp4`;
     const h = CLIPS.find((c) => c.id === id).hd === true ? 1440 : CLIPS.find((c) => c.id === id).hd; // hd: true = 1440p, sonst Zahl (z. B. 1080)
-    return `${B}video/portfolio/${id}-${h}.${av1 && !box._noAv1 ? 'webm' : 'mp4'}`;
+    return `${B}video/portfolio/${id}-${h}.${av1 && !box._noAv1 && CLIPS.find((c) => c.id === id).av1 !== false ? 'webm' : 'mp4'}`;
   };
   function wire(box) {
     if (box._p) return box._p;
