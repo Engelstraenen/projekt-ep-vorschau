@@ -115,3 +115,6 @@ body.ex-has-native-switch #exSocialPin,body.ex-has-native-switch #exSocialFab{di
 #exGate.open .g-wing.r{transform:translateX(102%)}
 #exGate.open .g-c{transform:scale(1.08);opacity:0;transition:transform .45s ease,opacity .3s ease}
 @media (prefers-reduced-motion:reduce){#exGate,#exGate *{transition:none!important}}
+
+/* v3: Bots-Seite – eigener Bereichs-Umschalter doppelt zur festen Leiste */
+body.ex-paket-nav-on nav.mainnav{display:none!important}

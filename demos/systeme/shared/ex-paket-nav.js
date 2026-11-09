@@ -101,7 +101,11 @@
     }
     if (out) {
       const go = () => {
-        gate.showInstant(out.from, "zurück in die Stadt …");
+        if (out.to === "social") {
+          // v3: Social von außen = direkt ins Social-Studio, keine Stadt-Zwischenfahrt
+          document.body.dataset.exTab = "social";
+          gate.showInstant("social", "Social wird geöffnet …");
+        } else gate.showInstant(out.from, "zurück in die Stadt …");
         setTimeout(() => gate.hide(), 9000);
       };
       document.body ? go() : document.addEventListener("DOMContentLoaded", go);
@@ -196,7 +200,8 @@
               if (to3d && from && from !== "social") sessionStorage.setItem("ex-gate-out", JSON.stringify({ from, to: it.id, ts: Date.now() }));
               else sessionStorage.setItem("ex-gate", JSON.stringify({ id: it.id, ts: Date.now() }));
             } catch (_) {}
-            gate.show(to3d && from && from !== "social" ? from : it.id, 0.36, to3d ? "zurück in die Stadt …" : "du gehst hinein …");
+            const toSocial = it.id === "social";
+            gate.show(to3d && !toSocial && from && from !== "social" ? from : it.id, 0.36, to3d && !toSocial ? "zurück in die Stadt …" : "du gehst hinein …");
             const href = to3d ? root3d + "?style=A" + (from && from !== "social" ? "" : it.id === "stadt" ? "" : "#" + it.id) : a.href;
             setTimeout(() => (location.href = href), reduce ? 0 : 380);
             return;
