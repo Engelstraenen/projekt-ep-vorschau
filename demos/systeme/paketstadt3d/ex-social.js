@@ -29,7 +29,26 @@
     { name: "YouTube · TrueView", ch: "youtube", spend: 510, budget: 800, leads: 9 },
     { name: "Google · Search", ch: "google", spend: 640, budget: 900, leads: 18 }
   ];
-  const short = { instagram: "IG", tiktok: "TT", youtube: "YT", google: "G" };
+
+  const COLORS = { instagram:"#c13584", tiktok:"#111111", youtube:"#e11d48", google:"#1a73e8", all:"#0071e3" };
+  const GLYPH = {
+    all: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="12" r="3.2" fill="#c13584"/><circle cx="12" cy="8" r="3.2" fill="#111"/><circle cx="17" cy="12" r="3.2" fill="#e11d48"/><circle cx="12" cy="16" r="3.2" fill="#1a73e8" opacity=".9"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg>',
+    tiktok: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4v9.2a3.8 3.8 0 1 1-2.6-3.6V7.2c.9.9 2.1 1.5 3.4 1.7V4H14z" fill="currentColor"/><path d="M14 4v9.2a3.8 3.8 0 1 1-2.6-3.6" fill="none" stroke="#25f4ee" stroke-width="1.4" opacity=".7"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3.5" fill="currentColor"/><path d="M11 9.5v5l5-2.5-5-2.5z" fill="#fff"/></svg>',
+    google: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16c4.2 0 7.2-2.9 7.2-7 0-.5-.05-1-.14-1.4H12v2.9h4.1A4.2 4.2 0 1 1 12 7.8V4z" fill="currentColor"/></svg>'
+  };
+  function ringBtn(id, label, active, pct){
+    const col = COLORS[id] || "#0071e3";
+    const r=18, c=2*Math.PI*r, dash = (Math.max(0.08, Math.min(1,pct||0.72))*c).toFixed(1);
+    return `<button type="button" class="sx-ring ${active?"active":""}" data-ch="${id}" style="--ch:${col}">
+      <div class="orb">
+        <svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle class="bg" cx="22" cy="22" r="${r}"/><circle class="fg" cx="22" cy="22" r="${r}" stroke-dasharray="${dash} ${c.toFixed(1)}" transform="rotate(-90 22 22)"/></svg>
+        <span class="glyph" style="color:${col}">${GLYPH[id]||GLYPH.all}</span>
+      </div>${label}
+    </button>`;
+  }
+
   const sentiments = ["pos", "pos", "neu", "pos", "neu", "neg"];
 
   function open() {
@@ -71,30 +90,82 @@
     ids().forEach((id) => demo.channels[id].comments.forEach((c) => out.push({ ...c, channel: id })));
     return out.sort((a, b) => (a.at < b.at ? 1 : -1));
   }
-  function chartSVG(values) {
-    const w = 320, h = 140, pad = 8;
-    const max = Math.max(...values, 1);
-    const step = (w - pad * 2) / Math.max(values.length - 1, 1);
-    const pts = values.map((v, i) => {
-      const x = pad + i * step;
-      const y = h - pad - (v / max) * (h - pad * 2);
-      return [x, y];
+  function dateLabels(n) {
+    const out = [];
+    const now = new Date(2026, 10, 9);
+    for (let i = n - 1; i >= 0; i--) {
+      const d = new Date(now); d.setDate(now.getDate() - i);
+      out.push(d.getDate() + "." + (d.getMonth() + 1));
+    }
+    return out;
+  }
+  function chartSVG() {
+    const list = ids();
+    const seriesMap = list.map((id) => ({ id, color: COLORS[id], values: demo.channels[id].series[range].slice(-18) }));
+    const n = Math.min(...seriesMap.map((s) => s.values.length));
+    seriesMap.forEach((s) => { s.values = s.values.slice(-n); });
+    const w = 360, h = 168, padL = 36, padR = 10, padT = 12, padB = 28;
+    const all = seriesMap.flatMap((s) => s.values);
+    const max = Math.max(...all, 1);
+    const min = Math.min(...all, 0);
+    const span = Math.max(max - min, 1);
+    const step = (w - padL - padR) / Math.max(n - 1, 1);
+    const labels = dateLabels(n);
+    const yTicks = [0, 0.5, 1].map((t) => min + span * t);
+    function pts(values) {
+      return values.map((v, i) => {
+        const x = padL + i * step;
+        const y = padT + (1 - (v - min) / span) * (h - padT - padB);
+        return [x, y, v];
+      });
+    }
+    function path(values) {
+      const p = pts(values);
+      return p.map((pt, i) => (i ? "L" : "M") + pt[0].toFixed(1) + "," + pt[1].toFixed(1)).join(" ");
+    }
+    const main = seriesMap.length === 1 ? seriesMap[0] : null;
+    const sum = [];
+    for (let i = 0; i < n; i++) sum.push(seriesMap.reduce((a, s) => a + s.values[i], 0));
+    const sumMax = Math.max(...sum, 1);
+    const sumPts = sum.map((v, i) => {
+      const x = padL + i * step;
+      const y = padT + (1 - v / sumMax) * (h - padT - padB);
+      return [x, y, v];
     });
-    const line = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
-    const area = line + ` L${pts[pts.length - 1][0]},${h - pad} L${pts[0][0]},${h - pad} Z`;
-    return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
-      <defs><linearGradient id="sxFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0071e3" stop-opacity=".35"/><stop offset="100%" stop-color="#0071e3" stop-opacity="0"/></linearGradient></defs>
-      <path d="${area}" fill="url(#sxFill)"></path>
-      <path d="${line}" fill="none" stroke="#0071e3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
-      ${pts.map((p, i) => `<circle class="sx-dot" data-i="${i}" data-v="${values[i]}" cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#fff" stroke="#0071e3" stroke-width="2"></circle>`).join("")}
-    </svg><div class="sx-tip" id="sxTip"></div>`;
+    const useOverlay = seriesMap.length > 1;
+    const fillSrc = useOverlay ? sumPts : pts(seriesMap[0].values);
+    const fillLine = fillSrc.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
+    const area = fillLine + ` L${fillSrc[fillSrc.length-1][0]},${h-padB} L${fillSrc[0][0]},${h-padB} Z`;
+    const axisY = useOverlay
+      ? [0, 0.5, 1].map((t) => {
+          const v = Math.round(sumMax * t);
+          const y = padT + (1 - t) * (h - padT - padB);
+          return `<text x="${padL-6}" y="${y+3}" text-anchor="end" class="sx-axis">${api.formatNumber(v)}</text><line x1="${padL}" y1="${y}" x2="${w-padR}" y2="${y}" class="sx-grid"/>`;
+        }).join("")
+      : yTicks.map((v) => {
+          const y = padT + (1 - (v - min) / span) * (h - padT - padB);
+          return `<text x="${padL-6}" y="${y+3}" text-anchor="end" class="sx-axis">${api.formatNumber(Math.round(v))}</text><line x1="${padL}" y1="${y}" x2="${w-padR}" y2="${y}" class="sx-grid"/>`;
+        }).join("");
+    const xLabs = [0, Math.floor((n-1)/2), n-1].map((i) => `<text x="${(padL + i*step).toFixed(1)}" y="${h-8}" text-anchor="middle" class="sx-axis">${labels[i]}</text>`).join("");
+    const lines = (useOverlay ? seriesMap : seriesMap).map((s) => {
+      const col = s.color;
+      const p = path(s.values);
+      const dots = pts(s.values).filter((_,i)=> i%Math.max(1,Math.floor(n/6))===0 || i===n-1).map((pt)=>`<circle class="sx-dot" data-i="${pt[0]}" data-v="${pt[2]}" data-ch="${s.id}" cx="${pt[0]}" cy="${pt[1]}" r="3.2" fill="#fff" stroke="${col}" stroke-width="2"></circle>`).join("");
+      return `<path d="${p}" fill="none" stroke="${col}" stroke-width="${useOverlay?2:2.6}" stroke-linecap="round" stroke-linejoin="round" opacity="${useOverlay?0.95:1}"></path>${dots}`;
+    }).join("");
+    const legend = seriesMap.map((s)=>`<span class="sx-leg"><i style="background:${s.color}"></i>${demo.channels[s.id].name}</span>`).join("");
+    return `<div class="sx-chart-wrap"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Verlaufskurve">
+      <defs><linearGradient id="sxFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0071e3" stop-opacity=".22"/><stop offset="100%" stop-color="#0071e3" stop-opacity="0"/></linearGradient></defs>
+      ${axisY}${xLabs}
+      ${useOverlay ? "" : `<path d="${area}" fill="url(#sxFill)"></path>`}
+      ${lines}
+    </svg><div class="sx-legend">${legend}</div><div class="sx-tip" id="sxTip"></div></div>`;
   }
 
   function render() {
     const o = org();
     const a = ads();
-    const s = series().slice(-18);
-    const funnel = [
+        const funnel = [
       ["Impressionen", a.impressions, 1],
       ["Klicks", a.clicks, a.impressions ? a.clicks / a.impressions : 0],
       ["Leads", a.leads, a.clicks ? a.leads / a.clicks : 0],
@@ -116,8 +187,8 @@
           </div>
         </div>
         <div class="sx-rings" role="tablist" aria-label="Kanäle">
-          <button type="button" class="sx-ring ${ch === "all" ? "active" : ""}" data-ch="all"><div class="orb">Alle</div>Mix</button>
-          ${api.channelIds().map((id) => `<button type="button" class="sx-ring ${ch === id ? "active" : ""}" data-ch="${id}"><div class="orb">${short[id]}</div>${demo.channels[id].name}</button>`).join("")}
+          ${ringBtn("all","Mix",ch==="all",0.86)}
+          ${api.channelIds().map((id)=>{const o=demo.channels[id].organic[range]; const pct=Math.min(0.95, (o.engagement||o.likes||1)/Math.max(o.reach||o.followers||1,1)*8); return ringBtn(id, demo.channels[id].name, ch===id, pct||0.65);}).join("")}
         </div>
         <div class="sx-kpis">
           <div class="sx-kpi"><b data-n="${o.followers}">0</b><span>Follower</span></div>
@@ -132,7 +203,7 @@
       </div>
 
       <div class="sx-panel ${section==="overview"?"on":""}" data-panel="overview">
-        <div class="sx-sec"><h3>Verlauf · tippen für Wert</h3><div class="sx-chart" id="sxChart">${chartSVG(s)}</div></div>
+        <div class="sx-sec"><h3>Verlauf · tippen für Wert</h3><div class="sx-chart" id="sxChart">${chartSVG()}</div></div>
         <div class="sx-sec"><h3>Kanalstatus</h3>
           ${ids().map((id)=>{const c=demo.channels[id];return `<div class="sx-feed"><div class="item on"><strong>${c.name}</strong> · ${c.handle}<div class="sub">${c.statusLabel}</div></div></div>`;}).join("")}
         </div>
