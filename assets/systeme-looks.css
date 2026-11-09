@@ -24,7 +24,7 @@
 .lk-card img { transition: filter .3s var(--lk-ease); }
 .lk-nr { margin: 16px 0 4px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #0071E3; }
 .lk-hero .sd-t { font-size: clamp(24px, 2.4vw, 32px); }
-.lk-live { display: inline-flex; align-items: center; gap: 6px; justify-self: start; margin-top: 14px; min-height: 40px; padding: 0 18px; border-radius: 999px; color: #FFFFFF !important; font-size: 15px; font-weight: 600; text-decoration: none; transition: transform .12s var(--lk-ease), filter .18s var(--lk-ease); /* Fill: liquid-glass.css kräftig */ }
+.lk-live { display: inline-flex; align-items: center; gap: 6px; justify-self: start; margin-top: 14px; min-height: 40px; padding: 0 18px; border-radius: 999px; color: #FFFFFF !important; background: #0071E3 !important; box-shadow: 0 8px 22px rgba(0,113,227,.28); font-size: 15px; font-weight: 600; text-decoration: none; transition: transform .12s var(--lk-ease), filter .18s var(--lk-ease); }
 .lk-live:active { transform: scale(.97); }
 .lk-sub { color: #0071E3; }
 .lk-soonchip { position: absolute; right: 12px; top: 12px; z-index: 2; padding: 4px 10px; border-radius: 999px; background: rgba(29,29,31,.8); color: #FFFFFF; font-size: 12px; font-weight: 600; opacity: 0; transform: translateY(-4px); transition: opacity .2s var(--lk-ease), transform .2s var(--lk-ease); }

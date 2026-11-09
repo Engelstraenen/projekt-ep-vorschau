@@ -99,7 +99,7 @@
         <button type="button" data-view="overview" class="${state.view === "overview" ? "active" : ""}">Übersicht</button>
         ${api.channelIds().map((id) => `<button type="button" data-view="${id}" class="${state.view === id ? "active" : ""}">${demo.channels[id].name}</button>`).join("")}
         <a href="../dashboard/">Dashboard</a>
-        <a href="../paketstadt3d/?style=A">Paketstadt</a>
+        <a href="../paketstadt3d/?style=A#social">Paketstadt 3D</a>
       </nav>
       <aside class="sidebar" aria-label="Seitenleiste">
         <div class="logo" aria-label="PROJEKT EX"><span class="logo-projekt">PROJEKT</span><span class="logo-ex">EX</span></div>
@@ -109,7 +109,7 @@
         </nav>
         <div class="sidebar-foot">
           <a href="../dashboard/"><span class="nav-icon" style="display:inline-grid;margin-right:8px;vertical-align:middle">${icons.dashboard}</span>Systeme-Dashboard</a>
-          <a href="../paketstadt3d/?style=A"><span class="nav-icon" style="display:inline-grid;margin-right:8px;vertical-align:middle">${icons.paket}</span>Paketstadt 3D</a>
+          <a href="../paketstadt3d/?style=A#social"><span class="nav-icon" style="display:inline-grid;margin-right:8px;vertical-align:middle">${icons.paket}</span>Zur Paketstadt (Kundensystem)</a>
           <a href="../">Alle System-Demos</a>
         </div>
       </aside>
@@ -185,7 +185,7 @@
         </section>
 
         <section class="glass panel" aria-label="Social-Leads und Paketstadt">
-          <div class="panel-head"><h2>Social-Leads → Paketstadt</h2><a href="../paketstadt3d/?style=A" style="font-size:13px;font-weight:700;color:var(--blue)">Zur Paketstadt</a></div>
+          <div class="panel-head"><h2>Social-Leads → Shop-Aufträge</h2><a href="../paketstadt3d/?style=A#social" style="font-size:13px;font-weight:700;color:var(--blue)">Zum Shop in der Paketstadt</a></div>
           <div class="leads">
             ${leads.map((l) => `
               <article class="lead">
@@ -193,7 +193,7 @@
                   <b>${l.name}</b>
                   <small>${demo.channels[l.channel].name} · ${l.interest}<br>${l.note}<br>Status: ${l.status} · ${api.formatDate(l.created_at)}</small>
                 </div>
-                <a href="../paketstadt3d/?style=A" title="Beispiel-Verknüpfung">${l.paketstadtOrderId}</a>
+                <a href="../paketstadt3d/?style=A#social" title="Shop-Auftrag (Beispiel)">${l.paketstadtOrderId}</a>
               </article>`).join("") || "<p class=\"stat-meta\">Keine Beispiel-Leads in diesem Filter.</p>"}
           </div>
         </section>
