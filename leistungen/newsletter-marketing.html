@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Newsletter-Marketing für lokale Betriebe | PROJEKT EX</title>
+<meta name="description" content="Newsletter und automatische Mail-Strecken mit Double-Opt-in, klarem Design und Aktionsplan. Einrichtung und Betreuung – Preis auf Anfrage.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PROJEKT EX">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://projektex.de/leistungen/newsletter-marketing">
+<meta property="og:title" content="Newsletter-Marketing für lokale Betriebe | PROJEKT EX">
+<meta property="og:description" content="Newsletter und automatische Mail-Strecken mit Double-Opt-in, klarem Design und Aktionsplan. Einrichtung und Betreuung – Preis auf Anfrage.">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://projektex.de/leistungen/newsletter-marketing">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2714%27 fill=%27none%27 stroke=%27%230071E3%27 stroke-width=%273%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/sub.css">
+<link rel="stylesheet" href="../assets/nav.css">
+<link rel="stylesheet" href="../assets/showcase.css?v=e07932b9">
+<link rel="stylesheet" href="../assets/praxis.css">
+<link rel="stylesheet" href="../assets/vendor/cookieconsent/cookieconsent.css">
+<link rel="stylesheet" href="../assets/consent-theme.css">
+<link rel="stylesheet" href="../assets/ep-fx.css">
+<link rel="stylesheet" href="../assets/themen.css">
+<link rel="stylesheet" href="../assets/liquid-glass.css">
+<style>
+  .nl-slot { margin: 8px 0 0; }
+  .nl-slot-in { display: grid; place-items: center; text-align: center; aspect-ratio: 16 / 9; padding: 24px; background: var(--bg-2, #f5f5f7); border: 1px solid var(--line, #d2d2d7); border-radius: 16px; color: var(--ink-2, #6e6e73); }
+  .nl-slot-in p { margin: 0; font-size: 17px; letter-spacing: -.01em; color: var(--ink, #1d1d1f); }
+  .nl-slot-in small { display: block; margin-top: 8px; font-size: 13px; }
+  .nl-pair, .nl-cards { display: grid; gap: 16px; margin-top: 8px; }
+  .nl-pair { grid-template-columns: 1fr 1fr; }
+  .nl-cards { grid-template-columns: repeat(3, 1fr); }
+  .nl-cards .nl-slot-in, .nl-funnel { aspect-ratio: 4 / 3; }
+  .nl-funnel { aspect-ratio: 2 / 1; }
+  .nl-price { margin-top: 8px; border: 1px solid var(--line, #d2d2d7); border-radius: 24px; padding: clamp(24px, 4vw, 48px); background: var(--bg-2, #f5f5f7); }
+  .nl-price strong { display: block; font-size: clamp(28px, 4vw, 44px); letter-spacing: -.03em; font-weight: 600; }
+  .nl-price p { max-width: 62ch; margin: 12px 0 0; color: var(--ink-2, #48484c); }
+  .nl-nutzen { list-style: none; margin: 8px 0 0; padding: 0; }
+  .nl-nutzen li { padding: 16px 0; border-bottom: 1px solid var(--line, #d2d2d7); max-width: 62ch; }
+  .nl-packs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
+  .nl-pack { background: var(--bg-2, #f5f5f7); border: 1px solid var(--line, #d2d2d7); border-radius: 22px; padding: 24px; }
+  .nl-pack h3 { margin: 0 0 12px; font-size: clamp(22px, 2vw, 28px); letter-spacing: -.03em; }
+  .nl-pack p { margin: 0; color: var(--ink-2, #48484c); }
+  .nl-pack strong { display: block; margin-top: 18px; }
+  .nl-note { margin-top: 18px; max-width: 62ch; color: var(--ink-2, #48484c); }
+  .nl-fig { margin: 28px 0 0; }
+  .nl-fig-scroll { max-width: 100%; overflow-x: auto; border-radius: 16px; background: var(--bg-2, #f5f5f7); }
+  .nl-fig img { display: block; width: 100%; height: auto; }
+  .nl-fig figcaption { margin-top: 10px; color: var(--ink-2, #6e6e73); font-size: 14px; }
+  ol.st-steps.nl-steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  ol.st-steps.nl-steps p { margin: 0; color: var(--ink-2, #48484c); font-size: 15px; }
+  .nl-compare-desk { display: block; }
+  .nl-compare-mob { display: none; }
+  .nl-compare img { display: block; width: 100%; height: auto; }
+  .nl-compare .nl-cap { margin: 8px 0 0; font-size: 14px; font-weight: 600; }
+  .nl-legend { margin: 18px 0 0; padding: 0 0 0 1.35em; max-width: 68ch; color: var(--ink, #1d1d1f); font-size: 16px; line-height: 1.45; list-style: decimal; }
+  .nl-legend li { margin: 0 0 8px; padding-left: 0.35em; }
+  .nl-fine { margin: 10px 0 0; max-width: 68ch; color: var(--ink-2, #6e6e73); font-size: 13px; }
+  .nl-phone { width: min(390px, 100%); margin: 28px auto 0; padding: 14px 12px 16px; border-radius: 32px; background: #1d1d1f; }
+  .nl-phone-screen { max-height: min(70vh, 720px); overflow: auto; border-radius: 18px; background: #fff; }
+  .nl-phone img { display: block; width: 100%; height: auto; }
+  @media (max-width: 768px) {
+    .nl-compare-desk { display: none; }
+    .nl-compare-mob { display: grid; gap: 28px; }
+  }
+  @media (max-width: 980px) {
+    .nl-pair, .nl-packs, ol.st-steps.nl-steps { grid-template-columns: 1fr; }
+    .nl-fig img { width: 960px; max-width: none; }
+  }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Newsletter-Marketing","serviceType":"Newsletter-Marketing","description":"Newsletter und automatische Mail-Strecken mit Double-Opt-in, klarem Design und Aktionsplan. Einrichtung und Betreuung. Preis auf Anfrage.","url":"https://projektex.de/leistungen/newsletter-marketing","provider":{"@type":"Organization","@id":"https://projektex.de/#organisation","name":"PROJEKT EX","url":"https://projektex.de/"},"areaServed":[{"@type":"Country","name":"Deutschland"},{"@type":"Country","name":"Österreich"},{"@type":"Country","name":"Schweiz"},"Worldwide"],"availableLanguage":"de"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://projektex.de/"},{"@type":"ListItem","position":2,"name":"Newsletter-Marketing","item":"https://projektex.de/leistungen/newsletter-marketing"}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Direkt zum Inhalt</a>
+<header class="top">
+  <a class="brand" href="../index.html">PROJEKT <b>EX</b><i aria-hidden="true"></i></a>
+  <nav class="links" aria-label="Hauptnavigation"><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mega">Leistungen <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a href="../index.html#finder">Potenzialfinder</a><a href="../prozess.html">Prozess</a><a href="../faq.html">FAQ</a><a href="../preise.html">Preise</a></nav>
+  <div class="right"><button class="menu-mobile" type="button" aria-expanded="false" aria-controls="mega" aria-label="Menü öffnen"><i aria-hidden="true"></i>Menü</button><a class="btn small" href="../index.html#kontakt">Projekt starten ↗</a></div>
+</header>
+<div class="scrollbar" aria-hidden="true"><span id="scrollbar"></span></div>
+<div class="mega" id="mega" data-lenis-prevent role="region" aria-label="Unsere Leistungen">
+    <div class="mega-head"><p>Alle 14 Leistungen<span class="menu-scroll-hint"> · Wischen / scrollen für weitere Punkte</span></p><a href="../index.html#websites">Als Geschichte erleben ›</a></div>
+    <div class="mega-grid">
+      <a class="tile" href="../leistungen/websites.html"><span class="thumb"><img src="../lab/digital-design-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>01 · Design</small><b>Websites</b><span>Design, Entwicklung, Hosting &amp; Betreuung</span></span></a>
+      <a class="tile" href="../leistungen/seo.html"><span class="thumb"><img src="../lab/seo-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>02 · Find</small><b>SEO &amp; Sichtbarkeit</b><span>Audit, On-page, Content</span></span></a>
+      <a class="tile" href="../leistungen/systeme.html"><span class="thumb"><img src="../lab/dashboards-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>03 · Manage</small><b>Systeme &amp; Dashboards</b><span>Warenwirtschaft, Personal, Dashboards</span></span></a>
+      <a class="tile" href="../leistungen/automatisierung-chatbots.html"><span class="thumb"><img src="../lab/workflow-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>04 · Connect</small><b>Automatisierung &amp; Chatbots</b><span>Chatbots, Integrationen, Abläufe</span></span></a>
+      <a class="tile" href="../leistungen/apps.html"><span class="thumb"><img src="../lab/app-design-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>05 · Develop</small><b>App Design</b><span>UX, UI, Prototyp, Entwicklung</span></span></a>
+      <a class="tile" href="../leistungen/games.html"><span class="thumb"><img src="../lab/game-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>05 · Play</small><b>Game Design</b><span>Browser, Mobile, Serious Games</span></span></a>
+      <a class="tile" href="../leistungen/werbeclips.html"><span class="thumb"><img src="../lab/campaign-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>06 · Create</small><b>Werbeclips</b><span>Werbefilme, Motion Design, Social Ads</span></span></a>
+      <a class="tile" href="../leistungen/ads-management.html"><span class="thumb"><img src="../lab/ads-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>07 · Run</small><b>Ads-Management</b><span>Meta, TikTok, Google, laufend betreut</span></span></a>
+      <a class="tile" href="../leistungen/newsletter-marketing.html"><span class="thumb"></span><span><small>Newsletter</small><b>Newsletter-Marketing</b><span>Aufbau, Texte, Versand</span></span></a>
+      <a class="tile" href="../leistungen/logo-design.html"><span class="thumb"><img src="../lab/logo-design-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>08 · Brand</small><b>Logo Design</b><span>Logo, Farben, Schrift, Brand Guide</span></span></a>
+      <a class="tile" href="../leistungen/print-design.html"><span class="thumb"><img src="../lab/print-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>09 · Craft</small><b>Print Design</b><span>Textil, Objekte, Packaging</span></span></a>
+      <a class="tile" href="../leistungen/merch.html"><span class="thumb"><img src="../lab/merch-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>10 · Produce</small><b>Merch-Produktion</b><span>Jersey, Denim, Strick, Kollektionen</span></span></a>
+      <a class="tile" href="../leistungen/visualisierung.html"><span class="thumb"><img src="../lab/spaces-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>11 · Envision</small><b>Räume &amp; Visualisierung</b><span>Garten, Interior, Architektur</span></span></a>
+      <a class="tile" href="../leistungen/individuelle-auftraege.html"><span class="thumb"><img src="../lab/produkt-320.webp" alt="" loading="lazy" decoding="async" width="320" height="213"></span><span><small>Mehr</small><b>Individuelle Aufträge</b><span>Wenn deine Idee in kein Raster passt</span></span></a>
+    </div>
+    <nav class="mega-extra" aria-label="Weitere Seiten"><a href="../index.html#finder">Potenzialfinder</a><a href="../prozess.html">Prozess</a><a href="../faq.html">FAQ</a><a href="../index.html#kontakt">Projekt starten</a><a href="../preise.html">Preise</a></nav>
+  </div>
+<main id="main">
+  <nav class="crumbs" aria-label="Brotkrumen"><a href="../index.html">Start</a> / <a href="../index.html#newsletter">Leistungen</a> / <span aria-current="page">Newsletter-Marketing</span></nav>
+  <section class="hero page-hero solo sc-hero th-hero">
+    <div>
+      <p class="kicker"><span>NL</span><span>Newsletter</span></p>
+      <h1 data-hw><span class="hw"><span style="--i:0">Newsletter-Marketing,</span></span> <span class="hw"><span style="--i:1">das</span></span> <span class="hw"><span style="--i:2">Gäste</span></span> <span class="hw"><span style="--i:3">wiederkommen</span></span> <span class="hw"><span style="--i:4">lässt</span></span></h1>
+      <p class="lead">Du schreibst Gästen, die das wirklich wollen – mit Einwilligung, klarem Angebot und einem Design, das am Handy gut aussieht. Wir richten das System ein, planen Aktionen und lassen Willkommens- und Erinnerungsmails automatisch laufen. Werbeanzeigen sind eine andere Leistung und stehen hier nicht mit drin.</p>
+      <ul class="th-kinds" aria-label="Das gehört dazu"><li style="--k:0">Double-Opt-in</li><li style="--k:1">Vorlagen</li><li style="--k:2">Automationen</li><li style="--k:3">Aktionsplan</li><li style="--k:4">Betreuung</li><li style="--k:5">Preis auf Anfrage</li></ul>
+    </div>
+  </section>
+
+  <nav class="rb-jump" aria-label="Rubriken auf dieser Seite"><div class="rb-jump-in"><p class="rb-jump-t" aria-hidden="true">Auf dieser Seite</p><ol role="list"><li><a href="#nutzen"><span class="rb-nr">01</span>Nutzen</a></li><li><a href="#erklaervideo"><span class="rb-nr">02</span>Erklärvideo</a></li><li><a href="#vergleich"><span class="rb-nr">03</span>Vorher und nachher</a></li><li><a href="#premium"><span class="rb-nr">·</span>Beispiel</a></li><li><a href="#ablauf"><span class="rb-nr">04</span>Ablauf</a></li><li><a href="#pakete"><span class="rb-nr">05</span>Pakete</a></li><li><a href="#funnel"><span class="rb-nr">06</span>Funnel</a></li><li><a href="#aktionen"><span class="rb-nr">07</span>Aktionsbeispiele</a></li><li><a href="#faq"><span class="rb-nr">08</span>Fragen</a></li></ol></div></nav>
+
+  <section class="block pb-list rb" id="nutzen" aria-labelledby="nu-h">
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">01</span><span class="rb-dot" aria-hidden="true"> · </span>Nutzen</p><h2 id="nu-h" class="rb-h">Was du davon hast</h2></header>
+    <ul class="nl-nutzen">
+      <li>Liste und Vorlagen liegen auf <b>deinem</b> Tool-Konto</li>
+      <li>Double-Opt-in und Abmeldelink – nachvollziehbar dokumentiert</li>
+      <li>Aktionen für Wochen und Monate im Voraus geplant</li>
+      <li>Automatische Strecken: Willkommen, Aktion, Wiederbestellung, Rückgewinnung, Bewertung</li>
+      <li>Vorlage auf PROJEKT-EX-Niveau statt Textwüste</li>
+    </ul>
+  </section>
+
+  <section class="block pb-list rb" id="erklaervideo" aria-labelledby="ev-h">
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">02</span><span class="rb-dot" aria-hidden="true"> · </span>Erklärvideo</p><h2 id="ev-h" class="rb-h">Erklärfilm <span>· 30,5 Sekunden</span></h2><p class="rb-lead">Vom Posteingang bis zum gestalteten Newsletter. Der Ton startet erst, wenn du ihn einschaltest.</p></header>
+    <figure class="px-film">
+      <video id="nl-film" data-px-auto data-ton muted playsinline loop controls preload="metadata" width="1920" height="1080" poster="../img/newsletter/erklaerfilm-poster.webp" aria-label="Erklärfilm, 30,5 Sekunden: Newsletter von der Anmeldung bis zur Betreuung. Ton startet auf Klick. Fiktive Demo Quattro Flammen.">
+        <source src="../video/newsletter/newsletter-erklaerfilm-16x9-v1.mp4" type="video/mp4">
+      </video>
+      <figcaption><span><b>Erklärfilm</b> · 30,5 s · mit Ton</span><span>Fiktive Demo · Quattro Flammen</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="block pb-list rb" id="vergleich" aria-labelledby="vg-h">
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">03</span><span class="rb-dot" aria-hidden="true"> · </span>Vergleich</p><h2 id="vg-h" class="rb-h">Vorher und nachher <span>· Amateur und Profi</span></h2><p class="rb-lead">Dieselbe Nachricht, einmal als einfacher Versand und einmal gestaltet. Mustermarke Quattro Flammen, frei erfunden.</p></header>
+    <div class="nl-compare">
+      <picture class="nl-compare-desk">
+        <source type="image/webp" srcset="../img/newsletter/vorher-nachher-nebeneinander.webp">
+        <img src="../img/newsletter/vorher-nachher-nebeneinander.png" width="1600" height="2228" alt="Vorher und nachher nebeneinander: links der markierte Amateur-Newsletter, rechts der Premium-Newsletter Quattro Flammen. Fiktive Demo, Demo-Preise fiktiv." loading="lazy" decoding="async">
+      </picture>
+      <div class="nl-compare-mob">
+        <figure>
+          <picture>
+            <source type="image/webp" srcset="../img/newsletter/vorher-amateur.webp">
+            <img src="../img/newsletter/vorher-amateur.png" width="560" height="563" alt="Vorher: Amateur-Newsletter mit markierten Fehlern, Betreff ohne Nutzen, unscharfes Bild, Textwüste, viele Buttons und unklarer Footer. Fiktive Demo." loading="lazy" decoding="async">
+          </picture>
+          <figcaption class="nl-cap">Vorher</figcaption>
+        </figure>
+        <figure>
+          <picture>
+            <source type="image/webp" srcset="../img/newsletter/nachher-profi.webp">
+            <img src="../img/newsletter/nachher-profi.png" width="900" height="5168" alt="Nachher: markierter Premium-Newsletter mit klarem Nutzen, scharfen Food-Fotos, einem Button je Abschnitt, Gerichteraster und Footer mit Impressum und Abmelden. Fiktive Demo, Demo-Preise fiktiv." loading="lazy" decoding="async">
+          </picture>
+          <figcaption class="nl-cap">Nachher</figcaption>
+        </figure>
+      </div>
+      <ol class="nl-legend">
+        <li><b>Vorher:</b> Betreff ohne Nutzen. <b>Nachher:</b> Klarer Nutzen ganz oben, „Aus der Glut“, große Markenüberschrift.</li>
+        <li><b>Vorher:</b> Bild unscharf oder verzerrt. <b>Nachher:</b> Starke Food-Fotos mit Licht und Tiefe, scharf, richtiges Format.</li>
+        <li><b>Vorher:</b> Textwüste. <b>Nachher:</b> Ein Button pro Abschnitt (bestellen, Angebot sichern, Karte, Treue).</li>
+        <li><b>Vorher:</b> Viele Buttons und Farben. <b>Nachher:</b> Gerichte im 2×2-Raster mit Demo-Preis, fiktiv.</li>
+        <li><b>Vorher:</b> Footer unklar. <b>Nachher:</b> Footer mit Impressum, Datenschutz, Abmeldelink und Double-Opt-in-Hinweis.</li>
+      </ol>
+      <p class="nl-fine">Mustermarke Quattro Flammen, frei erfunden, Demo-Preise fiktiv.</p>
+      <p class="nl-fine">Fotos im Nachher-Muster und Premium-Beispiel: Pexels (Pexels-Lizenz). Vorher-Beispiel: bearbeitetes Foto von Unsplash (Unsplash-Lizenz).</p>
+    </div>
+  </section>
+
+  <section class="block pb-list rb" id="premium" aria-labelledby="pm-h">
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-dot" aria-hidden="true"> · </span>Beispiel</p><h2 id="pm-h" class="rb-h">Beispiel: Premium-Newsletter</h2><p class="rb-lead">Die Nachher-Fassung als Handy-Ansicht. Im Rahmen lässt sich der Newsletter durchscrollen.</p></header>
+    <div class="nl-phone">
+      <div class="nl-phone-screen">
+        <picture>
+          <source type="image/webp" srcset="../img/newsletter/muster-mobil.webp">
+          <img src="../img/newsletter/muster-mobil.png" width="750" height="8848" alt="Premium-Newsletter der fiktiven Marke Quattro Flammen in der Handy-Ansicht, von Hero über Angebot und Gerichte bis zum Footer. Demo-Preise fiktiv." loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </div>
+    <p class="nl-fine">Mustermarke Quattro Flammen, frei erfunden, Demo-Preise fiktiv.</p>
+    <p class="nl-fine">Fotos im Nachher-Muster und Premium-Beispiel: Pexels (Pexels-Lizenz).</p>
+  </section>
+
+  <section class="block st" id="ablauf" aria-labelledby="ab-h">
+    <h2 id="ab-h">So läuft’s</h2>
+    <ol class="st-steps nl-steps">
+      <li><span>1</span><b>Kurzgespräch</b><p>Ziel, Liste, Tool-Wahl.</p></li>
+      <li><span>2</span><b>Einrichtung</b><p>Konto, Anmeldeformular, Double-Opt-in, Zustellbarkeit.</p></li>
+      <li><span>3</span><b>Design und Funnels</b><p>Vorlage, Texte, fünf Stufen nach Bedarf.</p></li>
+      <li><span>4</span><b>Aktionskalender</b><p>Die ersten drei Monate.</p></li>
+      <li><span>5</span><b>Start und Betreuung</b><p>Du sendest selbst oder wir übernehmen den Monatsrhythmus.</p></li>
+    </ol>
+  </section>
+
+  <section class="block pb-list rb" id="pakete" aria-labelledby="pk-h">
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">05</span><span class="rb-dot" aria-hidden="true"> · </span>Pakete</p><h2 id="pk-h" class="rb-h">Leistungsumfang <span>· Preis auf Anfrage</span></h2><p class="rb-lead">Drei Bausteine. Auf der Seite steht kein Betrag.</p></header>
+    <div class="nl-packs">
+      <article class="nl-pack"><h3>Einrichtung Newsletter-Marketing</h3><p>Tool-Setup auf deinem Konto, Double-Opt-in, Design-Vorlage, bis zu fünf automatische Strecken, Aktionskalender für drei Monate, kurze Einweisung.</p><strong>Preis auf Anfrage</strong></article>
+      <article class="nl-pack"><h3>Betreuung S</h3><p>Zwei fertige Newsletter im Monat, Feinschliff an bestehenden Automationen, kurzer Monatsüberblick.</p><strong>Preis auf Anfrage</strong></article>
+      <article class="nl-pack"><h3>Betreuung M</h3><p>Vier fertige Newsletter im Monat, Anpassungen plus eine kurze neue Aktion im Rahmen, Monatsüberblick.</p><strong>Preis auf Anfrage</strong></article>
+    </div>
+    <p class="nl-note">Tool-Gebühren zahlst du direkt an den Anbieter (z. B. CleverReach, Brevo, Mailchimp).</p>
+  </section>
+
+  <section class="block pb-list rb" id="funnel" aria-labelledby="fn-h">
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">06</span><span class="rb-dot" aria-hidden="true"> · </span>Funnel</p><h2 id="fn-h" class="rb-h">Fünf Stufen <span>· vom Erstkontakt zur Wiederbestellung</span></h2><p class="rb-lead">Fiktive Demo. Quattro Flammen ist erfunden, es sind keine Kundendaten.</p></header>
+    <figure class="nl-fig">
+      <div class="nl-fig-scroll">
+        <picture>
+          <source type="image/webp" srcset="../img/newsletter/funnel-stufen.webp">
+          <img src="../img/newsletter/funnel-stufen.png" width="1280" height="900" alt="Fiktive Demo Quattro Flammen: fünf automatische Mail-Stufen Willkommen, Aktion, Wiederbestellung, Rückgewinnung und Bewertung, jeweils mit Auslöser, Wartezeit und Beispiel-Betreff." loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <figcaption>Fiktive Demo · Quattro Flammen · Muster, keine Kundendaten</figcaption>
+    </figure>
+  </section>
+
+  <section class="block pb-list rb" id="aktionen" aria-labelledby="ak-h">
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">07</span><span class="rb-dot" aria-hidden="true"> · </span>Aktionen</p><h2 id="ak-h" class="rb-h">Aktionskalender <span>· drei Monate</span></h2><p class="rb-lead">Beispiel, wie Rabatt-, Saison-, Geburtstags- und Stammgast-Aktionen vorgeplant werden. Termine und Angebote in der Grafik sind Muster.</p></header>
+    <figure class="nl-fig">
+      <div class="nl-fig-scroll">
+        <picture>
+          <source type="image/webp" srcset="../img/newsletter/aktionskalender-3-monate.webp">
+          <img src="../img/newsletter/aktionskalender-3-monate.png" width="1180" height="900" alt="Fiktiver Aktionskalender über drei Monate für Quattro Flammen: Musteraktionen mit Kanal, Beispiel-Betreff und Ziel. Keine echten Kundendaten." loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <figcaption>Fiktive Demo · Quattro Flammen · Muster, keine Kundendaten</figcaption>
+    </figure>
+  </section>
+
+  <section class="block qa" id="faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">Fragen</h2>
+    <details><summary>Ist das datenschutzkonform?</summary><p>Wir bauen Double-Opt-in, Einwilligungsnachweis, Impressum und Abmeldelink ein und orientieren uns an UWG § 7 und DSGVO Art. 7. Das ersetzt keine Rechtsberatung.</p></details>
+    <details><summary>Welche Tools nutzt ihr?</summary><p>Wir empfehlen passende Tools und richten sie auf <b>deinem</b> Konto ein – z. B. CleverReach, Brevo oder Mailchimp.</p></details>
+    <details><summary>Wer zahlt das Tool?</summary><p>Du. Die Gebühren gehen an den Anbieter; wir stellen sie transparent zusammen.</p></details>
+    <details><summary>Schaltet ihr damit auch Werbeanzeigen?</summary><p>Nein. Diese Seite betrifft nur Newsletter-Marketing. Anzeigen-Betreuung ist getrennt.</p></details>
+    <details><summary>Gibt es eine Umsatzgarantie?</summary><p>Nein. Wir liefern System, Texte, Design und Betreuung – ohne Garantie für Öffnungen oder Umsatz.</p></details>
+  </section>
+
+  <section class="cta-band" id="cta"><h2>Schreib uns kurz, ob du starten oder zuerst den Umfang klären willst.</h2><p>Wir melden uns mit dem passenden nächsten Schritt.</p><div class="ctas"><a class="btn" href="../index.html#kontakt">Kostenloses Erstgespräch ↗</a></div></section>
+  <nav class="pager ep-next" aria-label="Nächste Leistung"><a class="nx" href="logo-design.html"><span class="nx-img" aria-hidden="true"><img src="../lab/logo-design-1024.webp" srcset="../lab/logo-design-640.webp 640w, ../lab/logo-design-1024.webp 1024w, ../lab/logo-design.webp 1536w" sizes="(max-width: 1320px) 92vw, 1320px" alt="" loading="lazy" decoding="async"></span><small>Nächste Leistung · 08 · Brand</small><b>Logo Design</b><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a><a class="pv" href="ads-management.html"><small>Vorherige</small>Ads-Management</a></nav>
+</main>
+<footer class="epf" id="epf" role="contentinfo">
+  <div class="epf-cta">
+    <p class="epf-kicker">Projekt starten</p>
+    <p class="epf-big"><a href="../kontakt.html">Erzähl uns von deiner Idee. <span>Wir machen sie sichtbar.</span><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></p>
+    <p class="epf-mail"><a href="mailto:kontakt@projektex.de">kontakt@projektex.de</a></p>
+  </div>
+  <div class="epf-cols">
+    <nav aria-label="Leistungen"><p class="epf-h">Leistungen</p><ul><li><a href="../leistungen/websites.html">Websites</a></li><li><a href="../leistungen/seo.html">SEO &amp; Sichtbarkeit</a></li><li><a href="../leistungen/systeme.html">Systeme &amp; Dashboards</a></li><li><a href="../leistungen/automatisierung-chatbots.html">Automatisierung &amp; Chatbots</a></li><li><a href="../leistungen/apps.html">App Design</a></li><li><a href="../leistungen/games.html">Game Design</a></li><li><a href="../leistungen/werbeclips.html">Werbeclips</a></li><li><a href="../leistungen/ads-management.html">Ads-Management</a></li><li><a href="../leistungen/newsletter-marketing.html">Newsletter-Marketing</a></li><li><a href="../leistungen/logo-design.html">Logo Design</a></li><li><a href="../leistungen/print-design.html">Print Design</a></li><li><a href="../leistungen/merch.html">Merch-Produktion</a></li><li><a href="../leistungen/visualisierung.html">Räume &amp; Visualisierung</a></li><li><a href="../leistungen/individuelle-auftraege.html">Individuelle Aufträge</a></li></ul></nav>
+    <nav aria-label="Studio"><p class="epf-h">Studio</p><ul><li><a href="../index.html">Start</a></li><li><a href="../prozess.html">Prozess</a></li><li><a href="../faq.html">FAQ</a></li><li><a href="../index.html#finder">Potenzialfinder</a></li><li><a href="../kontakt.html">Kontakt</a></li></ul></nav>
+    <nav aria-label="Rechtliches"><p class="epf-h">Rechtliches</p><ul><li><a href="../impressum.html">Impressum</a></li><li><a href="../datenschutz.html">Datenschutz</a></li><li><a href="../rechtliches.html#cookies">Cookie-Policy</a></li><li><a href="../rechtliches.html#agb">AGB</a></li><li><a href="../widerruf.html">Widerruf</a></li><li><a href="../rechtliches.html#barrierefreiheit">Barrierefreiheit</a></li><li><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></li></ul></nav>
+  </div>
+  <div class="epf-mark" aria-hidden="true"><span>PROJEKT</span><b>EX</b></div>
+  <p class="epf-legal"><span>© 2026 PROJEKT EX</span><span>Vom ersten Gedanken. Zum fertigen Ergebnis.</span></p>
+</footer>
+<script src="../assets/nav.js" defer></script>
+<script src="../assets/praxis.js?v=5e9b04a1" defer></script>
+<script src="../assets/autoplay.js?v=219edb23" defer></script>
+<script src="../assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
+<script src="../assets/consent.js" defer></script>
+<script src="../assets/ep-fx.js" defer></script>
+<script src="../assets/rubriken.js" defer></script>
+</body>
+</html>
