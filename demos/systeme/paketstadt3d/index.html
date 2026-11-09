@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="./ep-hinweis.css">
   <script type="module" crossorigin src="./assets/index-Bnbw9N66.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-THpGUhlS.css">
+<style id="ex-ext-links-css">
+.ex-ext-links{position:fixed;right:12px;top:70px;z-index:40;display:flex;flex-direction:column;gap:8px}
+.ex-ext-links a{font:600 12px/1.2 system-ui,-apple-system,sans-serif;color:#0a2540;background:rgba(255,255,255,.82);border:1px solid rgba(0,113,227,.18);padding:8px 12px;border-radius:999px;text-decoration:none;backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(15,40,80,.08)}
+.ex-ext-links a:hover{background:#fff;color:#0071e3}
+@media (max-width:720px){.ex-ext-links{top:auto;bottom:54px;right:10px;flex-direction:row;flex-wrap:wrap;max-width:calc(100vw - 20px)}}
+</style>
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -30,6 +36,10 @@
 <div class="ticker" id="ticker"></div>
 <aside class="card" id="card" hidden></aside>
 <div class="hint" id="hint"><span>Gebäude anklicken · Ziehen · Zoomen</span><button data-demo="order" type="button">Test-Bestellung</button><button data-demo="return" type="button">Test-Retoure</button></div>
+<nav class="ex-ext-links" aria-label="Weitere Systeme">
+  <a href="../dashboard/">Systeme-Dashboard</a>
+  <a href="../social/">Social Media</a>
+</nav>
 <div class="ep-bsp" role="note">Beispieldaten – so könnte dein System aussehen</div>
 </body>
 </html>
