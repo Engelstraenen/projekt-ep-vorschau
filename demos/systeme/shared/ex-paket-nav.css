@@ -71,3 +71,47 @@ body.ex-paket-nav-on #psNav,body.ex-paket-nav-on .ps-nav{display:none!important}
 #exSocialPin .go{opacity:.7;font-weight:600}
 /* Handy-Liste (Problem-Center voll): keine schwebenden 3D-Bedienelemente darüber */
 body.ops-full #exZoomHelp,body.ops-full .hint-tg,body.ops-full #exSocialPin{display:none!important}
+
+/* ---------- v2: Icons in der Leiste, auf schmalen Handys alle sechs Reiter ohne Wischen ---------- */
+#exPaketNav a{gap:7px}
+#exPaketNav a svg{width:17px;height:17px;flex:0 0 auto;opacity:.8}
+#exPaketNav a.active svg{opacity:1}
+@media(max-width:620px){
+  :root{--ex-nav-h:56px}
+  #exPaketNav{width:calc(100vw - 12px)}
+  #exPaketNav .ex-nav-fade{display:none}
+  #exPaketNav .ex-nav-scroll{overflow:visible;gap:1px;scroll-snap-type:none}
+  #exPaketNav a{flex:1 1 0;min-width:0;height:50px;padding:0 1px;flex-direction:column;gap:3px;font-size:10.5px;letter-spacing:-.01em;border-radius:16px}
+  #exPaketNav .ex-nav-shell{border-radius:20px}
+  #exPaketNav a span{max-width:100%;overflow:hidden;text-overflow:clip;white-space:nowrap}
+  #exPaketNav a svg{width:19px;height:19px}
+}
+@media(max-width:340px){#exPaketNav a{font-size:9.5px}}
+/* Social hat jetzt ein eigenes Gebäude: Pin am Laden + schwebender Knopf entfallen */
+body.ex-has-native-switch #exSocialPin,body.ex-has-native-switch #exSocialFab{display:none!important}
+/* Detailfenster offen: Zoom-Knöpfe weichen nach links */
+@media(min-width:721px){body.xf-open #exZoomHelp{right:424px}}
+
+/* ---------- v2: Tür-Überblendung („Rein-Gefühl“) ---------- */
+#exGate{position:fixed;inset:0;z-index:99;pointer-events:none;opacity:0;visibility:hidden;display:grid;place-items:center;
+  background:radial-gradient(120% 90% at 50% 58%,#fff8f0 0%,#f4e6d7 52%,#e4cbb4 100%);transition:opacity var(--gd,.4s) ease,visibility 0s linear var(--gd,.4s)}
+#exGate.on{opacity:1;visibility:visible;pointer-events:auto;transition:opacity var(--gd,.4s) ease}
+#exGate.instant{transition:none!important}
+#exGate .g-wing{position:absolute;top:0;bottom:0;width:50.5%;background:linear-gradient(180deg,#f6ebdf,#ead6c3);transition:transform .8s cubic-bezier(.7,0,.2,1)}
+#exGate .g-wing.l{left:0;box-shadow:inset -10px 0 24px -14px rgba(90,60,30,.35)}
+#exGate .g-wing.r{right:0;box-shadow:inset 10px 0 24px -14px rgba(90,60,30,.35)}
+#exGate .g-wing.l::after,#exGate .g-wing.r::after{content:"";position:absolute;top:50%;width:6px;height:46px;border-radius:6px;background:#c9a184;transform:translateY(-50%)}
+#exGate .g-wing.l::after{right:18px}#exGate .g-wing.r::after{left:18px}
+#exGate .g-c{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;color:#3a2a1c;font-family:Inter,system-ui,sans-serif;transform:scale(.92);opacity:0;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .35s ease}
+#exGate.on .g-c{transform:scale(1);opacity:1}
+#exGate .g-ic{width:68px;height:68px;border-radius:22px;display:grid;place-items:center;background:#d9735a;color:#fff;box-shadow:0 16px 34px -12px rgba(217,115,90,.8)}
+#exGate[data-id=bots] .g-ic{background:#8f9c84}
+#exGate[data-id=stadt] .g-ic{background:#b8794f}
+#exGate .g-ic svg{width:34px;height:34px}
+#exGate b{font-size:19px;font-weight:800;letter-spacing:-.01em}
+#exGate small{font-size:12px;font-weight:600;color:#8a7362}
+#exGate.open{opacity:0;transition:opacity .5s ease .35s,visibility 0s linear .9s}
+#exGate.open .g-wing.l{transform:translateX(-102%)}
+#exGate.open .g-wing.r{transform:translateX(102%)}
+#exGate.open .g-c{transform:scale(1.08);opacity:0;transition:transform .45s ease,opacity .3s ease}
+@media (prefers-reduced-motion:reduce){#exGate,#exGate *{transition:none!important}}

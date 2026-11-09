@@ -22,6 +22,92 @@
   }
   ensureLogin();
 
+  // ---------- v2: Icons + "Rein-Gefühl"-Überblendung (Tür) zwischen den Bereichen ----------
+  const ICON = {
+    stadt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M5 20V10l7-5 7 5v10M9 20v-5h6v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>',
+    lager: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5v11H3zM7 20v-7h10v7M7 16h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+    dashboard: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V11M10 20V5M16 20v-6M21 20H3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+    personal: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 19c.6-3.3 3-5 6-5s5.4 1.7 6 5M16 5.5a3 3 0 010 5.6M18 14c1.7.6 2.8 2.2 3 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    bots: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 8V4.5M9 13h.01M15 13h.01M9.5 16.2h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="3.8" r="1.2" fill="currentColor"/></svg>',
+    social: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-9.6A4 4 0 0112 8a4 4 0 017 2.4C19 15.6 12 20 12 20z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>'
+  };
+  const ORT = {
+    stadt: ["Stadt-Zentrale", "Stadt"], lager: ["Lager", "Lager"], dashboard: ["Laden", "Dashboard"],
+    personal: ["Office", "Personal"], bots: ["Bot-Zentrum", "Bots"], social: ["Social-Studio", "Social"]
+  };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const gate = (function () {
+    let el = null;
+    function make() {
+      if (el) return el;
+      el = document.createElement("div");
+      el.id = "exGate";
+      el.setAttribute("aria-hidden", "true");
+      el.innerHTML = '<span class="g-wing l"></span><span class="g-wing r"></span><div class="g-c"><span class="g-ic"></span><b></b><small>Beispieldaten</small></div>';
+      (document.body || document.documentElement).appendChild(el);
+      return el;
+    }
+    function fill(id, sub) {
+      const e = make();
+      const o = ORT[id] || ["", ""];
+      e.dataset.id = id || "";
+      e.querySelector(".g-ic").innerHTML = ICON[id] || "";
+      e.querySelector("b").textContent = o[0] + (o[1] && o[1] !== o[0] ? " · " + o[1] : "");
+      e.querySelector("small").textContent = sub || "Beispieldaten";
+      return e;
+    }
+    return {
+      // Tür schließt sich (Blende herein)
+      show(id, dur, sub) {
+        const e = fill(id, sub || "du gehst hinein …");
+        e.classList.remove("open", "instant");
+        if (dur === 0 || reduce) e.classList.add("instant");
+        e.style.setProperty("--gd", (dur == null ? 0.4 : dur) + "s");
+        void e.offsetWidth;
+        e.classList.add("on");
+      },
+      // Tür geht auf (Blende hinaus)
+      hide() {
+        if (!el || !el.classList.contains("on")) return;
+        el.classList.remove("instant");
+        el.classList.add("open");
+        setTimeout(() => el && el.classList.remove("on", "open"), reduce ? 0 : 900);
+      },
+      showInstant(id, sub) { this.show(id, 0, sub); }
+    };
+  })();
+  window.exGate = gate;
+  const fresh = (k, ms) => {
+    try {
+      const v = JSON.parse(sessionStorage.getItem(k) || "null");
+      return v && Date.now() - v.ts < ms ? v : null;
+    } catch (_) { return null; }
+  };
+  const pageKey = () =>
+    inPaket3d ? null : onBotsPage ? "bots" : onPersonal ? "personal" : (onDashboard || onShop) ? "dashboard" : path.includes("/social") ? "social" : null;
+  // Ankunft: Tür öffnet sich auf der Zielseite
+  {
+    const inn = fresh("ex-gate", 8000);
+    const out = inPaket3d ? fresh("ex-gate-out", 12000) : null;
+    if (inn && !inPaket3d) {
+      try { sessionStorage.removeItem("ex-gate"); } catch (_) {}
+      const go = () => {
+        gate.showInstant(inn.id, "du bist drin");
+        setTimeout(() => gate.hide(), 260);
+      };
+      document.body ? go() : document.addEventListener("DOMContentLoaded", go);
+    } else if (inn && inPaket3d) {
+      try { sessionStorage.removeItem("ex-gate"); } catch (_) {}
+    }
+    if (out) {
+      const go = () => {
+        gate.showInstant(out.from, "zurück in die Stadt …");
+        setTimeout(() => gate.hide(), 9000);
+      };
+      document.body ? go() : document.addEventListener("DOMContentLoaded", go);
+    }
+  }
+
   if (onPersonal && (location.hash === "#/bots" || location.hash.startsWith("#/bots"))) {
     location.replace("../bots/");
     return;
@@ -35,6 +121,8 @@
   }
   function activeKey() {
     if (inPaket3d) {
+      const t = document.body.dataset.exTab;
+      if (t && ["stadt", "lager", "dashboard", "personal", "bots", "social"].includes(t)) return t;
       if (document.body.classList.contains("ex-social-open")) return "social";
       const v = nativeView();
       if (v && items.some((i) => i.id === v)) return v;
@@ -86,9 +174,33 @@
         a.href = it.href;
         a.setAttribute("role", "tab");
         a.setAttribute("data-ex-tab", it.id);
-        a.textContent = it.label;
+        a.innerHTML = (ICON[it.id] || "") + "<span>" + it.label + "</span>";
+        a.setAttribute("aria-label", it.label);
         a.addEventListener("click", (e) => {
           if (it.id === "bots" || it.id === "personal") ensureLogin();
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+          if (inPaket3d && window.paketstadt && window.paketstadt.enter && !/[?&]capture/.test(location.search)) {
+            e.preventDefault();
+            setActive(wrap, it.id);
+            document.body.dataset.exTab = it.id;
+            window.paketstadt.enter(it.id);
+            return;
+          }
+          if (!inPaket3d) {
+            const from = pageKey();
+            if (from === it.id) return;
+            e.preventDefault();
+            setActive(wrap, it.id);
+            const to3d = it.id === "stadt" || it.id === "lager" || it.id === "social";
+            try {
+              if (to3d && from && from !== "social") sessionStorage.setItem("ex-gate-out", JSON.stringify({ from, to: it.id, ts: Date.now() }));
+              else sessionStorage.setItem("ex-gate", JSON.stringify({ id: it.id, ts: Date.now() }));
+            } catch (_) {}
+            gate.show(to3d && from && from !== "social" ? from : it.id, 0.36, to3d ? "zurück in die Stadt …" : "du gehst hinein …");
+            const href = to3d ? root3d + "?style=A" + (from && from !== "social" ? "" : it.id === "stadt" ? "" : "#" + it.id) : a.href;
+            setTimeout(() => (location.href = href), reduce ? 0 : 380);
+            return;
+          }
           if (inPaket3d && (it.id === "stadt" || it.id === "lager" || it.id === "dashboard")) {
             e.preventDefault();
             closeSocial();
@@ -173,7 +285,7 @@
       setActive(nav, k);
     };
     const obs = new MutationObserver(sync);
-    obs.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    obs.observe(document.body, { attributes: true, attributeFilter: ["class", "data-ex-tab"] });
     const sw = document.querySelector("nav.switch");
     if (sw) obs.observe(sw, { subtree: true, attributes: true, attributeFilter: ["aria-selected"] });
     window.addEventListener("popstate", sync);
@@ -181,7 +293,10 @@
 
     function applyHash() {
       const h = location.hash.replace("#", "");
-      if (h === "social") document.getElementById("exSocialTab")?.click();
+      if ((h === "social" || h === "lager") && window.paketstadt && window.paketstadt.enter) {
+        window.paketstadt.enter(h);
+        setActive(nav, h);
+      } else if (h === "social") document.getElementById("exSocialTab")?.click();
       else if (h === "lager" || h === "stadt") {
         try {
           window.paketstadt && window.paketstadt.setView && window.paketstadt.setView(h);
