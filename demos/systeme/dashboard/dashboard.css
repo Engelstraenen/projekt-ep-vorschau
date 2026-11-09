@@ -33,7 +33,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
   background:rgba(255,255,255,.45);backdrop-filter:blur(18px);border-right:1px solid rgba(255,255,255,.7);
 }
 .logo{display:flex;align-items:baseline;gap:6px;padding:0 10px;letter-spacing:-.03em}
-.logo-projekt{font-size:15px;font-weight:700;color:var(--blue-deep);text-transform:uppercase}
+.logo-projekt{font-size:14px;font-weight:700;color:var(--blue-deep)}
 .logo-ex{font-size:15px;font-weight:800;color:var(--blue)}
 .nav{display:flex;flex-direction:column;gap:4px;flex:1}
 .nav a{

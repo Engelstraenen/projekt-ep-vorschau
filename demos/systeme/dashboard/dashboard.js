@@ -35,7 +35,7 @@
       <a href="../paketstadt3d/?style=A">Paketstadt</a>
     </nav>
     <aside class="sidebar" aria-label="Seitenleiste">
-      <div class="logo"><span class="logo-projekt">PROJEKT</span><span class="logo-ex">EX</span></div>
+      <div class="logo"><span class="logo-projekt">Paketstadt</span><span class="logo-ex">Demo</span></div>
       <nav class="nav" aria-label="Hauptnavigation">
         <a class="active" href="./">Dashboard</a>
         <a href="../paketstadt3d/?style=A#social">Social Media</a>
