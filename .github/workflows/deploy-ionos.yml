@@ -33,6 +33,8 @@ jobs:
           ! grep -rIl --include=*.html -E "cdn\.jsdelivr|fonts\.googleapis|fonts\.gstatic|unpkg\.com|cdnjs" . | grep -v steak-seite
           # CSP-Hashes aktuell?
           python3 tools/csp.py > /dev/null && git diff --exit-code -- '*.html' .htaccess
+          # Menü darf den Eintrag Arbeiten nicht enthalten
+          python3 tools/check-menu-arbeiten.py
           # Offene Platzhalter (span.ph) und ENTWURF-Hinweise meldet tools/launch_build.py als WARNUNG
 
       - name: Paket bauen (nur öffentliche Dateien, Launch-Umstellung, Prüfungen)
