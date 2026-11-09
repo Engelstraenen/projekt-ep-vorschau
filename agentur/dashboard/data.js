@@ -2,6 +2,14 @@
 window.EX_AGENTUR={
  beispieldaten:true,
  label:'ENTWURF · BEISPIELDATEN',
+ kontakt:{
+  firma:'Engelstränen UG (haftungsbeschränkt) · PROJEKT EX',
+  telefon:'+49 1520 4388945',
+  tel:'tel:+4915204388945',
+  whatsapp:'https://wa.me/4915204388945',
+  email:'kontakt@projektex.de',
+  hinweis:'Echte Geschäftsnummer · Kennzahlen darunter bleiben Beispieldaten'
+ },
  hinweis:'Alle Zahlen, Kommentare und Anfragen sind erfunden – so könnte euer Agentur-Dashboard aussehen.',
  channels:{
   instagram:{name:'Instagram',handle:'@projektex.beispiel',status:'Noch nicht angebunden – Beispieldaten',organic:{followers:6120,reach:68400,views:81200,likes:5420,comments:418,shares:310},ads:{spend:640,impressions:168000,clicks:3720,ctr:2.21,cpc:0.17,leads:22,conversions:15,roas:2.9},series:[29, 31, 36, 34, 34, 34, 26, 26, 30, 28, 32, 39, 40, 34, 31, 33, 28, 31, 34, 37, 41, 42, 39, 37, 34, 32, 31, 33, 36, 43],comments:[{a:'lena.beispiel',t:'Wie läuft die Terminbuchung bei euch?',d:'08.11. · 16:10'},{a:'atelier.rhein',t:'Sieht klar und aufgeräumt aus.',d:'07.11. · 12:44'}]},
