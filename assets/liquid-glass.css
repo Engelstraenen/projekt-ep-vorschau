@@ -121,6 +121,8 @@ header.top a.back > * { position: relative; z-index: 1; }
 .film-cta { border-radius: 999px; }
 
 /* ---------- 1) Markenblau-Glas (Haupt-CTAs) — getönt, durchsichtig ---------- */
+.btn.small { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 17px; border-radius: 999px; font-size: 14px; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; }
+
 .btn:not(.ghost):not(.pastel),
 .more.cta,
 .film-cta,
@@ -159,6 +161,7 @@ form.contact button.send,
 [data-dark-on] .btn:not(.ghost):not(.pastel),
 [data-dark-on] .film-cta,
 .cta-band .btn:not(.ghost):not(.pastel),
+footer#epf .epf-wa .btn,
 #film .more.cta,
 #film .film-cta {
   color: #FFFFFF;
@@ -212,6 +215,7 @@ form.contact button.send,
   [data-dark-on] .btn:not(.ghost):not(.pastel):hover,
   [data-dark-on] .film-cta:hover,
   .cta-band .btn:not(.ghost):not(.pastel):hover,
+  footer#epf .epf-wa .btn:hover,
   #film .more.cta:hover,
   #film .film-cta:hover {
     background:
