@@ -2,9 +2,9 @@
 :root{--ex-nav-h:52px;--ex-nav-top:calc(8px + env(safe-area-inset-top,0px))}
 #exPaketNav{position:fixed;top:var(--ex-nav-top);left:50%;transform:translateX(-50%);z-index:100;width:min(720px,calc(100vw - 16px));pointer-events:none}
 #exPaketNav .ex-nav-shell{pointer-events:auto;position:relative;display:flex;align-items:center;padding:3px;border-radius:999px;background:rgba(255,248,240,.96);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 28px rgba(40,24,10,.16);backdrop-filter:blur(18px) saturate(1.35);-webkit-backdrop-filter:blur(18px) saturate(1.35)}
-#exPaketNav .ex-nav-scroll{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;width:100%;scroll-snap-type:x proximity;position:relative}
+#exPaketNav .ex-nav-scroll{scroll-padding-inline:28px;display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;width:100%;scroll-snap-type:x proximity;position:relative}
 #exPaketNav .ex-nav-scroll::-webkit-scrollbar{display:none}
-#exPaketNav a{position:relative;z-index:1;flex:0 0 auto;scroll-snap-align:center;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 12px;border-radius:999px;font:600 12.5px/1 system-ui,-apple-system,sans-serif;color:#6a5646;text-decoration:none;white-space:nowrap;background:transparent;transition:color .15s ease}
+#exPaketNav a{position:relative;z-index:3;flex:0 0 auto;scroll-snap-align:center;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 13px;border-radius:999px;font:600 12.5px/1 system-ui,-apple-system,sans-serif;line-height:1;color:#6a5646;text-decoration:none;white-space:nowrap;background:transparent;transition:color .15s ease}
 #exPaketNav a[aria-current="page"],#exPaketNav a.active{color:#0071e3;background:#fff;box-shadow:0 2px 10px rgba(0,113,227,.14)}
 #exPaketNav .ex-nav-fade{pointer-events:none;position:absolute;top:0;bottom:0;width:22px;z-index:2}
 #exPaketNav .ex-nav-fade.l{left:0;border-radius:999px 0 0 999px;background:linear-gradient(90deg,rgba(255,248,240,.98),transparent)}
