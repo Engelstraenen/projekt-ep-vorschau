@@ -101,9 +101,12 @@
   .k-steps i { grid-row: span 2; width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: #fff; font-style: normal; font-size: 14px; font-weight: 600; display: grid; place-items: center; }
   .k-steps b { font-size: 19px; letter-spacing: -.02em; }
   .k-steps span { color: var(--ink-2); font-size: 15.5px; }
-  .k-direct { display: flex; align-items: center; gap: 16px; margin-top: 28px; }
+  .k-direct { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 28px; }
   .k-direct p { font-size: 15px; color: var(--ink-2); }
   .k-direct a { font-size: 17px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+  .k-wa { margin-top: 16px; }
+  .k-wa .btn { display: inline-flex; align-items: center; height: 36px; padding: 0 17px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  .k-wa .btn:hover { text-decoration: none; }
   .k-faces { display: flex; }
   .k-faces img, .k-faces b { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px #fff; }
   .k-faces b { margin-left: -12px; background: #0B0B0D; color: #F5F5F7; display: flex; align-items: center; justify-content: center; font-size: 17px; letter-spacing: -.04em; }
@@ -148,7 +151,10 @@
   </ol>
   <div class="k-direct">
     <span class="k-faces" aria-hidden="true"><img src="img/team/eugen-kelberer-320.webp" alt="" width="320" height="320"><b>P<em>H</em></b></span>
-    <p>Ihr sprecht direkt mit uns.<br><a href="mailto:kontakt@projektex.de">kontakt@projektex.de</a></p>
+    <div>
+      <p>Ihr sprecht direkt mit uns.<br><a href="mailto:kontakt@projektex.de">kontakt@projektex.de</a><br><a href="tel:+4915204388945">+49 1520 4388945</a></p>
+      <p class="k-wa"><a class="btn small" href="https://wa.me/4915204388945">WhatsApp</a></p>
+    </div>
   </div>
   </div>
 
@@ -188,6 +194,8 @@
     <p class="epf-kicker">Projekt starten</p>
     <p class="epf-big"><a href="kontakt.html">Erzähl uns von deiner Idee. <span>Wir machen sie sichtbar.</span><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></p>
     <p class="epf-mail"><a href="mailto:kontakt@projektex.de">kontakt@projektex.de</a></p>
+    <p class="epf-phone"><a href="tel:+4915204388945">+49 1520 4388945</a></p>
+    <p class="epf-wa"><a class="btn small" href="https://wa.me/4915204388945">WhatsApp</a></p>
   </div>
   <div class="epf-cols">
     <nav aria-label="Leistungen"><p class="epf-h">Leistungen</p><ul><li><a href="leistungen/websites.html">Websites</a></li><li><a href="leistungen/seo.html">SEO &amp; Sichtbarkeit</a></li><li><a href="leistungen/systeme.html">Systeme &amp; Dashboards</a></li><li><a href="leistungen/automatisierung-chatbots.html">Automatisierung &amp; Chatbots</a></li><li><a href="leistungen/apps.html">App Design</a></li><li><a href="leistungen/games.html">Game Design</a></li><li><a href="leistungen/werbeclips.html">Werbeclips</a></li><li><a href="leistungen/ads-management.html">Ads-Management</a></li><li><a href="leistungen/logo-design.html">Logo Design</a></li><li><a href="leistungen/print-design.html">Print Design</a></li><li><a href="leistungen/merch.html">Merch-Produktion</a></li><li><a href="leistungen/visualisierung.html">Räume &amp; Visualisierung</a></li><li><a href="leistungen/individuelle-auftraege.html">Individuelle Aufträge</a></li></ul></nav>

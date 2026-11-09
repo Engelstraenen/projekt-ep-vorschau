@@ -14,7 +14,7 @@ GitHub main: `package.json`, `kontakt.html`, `assets/kontakt.js`, `kontakt.php`,
 
 ## Bestätigter Rechtsträger und offene Pflichtangaben
 
-Rechtsträgerin, Betreiberin und Vertragspartnerin ist die Engelstränen UG (haftungsbeschränkt). PROJEKT EX ist eine Marke der Engelstränen UG (haftungsbeschränkt). Bestätigung durch Eugen am 08.11.2026; keine Registerprüfung. Anschrift: Gothaerstr. 31, 40880 Ratingen. Geschäftsführerin: Jessica Kruse. Rechtliche Kontaktadresse: info@projektex.de. Anschrift, Geschäftsführerin und rechtliche Kontaktadresse sind durch Eugen bestätigt. Registergericht, HRB-Nummer, USt-IdNr. und Telefon: jeweils **[folgt]**, werden durch Eugen ergänzt. Keine Produktivfreigabe.
+Rechtsträgerin, Betreiberin und Vertragspartnerin ist die Engelstränen UG (haftungsbeschränkt). PROJEKT EX ist eine Marke der Engelstränen UG (haftungsbeschränkt). Bestätigung durch Eugen am 08.11.2026; keine Registerprüfung. Anschrift: Gothaerstr. 31, 40880 Ratingen. Geschäftsführerin: Jessica Kruse. Rechtliche Kontaktadresse: info@projektex.de. Anschrift, Geschäftsführerin und rechtliche Kontaktadresse sind durch Eugen bestätigt. Telefon: **+49 1520 4388945**. Registergericht, HRB-Nummer und USt-IdNr.: jeweils **[folgt]** und werden durch Eugen ergänzt. Keine Produktivfreigabe.
 
 ## Regeln
 

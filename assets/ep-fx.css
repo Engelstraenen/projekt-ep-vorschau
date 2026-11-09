@@ -151,8 +151,12 @@ footer#epf a { color: inherit; }
 .epf-big a:hover { text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .epf-big a:hover span { color: #2997FF; } .epf-big a:hover i { transform: rotate(-45deg); } }
 .epf-mail { margin-top: clamp(22px, 4vh, 36px); font-size: clamp(17px, 1.4vw, 21px); }
-.epf-mail a { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 3px; transition: background-size .4s var(--ease-out); }
-.epf-mail a:hover { text-decoration: none; background-size: 0 1px; background-position: 100% 100%; }
+.epf-phone { margin-top: 10px; font-size: clamp(17px, 1.4vw, 21px); }
+.epf-wa { margin-top: 18px; }
+.epf-wa .btn { display: inline-flex; align-items: center; height: 36px; padding: 0 17px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.epf-wa .btn:hover { text-decoration: none; }
+.epf-mail a, .epf-phone a { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 3px; transition: background-size .4s var(--ease-out); }
+.epf-mail a:hover, .epf-phone a:hover { text-decoration: none; background-size: 0 1px; background-position: 100% 100%; }
 .epf-cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px clamp(24px, 4vw, 64px); margin-top: clamp(72px, 12vh, 140px); padding-top: 32px; border-top: 1px solid #2C2C30; }
 .epf-cols .epf-h { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #8E8E93; margin-bottom: 18px; }
 .epf-cols ul { list-style: none; display: grid; gap: 10px; }
