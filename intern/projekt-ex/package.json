@@ -1,0 +1,18 @@
+{
+  "name": "@engelstraenen/projekt-ex-intern",
+  "private": true,
+  "type": "module",
+  "description": "Internes Backend und Dashboard der Engelstränen UG für PROJEKT EX. Läuft nicht auf GitHub Pages.",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node --experimental-sqlite --disable-warning=ExperimentalWarning src/index.js",
+    "dev": "node --experimental-sqlite --disable-warning=ExperimentalWarning --watch src/index.js",
+    "test": "node --experimental-sqlite --disable-warning=ExperimentalWarning --test test/*.js",
+    "seed:example": "node --experimental-sqlite --disable-warning=ExperimentalWarning src/seed.js"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.58.2"
+  }
+}

@@ -18,7 +18,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = 'https://projekt-ep.de'
 
 # Nicht öffentlich: Repo-, Werkzeug- und Doku-Dateien, interne Vorschauen
-EXCLUDE_PREFIX = ('.github/', 'docs/', 'tools/', 'node_modules/', 'steak-seite/', 'hq-showcase/')
+EXCLUDE_PREFIX = ('.github/', 'docs/', 'tools/', 'intern/', 'node_modules/', 'steak-seite/', 'hq-showcase/')
 EXCLUDE_FILES = {'_config.yml', '.nojekyll', 'package.json', 'package-lock.json', '.gitignore',
                  # unverlinkt, internes Showreel – Entscheidung Eugen 02.11.: nicht ins Deploy-Paket
                  'video/portfolio/effekte-showreel-720.mp4'}
