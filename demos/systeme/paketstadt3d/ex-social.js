@@ -15,12 +15,14 @@
 
   function open() {
     panel.classList.add("open");
+    document.body.classList.add("ex-social-open");
     panel.setAttribute("aria-hidden", "false");
     if (tab) tab.setAttribute("aria-selected", "true");
     render();
   }
   function close() {
     panel.classList.remove("open");
+    document.body.classList.remove("ex-social-open");
     panel.setAttribute("aria-hidden", "true");
     if (tab) tab.setAttribute("aria-selected", "false");
   }

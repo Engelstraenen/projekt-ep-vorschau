@@ -133,7 +133,7 @@
       instagram: {
         id: "instagram",
         name: "Instagram",
-        handle: "@projektex.beispiel",
+        handle: "@paketstadt.shop",
         status: "nicht_verbunden",
         statusLabel: "Nicht verbunden – Beispieldaten",
         color: "#0071e3",
@@ -161,7 +161,7 @@
       tiktok: {
         id: "tiktok",
         name: "TikTok",
-        handle: "@projektex.beispiel",
+        handle: "@paketstadt.shop",
         status: "nicht_verbunden",
         statusLabel: "Nicht verbunden – Beispieldaten",
         color: "#2b8cff",
@@ -189,7 +189,7 @@
       youtube: {
         id: "youtube",
         name: "YouTube",
-        handle: "PROJEKT EX Beispiel",
+        handle: "Paketstadt Beispiel-Shop",
         status: "nicht_verbunden",
         statusLabel: "Nicht verbunden – Beispieldaten",
         color: "#0a66d1",
@@ -217,7 +217,7 @@
       google: {
         id: "google",
         name: "Google",
-        handle: "Google Ads · Beispielkonto",
+        handle: "Google Ads · Paketstadt Beispiel",
         status: "nicht_verbunden",
         statusLabel: "Nicht verbunden – Beispieldaten",
         color: "#1a73e8",
