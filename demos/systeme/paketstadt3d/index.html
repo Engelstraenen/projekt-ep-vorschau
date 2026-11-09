@@ -6,6 +6,7 @@
 <title>Paketstadt 3D · PROJEKT EX</title>
   <script src="./ep-mock.js"></script>
 <link rel="stylesheet" href="./ep-hinweis.css">
+<link rel="stylesheet" href="../shared/ex-paket-nav.css">
   <script type="module" crossorigin src="./assets/index-Bnbw9N66.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-THpGUhlS.css">
 <style id="ex-social-css">
@@ -35,7 +36,38 @@
 #exSocialPanel .com strong,#exSocialPanel .ord strong{font-size:13px}
 #exSocialPanel .com p,#exSocialPanel .ord p{margin:5px 0 0;font-size:13px;line-height:1.4;color:#3a2a1c}
 #exSocialPanel .status{font-size:12px;color:#6a5646;margin:8px 0 0;line-height:1.4}
-@media(max-width:720px){#exSocialPanel .sheet{width:100%}#exSocialFab{left:10px;right:10px}#exSocialTab{font-size:12px;padding:7px 10px}}
+@media(max-width:720px){#exSocialPanel .sheet{width:100%}#exSocialTab{font-size:12px;padding:7px 10px}}
+
+#exSocialPanel .sx-ticker{display:flex;gap:18px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);white-space:nowrap;margin:8px 0 4px;padding:8px 0;font-size:12px;color:#5a4638}
+#exSocialPanel .sx-ticker span{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.85);animation:sx-marquee 28s linear infinite}
+@keyframes sx-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+#exSocialPanel .sx-track{display:inline-flex;gap:10px;min-width:200%}
+#exSocialPanel .sx-funnel{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+#exSocialPanel .sx-funnel .ex-kpi{text-align:center}
+#exSocialPanel .sx-funnel .ex-kpi b{font-size:18px}
+#exSocialPanel .sx-bars{display:flex;align-items:flex-end;gap:5px;height:110px;margin-top:8px}
+#exSocialPanel .sx-bars i{flex:1;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#f0b27a,#c47a4a);min-width:0;transform-origin:bottom;animation:sx-grow .7s cubic-bezier(.23,1,.32,1) both}
+@keyframes sx-grow{from{transform:scaleY(.2);opacity:.4}}
+#exSocialPanel .sx-posts{display:grid;gap:8px}
+#exSocialPanel .sx-post{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;background:rgba(255,255,255,.7);border-radius:14px;padding:10px;border:1px solid rgba(255,255,255,.85)}
+#exSocialPanel .sx-thumb{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#ffe0c2,#f5c79a)}
+#exSocialPanel .sx-camp .bar{height:8px;border-radius:99px;background:#6e54401a;overflow:hidden;margin-top:6px}
+#exSocialPanel .sx-camp .bar>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#e8a06a,#0071e3);width:0;animation:sx-w 1s cubic-bezier(.23,1,.32,1) .1s forwards}
+@keyframes sx-w{to{width:var(--w)}}
+#exSocialPanel .sx-sent{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700}
+#exSocialPanel .sx-sent.pos{background:#e5f6ea;color:#1f7a3a}
+#exSocialPanel .sx-sent.neu{background:#eef2f7;color:#5a6a7e}
+#exSocialPanel .sx-sent.neg{background:#fdeceb;color:#b42318}
+#exSocialPanel .range{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+#exSocialPanel .range button{border:0;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:700;background:rgba(255,255,255,.55);color:#6a5646;cursor:pointer}
+#exSocialPanel .range button.active{background:#fff;color:#0071e3}
+@media(prefers-reduced-motion:reduce){
+  #exSocialPanel .sx-ticker span,#exSocialPanel .sx-bars i,#exSocialPanel .sx-camp .bar>i{animation:none!important}
+  #exSocialPanel .sx-camp .bar>i{width:var(--w)}
+}
+
+/* Bots nie verstecken; native Switch scrollbar via ex-paket-nav.css */
+@media(max-width:440px){.switch button[data-view=bots]{display:inline-flex!important}}
 </style>
 </head>
 <body>
@@ -69,6 +101,7 @@
   <div class="sheet" id="exSocialSheet"></div>
 </div>
 <script src="../shared/ep-shared-demo.js"></script>
+<script src="../shared/ex-paket-nav.js"></script>
 <script src="./ex-social.js"></script>
 
 </body>
