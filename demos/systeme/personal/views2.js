@@ -143,7 +143,7 @@ export function bots() {
 export async function loginView(ctx) {
   const Z = await get('/zuordnung'); const cur = login.get(); let pick = cur?.ma || 'ma17';
   const btn = (m) => `<button type="button" data-ma="${m.id}" class="${m.id === pick ? 'on' : ''}">${av(m)}<span><b>${esc(m.anzeige)}</b><small>${esc(m.rolle)}</small></span></button>`;
-  return { bare: true, html: `<div class="login"><div class="card"><span class="bd s">BEISPIELDATEN</span><h1 style="margin-top:12px">Anmelden</h1><p class="m2" style="margin:4px 0 14px">Projekt EX – ein Konto für Stadt, Lager, Dashboard, Personal und Bots.</p>
+  return { bare: true, html: `<div class="login"><div class="card"><span class="bd s">BEISPIELDATEN</span><h1 style="margin-top:12px">Willkommen · Paketstadt</h1><p class="m2" style="margin:4px 0 14px">Paketstadt – ein Konto für Stadt, Lager, Dashboard, Personal und Bots (Beispieldaten).</p>
       <div class="fld"><label>E-Mail</label><input id="mail" value="${pick === 'ma17' ? 'markus' : 'team'}@beispiel.de" autocomplete="off"></div>
       <div class="fld"><label>Passkey</label><input value="Demo – ohne Passwort" disabled></div>
       <span class="lbl">Demo: als wer anmelden?</span><div class="who">${Z.personen.filter((m) => m.id === 'ma17').map(btn).join('')}${Z.personen.filter((m) => m.id !== 'ma17').map(btn).join('')}</div>

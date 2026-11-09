@@ -18,16 +18,16 @@ const route = () => { const h = location.hash.replace(/^#\/?/, ''); const [v, p]
 async function load() { const L = login.get(); S = await get('/state' + (L?.rolle === 'ma' ? `?rolle=ma&ma=${L.ma}` : '?rolle=gf')); return S; }
 function topbar(cur) {
   const L = login.get(); const me = S?.mitarbeiter?.find((m) => m.id === L?.ma) || S?.ich || { anzeige: L?.name, abteilung_id: L?.rolle === 'gf' ? 'gf' : '' };
-  const sw = [['stadt', 'building', 'Stadt'], ['lager', 'box', 'Lager'], ['dashboard', 'grid', 'Dashboard'], ['personal', 'users', 'Personal'], ['bots', 'bot', 'Bots']];
-  return `<header class="top"><a class="brand" href="#/${isGF() ? '' : 'stempel'}"><span class="lg">EX</span><span><b>Personal</b><small>Projekt EX · Personalmanagement</small></span></a>
-    <nav class="sw" aria-label="Bereiche">${sw.map(([k, i, n]) => `<a href="${k === 'personal' ? '#/' + (isGF() ? '' : 'stempel') : LINKS[k]}" class="${(k === 'personal' && cur !== 'bots') || (k === 'bots' && cur === 'bots') ? 'on' : ''}">${ic(i)}<span>${n}</span></a>`).join('')}</nav>
+  const sw = [['stadt', 'home', 'Stadt'], ['lager', 'box', 'Lager'], ['dashboard', 'grid', 'Dashboard'], ['personal', 'users', 'Personal'], ['bots', 'link', 'Bots'], ['social', 'grid', 'Social']];
+  return `<header class="top"><a class="brand" href="#/${isGF() ? '' : 'stempel'}"><span class="lg">P</span><span><b>${cur === 'bots' ? 'Bots' : 'Personal'}</b><small>Paketstadt · Beispiel-Shop</small></span></a>
+    <nav class="sw" aria-label="Bereiche">${sw.map(([k, i, n]) => `<a href="${k === 'personal' ? '#/' + (isGF() ? '' : 'stempel') : (k === 'bots' ? LINKS.bots : LINKS[k])}" class="${(k === 'personal' && cur !== 'bots') || (k === 'bots' && cur === 'bots') ? 'on' : ''}">${ic(i)}<span>${n}</span></a>`).join('')}</nav>
     <div class="tr"><span class="clock ${live.on ? '' : 'off'}" title="${live.on ? 'Live verbunden' : 'nicht live'}"><i></i>${S?.jetzt || '–'} <span class="hide-m">Demo-Uhr</span></span><span class="bd">BEISPIELDATEN</span>
     ${L ? `<button class="me" id="me" title="Rolle wechseln / abmelden">${av(me)}<span><b>${esc(me.anzeige)}</b><small>${L.rolle === 'gf' ? 'Geschäftsführung' : 'Mitarbeitende'}</small></span></button>` : ''}</div></header>`;
 }
 function shell(cur, v) {
   const nav = isGF() ? NAV_GF : NAV_MA; const tabs = isGF() ? TAB_GF : TAB_MA; const nF = (S.freigaben || []).filter((f) => f.status === 'offen').length;
   const badge = (k) => (k === 'freigaben' && nF && isGF() ? `<span class="n">${nF}</span>` : '');
-  const sw = [['stadt', 'building', 'Stadt'], ['lager', 'box', 'Lager'], ['dashboard', 'grid', 'Dashboard'], ['bots', 'bot', 'Bots']];
+  const sw = [['stadt', 'home', 'Stadt'], ['lager', 'box', 'Lager'], ['dashboard', 'grid', 'Dashboard'], ['personal', 'users', 'Personal'], ['bots', 'link', 'Bots'], ['social', 'grid', 'Social']];
   return topbar(cur) + `<nav class="mtop" aria-label="Bereiche"><a class="on" href="#/${isGF() ? '' : 'stempel'}">${ic('users')}Personal</a>${sw.map(([k, i, n]) => `<a href="${LINKS[k]}">${ic(i)}${n}</a>`).join('')}</nav>
     <div class="shell"><aside class="side">${nav.map(([g, items]) => `<div class="grp">${g}</div>` + items.map(([k, i, n]) => `<a href="#/${k}" class="${cur === k ? 'on' : ''}">${ic(i)}${n}${badge(k)}</a>`).join('')).join('')}
       <div class="foot"><b>Kopplung live</b><br>Stempeln, Umplanen und Krankmeldungen bewegen die Figuren in der <a href="${LINKS.lager}">Paketstadt</a>.<br><br>BEISPIELDATEN · erfundene Personen</div></aside>
@@ -46,7 +46,7 @@ async function render(full = true) {
     const ctx = { ...ctxBase, param: p, refresh: () => render(true) };
     const out = await VIEWS[key](S, ctx);
     const y = scrollY; app.innerHTML = shell(key, out); out.bind?.(app.querySelector('#main'), ctx);
-    bindTop(); if (!full) scrollTo(0, y); document.title = (out.title?.replace(/<[^>]+>/g, '') || 'Personal') + ' · Personal · Projekt EX';
+    bindTop(); if (!full) scrollTo(0, y); document.title = (out.title?.replace(/<[^>]+>/g, '') || (key === 'bots' ? 'Bots' : 'Personal')) + ' · Paketstadt';
   } catch (e) { console.error(e); app.innerHTML = `<div class="empty" style="padding:80px">Personal-Daten nicht erreichbar (${esc(e.message)}). Bitte die Seite neu laden.<br><br><button class="btn" type="button" data-reload>Neu laden</button></div>`; app.querySelector('[data-reload]')?.addEventListener('click', () => location.reload()); }
   finally { busy = false; if (again) { again = false; render(true); } }
 }

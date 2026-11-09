@@ -77,7 +77,7 @@ const offeneMeldungen = () => items.filter((i) => i.meldung && (i.status === 'Me
 function header() {
   const m = me(); const n = offeneMeldungen().length;
   const nav = [['stadt', 'city', 'Stadt'], ['lager', 'box', 'Lager'], ['dashboard', 'grid', 'Dashboard'], ['personal', 'users', 'Personal'], ['bots', 'bot', 'Bots']];
-  return `<header class="top"><a class="brand" href="${LINKS.dashboard}" title="Zum Dashboard"><span class="brand-btn">${ic('bag')}</span><h1>Shop-Raum</h1></a>
+  return `<header class="top"><a class="brand" href="${LINKS.stadt}" title="Zur Paketstadt"><span class="brand-btn">${ic('bag')}</span><h1>Bots</h1><small style="display:block;font-size:11px;opacity:.7;margin-top:2px">Paketstadt · Beispiel-Shop</small></a>
   <nav class="seg mainnav" aria-label="Bereich wechseln">${nav.map(([k, i, t]) => k === 'bots' ? `<a href="#/" class="on" aria-current="page">${ic(i)}Bots &amp; Meldungen ${n ? `<span class="badge">${n}</span>` : ''}</a>` : `<a href="${LINKS[k]}">${t}</a>`).join('')}</nav>
   <div class="tr"><a class="pillb" href="#/rueckrufe" title="Rückrufe heute">${ic('clock')}<span class="num">${now()}</span></a>
   <span class="sample" role="note"><i></i><span>BEISPIELDATEN</span></span>
@@ -272,7 +272,7 @@ function draw() {
   const c2 = document.getElementById('conv'); if (c2 && atBottom) c2.scrollTop = c2.scrollHeight;
   const i2 = document.getElementById('chatIn'); if (i2 && hadFocus && !i2.disabled) { i2.focus(); i2.setSelectionRange(i2.value.length, i2.value.length); }
   const nv = app.querySelector('.mainnav'); if (nv && nv.scrollWidth > nv.clientWidth) nv.scrollLeft = nv.scrollWidth;
-  document.title = 'Bots & Meldungen · Shop-Raum · Projekt EX (Beispieldaten)';
+  document.title = 'Bots · Paketstadt (Beispieldaten)';
 }
 addEventListener('hashchange', () => { scrollTo(0, 0); live.chatDraft = ''; render(); });
 document.addEventListener('click', (e) => {
