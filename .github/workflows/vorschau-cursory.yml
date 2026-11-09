@@ -1,0 +1,58 @@
+# Legt nur den Ordner vorschau/cursory auf main, damit GitHub Pages ihn ausliefert.
+# Der Feature-Branch wird dabei nicht gemergt. Bestehende Routen bleiben unberührt.
+name: Cursory-Vorschau
+
+on:
+  push:
+    branches:
+      - cursor/cursory-reel-demo-a006
+    paths:
+      - referenzen/cursory/**
+      - .github/workflows/vorschau-cursory.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vorschau-cursory
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Branch-Stand
+        uses: actions/checkout@v4
+        with:
+          path: src
+
+      - name: Aktuelles main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          token: ${{ github.token }}
+
+      - name: Nur /vorschau/cursory ersetzen
+        run: |
+          set -euo pipefail
+          rm -rf site/vorschau/cursory
+          mkdir -p site/vorschau/cursory
+          cp -a src/referenzen/cursory/. site/vorschau/cursory/
+          # Nichts außerhalb dieses Ordners anfassen.
+          git -C site add -A -- vorschau/cursory
+          git -C site status --short
+
+      - name: Auf main veröffentlichen
+        working-directory: site
+        run: |
+          set -euo pipefail
+          if git diff --cached --quiet; then
+            echo "Keine Änderung an vorschau/cursory."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Vorschau Cursory unter /vorschau/cursory/ (kein Merge)"
+          git push origin HEAD:main
