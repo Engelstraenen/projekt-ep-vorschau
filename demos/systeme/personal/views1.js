@@ -1,5 +1,5 @@
 // Übersicht · Stempeluhr · Schichtplan
-import { ic, esc, de, deKurz, av, STATUS, ORT, act, get, toast, dialog, link3d, LINKS, isGF, login, chipSt, sevIc } from './core.js';
+import { ic, esc, de, deKurz, av, STATUS, ORT, act, get, toast, dialog, link3d, LINKS, isGF, login, chipSt, sevIc, foto } from './core.js';
 
 const need = (o) => { const a = o.aktiv.length, p = o.pause.length, f = o.fehlt.length; const cells = []; for (let i = 0; i < Math.max(o.bedarf, a + p); i++) cells.push(i < a ? '<i></i>' : i < a + p ? '<i class="p"></i>' : i < a + p + f ? '<i class="x"></i>' : '<i class="e"></i>');
   const bad = o.anwesend < o.bedarf; return `<a class="need" href="${link3d('station:' + o.id)}" title="Im Lager zeigen"><div><b>${esc(o.name)}</b><small>${o.pause.length ? o.pause.length + ' in Pause · ' : ''}${o.fehlt.length ? o.fehlt.length + ' fehlt · ' : ''}${o.spaeter.length ? o.spaeter.length + ' später' : bad ? 'Lücke' : 'besetzt'}</small></div><div class="bar">${cells.join('')}</div><div class="v ${bad ? 'bad' : ''}">${o.anwesend}/${o.bedarf}</div></a>`; };
@@ -18,6 +18,23 @@ export function propCard(v, small = false) {
 }
 export function bindProps(el, refresh) { el.querySelectorAll('[data-prop]').forEach((b) => b.addEventListener('click', async () => { b.disabled = true; const r = await act(JSON.parse(b.dataset.prop)); if (r) toast(r.event?.text || 'Übernommen', '', 'Figur im Lager reagiert live · <a href="' + LINKS.lager + '">Lager öffnen</a>'); refresh(); })); }
 
+// ---------- Profilkarten mit Beispielfotos ----------
+const ORDER = { eingestempelt: 0, pause: 1, spaetschicht: 2, krank: 3, urlaub: 4, ausgestempelt: 5 };
+const schichtTxt = (m) => m.schicht_heute?.von ? `${m.schicht_heute.von}–${m.schicht_heute.bis}` : (m.status === 'urlaub' ? 'Urlaub' : m.status === 'krank' ? 'krank gemeldet' : 'frei');
+export function profilKarte(m) {
+  const f = foto(m, true);
+  return `<a class="pc" href="#/akte/${m.id}" data-st="${m.status}">
+    <span class="pc-ph">${f ? `<img src="${f}" alt="Beispielfoto ${esc(m.anzeige)}" loading="lazy" decoding="async" width="256" height="256">` : av(m, 'lg')}<span class="pc-st ${m.status}" aria-hidden="true"></span></span>
+    <span class="pc-tx"><b>${esc(m.anzeige)}</b><small>${esc(m.rolle)}</small></span>
+    <span class="pc-meta">${ic('clock')}<span>${esc(schichtTxt(m))}</span></span>
+    <span class="chip ${chipSt(m.status)}">${esc(m.status === 'spaetschicht' ? 'Spätschicht' : STATUS[m.status])}</span></a>`;
+}
+export function teamCards(S) {
+  const list = [...S.mitarbeiter].sort((a, b) => (ORDER[a.status] ?? 9) - (ORDER[b.status] ?? 9));
+  return `<section class="card team-cards" style="margin-top:16px" aria-label="Team heute"><div class="ch"><h2>Team heute</h2><span class="lbl">Beispielfotos · fiktive Personen</span><div class="r"><a class="jump" href="#/akte">alle ${ic('chev')}</a></div></div>
+    <div class="pc-row">${list.map(profilKarte).join('')}</div></section>`;
+}
+
 export function uebersicht(S) {
   const k = S.kpi; const me = S.mitarbeiter.find((m) => m.id === login.get()?.ma); const st = S.stationen; const pp = S.problems;
   const wo = (pred) => S.mitarbeiter.filter(pred);
@@ -29,6 +46,7 @@ export function uebersicht(S) {
       <div class="card stat"><span class="lbl">Pause</span><b>${k.pause}</b><small>${esc(wo((m) => m.status === 'pause').map((m) => m.anzeige).join(', ') || '–')}</small></div>
       <div class="card stat ${k.krank ? 'bad' : ''}"><span class="lbl">Abwesend</span><b>${k.krank + k.urlaub}</b><small>${k.krank} krank · ${k.urlaub} Urlaub</small></div>
       <div class="card stat"><span class="lbl">Später</span><b>${k.spaeter}</b><small>Spätschicht ab 14:00</small></div></div>
+    ${teamCards(S)}
     <div class="grid g21" style="margin-top:16px">
       <div class="grid" style="align-content:start">
         <div class="card"><div class="ch"><h2>Bedarf je Station</h2><span class="lbl">aus Versand & WWS</span><div class="r"><a class="jump" href="${LINKS.lager}">${ic('pin')}3D-Lager</a></div></div>

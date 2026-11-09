@@ -1,4 +1,4 @@
-// Projekt EX · Personalmanagement · Shell + Router (BEISPIELDATEN)
+// Paketstadt · Personalmanagement · Shell + Router (BEISPIELDATEN)
 import { ic, esc, av, get, login, isGF, connect, onLive, live, toast, LINKS, link3d } from './core.js';
 import { uebersicht, stempel, plan } from './views1.js';
 import { abwesenheiten, akte, freigaben, leistung, lohn, onoff, rollen, protokoll, bots, loginView } from './views2.js';

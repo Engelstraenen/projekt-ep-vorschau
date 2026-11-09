@@ -98,7 +98,7 @@
       <nav class="mobile-bar" aria-label="Mobile Navigation">
         <button type="button" data-view="overview" class="${state.view === "overview" ? "active" : ""}">Übersicht</button>
         ${api.channelIds().map((id) => `<button type="button" data-view="${id}" class="${state.view === id ? "active" : ""}">${demo.channels[id].name}</button>`).join("")}
-        <a href="../dashboard/">Dashboard</a>
+        <a href="../shop-raum/?from=paketstadt3d&amp;style=A">Dashboard</a>
         <a href="../paketstadt3d/?style=A#social">Paketstadt 3D</a>
       </nav>
       <aside class="sidebar" aria-label="Seitenleiste">

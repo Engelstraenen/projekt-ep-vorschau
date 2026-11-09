@@ -1,4 +1,4 @@
-// Projekt EX · Personal · Kern: API, Login/Rolle, Live-Bus, UI-Helfer (BEISPIELDATEN)
+// Paketstadt · Personal · Kern: API, Login/Rolle, Live-Bus, UI-Helfer (BEISPIELDATEN)
 import { ic } from './icons.js';
 export { ic };
 export const ROOT = new URL('../', location.href).href.replace(/\/$/, '');
@@ -11,7 +11,13 @@ export const deDate = (iso) => { if (!iso) return '–'; const [y, m, d] = iso.s
 export const deKurz = (iso) => { if (!iso) return '–'; const [, m, d] = iso.split('-'); return `${d}.${m}.`; };
 export const ini = (n) => String(n || '?').split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
 const AVC = { lager: '', wareneingang: '', versand: 'k', retouren: 'a', kundenservice: 'l', shop: 'l', marketing: 'l', einkauf: 'l', gf: 'c' };
-export const av = (m, cls = '') => `<span class="av ${AVC[m?.abteilung_id] ?? ''} ${cls}" aria-hidden="true">${esc(ini(m?.anzeige))}</span>`;
+// Beispielfotos (KI-generierte, fiktive Personen · siehe fotos/LIZENZ.md)
+const FOTO_NAMEN = { 'Franziska H.': 'ma01', 'Mehmet Y.': 'ma02', 'Lena B.': 'ma03', 'Jonas S.': 'ma04', 'Aleksandra N.': 'ma05', 'Stefan W.': 'ma06', 'Ayşe D.': 'ma07', 'Tobias K.': 'ma08', 'Marie F.': 'ma09', 'Niklas H.': 'ma10', 'Sophie W.': 'ma11', 'Elias B.': 'ma12', 'Clara R.': 'ma13', 'Daniel S.': 'ma14', 'Katharina N.': 'ma15', 'Laura Z.': 'ma16', 'Markus B.': 'ma17', 'Emma K.': 'ma18' };
+export const fotoId = (m) => { const id = m?.id || m?.ma; if (id && /^ma(0[1-9]|1[0-8])$/.test(id)) return id; return FOTO_NAMEN[m?.anzeige] || null; };
+export const foto = (m, gross = false) => { const id = fotoId(m); return id ? `${ROOT}/personal/fotos/${id}${gross ? '' : '-s'}.webp` : null; };
+export const av = (m, cls = '') => { const f = foto(m, /\blg\b|\bxl\b/.test(cls)); return f
+  ? `<span class="av has-foto ${cls}" aria-hidden="true"><img src="${f}" alt="" loading="lazy" decoding="async" width="96" height="96"></span>`
+  : `<span class="av ${AVC[m?.abteilung_id] ?? ''} ${cls}" aria-hidden="true">${esc(ini(m?.anzeige))}</span>`; };
 export const STATUS = { eingestempelt: 'eingestempelt', pause: 'Pause', krank: 'krank', urlaub: 'Urlaub', spaetschicht: 'Spätschicht (noch nicht da)', ausgestempelt: 'ausgestempelt' };
 export const ORT = (o) => { if (!o) return ''; if (o === 'nicht_sichtbar') return 'nicht im Betrieb'; if (o === 'mobil') return 'mobil (Homeoffice)'; const m = { 'lager:wareneingang': 'Lager · Wareneingang', 'lager:kommissionierung': 'Lager · Kommissionierung', 'lager:packen': 'Lager · Packen', 'lager:versand': 'Lager · Versand/Rampe', 'lager:retouren': 'Lager · Retouren', 'lager:pausenraum': 'Pausenraum Lager', 'office:teekueche': 'Office · Teeküche', 'office:gf-buero': 'Office · GF-Büro', 'office:grossraum:kundenservice': 'Office · Kundenservice', 'office:grossraum:shop': 'Office · Shop/Produkt', 'office:grossraum:marketing': 'Office · Marketing', 'office:grossraum:einkauf': 'Office · Einkauf' }; return m[o] || o; };
 

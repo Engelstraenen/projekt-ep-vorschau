@@ -5,7 +5,9 @@
 #exPaketNav .ex-nav-scroll{scroll-padding-inline:28px;display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;width:100%;scroll-snap-type:x proximity;position:relative}
 #exPaketNav .ex-nav-scroll::-webkit-scrollbar{display:none}
 #exPaketNav a{position:relative;z-index:3;flex:0 0 auto;scroll-snap-align:center;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 13px;border-radius:999px;font:600 12.5px/1 system-ui,-apple-system,sans-serif;line-height:1;color:#6a5646;text-decoration:none;white-space:nowrap;background:transparent;transition:color .15s ease}
-#exPaketNav a[aria-current="page"],#exPaketNav a.active{color:#0071e3;background:#fff;box-shadow:0 2px 10px rgba(0,113,227,.14)}
+#exPaketNav a[aria-current="page"],#exPaketNav a.active{color:#a8452e;background:#fff;box-shadow:0 1px 0 #fff inset,0 4px 14px -4px rgba(112,76,50,.32)}
+#exPaketNav a:not(.active):hover{color:#2b231f}
+#exPaketNav a:focus-visible{outline:2px solid #d9735a;outline-offset:2px}
 #exPaketNav .ex-nav-fade{pointer-events:none;position:absolute;top:0;bottom:0;width:22px;z-index:2}
 #exPaketNav .ex-nav-fade.l{left:0;border-radius:999px 0 0 999px;background:linear-gradient(90deg,rgba(255,248,240,.98),transparent)}
 #exPaketNav .ex-nav-fade.r{right:0;border-radius:0 999px 999px 0;background:linear-gradient(270deg,rgba(255,248,240,.98),transparent)}
@@ -57,6 +59,15 @@ body.ex-paket-nav-on .lg::after{content:"P";font-size:12px;font-weight:800}
 #exZoomHelp button{width:42px;height:42px;border-radius:14px;border:1px solid rgba(255,255,255,.75);background:rgba(255,248,240,.92);box-shadow:0 8px 20px rgba(40,24,10,.12);font:700 18px/1 system-ui,sans-serif;color:#3a2a1c;cursor:pointer}
 #exZoomHelp .ex-zoom-back{font-size:11px;width:auto;min-width:42px;padding:0 6px}
 @media(max-width:820px){#exZoomHelp{top:auto;bottom:calc(130px + env(safe-area-inset-bottom,0px));transform:none;right:8px}}
-#exSocialMarker{position:fixed;left:50%;top:42%;transform:translate(-50%,-50%);z-index:12;border:0;cursor:pointer;padding:10px 14px;border-radius:16px;background:rgba(255,248,240,.92);border:1px solid rgba(255,255,255,.85);box-shadow:0 12px 32px rgba(40,24,10,.18);font:700 12px/1.2 system-ui,sans-serif;color:#3a2a1c;backdrop-filter:blur(10px)}
-#exSocialMarker small{display:block;font-weight:600;opacity:.65;margin-top:3px}
-body.ops-full #exSocialMarker{display:none}
+
+/* v1: Problem-Center (Handy-Liste) beginnt unter der festen Leiste, damit Kopf + 3D/Liste-Umschalter sichtbar bleiben */
+body.ex-paket-nav-on .ops-panel{top:calc(var(--ex-nav-top) + var(--ex-nav-h) + 8px)!important}
+@media (max-width:720px){body.ex-paket-nav-on .ops-panel{top:calc(var(--ex-nav-top) + var(--ex-nav-h) + 4px)!important;border-radius:20px 20px 0 0!important}}
+/* Shop-Raum (= Paketstadt-Dashboard): eigener Bereichs-Umschalter weicht der festen Leiste, Inhalt bleibt original */
+body.ex-paket-nav-on #psNav,body.ex-paket-nav-on .ps-nav{display:none!important}
+#exSocialPin{position:fixed;z-index:11;transform:translate(-50%,-100%);cursor:pointer;font-family:inherit;color:#2b231f;border:1px solid rgba(255,255,255,.85);pointer-events:auto;transition:opacity .2s ease}
+#exSocialPin i{background:#d9735a;box-shadow:0 0 0 3px rgba(217,115,90,.22)}
+#exSocialPin.ex-off{opacity:0;pointer-events:none}
+#exSocialPin .go{opacity:.7;font-weight:600}
+/* Handy-Liste (Problem-Center voll): keine schwebenden 3D-Bedienelemente darüber */
+body.ops-full #exZoomHelp,body.ops-full .hint-tg,body.ops-full #exSocialPin{display:none!important}

@@ -6,7 +6,8 @@
   const onDashboard = path.includes("/dashboard") && path.includes("/systeme/");
   const onShop = path.includes("/shop-raum");
   const root3d = inPaket3d ? "./" : "../paketstadt3d/";
-  const dashHref = inPaket3d ? "../dashboard/" : (onDashboard ? "./" : "../dashboard/");
+  // Dashboard = originales Paketstadt-Dashboard (Shop-Raum), genau wie der native Tab im 3D-Bundle
+  const dashHref = onShop ? location.pathname + location.search : "../shop-raum/?from=paketstadt3d&style=A";
 
   function ensureLogin() {
     try {
@@ -26,7 +27,20 @@
     return;
   }
 
+  // Aktiver Tab aus dem echten App-Zustand: der native (ausgeblendete) Switch bekommt von der
+  // Paketstadt bei jedem Ansichtswechsel aria-selected (auch bei Klick auf Gebäude/Lager in 3D).
+  function nativeView() {
+    const b = document.querySelector('nav.switch button[data-view][aria-selected="true"]');
+    return b ? b.getAttribute("data-view") : null;
+  }
   function activeKey() {
+    if (inPaket3d) {
+      if (document.body.classList.contains("ex-social-open")) return "social";
+      const v = nativeView();
+      if (v && items.some((i) => i.id === v)) return v;
+      if (/[?&]view=lager/.test(location.search) || location.hash === "#lager") return "lager";
+      return "stadt";
+    }
     if (onBotsPage) return "bots";
     if (onPersonal) return "personal";
     if (onDashboard || onShop) return "dashboard";
@@ -75,22 +89,26 @@
         a.textContent = it.label;
         a.addEventListener("click", (e) => {
           if (it.id === "bots" || it.id === "personal") ensureLogin();
-          if (inPaket3d && (it.id === "stadt" || it.id === "lager")) {
+          if (inPaket3d && (it.id === "stadt" || it.id === "lager" || it.id === "dashboard")) {
             e.preventDefault();
-            document.body.classList.remove("ex-social-open");
-            const panel = document.getElementById("exSocialPanel");
-            if (panel) {
-              panel.classList.remove("open");
-              panel.setAttribute("aria-hidden", "true");
-            }
+            closeSocial();
             const api = window.paketstadt;
+            if (it.id === "dashboard") {
+              // Original-Verhalten der Paketstadt: Kamerafahrt ins Shop-Gebäude, dann Shop-Raum-Dashboard
+              const nb = document.querySelector('nav.switch button[data-view="dashboard"]');
+              setActive(wrap, "dashboard");
+              if (nb && api && !/[?&]capture/.test(location.search)) nb.click();
+              else location.href = it.href;
+              return;
+            }
             try {
+              // Auf dem Handy startet die Paketstadt in der Problem-Liste: für Stadt/Lager auf 3D umschalten
+              if (api && api.ops && api.ops.setMode && document.body.classList.contains("ops-full")) api.ops.setMode("3d");
               if (api && api.setView) api.setView(it.id);
               else location.href = it.href;
             } catch (_) {
               location.href = it.href;
             }
-            history.replaceState(null, "", it.id === "lager" ? "?style=A#lager" : "?style=A");
             setActive(wrap, it.id);
             return;
           }
@@ -110,6 +128,18 @@
     return wrap;
   }
 
+  function closeSocial() {
+    if (!document.body.classList.contains("ex-social-open")) return;
+    const btn = document.getElementById("exSocialClose");
+    if (btn) btn.click();
+    document.body.classList.remove("ex-social-open");
+    const panel = document.getElementById("exSocialPanel");
+    if (panel) {
+      panel.classList.remove("open");
+      panel.setAttribute("aria-hidden", "true");
+    }
+  }
+
   const nav = buildNav();
 
   // Intercept native switch (hidden) for bots/dashboard if somehow clicked
@@ -125,10 +155,6 @@
           e.stopPropagation();
           ensureLogin();
           location.href = "../bots/";
-        } else if (v === "dashboard") {
-          e.preventDefault();
-          e.stopPropagation();
-          location.href = "../dashboard/";
         } else if (v === "personal") {
           e.preventDefault();
           e.stopPropagation();
@@ -139,10 +165,19 @@
       true
     );
 
-    const obs = new MutationObserver(() => {
-      if (document.body.classList.contains("ex-social-open")) setActive(nav, "social");
-    });
+    let lastKey = null;
+    const sync = () => {
+      const k = activeKey();
+      if (k === lastKey) return;
+      lastKey = k;
+      setActive(nav, k);
+    };
+    const obs = new MutationObserver(sync);
     obs.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    const sw = document.querySelector("nav.switch");
+    if (sw) obs.observe(sw, { subtree: true, attributes: true, attributeFilter: ["aria-selected"] });
+    window.addEventListener("popstate", sync);
+    window.addEventListener("hashchange", sync);
 
     function applyHash() {
       const h = location.hash.replace("#", "");
@@ -152,7 +187,7 @@
           window.paketstadt && window.paketstadt.setView && window.paketstadt.setView(h);
         } catch (_) {}
         setActive(nav, h || "stadt");
-      } else if (h === "dashboard") location.replace("../dashboard/");
+      } else if (h === "dashboard") document.querySelector('#exPaketNav a[data-ex-tab="dashboard"]')?.click();
     }
     window.addEventListener("hashchange", applyHash);
     if (location.hash) setTimeout(applyHash, 500);
@@ -201,13 +236,35 @@
       }, 100);
     })();
 
-    if (!document.getElementById("exSocialMarker")) {
-      const btn = document.createElement("button");
-      btn.id = "exSocialMarker";
-      btn.type = "button";
-      btn.innerHTML = "<b>Social Studio</b><small>Kanäle &amp; Ads · tippen</small>";
-      btn.addEventListener("click", () => document.getElementById("exSocialTab")?.click());
-      document.body.appendChild(btn);
+    // Social als Ort in der Stadt: Pin hängt am Laden-Gebäude (folgt dem nativen 3D-Label bei Drehen/Zoomen)
+    if (!document.getElementById("exSocialPin")) {
+      const pin = document.createElement("button");
+      pin.id = "exSocialPin";
+      pin.type = "button";
+      pin.className = "lbl";
+      pin.setAttribute("aria-label", "Social Media öffnen (Beispieldaten)");
+      pin.innerHTML = '<i></i>Social<span class="go">· Kanäle &amp; Ads</span>';
+      pin.addEventListener("click", () => document.getElementById("exSocialTab")?.click());
+      document.body.appendChild(pin);
+      let ladenEl = null;
+      const findLaden = () => {
+        if (ladenEl && ladenEl.isConnected) return ladenEl;
+        ladenEl = [...document.querySelectorAll("#labels .lbl")].find((e) => /^Laden/.test(e.textContent.trim())) || null;
+        return ladenEl;
+      };
+      const follow = () => {
+        const l = findLaden();
+        const vis = l && !l.classList.contains("hidden") && getComputedStyle(l).display !== "none" &&
+          !document.body.classList.contains("ops-full") && !document.body.classList.contains("ex-social-open");
+        if (vis) {
+          const r = l.getBoundingClientRect();
+          pin.style.left = r.left + r.width / 2 + "px";
+          pin.style.top = r.bottom + 40 + "px";
+        }
+        pin.classList.toggle("ex-off", !vis);
+        requestAnimationFrame(follow);
+      };
+      requestAnimationFrame(follow);
     }
   }
 })();
