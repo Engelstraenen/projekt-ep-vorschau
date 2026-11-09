@@ -53,10 +53,16 @@
   .nl-fig figcaption { margin-top: 10px; color: var(--ink-2, #6e6e73); font-size: 14px; }
   ol.st-steps.nl-steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   ol.st-steps.nl-steps p { margin: 0; color: var(--ink-2, #48484c); font-size: 15px; }
+  .nl-compare-desk { display: block; }
   .nl-compare-mob { display: none; }
   .nl-compare img { display: block; width: 100%; height: auto; }
   .nl-compare .nl-cap { margin: 8px 0 0; font-size: 14px; font-weight: 600; }
-  .nl-legend { margin: 14px 0 0; max-width: 68ch; color: var(--ink-2, #48484c); font-size: 15px; }
+  .nl-legend { margin: 18px 0 0; padding: 0 0 0 1.35em; max-width: 68ch; color: var(--ink, #1d1d1f); font-size: 16px; line-height: 1.45; list-style: decimal; }
+  .nl-legend li { margin: 0 0 8px; padding-left: 0.35em; }
+  .nl-fine { margin: 10px 0 0; max-width: 68ch; color: var(--ink-2, #6e6e73); font-size: 13px; }
+  .nl-phone { width: min(390px, 100%); margin: 28px auto 0; padding: 14px 12px 16px; border-radius: 32px; background: #1d1d1f; }
+  .nl-phone-screen { max-height: min(70vh, 720px); overflow: auto; border-radius: 18px; background: #fff; }
+  .nl-phone img { display: block; width: 100%; height: auto; }
   @media (max-width: 768px) {
     .nl-compare-desk { display: none; }
     .nl-compare-mob { display: grid; gap: 28px; }
@@ -107,7 +113,7 @@
     </div>
   </section>
 
-  <nav class="rb-jump" aria-label="Rubriken auf dieser Seite"><div class="rb-jump-in"><p class="rb-jump-t" aria-hidden="true">Auf dieser Seite</p><ol role="list"><li><a href="#nutzen"><span class="rb-nr">01</span>Nutzen</a></li><li><a href="#erklaervideo"><span class="rb-nr">02</span>Erklärvideo</a></li><li><a href="#vergleich"><span class="rb-nr">03</span>Vorher und nachher</a></li><li><a href="#ablauf"><span class="rb-nr">04</span>Ablauf</a></li><li><a href="#pakete"><span class="rb-nr">05</span>Pakete</a></li><li><a href="#funnel"><span class="rb-nr">06</span>Funnel</a></li><li><a href="#aktionen"><span class="rb-nr">07</span>Aktionsbeispiele</a></li><li><a href="#faq"><span class="rb-nr">08</span>Fragen</a></li></ol></div></nav>
+  <nav class="rb-jump" aria-label="Rubriken auf dieser Seite"><div class="rb-jump-in"><p class="rb-jump-t" aria-hidden="true">Auf dieser Seite</p><ol role="list"><li><a href="#nutzen"><span class="rb-nr">01</span>Nutzen</a></li><li><a href="#erklaervideo"><span class="rb-nr">02</span>Erklärvideo</a></li><li><a href="#vergleich"><span class="rb-nr">03</span>Vorher und nachher</a></li><li><a href="#premium"><span class="rb-nr">·</span>Beispiel</a></li><li><a href="#ablauf"><span class="rb-nr">04</span>Ablauf</a></li><li><a href="#pakete"><span class="rb-nr">05</span>Pakete</a></li><li><a href="#funnel"><span class="rb-nr">06</span>Funnel</a></li><li><a href="#aktionen"><span class="rb-nr">07</span>Aktionsbeispiele</a></li><li><a href="#faq"><span class="rb-nr">08</span>Fragen</a></li></ol></div></nav>
 
   <section class="block pb-list rb" id="nutzen" aria-labelledby="nu-h">
     <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">01</span><span class="rb-dot" aria-hidden="true"> · </span>Nutzen</p><h2 id="nu-h" class="rb-h">Was du davon hast</h2></header>
@@ -135,7 +141,7 @@
     <div class="nl-compare">
       <picture class="nl-compare-desk">
         <source type="image/webp" srcset="../img/newsletter/vorher-nachher-nebeneinander.webp">
-        <img src="../img/newsletter/vorher-nachher-nebeneinander.png" width="1140" height="2100" alt="Vergleich nebeneinander: links der markierte Amateur-Newsletter, rechts der gestaltete Newsletter von Quattro Flammen. Fiktive Demo." loading="lazy" decoding="async">
+        <img src="../img/newsletter/vorher-nachher-nebeneinander.png" width="1600" height="2228" alt="Vorher und nachher nebeneinander: links der markierte Amateur-Newsletter, rechts der Premium-Newsletter Quattro Flammen. Fiktive Demo, Demo-Preise fiktiv." loading="lazy" decoding="async">
       </picture>
       <div class="nl-compare-mob">
         <figure>
@@ -148,13 +154,35 @@
         <figure>
           <picture>
             <source type="image/webp" srcset="../img/newsletter/nachher-profi.webp">
-            <img src="../img/newsletter/nachher-profi.png" width="560" height="1683" alt="Nachher: gestalteter Newsletter mit klarem Nutzen, scharfem Hero, einem Button, Angebotskarten und Footer mit Impressum und Abmelden. Fiktive Demo, Demo-Preise." loading="lazy" decoding="async">
+            <img src="../img/newsletter/nachher-profi.png" width="900" height="5168" alt="Nachher: markierter Premium-Newsletter mit klarem Nutzen, scharfen Food-Fotos, einem Button je Abschnitt, Gerichteraster und Footer mit Impressum und Abmelden. Fiktive Demo, Demo-Preise fiktiv." loading="lazy" decoding="async">
           </picture>
           <figcaption class="nl-cap">Nachher</figcaption>
         </figure>
       </div>
-      <p class="nl-legend">Mustermarke Quattro Flammen, frei erfunden. 1 Betreff ohne Nutzen, danach klarer Nutzen im Einstieg. 2 Bild unscharf, danach scharfes Hero. 3 Textwüste, danach kurzer Text und ein Button. 4 Viele Schriften und Buttons, danach Angebotskarten mit fiktivem Demo-Preis. 5 Footer unklar, danach Impressum und Abmelden.</p>
+      <ol class="nl-legend">
+        <li><b>Vorher:</b> Betreff ohne Nutzen. <b>Nachher:</b> Klarer Nutzen ganz oben, „Aus der Glut“, große Markenüberschrift.</li>
+        <li><b>Vorher:</b> Bild unscharf oder verzerrt. <b>Nachher:</b> Starke Food-Fotos mit Licht und Tiefe, scharf, richtiges Format.</li>
+        <li><b>Vorher:</b> Textwüste. <b>Nachher:</b> Ein Button pro Abschnitt (bestellen, Angebot sichern, Karte, Treue).</li>
+        <li><b>Vorher:</b> Viele Buttons und Farben. <b>Nachher:</b> Gerichte im 2×2-Raster mit Demo-Preis, fiktiv.</li>
+        <li><b>Vorher:</b> Footer unklar. <b>Nachher:</b> Footer mit Impressum, Datenschutz, Abmeldelink und Double-Opt-in-Hinweis.</li>
+      </ol>
+      <p class="nl-fine">Mustermarke Quattro Flammen, frei erfunden, Demo-Preise fiktiv.</p>
+      <p class="nl-fine">Fotos im Nachher-Muster und Premium-Beispiel: Pexels (Pexels-Lizenz). Vorher-Beispiel: bearbeitetes Foto von Unsplash (Unsplash-Lizenz).</p>
     </div>
+  </section>
+
+  <section class="block pb-list rb" id="premium" aria-labelledby="pm-h">
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-dot" aria-hidden="true"> · </span>Beispiel</p><h2 id="pm-h" class="rb-h">Beispiel: Premium-Newsletter</h2><p class="rb-lead">Die Nachher-Fassung als Handy-Ansicht. Im Rahmen lässt sich der Newsletter durchscrollen.</p></header>
+    <div class="nl-phone">
+      <div class="nl-phone-screen">
+        <picture>
+          <source type="image/webp" srcset="../img/newsletter/muster-mobil.webp">
+          <img src="../img/newsletter/muster-mobil.png" width="750" height="8848" alt="Premium-Newsletter der fiktiven Marke Quattro Flammen in der Handy-Ansicht, von Hero über Angebot und Gerichte bis zum Footer. Demo-Preise fiktiv." loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </div>
+    <p class="nl-fine">Mustermarke Quattro Flammen, frei erfunden, Demo-Preise fiktiv.</p>
+    <p class="nl-fine">Fotos im Nachher-Muster und Premium-Beispiel: Pexels (Pexels-Lizenz).</p>
   </section>
 
   <section class="block st" id="ablauf" aria-labelledby="ab-h">
