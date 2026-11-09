@@ -230,7 +230,7 @@
     if (feedTimer) clearInterval(feedTimer);
     const feed = document.getElementById("sxFeed");
     if (feed && section === "live") {
-      const pool = ["+18 Likes · Instagram · Beispiel", "Neuer Kommentar · TikTok · Beispiel", "+4 CRM-Leads · Google · Beispiel", "Story 91 % Completion · Beispiel"];
+      const pool = ["+18 Likes · Instagram · Beispiel", "Neuer Kommentar · TikTok · Beispiel", "+4 CRM-Leads · Google · Beispiel", "Reel 91 % Completion · Beispiel"];
       let i = 0;
       const push = () => {
         const el = document.createElement("div");
