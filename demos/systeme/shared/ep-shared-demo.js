@@ -76,7 +76,7 @@
         kind: "Kanäle & Ads",
         href: "../social/",
         kpi: { followers: 18420, reach: 96200, adSpend: 1280, leads: 38 },
-        meta: "Instagram, TikTok, YouTube, Google"
+        meta: "Kanäle & Ads im Kundensystem (Beispieldaten)"
       },
       dashboard: {
         id: "dashboard",
@@ -96,7 +96,7 @@
         created_at: "2026-11-08T14:22:00+01:00",
         status: "neu",
         paketstadtOrderId: "ORD-78421",
-        note: "Beispiel-Lead aus Instagram-Anzeige → Auftrag in Paketstadt"
+        note: "Beispiel-Lead aus Instagram-Anzeige → Shop-Auftrag im Beispiel-Shop"
       },
       {
         id: "lead-tt-881",
@@ -106,7 +106,7 @@
         created_at: "2026-11-07T19:05:00+01:00",
         status: "in_arbeit",
         paketstadtOrderId: "ORD-78390",
-        note: "Beispiel-Lead aus TikTok-Spark-Ad"
+        note: "Beispiel-Lead aus TikTok-Spark-Ad → Shop-Auftrag"
       },
       {
         id: "lead-yt-552",
@@ -116,7 +116,7 @@
         created_at: "2026-11-06T11:40:00+01:00",
         status: "bestätigt",
         paketstadtOrderId: "ORD-78311",
-        note: "Beispiel-Lead aus YouTube-Kampagne"
+        note: "Beispiel-Lead aus YouTube-Kampagne → Shop-Auftrag"
       },
       {
         id: "lead-gg-301",
@@ -126,7 +126,7 @@
         created_at: "2026-11-05T09:18:00+01:00",
         status: "abgeschlossen",
         paketstadtOrderId: "ORD-78255",
-        note: "Beispiel-Lead aus Google Ads"
+        note: "Beispiel-Lead aus Google Ads → Shop-Auftrag"
       }
     ],
     channels: {

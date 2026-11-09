@@ -13,7 +13,9 @@
       shopraum: { img: 'liquid-shopraum', alt: 'Shopraum als Glasinsel auf Wasser, Liquid-Look' },
       problemcenter: { img: 'liquid-problemcenter', alt: 'Problemcenter als Glaskuppel auf Wasser, Liquid-Look' },
       team: { img: 'liquid-personal', alt: 'Personal als wellenförmige Glasinsel auf Wasser, Liquid-Look' },
-      bots: { img: 'liquid-bots', alt: 'Bots als Glasinsel auf Wasser, Liquid-Look' } } }
+      bots: { img: 'liquid-bots', alt: 'Bots als Glasinsel auf Wasser, Liquid-Look' },
+      social: { href: '../demos/systeme/paketstadt3d/?style=A#social', img: 'social', alt: 'Social Media in der Paketstadt mit Kanälen und Ads' },
+      dashboard: { href: '../demos/systeme/dashboard/' } } }
   ];
   var root = document.querySelector('[data-looks]');
   if (!root) return;
@@ -42,7 +44,7 @@
       a.setAttribute('href', href); sh.setAttribute('href', href);
       if (s && s.img) { var p = '../lab/systeme/' + s.img; i.src = p + '-640.webp'; i.srcset = p + '-320.webp 320w, ' + p + '-640.webp 640w, ' + p + '-1024.webp 1024w'; i.alt = s.alt; }
       else { i.src = c._base.src; i.srcset = c._base.srcset; i.alt = c._base.alt; }
-      c.classList.toggle('lk-own', !!s || l.id === 'klassisch');
+      c.classList.toggle('lk-own', !!s || l.id === 'klassisch' || c.dataset.sys === 'social' || c.dataset.sys === 'dashboard');
       c.classList.toggle('lk-mood', !!(s && s.img && !s.href && l.id !== 'klassisch'));
       if (chip) chip.textContent = (s && s.img && !s.href && l.id !== 'klassisch') ? 'So könnte es aussehen' : 'Look folgt';
     });

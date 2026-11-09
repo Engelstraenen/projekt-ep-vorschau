@@ -8,11 +8,34 @@
 <link rel="stylesheet" href="./ep-hinweis.css">
   <script type="module" crossorigin src="./assets/index-Bnbw9N66.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-THpGUhlS.css">
-<style id="ex-ext-links-css">
-.ex-ext-links{position:fixed;right:12px;top:70px;z-index:40;display:flex;flex-direction:column;gap:8px}
-.ex-ext-links a{font:600 12px/1.2 system-ui,-apple-system,sans-serif;color:#0a2540;background:rgba(255,255,255,.82);border:1px solid rgba(0,113,227,.18);padding:8px 12px;border-radius:999px;text-decoration:none;backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(15,40,80,.08)}
-.ex-ext-links a:hover{background:#fff;color:#0071e3}
-@media (max-width:720px){.ex-ext-links{top:auto;bottom:54px;right:10px;flex-direction:row;flex-wrap:wrap;max-width:calc(100vw - 20px)}}
+<style id="ex-social-css">
+#exSocialTab{font:600 13px/1 system-ui,-apple-system,sans-serif;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.55);color:#3a2a1c;cursor:pointer}
+#exSocialTab[aria-selected="true"],#exSocialTab:hover{background:#fff;color:#0071e3;box-shadow:0 2px 10px rgba(0,113,227,.12)}
+#exSocialFab{position:fixed;left:14px;bottom:calc(58px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;flex-direction:column;gap:8px}
+#exSocialFab button{font:700 12px/1.2 system-ui,sans-serif;padding:10px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.7);background:rgba(255,248,240,.9);color:#3a2a1c;backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(40,24,10,.12);cursor:pointer;text-align:left}
+#exSocialFab button small{display:block;font-weight:600;opacity:.7;margin-top:3px}
+#exSocialFab button:hover{background:#fff;color:#0071e3}
+#exSocialPanel{position:fixed;inset:0;z-index:60;display:none;align-items:stretch;justify-content:flex-end;background:rgba(30,22,14,.28);backdrop-filter:blur(2px)}
+#exSocialPanel.open{display:flex}
+#exSocialPanel .sheet{width:min(440px,100%);height:100%;overflow:auto;background:linear-gradient(180deg,#fff8f1,#f3e7da);border-left:1px solid rgba(255,255,255,.7);box-shadow:-12px 0 40px rgba(40,24,10,.18);padding:18px 16px 80px;font-family:system-ui,-apple-system,sans-serif;color:#2b2118}
+#exSocialPanel .head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+#exSocialPanel h2{font-size:22px;letter-spacing:-.03em;margin:0}
+#exSocialPanel .close{border:0;background:rgba(255,255,255,.7);border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
+#exSocialPanel .badge{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.75);border:1px solid rgba(0,113,227,.16);font-size:11px;font-weight:700;color:#0a2540}
+#exSocialPanel .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+#exSocialPanel .chips button{border:0;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:700;background:rgba(255,255,255,.55);color:#6a5646;cursor:pointer}
+#exSocialPanel .chips button.active{background:#fff;color:#0071e3}
+#exSocialPanel .cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#exSocialPanel .card{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.85);border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(40,24,10,.06)}
+#exSocialPanel .card b{display:block;font-size:20px;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+#exSocialPanel .card span{font-size:11px;color:#6a5646}
+#exSocialPanel .section{margin-top:14px}
+#exSocialPanel .section h3{font-size:14px;margin:0 0 8px}
+#exSocialPanel .com,#exSocialPanel .ord{background:rgba(255,255,255,.65);border-radius:14px;padding:10px 12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.8)}
+#exSocialPanel .com strong,#exSocialPanel .ord strong{font-size:13px}
+#exSocialPanel .com p,#exSocialPanel .ord p{margin:5px 0 0;font-size:13px;line-height:1.4;color:#3a2a1c}
+#exSocialPanel .status{font-size:12px;color:#6a5646;margin:8px 0 0;line-height:1.4}
+@media(max-width:720px){#exSocialPanel .sheet{width:100%}#exSocialFab{left:10px;right:10px}#exSocialTab{font-size:12px;padding:7px 10px}}
 </style>
 </head>
 <body>
@@ -27,6 +50,7 @@
     <button data-view="dashboard" role="tab">Dashboard</button>
     <button data-view="personal" role="tab">Personal</button>
     <button data-view="bots" role="tab">Bots</button>
+    <button type="button" id="exSocialTab" data-ex-social role="tab" aria-controls="exSocialPanel" aria-selected="false">Social</button>
   </nav>
   <button class="hint-tg" id="hintTg" type="button" aria-label="Hinweise und Demo-Aktionen" aria-expanded="false" aria-controls="hint"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3.5l1.9 4.6 4.6 1.9-4.6 1.9L12 16.5l-1.9-4.6L5.5 10l4.6-1.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18 15.5l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z" fill="currentColor"/></svg></button>
   <div class="right"><span class="live" aria-label="Live"><i></i><span>LIVE</span></span><span class="chip">BEISPIELDATEN</span></div>
@@ -36,10 +60,16 @@
 <div class="ticker" id="ticker"></div>
 <aside class="card" id="card" hidden></aside>
 <div class="hint" id="hint"><span>Gebäude anklicken · Ziehen · Zoomen</span><button data-demo="order" type="button">Test-Bestellung</button><button data-demo="return" type="button">Test-Retoure</button></div>
-<nav class="ex-ext-links" aria-label="Weitere Systeme">
-  <a href="../dashboard/">Systeme-Dashboard</a>
-  <a href="../social/">Social Media</a>
-</nav>
 <div class="ep-bsp" role="note">Beispieldaten – so könnte dein System aussehen</div>
+
+<div id="exSocialFab" aria-label="Social Media in der Paketstadt">
+  <button type="button" id="exSocialOpen"><b>Social Media</b><small>Kanäle &amp; Ads · Beispieldaten</small></button>
+</div>
+<div id="exSocialPanel" aria-hidden="true" role="dialog" aria-label="Social Media Bereich">
+  <div class="sheet" id="exSocialSheet"></div>
+</div>
+<script src="../shared/ep-shared-demo.js"></script>
+<script src="./ex-social.js"></script>
+
 </body>
 </html>
