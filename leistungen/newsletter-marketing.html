@@ -53,6 +53,14 @@
   .nl-fig figcaption { margin-top: 10px; color: var(--ink-2, #6e6e73); font-size: 14px; }
   ol.st-steps.nl-steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   ol.st-steps.nl-steps p { margin: 0; color: var(--ink-2, #48484c); font-size: 15px; }
+  .nl-compare-mob { display: none; }
+  .nl-compare img { display: block; width: 100%; height: auto; }
+  .nl-compare .nl-cap { margin: 8px 0 0; font-size: 14px; font-weight: 600; }
+  .nl-legend { margin: 14px 0 0; max-width: 68ch; color: var(--ink-2, #48484c); font-size: 15px; }
+  @media (max-width: 768px) {
+    .nl-compare-desk { display: none; }
+    .nl-compare-mob { display: grid; gap: 28px; }
+  }
   @media (max-width: 980px) {
     .nl-pair, .nl-packs, ol.st-steps.nl-steps { grid-template-columns: 1fr; }
     .nl-fig img { width: 960px; max-width: none; }
@@ -113,18 +121,39 @@
   </section>
 
   <section class="block pb-list rb" id="erklaervideo" aria-labelledby="ev-h">
-    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">02</span><span class="rb-dot" aria-hidden="true"> · </span>Erklärvideo</p><h2 id="ev-h" class="rb-h">Erklärvideo <span>· folgt</span></h2><p class="rb-lead">Das Video kommt später vom Filmteam. Bis dahin bleibt der Platz frei.</p></header>
-    <figure class="nl-slot">
-      <div class="nl-slot-in" role="img" aria-label="Video folgt"><p>Video folgt<small>Platzhalter, noch ohne Film</small></p></div>
-      <figcaption>Erklärvideo · Slot</figcaption>
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">02</span><span class="rb-dot" aria-hidden="true"> · </span>Erklärvideo</p><h2 id="ev-h" class="rb-h">Erklärfilm <span>· 30,5 Sekunden</span></h2><p class="rb-lead">Vom Posteingang bis zum gestalteten Newsletter. Der Ton startet erst, wenn du ihn einschaltest.</p></header>
+    <figure class="px-film">
+      <video id="nl-film" data-px-auto data-ton muted playsinline loop controls preload="metadata" width="1920" height="1080" poster="../img/newsletter/erklaerfilm-poster.webp" aria-label="Erklärfilm, 30,5 Sekunden: Newsletter von der Anmeldung bis zur Betreuung. Ton startet auf Klick. Fiktive Demo Quattro Flammen.">
+        <source src="../video/newsletter/newsletter-erklaerfilm-16x9-v1.mp4" type="video/mp4">
+      </video>
+      <figcaption><span><b>Erklärfilm</b> · 30,5 s · mit Ton</span><span>Fiktive Demo · Quattro Flammen</span></figcaption>
     </figure>
   </section>
 
   <section class="block pb-list rb" id="vergleich" aria-labelledby="vg-h">
-    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">03</span><span class="rb-dot" aria-hidden="true"> · </span>Vergleich</p><h2 id="vg-h" class="rb-h">Vorher und nachher <span>· Amateur und Profi</span></h2><p class="rb-lead">Zwei Flächen für denselben Inhalt: einmal als einfacher Versand, einmal als gestalteter Newsletter. Das Bild kommt nach.</p></header>
-    <div class="nl-pair">
-      <figure class="nl-slot"><div class="nl-slot-in" role="img" aria-label="Amateur-Newsletter folgt"><p>Amateur-Newsletter<small>Vergleich folgt</small></p></div><figcaption>Vorher</figcaption></figure>
-      <figure class="nl-slot"><div class="nl-slot-in" role="img" aria-label="Profi-Newsletter folgt"><p>Profi-Newsletter<small>Vergleich folgt</small></p></div><figcaption>Nachher</figcaption></figure>
+    <header class="pb-head rb-head"><p class="rb-label"><span class="rb-nr">03</span><span class="rb-dot" aria-hidden="true"> · </span>Vergleich</p><h2 id="vg-h" class="rb-h">Vorher und nachher <span>· Amateur und Profi</span></h2><p class="rb-lead">Dieselbe Nachricht, einmal als einfacher Versand und einmal gestaltet. Mustermarke Quattro Flammen, frei erfunden.</p></header>
+    <div class="nl-compare">
+      <picture class="nl-compare-desk">
+        <source type="image/webp" srcset="../img/newsletter/vorher-nachher-nebeneinander.webp">
+        <img src="../img/newsletter/vorher-nachher-nebeneinander.png" width="1140" height="2100" alt="Vergleich nebeneinander: links der markierte Amateur-Newsletter, rechts der gestaltete Newsletter von Quattro Flammen. Fiktive Demo." loading="lazy" decoding="async">
+      </picture>
+      <div class="nl-compare-mob">
+        <figure>
+          <picture>
+            <source type="image/webp" srcset="../img/newsletter/vorher-amateur.webp">
+            <img src="../img/newsletter/vorher-amateur.png" width="560" height="563" alt="Vorher: Amateur-Newsletter mit markierten Fehlern, Betreff ohne Nutzen, unscharfes Bild, Textwüste, viele Buttons und unklarer Footer. Fiktive Demo." loading="lazy" decoding="async">
+          </picture>
+          <figcaption class="nl-cap">Vorher</figcaption>
+        </figure>
+        <figure>
+          <picture>
+            <source type="image/webp" srcset="../img/newsletter/nachher-profi.webp">
+            <img src="../img/newsletter/nachher-profi.png" width="560" height="1683" alt="Nachher: gestalteter Newsletter mit klarem Nutzen, scharfem Hero, einem Button, Angebotskarten und Footer mit Impressum und Abmelden. Fiktive Demo, Demo-Preise." loading="lazy" decoding="async">
+          </picture>
+          <figcaption class="nl-cap">Nachher</figcaption>
+        </figure>
+      </div>
+      <p class="nl-legend">Mustermarke Quattro Flammen, frei erfunden. 1 Betreff ohne Nutzen, danach klarer Nutzen im Einstieg. 2 Bild unscharf, danach scharfes Hero. 3 Textwüste, danach kurzer Text und ein Button. 4 Viele Schriften und Buttons, danach Angebotskarten mit fiktivem Demo-Preis. 5 Footer unklar, danach Impressum und Abmelden.</p>
     </div>
   </section>
 
@@ -202,6 +231,8 @@
   <p class="epf-legal"><span>© 2026 PROJEKT EX</span><span>Vom ersten Gedanken. Zum fertigen Ergebnis.</span></p>
 </footer>
 <script src="../assets/nav.js" defer></script>
+<script src="../assets/praxis.js?v=5e9b04a1" defer></script>
+<script src="../assets/autoplay.js?v=219edb23" defer></script>
 <script src="../assets/vendor/cookieconsent/cookieconsent.umd.js" defer></script>
 <script src="../assets/consent.js" defer></script>
 <script src="../assets/ep-fx.js" defer></script>
