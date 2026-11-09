@@ -284,7 +284,8 @@
   }
 
   function formatEuro(n) {
-    return new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
+    const digits = Math.abs(n) < 10 && n % 1 !== 0 ? 2 : 0;
+    return new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", minimumFractionDigits: digits, maximumFractionDigits: digits }).format(n);
   }
 
   function formatPct(n) {

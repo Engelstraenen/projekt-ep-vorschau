@@ -148,23 +148,6 @@
           </div>
         </section>
 
-        <div class="split">
-          <section class="glass panel" aria-label="Verlauf (Beispiel)">
-            <div class="panel-head"><h2>Verlauf Views / Reichweite</h2><span class="badge">Beispielserie</span></div>
-            <div class="bars" aria-hidden="true">${renderBars(series)}</div>
-          </section>
-          <section class="glass panel" aria-label="Kommentare (Beispiel)">
-            <div class="panel-head"><h2>Kommentare</h2><span class="badge">Beispielliste</span></div>
-            <div class="comments">
-              ${comments.slice(0, 6).map((c) => `
-                <article class="comment">
-                  <div><span class="who">${c.author}</span><span class="when">${api.formatDate(c.at)}${c.channel ? " · " + demo.channels[c.channel].name : ""}</span></div>
-                  <p class="txt">${c.text}</p>
-                </article>`).join("") || "<p class=\"stat-meta\">Keine Beispielkommentare in diesem Filter.</p>"}
-            </div>
-          </section>
-        </div>
-
         <section class="glass panel" aria-label="Ads Kennzahlen (Beispiel)">
           <div class="panel-head"><h2>Geschaltete Ads</h2><span class="badge">BEISPIELDATEN</span></div>
           <div class="grid">
@@ -183,6 +166,23 @@
             </tbody>
           </table>
         </section>
+
+        <div class="split">
+          <section class="glass panel" aria-label="Verlauf (Beispiel)">
+            <div class="panel-head"><h2>Verlauf Views / Reichweite</h2><span class="badge">Beispielserie</span></div>
+            <div class="bars" aria-hidden="true">${renderBars(series)}</div>
+          </section>
+          <section class="glass panel" aria-label="Kommentare (Beispiel)">
+            <div class="panel-head"><h2>Kommentare</h2><span class="badge">Beispielliste</span></div>
+            <div class="comments">
+              ${comments.slice(0, 6).map((c) => `
+                <article class="comment">
+                  <div><span class="who">${c.author}</span><span class="when">${api.formatDate(c.at)}${c.channel ? " · " + demo.channels[c.channel].name : ""}</span></div>
+                  <p class="txt">${c.text}</p>
+                </article>`).join("") || "<p class=\"stat-meta\">Keine Beispielkommentare in diesem Filter.</p>"}
+            </div>
+          </section>
+        </div>
 
         <section class="glass panel" aria-label="Social-Leads und Paketstadt">
           <div class="panel-head"><h2>Social-Leads → Shop-Aufträge</h2><a href="../paketstadt3d/?style=A#social" style="font-size:13px;font-weight:700;color:var(--blue)">Zum Shop in der Paketstadt</a></div>
