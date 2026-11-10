@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-/1Vu8SgPuFrx+ACpJkJHxMBZpdTOhmIycRbrfKoczyM=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-drpsXupYLl/DNcK29XP/UhkBsnXi96LZSqiInrr7yHw=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-s0CFzM7uRj0ZjbEEvHyVWRKzu+yoO3Cs8KEHI79we/4=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -157,6 +157,8 @@
   /* "Projekt starten" bekommt Besuch vom Papierflieger: kurzer Ring bei jedem Anstupsen */
   .btn.ping { animation: ping .9s var(--ease); }
   @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(0,113,227,.55); scale: 1; } 18% { scale: 1.07; } 100% { box-shadow: 0 0 0 16px rgba(0,113,227,0); scale: 1; } }
+  #flieger-link { position: fixed; z-index: 25; display: block; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; color: transparent; background: transparent; }
+  #flieger-link[hidden] { display: none; }
 
   #lab .sticky { display: block; overflow: hidden; padding-top: 18vh; }
   #lab .head { display: flex; justify-content: space-between; align-items: end; gap: 40px; }
@@ -515,6 +517,7 @@
   <nav class="links" aria-label="Hauptnavigation"><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mega">Leistungen <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a href="#finder">Potenzialfinder</a><a href="prozess.html">Prozess</a><a href="faq.html">FAQ</a><a href="preise.html">Preise</a></nav>
   <div class="right"><button class="menu-mobile" type="button" aria-expanded="false" aria-controls="mega" aria-label="Menü öffnen"><i aria-hidden="true"></i>Menü</button><a class="btn small" href="#kontakt">Projekt starten ↗</a></div>
 </header>
+<a id="flieger-link" href="kontakt.html" hidden>Anfrage stellen</a>
 <!-- mega:start -->
 <div class="mega" id="mega" data-lenis-prevent role="region" aria-label="Unsere Leistungen">
     <div class="mega-head"><p>Alle 14 Leistungen<span class="menu-scroll-hint"> · Wischen / scrollen für weitere Punkte</span></p><a href="#websites">Als Geschichte erleben ›</a></div>
@@ -1236,7 +1239,7 @@ else {
       uniform sampler2D uFrom, uTo; uniform vec2 uTexSize;
       uniform float uMix, uTime, uSize, uDpr, uDark, uPhotoA, uPhotoB, uFocus, uFlow; uniform vec3 uA, uB;
       uniform vec3 uSat; uniform float uSatFrom, uSatTo, uSatStart, uSeed, uDimA, uDimB, uFlkA, uFlkB; uniform vec4 uFx;
-      varying vec3 vCol; varying float vA, vBokeh;
+      varying vec3 vCol; varying float vA, vBokeh, vPlane;
       ${GLSL_NOISE}
       vec3 tone(vec3 c, float spark) {
         if (c.r >= 0.0) return c;
@@ -1322,11 +1325,15 @@ else {
         float sz = (.55 + pow(aRand, 5.0) * 1.0 + spark * .2) * (1.0 + coc * .3) * mix(mix(mix(uA.z, .5, satF), uB.z, t), .5, t2);
         gl_PointSize = uSize * uDpr * sz * (11.0 / -mv.z);
         vCol = mix(tone(cFrom, spark), tone(cTo, spark), t);
-        vA = (1.0 - .97 * hide) / (1.0 + coc * 3.0) * mix(uDimA, uDimB, t);
+        float plane = clamp(max(satF, satT * smoothstep(.55, .85, t2)), 0.0, 1.0);
+        vPlane = plane;
+        float dim = mix(uDimA, uDimB, t);
+        dim = mix(dim, 1.0, plane * .5); // Flieger nur halb so weit ausblenden wie der übrige Schwarm, etwa so sichtbar wie das EX
+        vA = (1.0 - .97 * hide * (1.0 - plane)) / (1.0 + coc * 3.0) * dim;
         vA *= mix(.86, .62, uDark) * (.8 + .2 * sin(uTime * (1.2 + aRand * 2.5) + aRand * 90.));
       }`,
     fragmentShader: /* glsl */`
-      varying vec3 vCol; varying float vA, vBokeh;
+      varying vec3 vCol; varying float vA, vBokeh, vPlane;
       void main() {
         float d = length(gl_PointCoord - .5);
         float a = smoothstep(.5, mix(.3, .45, vBokeh), d);
@@ -1470,6 +1477,7 @@ else {
   // Ziel ist immer der sichtbare "Projekt starten": oben in der Kopfzeile oder – in schmalen Fenstern, wo er dort ausgeblendet ist – im Kontakt.
   // Wird pro Frame geprüft, damit es auch nach dem Verkleinern des Fensters stimmt.
   const headBtn = document.querySelector('header.top .btn.small'), kontaktBtn = headBtn; // Kontakt-Button im Schluss entfernt: Ziel ist immer "Projekt starten" in der Kopfzeile (auch mobil sichtbar)
+  const fliegerLink = document.getElementById('flieger-link');
   let satBtn = headBtn, lastPing = -1;
   function satPlace(time) {
     const top = headBtn.offsetWidth > 0, mobile = innerWidth <= 860; satBtn = top ? headBtn : kontaktBtn;
@@ -1481,6 +1489,7 @@ else {
     const hit = ph > .1 && n !== lastPing; if (hit) lastPing = n;
     const reach = mobile ? 22 : 30;
     const cx = r.left - size * .42 + dart * reach, cy = r.bottom + size * .78 - dart * reach;
+    if (fliegerLink) { fliegerLink.hidden = false; fliegerLink.style.left = cx + 'px'; fliegerLink.style.top = cy + 'px'; fliegerLink.style.width = size + 'px'; fliegerLink.style.height = size + 'px'; fliegerLink.style.marginLeft = (-size / 2) + 'px'; fliegerLink.style.marginTop = (-size / 2) + 'px'; }
     return { x: (cx / innerWidth * 2 - 1) * hw, y: -(cy / innerHeight * 2 - 1) * hh, s: size / (ICON_SIZE * pxU), hit };
   }
   window.__finderIcon = (key) => { const prev = finder.dataset.key; if (prev === key) return; finder.dataset.key = key; finderMorph = { from: prev, to: key, t0: performance.now() }; };
@@ -1523,6 +1532,7 @@ else {
     U.uDimA.value = dimOf(A); U.uDimB.value = dimOf(B); U.uFlkA.value = +(A.dataset.flock || 0); U.uFlkB.value = +(B.dataset.flock || 0);
     // Papierflieger-Vorhut: sitzt links unter "Projekt starten" und stupst ihn regelmäßig an
     U.uSatFrom.value = A === kontakt ? 1 : 0; U.uSatTo.value = B === kontakt ? 1 : 0;
+    if (fliegerLink && A !== kontakt && B !== kontakt) fliegerLink.hidden = true;
     if (A === kontakt || B === kontakt) {
       const sp = satPlace(time); if (sp) U.uSat.value.set(sp.x, sp.y, sp.s);
       const arrived = A === kontakt || mixV > .85;
