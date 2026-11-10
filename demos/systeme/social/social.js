@@ -108,7 +108,7 @@
           ${api.channelIds().map((id) => `<button type="button" data-view="${id}" class="${state.view === id ? "active" : ""}"><span class="nav-icon">${icons[id]}</span>${demo.channels[id].name}</button>`).join("")}
         </nav>
         <div class="sidebar-foot">
-          <a href="../dashboard/"><span class="nav-icon" style="display:inline-grid;margin-right:8px;vertical-align:middle">${icons.dashboard}</span>Systeme-Dashboard</a>
+          <a href="../paketstadt3d/?style=A"><span class="nav-icon" style="display:inline-grid;margin-right:8px;vertical-align:middle">${icons.dashboard}</span>Paketstadt 3D</a>
           <a href="../paketstadt3d/?style=A#social"><span class="nav-icon" style="display:inline-grid;margin-right:8px;vertical-align:middle">${icons.paket}</span>Zur Paketstadt (Kundensystem)</a>
           <a href="../">Alle System-Demos</a>
         </div>
