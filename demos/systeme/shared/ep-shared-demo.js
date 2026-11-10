@@ -80,9 +80,9 @@
       },
       dashboard: {
         id: "dashboard",
-        name: "Systeme-Dashboard",
+        name: "Paketstadt 3D",
         kind: "Zentrale",
-        href: "../dashboard/",
+        href: "../paketstadt3d/?style=A",
         kpi: { systems: 8, demoLinks: 9 },
         meta: "Alles auf einen Blick"
       }

@@ -15,7 +15,7 @@
       team: { img: 'liquid-personal', alt: 'Personal als wellenförmige Glasinsel auf Wasser, Liquid-Look' },
       bots: { img: 'liquid-bots', alt: 'Bots als Glasinsel auf Wasser, Liquid-Look' },
       social: { href: '../demos/systeme/paketstadt3d/?style=A#social', img: 'social', alt: 'Social Media in der Paketstadt mit Kanälen und Ads' },
-      dashboard: { href: '../demos/systeme/dashboard/' } } }
+      dashboard: { href: '../demos/systeme/paketstadt3d/?style=A' } } }
   ];
   var root = document.querySelector('[data-looks]');
   if (!root) return;
