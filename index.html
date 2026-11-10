@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-HtuNTBU2r9gnMHTRLHpY1NC+sQvhVOyp+FJoh1+naCg=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-D/JpzgoYvYByYypvMkOA6KycRwOKgoM1RUqb8xu3vxE=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-HtuNTBU2r9gnMHTRLHpY1NC+sQvhVOyp+FJoh1+naCg=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-AZjiouglbcNQnnCkBWk6rJoAl/ENYsXYmtE5yOTb97Y=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo=' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -1545,7 +1545,11 @@ else {
       const near = i >= c.k - 1 && i <= c.k + 2; if (sec._near !== near) { sec._near = near; sec.classList.toggle('near', near); }
       let rv = 1, out = 1;
       if (i === c.k + 1 && c.u > 0) rv = sec === kontakt ? clamp01((c.mix - .12) / .5) : clamp01((c.mix - .3) / .62); // Schluss-Slogan steht schon, bevor das große EX die Mitte erreicht
-      else if (i === c.k) out = pinned ? 1 - sm((c.u - (sec === manifest ? .25 : .1)) / .22) : 1;
+      else if (i === c.k) {
+        // Auf dem Handy ist ein Kapitel nur eine Bildschirmhöhe: das Foto darf nicht schon nach dem ersten Drittel verschwinden.
+        const fadeAt = (mobile && sec !== manifest) ? .82 : (sec === manifest ? .25 : .1);
+        out = pinned ? 1 - sm((c.u - fadeAt) / .16) : 1;
+      }
       else if (i > c.k) rv = 0;
       else out = pinned ? 0 : 1;
       const v = rv.toFixed(3) + '/' + out.toFixed(3);
