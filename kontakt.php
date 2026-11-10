@@ -63,16 +63,40 @@ $kundentyp = clean(field('kundentyp'), 40);
 if (!in_array($kundentyp, ['', 'Unternehmen', 'Verein', 'Öffentlicher Auftraggeber', 'Privatperson'], true)) $kundentyp = '';
 $leistung  = clean(field('leistung'), 60);
 if (!in_array($leistung, LEISTUNGEN, true)) $leistung = '';
+$taetigkeit = clean(field('taetigkeit'), 200);
+$branche    = clean(field('branche'), 200);
+$web        = clean(field('web'), 200);
+$social     = clean(field('social'), 300);
+$zielgruppe = clean(field('zielgruppe'), 300);
+$ziel       = clean(field('ziel'), 300);
+$hakenText  = clean(field('haken_text'), 1000);
+$zeitpunkt  = clean(field('zeitpunkt'), 200);
+$entscheidet = clean(field('entscheidet'), 200);
+$hakenAllow = ['zu wenige Anfragen', 'kaum Reichweite', 'Website veraltet oder fehlt', 'keine Zeit für Social Media', 'Werbung bringt nichts'];
+$materialAllow = ['Logo', 'eigene Fotos', 'eigene Videos', 'Texte für die Website', 'nichts davon'];
+$pick = static function (string $raw, array $allow): string {
+    $out = [];
+    foreach (array_map('trim', explode(',', $raw)) as $part) {
+        if ($part !== '' && in_array($part, $allow, true) && !in_array($part, $out, true)) $out[] = $part;
+    }
+    if (in_array('nichts davon', $out, true)) $out = ['nichts davon'];
+    return implode(', ', $out);
+};
+$haken    = $pick(clean(field('haken'), 400), $hakenAllow);
+$material = $pick(clean(field('material'), 200), $materialAllow);
 $nachricht = clean(field('nachricht'), 5000);
 
 if ($name === '' || mb_strlen($nachricht) < 10) back('err=input');
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) back('err=email');
-if (preg_match('/[\r\n]/', $name . $email . $firma . $leistung)) back('err=input'); // Header-Injection
+if (preg_match('/[\r\n]/', $name . $email . $firma . $leistung . $taetigkeit . $branche . $web . $social . $zeitpunkt . $entscheidet . $haken . $material)) back('err=input'); // Header-Injection
 if (preg_match_all('~https?://~i', $nachricht) > 3) back('ok=1');                    // Link-Spam
 
 $subject = '=?UTF-8?B?' . base64_encode('Anfrage über projektex.de: ' . ($leistung !== '' ? $leistung : 'Allgemein')) . '?=';
 $body = "Neue Anfrage über das Kontaktformular\n\n"
-      . "Name: $name\nE-Mail: $email\nAnfrage als: $kundentyp\nUnternehmen/Verein: $firma\nLeistung: $leistung\n\nNachricht:\n$nachricht\n";
+      . "Name: $name\nE-Mail: $email\nAnfrage als: $kundentyp\nUnternehmen/Verein: $firma\n"
+      . "Tätigkeit: $taetigkeit\nBranche bzw. Bereich: $branche\nWebsite: $web\nSocial Media: $social\n"
+      . "Zielgruppe und Region: $zielgruppe\nWichtigstes Ziel: $ziel\nWo hakt es gerade?: $haken\nIn eigenen Worten: $hakenText\n"
+      . "Leistung: $leistung\nWas haben Sie schon?: $material\nZeitpunkt: $zeitpunkt\nWer entscheidet?: $entscheidet\n\nNachricht:\n$nachricht\n";
 $headers = implode("\r\n", [
   'From: PROJEKT EX Website <' . FROM . '>',
   'Reply-To: ' . $email,

@@ -7,6 +7,34 @@
   var MAILTO = !/(^|\.)projektex\.de$/i.test(location.hostname);
   function val(id) { var el = document.getElementById(id); return el ? String(el.value || '').trim() : ''; }
   if (MAILTO) { var btn = f.querySelector('button[type=submit]'); if (btn) btn.textContent = 'Anfrage per E-Mail senden'; }
+  var CHIP = {
+    haken: ['zu wenige Anfragen', 'kaum Reichweite', 'Website veraltet oder fehlt', 'keine Zeit für Social Media', 'Werbung bringt nichts'],
+    material: ['Logo', 'eigene Fotos', 'eigene Videos', 'Texte für die Website', 'nichts davon']
+  };
+  document.querySelectorAll('[data-chips]').forEach(function (group) {
+    var key = group.getAttribute('data-chips');
+    var hidden = document.getElementById('f-' + key);
+    var exclusive = group.getAttribute('data-exclusive');
+    function sync() {
+      var picked = [];
+      group.querySelectorAll('button[aria-pressed="true"]').forEach(function (b) { picked.push(b.textContent.trim()); });
+      if (hidden) hidden.value = picked.join(', ');
+    }
+    group.querySelectorAll('button').forEach(function (btn) {
+      if (CHIP[key].indexOf(btn.textContent.trim()) < 0) return;
+      btn.addEventListener('click', function () {
+        var on = btn.getAttribute('aria-pressed') !== 'true';
+        var label = btn.textContent.trim();
+        if (exclusive && on && label === exclusive) {
+          group.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+        } else if (exclusive && on) {
+          group.querySelectorAll('button').forEach(function (b) { if (b.textContent.trim() === exclusive) b.setAttribute('aria-pressed', 'false'); });
+        }
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        sync();
+      });
+    });
+  });
   var q = new URLSearchParams(location.search);
   var pre = q.get('leistung'), sel = document.getElementById('f-leistung');
   if (pre && sel) { for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].text === pre) { sel.selectedIndex = i; break; } } }
@@ -44,7 +72,13 @@
     var leistung = val('f-leistung');
     var subject = 'Anfrage über projektex.de: ' + (leistung || 'Allgemein');
     var body = 'Name: ' + val('f-name') + '\nE-Mail: ' + val('f-email') + '\nAnfrage als: ' + val('f-kundentyp') + '\nUnternehmen/Verein: ' + val('f-firma') +
-      '\nLeistung: ' + leistung + '\n\nNachricht:\n' + val('f-nachricht') + '\n';
+      '\nTätigkeit: ' + val('f-taetigkeit') + '\nBranche bzw. Bereich: ' + val('f-branche') +
+      '\nWebsite: ' + val('f-web') + '\nSocial Media: ' + val('f-social') +
+      '\nZielgruppe und Region: ' + val('f-zielgruppe') + '\nWichtigstes Ziel: ' + val('f-ziel') +
+      '\nWo hakt es gerade?: ' + val('f-haken') + '\nIn eigenen Worten: ' + val('f-haken-text') +
+      '\nLeistung: ' + leistung + '\nWas haben Sie schon?: ' + val('f-material') +
+      '\nZeitpunkt: ' + val('f-zeitpunkt') + '\nWer entscheidet?: ' + val('f-entscheidet') +
+      '\n\nNachricht:\n' + val('f-nachricht') + '\n';
     status.textContent = 'Dein E-Mail-Programm öffnet sich mit der vorbereiteten Anfrage. Bitte dort noch auf Senden tippen. Falls nichts passiert, schreib direkt an kontakt@projektex.de.';
     location.href = 'mailto:kontakt@projektex.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   }
