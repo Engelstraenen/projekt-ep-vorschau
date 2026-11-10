@@ -13,8 +13,7 @@ const FROM     = 'kontakt@projektex.de';           // Absender muss ein IONOS-Po
 const HOSTS    = ['projektex.de', 'www.projektex.de', 'test.projektex.de']; // test.: geschützte Test-Subdomain laut docs/IONOS-UMZUG.md
 const MIN_SECS = 4;      // schneller ausgefüllt = Bot
 const MAX_PER_HOUR = 5;  // Anfragen je IP-Hash und Stunde
-const LEISTUNGEN = ['', 'Website', 'Werbeclips', 'Logo Design', 'Print Design', 'Merch', 'SEO', 'Apps', 'Games',
-  'Automatisierung & Chatbots', 'Systeme & Dashboards', 'Visualisierung', 'Bewertungs-Löschservice', 'Etwas anderes']; // = Optionen in kontakt.html
+const LEISTUNGEN = ['Websites', 'SEO & Sichtbarkeit', 'Systeme & Dashboards', 'Automatisierung & Chatbots', 'App Design', 'Werbeclips', 'Ads-Management', 'Newsletter-Marketing', 'Logo Design', 'Print Design', 'Merch-Produktion', 'Räume & Visualisierung', 'Individuelle Aufträge', 'Bewertungs-Löschservice'];
 
 ini_set('display_errors', '0');   // nie Fehlermeldungen/Pfade an Besucher ausgeben
 header('X-Content-Type-Options: nosniff');
@@ -61,18 +60,54 @@ $email     = clean(field('email'), 200);
 $firma     = clean(field('firma'), 150);
 $kundentyp = clean(field('kundentyp'), 40);
 if (!in_array($kundentyp, ['', 'Unternehmen', 'Verein', 'Öffentlicher Auftraggeber', 'Privatperson'], true)) $kundentyp = '';
-$leistung  = clean(field('leistung'), 60);
-if (!in_array($leistung, LEISTUNGEN, true)) $leistung = '';
+$pick = static function (string $raw, array $allow): string {
+    $out = [];
+    foreach (array_map('trim', explode(',', $raw)) as $part) {
+        if ($part !== '' && in_array($part, $allow, true) && !in_array($part, $out, true)) $out[] = $part;
+    }
+    if (in_array('nichts davon', $out, true)) $out = ['nichts davon'];
+    return implode(', ', $out);
+};
+$note = static function (string $key, int $max): string { return clean(field($key), $max); };
+$branche = $pick(clean(field('branche'), 400), ['Handwerk', 'Gastronomie', 'Einzelhandel/Shop', 'Gesundheit/Praxis', 'Beauty/Friseur', 'Immobilien', 'Beratung/Dienstleistung', 'Steuer/Recht', 'Fitness/Sport', 'Industrie/Produktion', 'Bildung', 'Event', 'Tourismus/Hotel', 'Sonstiges']);
+$kanaele = $pick(clean(field('kanaele'), 400), ['keine Website', 'Website vorhanden', 'Instagram', 'Facebook', 'TikTok', 'YouTube', 'LinkedIn', 'Google-Unternehmensprofil', 'kein Social Media']);
+$region = $pick(clean(field('region'), 200), ['lokal', 'regional', 'deutschlandweit', 'international', 'B2B', 'B2C', 'beides']);
+$ziel = $pick(clean(field('ziel'), 500), ['mehr Anfragen', 'mehr Reichweite', 'Bekanntheit', 'Mitarbeiter finden', 'Online-Verkauf', 'bei Google gefunden werden', 'Social Media aufbauen', 'Abläufe entlasten', 'Marke schärfen', 'unzulässige Bewertungen prüfen lassen']);
+$haken = $pick(clean(field('haken'), 500), ['zu wenige Anfragen', 'kaum Reichweite', 'Website veraltet oder fehlt', 'keine Zeit für Social Media', 'Werbung bringt nichts', 'Auftritt uneinheitlich', 'zu viel Handarbeit', 'kein Überblick', 'Online-Shop fehlt oder hakt']);
+$leistungen = $pick(clean(field('leistungen'), 600), LEISTUNGEN);
+$material = $pick(clean(field('material'), 240), ['Logo', 'eigene Fotos', 'eigene Videos', 'Texte', 'Farben und Schriften', 'Domain', 'nichts davon']);
+$zeitpunkt = $pick(clean(field('zeitpunkt'), 80), ['sofort', 'in 1–3 Monaten', 'in diesem Jahr', 'später', 'noch offen']);
+$entscheidet = $pick(clean(field('entscheidet'), 80), ['ich selbst', 'mit Partner/Team', 'Geschäftsführung', 'noch unklar']);
+$sonstBranche = $note('sonst_branche', 240);
+$sonstKanaele = $note('sonst_kanaele', 300);
+$sonstRegion = $note('sonst_region', 240);
+$sonstZiel = $note('sonst_ziel', 240);
+$sonstHaken = $note('sonst_haken', 240);
+$sonstLeistungen = $note('sonst_leistungen', 240);
+$sonstMaterial = $note('sonst_material', 240);
+$sonstZeitpunkt = $note('sonst_zeitpunkt', 240);
+$sonstEntscheidet = $note('sonst_entscheidet', 240);
 $nachricht = clean(field('nachricht'), 5000);
 
 if ($name === '' || mb_strlen($nachricht) < 10) back('err=input');
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) back('err=email');
-if (preg_match('/[\r\n]/', $name . $email . $firma . $leistung)) back('err=input'); // Header-Injection
-if (preg_match_all('~https?://~i', $nachricht) > 3) back('ok=1');                    // Link-Spam
+$einzeilig = $name . $email . $firma . $branche . $kanaele . $region . $ziel . $haken . $leistungen . $material . $zeitpunkt . $entscheidet . $sonstBranche . $sonstKanaele . $sonstRegion . $sonstZiel . $sonstHaken . $sonstLeistungen . $sonstMaterial . $sonstZeitpunkt . $sonstEntscheidet;
+if (preg_match('/[\r\n]/', $einzeilig)) back('err=input');
+if (preg_match_all('~https?://~i', $nachricht) > 3) back('ok=1');
 
-$subject = '=?UTF-8?B?' . base64_encode('Anfrage über projektex.de: ' . ($leistung !== '' ? $leistung : 'Allgemein')) . '?=';
+$betreff = $leistungen !== '' ? explode(', ', $leistungen)[0] : 'Allgemein';
+$subject = '=?UTF-8?B?' . base64_encode('Anfrage über projektex.de: ' . $betreff) . '?=';
 $body = "Neue Anfrage über das Kontaktformular\n\n"
-      . "Name: $name\nE-Mail: $email\nAnfrage als: $kundentyp\nUnternehmen/Verein: $firma\nLeistung: $leistung\n\nNachricht:\n$nachricht\n";
+      . "Name: $name\nE-Mail: $email\nAnfrage als: $kundentyp\nUnternehmen/Verein: $firma\n"
+      . "Branche: $branche\nBranche sonstiges: $sonstBranche\n"
+      . "Kanäle: $kanaele\nKanäle sonstiges: $sonstKanaele\n"
+      . "Zielgruppe und Region: $region\nRegion sonstiges: $sonstRegion\n"
+      . "Wichtigstes Ziel: $ziel\nZiel sonstiges: $sonstZiel\n"
+      . "Wo hakt es gerade?: $haken\nHaken sonstiges: $sonstHaken\n"
+      . "Leistungen: $leistungen\nLeistungen sonstiges: $sonstLeistungen\n"
+      . "Was haben Sie schon?: $material\nMaterial sonstiges: $sonstMaterial\n"
+      . "Zeitpunkt: $zeitpunkt\nZeitpunkt sonstiges: $sonstZeitpunkt\n"
+      . "Wer entscheidet?: $entscheidet\nEntscheidung sonstiges: $sonstEntscheidet\n\nNachricht:\n$nachricht\n";
 $headers = implode("\r\n", [
   'From: PROJEKT EX Website <' . FROM . '>',
   'Reply-To: ' . $email,
