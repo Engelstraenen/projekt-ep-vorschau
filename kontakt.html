@@ -179,63 +179,146 @@
       <div class="field"><label for="f-firma">Unternehmen oder Verein (optional)</label>
         <input id="f-firma" name="firma" type="text" autocomplete="organization" maxlength="150"></div>
       <fieldset class="q"><legend><i>1</i> Was macht Ihr Unternehmen?</legend>
-        <p class="q-hint">Tätigkeit und Branche bzw. Bereich.</p>
-        <div class="field"><label for="f-taetigkeit">Tätigkeit</label>
-          <input id="f-taetigkeit" name="taetigkeit" type="text" maxlength="200" autocomplete="organization-title"></div>
-        <div class="field"><label for="f-branche">Branche bzw. Bereich</label>
-          <input id="f-branche" name="branche" type="text" maxlength="200"></div>
+        <div class="chips" role="group" aria-label="Branche" data-chips="branche">
+          <button type="button" aria-pressed="false">Handwerk</button>
+          <button type="button" aria-pressed="false">Gastronomie</button>
+          <button type="button" aria-pressed="false">Einzelhandel/Shop</button>
+          <button type="button" aria-pressed="false">Gesundheit/Praxis</button>
+          <button type="button" aria-pressed="false">Beauty/Friseur</button>
+          <button type="button" aria-pressed="false">Immobilien</button>
+          <button type="button" aria-pressed="false">Beratung/Dienstleistung</button>
+          <button type="button" aria-pressed="false">Steuer/Recht</button>
+          <button type="button" aria-pressed="false">Fitness/Sport</button>
+          <button type="button" aria-pressed="false">Industrie/Produktion</button>
+          <button type="button" aria-pressed="false">Bildung</button>
+          <button type="button" aria-pressed="false">Event</button>
+          <button type="button" aria-pressed="false">Tourismus/Hotel</button>
+          <button type="button" aria-pressed="false">Sonstiges</button>
+        </div>
+        <input type="hidden" name="branche" id="f-branche" value="">
+        <div class="field"><label for="f-sonst-branche">Sonstiges / eigene Antwort</label>
+          <input id="f-sonst-branche" name="sonst_branche" type="text" maxlength="240"></div>
       </fieldset>
       <fieldset class="q"><legend><i>2</i> Website und Social Media</legend>
-        <div class="field"><label for="f-web">Website</label>
-          <input id="f-web" name="web" type="url" inputmode="url" maxlength="200" placeholder="https://" autocomplete="url"></div>
-        <div class="field"><label for="f-social">Social Media</label>
-          <input id="f-social" name="social" type="text" maxlength="300"></div>
+        <div class="chips" role="group" aria-label="Website und Social Media" data-chips="kanaele">
+          <button type="button" aria-pressed="false">keine Website</button>
+          <button type="button" aria-pressed="false">Website vorhanden</button>
+          <button type="button" aria-pressed="false">Instagram</button>
+          <button type="button" aria-pressed="false">Facebook</button>
+          <button type="button" aria-pressed="false">TikTok</button>
+          <button type="button" aria-pressed="false">YouTube</button>
+          <button type="button" aria-pressed="false">LinkedIn</button>
+          <button type="button" aria-pressed="false">Google-Unternehmensprofil</button>
+          <button type="button" aria-pressed="false">kein Social Media</button>
+        </div>
+        <input type="hidden" name="kanaele" id="f-kanaele" value="">
+        <div class="field"><label for="f-sonst-kanaele">Sonstiges / eigene Antwort</label>
+          <input id="f-sonst-kanaele" name="sonst_kanaele" type="text" maxlength="300"></div>
       </fieldset>
       <fieldset class="q"><legend><i>3</i> Zielgruppe und Region</legend>
-        <div class="field"><label for="f-zielgruppe" class="visually-hidden">Zielgruppe und Region</label>
-          <textarea id="f-zielgruppe" name="zielgruppe" rows="3" maxlength="300"></textarea></div>
+        <div class="chips" role="group" aria-label="Zielgruppe und Region" data-chips="region">
+          <button type="button" aria-pressed="false">lokal</button>
+          <button type="button" aria-pressed="false">regional</button>
+          <button type="button" aria-pressed="false">deutschlandweit</button>
+          <button type="button" aria-pressed="false">international</button>
+          <button type="button" aria-pressed="false">B2B</button>
+          <button type="button" aria-pressed="false">B2C</button>
+          <button type="button" aria-pressed="false">beides</button>
+        </div>
+        <input type="hidden" name="region" id="f-region" value="">
+        <div class="field"><label for="f-sonst-region">Sonstiges / eigene Antwort</label>
+          <input id="f-sonst-region" name="sonst_region" type="text" maxlength="240"></div>
       </fieldset>
       <fieldset class="q"><legend><i>4</i> Wichtigstes Ziel</legend>
-        <div class="field"><label for="f-ziel" class="visually-hidden">Wichtigstes Ziel</label>
-          <textarea id="f-ziel" name="ziel" rows="3" maxlength="300"></textarea></div>
+        <div class="chips" role="group" aria-label="Wichtigstes Ziel" data-chips="ziel">
+          <button type="button" aria-pressed="false">mehr Anfragen</button>
+          <button type="button" aria-pressed="false">mehr Reichweite</button>
+          <button type="button" aria-pressed="false">Bekanntheit</button>
+          <button type="button" aria-pressed="false">Mitarbeiter finden</button>
+          <button type="button" aria-pressed="false">Online-Verkauf</button>
+          <button type="button" aria-pressed="false">bei Google gefunden werden</button>
+          <button type="button" aria-pressed="false">Social Media aufbauen</button>
+          <button type="button" aria-pressed="false">Abläufe entlasten</button>
+          <button type="button" aria-pressed="false">Marke schärfen</button>
+          <button type="button" aria-pressed="false">unzulässige Bewertungen prüfen lassen</button>
+        </div>
+        <input type="hidden" name="ziel" id="f-ziel" value="">
+        <div class="field"><label for="f-sonst-ziel">Sonstiges / eigene Antwort</label>
+          <input id="f-sonst-ziel" name="sonst_ziel" type="text" maxlength="240"></div>
       </fieldset>
       <fieldset class="q"><legend><i>5</i> Wo hakt es gerade?</legend>
-        <p class="q-hint">Was soll bei Ihnen besser laufen? Mehrfachauswahl möglich.</p>
         <div class="chips" role="group" aria-label="Wo hakt es gerade?" data-chips="haken">
           <button type="button" aria-pressed="false">zu wenige Anfragen</button>
           <button type="button" aria-pressed="false">kaum Reichweite</button>
           <button type="button" aria-pressed="false">Website veraltet oder fehlt</button>
           <button type="button" aria-pressed="false">keine Zeit für Social Media</button>
           <button type="button" aria-pressed="false">Werbung bringt nichts</button>
+          <button type="button" aria-pressed="false">Auftritt uneinheitlich</button>
+          <button type="button" aria-pressed="false">zu viel Handarbeit</button>
+          <button type="button" aria-pressed="false">kein Überblick</button>
+          <button type="button" aria-pressed="false">Online-Shop fehlt oder hakt</button>
         </div>
         <input type="hidden" name="haken" id="f-haken" value="">
-        <div class="field"><label for="f-haken-text">In eigenen Worten (optional)</label>
-          <textarea id="f-haken-text" name="haken_text" rows="3" maxlength="1000"></textarea></div>
+        <div class="field"><label for="f-sonst-haken">Sonstiges / eigene Antwort</label>
+          <input id="f-sonst-haken" name="sonst_haken" type="text" maxlength="240"></div>
       </fieldset>
       <fieldset class="q"><legend><i>6</i> Leistungen</legend>
-        <div class="field"><label for="f-leistung">Worum geht es? (optional)</label>
-          <select id="f-leistung" name="leistung">
-            <option value="">Bitte wählen</option>
-            <option>Website</option><option>Werbeclips</option><option>Logo Design</option><option>Print Design</option><option>Merch</option><option>SEO</option><option>Apps</option><option>Games</option><option>Automatisierung &amp; Chatbots</option><option>Systeme &amp; Dashboards</option><option>Visualisierung</option><option>Bewertungs-Löschservice</option><option>Etwas anderes</option>
-          </select></div>
+        <div class="chips" role="group" aria-label="Leistungen" data-chips="leistungen">
+          <button type="button" aria-pressed="false">Websites</button>
+          <button type="button" aria-pressed="false">SEO &amp; Sichtbarkeit</button>
+          <button type="button" aria-pressed="false">Systeme &amp; Dashboards</button>
+          <button type="button" aria-pressed="false">Automatisierung &amp; Chatbots</button>
+          <button type="button" aria-pressed="false">App Design</button>
+          <button type="button" aria-pressed="false">Werbeclips</button>
+          <button type="button" aria-pressed="false">Ads-Management</button>
+          <button type="button" aria-pressed="false">Newsletter-Marketing</button>
+          <button type="button" aria-pressed="false">Logo Design</button>
+          <button type="button" aria-pressed="false">Print Design</button>
+          <button type="button" aria-pressed="false">Merch-Produktion</button>
+          <button type="button" aria-pressed="false">Räume &amp; Visualisierung</button>
+          <button type="button" aria-pressed="false">Individuelle Aufträge</button>
+          <button type="button" aria-pressed="false">Bewertungs-Löschservice</button>
+        </div>
+        <input type="hidden" name="leistungen" id="f-leistungen" value="">
+        <div class="field"><label for="f-sonst-leistungen">Sonstiges / eigene Antwort</label>
+          <input id="f-sonst-leistungen" name="sonst_leistungen" type="text" maxlength="240"></div>
       </fieldset>
       <fieldset class="q"><legend><i>7</i> Was haben Sie schon?</legend>
         <div class="chips" role="group" aria-label="Was haben Sie schon?" data-chips="material" data-exclusive="nichts davon">
           <button type="button" aria-pressed="false">Logo</button>
           <button type="button" aria-pressed="false">eigene Fotos</button>
           <button type="button" aria-pressed="false">eigene Videos</button>
-          <button type="button" aria-pressed="false">Texte für die Website</button>
+          <button type="button" aria-pressed="false">Texte</button>
+          <button type="button" aria-pressed="false">Farben und Schriften</button>
+          <button type="button" aria-pressed="false">Domain</button>
           <button type="button" aria-pressed="false">nichts davon</button>
         </div>
         <input type="hidden" name="material" id="f-material" value="">
+        <div class="field"><label for="f-sonst-material">Sonstiges / eigene Antwort</label>
+          <input id="f-sonst-material" name="sonst_material" type="text" maxlength="240"></div>
       </fieldset>
       <fieldset class="q"><legend><i>8</i> Zeitpunkt</legend>
-        <div class="field"><label for="f-zeitpunkt" class="visually-hidden">Zeitpunkt</label>
-          <input id="f-zeitpunkt" name="zeitpunkt" type="text" maxlength="200"></div>
+        <div class="chips" role="group" aria-label="Zeitpunkt" data-chips="zeitpunkt" data-mode="single">
+          <button type="button" aria-pressed="false">sofort</button>
+          <button type="button" aria-pressed="false">in 1–3 Monaten</button>
+          <button type="button" aria-pressed="false">in diesem Jahr</button>
+          <button type="button" aria-pressed="false">später</button>
+          <button type="button" aria-pressed="false">noch offen</button>
+        </div>
+        <input type="hidden" name="zeitpunkt" id="f-zeitpunkt" value="">
+        <div class="field"><label for="f-sonst-zeitpunkt">Sonstiges / eigene Antwort</label>
+          <input id="f-sonst-zeitpunkt" name="sonst_zeitpunkt" type="text" maxlength="240"></div>
       </fieldset>
       <fieldset class="q"><legend><i>9</i> Wer entscheidet?</legend>
-        <div class="field"><label for="f-entscheidet" class="visually-hidden">Wer entscheidet?</label>
-          <input id="f-entscheidet" name="entscheidet" type="text" maxlength="200"></div>
+        <div class="chips" role="group" aria-label="Wer entscheidet?" data-chips="entscheidet" data-mode="single">
+          <button type="button" aria-pressed="false">ich selbst</button>
+          <button type="button" aria-pressed="false">mit Partner/Team</button>
+          <button type="button" aria-pressed="false">Geschäftsführung</button>
+          <button type="button" aria-pressed="false">noch unklar</button>
+        </div>
+        <input type="hidden" name="entscheidet" id="f-entscheidet" value="">
+        <div class="field"><label for="f-sonst-entscheidet">Sonstiges / eigene Antwort</label>
+          <input id="f-sonst-entscheidet" name="sonst_entscheidet" type="text" maxlength="240"></div>
       </fieldset>
       <div class="field"><label for="f-nachricht">Nachricht <span aria-hidden="true">*</span></label>
         <textarea id="f-nachricht" name="nachricht" rows="6" required minlength="10" maxlength="5000" aria-describedby="e-nachricht"></textarea><span class="err" id="e-nachricht"></span></div>
@@ -260,7 +343,7 @@
     <p class="epf-wa"><a class="btn small" href="https://wa.me/4915204388945">WhatsApp</a></p>
   </div>
   <div class="epf-cols">
-    <nav aria-label="Leistungen"><p class="epf-h">Leistungen</p><ul><li><a href="leistungen/websites.html">Websites</a></li><li><a href="leistungen/seo.html">SEO &amp; Sichtbarkeit</a></li><li><a href="leistungen/systeme.html">Systeme &amp; Dashboards</a></li><li><a href="leistungen/automatisierung-chatbots.html">Automatisierung &amp; Chatbots</a></li><li><a href="leistungen/apps.html">App Design</a></li><li><a href="leistungen/games.html">Game Design</a></li><li><a href="leistungen/werbeclips.html">Werbeclips</a></li><li><a href="leistungen/ads-management.html">Ads-Management</a></li><li><a href="leistungen/logo-design.html">Logo Design</a></li><li><a href="leistungen/print-design.html">Print Design</a></li><li><a href="leistungen/merch.html">Merch-Produktion</a></li><li><a href="leistungen/visualisierung.html">Räume &amp; Visualisierung</a></li><li><a href="leistungen/individuelle-auftraege.html">Individuelle Aufträge</a></li></ul></nav>
+    <nav aria-label="Leistungen"><p class="epf-h">Leistungen</p><ul><li><a href="leistungen/websites.html">Websites</a></li><li><a href="leistungen/seo.html">SEO &amp; Sichtbarkeit</a></li><li><a href="leistungen/systeme.html">Systeme &amp; Dashboards</a></li><li><a href="leistungen/automatisierung-chatbots.html">Automatisierung &amp; Chatbots</a></li><li><a href="leistungen/apps.html">App Design</a></li><li><a href="leistungen/werbeclips.html">Werbeclips</a></li><li><a href="leistungen/ads-management.html">Ads-Management</a></li><li><a href="leistungen/logo-design.html">Logo Design</a></li><li><a href="leistungen/print-design.html">Print Design</a></li><li><a href="leistungen/merch.html">Merch-Produktion</a></li><li><a href="leistungen/visualisierung.html">Räume &amp; Visualisierung</a></li><li><a href="leistungen/individuelle-auftraege.html">Individuelle Aufträge</a></li></ul></nav>
     <nav aria-label="Studio"><p class="epf-h">Studio</p><ul><li><a href="index.html">Start</a></li><li><a href="prozess.html">Prozess</a></li><li><a href="faq.html">FAQ</a></li><li><a href="index.html#finder">Potenzialfinder</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav>
     <nav aria-label="Rechtliches"><p class="epf-h">Rechtliches</p><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="rechtliches.html#cookies">Cookie-Policy</a></li><li><a href="rechtliches.html#agb">AGB</a></li><li><a href="widerruf.html">Widerruf</a></li><li><a href="rechtliches.html#barrierefreiheit">Barrierefreiheit</a></li><li><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></li></ul></nav>
   </div>
