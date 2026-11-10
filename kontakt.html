@@ -86,6 +86,14 @@
   form.contact .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
   form.contact .privacy-hint { font-size: 14px; color: #515154; }
   form.contact button.send { justify-self: start; font: inherit; font-size: 16px; font-weight: 500; border: 0; border-radius: 999px; padding: 12px 26px; cursor: pointer; /* Color+Fill: liquid-glass.css */ }
+  form.contact fieldset.q { border: 0; margin: 8px 0 0; padding: 10px 0 0; display: grid; gap: 10px; }
+  form.contact fieldset.q legend { font-size: 17px; font-weight: 600; letter-spacing: -.02em; display: flex; gap: 10px; align-items: baseline; padding: 0; }
+  form.contact fieldset.q legend i { font-style: normal; color: var(--blue); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  form.contact .q-hint { font-size: 14px; color: var(--ink-2); }
+  form.contact .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  form.contact .chips button { font: inherit; font-size: 14.5px; line-height: 1.3; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; text-align: left; }
+  form.contact .chips button[aria-pressed="true"] { background: #E8F2FC; border-color: var(--blue); color: var(--blue-ink); }
+  form.contact .q-block { font-size: 15px; font-weight: 600; margin-top: 4px; }
   .form-status:empty { display: none; }
   .form-status { margin-top: 12px; background: #fff; border-radius: 14px; padding: 12px 16px; }
   /* Audit: Links im Text unterstreichen (WCAG 1.4.1) */
@@ -162,24 +170,130 @@
     <h2 id="h-form">Anfrage</h2>
     <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
     <form class="contact" id="contact-form" action="kontakt.php" method="post" accept-charset="utf-8" novalidate>
+      <fieldset class="q"><legend><i>1</i> Was macht Ihr Unternehmen?</legend>
+        <p class="q-hint">Branche und ein Satz. Beides nötig.</p>
+        <div class="field"><label for="f-branche">Branche</label>
+          <input id="f-branche" name="branche" type="text" required maxlength="200" aria-describedby="e-branche"><span class="err" id="e-branche"></span></div>
+        <div class="field"><label for="f-satz">In einem Satz</label>
+          <input id="f-satz" name="satz" type="text" required minlength="8" maxlength="240" aria-describedby="e-satz"><span class="err" id="e-satz"></span></div>
+      </fieldset>
+      <fieldset class="q"><legend><i>2</i> Website und Social-Media-Kanäle</legend>
+        <p class="q-hint">URLs oder Handles, optional.</p>
+        <div class="field"><label for="f-web">Website</label>
+          <input id="f-web" name="web" type="url" inputmode="url" maxlength="200" placeholder="https://" autocomplete="url"></div>
+        <div class="field"><label for="f-social">Social Media</label>
+          <input id="f-social" name="social" type="text" maxlength="300"></div>
+      </fieldset>
+      <fieldset class="q"><legend><i>3</i> Wer sind Ihre Kunden und wo?</legend>
+        <p class="q-block">Gebiet</p>
+        <div class="chips" role="group" aria-label="Gebiet" data-chips="gebiet" data-mode="single">
+          <button type="button" aria-pressed="false">lokal</button>
+          <button type="button" aria-pressed="false">regional</button>
+          <button type="button" aria-pressed="false">deutschlandweit</button>
+          <button type="button" aria-pressed="false">international</button>
+        </div>
+        <input type="hidden" name="gebiet" id="f-gebiet" value="">
+        <p class="q-block">Kunden</p>
+        <div class="chips" role="group" aria-label="Kunden" data-chips="kunden">
+          <button type="button" aria-pressed="false">B2B</button>
+          <button type="button" aria-pressed="false">B2C</button>
+        </div>
+        <input type="hidden" name="kunden" id="f-kunden" value="">
+      </fieldset>
+      <fieldset class="q"><legend><i>4</i> Was ist Ihr wichtigstes Ziel?</legend>
+        <p class="q-hint">Mehrfachauswahl möglich.</p>
+        <div class="chips" role="group" aria-label="Wichtigstes Ziel" data-chips="ziel">
+          <button type="button" aria-pressed="false">mehr Anfragen</button>
+          <button type="button" aria-pressed="false">mehr Reichweite</button>
+          <button type="button" aria-pressed="false">Bekanntheit</button>
+          <button type="button" aria-pressed="false">Mitarbeiter finden</button>
+          <button type="button" aria-pressed="false">Online-Verkauf</button>
+        </div>
+        <input type="hidden" name="ziel" id="f-ziel" value="">
+      </fieldset>
+      <fieldset class="q"><legend><i>5</i> Wo stehen Sie heute?</legend>
+        <p class="q-block">Website</p>
+        <div class="chips" role="group" aria-label="Website heute" data-chips="stand-web" data-mode="single">
+          <button type="button" aria-pressed="false">keine Website</button>
+          <button type="button" aria-pressed="false">veraltete Website</button>
+          <button type="button" aria-pressed="false">Website vorhanden</button>
+        </div>
+        <input type="hidden" name="stand_web" id="f-stand-web" value="">
+        <p class="q-block">Social Media aktiv</p>
+        <div class="chips" role="group" aria-label="Social Media aktiv" data-chips="stand-social" data-mode="single">
+          <button type="button" aria-pressed="false">ja</button>
+          <button type="button" aria-pressed="false">nein</button>
+        </div>
+        <input type="hidden" name="stand_social" id="f-stand-social" value="">
+        <p class="q-block">Bisher Werbung geschaltet</p>
+        <div class="chips" role="group" aria-label="Bisher Werbung geschaltet" data-chips="stand-werbung" data-mode="single">
+          <button type="button" aria-pressed="false">ja</button>
+          <button type="button" aria-pressed="false">nein</button>
+        </div>
+        <input type="hidden" name="stand_werbung" id="f-stand-werbung" value="">
+      </fieldset>
+      <fieldset class="q"><legend><i>6</i> Welche Leistungen interessieren Sie?</legend>
+        <p class="q-hint">Mehrfachauswahl möglich.</p>
+        <div class="chips" role="group" aria-label="Leistungen" data-chips="leistungen">
+          <button type="button" aria-pressed="false">Websites</button>
+          <button type="button" aria-pressed="false">SEO &amp; Sichtbarkeit</button>
+          <button type="button" aria-pressed="false">Systeme &amp; Dashboards</button>
+          <button type="button" aria-pressed="false">Automatisierung &amp; Chatbots</button>
+          <button type="button" aria-pressed="false">App Design</button>
+          <button type="button" aria-pressed="false">Werbeclips</button>
+          <button type="button" aria-pressed="false">Ads-Management</button>
+          <button type="button" aria-pressed="false">Newsletter-Marketing</button>
+        </div>
+        <input type="hidden" name="leistungen" id="f-leistungen" value="">
+      </fieldset>
+      <fieldset class="q"><legend><i>7</i> Vorhandenes Material</legend>
+        <div class="chips" role="group" aria-label="Vorhandenes Material" data-chips="material">
+          <button type="button" aria-pressed="false">Logo</button>
+          <button type="button" aria-pressed="false">Fotos</button>
+          <button type="button" aria-pressed="false">Videos</button>
+          <button type="button" aria-pressed="false">Texte</button>
+        </div>
+        <input type="hidden" name="material" id="f-material" value="">
+      </fieldset>
+      <fieldset class="q"><legend><i>8</i> Monatliches Marketingbudget</legend>
+        <div class="chips" role="group" aria-label="Monatliches Marketingbudget" data-chips="budget" data-mode="single">
+          <button type="button" aria-pressed="false">unter 500 €</button>
+          <button type="button" aria-pressed="false">500–2.000 €</button>
+          <button type="button" aria-pressed="false">über 2.000 €</button>
+          <button type="button" aria-pressed="false">noch offen</button>
+        </div>
+        <input type="hidden" name="budget" id="f-budget" value="">
+      </fieldset>
+      <fieldset class="q"><legend><i>9</i> Wann soll es losgehen?</legend>
+        <div class="chips" role="group" aria-label="Wann soll es losgehen?" data-chips="zeitpunkt" data-mode="single">
+          <button type="button" aria-pressed="false">sofort</button>
+          <button type="button" aria-pressed="false">in 1–3 Monaten</button>
+          <button type="button" aria-pressed="false">später</button>
+        </div>
+        <input type="hidden" name="zeitpunkt" id="f-zeitpunkt" value="">
+      </fieldset>
+      <fieldset class="q"><legend><i>10</i> Wer entscheidet?</legend>
+        <div class="chips" role="group" aria-label="Wer entscheidet?" data-chips="entscheidet" data-mode="single">
+          <button type="button" aria-pressed="false">ich selbst</button>
+          <button type="button" aria-pressed="false">mit Partner/Team</button>
+        </div>
+        <input type="hidden" name="entscheidet" id="f-entscheidet" value="">
+      </fieldset>
       <div class="field"><label for="f-name">Name <span aria-hidden="true">*</span></label>
         <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="e-name"><span class="err" id="e-name"></span></div>
       <div class="field"><label for="f-email">E-Mail <span aria-hidden="true">*</span></label>
         <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="e-email"><span class="err" id="e-email"></span></div>
+      <div class="field"><label for="f-telefon">Telefon</label>
+        <input id="f-telefon" name="telefon" type="tel" autocomplete="tel" maxlength="40"></div>
       <div class="field"><label for="f-kundentyp">Ich frage an als (optional)</label>
         <select id="f-kundentyp" name="kundentyp"><option value="">Bitte wählen</option><option>Unternehmen</option><option>Verein</option><option>Öffentlicher Auftraggeber</option><option>Privatperson</option></select></div>
       <div class="field"><label for="f-firma">Unternehmen oder Verein (optional)</label>
         <input id="f-firma" name="firma" type="text" autocomplete="organization" maxlength="150"></div>
-      <div class="field"><label for="f-leistung">Worum geht es? (optional)</label>
-        <select id="f-leistung" name="leistung">
-          <option value="">Bitte wählen</option>
-          <option>Website</option><option>Werbeclips</option><option>Logo Design</option><option>Print Design</option><option>Merch</option><option>SEO</option><option>Apps</option><option>Games</option><option>Automatisierung &amp; Chatbots</option><option>Systeme &amp; Dashboards</option><option>Visualisierung</option><option>Bewertungs-Löschservice</option><option>Etwas anderes</option>
-        </select></div>
       <div class="field"><label for="f-nachricht">Nachricht <span aria-hidden="true">*</span></label>
         <textarea id="f-nachricht" name="nachricht" rows="6" required minlength="10" maxlength="5000" aria-describedby="e-nachricht"></textarea><span class="err" id="e-nachricht"></span></div>
       <div class="hp" aria-hidden="true"><label for="f-website">Website (bitte leer lassen)</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
       <input type="hidden" name="ts" id="f-ts" value="">
-      <p class="privacy-hint">In dieser GitHub-Pages-Vorschau öffnet das Formular eine vorbereitete E-Mail in Ihrem Mailprogramm; erst dortiges Senden übermittelt Ihre Anfrage. Auf projektex.de ist eine serverseitige Übermittlung vorbereitet, aber hier nicht aktiv. Bitte nur Testdaten eingeben. Name, E-Mail und Nachricht werden für eine gewünschte Antwort benötigt; optionale Angaben sind freiwillig. Dies ist keine Werbeeinwilligung. Mehr dazu in der <a href="datenschutz.html#kontakt">Datenschutzerklärung</a>. Pflichtfelder sind mit * markiert. Eine Anfrage ist noch kein Auftrag; das Erstgespräch ist kostenlos. Privatpersonen nennen wir Preise inkl. MwSt.; vor dem Auftrag erhaltet ihr unser Angebot mit <a href="rechtliches.html#agb">AGB</a> und <a href="widerruf.html">Widerrufsbelehrung</a>.</p>
+      <p class="privacy-hint">In dieser GitHub-Pages-Vorschau öffnet das Formular eine vorbereitete E-Mail in Ihrem Mailprogramm; erst dortiges Senden übermittelt Ihre Anfrage. Auf projektex.de ist eine serverseitige Übermittlung vorbereitet, aber hier nicht aktiv. Bitte nur Testdaten eingeben. Name, E-Mail, Nachricht, Branche und ein Satz zum Unternehmen werden für eine gewünschte Antwort benötigt; optionale Angaben sind freiwillig. Dies ist keine Werbeeinwilligung. Mehr dazu in der <a href="datenschutz.html#kontakt">Datenschutzerklärung</a>. Pflichtfelder sind mit * markiert. Eine Anfrage ist noch kein Auftrag; das Erstgespräch ist kostenlos. Privatpersonen nennen wir Preise inkl. MwSt.; vor dem Auftrag erhaltet ihr unser Angebot mit <a href="rechtliches.html#agb">AGB</a> und <a href="widerruf.html">Widerrufsbelehrung</a>.</p>
       <button class="send" type="submit">Anfrage senden</button>
     </form>
   </section>

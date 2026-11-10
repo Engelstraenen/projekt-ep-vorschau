@@ -61,18 +61,45 @@ $email     = clean(field('email'), 200);
 $firma     = clean(field('firma'), 150);
 $kundentyp = clean(field('kundentyp'), 40);
 if (!in_array($kundentyp, ['', 'Unternehmen', 'Verein', 'Öffentlicher Auftraggeber', 'Privatperson'], true)) $kundentyp = '';
-$leistung  = clean(field('leistung'), 60);
-if (!in_array($leistung, LEISTUNGEN, true)) $leistung = '';
+$branche = clean(field('branche'), 200);
+$satz    = clean(field('satz'), 240);
+$web     = clean(field('web'), 200);
+$social  = clean(field('social'), 300);
+$telefon = clean(field('telefon'), 40);
+$pick = static function (string $raw, array $allow): string {
+    $out = [];
+    foreach (array_map('trim', explode(',', $raw)) as $part) {
+        if ($part !== '' && in_array($part, $allow, true) && !in_array($part, $out, true)) $out[] = $part;
+    }
+    return implode(', ', $out);
+};
+$gebiet = $pick(clean(field('gebiet'), 80), ['lokal', 'regional', 'deutschlandweit', 'international']);
+$kunden = $pick(clean(field('kunden'), 20), ['B2B', 'B2C']);
+$ziel = $pick(clean(field('ziel'), 200), ['mehr Anfragen', 'mehr Reichweite', 'Bekanntheit', 'Mitarbeiter finden', 'Online-Verkauf']);
+$standWeb = $pick(clean(field('stand_web'), 40), ['keine Website', 'veraltete Website', 'Website vorhanden']);
+$standSocial = $pick(clean(field('stand_social'), 10), ['ja', 'nein']);
+$standWerbung = $pick(clean(field('stand_werbung'), 10), ['ja', 'nein']);
+$leistungen = $pick(clean(field('leistungen'), 400), ['Websites', 'SEO & Sichtbarkeit', 'Systeme & Dashboards', 'Automatisierung & Chatbots', 'App Design', 'Werbeclips', 'Ads-Management', 'Newsletter-Marketing']);
+$material = $pick(clean(field('material'), 80), ['Logo', 'Fotos', 'Videos', 'Texte']);
+$budget = $pick(clean(field('budget'), 40), ['unter 500 €', '500–2.000 €', 'über 2.000 €', 'noch offen']);
+$zeitpunkt = $pick(clean(field('zeitpunkt'), 40), ['sofort', 'in 1–3 Monaten', 'später']);
+$entscheidet = $pick(clean(field('entscheidet'), 40), ['ich selbst', 'mit Partner/Team']);
 $nachricht = clean(field('nachricht'), 5000);
 
-if ($name === '' || mb_strlen($nachricht) < 10) back('err=input');
+if ($name === '' || $branche === '' || mb_strlen($satz) < 8 || mb_strlen($nachricht) < 10) back('err=input');
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) back('err=email');
-if (preg_match('/[\r\n]/', $name . $email . $firma . $leistung)) back('err=input'); // Header-Injection
+if (preg_match('/[\r\n]/', $name . $email . $firma . $branche . $satz . $web . $social . $telefon . $gebiet . $kunden . $ziel . $standWeb . $standSocial . $standWerbung . $leistungen . $material . $budget . $zeitpunkt . $entscheidet)) back('err=input'); // Header-Injection
 if (preg_match_all('~https?://~i', $nachricht) > 3) back('ok=1');                    // Link-Spam
 
-$subject = '=?UTF-8?B?' . base64_encode('Anfrage über projektex.de: ' . ($leistung !== '' ? $leistung : 'Allgemein')) . '?=';
+$betreff = $leistungen !== '' ? explode(', ', $leistungen)[0] : 'Allgemein';
+$subject = '=?UTF-8?B?' . base64_encode('Anfrage über projektex.de: ' . $betreff) . '?=';
 $body = "Neue Anfrage über das Kontaktformular\n\n"
-      . "Name: $name\nE-Mail: $email\nAnfrage als: $kundentyp\nUnternehmen/Verein: $firma\nLeistung: $leistung\n\nNachricht:\n$nachricht\n";
+      . "Name: $name\nE-Mail: $email\nTelefon: $telefon\nAnfrage als: $kundentyp\nUnternehmen/Verein: $firma\n"
+      . "Branche: $branche\nIn einem Satz: $satz\nWebsite: $web\nSocial Media: $social\n"
+      . "Gebiet: $gebiet\nKunden: $kunden\nWichtigstes Ziel: $ziel\n"
+      . "Website heute: $standWeb\nSocial Media aktiv: $standSocial\nBisher Werbung: $standWerbung\n"
+      . "Leistungen: $leistungen\nVorhandenes Material: $material\nMonatliches Marketingbudget: $budget\n"
+      . "Wann soll es losgehen?: $zeitpunkt\nWer entscheidet?: $entscheidet\n\nNachricht:\n$nachricht\n";
 $headers = implode("\r\n", [
   'From: PROJEKT EX Website <' . FROM . '>',
   'Reply-To: ' . $email,
