@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-jRmPsbsPwu8oEM8kbjPs5Zz0wagNXEpsG6Wg1pI6/m4='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://esm.sh blob: data: 'sha256-jRmPsbsPwu8oEM8kbjPs5Zz0wagNXEpsG6Wg1pI6/m4='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self' https://esm.sh https://api.elevenlabs.io wss://api.elevenlabs.io https://livekit.rtc.elevenlabs.io wss://livekit.rtc.elevenlabs.io; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
@@ -30,8 +30,7 @@
 <link rel="stylesheet" href="../assets/ep-fx.css">
 <link rel="stylesheet" href="../assets/themen.css">
 <link rel="stylesheet" href="../assets/liquid-glass.css">
-<link rel="stylesheet" href="../assets/preise.css">
-<link rel="stylesheet" href="../assets/telefonbot-demo.css">
+<link rel="stylesheet" href="../assets/telefonbot-demo.css?v=b9d7bd5e">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Automatisierung & Chatbots","serviceType":"Intelligente Automatisierung","description":"Intelligente Prozessautomatisierung mit Chatbots für Anfragen, Termine, Dokumente und internes Wissen. Systeme verbinden, die Kontrolle bleibt beim Team.","url":"https://projektex.de/leistungen/automatisierung-chatbots","provider":{"@type":"Organization","@id":"https://projektex.de/#organisation","name":"PROJEKT EX","url":"https://projektex.de/","telephone":"+49-1520-4388945"},"areaServed":[{"@type":"Country","name":"Deutschland"},{"@type":"Country","name":"Österreich"},{"@type":"Country","name":"Schweiz"},"Worldwide"],"availableLanguage":"de"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://projektex.de/"},{"@type":"ListItem","position":2,"name":"Automatisierung & Chatbots","item":"https://projektex.de/leistungen/automatisierung-chatbots"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kann eine Automatisierung vollständig selbstständig arbeiten?","acceptedAnswer":{"@type":"Answer","text":"Technisch sind autonome Schritte möglich, aber nicht überall sinnvoll. Wir definieren klare Grenzen, Freigaben und Fehlerwege passend zum Risiko des jeweiligen Prozesses."}},{"@type":"Question","name":"Müssen bestehende Systeme ersetzt werden?","acceptedAnswer":{"@type":"Answer","text":"Meistens nicht. Wenn Schnittstellen vorhanden sind, kann eine Automatisierung bestehende Systeme verbinden. Wo keine sichere Integration möglich ist, empfehlen wir eine andere Lösung."}},{"@type":"Question","name":"Wie beginnt ein Automatisierungsprojekt?","acceptedAnswer":{"@type":"Answer","text":"Mit einem wiederkehrenden Ablauf, dessen Eingang, gewünschtes Ergebnis und Ausnahmen klar beschrieben werden können. Daraus bauen wir einen begrenzten Pilot."}},{"@type":"Question","name":"Kümmert ihr euch auch um Hosting und Betreuung?","acceptedAnswer":{"@type":"Answer","text":"Ja. Wir verbinden eure Systeme, richten Hosting, Domain und Zugänge ein und helfen nach dem Start bei Updates und Anpassungen. Kosten der Anbieter weisen wir separat und transparent aus."}},{"@type":"Question","name":"Was kann ein Chat-Assistent auf unserer Website?","acceptedAnswer":{"@type":"Answer","text":"Er beantwortet wiederkehrende Fragen aus euren eigenen Inhalten, nimmt Terminwünsche auf und gibt alles Unklare an euer Team weiter. Welche Quellen er nutzen darf, legt ihr fest."}},{"@type":"Question","name":"Welche Systeme könnt ihr verbinden?","acceptedAnswer":{"@type":"Answer","text":"Alles mit passender Schnittstelle, zum Beispiel Formulare, E-Mail, Kalender, Shop oder Tabellen. Ob eine Verbindung sicher möglich ist, prüfen wir vorab."}}]}]}</script>
 <style>
 .px-film { margin: 0; border-radius: 28px; padding: 6px; background: linear-gradient(160deg, rgba(255,255,255,.8), rgba(236,241,248,.6)); border: 1px solid rgba(255,255,255,.95);
@@ -78,39 +77,9 @@
       <p class="kicker"><span>04</span><span>Connect</span></p>
       <h1 data-hw><span class="hw"><span style="--i:0">Automatisierung,</span></span> <span class="hw"><span style="--i:1">die</span></span> <span class="hw"><span style="--i:2">Routine</span></span> <span class="hw"><span style="--i:3">abnimmt.</span></span></h1>
       <p class="lead">Prozessautomatisierung für Anfragen, Dokumente und bestehende Systeme, dazu Chat-Assistenten für Website und Team. Mehr Zeit fürs Geschäft, die Kontrolle bleibt bei euch.</p>
-      <p class="ctas"><a class="btn" href="#telefonbot-testen">Jetzt testen</a></p>
+      <p class="ctas"><a class="btn" href="#telefonbot-testen">Jetzt testen</a><a class="tb-preis-link" href="../preise.html#telefonbot-abo-standard">Preise ansehen</a></p>
       <ul class="th-kinds" aria-label="Das gehört dazu"><li style="--k:0">Chat-Assistenten</li><li style="--k:1">Anfragen &amp; Leads</li><li style="--k:2">Dokumente &amp; Daten</li><li style="--k:3">Internes Wissen</li><li style="--k:4">Systeme verbinden</li><li style="--k:5">Hosting &amp; Betreuung</li></ul>
     </div>
-  </section>
-
-  <section class="block tb-test" id="telefonbot-testen" aria-labelledby="telefonbot-testen-h">
-    <h2 id="telefonbot-testen-h">Den Telefon-Bot testen.</h2>
-    <p class="tb-lead">Fragen beantworten, Termine buchen oder an euer Team weiterleiten. Die Demo im Browser folgt als Widget, ohne Rufnummer.</p>
-    <div id="telefonbot-demo" class="tb-demo" data-telefonbot-demo data-demo-widget="pending" data-demo-provider="ki-automatisierung">
-      <p class="tb-demo-status" id="telefonbot-demo-status">Demo-Leitung folgt</p>
-      <a class="btn" href="#telefonbot-demo" aria-describedby="telefonbot-demo-status">Jetzt testen</a>
-    </div>
-    <h3>Was der Agent kann</h3>
-    <ul class="tb-can">
-      <li><b>Fragen beantworten</b><p>Öffnungszeiten, Leistungen und typische Anliegen aus euren Angaben.</p></li>
-      <li><b>Termine buchen</b><p>Freie Zeiten vorschlagen und im Kalender eintragen.</p></li>
-      <li><b>An einen Menschen weiterleiten</b><p>Unklare oder dringende Fälle gehen an euer Team.</p></li>
-      <li><b>Zusammenfassung nach dem Anruf</b><p>Kurzfassung an euer Team, zum Beispiel per E-Mail oder CRM.</p></li>
-    </ul>
-    <figure class="tb-chat-wrap">
-      <figcaption>
-        <h3>Beispiel: Termin beim Friseur</h3>
-        <p class="tb-chat-note">Demo, kein echtes Gespräch.</p>
-      </figcaption>
-      <ol class="tb-chat" aria-label="Beispielgespräch zur Terminbuchung, als Demo gekennzeichnet">
-        <li class="tb-caller"><span class="tb-who">Anruferin</span><p>Hallo, ich hätte gern einen Termin für einen Haarschnitt.</p></li>
-        <li class="tb-agent"><span class="tb-who">Agent</span><p>Gern. Nur Schnitt, oder auch Farbe?</p></li>
-        <li class="tb-caller"><span class="tb-who">Anruferin</span><p>Nur Schnitt, am Donnerstagnachmittag.</p></li>
-        <li class="tb-agent"><span class="tb-who">Agent</span><p>Donnerstag um 15 Uhr bei Anna ist frei. Soll ich den Termin eintragen?</p></li>
-        <li class="tb-caller"><span class="tb-who">Anruferin</span><p>Ja, bitte.</p></li>
-        <li class="tb-agent"><span class="tb-who">Agent</span><p>Ist eingetragen. Eine kurze Zusammenfassung geht an das Studio. Bis Donnerstag.</p></li>
-      </ol>
-    </figure>
   </section>
 
   <section class="block uc" id="erklaervideo" aria-labelledby="ev-h">
@@ -139,6 +108,45 @@
       </article>
     </div>
   </section>
+  <section class="block tb-test" id="telefonbot-testen" aria-labelledby="telefonbot-testen-h">
+    <h2 id="telefonbot-testen-h">Den Telefon-Bot testen.</h2>
+    <p class="tb-lead">Fragen beantworten, Termine buchen oder an euer Team weiterleiten. Test im Browser, ohne Rufnummer.</p>
+    <p><a class="tb-preis-link" href="../preise.html#telefonbot-abo-standard">Preise ansehen</a></p>
+    <div id="telefonbot-demo" class="tb-demo pex-demo" data-telefonbot-demo data-demo-provider="elevenlabs">
+      <button type="button" id="pex-demo-btn" class="btn pex-demo__btn">Jetzt testen</button>
+      <p id="pex-demo-status" class="tb-demo-status pex-demo__status" aria-live="polite">Live-Gespräch mit unserer KI im Browser (Mikrofon nötig, max. 3 Minuten). Demo: Termine sind Beispiele und werden nicht gebucht.</p>
+      <p class="tb-demo-privacy">Die Verarbeitung läuft über ElevenLabs in den USA (EU-Standardvertragsklauseln). Das KI-Modell ist Google Gemini. Das Mikrofon wird erst nach dem Klick genutzt.</p>
+    </div>
+    <figure class="tb-hoerprobe">
+      <figcaption>Beispiel</figcaption>
+      <audio controls preload="metadata" src="../assets/audio/telefonbot/beispiel-dialog.mp3">
+        Ihr Browser kann die Hörprobe nicht wiedergeben.
+      </audio>
+      <p class="tb-chat-note">Beispielaufnahme, 39 s. Kein echtes Gespräch.</p>
+    </figure>
+    <h3>Was der Agent kann</h3>
+    <ul class="tb-can">
+      <li><b>Fragen beantworten</b><p>Öffnungszeiten, Leistungen und typische Anliegen aus euren Angaben.</p></li>
+      <li><b>Termine buchen</b><p>Freie Zeiten vorschlagen und im Kalender eintragen.</p></li>
+      <li><b>An einen Menschen weiterleiten</b><p>Unklare oder dringende Fälle gehen an euer Team.</p></li>
+      <li><b>Zusammenfassung nach dem Anruf</b><p>Kurzfassung an euer Team, zum Beispiel per E-Mail oder CRM.</p></li>
+    </ul>
+    <figure class="tb-chat-wrap">
+      <figcaption>
+        <h3>Beispiel: Termin beim Friseur</h3>
+        <p class="tb-chat-note">Demo, kein echtes Gespräch.</p>
+      </figcaption>
+      <ol class="tb-chat" aria-label="Beispielgespräch zur Terminbuchung, als Demo gekennzeichnet">
+        <li class="tb-caller"><span class="tb-who">Anruferin</span><p>Hallo, ich hätte gern einen Termin für einen Haarschnitt.</p></li>
+        <li class="tb-agent"><span class="tb-who">Agent</span><p>Gern. Nur Schnitt, oder auch Farbe?</p></li>
+        <li class="tb-caller"><span class="tb-who">Anruferin</span><p>Nur Schnitt, am Donnerstagnachmittag.</p></li>
+        <li class="tb-agent"><span class="tb-who">Agent</span><p>Donnerstag um 15 Uhr bei Anna ist frei. Soll ich den Termin eintragen?</p></li>
+        <li class="tb-caller"><span class="tb-who">Anruferin</span><p>Ja, bitte.</p></li>
+        <li class="tb-agent"><span class="tb-who">Agent</span><p>Ist eingetragen. Eine kurze Zusammenfassung geht an das Studio. Bis Donnerstag.</p></li>
+      </ol>
+    </figure>
+  </section>
+
   <section class="block uc" id="praxisbeispiele" aria-labelledby="uc-h">
     <div class="th-list-h"><h2 id="uc-h" class="pb-title">So könnte das bei euch aussehen.</h2><p>Drei Ideen aus Praxis, Handwerk und Kanzlei. Marken erfunden, Abläufe echt umsetzbar.</p></div>
     <div class="uc-list">
@@ -209,25 +217,6 @@
 <details><summary>Welche Systeme könnt ihr verbinden?</summary><p>Alles mit passender Schnittstelle, zum Beispiel Formulare, E-Mail, Kalender, Shop oder Tabellen. Ob eine Verbindung sicher möglich ist, prüfen wir vorab.</p></details>
 </div></div></section>
   
-  <section class="block price-area" id="telefonbot-abo-standard" aria-labelledby="telefonbot-abo-h">
-    <h2 id="telefonbot-abo-h">Telefon-Bot, Paket Standard.</h2>
-    <p class="intro">v1-Vorschau, noch kein buchbares Angebot. Alle Beträge netto zzgl. MwSt.</p>
-    <div class="package-grid package-grid-single">
-<article class="package">
-<h3>Standard</h3>
-<p class="package-frequency">Telefon-Bot, Mindestlaufzeit 3 Monate</p>
-<p><strong>180 € netto</strong> / Monat<br><small>zzgl. MwSt.</small></p>
-<dl>
-<div><dt>Einrichtung</dt><dd>einmalig 450 € netto zzgl. MwSt.</dd></div>
-<div><dt>Inklusivminuten</dt><dd>500 Minuten inklusive</dd></div>
-<div><dt>Anbindungen</dt><dd>Kalender- und CRM-Anbindung inklusive</dd></div>
-<div><dt>Zusatzminute</dt><dd>0,35 € netto zzgl. MwSt.</dd></div>
-<div><dt>Laufzeit</dt><dd>Mindestlaufzeit 3 Monate, danach monatlich kündbar</dd></div>
-</dl>
-</article>
-</div>
-    <p class="catalog-note">Zusatzminuten über 500 Minuten im Monat: 0,35 € netto zzgl. MwSt. <a href="../preise.html#telefonbot-abo-standard">Zur Preisseite</a></p>
-  </section>
 
   <section class="cta-band"><h2>Automatisierung ist dann gut, wenn Arbeit leichter wird.</h2><div class="ctas"><a class="btn" href="../index.html#kontakt">Projekt besprechen ↗</a><a class="btn ghost light" href="mailto:kontakt@projektex.de">kontakt@projektex.de</a></div></section>
   <nav class="pager ep-next" aria-label="Nächste Leistung"><a class="nx" href="apps.html"><span class="nx-img" aria-hidden="true"><img src="../lab/app-design-1024.webp" srcset="../lab/app-design-640.webp 640w, ../lab/app-design-1024.webp 1024w, ../lab/app-design.webp 1536w" sizes="(max-width: 1320px) 92vw, 1320px" alt="" loading="lazy" decoding="async"></span><small>Nächste Leistung · 05 · Develop</small><b>App Design</b><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a><a class="pv" href="systeme.html"><small>Vorherige</small>Systeme &amp; Dashboards</a></nav>
@@ -255,5 +244,6 @@
 <script src="../assets/ep-fx.js" defer></script>
 <script src="../assets/rubriken.js" defer></script>
 <script src="../assets/autoplay.js?v=219edb23" defer></script>
+<script type="module" src="../assets/telefonbot-demo.js?v=c2200086"></script>
 </body>
 </html>
