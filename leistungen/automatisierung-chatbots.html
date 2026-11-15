@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="../assets/themen.css">
 <link rel="stylesheet" href="../assets/liquid-glass.css">
 <link rel="stylesheet" href="../assets/preise.css">
+<link rel="stylesheet" href="../assets/telefonbot-demo.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Automatisierung & Chatbots","serviceType":"Intelligente Automatisierung","description":"Intelligente Prozessautomatisierung mit Chatbots für Anfragen, Termine, Dokumente und internes Wissen. Systeme verbinden, die Kontrolle bleibt beim Team.","url":"https://projektex.de/leistungen/automatisierung-chatbots","provider":{"@type":"Organization","@id":"https://projektex.de/#organisation","name":"PROJEKT EX","url":"https://projektex.de/","telephone":"+49-1520-4388945"},"areaServed":[{"@type":"Country","name":"Deutschland"},{"@type":"Country","name":"Österreich"},{"@type":"Country","name":"Schweiz"},"Worldwide"],"availableLanguage":"de"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://projektex.de/"},{"@type":"ListItem","position":2,"name":"Automatisierung & Chatbots","item":"https://projektex.de/leistungen/automatisierung-chatbots"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kann eine Automatisierung vollständig selbstständig arbeiten?","acceptedAnswer":{"@type":"Answer","text":"Technisch sind autonome Schritte möglich, aber nicht überall sinnvoll. Wir definieren klare Grenzen, Freigaben und Fehlerwege passend zum Risiko des jeweiligen Prozesses."}},{"@type":"Question","name":"Müssen bestehende Systeme ersetzt werden?","acceptedAnswer":{"@type":"Answer","text":"Meistens nicht. Wenn Schnittstellen vorhanden sind, kann eine Automatisierung bestehende Systeme verbinden. Wo keine sichere Integration möglich ist, empfehlen wir eine andere Lösung."}},{"@type":"Question","name":"Wie beginnt ein Automatisierungsprojekt?","acceptedAnswer":{"@type":"Answer","text":"Mit einem wiederkehrenden Ablauf, dessen Eingang, gewünschtes Ergebnis und Ausnahmen klar beschrieben werden können. Daraus bauen wir einen begrenzten Pilot."}},{"@type":"Question","name":"Kümmert ihr euch auch um Hosting und Betreuung?","acceptedAnswer":{"@type":"Answer","text":"Ja. Wir verbinden eure Systeme, richten Hosting, Domain und Zugänge ein und helfen nach dem Start bei Updates und Anpassungen. Kosten der Anbieter weisen wir separat und transparent aus."}},{"@type":"Question","name":"Was kann ein Chat-Assistent auf unserer Website?","acceptedAnswer":{"@type":"Answer","text":"Er beantwortet wiederkehrende Fragen aus euren eigenen Inhalten, nimmt Terminwünsche auf und gibt alles Unklare an euer Team weiter. Welche Quellen er nutzen darf, legt ihr fest."}},{"@type":"Question","name":"Welche Systeme könnt ihr verbinden?","acceptedAnswer":{"@type":"Answer","text":"Alles mit passender Schnittstelle, zum Beispiel Formulare, E-Mail, Kalender, Shop oder Tabellen. Ob eine Verbindung sicher möglich ist, prüfen wir vorab."}}]}]}</script>
 <style>
 .px-film { margin: 0; border-radius: 28px; padding: 6px; background: linear-gradient(160deg, rgba(255,255,255,.8), rgba(236,241,248,.6)); border: 1px solid rgba(255,255,255,.95);
@@ -77,9 +78,41 @@
       <p class="kicker"><span>04</span><span>Connect</span></p>
       <h1 data-hw><span class="hw"><span style="--i:0">Automatisierung,</span></span> <span class="hw"><span style="--i:1">die</span></span> <span class="hw"><span style="--i:2">Routine</span></span> <span class="hw"><span style="--i:3">abnimmt.</span></span></h1>
       <p class="lead">Prozessautomatisierung für Anfragen, Dokumente und bestehende Systeme, dazu Chat-Assistenten für Website und Team. Mehr Zeit fürs Geschäft, die Kontrolle bleibt bei euch.</p>
+      <p class="ctas"><a class="btn" href="#telefonbot-testen">Jetzt testen</a></p>
       <ul class="th-kinds" aria-label="Das gehört dazu"><li style="--k:0">Chat-Assistenten</li><li style="--k:1">Anfragen &amp; Leads</li><li style="--k:2">Dokumente &amp; Daten</li><li style="--k:3">Internes Wissen</li><li style="--k:4">Systeme verbinden</li><li style="--k:5">Hosting &amp; Betreuung</li></ul>
     </div>
   </section>
+
+  <section class="block tb-test" id="telefonbot-testen" aria-labelledby="telefonbot-testen-h">
+    <h2 id="telefonbot-testen-h">Den Telefon-Bot testen.</h2>
+    <p class="tb-lead">Fragen beantworten, Termine buchen oder an euer Team weiterleiten. Die Demo im Browser folgt als Widget, ohne Rufnummer.</p>
+    <div id="telefonbot-demo" class="tb-demo" data-telefonbot-demo data-demo-widget="pending" data-demo-provider="ki-automatisierung">
+      <p class="tb-demo-status" id="telefonbot-demo-status">Demo-Leitung folgt</p>
+      <a class="btn" href="#telefonbot-demo" aria-describedby="telefonbot-demo-status">Jetzt testen</a>
+    </div>
+    <h3>Was der Agent kann</h3>
+    <ul class="tb-can">
+      <li><b>Fragen beantworten</b><p>Öffnungszeiten, Leistungen und typische Anliegen aus euren Angaben.</p></li>
+      <li><b>Termine buchen</b><p>Freie Zeiten vorschlagen und im Kalender eintragen.</p></li>
+      <li><b>An einen Menschen weiterleiten</b><p>Unklare oder dringende Fälle gehen an euer Team.</p></li>
+      <li><b>Zusammenfassung nach dem Anruf</b><p>Kurzfassung an euer Team, zum Beispiel per E-Mail oder CRM.</p></li>
+    </ul>
+    <figure class="tb-chat-wrap">
+      <figcaption>
+        <h3>Beispiel: Termin beim Friseur</h3>
+        <p class="tb-chat-note">Demo, kein echtes Gespräch.</p>
+      </figcaption>
+      <ol class="tb-chat" aria-label="Beispielgespräch zur Terminbuchung, als Demo gekennzeichnet">
+        <li class="tb-caller"><span class="tb-who">Anruferin</span><p>Hallo, ich hätte gern einen Termin für einen Haarschnitt.</p></li>
+        <li class="tb-agent"><span class="tb-who">Agent</span><p>Gern. Nur Schnitt, oder auch Farbe?</p></li>
+        <li class="tb-caller"><span class="tb-who">Anruferin</span><p>Nur Schnitt, am Donnerstagnachmittag.</p></li>
+        <li class="tb-agent"><span class="tb-who">Agent</span><p>Donnerstag um 15 Uhr bei Anna ist frei. Soll ich den Termin eintragen?</p></li>
+        <li class="tb-caller"><span class="tb-who">Anruferin</span><p>Ja, bitte.</p></li>
+        <li class="tb-agent"><span class="tb-who">Agent</span><p>Ist eingetragen. Eine kurze Zusammenfassung geht an das Studio. Bis Donnerstag.</p></li>
+      </ol>
+    </figure>
+  </section>
+
   <section class="block uc" id="erklaervideo" aria-labelledby="ev-h">
     <div class="uc-list">
       <article class="pb uc-item rb">

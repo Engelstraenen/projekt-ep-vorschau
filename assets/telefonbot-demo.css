@@ -1,0 +1,92 @@
+/* Testanruf-Bereich auf der Automatisierung-Seite. Kompakt, vorhandene Tokens. */
+#telefonbot-testen,
+#telefonbot-demo { scroll-margin-top: 96px; }
+.tb-test h2 { letter-spacing: -.035em; max-width: 20ch; }
+.tb-test .tb-lead { max-width: 62ch; margin: 12px 0 28px; color: var(--ink-2); }
+.tb-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 22px;
+  padding: 22px 24px;
+  margin: 0 0 40px;
+  background: #FAFAFB;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 24px;
+  max-width: 42rem;
+}
+.tb-demo-status { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
+.tb-can {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0 40px;
+}
+.tb-can li {
+  background: #FAFAFB;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 20px;
+  padding: 18px 18px 20px;
+}
+.tb-can b { display: block; font-size: 17px; font-weight: 650; letter-spacing: -.03em; margin-bottom: 6px; }
+.tb-can p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.45; }
+.tb-test h3 { font-size: clamp(21px, 2.2vw, 28px); letter-spacing: -.03em; margin: 0 0 8px; }
+.tb-chat-wrap { margin: 16px 0 0; max-width: 36rem; }
+.tb-chat-note { margin: 0 0 16px; font-size: 14px; color: var(--ink-2); }
+.tb-chat {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 18px 18px 20px;
+  background: #F5F5F7;
+  border-radius: 22px;
+  min-height: 8rem;
+}
+.tb-chat li { display: flex; flex-direction: column; gap: 4px; max-width: 88%; margin-top: 10px; }
+.tb-chat li:first-child { margin-top: 0; }
+.tb-chat .tb-who { font-size: 12px; font-weight: 600; color: var(--ink-2); letter-spacing: .01em; }
+.tb-chat p {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.4;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.tb-agent { align-self: flex-start; }
+.tb-caller { align-self: flex-end; align-items: flex-end; }
+.tb-caller p { background: var(--blue); color: #fff; }
+@media (prefers-reduced-motion: no-preference) {
+  .tb-chat li {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transform: translateY(6px);
+    animation: tb-msg .45s var(--ease) forwards;
+  }
+  .tb-chat li:nth-child(1) { animation-delay: .1s; }
+  .tb-chat li:nth-child(2) { animation-delay: .55s; }
+  .tb-chat li:nth-child(3) { animation-delay: 1s; }
+  .tb-chat li:nth-child(4) { animation-delay: 1.45s; }
+  .tb-chat li:nth-child(5) { animation-delay: 1.9s; }
+  .tb-chat li:nth-child(6) { animation-delay: 2.35s; }
+}
+@keyframes tb-msg {
+  to { opacity: 1; max-height: 12rem; margin-top: 10px; overflow: visible; transform: none; }
+}
+.tb-chat li:first-child { animation-name: tb-msg-first; }
+@keyframes tb-msg-first {
+  to { opacity: 1; max-height: 12rem; margin-top: 0; overflow: visible; transform: none; }
+}
+@media (max-width: 860px) {
+  .tb-can { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .tb-can { grid-template-columns: 1fr; }
+  .tb-demo { padding: 18px 16px; }
+}
