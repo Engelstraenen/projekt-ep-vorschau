@@ -1,0 +1,18 @@
+@font-face{font-family:Fraunces;src:url("../app-stage-fonts/fraunces-700-italic.woff2") format("woff2");font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:Manrope;src:url("../app-stage-fonts/manrope-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Manrope;src:url("../app-stage-fonts/manrope-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+:root{
+  --stage-bg:#ECEDE5;
+  --stage-fg:#1E3A2A;
+  --stage-mute:#1E3A2AA3;
+  --stage-accent:#1E3A2A;
+  --stage-glow:#1E3A2A2E;
+  --stage-font:Manrope,Helvetica,sans-serif;
+  --title-font:Fraunces,Georgia,serif;
+  --title-weight:700;
+  --title-italic:italic;
+  --title-stretch:100%;
+  --stage-weight:400;
+  --phone-glow:#1E3A2A4D;
+  --phone-screen:#FBF8F3;
+}

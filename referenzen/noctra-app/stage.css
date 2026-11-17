@@ -1,0 +1,15 @@
+@font-face{font-family:"Roboto Flex";src:url("../app-stage-fonts/roboto-flex.woff2") format("woff2");font-weight:100 1000;font-style:normal;font-display:swap}
+:root{
+  --stage-bg:#0b0d12;
+  --stage-fg:#f4f7ff;
+  --stage-mute:#f4f7ffa3;
+  --stage-accent:#f4f7ff;
+  --stage-glow:#ffffff1c;
+  --stage-font:"Roboto Flex",Helvetica,sans-serif;
+  --title-weight:900;
+  --title-italic:italic;
+  --title-stretch:118%;
+  --stage-weight:420;
+  --phone-glow:#ffffff29;
+  --phone-screen:#111;
+}

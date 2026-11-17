@@ -5,43 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#111111">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src https://engelstraenen.github.io; script-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <title>NOCTRA · Shop-App · Demo PROJEKT EX</title>
-<style>
-  :root{--bg:#111;--fg:#f5f5f5;--muted:#9a9a9a;--line:rgba(255,255,255,.14)}
-  *{box-sizing:border-box}
-  html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  .skip{position:absolute;left:-999px}
-  .skip:focus{left:12px;top:12px;background:#fff;color:#111;padding:8px 12px;z-index:5}
-  .desk__side{display:none}
-  .phone{position:fixed;inset:0;background:#111}
-  .phone iframe{display:block;width:100%;height:100%;border:0;background:#fff}
-  .note{display:none}
-  @media (min-width:960px){
-    body{background:radial-gradient(ellipse at 70% 30%,#2a2a2a, #0c0c0c 62%)}
-    .desk{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(3rem,7vw,8rem);max-width:1180px;margin:0 auto;padding:4rem 3rem 3rem;min-height:100vh}
-    .desk__side{display:block;max-width:42ch}
-    .kicker{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 1.1rem}
-    h1{font-weight:700;font-size:clamp(2.4rem,4.4vw,3.6rem);line-height:.95;letter-spacing:-.04em;margin:0;text-wrap:balance}
-    h1 span{display:block;font-weight:500;color:#bbb;letter-spacing:0;font-size:.42em;margin-top:.55rem}
-    .lead{margin:1.4rem 0 0;font-size:1.05rem;line-height:1.5;color:#ddd;max-width:40ch}
-    .fine{margin:1.8rem 0 0;font-size:.82rem;line-height:1.45;color:var(--muted);max-width:44ch}
-    .open{display:inline-block;margin-top:1.3rem;font-size:.9rem;color:#fff;text-underline-offset:4px}
-    .phone{position:relative;inset:auto;width:390px;height:min(844px, calc(100vh - 6rem));border-radius:54px;padding:12px;background:#000;box-shadow:0 0 0 1px var(--line),0 40px 90px rgba(0,0,0,.55)}
-    .phone iframe{height:100%;border-radius:42px}
-    .note{display:block;margin-top:2rem;font-size:.75rem;color:var(--muted)}
-  }
-</style>
+<link rel="preload" href="../app-stage-fonts/roboto-flex.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="stage.css">
+<link rel="stylesheet" href="../app-stage.css">
 </head>
 <body>
   <a class="skip" href="#app">Zur App springen</a>
-  <div class="desk">
-    <aside class="desk__side">
-      <p class="kicker">Shop-App · Demo</p>
-      <h1>NOCTRA<span>Streetwear-Shop als App</span></h1>
-      <p class="lead">Stöbern, merken, Größe wählen und in den Warenkorb legen. Die Demo läuft hier im Handy-Rahmen, genau wie auf dem Telefon.</p>
-      <p class="fine">Interaktive Portfolio-Demo von PROJEKT EX mit Beispieldaten. Keine echte Bestellung, keine Zahlung.</p>
-      <a class="open" href="https://engelstraenen.github.io/noctra-app/" target="_blank" rel="noopener">App ohne Rahmen öffnen ↗</a>
+  <div class="stage">
+    <aside class="stage-copy">
+      <p class="kicker">Demo-App</p>
+      <h1 class="stage-title">Noctra</h1>
+      <p class="stage-text">Ein Mode-Shop, der sich wie eine App anfühlt: stöbern, merken, Größe wählen und in den Warenkorb legen. Erfundene Marke mit Beispieldaten, keine echte Bestellung.</p>
+      <ul class="stage-list">
+        <li>Stöbern und merken</li>
+        <li>Größe wählen</li>
+        <li>In den Warenkorb</li>
+      </ul>
     </aside>
     <div class="phone" id="app">
       <iframe title="NOCTRA Shop-App" src="https://engelstraenen.github.io/noctra-app/" allow="fullscreen"></iframe>

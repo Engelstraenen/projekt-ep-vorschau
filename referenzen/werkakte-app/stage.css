@@ -1,0 +1,19 @@
+@font-face{font-family:"IBM Plex Sans";src:url("../app-stage-fonts/ibm-plex-sans-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("../app-stage-fonts/ibm-plex-sans-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Condensed";src:url("../app-stage-fonts/ibm-plex-sans-condensed-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+:root{
+  --stage-bg:#F3F5F8;
+  --stage-fg:#0F1F3D;
+  --stage-mute:#0F1F3DA3;
+  --stage-accent:#1D4ED8;
+  --stage-glow:#1D4ED847;
+  --stage-font:"IBM Plex Sans",Helvetica,sans-serif;
+  --stage-ui-font:"IBM Plex Sans",Helvetica,sans-serif;
+  --title-font:"IBM Plex Sans Condensed","IBM Plex Sans",Helvetica,sans-serif;
+  --title-weight:700;
+  --title-italic:normal;
+  --title-stretch:100%;
+  --stage-weight:400;
+  --phone-glow:#1D4ED859;
+  --phone-screen:#F7F8FA;
+}
