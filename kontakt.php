@@ -65,7 +65,7 @@ $name      = clean(field('name'), 100);
 $email     = clean(field('email'), 200);
 $firma     = clean(field('firma'), 150);
 $kundentyp = clean(field('kundentyp'), 40);
-if (!in_array($kundentyp, ['', 'Unternehmen', 'Verein', 'Öffentlicher Auftraggeber', 'Privatperson'], true)) $kundentyp = '';
+if (!in_array($kundentyp, ['', 'Unternehmen', 'Verein', 'Öffentlicher Auftraggeber'], true)) $kundentyp = '';
 $pick = static function (string $raw, array $allow): string {
     $out = [];
     foreach (array_map('trim', explode(',', $raw)) as $part) {
@@ -95,7 +95,7 @@ $sonstZeitpunkt = $note('sonst_zeitpunkt', 240);
 $sonstEntscheidet = $note('sonst_entscheidet', 240);
 $nachricht = clean(field('nachricht'), 5000);
 
-if ($name === '' || mb_strlen($nachricht) < 10) back('err=input');
+if ($name === '' || mb_strlen($firma) < 2 || mb_strlen($nachricht) < 10) back('err=input');
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) back('err=email');
 $einzeilig = $name . $email . $firma . $branche . $kanaele . $region . $ziel . $haken . $leistungen . $material . $zeitpunkt . $entscheidet . $sonstBranche . $sonstKanaele . $sonstRegion . $sonstZiel . $sonstHaken . $sonstLeistungen . $sonstMaterial . $sonstZeitpunkt . $sonstEntscheidet;
 if (preg_match('/[\r\n]/', $einzeilig)) back('err=input');
