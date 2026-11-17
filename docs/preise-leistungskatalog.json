@@ -3,36 +3,107 @@
     "name": "Websites",
     "source": "leistungen/websites.html",
     "einmalig": [
-      "Onepager"
+      "One Pager",
+      "Neue Webseite",
+      "Neuer E-Commerce-Shop"
     ],
-    "laufend": []
+    "laufend": [],
+    "pakete": []
+  },
+  "seo": {
+    "name": "SEO",
+    "source": "leistungen/seo.html",
+    "einmalig": [
+      "Einrichtungsgebühr"
+    ],
+    "laufend": [
+      "Monatlich"
+    ],
+    "pakete": []
+  },
+  "systeme": {
+    "name": "Systeme / Dashboards",
+    "source": "leistungen/systeme.html",
+    "einmalig": [
+      "Live World Design (3D-Welt der Prozesse)",
+      "Dashboard-Design",
+      "Warenwirtschaftssystem",
+      "Personalwirtschaftssystem",
+      "Telefon-Agent-Dashboard"
+    ],
+    "laufend": [],
+    "pakete": []
+  },
+  "bots": {
+    "name": "Bots",
+    "source": "leistungen/automatisierung-chatbots.html",
+    "einmalig": [
+      "Telefon-Agent",
+      "WhatsApp-Bot",
+      "Website-Chatbot",
+      "E-Mail-Bot",
+      "Büro-Agent",
+      "Individueller Agent"
+    ],
+    "laufend": [],
+    "pakete": []
+  },
+  "apps": {
+    "name": "Apps",
+    "source": "leistungen/apps.html",
+    "einmalig": [
+      "Neue App",
+      "Neue E-Commerce-App"
+    ],
+    "laufend": [],
+    "pakete": []
   },
   "bewertungs-loeschservice": {
-    "name": "Bewertungs-Löschservice",
+    "name": "Bewertungen löschen",
     "source": "leistungen/bewertungs-loeschservice.html",
     "einmalig": [
-      "Je tatsächlich gelöschter Bewertung",
-      "Ohne Löschung",
-      "Vorkasse"
+      "Je gelöschter Bewertung"
     ],
-    "laufend": []
+    "laufend": [],
+    "pakete": []
   },
   "werbeclips": {
-    "name": "Werbeclips",
+    "name": "Video",
     "source": "leistungen/werbeclips.html",
     "einmalig": [
-      "Digitales KI-Werbevideo",
-      "CGI-Video bis 30 s"
+      "Werbevideos / Ad Creatives",
+      "Firmenpräsentation"
     ],
-    "laufend": []
+    "laufend": [],
+    "pakete": []
+  },
+  "performance": {
+    "name": "Performance-Ad-Marketing",
+    "source": "leistungen/ads-management.html",
+    "einmalig": [],
+    "laufend": [],
+    "pakete": [
+      "Klein",
+      "Mittel",
+      "Groß"
+    ]
+  },
+  "newsletter-marketing": {
+    "name": "Newsletter-Marketing",
+    "source": "leistungen/newsletter-marketing.html",
+    "einmalig": [
+      "Newsletter-Marketing"
+    ],
+    "laufend": [],
+    "pakete": []
   },
   "logo-design": {
-    "name": "Logo Design",
+    "name": "Logo-Design",
     "source": "leistungen/logo-design.html",
     "einmalig": [
-      "Logo Basis",
-      "Logo Individuell"
+      "Logo-Design"
     ],
-    "laufend": []
+    "laufend": [],
+    "pakete": []
   }
 }

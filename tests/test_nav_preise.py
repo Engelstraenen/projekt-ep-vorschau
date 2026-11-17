@@ -61,9 +61,10 @@ async def main():
      await page.evaluate("window.scrollTo(0,document.querySelector('#bewertungs-loeschservice').offsetTop-76)"); await page.screenshot(path=str(OUT/f'after-{w}-preise-loesch.png'))
      await page.evaluate("window.scrollTo(0,document.querySelector('#websites').offsetTop-76)"); await page.screenshot(path=str(OUT/f'after-{w}-preise-websites.png'))
      await page.screenshot(path=str(OUT/f'after-{w}-preise-full.png'),full_page=True)
-     assert await page.locator('.price-area').count()==4
      catalog=json.loads((ROOT/'docs/preise-leistungskatalog.json').read_text())
+     assert await page.locator('.price-area').count()==len(catalog)
      assert await page.locator('.price-list > div').count()==sum(len(v['einmalig'])+len(v['laufend']) for v in catalog.values())
+     assert await page.locator('.package').count()==sum(len(v.get('pakete',[])) for v in catalog.values())
     report['httpErrors']+=errors
     await page.close()
    await c.close()
