@@ -22,6 +22,7 @@ DirectoryIndex index.html
   RewriteRule (^|/)\.(?!well-known/) - [F,L]
   RewriteRule ^(tools|docs|tests|node_modules|steak-seite|hq-showcase|agentur|\.github)(/|$) - [R=404,L]
   RewriteRule ^vorschau/(rechtspruefung|projektex-bestellprozess|cursory|jonas-tempo|stimmen-frau|agenturfilm-social|orbit)(/|$) - [R=404,L]
+  RewriteRule ^vorschau/(.+\.html|[^/]+/?)$ - [R=404,L]
   RewriteRule \.(md|py|map|lock|log|sh|yml|yaml|bak|orig|swp|sql|env|ini|dist)$ - [R=404,L]
   RewriteRule ^(package(-lock)?\.json)$ - [R=404,L]
 

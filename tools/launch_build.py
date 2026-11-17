@@ -89,6 +89,7 @@ def tracked_files():
 def public(p):
     if p.startswith(EXCLUDE_PREFIX) or p in EXCLUDE_FILES or p.endswith(EXCLUDE_SUFFIX): return False
     if '/tools/' in p: return False
+    if p.startswith('vorschau/') and p.endswith('.html'): return False   # interne Vorschauseiten, nur deren Medien sind verlinkt
     if EXCLUDE_RE.match(p): return False
     return True
 
