@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Deploy-Paket für https://projekt-ep.de (IONOS) bauen – ändert NICHTS im Repo.
+"""Deploy-Paket für https://projektex.de (IONOS) bauen – ändert NICHTS im Repo.
 
 Sammelt nur öffentliche, von Git verfolgte Dateien in einem Zielordner (Standard: ../ep-launch/dist)
 und stellt dort von "GitHub-Pages-Vorschau" auf "Launch" um:
   - noindex aus allen Seiten der sitemap.xml entfernen (404, Demos, Referenzen und Alt-Adressen bleiben noindex)
   - robots.txt: Allow + Sitemap-Zeile
-  - Canonical/og:url/sitemap prüfen (müssen auf https://projekt-ep.de/ zeigen)
+  - Canonical/og:url/sitemap prüfen (müssen auf https://projektex.de/ zeigen)
   - Rechtstexte: Abschnitte für NICHT genutzte Dienste ausblenden (Kategorien unten, Standard: chat, tracking;
     optional: zahlung). Die Vorschau-Quelle bleibt unverändert, die Abschnitte sind so später wieder einsetzbar.
   - Prüft, dass alle Inline-Skript-Hashes in der CSP der .htaccess stehen.
@@ -15,10 +15,13 @@ Aufruf:  python3 tools/launch_build.py [--out PFAD] [--entfernen chat,tracking[,
 import argparse, base64, hashlib, os, re, shutil, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOMAIN = 'https://projekt-ep.de'
+DOMAIN = 'https://projektex.de'
 
 # Nicht öffentlich: Repo-, Werkzeug- und Doku-Dateien, interne Vorschauen
-EXCLUDE_PREFIX = ('.github/', 'docs/', 'tools/', 'node_modules/', 'steak-seite/', 'hq-showcase/')
+EXCLUDE_PREFIX = ('.github/', 'docs/', 'tools/', 'tests/', 'node_modules/', 'steak-seite/', 'hq-showcase/',
+                  # interne Vorschauen/Werkzeuge (nicht von öffentlichen Seiten verlinkt, Vollcheck 17.11.2026)
+                  'agentur/', 'vorschau/rechtspruefung/', 'vorschau/projektex-bestellprozess/', 'vorschau/cursory/',
+                  'vorschau/jonas-tempo/', 'vorschau/stimmen-frau/', 'vorschau/agenturfilm-social/', 'vorschau/orbit/')
 EXCLUDE_FILES = {'_config.yml', '.nojekyll', 'package.json', 'package-lock.json', '.gitignore',
                  # unverlinkt, internes Showreel – Entscheidung Eugen 02.11.: nicht ins Deploy-Paket
                  'video/portfolio/effekte-showreel-720.mp4'}
@@ -35,7 +38,7 @@ ROBOTS = """User-agent: *
 Allow: /
 Disallow: /kontakt.php
 
-Sitemap: https://projekt-ep.de/sitemap.xml
+Sitemap: https://projektex.de/sitemap.xml
 """
 
 S = re.S
@@ -75,34 +78,8 @@ def csp_extend(policy, add):
 # (Kategorie, Datei, Muster (Regex), Ersatz). Jedes Muster MUSS genau einmal passen, sonst Abbruch
 # (so fällt auf, wenn sich der Quelltext geändert hat).
 RULES = [
-  # --- Chat-Assistent und WhatsApp-Benachrichtigung (Launch ohne Chat-Widget, Eugen 02.11.) ---
-  ('chat', 'datenschutz.html', r'<a href="#chat">Website-Chat</a>', ''),
-  ('chat', 'datenschutz.html', r'\s*<section class="legal" id="chat".*?</section>', ''),
-  ('chat', 'datenschutz.html', r'3b\. Aufträge', '3a. Aufträge'),
-  ('chat', 'datenschutz.html', r'\s*<p>Unser Chat-Assistent legt.*?</p>', ''),
-  ('chat', 'datenschutz.html', r' bei Sofort-Meldungen aus dem Website-Chat WhatsApp bzw\. unser E-Mail-Anbieter,', ''),
-  ('chat', 'rechtliches.html', r'\s*<p>Unser Chat-Assistent speichert.*?</p>', ''),
-  ('chat', 'rechtliches.html', r', per E-Mail oder im Website-Chat ist', ' oder per E-Mail ist'),
-  ('chat', 'widerruf.html', r', per E-Mail oder im Chat ist', ' oder per E-Mail ist'),
-  # --- Google Analytics 4, Google Ads Conversion, Meta-Pixel (Launch ohne Tracking, Eugen 02.11.) ---
-  ('tracking', 'datenschutz.html', r'<a href="#tracking">Analyse &amp; Werbung</a>', ''),
-  ('tracking', 'datenschutz.html', r'\s*<section class="legal" id="tracking".*?</section>', ''),
-  ('tracking', 'datenschutz.html', r'6\. Empfänger', '5. Empfänger'),
-  ('tracking', 'datenschutz.html', r' sowie – nur nach Ihrer Einwilligung – die genannten Analyse- und Werbedienste', ''),
-  ('tracking', 'datenschutz.html', r'Dienste zur Statistik und Werbung laden wir erst, nachdem Sie im Banner zugestimmt haben',
-   'Dienste zur Statistik und Werbung setzen wir derzeit nicht ein. Sollten wir sie einführen, laden wir sie erst, nachdem Sie im Banner zugestimmt haben'),
-  # --- Zahlungsarten (optional: --entfernen chat,tracking,zahlung) -> nur Rechnung/Überweisung ---
-  ('zahlung', 'datenschutz.html', r'<h3>Zahlungsdienstleister</h3>.*?(?=\s*</section>)',
-   '<h3>Zahlung</h3>\n    <p>Sie bezahlen per Rechnung bzw. Überweisung. Dabei verarbeiten Ihre Bank und unsere Bank '
-   '<span class="ph">[Name der Bank – trägt Eugen ein]</span> die Zahlungsdaten (Art. 6 Abs. 1 lit. b und c DSGVO).</p>'),
-  ('zahlung', 'datenschutz.html', r'bei Zahlungen der von Ihnen gewählte Zahlungsdienst \(PayPal, Klarna bzw\. die oben genannten Anbieter\),',
-   'bei Zahlungen die beteiligten Banken,'),
-  ('zahlung', 'rechtliches.html', r'<p>\(3a\) Zahlungswege:.*?</p>',
-   '<p>(3a) Zahlungsweg: Rechnung bzw. Überweisung. Für die Nutzung des Zahlungsmittels fallen für Verbraucher keine zusätzlichen Entgelte an (§ 312a Abs. 4 BGB, § 270a BGB).</p>'),
-  ('zahlung', 'faq.html', r'<strong>Mit allen gängigen Zahlungswegen\.</strong>.*?</p>',
-   '<strong>Per Rechnung.</strong> Ihr bekommt eine Rechnung und überweist innerhalb von 14 Tagen.</p>'),
-  ('zahlung', 'faq.html', r'"text":"Mit allen gängigen Zahlungswegen\.[^"]*"',
-   '"text":"Per Rechnung. Ihr bekommt eine Rechnung und überweist innerhalb von 14 Tagen."'),
+  # Leer seit Vollcheck 17.11.2026: Datenschutz, AGB, FAQ und Widerruf sind bereits als Launch-Fassung geschrieben
+  # (kein Chat-Widget, kein Tracking, Zahlung per Rechnung/Überweisung). Neue Regeln nur bei echten Umschaltungen.
 ]
 
 def tracked_files():
@@ -153,7 +130,7 @@ def main():
                 errors.append(f'{os.path.relpath(f, out)}: Vorschau-Adresse (github.io/projekt-ep-vorschau) im Code')
     print(f'Pfadpräfix /projekt-ep-vorschau/ in {fixed} Dateien entfernt')
 
-    # HSTS am ersten Tag kurz (300 s, ohne preload). Nach 1–2 stabilen Tagen (HTTPS für projekt-ep.de UND www,
+    # HSTS am ersten Tag kurz (300 s, ohne preload). Nach 1–2 stabilen Tagen (HTTPS für projektex.de UND www,
     # keine Zertifikatsfehler) erhöhen: Die Repo-.htaccess enthält bereits 1 Jahr -> Paket mit --no-hsts-start bauen und hochladen.
     if a.hsts_start:
         hp = os.path.join(out, '.htaccess'); ht = open(hp, encoding='utf-8').read()

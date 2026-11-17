@@ -1,7 +1,7 @@
 # =====================================================================
-#  PROJEKT EP – .htaccess für IONOS Webhosting (Apache)
-#  Domain: https://projekt-ep.de (ohne www, nur HTTPS)
-#  ENTWURF im Branch audit-fixes. Erst beim Umzug zu IONOS hochladen.
+#  PROJEKT EX – .htaccess für IONOS Webhosting (Apache)
+#  Domain: https://projektex.de (ohne www, nur HTTPS)
+#  Stand Vollcheck 17.11.2026 (Branch rechtstexte-vollcheck-v1). Erst nach Eugens Freigabe hochladen.
 #  Nach Änderungen an Inline-Skripten: python3 tools/csp.py (aktualisiert CSP unten)
 # =====================================================================
 
@@ -16,12 +16,13 @@ DirectoryIndex index.html
   # 1) HTTP -> HTTPS und www -> ohne www (eine Variante, ein 301-Sprung)
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} ^www\. [NC]
-  RewriteRule ^ https://projekt-ep.de%{REQUEST_URI} [R=301,L,NE]
+  RewriteRule ^ https://projektex.de%{REQUEST_URI} [R=301,L,NE]
 
   # 2) Interne Dateien nie ausliefern (Repo-Reste, Werkzeuge, Doku, Vorschauen)
   RewriteRule (^|/)\.(?!well-known/) - [F,L]
-  RewriteRule ^(tools|docs|node_modules|steak-seite|hq-showcase|\.github)(/|$) - [R=404,L]
-  RewriteRule \.(md|py|mjs\.map|lock|log|sh|yml|yaml|json\.bak)$ - [R=404,L]
+  RewriteRule ^(tools|docs|tests|node_modules|steak-seite|hq-showcase|agentur|\.github)(/|$) - [R=404,L]
+  RewriteRule ^vorschau/(rechtspruefung|projektex-bestellprozess|cursory|jonas-tempo|stimmen-frau|agenturfilm-social|orbit)(/|$) - [R=404,L]
+  RewriteRule \.(md|py|map|lock|log|sh|yml|yaml|bak|orig|swp|sql|env|ini|dist)$ - [R=404,L]
   RewriteRule ^(package(-lock)?\.json)$ - [R=404,L]
 
   # 3) Alte Adressen dauerhaft umleiten
@@ -37,7 +38,7 @@ DirectoryIndex index.html
 ErrorDocument 404 /404.html
 
 <IfModule mod_headers.c>
-  # HSTS: erst aktivieren, wenn HTTPS inkl. Zertifikat für projekt-ep.de UND www.projekt-ep.de sicher läuft.
+  # HSTS: erst aktivieren, wenn HTTPS inkl. Zertifikat für projektex.de UND www.projektex.de sicher läuft.
   # Start mit 1 Jahr. "preload" erst nach bewusster Entscheidung (schwer rückgängig zu machen).
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" "expr=%{HTTPS} == 'on'"
   Header always set X-Content-Type-Options "nosniff"
@@ -49,15 +50,19 @@ ErrorDocument 404 /404.html
   Header always unset X-Powered-By
   Header unset X-Powered-By
   # CSP-BEGIN
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-9rUZRmAmxLi7yJy/0h2umjUYgkJ9w1s5q8uIvSQ/ZIw=' 'sha256-B7tdwna2T5tu2b+Z0FSSuI0toY0O0CpGCdwjP2POEGw=' 'sha256-GNH/OzHntoG96nZw+hCSKjYqkJ5NLSXTvXEReWSPJF8=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-ORYTzHdG9jJqWlDOTrWg8cvAnrL+YPXKAFnyDkv7gAs=' 'sha256-hjVn+IRsqvrt8bMHeAuDaoUehRtmyqdrzqX5qm/5igI=' 'sha256-jRmPsbsPwu8oEM8kbjPs5Zz0wagNXEpsG6Wg1pI6/m4=' 'sha256-lVnwkM66inqvqQrf58LcToKJgCcGo0GA5fW2wa2sQhY=' 'sha256-t3UiN02yEOELy8uyYuAGfqOjM+CgL3Zld9KFKwAp/UU=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests; frame-ancestors 'none'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-B7tdwna2T5tu2b+Z0FSSuI0toY0O0CpGCdwjP2POEGw=' 'sha256-DOSzzHudZur9nA1X6CXT0D99FkUpIK1eU5MLhvI9hEw=' 'sha256-GNH/OzHntoG96nZw+hCSKjYqkJ5NLSXTvXEReWSPJF8=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-ORYTzHdG9jJqWlDOTrWg8cvAnrL+YPXKAFnyDkv7gAs=' 'sha256-WZRJfWvsnNCPcxzZwvyhovnZGqhZaC+8gPGPRbx6wTk=' 'sha256-hjVn+IRsqvrt8bMHeAuDaoUehRtmyqdrzqX5qm/5igI=' 'sha256-jRmPsbsPwu8oEM8kbjPs5Zz0wagNXEpsG6Wg1pI6/m4=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-ywz/tsfQ4QL5ckht8KzaS6hTQBlmvuHMfUgh3tQ6S4s=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests; frame-ancestors 'none'"
   # CSP-END
 
   # Caching: HTML kurz, Assets lang
   <FilesMatch "\.(html|php)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
-  <FilesMatch "\.(css|js|mjs|webp|jpg|jpeg|png|svg|mp4|webm|woff2)$">
+  <FilesMatch "\.(css|js|mjs|json)$">
     Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  # Medien und Schriften: 30 Tage (nicht alle Dateien haben ?v=, deshalb kein immutable)
+  <FilesMatch "\.(webp|avif|jpg|jpeg|png|gif|svg|ico|mp4|webm|woff|woff2|vtt)$">
+    Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
 </IfModule>
 
@@ -69,6 +74,8 @@ ErrorDocument 404 /404.html
   AddType text/javascript .mjs
   AddType image/webp .webp
   AddType video/mp4 .mp4
+  AddType image/avif .avif
+  AddType font/woff2 .woff2
 </IfModule>
 
 # Kontaktformular: nur POST erlaubt (Prüfung zusätzlich in kontakt.php)
