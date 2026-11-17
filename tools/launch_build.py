@@ -13,6 +13,9 @@ und stellt dort von "GitHub-Pages-Vorschau" auf "Launch" um:
 Aufruf:  python3 tools/launch_build.py [--out PFAD] [--entfernen chat,tracking[,zahlung]]
 """
 import argparse, base64, hashlib, os, re, shutil, subprocess, sys
+# Von Eugen am 17.11.2026 freigegeben: externe Demo-Links bleiben
+DEMO_LINK = re.compile(r'https://[a-z0-9-]+\.github\.io/(?!projekt-ep-vorschau)[^"\'\s<>]*')
+DEMO_LINK_B = re.compile(rb'https://[a-z0-9-]+\.github\.io/(?!projekt-ep-vorschau)[^"\'\s<>]*')
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = 'https://projektex.de'
@@ -125,9 +128,12 @@ def main():
         for fn in fs:
             if not fn.endswith(TEXT): continue
             f = os.path.join(d, fn); b = open(f, 'rb').read()
+            # github.io an der Ursprungsfassung prüfen, bevor /projekt-ep-vorschau/ zu / umgeschrieben wird
+            _raw = DEMO_LINK_B.sub(b'', b)
             if b'/projekt-ep-vorschau/' in b:
-                open(f, 'wb').write(b.replace(b'/projekt-ep-vorschau/', b'/')); fixed += 1
-            if b'projekt-ep-vorschau' in open(f, 'rb').read() or b'github.io' in open(f, 'rb').read():
+                b = b.replace(b'/projekt-ep-vorschau/', b'/')
+                open(f, 'wb').write(b); fixed += 1
+            if b'projekt-ep-vorschau' in DEMO_LINK_B.sub(b'', b) or b'github.io' in _raw:
                 errors.append(f'{os.path.relpath(f, out)}: Vorschau-Adresse (github.io/projekt-ep-vorschau) im Code')
     print(f'Pfadpräfix /projekt-ep-vorschau/ in {fixed} Dateien entfernt')
 
@@ -213,7 +219,7 @@ def main():
         for fn in fs:
             if not fn.endswith('.html'): continue
             f = os.path.join(d, fn); rel = os.path.relpath(f, out); h = open(f, encoding='utf-8').read()
-            if re.search(r'github\.io|localhost|127\.0\.0\.1', h): errors.append(f'{rel}: Vorschau-/Test-URL im Code')
+            if re.search(r'github\.io|localhost|127\.0\.0\.1', DEMO_LINK.sub('', h)): errors.append(f'{rel}: Vorschau-/Test-URL im Code')
             if rel.startswith('referenzen/'): continue
             for m in re.finditer(r'<script(?P<a>[^>]*)>(?P<b>.*?)</script>', h, S):
                 if 'src=' in m['a'] or 'ld+json' in m['a'] or 'text/plain' in m['a']: continue
