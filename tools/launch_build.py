@@ -81,7 +81,7 @@ def csp_extend(policy, add):
 # (Kategorie, Datei, Muster (Regex), Ersatz). Jedes Muster MUSS genau einmal passen, sonst Abbruch
 # (so fällt auf, wenn sich der Quelltext geändert hat).
 RULES = [
-  # Leer seit Vollcheck 17.11.2026: Datenschutz, AGB, FAQ und Widerruf sind bereits als Launch-Fassung geschrieben
+  # Leer seit Vollcheck 17.11.2026: Datenschutz, AGB und FAQ sind bereits als Launch-Fassung geschrieben
   # (kein Chat-Widget, kein Tracking, Zahlung per Rechnung/Überweisung). Neue Regeln nur bei echten Umschaltungen.
 ]
 

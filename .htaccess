@@ -29,6 +29,7 @@ DirectoryIndex index.html
   # 3) Alte Adressen dauerhaft umleiten
   RewriteRule ^leistungen/ki-automatisierung(\.html)?$ /leistungen/automatisierung-chatbots [R=301,L]
   RewriteRule ^leistungen/ki-werbeclips(\.html)?$ /leistungen/werbeclips [R=301,L]
+  RewriteRule ^widerruf(\.html)?/?$ /rechtliches [R=301,L]
 
   # 4) Saubere URLs: /faq -> faq.html (passend zu den Canonical-Tags)
   RewriteCond %{REQUEST_FILENAME} !-d
