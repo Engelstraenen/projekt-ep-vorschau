@@ -60,15 +60,21 @@
   </div>
 <main id="main">
   <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a> / <span aria-current="page">Prozess</span></nav>
-  <section class="hero page-hero">
+  <section class="hero page-hero prozess-hero">
     <div>
       <p class="kicker"><span>Prozess</span><span>Wie wir arbeiten</span></p>
       <h1>Groß denken. <span class="mute">Konkret anfangen.</span></h1>
-      <p class="lead">Vier Schritte, klar getrennt. Jeder endet mit einem Ergebnis, das ihr sehen und beurteilen könnt.</p>
     </div>
     <ol class="loop" aria-hidden="true"><li><i><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="21" cy="21" r="12" fill="none" stroke="currentColor" stroke-width="3"/><path d="m30 30 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></i><b>Discover</b></li><li><i><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="10" width="32" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M20 17v8l7-4z" fill="currentColor"/><path d="M17 38h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></i><b>Prototype</b></li><li><i><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 34 22 22l4 4 12-12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 14h8v8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Build</b></li><li><i><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M38 24a14 14 0 1 1-4.1-9.9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M34 8v7h-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Evolve</b></li></ol>
   </section>
-  <section class="block">
+  <section class="prozess-film" id="ablauf-video" aria-label="Erklärvideo: Was nach der Bestellung passiert">
+    <figure class="prozess-film-frame">
+      <video id="ablauf-video-el" data-no-auto data-src="video/prozess/bestellablauf.mp4?v=437cb9b0" controls playsinline preload="none" width="1920" height="1080" poster="video/prozess/bestellablauf-poster.webp?v=f830f39b" aria-label="Erklärvideo zum Ablauf nach der Bestellung: Gespräch, Konzept, Designvorschläge und Projekt-Tracking, 33 Sekunden, mit Ton"></video>
+      <figcaption><span><b>Was nach der Bestellung passiert</b> · 33 s · mit Ton</span><span>Zum Abspielen klicken</span></figcaption>
+    </figure>
+  </section>
+  <section class="block prozess-schritte" id="schritte">
+    <p class="lead">Vier Schritte, klar getrennt. Jeder endet mit einem Ergebnis, das ihr sehen und beurteilen könnt.</p>
     <ol class="flow">
       <li><span class="node">01</span><i class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="21" cy="21" r="12" fill="none" stroke="currentColor" stroke-width="3"/><path d="m30 30 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></i><small>Discover</small><b>Verstehen.</b><p>Ziel, Nutzer, Daten und den echten Engpass gemeinsam eingrenzen.</p><em>Ergebnis: Klarheit über Ziel und Engpass</em></li>
       <li><span class="node">02</span><i class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="10" width="32" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M20 17v8l7-4z" fill="currentColor"/><path d="M17 38h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></i><small>Prototype</small><b>Erlebbar machen.</b><p>2–3 Moodboards oder ein erster Prototyp: etwas, das ihr sehen, ausprobieren und beurteilen könnt.</p><em>Ergebnis: Etwas zum Ausprobieren</em></li>
@@ -149,6 +155,7 @@
 <script src="assets/ep-fx.js" defer></script>
 <script src="assets/vendor/gsap/gsap.min.js" defer></script>
 <script src="assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
+<script src="assets/prozess-film.js" defer></script>
 <script src="assets/tracking.js" defer></script>
 
 </body>

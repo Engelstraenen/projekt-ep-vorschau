@@ -165,3 +165,41 @@ nav.links a[aria-current="page"] { opacity: 1; font-weight: 600; }
   .brand i { display: none; }
   .menu-mobile { font-size: 0 !important; gap: 0 !important; }
 }
+
+/* Prozess: Erklärvideo zur Bestellabwicklung, zwischen Hero und den vier Schritten */
+.prozess-hero { padding-bottom: clamp(28px, 4vh, 48px); }
+.prozess-film { padding: 0 0 clamp(40px, 6vh, 72px); }
+.prozess-film-frame {
+  margin: 0;
+  width: 100%;
+  border-radius: 28px;
+  padding: 6px;
+  background: linear-gradient(160deg, rgba(255,255,255,.8), rgba(236,241,248,.6));
+  border: 1px solid rgba(255,255,255,.95);
+  box-shadow: 0 28px 64px -40px rgba(0,0,0,.28), 0 2px 6px rgba(0,0,0,.04);
+}
+.prozess-film-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 22px;
+  background: #1D1D1F;
+  object-fit: cover;
+}
+.prozess-film-frame figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--ink-2);
+  padding: 10px 12px 6px;
+}
+.prozess-film-frame figcaption b { color: var(--ink); font-weight: 600; }
+.prozess-schritte { padding-top: clamp(40px, 6vh, 72px); }
+.prozess-schritte > .lead { margin-top: 0; margin-bottom: clamp(28px, 4vh, 44px); max-width: 46ch; }
+@media (max-width: 520px) {
+  .prozess-film-frame { padding: 4px; border-radius: 20px; }
+  .prozess-film-frame video { border-radius: 16px; }
+}
