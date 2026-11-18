@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Förderrechner Wärmepumpe 2026 · WARMHERZ (Demo)</title>
+<meta name="description" content="Zuschuss für die Wärmepumpe in einer Minute berechnen. Ab 1. Februar 2027 sinkt der Klimageschwindigkeitsbonus.">
+<meta name="theme-color" content="#0E0E0E">
+<link rel="stylesheet" href="assets/fonts/fonts2.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5B1F'/%3E%3Cpath d='M32 50S14 39 14 26a9 9 0 0 1 18-4 9 9 0 0 1 18 4c0 13-18 24-18 24z' fill='%23fff'/%3E%3C/svg%3E">
+</head>
+<body data-page="foerderung">
+
+<div class="demo-bar">Demo von PROJEKT EX · WARMHERZ ist eine erfundene Firma · alle Personen, Zahlen und Stimmen sind Beispiele</div>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="logo" aria-label="WARMHERZ Startseite">
+    <span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span>
+    <span>Warmherz</span>
+  </a>
+  <nav class="links" aria-label="Hauptmenü">
+    <div class="dd">
+      <button class="dd-btn" aria-expanded="false" data-key="leistungen">Leistungen <span aria-hidden="true">▾</span></button>
+      <div class="dd-menu">
+        <a href="waermepumpe.html" data-key="waermepumpe"><b>Wärmepumpe</b><small>Luft, Erde oder Hybrid</small></a>
+        <a href="heizungstausch.html" data-key="heizungstausch"><b>Heizungstausch</b><small>Öl und Gas raus, 2–3 Tage</small></a>
+        <a href="fussbodenheizung.html" data-key="fussbodenheizung"><b>Fußbodenheizung</b><small>auch nachträglich gefräst</small></a>
+        <a href="bad.html" data-key="bad"><b>Bad</b><small>vom Gäste-WC bis barrierefrei</small></a>
+        <a href="wartung.html" data-key="wartung"><b>Wartung & Notdienst</b><small>im Winter 24/7</small></a>
+      </div>
+    </div>
+    <a href="foerderung.html" data-key="foerderung" aria-current="page">Förderung</a>
+    <a href="foto-check.html" data-key="foto-check" class="nav-foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>Foto-Check</a>
+    <a href="ablauf.html" data-key="ablauf">So läuft's ab</a>
+    <a href="jobs.html" data-key="jobs">Jobs</a>
+    <a href="ueber-uns.html" data-key="ueber-uns">Über uns</a>
+    <a href="kontakt.html" data-key="kontakt">Kontakt</a>
+  </nav>
+  <a href="tel:+495210000000" class="nav-call">0521 000 00 00</a>
+  <a href="foerderung.html" class="chip-count" aria-label="Bis zu 22.400 Euro Zuschuss sichern, Förderung sinkt am 1. Februar"><span class="dot"></span><span class="chip-txt"><b><span class="lbl-long">Bis zu </span>22.400 € Zuschuss<span class="lbl-long"> sichern</span></b><small class="lbl-long">nur noch <span data-days>–</span> Tage, dann gibt es weniger</small></span></a>
+  <button class="burger" aria-label="Menü öffnen" aria-expanded="false"><i></i><i></i></button>
+</header>
+
+<main>
+<section class="phero short">
+  <img src="assets/img/display.webp" alt="" fetchpriority="high">
+  <div class="shade"></div>
+  <div class="in"><div class="crumbs"><a href="index.html">Start</a><span>/</span>Förderung</div>
+    <p class="kicker">Förderung</p>
+    <h1 class="reveal">Bis zu 80 % <em>vom Staat.</em></h1>
+    <p class="sub reveal">Rechnen Sie Ihren Zuschuss in einer Minute aus. Den Antrag stellen wir gemeinsam mit Ihnen, bevor der Bonus am 1. Februar sinkt.</p>
+    <div class="ctas"><a href="#foerderung" class="btn acc">Zum Rechner <span>→</span></a></div>
+  </div>
+</section>
+<!-- ============ COUNTDOWN-BAND ============ -->
+<section class="band" id="countdown" aria-label="Förder-Countdown">
+  <div class="band-inner">
+    <div class="band-count">
+      <div><b data-cd="d">00</b><small>Tage</small></div>
+      <div><b data-cd="h">00</b><small>Std</small></div>
+      <div><b data-cd="m">00</b><small>Min</small></div>
+      <div><b data-cd="s">00</b><small>Sek</small></div>
+    </div>
+    <p class="band-text">bis der <b>Förderbonus sinkt</b>. Am 1. Februar 2027 fällt der Klimageschwindigkeits&shy;bonus von 16 auf 12 Prozent.</p>
+    <a href="foerderung.html" class="btn dark">Meinen Zuschuss ausrechnen <span>→</span></a>
+  </div>
+  <div class="marquee" aria-hidden="true"><div class="track">
+    <span>Wärmepumpe</span><span>●</span><span>Heizungstausch</span><span>●</span><span>Fußbodenheizung</span><span>●</span><span>Bad</span><span>●</span><span>Wartung</span><span>●</span><span>Notdienst 24/7</span><span>●</span><span>Förderanträge</span><span>●</span>
+    <span>Wärmepumpe</span><span>●</span><span>Heizungstausch</span><span>●</span><span>Fußbodenheizung</span><span>●</span><span>Bad</span><span>●</span><span>Wartung</span><span>●</span><span>Notdienst 24/7</span><span>●</span><span>Förderanträge</span><span>●</span>
+  </div></div>
+</section>
+
+<!-- ============ FÖRDERRECHNER ============ -->
+<section class="calc light" id="foerderung">
+  <div class="wrap calc-grid">
+    <div class="calc-in">
+      <p class="kicker">Förderrechner · 1 Minute</p>
+      <h2 class="reveal">Wie viel bekommen <em>Sie</em> geschenkt?</h2>
+      <fieldset class="seg">
+        <legend>Sie wohnen selbst im Haus?</legend>
+        <label><input type="radio" name="owner" value="1" checked><span>Ja</span></label>
+        <label><input type="radio" name="owner" value="0"><span>Nein, vermietet</span></label>
+      </fieldset>
+      <fieldset class="seg">
+        <legend>Heute geheizt mit</legend>
+        <label><input type="radio" name="fuel" value="oel" checked><span>Öl</span></label>
+        <label><input type="radio" name="fuel" value="gas"><span>Gas</span></label>
+        <label><input type="radio" name="fuel" value="nacht"><span>Nachtspeicher</span></label>
+        <label><input type="radio" name="fuel" value="kohle"><span>Kohle</span></label>
+      </fieldset>
+      <label class="range">
+        <span>Kosten für Wärmepumpe und Einbau <b data-cost-out>32.000 €</b></span>
+        <input type="range" min="15000" max="50000" step="500" value="32000" data-cost aria-label="Kosten für Wärmepumpe und Einbau">
+      </label>
+      <div class="toggles">
+        <label class="range"><span>Zu versteuerndes Haushaltseinkommen</span><select class="sel" data-income><option value="99999">über 60.000 € im Jahr</option><option value="60000">50.001 – 60.000 €</option><option value="50000">40.001 – 50.000 €</option><option value="40000">30.001 – 40.000 €</option><option value="30000">bis 30.000 €</option></select></label>
+        <label class="tg"><input type="checkbox" data-child><span></span>Mindestens ein Kind unter 18 im Haushalt</label>
+      </div>
+    </div>
+    <div class="calc-out">
+      <div class="result">
+        <small>Ihr Zuschuss, wenn Sie jetzt beauftragen</small>
+        <div class="big"><span data-grant-now>0</span> €</div>
+        <div class="bars" data-bars></div>
+        <div class="later">
+          <div><small>ab 1. Februar 2027</small><b><span data-grant-later>0</span> €</b></div>
+          <div class="loss"><small>Wer wartet, verliert</small><b>− <span data-loss>0</span> €</b></div>
+        </div>
+        <a href="foto-check.html" class="btn acc full">Weiter: Fotos schicken <span>→</span></a>
+        <p class="fine">Beispielrechnung ohne Gewähr, Stand: KfW-Programm 458 ab 21.07.2026. Grundförderung 30 %, Klimageschwindigkeitsbonus 16 % (ab 1.2.2027: 12 %, nur Selbstnutzer), Einkommensbonus 40/30/10 % je nach Einkommen (mit Kind +10.000 € Grenze). Höchstens 70 %, bei geringem Einkommen 80 %. Förderfähige Kosten bis 28.000 € (ab 1.2.2027: 27.250 €). Verbindlich ist nur die aktuelle Richtlinie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="kicker">Die Bausteine</p><h2 class="reveal">Woraus sich Ihr <em>Zuschuss</em> zusammensetzt.</h2></div><p class="sub">Stand: KfW-Programm 458, gültig ab 21.07.2026.</p></div>
+    <div class="cards c4">
+      <div class="card"><div class="big-n">30 %</div><h3>Grundförderung</h3><p>Für jeden Heizungstausch auf eine Wärmepumpe.</p></div>
+      <div class="card"><div class="big-n">16 %</div><h3>Klimabonus</h3><p>Wenn Sie selbst wohnen und eine alte Öl-, Gas-, Kohle- oder Nachtspeicherheizung ersetzen. Ab 1.2.2027: 12 %.</p></div>
+      <div class="card"><div class="big-n">bis 40 %</div><h3>Einkommensbonus</h3><p>Gestaffelt nach zu versteuerndem Haushaltseinkommen: 40 % bis 30.000 €, 30 % bis 40.000 €, 10 % bis 50.000 €. Mit Kind unter 18 je 10.000 € mehr.</p></div>
+      <div class="card"><div class="big-n">70–80 %</div><h3>Höchstgrenze</h3><p>Zusammen höchstens 70 % der förderfähigen Kosten, bei geringem Einkommen bis 80 %. Förderfähig sind bis 28.000 € (ab 1.2.2027: 27.250 €).</p></div>
+    </div>
+  </div>
+</section>
+<section class="sec light"><div class="wrap"><p class="kicker">Wichtig</p><h2 class="reveal" style="margin-bottom:40px">Fragen zur <em>Förderung.</em></h2><div class="faq"><details><summary>Muss ich den Antrag vor dem Auftrag stellen?</summary><p>Ja. Der Antrag muss vor Beginn der Arbeiten gestellt sein. Wir unterschreiben einen Vertrag mit Vorbehalt der Förderzusage, damit Sie sicher sind.</p></details><details><summary>Was passiert am 1. Februar 2027?</summary><p>Der Klimageschwindigkeitsbonus sinkt von 16 auf 12 Prozent und danach weiter. Wer früher beauftragt, bekommt mehr.</p></details><details><summary>Was ist der Wertschöpfungsbonus?</summary><p>Ab 2027 ist ein neuer Baustein geplant: Wärmepumpen aus der EU sollen die volle Grundförderung behalten, andere weniger. Details stehen noch aus, wir halten Sie auf dem Laufenden.</p></details><details><summary>Wer stellt den Antrag?</summary><p>Sie, mit uns zusammen. Wir füllen alles mit Ihnen aus und liefern alle Nachweise.</p></details><details><summary>Gilt das auch für Vermieter?</summary><p>Ja, die Grundförderung von 30 % gilt auch für vermietete Häuser. Klima- und Einkommensbonus gibt es nur für Selbstnutzer.</p></details></div></div></section>
+<section class="cta-band"><div class="wrap"><h2>Ihr Zuschuss steht fest?</h2><div class="ctas"><a href="foto-check.html" class="btn dark">Jetzt Fotos schicken <span>→</span></a><a href="kontakt.html" class="btn white">Rückruf anfordern <span>→</span></a></div></div></section>
+
+</main>
+
+<a href="foto-check.html" class="fab-foto" aria-label="Foto-Check: 3 Fotos schicken, wir wissen sofort Bescheid">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>
+  <span><b>3 Fotos schicken</b><small>Wir wissen sofort Bescheid</small></span>
+</a>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <a href="index.html" class="logo"><span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span><span>Warmherz</span></a>
+      <p>Heizung · Wärmepumpe · Bad<br>Am Kupferhammer 12 · 33602 Bielefeld (fiktiv)</p>
+      <p class="foot-tel"><a href="tel:+495210000000">0521 000 00 00</a><br><small>Mo–Fr 7–17 Uhr, Sa 8–12 Uhr</small></p>
+    </div>
+    <div><b>Leistungen</b><p><a href="waermepumpe.html">Wärmepumpe</a><br><a href="heizungstausch.html">Heizungstausch</a><br><a href="fussbodenheizung.html">Fußbodenheizung</a><br><a href="bad.html">Bad</a><br><a href="wartung.html">Wartung & Notdienst</a></p></div>
+    <div><b>Service</b><p><a href="foerderung.html">Förderrechner</a><br><a href="ablauf.html">So läuft's ab</a><br><a href="foto-check.html">Foto-Check: 3 Fotos schicken</a><br><a href="kontakt.html">Rückruf anfordern</a></p></div>
+    <div><b>WARMHERZ</b><p><a href="ueber-uns.html">Über uns</a><br><a href="jobs.html">Jobs & Ausbildung</a><br><a href="impressum.html">Impressum</a><br><a href="datenschutz.html">Datenschutz</a></p></div>
+  </div>
+  <p class="demo-note">Dies ist eine Demo-Webseite von PROJEKT EX. WARMHERZ, alle Personen, Bewertungen, Preise und Gehälter sind erfunden. Förderangaben sind Beispielwerte ohne Gewähr. Eingaben auf dieser Seite werden nicht übertragen.</p>
+</footer>
+
+<script src="assets/js/gsap.min.js"></script>
+<script src="assets/js/ScrollTrigger.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/pages.js"></script>
+</body>
+</html>

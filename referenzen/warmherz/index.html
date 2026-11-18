@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WARMHERZ · Heizung & Wärmepumpe in Bielefeld (Demo)</title>
+<meta name="description" content="Demo-Webseite eines fiktiven Familienbetriebs für Wärmepumpen, Heizung und Bad in Bielefeld.">
+<meta name="theme-color" content="#0E0E0E">
+<link rel="preload" href="assets/img/h-luecke.webp" as="image">
+<link rel="stylesheet" href="assets/fonts/fonts2.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5B1F'/%3E%3Cpath d='M32 50S14 39 14 26a9 9 0 0 1 18-4 9 9 0 0 1 18 4c0 13-18 24-18 24z' fill='%23fff'/%3E%3C/svg%3E">
+</head>
+<body data-page="start">
+
+<div class="demo-bar">Demo von PROJEKT EX · WARMHERZ ist eine erfundene Firma · alle Personen, Zahlen und Stimmen sind Beispiele</div>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="logo" aria-label="WARMHERZ Startseite">
+    <span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span>
+    <span>Warmherz</span>
+  </a>
+  <nav class="links" aria-label="Hauptmenü">
+    <div class="dd">
+      <button class="dd-btn" aria-expanded="false" data-key="leistungen">Leistungen <span aria-hidden="true">▾</span></button>
+      <div class="dd-menu">
+        <a href="waermepumpe.html" data-key="waermepumpe"><b>Wärmepumpe</b><small>Luft, Erde oder Hybrid</small></a>
+        <a href="heizungstausch.html" data-key="heizungstausch"><b>Heizungstausch</b><small>Öl und Gas raus, 2–3 Tage</small></a>
+        <a href="fussbodenheizung.html" data-key="fussbodenheizung"><b>Fußbodenheizung</b><small>auch nachträglich gefräst</small></a>
+        <a href="bad.html" data-key="bad"><b>Bad</b><small>vom Gäste-WC bis barrierefrei</small></a>
+        <a href="wartung.html" data-key="wartung"><b>Wartung & Notdienst</b><small>im Winter 24/7</small></a>
+      </div>
+    </div>
+    <a href="foerderung.html" data-key="foerderung">Förderung</a>
+    <a href="foto-check.html" data-key="foto-check" class="nav-foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>Foto-Check</a>
+    <a href="ablauf.html" data-key="ablauf">So läuft's ab</a>
+    <a href="jobs.html" data-key="jobs">Jobs</a>
+    <a href="ueber-uns.html" data-key="ueber-uns">Über uns</a>
+    <a href="kontakt.html" data-key="kontakt">Kontakt</a>
+  </nav>
+  <a href="tel:+495210000000" class="nav-call">0521 000 00 00</a>
+  <a href="foerderung.html" class="chip-count" aria-label="Bis zu 22.400 Euro Zuschuss sichern, Förderung sinkt am 1. Februar"><span class="dot"></span><span class="chip-txt"><b><span class="lbl-long">Bis zu </span>22.400 € Zuschuss<span class="lbl-long"> sichern</span></b><small class="lbl-long">nur noch <span data-days>–</span> Tage, dann gibt es weniger</small></span></a>
+  <button class="burger" aria-label="Menü öffnen" aria-expanded="false"><i></i><i></i></button>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img src="assets/img/h-luecke.webp" alt="Das WARMHERZ-Team steht eng zusammen, Lukas hält den Arm um einen freien Platz" class="hero-img" fetchpriority="high">
+    <div class="hero-shade"></div>
+    <div class="heat" aria-hidden="true"></div>
+
+    <button class="person" data-fx="18.5" data-fy="27" data-name="Heinz, 61" data-role="Meister & Inhaber" data-quote="Seit 1987 machen wir Bielefeld warm."></button>
+    <button class="person" data-fx="29.5" data-fy="33" data-name="Lea, 19" data-role="Azubi, 2. Lehrjahr" data-quote="Ich wollte nie ins Büro."></button>
+    <button class="person" data-fx="40" data-fy="26" data-name="Lukas, 31" data-role="Monteur seit 2019" data-quote="Am liebsten Altbauten. Da sieht man den Unterschied."></button>
+    <button class="person" data-fx="64.5" data-fy="30" data-name="Murat, 38" data-role="Kundendienst" data-quote="Samstags auch. Wenn's kalt ist, ist's kalt."></button>
+    <button class="person" data-fx="75.5" data-fy="36" data-name="Sabine, 45" data-role="Büro & Termine" data-quote="Ich sorge dafür, dass Lukas pünktlich klingelt."></button>
+    <button class="person" data-fx="84.5" data-fy="27" data-name="Finn, 26" data-role="Monteur" data-quote="Wärmepumpe, Bad, Fußboden: hier lernst du alles."></button>
+
+    <a href="jobs.html" class="spot" data-fx="52" data-fy="45" aria-label="Hier ist ein Platz frei. Zu den Jobs">
+      <span class="spot-tag">Dein Platz<small>Wir suchen 2 Monteure →</small></span>
+      <span class="spot-ring"></span>
+    </a>
+    <div class="person-card" role="status" aria-live="polite"><small></small><b></b><span></span></div>
+  </div>
+
+  <div class="hero-copy">
+    <div>
+      <p class="kicker">Familienbetrieb seit 1987 · Bielefeld</p>
+      <h1 class="split">Wir machen<br>Bielefeld <em>warm.</em></h1>
+      <p class="lead">Wärmepumpen, Heizung und Bad. Von sechs Leuten, die Sie mit Namen kennen.</p>
+    </div>
+    <div class="ctas">
+      <a href="foerderung.html" class="btn acc">Zuschuss berechnen <span>→</span></a>
+      <a href="jobs.html" class="btn line">Jobs bei uns <span>→</span></a>
+      <a href="foto-check.html" class="hero-foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg><span>Heizung macht Probleme? <b>3 Fotos schicken →</b></span></a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">Scrollen</div>
+</section>
+
+<!-- ============ COUNTDOWN-BAND ============ -->
+<section class="band" id="countdown" aria-label="Förder-Countdown">
+  <div class="band-inner">
+    <div class="band-count">
+      <div><b data-cd="d">00</b><small>Tage</small></div>
+      <div><b data-cd="h">00</b><small>Std</small></div>
+      <div><b data-cd="m">00</b><small>Min</small></div>
+      <div><b data-cd="s">00</b><small>Sek</small></div>
+    </div>
+    <p class="band-text">bis der <b>Förderbonus sinkt</b>. Am 1. Februar 2027 fällt der Klimageschwindigkeits&shy;bonus von 16 auf 12 Prozent.</p>
+    <a href="foerderung.html" class="btn dark">Meinen Zuschuss ausrechnen <span>→</span></a>
+  </div>
+  <div class="marquee" aria-hidden="true"><div class="track">
+    <span>Wärmepumpe</span><span>●</span><span>Heizungstausch</span><span>●</span><span>Fußbodenheizung</span><span>●</span><span>Bad</span><span>●</span><span>Wartung</span><span>●</span><span>Notdienst 24/7</span><span>●</span><span>Förderanträge</span><span>●</span>
+    <span>Wärmepumpe</span><span>●</span><span>Heizungstausch</span><span>●</span><span>Fußbodenheizung</span><span>●</span><span>Bad</span><span>●</span><span>Wartung</span><span>●</span><span>Notdienst 24/7</span><span>●</span><span>Förderanträge</span><span>●</span>
+  </div></div>
+</section>
+
+<!-- ============ FOTO-CHECK (TEASER) ============ -->
+<section class="check" id="foto-check-kurz">
+  <div class="wrap check-grid">
+    <div>
+      <p class="kicker">Foto-Check</p>
+      <h2 class="reveal">3 Fotos schicken. <em>Wir wissen sofort Bescheid.</em></h2>
+      <p class="sub">Heizung macht Probleme, Fleck an der Decke, neue Heizung geplant? Schicken Sie 3 bis 5 Fotos und zwei Sätze. Wir sehen sofort, was los ist, und bringen gleich das passende Teil mit.</p>
+      <ul class="steps"><li><b>1</b>Thema wählen</li><li><b>2</b>3 bis 5 Fotos machen</li><li><b>3</b>Abschicken, wir melden uns heute</li></ul>
+      <div class="dayvid-ctas"><a href="foto-check.html" class="btn dark">Zum Foto-Check <span>→</span></a></div>
+    </div>
+    <div class="phone">
+      <div class="phone-in">
+        <div class="ph-head"><b>Foto-Check</b><small>WARMHERZ</small></div>
+        <div class="slot filled" style="background-image:url(assets/img/keller-vorher.webp)"><span class="slot-ph"><i>✓</i>Heizraum</span></div>
+        <div class="slot"><span class="slot-ph"><i>+</i>Typenschild</span></div>
+        <div class="slot"><span class="slot-ph"><i>+</i>Heizkörper</span></div>
+        <a href="foto-check.html" class="btn acc full">Weiter <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VON −10 °C AUF 21 °C (SCROLL-VIDEO) ============ -->
+<section class="wf" id="warm" aria-label="Von minus 10 Grad draußen auf 21 Grad drinnen">
+  <div class="wf-pin">
+    <canvas class="wf-canvas" data-seq data-frames="122" data-path="assets/seq/f_" aria-hidden="true"></canvas>
+    <img class="wf-still" src="assets/img/ff-garten.webp" alt="Wärmepumpe im verschneiten Garten vor dem warm erleuchteten Wohnzimmer" data-seq-still>
+    <div class="wf-shade"></div>
+    <div class="wf-ui">
+      <p class="kicker">Von draußen nach drinnen</p>
+      <div class="wf-temp"><b data-wf-temp>−10</b><span>°C</span></div>
+      <div class="wf-bar"><i data-wf-bar></i></div>
+      <div class="wf-caps">
+        <p class="wf-cap" data-from="0" data-to=".26"><b>Draußen −10 °C.</b> Die Wärmepumpe holt trotzdem Wärme aus der Luft.</p>
+        <p class="wf-cap" data-from=".26" data-to=".52"><b>1 Teil Strom, 3 bis 4 Teile Wärme.</b> Leise, ohne Öl, ohne Gas.</p>
+        <p class="wf-cap" data-from=".52" data-to=".78"><b>Drinnen verteilt sie sich.</b> Über den Boden und die Heizkörper.</p>
+        <p class="wf-cap" data-from=".78" data-to="1.01"><b>21 °C. Überall.</b> Und bis zu 22.400 € Zuschuss.</p>
+      </div>
+      <a href="foerderung.html" class="btn acc wf-cta">Meinen Zuschuss berechnen <span>→</span></a>
+    </div>
+    <div class="wf-hint" aria-hidden="true">Scrollen</div>
+  </div>
+</section>
+
+<!-- ============ LEISTUNGEN (TEASER) ============ -->
+<section class="sec light" id="leistungen">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="kicker">Was wir machen</p><h2 class="reveal">Alles, was Ihr Haus <em>warm</em> macht.</h2></div>
+    <p class="sub reveal">Ein Team, ein Ansprechpartner, ein Termin. Wählen Sie, worum es bei Ihnen geht.</p></div>
+    <div class="cards">
+      <a href="waermepumpe.html" class="card"><div class="card-img"><img src="assets/img/lukas.webp" alt="Monteur Lukas an einer Wärmepumpe" loading="lazy"></div><h3>Wärmepumpe</h3><p>Luft, Erde oder Hybrid. Raumweise berechnet, nicht nach Gefühl.</p><span class="more">Mehr erfahren →</span></a>
+      <a href="heizungstausch.html" class="card"><div class="card-img"><img src="assets/img/keller-nachher.webp" alt="Technikraum nach dem Heizungstausch" loading="lazy"></div><h3>Heizungstausch</h3><p>Öl oder Gas raus, neue Technik rein. Meist in 2–3 Tagen.</p><span class="more">Mehr erfahren →</span></a>
+      <a href="fussbodenheizung.html" class="card"><div class="card-img"><img src="assets/img/p-fussboden.webp" alt="Fußbodenheizung wird in den Estrich gefräst" loading="lazy"></div><h3>Fußbodenheizung</h3><p>Auch nachträglich: gefräst in den alten Estrich.</p><span class="more">Mehr erfahren →</span></a>
+      <a href="bad.html" class="card"><div class="card-img"><img src="assets/img/p-bad.webp" alt="Neues Bad mit bodengleicher Dusche" loading="lazy"></div><h3>Bad</h3><p>Vom Gäste-WC bis zum barrierefreien Bad, mit festem Endtermin.</p><span class="more">Mehr erfahren →</span></a>
+      <a href="wartung.html" class="card"><div class="card-img"><img src="assets/img/p-wartung.webp" alt="Murat wartet eine Wärmepumpe im Schnee" loading="lazy"></div><h3>Wartung & Notdienst</h3><p>Jährliche Wartung und im Winter rund um die Uhr erreichbar.</p><span class="more">Mehr erfahren →</span></a>
+      <a href="foerderung.html" class="card"><div class="card-img"><img src="assets/img/display.webp" alt="Lukas erklärt die neue Wärmepumpe" loading="lazy"></div><h3>Förderung</h3><p>Bis zu 70 % Zuschuss. Wir rechnen aus und stellen den Antrag mit Ihnen.</p><span class="more">Zuschuss berechnen →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FÖRDERUNG (TEASER) ============ -->
+<section class="sec" id="foerderung-kurz">
+  <div class="wrap duo">
+    <div>
+      <p class="kicker">Förderung</p>
+      <h2 class="reveal">Bis zu <em>80 %</em> zahlt der Staat.</h2>
+      <p class="sub">Grundförderung, Klimabonus und Einkommensbonus: Wir rechnen Ihren Zuschuss in einer Minute aus und stellen den Antrag mit Ihnen. Aber nicht mehr lange zum heutigen Satz.</p>
+      <ul class="checks"><li>Zuschuss in Euro, sofort im Rechner</li><li>Antrag füllen wir gemeinsam aus</li><li>Ab 1. Februar 2027 sinkt der Klimabonus</li></ul>
+      <div class="dayvid-ctas"><a href="foerderung.html" class="btn acc">Meinen Zuschuss berechnen <span>→</span></a></div>
+    </div>
+    <div class="result">
+      <small>Beispiel: Ölheizung, 32.000 € Kosten, selbst bewohnt</small>
+      <div class="big">12.880 €</div>
+      <div class="later"><div><small>ab 1. Februar 2027</small><b>11.445 €</b></div><div class="loss"><small>Wer wartet, verliert</small><b>− 1.435 €</b></div></div>
+      <p class="fine">Beispielrechnung ohne Gewähr. Verbindlich ist die aktuelle BEG-Richtlinie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VORHER / NACHHER ============ -->
+<section class="ba" id="vorher-nachher">
+  <div class="wrap">
+    <p class="kicker">Vorher / Nachher</p>
+    <h2 class="reveal">Aus dem Öltank-Keller wird <em>Platz.</em></h2>
+    <div class="ba-box" data-ba style="--p:50%">
+      <img src="assets/img/keller-nachher.webp" alt="Nachher: heller Technikraum mit Wärmepumpe" loading="lazy">
+      <div class="ba-before"><img src="assets/img/keller-vorher.webp" alt="Vorher: alter Heizungskeller mit Öltank" loading="lazy"></div>
+      <span class="ba-tag l">1990</span><span class="ba-tag r">Heute</span>
+      <input type="range" min="0" max="100" value="50" aria-label="Vorher-Nachher-Regler" data-ba-range>
+      <div class="ba-handle" aria-hidden="true"><span>⟷</span></div>
+    </div>
+    <div class="ba-facts"><div><b>⅓</b><span>Platz im Keller gewonnen</span></div><div><b>0</b><span>Öllieferungen pro Jahr</span></div><div><b>2,5</b><span>Tage Einbau</span></div></div>
+  </div>
+</section>
+
+<!-- ============ JOBS (TEASER) ============ -->
+<section class="platz" id="jobs">
+  <div class="platz-hero">
+    <div class="platz-media">
+      <img src="assets/img/h-stuhl.webp" alt="Das Team sitzt beim Kaffee in der Werkstatt, vorne ein leerer Stuhl mit einer vollen Tasse" class="platz-bg" loading="lazy">
+      <span class="spot" data-fx="52" data-fy="81" aria-hidden="true"><span class="spot-tag">Dein Kaffee wird kalt<small>Der Stuhl ist frei</small></span><span class="spot-ring"></span></span>
+    </div>
+    <div class="platz-shade"></div>
+    <div class="platz-copy">
+      <p class="kicker">Jobs bei WARMHERZ</p>
+      <h2 class="reveal">Hier fehlt noch <em>jemand.</em></h2>
+      <p class="sub">Monteurin, Azubi, Quereinsteiger: Wir suchen Leute, die gern mit den Händen arbeiten und abends sehen wollen, was sie geschafft haben.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="why">
+      <article data-tilt><b>16:30</b><h3>Pünktlich Feierabend</h3><p>Bericht per App auf der Baustelle. Abends kein Papierkram.</p></article>
+      <article data-tilt><b>1.000 €</b><h3>Prämie fürs Werben</h3><p>Bringst du jemanden mit, der bleibt, gibt's 1.000 € extra.</p></article>
+      <article data-tilt><b>100 %</b><h3>Schulung bezahlt</h3><p>Wärmepumpen-Zertifikat, Kältescheine, Meisterkurs: zahlen wir.</p></article>
+      <article data-tilt><b>1</b><h3>Eigener Transporter</h3><p>Für dich allein, nicht ständig wechseln, nicht suchen.</p></article>
+    </div>
+
+    <div class="jobs-ctas">
+      <a href="ausbildung.html" class="btn acc">Ausbildung bei uns <span>→</span></a>
+      <a href="fachkraefte.html" class="btn line">Fachkräfte & Quereinstieg <span>→</span></a>
+      <a href="jobs.html#bewerben" class="btn line">In 60 Sekunden bewerben <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHEF / NACHFOLGE ============ -->
+<section class="heinz light" id="chef">
+  <div class="wrap heinz-grid">
+    <figure class="heinz-img"><img src="assets/img/heinz.webp" alt="Heinz Brinkmann, Inhaber, in der Werkstatt" loading="lazy"></figure>
+    <div>
+      <p class="kicker">Ein ehrliches Wort vom Chef</p>
+      <blockquote class="reveal">„Ich bin 61. Ich suche jemanden, der das hier mal <em>weiterführt.</em>“</blockquote>
+      <p class="sub">Für unsere Kunden heißt das: WARMHERZ bleibt. Für ehrgeizige Gesellinnen und Gesellen heißt das: Hier kannst du Meister werden, und mehr. Den Meisterkurs bezahlen wir.</p>
+      <div class="sig">Heinz Brinkmann <small>Inhaber, Meister im Installateur- und Heizungsbauerhandwerk</small></div>
+      <div class="actions">
+        <a href="tel:+495210000000" class="btn dark">Heinz anrufen <span>→</span></a>
+        <a href="kontakt.html?thema=nachfolge#kontakt" class="btn acc">Rückruf von Heinz <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band"><div class="wrap"><h2>Lieber kurz sprechen? <br>Wir gehen ran.</h2><div class="ctas"><a href="tel:+495210000000" class="btn dark">0521 000 00 00 anrufen <span>→</span></a><a href="kontakt.html" class="btn white">Rückruf anfordern <span>→</span></a></div></div></section>
+
+</main>
+
+<a href="foto-check.html" class="fab-foto" aria-label="Foto-Check: 3 Fotos schicken, wir wissen sofort Bescheid">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>
+  <span><b>3 Fotos schicken</b><small>Wir wissen sofort Bescheid</small></span>
+</a>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <a href="index.html" class="logo"><span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span><span>Warmherz</span></a>
+      <p>Heizung · Wärmepumpe · Bad<br>Am Kupferhammer 12 · 33602 Bielefeld (fiktiv)</p>
+      <p class="foot-tel"><a href="tel:+495210000000">0521 000 00 00</a><br><small>Mo–Fr 7–17 Uhr, Sa 8–12 Uhr</small></p>
+    </div>
+    <div><b>Leistungen</b><p><a href="waermepumpe.html">Wärmepumpe</a><br><a href="heizungstausch.html">Heizungstausch</a><br><a href="fussbodenheizung.html">Fußbodenheizung</a><br><a href="bad.html">Bad</a><br><a href="wartung.html">Wartung & Notdienst</a></p></div>
+    <div><b>Service</b><p><a href="foerderung.html">Förderrechner</a><br><a href="ablauf.html">So läuft's ab</a><br><a href="foto-check.html">Foto-Check: 3 Fotos schicken</a><br><a href="kontakt.html">Rückruf anfordern</a></p></div>
+    <div><b>WARMHERZ</b><p><a href="ueber-uns.html">Über uns</a><br><a href="jobs.html">Jobs & Ausbildung</a><br><a href="impressum.html">Impressum</a><br><a href="datenschutz.html">Datenschutz</a></p></div>
+  </div>
+  <p class="demo-note">Dies ist eine Demo-Webseite von PROJEKT EX. WARMHERZ, alle Personen, Bewertungen, Preise und Gehälter sind erfunden. Förderangaben sind Beispielwerte ohne Gewähr. Eingaben auf dieser Seite werden nicht übertragen.</p>
+</footer>
+
+<script src="assets/js/gsap.min.js"></script>
+<script src="assets/js/ScrollTrigger.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/pages.js"></script>
+</body>
+</html>
