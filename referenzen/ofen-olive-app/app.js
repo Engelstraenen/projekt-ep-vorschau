@@ -17,7 +17,7 @@
 
   // Views
   const views = Object.fromEntries($$('.view').map(v => [v.dataset.view, v]));
-  const order = ['build', 'list', 'cart', 'done'];
+  const order = ['build', 'res', 'list', 'cart', 'done'];
   Object.values(views).forEach(v => { v.hidden = false; if (!v.classList.contains('is-on')) { v.classList.add('is-next'); v.inert = true; } });
   let now = 'build';
   function go(to) {
@@ -28,6 +28,7 @@
     b.classList.remove('is-next', 'is-back'); b.classList.add('is-on'); b.inert = false; b.scrollTop = 0;
     a.classList.remove('is-on'); a.classList.add(fwd ? 'is-back' : 'is-next'); a.inert = true;
     now = to; syncBar();
+    if (to === 'res' || location.hash === '#reservierung') history.replaceState(null, '', to === 'res' ? '#reservierung' : location.pathname + location.search);
     b.querySelectorAll('video').forEach(v => v.play().catch(() => {}));
   }
   $$('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
@@ -171,6 +172,9 @@
     }
   });
   setMode('abholung');
+  // Direktlink …/ofen-olive-app/#reservierung oeffnet die Reservierung
+  const hashRes = () => { if (location.hash === '#reservierung') go('res'); };
+  addEventListener('hashchange', hashRes); hashRes();
   const q = new URLSearchParams(location.search).get('pizza'); if (q) setTimeout(() => openSheet(q), 350);
   const qg = new URLSearchParams(location.search).get('gericht'); if (qg && find(qg)) setTimeout(() => { go('list'); addDish(qg); const t = document.querySelector(`[data-add="${qg}"]`); if (t) views.list.scrollTo({ top: t.offsetTop - 120 }); }, 350);
 })();

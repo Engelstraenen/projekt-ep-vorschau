@@ -230,3 +230,7 @@ button{cursor:pointer;background:none;border:0}
 @media (min-width:900px){
   .view{inset:34px 0 0 0}
 }
+/* Tischreservierung */
+.top__links{display:flex;gap:.4rem}
+.view--res{background:var(--paper);padding-bottom:0}
+.view--res .bar{z-index:3}

@@ -12,10 +12,12 @@
 <link rel="preload" href="fonts/outfit-normal-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="builder/builder.css?v=bake9">
+<link rel="stylesheet" href="reservierung/reservierung.css?v=r1">
 <script src="config.js" defer></script>
 <script src="js/site.js" defer></script>
 <script src="builder/builder.js?v=bake9" defer></script>
 <script src="js/bauen.js" defer></script>
+<script src="reservierung/reservierung.js?v=r1" defer></script>
 </head>
 <body>
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
@@ -28,7 +30,7 @@
 <header class="head" id="kopf">
   <a class="head__logo" href="#inhalt" aria-label="Ofen &amp; Olive, zum Anfang"><img data-cfg-logo="hell" src="img/logo-hell.png" width="180" height="47" alt="Ofen &amp; Olive"></a>
   <nav class="head__nav" aria-label="Hauptnavigation">
-    <a href="#bauen">Pizza bauen</a><a href="#karte">Speisekarte</a><a href="#zeiten">Zeiten</a><a href="#zeiten">Liefergebiet</a>
+    <a href="#bauen">Pizza bauen</a><a href="#karte">Speisekarte</a><a href="#reservierung">Tisch reservieren</a><a href="#zeiten">Zeiten</a><a href="#zeiten">Liefergebiet</a>
   </nav>
   <a class="btn btn--fire head__cta" href="#bauen">Jetzt bestellen</a>
 </header>
@@ -52,7 +54,7 @@
     <div class="ch__card ch__card--hero">
       <h1 class="display">Feuer, Teig<br><em>und Zeit.</em></h1>
       <p class="lead">Holzofen-Pizzeria in <span data-cfg="ort">Ratingen</span>. Neapolitanische Pizza, neunzig Sekunden bei 450 Grad. Zum Abholen oder zu dir nach Hause.</p>
-      <div class="ch__actions"><a class="btn btn--fire" href="#bauen">Jetzt bestellen</a><a class="btn btn--ghost" href="#karte">Speisekarte ansehen</a></div>
+      <div class="ch__actions"><a class="btn btn--fire" href="#bauen">Jetzt bestellen</a><a class="btn btn--ghost" href="#reservierung">Tisch reservieren</a></div>
       <p class="status"><span class="status__dot" aria-hidden="true"></span><span data-cfg="status">Jetzt geöffnet · Küche bis 22:00 · Abholung &amp; Lieferung</span></p>
     </div>
     <p class="scrollhint" aria-hidden="true">Scrollen <span></span></p>
@@ -97,7 +99,7 @@
       <p class="eyebrow"><span class="nr">06</span> Abend</p>
       <h2 class="display">Ein Tisch am Ofen. <em>Oder die Pizza zu dir.</em></h2>
       <p>Abholung in rund 20 Minuten, Lieferung nach Ratingen Mitte, West, Lintorf, Hösel und Breitscheid.</p>
-      <div class="ch__actions"><a class="btn btn--fire" href="../ofen-olive-app/">Jetzt bestellen</a></div>
+      <div class="ch__actions"><a class="btn btn--fire" href="#reservierung">Tisch reservieren</a><a class="btn btn--ghost" href="../ofen-olive-app/">Jetzt bestellen</a></div>
     </div>
   </article>
 </section>
@@ -121,6 +123,16 @@
     <a class="btn btn--fire" href="../ofen-olive-app/">Zur Bestellung</a>
     <p class="fine">Fiktive Beispielpreise. Allergene und Zusatzstoffe würden hier pro Gericht ausgewiesen.</p>
   </div>
+</section>
+
+<section class="res" id="reservierung" aria-labelledby="res-h">
+  <div class="res__copy">
+    <h2 id="res-h" class="display display--ink">Ein Tisch am Ofen. <em>Für euren Abend.</em></h2>
+    <p>Datum, Uhrzeit, Gäste. Dazu sagt ihr uns pro Person, worauf die Küche achten soll, und was wir vorbereiten dürfen: die Torte zum Dessert, den ruhigen Platz, den Kinderstuhl.</p>
+    <figure class="res__img"><img src="img/trattoria.webp" alt="Gedeckte Tische im warmen Licht der Trattoria" loading="lazy" decoding="async"></figure>
+    <p class="fine">Demo-Reservierung ohne echten Versand. Es werden keine Daten übertragen.</p>
+  </div>
+  <div class="res__card"><div data-rz="site"></div></div>
 </section>
 
 <section class="zeiten" id="zeiten" aria-labelledby="zeiten-h">
