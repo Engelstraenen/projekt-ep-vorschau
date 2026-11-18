@@ -14,8 +14,8 @@ Aufruf:  python3 tools/launch_build.py [--out PFAD] [--entfernen chat,tracking[,
 """
 import argparse, base64, hashlib, os, re, shutil, subprocess, sys
 # Von Eugen am 17.11.2026 freigegeben: externe Demo-Links bleiben
-DEMO_LINK = re.compile(r'https://[a-z0-9-]+\.github\.io/(?!projekt-ep-vorschau)[^"\'\s<>]*')
-DEMO_LINK_B = re.compile(rb'https://[a-z0-9-]+\.github\.io/(?!projekt-ep-vorschau)[^"\'\s<>]*')
+DEMO_LINK = re.compile(r'https://[a-z0-9-]+\.github\.io(?:/(?!projekt-ep-vorschau)[^"\'\s<>;]*|(?=[;"\'\s<>]))')
+DEMO_LINK_B = re.compile(rb'https://[a-z0-9-]+\.github\.io(?:/(?!projekt-ep-vorschau)[^"\'\s<>;]*|(?=[;"\'\s<>]))')
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = 'https://projektex.de'

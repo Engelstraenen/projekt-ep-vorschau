@@ -1,0 +1,6 @@
+# App-Demo im FLUTLICHT-27-Layout (PROJEKT EX). Nur fuer IONOS/Apache relevant, GitHub Pages ignoriert diese Datei.
+# CSP identisch zum Meta-Tag der Seite (erlaubt nur das eingebettete Demo-Frame), plus frame-ancestors (wirkt nur als Header).
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src https://whiteboipauli.github.io; script-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
