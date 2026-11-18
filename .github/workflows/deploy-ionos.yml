@@ -2,7 +2,7 @@
 # Läuft NUR manuell (workflow_dispatch) und nur nach Freigabe in der Umgebung "production".
 # Vorher in GitHub anlegen: Settings > Environments > production (Required reviewers: Eugen)
 # Secrets dort: IONOS_SFTP_HOST, IONOS_SFTP_USER, IONOS_SFTP_PASSWORD, IONOS_SFTP_PATH, IONOS_SFTP_KNOWN_HOSTS
-name: Deploy zu IONOS (projekt-ep.de)
+name: Deploy zu IONOS (projektex.de)
 
 on:
   workflow_dispatch:
@@ -61,8 +61,8 @@ jobs:
         if: ${{ inputs.dry_run == false }}
         run: |
           sleep 10
-          curl -sSI https://projekt-ep.de/ | tee headers.txt
+          curl -sSI https://projektex.de/ | tee headers.txt
           grep -qi "strict-transport-security" headers.txt
           grep -qi "content-security-policy" headers.txt
-          curl -sSI http://projekt-ep.de/ | grep -q "301"
-          curl -sSI https://www.projekt-ep.de/ | grep -q "301"
+          curl -sSI http://projektex.de/ | grep -q "301"
+          curl -sSI https://www.projektex.de/ | grep -q "301"

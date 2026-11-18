@@ -7,7 +7,7 @@ Aufruf: python3 tools/shared.py [datei ...]   (ohne Argumente: alle Seiten)
 """
 import os, re, sys, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAIL = 'kontakt@projekt-ep.de'
+MAIL = 'kontakt@projektex.de'
 # Reihenfolge und Nummern = Kapitel der Startseite (Games teilt 05 mit Apps; Print/Merch/Räume am Ende)
 S = [
  ('websites', '01', 'Design', 'Websites', 'Design, Entwicklung, Hosting &amp; Betreuung', 'digital-design'),
@@ -64,7 +64,7 @@ def footer(p):
   <div class="epf-cols">
     <nav aria-label="Leistungen"><p class="epf-h">Leistungen</p><ul>{links}</ul></nav>
     <nav aria-label="Studio"><p class="epf-h">Studio</p><ul><li><a href="{p}index.html">Start</a></li><li><a href="{p}prozess.html">Prozess</a></li><li><a href="{p}faq.html">FAQ</a></li><li><a href="{p}index.html#finder">Potenzialfinder</a></li><li><a href="{p}kontakt.html">Kontakt</a></li></ul></nav>
-    <nav aria-label="Rechtliches"><p class="epf-h">Rechtliches</p><ul><li><a href="{p}impressum.html">Impressum</a></li><li><a href="{p}datenschutz.html">Datenschutz</a></li><li><a href="{p}rechtliches.html#cookies">Cookie-Policy</a></li><li><a href="{p}rechtliches.html#agb">AGB</a></li><li><a href="{p}widerruf.html">Widerruf</a></li><li><a href="{p}rechtliches.html#barrierefreiheit">Barrierefreiheit</a></li><li><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></li></ul></nav>
+    <nav aria-label="Rechtliches"><p class="epf-h">Rechtliches</p><ul><li><a href="{p}impressum.html">Impressum</a></li><li><a href="{p}datenschutz.html">Datenschutz</a></li><li><a href="{p}rechtliches.html#cookies">Cookie-Policy</a></li><li><a href="{p}rechtliches.html#agb">AGB</a></li><li><a href="{p}rechtliches.html#barrierefreiheit">Barrierefreiheit</a></li><li><a href="{p}rechtliches.html#ki-hinweis">KI-Hinweis</a></li><li><a id="cookie-einstellungen" href="#cookie-einstellungen" class="cc-settings-link" data-cc="show-preferencesModal">Cookie-Einstellungen</a></li></ul></nav>
   </div>
   <div class="epf-mark" aria-hidden="true"><span>PROJEKT</span><b>EX</b></div>
   <p class="epf-legal"><span>© 2026 PROJEKT EX</span><span>Vom ersten Gedanken. Zum fertigen Ergebnis.</span></p>

@@ -16,6 +16,8 @@ const MAX_PER_HOUR = 5;  // Anfragen je IP-Hash und Stunde
 const LEISTUNGEN = ['Websites', 'SEO & Sichtbarkeit', 'Systeme & Dashboards', 'Automatisierung & Chatbots', 'App Design', 'Werbeclips', 'Ads-Management', 'Newsletter-Marketing', 'Logo Design', 'Print Design', 'Merch-Produktion', 'Räume & Visualisierung', 'Individuelle Aufträge', 'Bewertungs-Löschservice'];
 
 ini_set('display_errors', '0');   // nie Fehlermeldungen/Pfade an Besucher ausgeben
+ini_set('log_errors', '1');
+header('X-Frame-Options: DENY');
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: same-origin');
 header('Cache-Control: no-store');
@@ -47,19 +49,23 @@ if ($ts <= 0 || (time() - $ts) < MIN_SECS || (time() - $ts) > 86400) back('ok=1'
 // Rate-Limit: gehashte IP, Datei außerhalb des Web-Roots, wenn möglich
 $dir = rtrim(sys_get_temp_dir(), '/') . '/ep-ratelimit';
 if (!is_dir($dir)) @mkdir($dir, 0700, true);
-// IP nur gesalzen gehasht (Salz = Pfad dieser Datei auf dem Server, nicht im Repo erratbar), Schlüssel wechselt stündlich
-$key = $dir . '/' . hash_hmac('sha256', ($_SERVER['REMOTE_ADDR'] ?? '') . '|' . date('Y-m-d-H'), __FILE__ . php_uname('n'));
+// Zufälliges Salz, einmalig erzeugt und nur auf dem Server gespeichert (nicht aus Pfad/Hostname erratbar)
+$saltFile = $dir . '/.salt';
+if (!is_file($saltFile)) { @file_put_contents($saltFile, bin2hex(random_bytes(32)), LOCK_EX); @chmod($saltFile, 0600); }
+$salt = (string)@file_get_contents($saltFile);
+if ($salt === '') $salt = __FILE__ . php_uname('n');
+$key = $dir . '/' . hash_hmac('sha256', ($_SERVER['REMOTE_ADDR'] ?? '') . '|' . date('Y-m-d-H'), $salt);
 $count = is_file($key) ? (int)file_get_contents($key) : 0;
 if ($count >= MAX_PER_HOUR) { http_response_code(429); back('err=rate'); }
 @file_put_contents($key, (string)($count + 1), LOCK_EX);
-foreach (glob($dir . '/*') ?: [] as $f) { if (filemtime($f) < time() - 3600) @unlink($f); }
+foreach (glob($dir . '/*') ?: [] as $f) { if (filemtime($f) < time() - 3600) @unlink($f); } // .salt wird von glob('*') nicht erfasst
 
 // Eingaben prüfen
 $name      = clean(field('name'), 100);
 $email     = clean(field('email'), 200);
 $firma     = clean(field('firma'), 150);
 $kundentyp = clean(field('kundentyp'), 40);
-if (!in_array($kundentyp, ['', 'Unternehmen', 'Verein', 'Öffentlicher Auftraggeber', 'Privatperson'], true)) $kundentyp = '';
+if (!in_array($kundentyp, ['', 'Unternehmen', 'Verein', 'Öffentlicher Auftraggeber'], true)) $kundentyp = '';
 $pick = static function (string $raw, array $allow): string {
     $out = [];
     foreach (array_map('trim', explode(',', $raw)) as $part) {
@@ -89,7 +95,7 @@ $sonstZeitpunkt = $note('sonst_zeitpunkt', 240);
 $sonstEntscheidet = $note('sonst_entscheidet', 240);
 $nachricht = clean(field('nachricht'), 5000);
 
-if ($name === '' || mb_strlen($nachricht) < 10) back('err=input');
+if ($name === '' || mb_strlen($firma) < 2 || mb_strlen($nachricht) < 10) back('err=input');
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) back('err=email');
 $einzeilig = $name . $email . $firma . $branche . $kanaele . $region . $ziel . $haken . $leistungen . $material . $zeitpunkt . $entscheidet . $sonstBranche . $sonstKanaele . $sonstRegion . $sonstZiel . $sonstHaken . $sonstLeistungen . $sonstMaterial . $sonstZeitpunkt . $sonstEntscheidet;
 if (preg_match('/[\r\n]/', $einzeilig)) back('err=input');
@@ -113,7 +119,7 @@ $headers = implode("\r\n", [
   'Reply-To: ' . $email,
   'Content-Type: text/plain; charset=UTF-8',
   'Content-Transfer-Encoding: 8bit',
-  'X-Mailer: projekt-ep-kontakt',
+  'X-Mailer: projektex-kontakt',
 ]);
 
 $ok = mail(TO, $subject, $body, $headers, '-f' . FROM);
