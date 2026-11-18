@@ -277,7 +277,7 @@
   /* ---------- Vorher / Nachher ---------- */
   const ba = $('[data-ba]');
   if (ba) {
-  const baImg = $('img', ba), hideBa = () => { $('#vorher-nachher').style.display = 'none'; };
+  const baImg = $('img', ba), hideBa = () => { ba.closest('section').style.display = 'none'; };
   if (baImg.complete && !baImg.naturalWidth) hideBa(); else baImg.addEventListener('error', hideBa);
   $('[data-ba-range]').addEventListener('input', e => ba.style.setProperty('--p', e.target.value + '%'));
   if (hasGsap && !reduce) ScrollTrigger.create({ trigger: ba, start: 'top 70%', once: true, onEnter: () => gsap.fromTo(ba, { '--p': '85%' }, { '--p': '50%', duration: 1.6, ease: 'power3.inOut' }) });
