@@ -12,6 +12,8 @@ DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # IONOS (Massen-Hosting): ohne RewriteBase landen relative Ziele im falschen Pfad -> 404 bei sauberen URLs
+  RewriteBase /
 
   # 1) HTTP -> HTTPS und www -> ohne www (eine Variante, ein 301-Sprung)
   RewriteCond %{HTTPS} !=on [OR]
@@ -34,7 +36,7 @@ DirectoryIndex index.html
   # 4) Saubere URLs: /faq -> faq.html (passend zu den Canonical-Tags)
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME}.html -f
-  RewriteRule ^(.+?)/?$ $1.html [L]
+  RewriteRule ^(.+?)/?$ /$1.html [L]
 </IfModule>
 
 ErrorDocument 404 /404.html
