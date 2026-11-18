@@ -96,6 +96,74 @@ def public(p):
     if EXCLUDE_RE.match(p): return False
     return True
 
+
+def check_reference_videos(root, errors):
+    """FEHLER, wenn eine Referenzkarte (article.pb mit Browser-/Handy-Vorschau)
+    kein <video> mit vorhandenen mp4- und webm-Quellen hat, eine Videodatei
+    fehlt, oder dieselbe Datei auf websites.html und apps.html liegt."""
+    art_re = re.compile(r'<article\b([^>]*)>(.*?)</article>', S)
+    src_re = re.compile(r'<source\b[^>]*\bsrc="([^"]+)"', S)
+    vid_src_re = re.compile(r'<video\b[^>]*\bsrc="([^"]+)"', S)
+    usage = {}
+    for d, _, fs in os.walk(root):
+        for fn in fs:
+            if not fn.endswith('.html'):
+                continue
+            f = os.path.join(d, fn)
+            rel = os.path.relpath(f, root)
+            if rel.startswith('referenzen' + os.sep) or rel.startswith('vorschau' + os.sep):
+                continue
+            h = open(f, encoding='utf-8').read()
+
+            def resolve(src):
+                clean = src.split('?', 1)[0].split('#', 1)[0]
+                return os.path.normpath(os.path.join(d, clean)), clean
+
+            # Jede referenzierte Videodatei muss physisch existieren
+            for m in list(src_re.finditer(h)) + list(vid_src_re.finditer(h)):
+                path, clean = resolve(m.group(1))
+                if not re.search(r'\.(mp4|webm)$', clean, re.I):
+                    continue
+                if not os.path.isfile(path):
+                    errors.append(f'{rel}: Videodatei fehlt: {clean}')
+
+            for am in art_re.finditer(h):
+                attrs, body = am.group(1), am.group(2)
+                cls_m = re.search(r'\bclass="([^"]*)"', attrs)
+                cls = cls_m.group(1) if cls_m else ''
+                if 'pb' not in cls.split():
+                    continue
+                is_card = any(tok in body for tok in ('sc-bar', 'sc-browser', 'sc-screen', 'phone-frame', 'sc-toggle'))
+                if not is_card:
+                    continue
+                id_m = re.search(r'\bid="([^"]+)"', attrs)
+                cid = id_m.group(1) if id_m else '(ohne-id)'
+                videos = re.findall(r'<video\b[^>]*>.*?</video>', body, S)
+                if not videos:
+                    errors.append(f'{rel} #{cid}: Referenzkarte ohne <video>')
+                    continue
+                for v in videos:
+                    srcs = src_re.findall(v) + vid_src_re.findall(v)
+                    has_mp4 = any(re.search(r'\.mp4(?:$|[?#])', s, re.I) for s in srcs)
+                    has_webm = any(re.search(r'\.webm(?:$|[?#])', s, re.I) for s in srcs)
+                    if not has_mp4 or not has_webm:
+                        errors.append(f'{rel} #{cid}: Vorschau-Video braucht mp4- und webm-Quelle')
+                    for s in srcs:
+                        path, clean = resolve(s)
+                        if os.path.isfile(path):
+                            key = os.path.relpath(path, root)
+                            usage.setdefault(key, []).append((rel, cid))
+                if 'sc-toggle' in body and not videos:
+                    errors.append(f'{rel} #{cid}: Play-Knopf ohne <video>')
+
+    for vid, used in usage.items():
+        pages = {p for p, _ in used}
+        on_web = any(p.replace('\\', '/').endswith('leistungen/websites.html') for p in pages)
+        on_app = any(p.replace('\\', '/').endswith('leistungen/apps.html') for p in pages)
+        if on_web and on_app:
+            cards = ', '.join(f'{p} #{c}' for p, c in used)
+            errors.append(f'{vid}: dieselbe Videodatei auf websites.html und apps.html ({cards})')
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=os.path.join(os.path.dirname(ROOT), 'ep-launch', 'dist'))
@@ -238,6 +306,7 @@ def main():
     for p in skipped:
         stem = re.sub(r'(-\d+)?\.(webp|avif|svg)$', '', os.path.basename(p))
         if stem in blob: errors.append(f'ausgeschlossene Datei wird referenziert: {p}')
+    check_reference_videos(out, errors)
     for w in warns: print('WARNUNG', w)
     for e in errors: print('FEHLER ', e)
     print(f'offene Platzhalter gesamt: {ph}')
