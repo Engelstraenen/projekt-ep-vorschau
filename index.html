@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Weiterleitung zu projektex.de</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://projektex.de/">
+  <meta http-equiv="refresh" content="0; url=https://projektex.de/">
+  <script>
+  (function () {
+    var prefix = "/projekt-ep-vorschau";
+    var path = location.pathname || "/";
+    if (path.indexOf(prefix) === 0) path = path.slice(prefix.length) || "/";
+    if (path.charAt(0) !== "/") path = "/" + path;
+    if (path === "/index.html") path = "/";
+    location.replace("https://projektex.de" + path + (location.search || "") + (location.hash || ""));
+  })();
+  </script>
+</head>
+<body>
+  <p>Diese Vorschau ist auf die Live-Seite umgezogen: <a href="https://projektex.de/">projektex.de</a>.</p>
+</body>
+</html>
