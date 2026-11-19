@@ -1,0 +1,6 @@
+:HL["/projekt-ep-vorschau/referenzen/flutlicht27/_next/static/chunks/38wm2-8_ru5hf.css","style"]
+:HL["/projekt-ep-vorschau/referenzen/flutlicht27/fonts/archivo-italic.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/projekt-ep-vorschau/referenzen/flutlicht27/fonts/archivo-normal.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
+0:{"b":"rLIkfbZvdAo6uJlnpPGGg","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

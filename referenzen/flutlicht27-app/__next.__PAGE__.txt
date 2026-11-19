@@ -1,0 +1,27 @@
+1:"$Sreact.fragment"
+2:"/projekt-ep-vorschau/referenzen/flutlicht27-app/_next/static/chunks/2x-moexh2_r4l.js"
+3:I[80520,["$2"],"default"]
+4:I[26214,["$2"],"default"]
+8:"/projekt-ep-vorschau/referenzen/flutlicht27-app/_next/static/chunks/2dl7k0q6it-5q.js"
+9:I[9843,["$2","$8"],"App"]
+a:I[12462,["$2"],"OutletBoundary"]
+b:"$Sreact.suspense"
+e:"ViewportBoundary"
+f:I[12462,["$2"],"$e"]
+10:"MetadataBoundary"
+11:I[12462,["$2"],"$10"]
+12:I[81829,["$2"],"IconMark"]
+:HL["/projekt-ep-vorschau/referenzen/flutlicht27-app/_next/static/chunks/0gumuud6xv4_u.css","style"]
+:HL["/projekt-ep-vorschau/referenzen/flutlicht27-app/fonts/archivo-italic.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/projekt-ep-vorschau/referenzen/flutlicht27-app/fonts/archivo-normal.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+6:X
+7:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","$L9",null,{}],[["$","script","script-0",{"src":"/projekt-ep-vorschau/referenzen/flutlicht27-app/_next/static/chunks/2dl7k0q6it-5q.js","async":true}]],["$","$La",null,{"children":["$","$b",null,{"name":"Next.MetadataOutlet","children":"$@c"}]}]]}],"p":"$@d","v":null,"s":"$6"}}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/projekt-ep-vorschau/referenzen/flutlicht27-app/_next/static/chunks/0gumuud6xv4_u.css","precedence":"next"}],["$","script","script-0",{"src":"/projekt-ep-vorschau/referenzen/flutlicht27-app/_next/static/chunks/2x-moexh2_r4l.js","async":true}]],["$","html",null,{"lang":"de","children":[["$","head",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"@font-face{font-family:\"Archivo Variable\";font-style:normal;font-display:swap;font-weight:400 900;font-stretch:100% 125%;src:url(/projekt-ep-vorschau/referenzen/flutlicht27-app/fonts/archivo-normal.woff2) format(\"woff2-variations\");}@font-face{font-family:\"Archivo Variable\";font-style:italic;font-display:swap;font-weight:400 900;font-stretch:100% 125%;src:url(/projekt-ep-vorschau/referenzen/flutlicht27-app/fonts/archivo-italic.woff2) format(\"woff2-variations\");}"}}],["$","link",null,{"rel":"preload","href":"/projekt-ep-vorschau/referenzen/flutlicht27-app/fonts/archivo-italic.woff2","as":"font","type":"font/woff2","crossOrigin":"anonymous"}],["$","link",null,{"rel":"preload","href":"/projekt-ep-vorschau/referenzen/flutlicht27-app/fonts/archivo-normal.woff2","as":"font","type":"font/woff2","crossOrigin":"anonymous"}]]}],["$","body",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L4",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]}]]}]]}],"p":"$@5","v":null,"s":"$6"},"c":"$Q7"},"h":{"r":["$","$1","h",{"children":[null,["$","$Lf",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1, viewport-fit=cover"}],["$","meta","2",{"name":"theme-color","content":"#0b0d12"}]]}],["$","$L11",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$b",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"FLUTLICHT 27 – App (Demo)"}],["$","meta","1",{"name":"description","content":"Live-Belegung der 8 Courts, Court buchen, offene Matches, Rangliste, Americano, Schlägerverleih und Bar an den Court. Demo-App der Padelhalle FLUTLICHT 27."}],["$","link","2",{"rel":"manifest","href":"/projekt-ep-vorschau/referenzen/flutlicht27-app/manifest.webmanifest"}],["$","meta","3",{"name":"robots","content":"noindex, nofollow"}],["$","meta","4",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","5",{"name":"apple-mobile-web-app-title","content":"FLUTLICHT 27"}],["$","meta","6",{"name":"apple-mobile-web-app-status-bar-style","content":"black-translucent"}],["$","link","7",{"rel":"icon","href":"/projekt-ep-vorschau/referenzen/flutlicht27-app/icon.svg?icon.3x-cg9xlk-vie.svg","sizes":"any","type":"image/svg+xml"}],["$","link","8",{"rel":"apple-touch-icon","href":"/projekt-ep-vorschau/referenzen/flutlicht27-app/apple-icon.png?apple-icon.2za7i_mp8e741.png","sizes":"180x180","type":"image/png"}],["$","$L12","9",{}]]}]}],null]}],null]}],"p":"$@13","v":null,"s":"$6"}},"a":"$@14","u":"$@15","b":"9bFCVD8AMlOTl_uudANal"}
+c:null
+6:300
+15:true
+6:C
+14:0
+5:"$undefined"
+13:"$undefined"
+d:"$undefined"

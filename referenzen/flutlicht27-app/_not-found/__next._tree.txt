@@ -1,0 +1,6 @@
+:HL["/projekt-ep-vorschau/referenzen/flutlicht27-app/_next/static/chunks/0gumuud6xv4_u.css","style"]
+:HL["/projekt-ep-vorschau/referenzen/flutlicht27-app/fonts/archivo-italic.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/projekt-ep-vorschau/referenzen/flutlicht27-app/fonts/archivo-normal.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
+0:{"b":"9bFCVD8AMlOTl_uudANal","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
