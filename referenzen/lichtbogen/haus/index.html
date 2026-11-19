@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="de" data-theme="light" data-v="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LICHTBOGEN · Das Haus unter Strom (Demo)</title>
+<meta name="description" content="Demo von PROJEKT EX: Website für einen erfundenen Elektrobetrieb.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23080a0f'/%3E%3Cpath d='M6 23a10 10 0 0 1 20 0' fill='none' stroke='%23ffc83d' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='23' r='2.500' fill='%23ffc83d'/%3E%3C/svg%3E">
+<script>(function(){var F=null,t=F;if(!t){try{t=localStorage.getItem('lb-theme')}catch(e){}}if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})()</script>
+<script>try{fetch('../version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=v.trim();if(v&&v!=='1795057959'&&location.search.indexOf('v='+v)<0){var u=new URL(location.href);u.searchParams.set('v',v);location.replace(u.href)}}).catch(function(){})}catch(e){}</script>
+<link rel="preload" href="../assets/fonts/grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css?v=1795057959">
+<link rel="stylesheet" href="../assets/css/v1.css?v=1795057959">
+</head>
+<body>
+<div class="demo"><div class="wrap"><span class="for">So könnte das für <span data-firma></span> aussehen.</span>
+<b>Demo von <a href="https://projektex.de/" rel="noopener">PROJEKT EX</a></b>, erfundene Firma, alle Personen, Zahlen und Stimmen sind Beispiele. · Testversion 1 von 3 · <a href="../versionen.html">andere ansehen</a></div></div>
+<header class="head">
+<div class="wrap head-in">
+<a class="logo" href="index.html" aria-label="LICHTBOGEN Startseite"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 24a12 12 0 0 1 24 0"/><path d="M16 5v9" /><circle cx="16" cy="24" r="2.500" fill="currentColor" stroke="none"/></svg><span>LICHTBOGEN<small>ELEKTROTECHNIK · DORTMUND</small></span></a>
+<nav class="nav" aria-label="Hauptmenü"><a href="index.html" aria-current="page">Start</a><a href="rechner.html">Rechner</a><a href="foto-check.html">Foto-Check</a><a href="jobs.html">Jobs</a></nav>
+<div class="head-tools">
+<button class="tool" type="button" data-sound aria-pressed="false" aria-label="Schalter-Klick an oder aus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l5 4V6L7 10z"/><path class="on" d="M16 9a4 4 0 0 1 0 6M18.500 6.500a8 8 0 0 1 0 11"/><path class="off" d="M16 9.500l5 5M21 9.500l-5 5"/></svg></button>
+<button class="tool" type="button" data-light aria-pressed="true" aria-label="Licht ausschalten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.800 1-2.5A6 6 0 0 0 12 3z"/></svg></button>
+<a class="btn btn--sm" href="#" data-demo="Demo: Hier wählt das Handy direkt die Nummer des Betriebs."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> 0231 000 00 00</a>
+</div>
+</div>
+<nav class="subnav" aria-label="Seiten"><a href="index.html" aria-current="page">Start</a><a href="rechner.html">Rechner</a><a href="foto-check.html">Foto-Check</a><a href="jobs.html">Jobs</a></nav>
+</header>
+<main>
+
+<section class="hs" id="hs" style="padding:0"><div class="hs-stage">
+<div class="hs-zoom" id="hs-zoom">
+<svg class="house" id="house" viewBox="0 0 800 720" role="img" aria-label="Aufgeschnittenes Haus mit allen Leistungen">
+<rect class="sky" width="800" height="560"/>
+<g class="stars"><circle cx="90" cy="60" r="2"/><circle cx="210" cy="36" r="1.500"/><circle cx="330" cy="70" r="1.500"/><circle cx="560" cy="44" r="2"/><circle cx="720" cy="150" r="1.500"/><circle cx="60" cy="190" r="1.500"/></g>
+<circle class="sun" cx="700" cy="78" r="34"/><circle class="moon" cx="104" cy="92" r="24"/>
+<rect class="ground" y="540" width="800" height="180"/>
+<path class="shell" d="M170 250H630V700H170z"/><path class="shell" d="M630 420H790V540H630z"/>
+<path class="roof" d="M136 252L400 88L664 252z"/><path class="roof" d="M624 420h172v-12H624z"/>
+<g class="rooms">
+<rect class="room r-smart" x="182" y="262" width="212" height="126"/><rect class="room r-alt" x="406" y="262" width="212" height="126"/>
+<rect class="room r-wohn" x="182" y="400" width="212" height="128"/><rect class="room r-kue" x="406" y="400" width="212" height="128"/>
+<rect class="room r-kel" x="182" y="552" width="212" height="136"/><rect class="room r-sp" x="406" y="552" width="212" height="136"/>
+<rect class="room r-gar" x="642" y="432" width="136" height="96"/>
+</g>
+<!-- Leitungen -->
+<g class="wires">
+<path class="wire w-pv" d="M606 226V620H548"/><path class="wire w-bat" d="M462 620H306"/>
+<path class="wire w-house" d="M214 600H176V300H206"/><path class="wire w-house" d="M176 440H206"/><path class="wire w-house" d="M306 640H400V394H430"/><path class="wire w-house" d="M400 534H430"/>
+<path class="wire w-gar" d="M400 546H636V470H652"/>
+</g>
+<!-- Dach / PV -->
+<g class="hot" data-z="pv" tabindex="0" role="button" aria-label="Solaranlage"><g transform="translate(436,112) rotate(31.600)"><rect class="pvp" x="0" y="-17" width="50" height="14" rx="2"/><rect class="pvp" x="56" y="-17" width="50" height="14" rx="2"/><rect class="pvp" x="112" y="-17" width="50" height="14" rx="2"/><rect class="pvp" x="168" y="-17" width="50" height="14" rx="2"/></g></g>
+<!-- Smart Home: Fenster mit Rollladen -->
+<g class="hot" data-z="smart" data-act="shut" tabindex="0" role="button" aria-label="Rollladen fahren"><rect class="win" x="232" y="286" width="84" height="66" rx="3"/><rect class="shutter" x="232" y="286" width="84" height="66"/><path class="frame" d="M232 286h84v66h-84zM274 286v66"/></g>
+<rect class="furn" x="330" y="352" width="54" height="30" rx="4"/><circle class="knobc" cx="208" cy="318" r="7"/>
+<!-- Altbau -->
+<g class="hot" data-z="altbau" tabindex="0" role="button" aria-label="Altbau-Sanierung"><path class="oldwire" d="M420 290h60l10 14 12-14h100"/><rect class="sockn" x="432" y="340" width="20" height="20" rx="4"/><rect class="sockn" x="470" y="340" width="20" height="20" rx="4"/><rect class="socko" x="560" y="340" width="20" height="20" rx="4"/><path class="frame" d="M520 388v-52l24-10v62"/></g>
+<!-- Wohnen: Lampe + Schalter -->
+<path class="glow-l" d="M268 442L210 528H366L308 442z"/>
+<g class="hot" data-z="licht" data-act="lamp" tabindex="0" role="button" aria-label="Licht schalten"><path class="frame" d="M288 400v26"/><path class="lampsh" d="M266 444c0-12 10-18 22-18s22 6 22 18z"/><circle class="lampb" cx="288" cy="446" r="6"/><rect class="sw" x="374" y="452" width="12" height="18" rx="3"/></g>
+<rect class="furn" x="200" y="496" width="90" height="26" rx="8"/>
+<!-- Küche: E-Check -->
+<g class="hot" data-z="echeck" tabindex="0" role="button" aria-label="E-Check"><rect class="furn" x="420" y="486" width="130" height="38" rx="3"/><rect class="furn" x="560" y="430" width="46" height="94" rx="4"/><circle class="hob" cx="450" cy="482" r="9"/><circle class="hob" cx="482" cy="482" r="9"/><path class="chk" d="M506 436h34v40h-34zM514 456l7 7 12-13"/></g>
+<!-- Keller: Zählerschrank -->
+<g class="hot" data-z="not" data-act="fuse" tabindex="0" role="button" aria-label="Hauptsicherung schalten"><rect class="fbox" x="214" y="574" width="92" height="84" rx="6"/><rect class="fb" x="226" y="588" width="12" height="24" rx="2"/><rect class="fb" x="244" y="588" width="12" height="24" rx="2"/><rect class="fb" x="262" y="588" width="12" height="24" rx="2"/><rect class="fmain" x="282" y="586" width="16" height="30" rx="3"/><circle class="fled" cx="236" cy="640" r="5"/></g>
+<!-- Speicher -->
+<g class="hot" data-z="pv" tabindex="0" role="button" aria-label="Stromspeicher"><rect class="fbox" x="462" y="576" width="86" height="96" rx="8"/><rect class="bat b1" x="474" y="646" width="62" height="14" rx="3"/><rect class="bat b2" x="474" y="626" width="62" height="14" rx="3"/><rect class="bat b3" x="474" y="606" width="62" height="14" rx="3"/><rect class="bat b4" x="474" y="586" width="62" height="14" rx="3"/></g>
+<!-- Garage -->
+<g class="hot" data-z="wallbox" data-act="plug" tabindex="0" role="button" aria-label="Auto einstecken"><rect class="wb" x="650" y="452" width="20" height="34" rx="4"/><path class="chg" d="M670 470c14 0 8 26 24 26"/><path class="car" d="M690 506c0-10 6-14 14-16l10-18h40l12 18c6 2 10 6 10 16z"/><circle class="wheel" cx="712" cy="510" r="10"/><circle class="wheel" cx="758" cy="510" r="10"/><rect class="carbat" x="712" y="480" width="44" height="7" rx="2"/><rect class="carfill" x="712" y="480" width="44" height="7" rx="2"/></g>
+</svg></div>
+<button class="daynight" type="button" data-light aria-pressed="true" aria-label="Licht ausschalten"><span class="only-light">Nacht einschalten</span><span class="only-dark">Tag einschalten</span></button>
+<div class="hs-card card" id="hs-card" aria-live="polite"><p class="eyebrow" id="hs-eye"></p><h1 id="hs-h"></h1><p class="muted" id="hs-t"></p>
+<div class="hs-act"><a class="btn btn--sm" id="hs-a" href="#"></a><a class="btn btn--sm btn--ghost" id="hs-call" href="#" data-demo="Demo: Hier wählt das Handy direkt die Nummer des Betriebs."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> 0231 000 00 00</a></div>
+<div class="hs-dots" id="hs-dots"></div></div>
+</div></section>
+<script>window.LB_ZONES=[{"z": "all", "eye": "Willkommen im Haus", "h": "Alles, was wir machen, in einem Haus.", "t": "Scroll durch die Räume oder tipp direkt etwas an: Lichtschalter, Rollladen, Auto, Sicherung. Oben rechts wird es Nacht.", "link": "", "cta": ""}, {"z": "pv", "eye": "PV und Speicher", "h": "Dein Dach macht Strom.", "t": "Tagsüber fließt Strom vom Dach in den Speicher. Nachts versorgt der Speicher das Haus. Schalt oben auf Nacht und schau zu.", "link": "rechner.html#pv", "cta": "Ertrag grob einschätzen"}, {"z": "wallbox", "eye": "Wallbox", "h": "Laden, während du schläfst.", "t": "Tipp auf das Auto und steck es ein. Wir montieren die Wallbox in der Regel an einem Tag.", "link": "rechner.html", "cta": "Ladezeit ausrechnen"}, {"z": "smart", "eye": "Smart Home", "h": "Rollläden, Licht, Heizung. Ein Tipp.", "t": "Tipp auf das Fenster: Der Rollladen fährt. So fühlt sich das später auf deinem Handy an.", "link": "foto-check.html", "cta": "Beraten lassen"}, {"z": "licht", "eye": "Licht und Schalter", "h": "Licht, wo du es brauchst.", "t": "Tipp auf den Schalter im Wohnzimmer. Neue Stromkreise, mehr Steckdosen, gutes Licht.", "link": "foto-check.html", "cta": "Fotos schicken"}, {"z": "echeck", "eye": "E-Check", "h": "Einmal durchmessen, ruhig schlafen.", "t": "Wir prüfen Anlage und Geräte und schreiben auf, was wir gefunden haben. Mit Fotos.", "link": "foto-check.html", "cta": "E-Check anfragen"}, {"z": "altbau", "eye": "Altbau-Sanierung", "h": "Alte Leitungen, neuer Stand.", "t": "Raum für Raum, staubarm, damit du weiter wohnen kannst.", "link": "foto-check.html", "cta": "Zählerschrank fotografieren"}, {"z": "not", "eye": "Notdienst", "h": "Strom weg? Wir kommen.", "t": "Tipp auf die Hauptsicherung im Keller und schau, was passiert. Im Ernstfall: anrufen, wir fahren los.", "link": "", "cta": ""}];</script>
+
+<section class="band"><div class="wrap">
+<div class="sec-head"><p class="eyebrow">So läuft es ab</p><h2>Drei Schritte bis zum Termin.</h2></div>
+<div class="grid3">
+<div class="card step rv"><b>1</b><h3>Fotos schicken</h3><p class="muted" style="margin-top:8px">Zählerschrank, Problemstelle, Raum. Dauert zwei Minuten und spart die erste Anfahrt.</p></div>
+<div class="card step rv"><b>2</b><h3>Rückruf vom Meister</h3><p class="muted" style="margin-top:8px">Wir haben deine Fotos schon gesehen, wenn wir anrufen.</p></div>
+<div class="card step rv"><b>3</b><h3>Fester Termin</h3><p class="muted" style="margin-top:8px">Du bekommst einen Tag und eine Uhrzeit. Und jemanden, der dann auch da ist.</p></div>
+</div></div></section>
+
+<section><div class="wrap">
+<div class="sec-head"><p class="eyebrow">Direkt loslegen</p><h2>Such dir den kürzesten Weg aus.</h2></div>
+<div class="grid3">
+<a class="card tease rv" href="rechner.html"><div><p class="eyebrow">Rechner</p><h3 style="margin-top:10px">Wallbox und PV grob einschätzen</h3></div><span class="go">Zum Rechner →</span></a>
+<a class="card tease rv" href="foto-check.html"><div><p class="eyebrow">Foto-Check</p><h3 style="margin-top:10px">3 Fotos schicken, Rückruf bekommen</h3></div><span class="go">Fotos machen →</span></a>
+<a class="card tease rv" href="jobs.html"><div><p class="eyebrow">Jobs</p><h3 style="margin-top:10px">Elektroniker gesucht. Bewerben in 60 Sekunden</h3></div><span class="go">Zu den Jobs →</span></a>
+</div></div></section>
+
+</main>
+<footer class="foot"><div class="wrap foot-in">
+<div><a class="logo" href="index.html"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 24a12 12 0 0 1 24 0"/><path d="M16 5v9" /><circle cx="16" cy="24" r="2.500" fill="currentColor" stroke="none"/></svg><span>LICHTBOGEN</span></a>
+<p style="margin-top:14px">Erfundener Elektrobetrieb aus Dortmund. Diese Seite ist ein Muster von <a href="https://projektex.de/" rel="noopener">PROJEKT EX</a>: So kann die Website eines Elektrobetriebs aussehen und arbeiten.</p></div>
+<nav aria-label="Fußmenü"><a href="index.html" aria-current="page">Start</a><a href="rechner.html">Rechner</a><a href="foto-check.html">Foto-Check</a><a href="jobs.html">Jobs</a><a href="../impressum.html">Impressum</a><a href="../datenschutz.html">Datenschutz</a><div class="foot-soc"><button class="soc-i" type="button" aria-label="Instagram" data-demo="Demo: Hier geht es zu eurem Instagram-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></button><button class="soc-i" type="button" aria-label="Facebook" data-demo="Demo: Hier geht es zu eurem Facebook-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 21v-7h2.6l.5-3.2h-3.1V8.9c0-1 .5-1.7 1.8-1.7h1.4V4.4c-.5-.1-1.300-.2-2.2-.2-2.500 0-4 1.500-4 4.200v2.400H9V14h2.500v7"/></svg></button><button class="soc-i" type="button" aria-label="YouTube" data-demo="Demo: Hier geht es zu eurem YouTube-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.200 9.300l4.800 2.700-4.800 2.700z" fill="currentColor"/></svg></button><button class="soc-i" type="button" aria-label="TikTok" data-demo="Demo: Hier geht es zu eurem TikTok-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.500a3.500 3.500 0 1 1-3.500-3.500"/><path d="M14 4c.4 2.600 2 4.200 4.500 4.500"/></svg></button><button class="soc-i" type="button" aria-label="WhatsApp" data-demo="Demo: Hier geht es zu eurem WhatsApp-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.300-4.200A8 8 0 1 1 8.300 19z"/><path d="M9.200 9.200c.3 2.300 2.200 4.500 5 5.400l1.300-1.300"/></svg></button></div></nav>
+<div><p>Alle Namen, Zahlen und Stimmen sind Beispiele. Formulare senden nichts, Fotos bleiben auf deinem Gerät.</p>
+<p style="margin-top:10px">Weitere Demos: <a href="https://projektex.de/referenzen/warmherz/" rel="noopener">WARMHERZ</a> · <a href="https://projektex.de/referenzen/werkakte-app/" rel="noopener">Werkakte-App</a></p></div>
+</div></footer>
+<div class="bar"><a class="btn" href="#" data-demo="Demo: Hier wählt das Handy direkt die Nummer des Betriebs."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> Anrufen</a><a class="btn btn--ghost" href="foto-check.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg> Foto-Check</a></div>
+<script src="../assets/js/app.js?v=1795057959" defer></script>
+<script src="../assets/js/v1.js?v=1795057959" defer></script>
+</body>
+</html>

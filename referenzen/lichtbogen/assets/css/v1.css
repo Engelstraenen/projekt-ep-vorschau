@@ -1,0 +1,86 @@
+/* Testversion 1 · Das Haus unter Strom */
+.hs{height:760vh;position:relative}
+.hs-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--sky)}
+:root{--sky:#cfe6f5;--gr:#b9c9a4;--shell:#fbf7ef;--room:#efe7d8;--roofc:#3a3f48;--furn:#cdbfa6;--wirec:#c9bfa9}
+:root[data-theme="dark"]{--sky:#070b16;--gr:#0f1712;--shell:#161c27;--room:#1d2532;--roofc:#0d1118;--furn:#2a3445;--wirec:#263042}
+.hs-zoom{position:absolute;left:0;top:0;width:100%;transform-origin:0 0;transition:transform 1.1s cubic-bezier(.6,0,.2,1);will-change:transform}
+.house{width:100%;height:auto;display:block}
+.sky{fill:var(--sky)}.ground{fill:var(--gr)}
+.shell{fill:var(--shell);stroke:var(--ink);stroke-width:3}
+.roof{fill:var(--roofc)}
+.room{fill:var(--room)}
+.furn{fill:var(--furn)}
+.frame{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round}
+.sun{fill:#ffc83d;transition:transform 1.2s cubic-bezier(.6,0,.2,1),opacity .8s}
+.moon{fill:#e8edf7;opacity:0;transform:translateY(60px);transition:transform 1.2s cubic-bezier(.6,0,.2,1),opacity .8s}
+.stars circle{fill:#fff;opacity:0;transition:opacity 1s}
+[data-theme="dark"] .sun{transform:translateY(120px);opacity:0}
+[data-theme="dark"] .moon{opacity:1;transform:none}
+[data-theme="dark"] .stars circle{opacity:.9}
+/* Leitungen */
+.wire{fill:none;stroke:var(--wirec);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.w-house,.w-bat,.w-gar{stroke:var(--accent);stroke-dasharray:5 11;animation:dash2 1s linear infinite}
+[data-theme="light"] .w-pv{stroke:var(--accent);stroke-dasharray:5 11;animation:dash2 1s linear infinite}
+[data-theme="dark"] .wire{filter:drop-shadow(0 0 5px rgba(255,200,61,.8))}
+[data-theme="dark"] .w-pv{filter:none}
+.w-gar{opacity:.25;animation-play-state:paused}
+.plug .w-gar{opacity:1;animation-play-state:running}
+@keyframes dash2{to{stroke-dashoffset:-32}}
+.hs-off .wire{stroke:var(--wirec);animation:none;filter:none}
+/* Teile */
+.hot{cursor:pointer;outline:none}
+.hot:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.pvp{fill:#1f3a5f;stroke:#7fb2e6;stroke-width:1.500}
+[data-theme="light"] .pvp{animation:pvglint 3s ease-in-out infinite}
+@keyframes pvglint{50%{fill:#2f5f9a}}
+.win{fill:#bfe3f7}
+[data-theme="dark"] .win{fill:#ffd98a;filter:drop-shadow(0 0 10px rgba(255,200,61,.8))}
+.shutter{fill:#8c8576;transform-box:fill-box;transform-origin:50% 0;transform:scaleY(.12);transition:transform .9s cubic-bezier(.6,0,.2,1)}
+.shut .shutter{transform:scaleY(1)}
+.knobc{fill:var(--accent)}
+.oldwire{fill:none;stroke:#9a8f7a;stroke-width:3;stroke-dasharray:3 6}
+.sockn{fill:var(--accent)}.socko{fill:#9a8f7a}
+.glow-l{fill:#ffd166;opacity:0;transition:opacity .35s}
+.lamp-on .glow-l{opacity:.55}
+.lampsh{fill:var(--ink)}
+[data-theme="dark"] .lampsh{fill:#3a4658}
+.lampb{fill:#8b8778}.lamp-on .lampb{fill:#fff3c9}
+.sw{fill:var(--accent)}
+.hob{fill:none;stroke:var(--ink);stroke-width:2}
+.chk{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.fbox{fill:var(--shell);stroke:var(--ink);stroke-width:2.500}
+.fb{fill:var(--furn)}
+.fmain{fill:#2fbf6b;transition:transform .2s cubic-bezier(.3,1.9,.5,1),fill .1s}
+.fled{fill:#2fbf6b}
+.hs-off .fmain{transform:translateY(12px);fill:#e5352b}
+.hs-off .fled{fill:#e5352b}
+.bat{fill:var(--furn)}
+.b1,.b2{fill:var(--accent)}
+[data-theme="light"] .b3{animation:charge 2.4s ease-in-out infinite;fill:var(--accent)}
+@keyframes charge{0%,40%{opacity:.15}60%,100%{opacity:1}}
+.wb{fill:var(--accent)}
+.chg{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-dasharray:60;stroke-dashoffset:60;transition:stroke-dashoffset .7s ease}
+.plug .chg{stroke-dashoffset:0}
+.car{fill:#5d6b82}.wheel{fill:var(--ink)}
+.carbat{fill:#2a3040}.carfill{fill:#2fbf6b;transform-box:fill-box;transform-origin:0 50%;transform:scaleX(.18);transition:transform 4s linear}
+.plug .carfill{transform:scaleX(1)}
+/* Stromausfall im Haus */
+.hs-off .glow-l{opacity:0!important}
+.hs-off .win{fill:#39424f;filter:none}
+.hs-off .room{fill:color-mix(in srgb,var(--room) 55%,#000)}
+/* Karte */
+.daynight{position:absolute;right:14px;top:14px;z-index:4;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:11px 16px;font:600 .86rem var(--head);cursor:pointer}
+[data-theme="dark"] .daynight{box-shadow:var(--glow-soft)}
+.hs-card{position:absolute;left:12px;right:12px;bottom:84px;z-index:5;padding:18px 18px 14px}
+.hs-card h1{font-size:clamp(1.5rem,6vw,2.4rem);margin:8px 0 8px;line-height:1.08}
+.hs-card.sw{animation:cardin .5s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes cardin{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hs-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.hs-dots{display:flex;gap:5px;margin-top:14px}
+.hs-dots i{flex:1;height:4px;border-radius:4px;background:var(--bg2)}
+.hs-dots i.on{background:var(--accent)}
+[data-v="1"] .head{position:relative}
+@media (min-width:720px){
+  .hs-card{left:32px;right:auto;bottom:32px;width:400px;padding:24px}
+  .daynight{right:32px;top:24px}
+}

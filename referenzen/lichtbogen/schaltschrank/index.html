@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="de" data-theme="light" data-v="2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LICHTBOGEN · Der Sicherungskasten (Demo)</title>
+<meta name="description" content="Demo von PROJEKT EX: Website für einen erfundenen Elektrobetrieb.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23080a0f'/%3E%3Cpath d='M6 23a10 10 0 0 1 20 0' fill='none' stroke='%23ffc83d' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='23' r='2.500' fill='%23ffc83d'/%3E%3C/svg%3E">
+<script>(function(){var F='dark',t=F;if(!t){try{t=localStorage.getItem('lb-theme')}catch(e){}}if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})()</script>
+<script>try{fetch('../version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=v.trim();if(v&&v!=='1795057959'&&location.search.indexOf('v='+v)<0){var u=new URL(location.href);u.searchParams.set('v',v);location.replace(u.href)}}).catch(function(){})}catch(e){}</script>
+<link rel="preload" href="../assets/fonts/grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css?v=1795057959">
+<link rel="stylesheet" href="../assets/css/v2.css?v=1795057959">
+</head>
+<body>
+<div class="demo"><div class="wrap"><span class="for">So könnte das für <span data-firma></span> aussehen.</span>
+<b>Demo von <a href="https://projektex.de/" rel="noopener">PROJEKT EX</a></b>, erfundene Firma, alle Personen, Zahlen und Stimmen sind Beispiele. · Testversion 2 von 3 · <a href="../versionen.html">andere ansehen</a></div></div>
+<header class="head">
+<div class="wrap head-in">
+<a class="logo" href="index.html" aria-label="LICHTBOGEN Startseite"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 24a12 12 0 0 1 24 0"/><path d="M16 5v9" /><circle cx="16" cy="24" r="2.500" fill="currentColor" stroke="none"/></svg><span>LICHTBOGEN<small>ELEKTROTECHNIK · DORTMUND</small></span></a>
+<nav class="nav" aria-label="Hauptmenü"><a href="index.html" aria-current="page">Start</a><a href="rechner.html">Rechner</a><a href="foto-check.html">Foto-Check</a><a href="jobs.html">Jobs</a></nav>
+<div class="head-tools">
+<button class="tool" type="button" data-sound aria-pressed="false" aria-label="Schalter-Klick an oder aus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l5 4V6L7 10z"/><path class="on" d="M16 9a4 4 0 0 1 0 6M18.500 6.500a8 8 0 0 1 0 11"/><path class="off" d="M16 9.500l5 5M21 9.500l-5 5"/></svg></button>
+
+<a class="btn btn--sm" href="#" data-demo="Demo: Hier wählt das Handy direkt die Nummer des Betriebs."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> 0231 000 00 00</a>
+</div>
+</div>
+<nav class="subnav" aria-label="Seiten"><a href="index.html" aria-current="page">Start</a><a href="rechner.html">Rechner</a><a href="foto-check.html">Foto-Check</a><a href="jobs.html">Jobs</a></nav>
+</header>
+<main>
+
+<section class="cab" id="cab"><div class="wrap"><div class="cab-panel">
+<i class="screw s1"></i><i class="screw s2"></i><i class="screw s3"></i><i class="screw s4"></i>
+<div class="cab-top">
+<div class="lcd" id="lcd" aria-live="polite">ANLAGE AUS</div>
+<div class="gauges"><div class="gauge"><svg viewBox="0 0 120 78" aria-hidden="true"><path class="g-arc" d="M12 66A48 48 0 0 1 108 66"/><path class="g-hot" d="M94 32A48 48 0 0 1 108 66"/><line class="g-needle" id="g-volt" x1="60" y1="66" x2="60" y2="24"/><circle class="g-hub" cx="60" cy="66" r="5"/></svg><span>Spannung</span></div><div class="gauge"><svg viewBox="0 0 120 78" aria-hidden="true"><path class="g-arc" d="M12 66A48 48 0 0 1 108 66"/><path class="g-hot" d="M94 32A48 48 0 0 1 108 66"/><line class="g-needle" id="g-load" x1="60" y1="66" x2="60" y2="24"/><circle class="g-hub" cx="60" cy="66" r="5"/></svg><span>Last</span></div></div>
+<div class="leds" id="leds"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+<div class="cab-head"><h1>Schalt uns ein.</h1><p class="lead" id="hint">Das hier ist unser Sicherungskasten. Leg zuerst den Hauptschalter um.</p></div>
+<div class="main-wrap"><button class="lever lever--main" id="main" type="button" aria-pressed="false"><span class="slot"><span class="knob"></span></span><b>Hauptschalter</b></button></div>
+<div class="breakers" id="brk"><button class="lever brk" type="button" data-i="0" aria-pressed="false" disabled><i class="lmp"></i><span class="slot"><span class="knob"></span></span><b>F1</b><small>Wallbox</small></button><button class="lever brk" type="button" data-i="1" aria-pressed="false" disabled><i class="lmp"></i><span class="slot"><span class="knob"></span></span><b>F2</b><small>PV und Speicher</small></button><button class="lever brk" type="button" data-i="2" aria-pressed="false" disabled><i class="lmp"></i><span class="slot"><span class="knob"></span></span><b>F3</b><small>Smart Home</small></button><button class="lever brk" type="button" data-i="3" aria-pressed="false" disabled><i class="lmp"></i><span class="slot"><span class="knob"></span></span><b>F4</b><small>E-Check</small></button><button class="lever brk" type="button" data-i="4" aria-pressed="false" disabled><i class="lmp"></i><span class="slot"><span class="knob"></span></span><b>F5</b><small>Altbau-Sanierung</small></button><button class="lever brk" type="button" data-i="5" aria-pressed="false" disabled><i class="lmp"></i><span class="slot"><span class="knob"></span></span><b>F6</b><small>Notdienst</small></button></div>
+<div class="drawer" id="drawer" hidden><div class="drawer-in"><div><p class="eyebrow" id="d-eye"></p><h2 id="d-h"></h2><p class="lead" id="d-t"></p><ul id="d-l"></ul><a class="btn" id="d-a" href="#"></a></div><div class="viz" id="d-v"></div></div></div>
+</div></div></section>
+
+<section class="patch"><div class="wrap">
+<div class="sec-head"><p class="eyebrow">Probier es aus</p><h2>Steck die Wallbox an.</h2><p class="lead">Zieh den Stecker rüber zum Hausanschluss. Oder tipp einfach auf die rechte Dose.</p></div>
+<div class="patch-stage"><svg id="patch" viewBox="0 0 600 260" role="img" aria-label="Kabel von der Wallbox zum Hausanschluss ziehen">
+<path id="cable" class="cable" d=""/><g id="dots"></g>
+<g class="sock"><circle cx="70" cy="130" r="38"/><circle class="hole" cx="70" cy="130" r="14"/><text x="70" y="200">Wallbox</text></g>
+<g class="sock" id="target" tabindex="0" role="button" aria-label="Hier einstecken"><circle cx="530" cy="130" r="38"/><circle class="hole" cx="530" cy="130" r="14"/><text x="530" y="200">Hausanschluss</text></g>
+<g id="plug" class="plug"><circle r="24"/><rect x="-9" y="-5" width="5" height="10" rx="2"/><rect x="4" y="-5" width="5" height="10" rx="2"/></g>
+</svg></div>
+<div class="card" id="patch-res" hidden><p class="eyebrow">Angeschlossen</p><h3 style="margin:10px 0 8px;font-size:1.5rem">Strom fließt. So einfach soll es sich anfühlen.</h3>
+<p class="muted">Mit 11 kW lädst du rund 60 km Reichweite pro Stunde. Wie lange dein Auto braucht, zeigt der Rechner.</p>
+<div class="btn-row" style="margin-top:16px"><a class="btn" href="rechner.html">Zum Rechner</a></div></div>
+</div></section>
+
+<section class="band"><div class="wrap">
+<div class="sec-head"><p class="eyebrow">So läuft es ab</p><h2>Drei Schritte bis zum Termin.</h2></div>
+<div class="grid3">
+<div class="card step rv"><b>1</b><h3>Fotos schicken</h3><p class="muted" style="margin-top:8px">Zählerschrank, Problemstelle, Raum. Dauert zwei Minuten und spart die erste Anfahrt.</p></div>
+<div class="card step rv"><b>2</b><h3>Rückruf vom Meister</h3><p class="muted" style="margin-top:8px">Wir haben deine Fotos schon gesehen, wenn wir anrufen.</p></div>
+<div class="card step rv"><b>3</b><h3>Fester Termin</h3><p class="muted" style="margin-top:8px">Du bekommst einen Tag und eine Uhrzeit. Und jemanden, der dann auch da ist.</p></div>
+</div></div></section>
+
+<section class="notaus"><div class="wrap">
+<p class="eyebrow">Notdienst</p><h2>Wenn es brennt: der rote Knopf.</h2>
+<button class="mush" type="button" data-demo="Demo: Hier wählt das Handy direkt den Notdienst." aria-label="Notdienst anrufen"><span>NOT<br>DIENST</span></button>
+<p class="lead" style="margin:18px auto 0">0231 000 00 00 · Tag und Nacht</p>
+</div></section>
+
+</main>
+<footer class="foot"><div class="wrap foot-in">
+<div><a class="logo" href="index.html"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 24a12 12 0 0 1 24 0"/><path d="M16 5v9" /><circle cx="16" cy="24" r="2.500" fill="currentColor" stroke="none"/></svg><span>LICHTBOGEN</span></a>
+<p style="margin-top:14px">Erfundener Elektrobetrieb aus Dortmund. Diese Seite ist ein Muster von <a href="https://projektex.de/" rel="noopener">PROJEKT EX</a>: So kann die Website eines Elektrobetriebs aussehen und arbeiten.</p></div>
+<nav aria-label="Fußmenü"><a href="index.html" aria-current="page">Start</a><a href="rechner.html">Rechner</a><a href="foto-check.html">Foto-Check</a><a href="jobs.html">Jobs</a><a href="../impressum.html">Impressum</a><a href="../datenschutz.html">Datenschutz</a><div class="foot-soc"><button class="soc-i" type="button" aria-label="Instagram" data-demo="Demo: Hier geht es zu eurem Instagram-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></button><button class="soc-i" type="button" aria-label="Facebook" data-demo="Demo: Hier geht es zu eurem Facebook-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 21v-7h2.6l.5-3.2h-3.1V8.9c0-1 .5-1.7 1.8-1.7h1.4V4.4c-.5-.1-1.300-.2-2.2-.2-2.500 0-4 1.500-4 4.200v2.400H9V14h2.500v7"/></svg></button><button class="soc-i" type="button" aria-label="YouTube" data-demo="Demo: Hier geht es zu eurem YouTube-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.200 9.300l4.800 2.700-4.800 2.700z" fill="currentColor"/></svg></button><button class="soc-i" type="button" aria-label="TikTok" data-demo="Demo: Hier geht es zu eurem TikTok-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.500a3.500 3.500 0 1 1-3.500-3.500"/><path d="M14 4c.4 2.600 2 4.200 4.500 4.500"/></svg></button><button class="soc-i" type="button" aria-label="WhatsApp" data-demo="Demo: Hier geht es zu eurem WhatsApp-Kanal."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.300-4.200A8 8 0 1 1 8.300 19z"/><path d="M9.200 9.200c.3 2.300 2.200 4.500 5 5.400l1.300-1.300"/></svg></button></div></nav>
+<div><p>Alle Namen, Zahlen und Stimmen sind Beispiele. Formulare senden nichts, Fotos bleiben auf deinem Gerät.</p>
+<p style="margin-top:10px">Weitere Demos: <a href="https://projektex.de/referenzen/warmherz/" rel="noopener">WARMHERZ</a> · <a href="https://projektex.de/referenzen/werkakte-app/" rel="noopener">Werkakte-App</a></p></div>
+</div></footer>
+<div class="bar"><a class="btn" href="#" data-demo="Demo: Hier wählt das Handy direkt die Nummer des Betriebs."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> Anrufen</a><a class="btn btn--ghost" href="foto-check.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg> Foto-Check</a></div>
+<script src="../assets/js/app.js?v=1795057959" defer></script>
+<script src="../assets/js/fx.js?v=1795057959" defer></script>
+<script src="../assets/js/v2.js?v=1795057959" defer></script>
+<script>window.LB_SERVICES=[{"key": "wallbox", "name": "Wallbox", "head": "Laden, während du schläfst.", "text": "Wir schauen uns Zählerschrank und Leitungsweg an, montieren die Wallbox und kümmern uns um die Anmeldung. Du steckst nur noch ein.", "pts": ["Erste Einschätzung per Foto, ohne Termin", "Montage in der Regel an einem Tag", "Vorbereitet für Laden mit Sonnenstrom"], "link": "rechner.html", "cta": "Ladezeit grob ausrechnen"}, {"key": "pv", "name": "PV und Speicher", "head": "Dein Dach macht Strom.", "text": "Wir planen die Anlage nach deinem Verbrauch und nicht nach dem größten Angebot. Dach, Zähler und Inbetriebnahme kommen aus einer Hand.", "pts": ["Planung nach deinem Jahresverbrauch", "Speicher passend, nicht zu groß", "Ein Ansprechpartner von Anfang bis Ende"], "link": "rechner.html#pv", "cta": "Ertrag grob einschätzen"}, {"key": "smart", "name": "Smart Home", "head": "Licht, Rollläden, Heizung. Ein Tipp.", "text": "Wir bauen Steuerungen, die du wirklich nutzt. Auch nachträglich, oft ohne eine Wand aufzumachen.", "pts": ["Nachrüsten per Funk oder Kabel", "Szenen für Alltag, Urlaub und Abend", "Einweisung, bis jeder im Haus klarkommt"], "link": "foto-check.html", "cta": "Fotos schicken und beraten lassen"}, {"key": "echeck", "name": "E-Check", "head": "Einmal durchmessen, ruhig schlafen.", "text": "Wir prüfen Anlage und Geräte und schreiben auf, was wir gefunden haben. Mit Fotos und in klarem Deutsch.", "pts": ["Prüfung von Anlage und Geräten", "Protokoll mit Fotos", "Klare Liste: was sofort, was später"], "link": "foto-check.html", "cta": "Termin für den E-Check anfragen"}, {"key": "altbau", "name": "Altbau-Sanierung", "head": "Alte Leitungen, neuer Stand.", "text": "Neuer Zählerschrank, sauber getrennte Stromkreise, genug Steckdosen. Raum für Raum, damit du weiter wohnen kannst.", "pts": ["Bestandsaufnahme mit Fotos und Plan", "Staubarm, ein Raum nach dem anderen", "Fester Bauleiter, feste Termine"], "link": "foto-check.html", "cta": "Zählerschrank fotografieren"}, {"key": "not", "name": "Notdienst", "head": "Strom weg? Wir kommen.", "text": "Sicherung fliegt, Herd tot, Keller dunkel. Ruf an, wir sagen dir am Telefon, was du sofort tun kannst, und fahren los.", "pts": ["Tag und Nacht erreichbar", "Erst Fehler finden, dann Aufwand nennen", "Dortmund und Umgebung"], "link": "", "cta": ""}];window.LB_VIZ={"wallbox": "<svg viewBox=\"0 0 200 160\"><rect x=\"62\" y=\"18\" width=\"76\" height=\"104\" rx=\"14\"/><circle class=\"a\" cx=\"100\" cy=\"58\" r=\"16\"/><path class=\"af\" d=\"M103 46l-10 14h7l-3 10 10-14h-7z\"/><path class=\"a dash\" d=\"M100 122v14c0 10 46 10 46-6V96\"/><rect x=\"138\" y=\"80\" width=\"16\" height=\"18\" rx=\"4\"/></svg>", "pv": "<svg viewBox=\"0 0 200 160\"><circle class=\"a\" cx=\"156\" cy=\"36\" r=\"14\"/><path class=\"a\" d=\"M156 10v6M156 56v6M130 36h6M176 36h6M138 18l4 4M170 50l4 4M174 18l-4 4\"/><path d=\"M26 124l22-62h92l22 62z\"/><path d=\"M71 62l-12 62M117 62l12 62M38 92h112\"/><path class=\"a dash\" d=\"M94 124v22\"/></svg>", "smart": "<svg viewBox=\"0 0 200 160\"><path d=\"M34 78l66-52 66 52\"/><path d=\"M50 68v70h100V68\"/><path class=\"a\" d=\"M82 106a26 26 0 0 1 36 0M70 94a42 42 0 0 1 60 0\"/><circle class=\"af\" cx=\"100\" cy=\"120\" r=\"6\"/></svg>", "echeck": "<svg viewBox=\"0 0 200 160\"><rect x=\"54\" y=\"22\" width=\"92\" height=\"120\" rx=\"10\"/><path d=\"M82 22v-6h36v6\"/><path d=\"M72 58h56M72 80h56M72 102h30\"/><circle class=\"a\" cx=\"130\" cy=\"112\" r=\"20\"/><path class=\"a\" d=\"M121 112l7 7 12-13\"/></svg>", "altbau": "<svg viewBox=\"0 0 200 160\"><rect x=\"30\" y=\"26\" width=\"140\" height=\"108\" rx=\"10\"/><path d=\"M30 60h140\"/><rect x=\"48\" y=\"76\" width=\"16\" height=\"40\" rx=\"3\"/><rect x=\"74\" y=\"76\" width=\"16\" height=\"40\" rx=\"3\"/><rect class=\"a\" x=\"100\" y=\"76\" width=\"16\" height=\"40\" rx=\"3\"/><rect class=\"a\" x=\"126\" y=\"76\" width=\"16\" height=\"40\" rx=\"3\"/><path class=\"a dash\" d=\"M48 43h94\"/></svg>", "not": "<svg viewBox=\"0 0 200 160\"><circle cx=\"100\" cy=\"82\" r=\"56\"/><path d=\"M100 26V14M88 14h24\"/><path class=\"af\" d=\"M108 44L74 90h22l-6 32 36-48h-22z\"/></svg>"};</script>
+</body>
+</html>
