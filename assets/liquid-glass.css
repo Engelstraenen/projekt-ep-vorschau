@@ -603,6 +603,7 @@ header.top a.back {
   text-decoration: none !important;
 }
 
-/* KI-Hinweis am WhatsApp-Button (AI Act Art. 50) */
-.wa-ki-wrap { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; }
-.wa-ki { font-size: 12px; line-height: 1.3; opacity: .78; font-weight: 500; letter-spacing: 0; }
+/* KI-Hinweis an WhatsApp-Button und Telefonnummer (AI Act Art. 50): klein, direkt darunter */
+.wa-ki-wrap { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; vertical-align: top; }
+.wa-ki { font-size: 10px; line-height: 1.2; opacity: .6; font-weight: 400; letter-spacing: 0; white-space: nowrap; }
+.epf-wa .wa-ki-wrap, .k-wa .wa-ki-wrap { align-items: inherit; }
