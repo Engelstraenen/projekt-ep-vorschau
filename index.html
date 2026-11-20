@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-ywz/tsfQ4QL5ckht8KzaS6hTQBlmvuHMfUgh3tQ6S4s=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-Z2bDqGIPmcVKFMBT9xfS4rdRZ90pvzKggQIXe2FWlN4=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -137,6 +137,7 @@
      Manifest nicht: dort soll der Text bewusst von unten hochfahren – Nutzerwunsch) */
   .fx section.ch[data-text]:not(#kontakt, #manifest) > .sticky { position: fixed; inset: 0; pointer-events: none; }
   .fx section.ch[data-text]:not(#kontakt, #manifest).gone > .sticky { visibility: hidden; }
+  .fx section.ch[data-text]:not(#kontakt, #manifest).live > .sticky .copy { pointer-events: auto; }
   .fx section.ch[data-text]:not(#kontakt, #manifest).live > .sticky :is(a, button) { pointer-events: auto; }
   /* EX Lab: Kacheln fliegen einzeln herein, sobald sie ins Bild kommen (--c 0→1, gesetzt im Frame-Loop) */
   #lab figure { --c: 1; opacity: var(--c); translate: calc((1 - var(--c)) * 140px) calc((1 - var(--c)) * var(--cy, 40px)); rotate: calc((1 - var(--c)) * var(--cr, 8deg)); scale: calc(.78 + var(--c) * .22); transform-origin: 0 100%; }
@@ -312,14 +313,15 @@
   [data-side="left"] .dom-img { grid-column: 1; } [data-side="right"] .dom-img { grid-column: 2; }
   section[data-dom] .copy { grid-row: 1; }
   @media (max-width: 860px) {
-    section[data-dom] .sticky { grid-template-rows: 1fr auto; }
-    section[data-dom] .dom-img { grid-column: 1; grid-row: 1; width: min(100%, calc((100% ) * 1)); max-height: 100%; align-self: center; }
-    section[data-dom] .copy { grid-row: 2; }
+    /* minmax(0,1fr): Bildzeile darf unter die 3:2-Intrinsic-Höhe schrumpfen, damit der Detail-Link im Viewport bleibt */
+    section[data-dom] .sticky { grid-template-rows: minmax(96px, 1fr) auto; }
+    section[data-dom] .dom-img { grid-column: 1; grid-row: 1; min-height: 0; aspect-ratio: auto; width: 100%; max-width: 100%; height: 100%; max-height: 100%; justify-self: center; align-self: center; }
+    section[data-dom] .copy { grid-row: 2; background: var(--bg); }
   }
   /* Fotos hinter dem Schwarm (data-flock): +50 % breiter als vorher (Handy 70 % der Inhaltsbreite → ~92 % der Bildschirmbreite,
      16 px Rand). Der Schwarm skaliert in flockPlace() mit der Bildbreite mit und bleibt oben/unten und an den Rändern sichtbar. */
   @media (max-width: 860px) and (orientation: portrait) {
-    section[data-flock] .dom-img { --w: calc(100% + 2 * var(--gutter) - 32px); width: var(--w); max-height: none; justify-self: start; margin-left: calc((100% - var(--w)) / 2); } /* alle Schwarm-Fotos gleich groß (Bildschirmbreite − 2 × 16 px), unabhängig von der Textlänge – reicht der Platz nicht, wird das Kapitel länger (fitChapters) */
+    section[data-flock] .dom-img { --w: calc(100% + 2 * var(--gutter) - 32px); width: var(--w); max-height: 100%; justify-self: start; margin-left: calc((100% - var(--w)) / 2); } /* gleiche Breite, Höhe aber durch die Grid-Zeile begrenzt, damit der Detail-Link sichtbar bleibt */
   }
   @media (max-width: 860px) and (orientation: landscape) { section[data-flock] .dom-img { width: 70%; } } /* Handy quer: wie bisher, sonst fehlt die Höhe */
   /* Desktop/Tablet quer: das Foto wächst in den äußeren Rand und bis an die Textspalte (Text bleibt frei) */
@@ -479,9 +481,14 @@
     section.ch .copy > h2 { font-size: clamp(30px, min(9.6vw, 4.9vh), 40px); line-height: 1.06; }
     section.ch .copy > p:not(.kicker) { font-size: clamp(15px, 2.1vh, 17px); line-height: 1.5; margin-top: 18px; }
     section.ch .copy > .plat { margin-top: 24px; }
-    section.ch .copy > .more { margin-top: 26px; }
+    section.ch .copy > .more { margin-top: 26px; min-height: 44px; align-items: center; }
     section.ch .copy > .sub { margin-top: 30px; padding-top: 18px; }
-    .sticky { padding-bottom: max(7vh, 40px); }
+    .sticky { padding-bottom: max(7vh, 40px, calc(16px + env(safe-area-inset-bottom, 0px))); }
+  }
+  @media (max-width: 860px) and (max-height: 720px) {
+    section.ch .copy > .plat, section.ch .copy > .sub { display: none; }
+    section.ch .copy > h2 { font-size: clamp(26px, min(8.4vw, 4.4vh), 36px); }
+    section.ch .copy > p:not(.kicker) { margin-top: 12px; }
   }
   @media (max-width: 860px) and (orientation: landscape) and (max-height: 520px) {
     section.ch .copy > .kicker { padding-top: 10px; margin-bottom: 10px; }
@@ -1024,7 +1031,11 @@ function fitChapters() {
     const st = s.querySelector('.sticky'), cp = s.querySelector('.copy'), cs = getComputedStyle(st);
     const padT = parseFloat(cs.paddingTop), padB = parseFloat(cs.paddingBottom);
     let need;
-    if (stacked) need = padT + 16 + (W - 32) * IMG_H / IMG_W + 20 + cp.offsetHeight + padB; // Kopfzeile · Foto (3:2) · Text
+    if (stacked) { // tatsächliche Bildhöhe (CSS kann das Foto unter 3:2-Vollbreite schrumpfen, damit der Link sichtbar bleibt)
+      const img = s.querySelector('.dom-img');
+      const imgH = img ? img.getBoundingClientRect().height : 0;
+      need = padT + (imgH ? imgH + 20 : 16) + cp.offsetHeight + padB;
+    }
     else if (W > 860) need = padT + 32 + cp.offsetHeight + 32; // Text neben dem Foto
     else need = 0;
     const over = Math.max(0, Math.ceil(need - svh));
