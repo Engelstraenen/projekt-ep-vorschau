@@ -283,6 +283,7 @@
     .sub small { grid-column: 1 / -1; }
     .sub p { display: none; }
     .t-block { translate: 0 calc((1 - var(--o)) * 24px); } /* mobil nur senkrecht – seitlicher Versatz würde die Seite verbreitern */
+    .t-zoom { transform-origin: 100% 50%; } /* Zoom gleich stark, wächst aber vom rechten Wortrand nach links – sonst ragen große Wörter vor dem Einblenden über den Rand (ohne overflow-clip sichtbar, z. B. iOS < 16) */
     .t-right { translate: calc((1 - var(--o)) * .8em) 0; }
     .sub b { font-size: 17px; }
     .block { padding: clamp(64px, 10vh, 96px) 16px; }
