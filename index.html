@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-Z2bDqGIPmcVKFMBT9xfS4rdRZ90pvzKggQIXe2FWlN4=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-UahhOPPB3AQ8H5a/0RzwLNvAvoOcKdkbaQI0n4fUKGU=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -315,7 +315,7 @@
   @media (max-width: 860px) {
     /* minmax(0,1fr): Bildzeile darf unter die 3:2-Intrinsic-Höhe schrumpfen, damit der Detail-Link im Viewport bleibt */
     section[data-dom] .sticky { grid-template-rows: minmax(96px, 1fr) auto; }
-    section[data-dom] .dom-img { grid-column: 1; grid-row: 1; min-height: 0; aspect-ratio: auto; width: 100%; max-width: 100%; height: 100%; max-height: 100%; justify-self: center; align-self: center; }
+    section[data-dom] .dom-img { grid-column: 1; grid-row: 1; min-height: 0; aspect-ratio: 3 / 2; width: 100%; max-width: 100%; height: auto; max-height: 100%; justify-self: center; align-self: center; } /* höchstens 3:2 (nicht in die wachsende Zeile strecken), darf aber für den Link schrumpfen */
     section[data-dom] .copy { grid-row: 2; background: var(--bg); }
   }
   /* Fotos hinter dem Schwarm (data-flock): +50 % breiter als vorher (Handy 70 % der Inhaltsbreite → ~92 % der Bildschirmbreite,
@@ -1031,14 +1031,16 @@ function fitChapters() {
     const st = s.querySelector('.sticky'), cp = s.querySelector('.copy'), cs = getComputedStyle(st);
     const padT = parseFloat(cs.paddingTop), padB = parseFloat(cs.paddingBottom);
     let need;
-    if (stacked) { // tatsächliche Bildhöhe (CSS kann das Foto unter 3:2-Vollbreite schrumpfen, damit der Link sichtbar bleibt)
+    if (stacked) { // Foto darf bis auf 60 % seiner 3:2-Höhe (mind. 96 px) schrumpfen, damit der Link sichtbar bleibt; erst dann Überhang.
+      // NICHT die gemessene Bildhöhe nehmen: das Foto füllt die Rasterzeile, die mit dem Überhang mitwächst – das war eine
+      // Rückkopplung (Überhang -> größeres Foto -> mehr Überhang …), die Seite wuchs auf dem iPhone endlos (riesige, unscharfe Fotos, Texte weg).
       const img = s.querySelector('.dom-img');
-      const imgH = img ? img.getBoundingClientRect().height : 0;
-      need = padT + (imgH ? imgH + 20 : 16) + cp.offsetHeight + padB;
+      const imgW = (img && img.getBoundingClientRect().width) || (W - 32);
+      need = padT + Math.max(96, Math.round(imgW * IMG_H / IMG_W * .6)) + 20 + cp.offsetHeight + padB;
     }
     else if (W > 860) need = padT + 32 + cp.offsetHeight + 32; // Text neben dem Foto
     else need = 0;
-    const over = Math.max(0, Math.ceil(need - svh));
+    const over = Math.min(Math.max(0, Math.ceil(need - svh)), svh * 2); // Notbremse: nie mehr als zwei Bildschirmhöhen Überhang
     if (s._over !== over) {
       s._over = over;
       s.style.height = over ? `calc(100svh + ${over}px)` : '';
