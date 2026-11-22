@@ -317,7 +317,7 @@
     /* minmax(0,1fr): Bildzeile darf unter die 3:2-Intrinsic-Höhe schrumpfen, damit der Detail-Link im Viewport bleibt */
     section[data-dom] .sticky { grid-template-rows: minmax(96px, 1fr) auto; }
     section[data-dom] .dom-img { grid-column: 1; grid-row: 1; min-height: 0; aspect-ratio: 3 / 2; width: 100%; max-width: 100%; height: auto; max-height: 100%; justify-self: center; align-self: center; } /* höchstens 3:2 (nicht in die wachsende Zeile strecken), darf aber für den Link schrumpfen */
-    section[data-dom] .copy { grid-row: 2; background: var(--bg); }
+    section[data-dom] .copy { grid-row: 2; background: color-mix(in srgb, var(--bg), var(--night) calc(var(--dark) * 100%)); } /* folgt dem Nachtmodus wie --fg (vorher weißer Kasten mit heller Schrift in den dunklen Kapiteln) */
   }
   /* Fotos hinter dem Schwarm (data-flock): +50 % breiter als vorher (Handy 70 % der Inhaltsbreite → ~92 % der Bildschirmbreite,
      16 px Rand). Der Schwarm skaliert in flockPlace() mit der Bildbreite mit und bleibt oben/unten und an den Rändern sichtbar. */
