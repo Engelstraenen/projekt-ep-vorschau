@@ -525,7 +525,7 @@ body:has(.viz)::after{display:none!important}
   .hud span{font-size:max(12px,2.6cqw)}
   .chip{font-size:max(12px,2.5cqw)}
   .wn p span,.wp p span,.wr p span{font-size:max(12px,2.5cqw)}
-  .wn-track u{font-size:max(11px,2.1cqw)}
+  .wn-track u{font-size:max(12px,2.1cqw)}
   .fuse span{font-size:.75rem}
   .tag{font-size:.75rem}
 }
