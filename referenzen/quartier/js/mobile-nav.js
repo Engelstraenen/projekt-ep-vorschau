@@ -8,12 +8,12 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.open) { shut(); menu.querySelector('summary').focus(); } });
     document.addEventListener('click', function (e) { if (menu.open && !menu.contains(e.target)) shut(); });
   }
-  // Nur mobil (CSS-Regeln für .on-paper stehen in mobile-fix.css unter max-width:760px)
+  // Phone + Touch-Tablet (CSS-Regeln für body.on-paper stehen in mobile-fix.css, gleiche Media-Query)
   var bar = document.querySelector('.bar'), paper = document.querySelector('.paper');
-  var mq = matchMedia('(max-width: 760px)');
+  var mq = matchMedia('(max-width: 760px), (pointer: coarse)');
   if (!bar || !paper) return;
   var queued = false;
-  function check() { queued = false; bar.classList.toggle('on-paper', mq.matches && paper.getBoundingClientRect().top < bar.offsetHeight); }
+  function check() { queued = false; document.body.classList.toggle('on-paper', mq.matches && paper.getBoundingClientRect().top < bar.offsetHeight); }
   function queue() { if (!queued) { queued = true; requestAnimationFrame(check); } }
   addEventListener('scroll', queue, { passive: true });
   addEventListener('resize', queue);

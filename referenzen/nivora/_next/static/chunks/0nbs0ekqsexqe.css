@@ -20,3 +20,8 @@
 .np-footer .np-brand{min-height:44px}
 .np-footer>a:last-child{min-height:44px}
 }
+/* "In die Tasche": die CSS-Transition auf transform kollidiert mit der GSAP-Einblendung (Button blieb 25px versetzt
+   und verdeckte den Demo-Hinweis darunter). Auf Touch/Handy ohne transform-Transition. */
+@media (max-width:900px){
+.np-add{transition:background .2s}
+}

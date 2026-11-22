@@ -305,3 +305,43 @@ p{margin:0;text-wrap:pretty}
 .foot__legal{margin-top:48px;font-size:13px;color:var(--muted-d)}
 @media (max-width:700px){.foot__grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}[data-rv]{opacity:1;transform:none}}
+
+/* ===== Mobil/Tablet (2026-11): nur unterhalb der Desktop-Breakpoints (900px Navigation), Desktop unverändert ===== */
+@media (max-width:900px){
+ /* Tap-Ziele >= 44px: Trefferfläche per Padding + negativem Margin, Layout bleibt gleich */
+ .demo-bar a{display:inline-block;padding:12px 0;margin:-12px 0}
+ .logo{padding-block:14.5px;margin-block:-14.5px}
+ .menu summary{padding:10px 12px;margin-right:-12px}
+ .menu__panel{max-height:calc(100svh - 90px);overflow:auto}
+ .sl{height:44px;margin-block:-8px}
+ .ctrl__l label,.field label{padding-block:11px;margin-block:-11px}
+ .haus__list button{min-height:44px}
+ .ok input{width:20px;height:20px;margin-top:1px;flex:none}
+ .foot ul{gap:0}
+ .foot ul a{display:inline-flex;align-items:center;min-height:44px}
+ main>p:last-child>a{display:inline-block;padding-block:10px;margin-block:-10px}
+ /* Schrift >= 12px */
+ .viz__read dt{font-size:12px}
+ /* 16:9-Loops im Hochformat: Motiv statt Bildmitte */
+ .hero__v{object-position:60% 50%}
+ .prinzip .bgv{object-position:72% 50%}
+ .anfrage .bgv{object-position:72% 50%}
+}
+@media (max-width:700px){
+ .hs{width:44px;height:44px;margin:-22px 0 0 -22px}.hs::before{inset:13px}
+ /* Querschnitt: Infokarte unter dem Bild statt darüber (verdeckte sonst Bild und Punkte); app.js setzt sie hinter die Bühne */
+ .haus__panel{position:relative;left:auto!important;top:auto!important;right:auto;bottom:auto;width:auto;margin-top:12px;display:none;transform:none}
+ .haus__panel.on{display:block}
+}
+/* Scroll-Film als gestapelte Bühne im Hochformat: Bild oben (Motiv per Fokuspunkt), Text darunter */
+@media (max-width:700px),(max-width:900px) and (orientation:portrait){
+ .film canvas{height:58%;bottom:auto}
+ .film__shade{background:linear-gradient(180deg,#0a141980 0%,#0a141900 22%,#0a141900 44%,#0a1419f2 58%,#0a1419 100%)}
+ .film__cap{left:var(--pad);right:calc(var(--pad) + 22px);top:calc(58% + clamp(20px,4svh,40px));bottom:auto;max-width:none}
+ .film__cap p{top:0;bottom:auto}
+ .film__cap strong{font-size:clamp(28px,7.6vw,44px)}
+ .film__bar{top:calc(58% + clamp(20px,4svh,40px));bottom:auto;height:clamp(90px,14svh,140px)}
+ .film__deg{top:84px}
+}
+/* Touch: kein klebender Hover-Versatz nach dem Antippen der Leistungszeilen */
+@media (hover:none){.lst li:hover{padding-left:0}.lst li:hover h3{color:inherit}}

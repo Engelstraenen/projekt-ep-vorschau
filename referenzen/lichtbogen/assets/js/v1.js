@@ -65,10 +65,10 @@
       scrollTo({ top: top + (i + 0.5) / Z.length * (r.height - VH()), behavior: 'smooth' });
     }
   }
-  /* Touch: unsichtbare Trefferfläche je Schalter, mindestens 92 Einheiten der Zeichnung (= 44 px in der Gesamtansicht am Handy) */
+  /* Touch: unsichtbare Trefferfläche je Schalter, mindestens 100 Einheiten der Zeichnung (= 44 px in der Gesamtansicht ab 360 px Breite) */
   if (touch) $$('.hot').forEach(function (el) {
     try {
-      var bb = el.getBBox(), w = Math.max(bb.width, 92), h = Math.max(bb.height, 92);
+      var bb = el.getBBox(), w = Math.max(bb.width, 100), h = Math.max(bb.height, 100);
       var hit = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
       hit.setAttribute('class', 'hot-hit'); hit.setAttribute('fill', 'transparent');
       hit.setAttribute('x', (bb.x + bb.width / 2 - w / 2).toFixed(1)); hit.setAttribute('y', (bb.y + bb.height / 2 - h / 2).toFixed(1));

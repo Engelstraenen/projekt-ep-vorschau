@@ -206,13 +206,17 @@ body.rz-near .fab{opacity:0;transform:translateY(12px);pointer-events:none}
   .layer:nth-child(6) video{object-position:62% 50%}
   /* Holzofen-Glut und Funken des Pizza-Builders ragen über den Bildschirmrand: abschneiden, ohne Sticky zu brechen */
   .bauen{overflow-x:clip}
+  /* Bühne des Builders klebt direkt unter dem (jetzt 44 px hohen) Kopf statt halb darunter */
+  .bauen__card{--bz-top:calc(var(--bar) + 4.2rem)}
 }
 @media (max-width:640px){
   :root{--bar:52px}
   .demo-bar{font-size:.75rem}
+  /* Texte stehen hochkant mitten im Bild: Abdunklung dort kräftiger, damit sie auch über hellem Käse lesbar bleiben */
+  .stage__shade,.film[data-side] .stage__shade{background:linear-gradient(0deg,rgba(20,17,14,.88) 0%,rgba(20,17,14,.62) 50%,rgba(20,17,14,.42))}
 }
 @media (pointer:coarse){
   .btn{min-height:44px}
-  .kn a{display:inline-flex;align-items:center;min-height:44px}
+  .kn a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
   .foot a{display:inline-flex;align-items:center;min-height:44px}
 }

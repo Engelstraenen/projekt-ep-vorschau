@@ -171,6 +171,10 @@
   .bz__st{font-size:.75rem}
   .bz__badge{font-size:.75rem}
 }
+@media (max-width:389px){
+  /* schmale Handys (360/375 px): Belag- und Soßenfelder dreispaltig, sonst ragen lange Namen (Parmaschinken, Champignon) über den Rand */
+  .bz__grid,.bz__grid--sauce{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 @media (pointer:coarse){
   /* Größenwahl S/M/L: 44 px statt 40 x 35 px */
   .bz__size{grid-template-columns:repeat(3,2.75rem)}

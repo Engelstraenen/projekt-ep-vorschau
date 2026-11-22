@@ -7,7 +7,7 @@
 .ep-demo-notice{font-size:12px}
 .ep-demo-notice a{display:inline-flex;align-items:center;min-height:44px;margin:-9px 0;border:9px solid #0000;border-width:9px 0;background-clip:padding-box;padding:0 11px}
 }
-@media (max-width:700px){
+@media (max-width:800px){
 body:has(.section-nav) .ep-demo-notice{bottom:calc(max(12px,env(safe-area-inset-bottom)) + 58px)}
 }
 /* Shop-Seite (/shop/): Tap-Flaechen >= 44px */
@@ -34,4 +34,20 @@ body:has(.section-nav) .ep-demo-notice{bottom:calc(max(12px,env(safe-area-inset-
 .footer-links a,.footer-links button{min-height:44px;font-size:13px}
 .back-top{width:44px;height:44px}
 .toast button{min-height:44px;padding-top:0;padding-bottom:0}
+}
+/* Shop-Seite (Handy): Hero-Fusszeile und Footer nicht unter dem Demo-Hinweis, Ski-Hinweis lesbar neben dem Ski */
+@media (max-width:700px){
+.hero-bottom{bottom:72px;align-items:flex-end}
+.ski-callout{right:3%;letter-spacing:.04em;line-height:1.5}
+.footer{padding-bottom:95px}
+}
+/* Dialoge / Warenkorb-Schublade (alle Seiten): Tap-Flaechen >= 44px; Demo-Hinweis liegt hinter offenen Dialogen */
+@media (max-width:900px){
+.dialog-header .icon-button{min-width:44px;min-height:44px;margin-right:-9px}
+.quantity{gap:2px}
+.quantity button{width:44px;height:44px;border:0;background:transparent;position:relative;isolation:isolate}
+.quantity button:before{content:"";position:absolute;inset:9px;border:1px solid var(--line);z-index:-1}
+.quantity button:first-child{margin-left:-9px}
+.cart-item-end button{min-width:44px;min-height:44px;margin-right:-12px;display:grid;place-items:center}
+body:has(.dialog-backdrop) .ep-demo-notice{z-index:90}
 }

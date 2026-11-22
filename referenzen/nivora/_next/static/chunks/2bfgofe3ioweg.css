@@ -30,3 +30,12 @@
 @media (max-width:600px){
 .ec-save{top:4px;right:4px}
 }
+/* Kollektions-Hero (Handy): genug Hoehe fuer die groessere Schrift, Signatur ueberlappt den Link nicht mehr */
+@media (max-width:700px){
+.ec-hero{height:540px}
+.ec-hero-copy{top:15%}
+.ec-hero-copy>p{max-width:255px;line-height:1.7}
+}
+@media (max-width:380px){
+.ec-hero{height:540px}
+}

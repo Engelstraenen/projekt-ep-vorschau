@@ -450,6 +450,9 @@ html.out.film .shade{display:none}
 @media (min-width:720px) and (max-width:1023px){
   /* Tablet hochkant: Aussage und Knöpfe untereinander, sonst ragt der Notdienst-Knopf aus der schmalen Spalte */
   .hero-grid{grid-template-columns:1fr;gap:26px}
+  /* Kopfzeile: Lichtschalter ohne Beschriftung wie am Handy, damit Menü und Nummer einzeilig bleiben */
+  [data-v="3"] .head .lsw span{display:none}
+  [data-v="3"] .lsw{padding-left:6px}
 }
 @media (max-width:1199px){
   /* Tablet: die drei Schritt-Karten tragen auch die Klasse .rv (Bewertungskarte, feste 360 px) und liefen bei 768 px

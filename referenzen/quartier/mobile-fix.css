@@ -10,7 +10,6 @@
   /* Mobiles Menü: Die Kapitel-Navigation war unter 760px ersatzlos ausgeblendet */
   .bar{gap:12px}
   .bar>.btn{display:none}
-  .logo{min-height:44px;align-items:center}
   .qmenu{display:block;margin-left:auto}
   .qmenu summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(20,17,14,.34);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--line);font:500 13px/1 var(--sans);letter-spacing:.04em;color:var(--paper)}
   .qmenu summary::-webkit-details-marker{display:none}
@@ -27,17 +26,30 @@
   body[data-ch=lage] .qmenu__panel a[data-to=lage]{color:var(--brass)}
   @media (prefers-reduced-motion:no-preference){.qmenu[open] .qmenu__panel{animation:qmenu-in .35s var(--ease-out) both}}
 
-  /* Kopfzeile über dem hellen Exposé-Teil: vorher helle Schrift auf hellem Grund (Logo unsichtbar, Kopf überlagerte Formular) */
-  .bar{transition:background-color .25s ease,color .25s ease}
-  .bar.on-paper{background:rgba(244,239,231,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--ink);box-shadow:0 1px 0 rgba(20,17,14,.1)}
-  .bar.on-paper .logo b{color:#85521f}
-  .bar.on-paper .qmenu summary{background:var(--ink);border-color:var(--ink)}
+  /* Lage-Karte: Beschriftungen am Bildrand nach innen schieben (Versatz --dx setzt main.js), Strich bleibt am Punkt */
+  .pin>div{transform:translate(calc(-50% + var(--dx,0px)),-14px)}
+  .pin>div::after{left:calc(50% - var(--dx,0px))}
 
-  /* Tap-Ziele ≥ 44px, Fließtext ≥ 15px */
+  .caption{font-size:15px}
+}
+
+/* Kopfzeile über dem hellen Exposé-Teil (Klasse setzt js/mobile-nav.js): vorher helle Schrift auf hellem
+   Grund – Logo unsichtbar, Kopf und Demo-Hinweis lagen über dem Formular. Phone + Touch-Tablets. */
+@media (max-width:760px),(pointer:coarse){
+  .bar{transition:background-color .25s ease,color .25s ease}
+  body.on-paper .bar{background:rgba(244,239,231,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--ink);box-shadow:0 1px 0 rgba(20,17,14,.1)}
+  body.on-paper .logo b{color:#85521f}
+  body.on-paper .qmenu summary{background:var(--ink);border-color:var(--ink)}
+  body.on-paper .demo-note{opacity:0;pointer-events:none}
+}
+
+/* Tap-Ziele ≥ 44px: Phone und Touch-Tablets (768 hoch, 1024 quer) – Maus-Desktop unverändert */
+@media (max-width:760px),(pointer:coarse){
+  .logo{min-height:44px;align-items:center}
   .btn{min-height:44px}
+  .chapters a{display:inline-flex;align-items:center;min-height:44px}
   .foot nav{gap:4px 22px}
   .foot nav a{display:inline-flex;align-items:center;min-height:44px}
-  .caption{font-size:15px}
 }
 @keyframes qmenu-in{from{opacity:0;transform:translateY(-8px)}}
 
