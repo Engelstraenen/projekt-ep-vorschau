@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FARBKANTE Malerwerkstatt (Demo)</title>
+<meta name="description" content="Demo von PROJEKT EX: Website für einen erfundenen Maler- und Lackiererbetrieb.">
+<meta name="theme-color" content="#16191b">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316191b'/%3E%3Crect x='10' y='22' width='38' height='16' rx='4' fill='%23138086'/%3E%3Cpath d='M48 30h6v14H36v8' fill='none' stroke='%23e9e6df' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=1795288807">
+<script src="assets/js/version.js?v=1795288807"></script>
+</head>
+<body>
+<div class="demo"><span class="for">So könnte das für <span data-firma></span> aussehen. </span><b>Demo von <a href="https://projektex.de/" rel="noopener">PROJEKT EX</a></b>: erfundener Betrieb, alle Personen, Zahlen und Stimmen sind Beispiele.</div>
+
+<header class="nav">
+  <button class="nav-menu" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
+  <a class="nav-brand" href="#top">FARBKANTE</a>
+  <a class="nav-cta" href="#termin">Termin</a>
+</header>
+<nav class="menu" aria-label="Kapitel">
+  <a href="#fassade">Fassade</a><a href="#leistungen">Leistungen</a><a href="#raum">Raum für Raum</a><a href="#farblabor">Farblabor</a><a href="#foto">Angebot per Foto</a><a href="#karriere">Karriere</a><a href="#bewerben">Bewerben</a><a href="#termin">Termin</a>
+</nav>
+<div class="dots" aria-hidden="true"></div>
+
+<main id="top">
+
+<!-- 1 FILM: Fassade -->
+<section class="ch film" id="fassade" data-ch="fassade" style="--h:313vh">
+  <div class="stage">
+    <div class="media">
+      <video class="vid" muted playsinline preload="auto" data-src="assets/vid/fassade"></video>
+      <img class="still" data-img="f0-fassade-vorher" alt="Alter grauer Altbau vor der Renovierung, noch ohne Gerüst">
+    </div>
+    <div class="shade"></div>
+    <div class="beat b-hero">
+      <p class="kicker">Malerwerkstatt · Essen</p>
+      <h1>Wir machen<br>Farbe.</h1>
+      <p class="sub">Fassade. Innen. Lack. Seit drei Generationen, mit einer Crew, die Bock hat.</p>
+      <p class="hint">Scrollen</p>
+    </div>
+    <div class="beat b-2"><h2>Erst das Gerüst.</h2></div>
+    <div class="beat b-3"><h2>Dann die Farbe.</h2></div>
+    <div class="tag">Fassade</div>
+    <div class="window">
+      <img class="still" data-img="f3-fenster" alt="Offenes Fenster in frisch gestrichener Ockerfassade">
+      <video class="vid" muted playsinline preload="auto" data-src="assets/vid/drohne" data-key="drohne"></video>
+    </div>
+    <div class="wipe"></div>
+  </div>
+</section>
+
+<!-- 2 MOTION: Leistungen -->
+<section class="ch motion" id="leistungen" data-ch="leistungen" style="--h:273vh">
+  <div class="stage">
+    <img class="still frame-img" data-img="m2-rahmen" alt="">
+    <div class="frame-in">
+      <div class="stripes">
+        <img class="stripe-img" data-img="m1-streifen" alt="">
+        <button class="stripe" data-i="0" style="--c:var(--teal)"><span>Innen</span></button>
+        <button class="stripe" data-i="1" style="--c:var(--ochre)"><span>Fassade</span></button>
+        <button class="stripe" data-i="2" style="--c:var(--cream)"><span>Lack</span></button>
+        <button class="stripe" data-i="3" style="--c:var(--sage)"><span>Tapete</span></button>
+        <button class="stripe" data-i="4" style="--c:var(--grey)"><span>Spachtel</span></button>
+      </div>
+      <img class="roller" data-img="r1-rolle" data-png alt="">
+    </div>
+    <div class="ch-title"><p class="kicker">Was wir machen · Tippe auf einen Streifen</p></div>
+    <div class="sheet" hidden>
+      <button class="sheet-x" aria-label="Schließen">×</button>
+      <p class="kicker"></p><h3></h3><p class="txt"></p>
+      <ul class="pts"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3 FILM: Raum für Raum -->
+<section class="ch film" id="raum" data-ch="raum" style="--h:287vh">
+  <div class="stage">
+    <div class="media">
+      <video class="vid" muted playsinline preload="auto" data-src="assets/vid/raum"></video>
+      <img class="still" data-img="f4a-raum-vorher" alt="Altbauzimmer vor der Renovierung, Maler mit Abdeckvlies">
+    </div>
+    <div class="shade"></div>
+    <div class="beat b-1"><p class="kicker">Innen</p><h2>Raum für Raum.</h2></div>
+    <ol class="steps" aria-label="Ablauf">
+      <li>Abdecken</li><li>Spachteln</li><li>Grundieren</li><li>Streichen</li>
+    </ol>
+    <div class="beat b-2"><h2>Sauber.<br>Pünktlich.<br>Abgedeckt.</h2></div>
+    <div class="tag">Raum für Raum</div>
+    <div class="rollover">
+      <img class="still" data-img="m3-teal-rolle" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- 4 MOTION: Farblabor + Angebot per Foto -->
+<section class="ch motion" id="farblabor" data-ch="farblabor" style="--h:340vh">
+  <div class="stage">
+    <img class="still lab-bg" data-img="m3-teal-rolle" alt="">
+    <div class="lab-tint"></div>
+    <div class="lab">
+      <div class="lab-l">
+        <h2 class="lab-h">Farblabor</h2>
+        <div class="fan"><img class="still" data-img="m4-faecher" alt="Farbfächer"></div>
+        <div class="chips" role="radiogroup" aria-label="Wandfarbe"></div>
+        <p class="sub lab-name"></p>
+      </div>
+      <div class="lab-r">
+        <div class="room" data-need="m5a-raum-weiss">
+          <img class="still" data-img="m5a-raum-weiss" alt="Wohnzimmer im Altbau">
+          <div class="wall"></div>
+        </div>
+        <div class="phone-scene" id="foto" data-need="m6-handy-wand">
+          <img class="still" data-img="m6-handy-wand" alt="Hand hält Handy vor die Wand">
+          <div class="screen">
+            <div class="cam">
+              <div class="measure"><i></i><i></i><i></i><i></i><b class="m2">0 m²</b></div>
+            </div>
+            <label class="shot">Angebot per Foto<input type="file" accept="image/*" capture="environment" hidden></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="calc">
+      <p class="kicker">Angebot per Foto</p>
+      <h3>Wand fotografieren. Maße schieben. Fertig.</h3>
+      <label>Breite <output data-o="w"></output><input type="range" min="2" max="9" step="0.5" value="4.5" data-k="w"></label>
+      <label>Höhe <output data-o="h"></output><input type="range" min="2.2" max="4.2" step="0.1" value="3.2" data-k="h"></label>
+      <label>Wände <output data-o="n"></output><input type="range" min="1" max="4" step="1" value="4" data-k="n"></label>
+      <p class="res"><b data-o="a">0</b> m² Wandfläche</p>
+      <label class="shot2">Wand fotografieren<input type="file" accept="image/*" capture="environment" hidden></label>
+      <p class="fine">Kein Preis, keine Anmeldung. Der Meister meldet sich mit einem Termin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 FILM: Karriere -->
+<section class="ch film" id="karriere" data-ch="karriere" style="--h:447vh">
+  <div class="stage">
+    <div class="media">
+      <video class="vid" muted playsinline preload="auto" data-src="assets/vid/karriere"></video>
+      <img class="still" data-img="f5-karriere" alt="Malerin und Azubi sitzen bei Sonnenuntergang auf dem Gerüst">
+    </div>
+    <div class="shade"></div>
+    <div class="pk-dim"></div>
+    <div class="beat b-1"><p class="kicker">Ausbildung & Jobs</p><h2>Oben ist die<br>Aussicht<br>besser.</h2></div>
+    <div class="pks" aria-label="Was du bei uns bekommst">
+      <div class="pk" data-s="0"><span class="pk-n">01 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Feste Crew.</h3></div><p>Statt Zeitarbeit. Du weißt, mit wem du morgen auf dem Gerüst stehst.</p></div>
+      <div class="pk" data-s="1"><span class="pk-n">02 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Führerschein?</h3></div><p>Zahlen wir. Klasse B, ab dem zweiten Lehrjahr.</p></div>
+      <div class="pk" data-s="3"><span class="pk-n">03 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Meister?</h3></div><p>Zahlen wir mit. Und du bekommst die Zeit dafür.</p></div>
+      <div class="pk dark" data-s="2"><span class="pk-n">04 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Eigenes Werkzeug.</h3></div><p>Ab Tag 1. Deine Rolle, dein Spachtel, deine Kiste.</p></div>
+      <div class="pk" data-s="0"><span class="pk-n">05 / 05</span><div class="pk-w"><i class="pk-s"></i><h3>Bock auf Farbe?</h3></div><p>Bewerben dauert 60 Sekunden. Scroll weiter.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 MOTION: Bewerben in 60 Sekunden -->
+<section class="ch motion" id="bewerben" data-ch="bewerben">
+  <div class="stage static">
+    <i class="ap-bg s0" data-stroke="0"></i><i class="ap-bg s1" data-stroke="1"></i>
+    <div class="apply">
+      <div class="phone3d">
+        <div class="phone">
+          <div class="island"></div>
+          <div class="pscreen">
+            <div class="ps-top"><b>FARBKANTE</b><span class="prog">Schritt 1 von 6</span></div>
+            <div class="ps-bar"><i></i></div>
+            <div class="deck" aria-live="polite"></div>
+            <div class="deck-nav"><button class="no" aria-label="Links">←</button><span class="dn-hint">wischen oder tippen</span><button class="yes" aria-label="Rechts">→</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="apply-t">
+        <p class="kicker">Jobs & Ausbildung</p>
+        <h2>Bewerben in<br><span class="mk"><i class="mk-s" data-stroke="0"></i><span>60 Sekunden.</span></span><br>Ohne Lebenslauf.</h2>
+        <p class="ap-sub">Fünf Fragen wischen, Kontakt eintragen, fertig. Wir rufen dich an.</p>
+        <div class="roles" role="radiogroup" aria-label="Ich will"><button aria-pressed="true">Ausbildung</button><button aria-pressed="false">Geselle</button><button aria-pressed="false">Quereinstieg</button></div>
+        <div class="clock"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/><circle class="ring" cx="22" cy="22" r="19"/></svg><div><small>Deine Zeit</small><b>0:00</b></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 MOTION: Finale -->
+<section class="ch motion" id="termin" data-ch="finale" style="--h:133vh">
+  <div class="stage">
+    <div class="paint">
+      <i class="fin-s" data-stroke="0"></i>
+      <div class="word">FARBKANTE</div>
+      <img class="roller" data-img="r1-rolle" data-png alt="">
+    </div>
+    <div class="fin">
+      <p class="stars" aria-label="5 von 5 Sternen (Beispiel)">★★★★★ <small>4,9 aus 212 Bewertungen · Beispiel</small></p>
+      <div class="btns"><button class="btn" data-open="termin">Termin anfragen</button><a class="btn ghost" href="#bewerben">Jetzt bewerben</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="stimmen" aria-label="Bewertungen (Beispiel)">
+  <div class="cards">
+    <figure><blockquote>„Alles abgedeckt, alles sauber, am Freitag fertig wie versprochen.“</blockquote><figcaption>Sandra K. · Wohnung, Rüttenscheid · Beispiel</figcaption></figure>
+    <figure><blockquote>„Die Fassade sieht aus wie neu. Das Gerüst stand keinen Tag länger als nötig.“</blockquote><figcaption>Hausverwaltung M. · Beispiel</figcaption></figure>
+    <figure><blockquote>„Farbe im Farblabor ausgesucht, Foto geschickt, zwei Tage später war der Meister da.“</blockquote><figcaption>Jonas B. · Altbau, Holsterhausen · Beispiel</figcaption></figure>
+  </div>
+  <div class="social"><span>Instagram</span><span>TikTok</span><span>WhatsApp</span><span>Google</span><small>Beispiel-Kanäle</small></div>
+</section>
+
+<footer class="foot">
+  <p><b>FARBKANTE</b> Malerwerkstatt · Musterstraße 1 · 45127 Essen (Demo)</p>
+  <p><a href="#termin">Termin</a> · <a href="#bewerben">Jobs</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="../../leistungen/websites.html#farbkante">Zurück zu PROJEKT EX</a></p>
+</footer>
+</main>
+
+<dialog class="modal" id="m-termin">
+  <form method="dialog">
+    <h3>Termin anfragen</h3>
+    <label>Was soll gemacht werden?<select><option>Innen streichen</option><option>Fassade</option><option>Lackieren</option><option>Tapezieren</option><option>Spachteltechnik</option></select></label>
+    <label>Name<input type="text" autocomplete="off"></label>
+    <label>Telefon<input type="tel" autocomplete="off"></label>
+    <p class="fine">Demo: Es wird nichts gesendet.</p>
+    <button class="btn">Anfrage senden</button>
+  </form>
+</dialog>
+<div class="toast" role="status" hidden></div>
+
+<script src="assets/js/img.js?v=1795288807"></script>
+<script src="assets/js/app.js?v=1795288807"></script>
+</body>
+</html>
