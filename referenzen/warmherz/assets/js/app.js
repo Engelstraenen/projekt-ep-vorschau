@@ -23,8 +23,21 @@
   const nav = $('#nav');
   addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 40), { passive: true });
   const burger = $('.burger'), links = $('.links');
-  burger.addEventListener('click', () => burger.setAttribute('aria-expanded', links.classList.toggle('open')));
-  $$('.links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+  /* Mobil: Menü passt in den sichtbaren Bereich (scrollt selbst), X-Zustand, Esc schließt, Foto-Knopf weicht */
+  const fitMenu = () => { if (links.classList.contains('open')) links.style.maxHeight = Math.max(200, innerHeight - nav.getBoundingClientRect().bottom) + 'px'; };
+  const setMenu = open => {
+    links.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    document.documentElement.classList.toggle('menu-open', open);
+    if (open) fitMenu(); else links.style.maxHeight = '';
+  };
+  burger.addEventListener('click', () => setMenu(!links.classList.contains('open')));
+  $$('.links a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && links.classList.contains('open')) { setMenu(false); burger.focus(); } });
+  addEventListener('resize', fitMenu);
+  addEventListener('scroll', fitMenu, { passive: true });
+  links.addEventListener('click', e => { if (e.target.closest('.dd-btn')) requestAnimationFrame(fitMenu); });
 
   /* ---------- Countdown bis 1.2.2027 ---------- */
   const target = new Date('2027-02-01T00:00:00+01:00').getTime();
@@ -197,6 +210,12 @@
       if (hasGsap && !reduce) gsap.fromTo('.hp-info', { x: 14, opacity: .3 }, { x: 0, opacity: 1, duration: .45, ease: 'power3.out' });
     };
     g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', HS[+g.dataset.hs][0]);
+    /* Touch: unsichtbare, größere Tippfläche (Punkte sind auf dem Handy nur ~10 px groß) */
+    if (matchMedia('(pointer: coarse)').matches) {
+      const hit = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      hit.setAttribute('r', '51'); hit.setAttribute('fill', 'transparent'); hit.setAttribute('class', 'hs-hit');
+      g.prepend(hit);
+    }
     g.addEventListener('mouseenter', act); g.addEventListener('click', act);
     g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
   });

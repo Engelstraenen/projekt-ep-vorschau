@@ -21,6 +21,14 @@
   const head = $('[data-head]');
   const onScroll = () => head.classList.toggle('is-solid', scrollY > 40);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  /* Mobiles Menü (details): nach Linkwahl, Tipp daneben oder Escape schließen (blieb sonst offen über dem Inhalt) */
+  const menu = $('.menu');
+  if (menu) {
+    const shut = () => { menu.open = false; };
+    $$('.menu__panel a', menu).forEach(a => a.addEventListener('click', shut));
+    d.addEventListener('click', e => { if (menu.open && !menu.contains(e.target)) shut(); });
+    d.addEventListener('keydown', e => { if (e.key === 'Escape' && menu.open) { shut(); $('summary', menu).focus(); } });
+  }
 
   /* Hero: Wärmebild-Linse */
   const hero = $('[data-hero]');
@@ -87,7 +95,7 @@
   };
   let running = false, parts = [], last = 0;
   const ctx = cv && cv.getContext('2d');
-  const size = () => { if (!cv) return; const r = cv.getBoundingClientRect(); cv.width = r.width * dpr(); cv.height = r.height * dpr(); };
+  const size = () => { if (!cv) return; const r = cv.getBoundingClientRect(), w = Math.floor(r.width * dpr()), h = Math.floor(r.height * dpr()); if (w === cv.width && h === cv.height) return; cv.width = w; cv.height = h; };
   const draw = (now) => {
     const k = dpr(), W = cv.width / k, H = cv.height / k, dt = Math.min(50, now - (last || now)) / 16.7; last = now;
     for (const [a, b] of [['w', S.w], ['vl', S.vl], ['jaz', S.jaz], ['score', S.score]]) A[a] = lerp(A[a], b, .08);
@@ -137,7 +145,7 @@
     for (const p of parts) { p.x += p.vx * dt; p.y += p.vy * dt; p.l -= (p.c ? .006 : .012) * dt; if (p.c && p.x < p.tx) p.l = 0;
       ctx.fillStyle = p.c ? `rgba(127,178,198,${p.l * .9})` : `rgba(226,88,47,${p.l * .8})`; ctx.beginPath(); ctx.arc(p.x, p.y, p.c ? 1.6 : 2.2, 0, 7); ctx.fill(); }
     // Kessel-Hinweis im Haus (verblasst)
-    ctx.font = '500 11px Onest, sans-serif'; ctx.fillStyle = '#ffffff99'; ctx.fillText('WÄRMEVERLUST', 18, gY - hh - roof * .2); ctx.fillStyle = '#7fb2c6'; ctx.fillText('UMWELTWÄRME', Math.min(W - 100, ux - 10), uy - 16);
+    const narrowViz = W < 520; ctx.font = narrowViz ? '500 12px Onest, sans-serif' : '500 11px Onest, sans-serif'; ctx.fillStyle = '#ffffff99'; ctx.fillText('WÄRMEVERLUST', narrowViz ? 16 : 18, narrowViz ? Math.max(58, gY - hh - roof - 18) : gY - hh - roof * .2); ctx.fillStyle = '#7fb2c6'; ctx.fillText('UMWELTWÄRME', Math.min(W - 100, ux - 10), uy - 16);
   };
   const loop = () => { running = true; const f = n => { if (visible.get(cv) === false || reduce) { running = false; if (reduce) draw(n); return; } draw(n); requestAnimationFrame(f); }; requestAnimationFrame(f); };
   if (konf && cv) { size(); addEventListener('resize', size); konf.addEventListener('input', calc); io.observe(cv); new IntersectionObserver(([e]) => { if (e.isIntersecting && !running) loop(); }).observe(cv); calc(); }
@@ -148,9 +156,13 @@
     const N = 97, mob = innerWidth < 760, dir = mob ? 'film/seq-m/' : 'film/seq-d/', imgs = new Array(N), fx = fc.getContext('2d');
     const load = i => { if (imgs[i]) return imgs[i]; const im = new Image(); im.decoding = 'async'; im.src = dir + String(i + 1).padStart(3, '0') + '.webp'; imgs[i] = im; im.onload = () => { if (i === cur) paint(i); }; return im; };
     let cur = 0;
-    const fsize = () => { const r = fc.getBoundingClientRect(); fc.width = r.width * dpr(); fc.height = r.height * dpr(); paint(cur); };
+    /* Hochformat: Bildausschnitt folgt dem Motiv (Außengerät -> Terrassentür -> Sofa) statt der Bildmitte */
+    const narrow = matchMedia('(max-width: 900px)');
+    const FOC = [[0, .56], [12, .53], [24, .47], [33, .34], [40, .55], [48, .58], [56, .55], [64, .6], [72, .55], [80, .62], [88, .66], [96, .7]];
+    const focus = i => { for (let k = 1; k < FOC.length; k++) if (i <= FOC[k][0]) { const [a, fa] = FOC[k - 1], [b, fb] = FOC[k]; let t = (i - a) / (b - a); t = t * t * (3 - 2 * t); return fa + (fb - fa) * t; } return FOC[FOC.length - 1][1]; };
+    const fsize = () => { const r = fc.getBoundingClientRect(), w = Math.floor(r.width * dpr()), h = Math.floor(r.height * dpr()); if (w === fc.width && h === fc.height) return; fc.width = w; fc.height = h; paint(cur); };
     const paint = i => { const im = load(i); if (!im.complete || !im.naturalWidth) { for (let j = i; j >= 0; j--) if (imgs[j] && imgs[j].complete && imgs[j].naturalWidth) return cover(imgs[j]); return; } cover(im); };
-    const cover = im => { const W = fc.width, H = fc.height, s = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s; fx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h); };
+    const cover = im => { const W = fc.width, H = fc.height, s = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s; let x = (W - w) / 2; if (narrow.matches && w > W + 1) x = Math.min(0, Math.max(W - w, W / 2 - focus(cur) * w)); fx.drawImage(im, x, (H - h) / 2, w, h); };
     load(0);
     new IntersectionObserver(([e]) => { if (e.isIntersecting) for (let i = 0; i < N; i++) load(i); }, { rootMargin: '100% 0px' }).observe(film);
     fsize(); addEventListener('resize', fsize);
@@ -177,6 +189,9 @@
       ['Obergeschoss', 'Bad und Warmwasser', 'Warmes Wasser in gewohnter Menge. Ein Badheizkörper sorgt für das wohlige Handtuch am Morgen.']
     ];
     const panel = $('[data-panel]', haus), hs = $$('.hs', haus), hb = $$('[data-hb]');
+    const mqHaus = matchMedia('(max-width: 700px)');
+    const placePanel = () => { if (mqHaus.matches) { if (panel.parentNode === haus) haus.after(panel); } else if (panel.parentNode !== haus) haus.appendChild(panel); };
+    placePanel(); if (mqHaus.addEventListener) mqHaus.addEventListener('change', placePanel); else mqHaus.addListener(placePanel);
     let open = -1;
     const show = i => {
       open = i === open ? -1 : i;
@@ -198,7 +213,7 @@
     if (fine && !reduce) { const img = $('.haus__img', haus); haus.addEventListener('pointermove', e => { const r = haus.getBoundingClientRect(); img.style.setProperty('--tx', ((e.clientX - r.left) / r.width - .5) * -14 + 'px'); img.style.setProperty('--ty', ((e.clientY - r.top) / r.height - .5) * -10 + 'px'); }); haus.addEventListener('pointerleave', () => { img.style.setProperty('--tx', 0); img.style.setProperty('--ty', 0); }); }
     // Schnee
     const sc = $('[data-snow]', haus), sx = sc.getContext('2d'); let fl2 = [];
-    const ss = () => { sc.width = haus.clientWidth * dpr(); sc.height = haus.clientHeight * dpr(); fl2 = Array.from({ length: 90 }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 1.6 + .4, s: Math.random() * .4 + .15, w: Math.random() * 6 })); };
+    const ss = () => { const w = Math.floor(haus.clientWidth * dpr()), h = Math.floor(haus.clientHeight * dpr()); if (fl2.length && w === sc.width && h === sc.height) return; sc.width = w; sc.height = h; fl2 = Array.from({ length: 90 }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 1.6 + .4, s: Math.random() * .4 + .15, w: Math.random() * 6 })); };
     ss(); addEventListener('resize', ss); io.observe(sc);
     const snow = n => { requestAnimationFrame(snow); if (!visible.get(sc) || reduce) return; const W = sc.width, H = sc.height, k = dpr(); sx.clearRect(0, 0, W, H); sx.fillStyle = '#ffffffcc';
       for (const f of fl2) { f.y += f.s / H * k * 1.2; if (f.y > 1) { f.y = 0; f.x = Math.random(); } sx.globalAlpha = .4 + f.r / 3; sx.beginPath(); sx.arc((f.x + Math.sin(n / 1600 + f.w) * .006) * W, f.y * H, f.r * k, 0, 7); sx.fill(); } };
@@ -234,7 +249,7 @@
     sel(0); addEventListener('resize', () => sel(bs.findIndex(b => b.getAttribute('aria-selected') === 'true'))); d.fonts && d.fonts.ready.then(() => sel(bs.findIndex(b => b.getAttribute('aria-selected') === 'true'))); }
 
   /* Vergleich: ruhige Wärmeströme im Hintergrund */
-  $$('[data-flow]').forEach(fcv => { const c = fcv.getContext('2d'); const sz = () => { fcv.width = fcv.clientWidth * dpr(); fcv.height = fcv.clientHeight * dpr(); }; sz(); addEventListener('resize', sz); io.observe(fcv);
+  $$('[data-flow]').forEach(fcv => { const c = fcv.getContext('2d'); const sz = () => { const w = Math.floor(fcv.clientWidth * dpr()), h = Math.floor(fcv.clientHeight * dpr()); if (w === fcv.width && h === fcv.height) return; fcv.width = w; fcv.height = h; }; sz(); addEventListener('resize', sz); io.observe(fcv);
     const f = n => { requestAnimationFrame(f); if (!visible.get(fcv) || reduce) return; const W = fcv.width, H = fcv.height, t = n / 4000; c.clearRect(0, 0, W, H); c.lineWidth = 1.2 * dpr();
       for (let i = 0; i < 14; i++) { c.strokeStyle = i % 3 ? 'rgba(127,178,198,.55)' : 'rgba(240,138,75,.7)'; c.beginPath(); for (let x = 0; x <= W; x += 12) { const y = H * (.15 + i * .055) + Math.sin(x / W * 5 + t * (1 + i * .08) + i) * H * .04 + Math.sin(x / W * 11 - t * 1.4 + i * 2) * H * .012; x ? c.lineTo(x, y) : c.moveTo(x, y); } c.stroke(); } };
     requestAnimationFrame(f); });

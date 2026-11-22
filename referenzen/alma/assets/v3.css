@@ -161,7 +161,7 @@ img{display:block;max-width:100%}a{color:inherit}
 .foot__grid ul{list-style:none;display:grid;gap:6px}.foot__grid a{text-underline-offset:3px}
 .foot__legal{margin-top:56px;font-size:12px;color:var(--mute)}
 
-@media (max-width:800px){
+@media (max-width:800px),(orientation:portrait) and (max-width:1100px) and (pointer:coarse){
  .top{grid-template-columns:1fr auto;padding:14px 18px}.top__tc{display:none}
  .rail{display:none}
  .shade{background:linear-gradient(180deg,rgba(8,5,4,.55) 0%,rgba(8,5,4,0) 22%,rgba(8,5,4,.2) 50%,rgba(8,5,4,.85) 100%)}
@@ -197,8 +197,8 @@ img{display:block;max-width:100%}a{color:inherit}
 .hud--map,.curve{width:100%}
 .alt__ridge{fill:rgba(246,239,228,.14);stroke:rgba(246,239,228,.5)}
 .alt{width:72px;height:170px}
-@media (max-width:800px){.obj__tag{display:none}.shade{background:linear-gradient(180deg,rgba(8,5,4,.6) 0%,rgba(8,5,4,.1) 30%,rgba(8,5,4,.15) 55%,rgba(8,5,4,.88) 100%)}}
-@media (max-width:800px){.shade{background:linear-gradient(180deg,rgba(8,5,4,.82) 0%,rgba(8,5,4,.55) 32%,rgba(8,5,4,.1) 50%,rgba(8,5,4,.25) 66%,rgba(8,5,4,.9) 100%)}}
+@media (max-width:800px),(orientation:portrait) and (max-width:1100px) and (pointer:coarse){.obj__tag{display:none}.shade{background:linear-gradient(180deg,rgba(8,5,4,.6) 0%,rgba(8,5,4,.1) 30%,rgba(8,5,4,.15) 55%,rgba(8,5,4,.88) 100%)}}
+@media (max-width:800px),(orientation:portrait) and (max-width:1100px) and (pointer:coarse){.shade{background:linear-gradient(180deg,rgba(8,5,4,.82) 0%,rgba(8,5,4,.55) 32%,rgba(8,5,4,.1) 50%,rgba(8,5,4,.25) 66%,rgba(8,5,4,.9) 100%)}}
 .rail a,.bars span,.roast span,.grind p{font-size:11px}
 .map__lbl text,.curve__grid text,.curve__fc text,.alt__ticks text{font-size:11px}
 .hero__h em,.shop__h em{font-style:normal}
@@ -247,7 +247,7 @@ img{display:block;max-width:100%}a{color:inherit}
   .ch__txt{z-index:3}
   .ch__hud{z-index:3}
 }
-@media (max-width:800px){
+@media (max-width:800px),(orientation:portrait) and (max-width:1100px) and (pointer:coarse){
   .ch__txt{
     left:18px;right:18px;width:auto;margin-inline:0;
     top:96px;bottom:auto;
@@ -256,3 +256,100 @@ img{display:block;max-width:100%}a{color:inherit}
   .ch__k{justify-content:flex-start}
   .ch__lead{margin-inline:0}
 }
+
+/* ===== Mobil/Tablet (2026-11): nur <=800px (Breakpoint der Seite), Desktop unverändert ===== */
+@media (max-width:800px),(orientation:portrait) and (max-width:1100px) and (pointer:coarse){
+ /* Bühne an der großen Viewport-Höhe fest: Adressleiste ein/aus skaliert das Bild nicht mehr */
+ .stage{bottom:auto;height:100vh;height:100lvh}
+ /* HUD unten statt mittig (überlagerte sonst Probe und Text auf normal hohen Handys) */
+ .ch__hud{top:auto;bottom:calc(20px + env(safe-area-inset-bottom,0px));translate:none;width:auto}
+ /* Mini-Beschriftungen in SVG-Instrumenten: lesbar groß oder (zu schmale Spalte) weglassen */
+ .alt__ticks text{display:none}
+ .map__lbl text{font-size:13px}
+ .hud--map:not(:only-child) .map__lbl{display:none}
+ .curve__grid text,.curve__fc text{font-size:18px}
+ .ch__lead{text-shadow:0 1px 14px rgba(8,5,4,.85),0 0 2px rgba(8,5,4,.6)}
+ .ch__k{text-shadow:0 1px 10px rgba(8,5,4,.8)}
+ /* Schrift >= 12px */
+ .hl,.ch__k,.top__cta,.hv span,.row__n,.logo span,.bars span,.roast span,.grind p,.recipe{font-size:12px}
+ .hl{letter-spacing:.12em}
+ /* Ring-Werte im selben Grid-Feld wie der Ring: bleiben mittig, auch wenn das Label umbricht */
+ .hud--ring .ring,.hud--brew .ring,.hud--ring .hv--in,.hud--brew .hv--in{grid-area:2/1}
+ .hud--ring .hv--in,.hud--brew .hv--in{position:relative;top:auto;left:auto;translate:none;align-self:center}
+ /* Tap-Ziele >= 44px */
+ .skip{left:8px;top:-80px;padding:12px 16px}.skip:focus{left:8px;top:8px}
+ .logo{padding-block:7px;margin-block:-7px}
+ .top__cta{display:inline-flex;align-items:center;min-height:44px;padding:0 16px}
+ .foot__grid ul{gap:0}
+ .foot__grid a{display:inline-flex;align-items:center;min-height:44px}
+ /* niedrige Handys: Kopf etwas höher, HUD kompakter (svh = stabil, springt nicht mit der Adressleiste) */
+ .ch__txt{top:clamp(80px,13svh,96px)}
+ .ch__hud{gap:min(18px,2.4svh)}
+ .ring{width:min(96px,13svh);height:min(96px,13svh)}.hud--ring .hv--in,.hud--brew .hv--in{width:min(96px,13svh)}
+ .bars{height:min(80px,10svh)}
+ .alt{height:min(110px,14svh)}
+ /* Runde 2: Karte/Kurve auf kleinen Handys flacher, damit Text, Probe und HUD nebeneinander Platz haben */
+ .map{max-height:26svh}
+ .map__lbl text{font-size:15px}
+ .curve{height:min(110px,15svh)}
+}
+
+/* ===== Runde 2: Querformat-Handys (Höhe <= 500px): Text links, Probe + HUD rechts; Desktop mit Maus unverändert ===== */
+@media (orientation:landscape) and (max-height:500px) and (max-width:800px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
+ .stage{bottom:auto;height:100vh;height:100lvh}
+ .top{top:24px;grid-template-columns:1fr auto;padding:4px var(--pad)}
+ .top__tc,.rail,.wm,.cue,.obj__tag{display:none}
+ .shade{background:linear-gradient(90deg,rgba(8,5,4,.8) 0%,rgba(8,5,4,.5) 42%,rgba(8,5,4,.08) 62%,rgba(8,5,4,.35) 100%),linear-gradient(180deg,rgba(8,5,4,.55) 0%,rgba(8,5,4,0) 26%,rgba(8,5,4,0) 62%,rgba(8,5,4,.6) 100%)}
+ .hero{padding-bottom:22px;min-height:calc(100svh - 26px)}
+ .hero__h{font-size:clamp(40px,13vh,64px)}
+ .hud--curve{padding-bottom:18px}
+ .hero__lead{margin-top:12px;max-width:52ch;font-size:15px}
+ .ch__txt{left:var(--pad);right:auto;margin-inline:0;width:min(54vw,560px);top:80px;bottom:auto;text-align:left;align-items:flex-start}
+ .ch__k{justify-content:flex-start;margin-bottom:6px}
+ .ch__h{font-size:clamp(28px,9vh,44px)}
+ .ch__lead{margin:10px 0 0;max-width:46ch;font-size:15px;line-height:1.5;text-shadow:0 1px 14px rgba(8,5,4,.85),0 0 2px rgba(8,5,4,.6)}
+ .ch__hud{left:auto;right:var(--pad);width:min(36vw,340px);top:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));translate:none;grid-template-columns:1fr 1fr;gap:10px 12px;align-items:end}
+ .ch__hud .hud:only-child,.hud--curve{grid-column:1/-1}
+ .hud{padding-top:8px}
+ .hl,.ch__k,.top__cta,.hv span,.logo span,.bars span,.roast span,.grind p,.recipe{font-size:12px}
+ .hl{margin-bottom:6px;letter-spacing:.1em}
+ .hv b{font-size:26px}.hud--sm .hv b,.hv--t b{font-size:22px}
+ .alt{width:40px;height:min(80px,18vh)}.hud--alt{grid-template-columns:40px 1fr;column-gap:10px}
+ .alt__ticks text{display:none}
+ .ring{width:min(72px,17vh);height:min(72px,17vh)}
+ .hud--ring .ring,.hud--brew .ring,.hud--ring .hv--in,.hud--brew .hv--in{grid-area:2/1}
+ .hud--ring .hv--in,.hud--brew .hv--in{position:relative;top:auto;left:auto;translate:none;align-self:center;width:min(72px,17vh)}
+ .hv--in b{font-size:22px}
+ .bars{height:min(56px,13vh);gap:6px}
+ .hud--map,.curve{width:100%}
+ .map{max-height:30vh;margin-bottom:4px}
+ .map__lbl text{font-size:13px}
+ .hud--map:not(:only-child) .map__lbl{display:none}
+ .curve{height:min(84px,20vh)}
+ .curve__grid text,.curve__fc text{font-size:18px}
+ .curve__row{margin-top:4px}
+ .stamp{font-size:20px;min-height:2.3em}
+ .grind__scale{height:28px}.grind__n{height:38px}
+ .obj{width:clamp(120px,17vw,200px)}
+ .skip{left:8px;top:-80px;padding:12px 16px}.skip:focus{left:8px;top:8px}
+ .logo{padding-block:7px;margin-block:-7px}
+ .top__cta{display:inline-flex;align-items:center;min-height:44px;padding:0 16px}
+ .foot__grid ul{gap:0}
+ .foot__grid a{display:inline-flex;align-items:center;min-height:44px}
+}
+/* Touch-Tablets quer (Desktop-Layout): Tap-Ziele und Schrift */
+@media (min-width:801px) and (hover:none) and (pointer:coarse){
+ .hl,.ch__k,.hero__k,.top__tc,.rail a,.obj__tag,.top__cta,.hv span,.logo span,.row__n,.cue,.bars span,.roast span,.grind p{font-size:12px}
+ .map__lbl text,.alt__ticks text{font-size:12px}
+ .skip{left:8px;top:-80px;padding:12px 16px}.skip:focus{left:8px;top:8px}
+ .logo{padding-block:7px;margin-block:-7px}
+ .top__cta{display:inline-flex;align-items:center;min-height:44px}
+ .rail ol{gap:0}.rail a{min-height:44px;padding-block:0}
+ .foot__grid ul{gap:0}
+ .foot__grid a{display:inline-flex;align-items:center;min-height:44px}
+}
+@media (max-width:340px){.map{max-height:20svh}}
+@media (max-width:360px){.top__cta{white-space:nowrap;padding:0 12px;letter-spacing:.1em}.top{padding-inline:14px}}
+@media (max-width:340px){.logo span{display:none}}
+/* Touch-Tablet quer (Desktop-Layout): mittiger Kapiteltext schmaler, damit er das HUD rechts nicht berührt */
+@media (min-width:801px) and (min-height:501px) and (orientation:landscape) and (hover:none) and (pointer:coarse){.ch__txt{width:min(40vw,860px)}}

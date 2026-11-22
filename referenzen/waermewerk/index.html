@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#0d1a21">
 <link rel="preload" href="fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/onest-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/site.css?v=20261122r2">
 <link rel="stylesheet" href="../../assets/demo-local.css"></head>
 <body>
 <a class="skip" href="#inhalt">Direkt zum Inhalt</a>
@@ -219,7 +219,7 @@
       <div class="form__row"><div class="field"><label for="f-name">Name</label><input id="f-name" type="text" autocomplete="name" required></div><div class="field"><label for="f-plz">Postleitzahl</label><input id="f-plz" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" required></div></div>
       <div class="form__row"><div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" type="email" autocomplete="email" required></div><div class="field"><label for="f-tel">Telefon <span class="optional">(optional)</span></label><input id="f-tel" type="tel" autocomplete="tel"></div></div>
       <div class="field"><label for="f-msg">Nachricht <span class="optional">(optional)</span></label><textarea id="f-msg" rows="3"></textarea></div>
-      <div class="ok"><input id="f-ok" type="checkbox" required><label for="f-ok">Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden (siehe <a href="datenschutz.html">Datenschutz</a>).</label></div>
+      <label class="ok" for="f-ok"><input id="f-ok" type="checkbox" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden (siehe <a href="datenschutz.html">Datenschutz</a>).</span></label>
       <p><button class="btn btn--heat" type="button" data-local-confirm>Anfrage senden <span class="arr" aria-hidden="true">→</span></button></p>
     <p class="demo-local-status" role="status" aria-live="polite">Reine Demo: kein Versand, keine echte Anfrage oder Anmeldung. Eingaben bleiben lokal, ohne URL-Übernahme oder Speicherung durch die Seite. Nur fiktive Testdaten. Bestätigung nur mit JavaScript.</p></div>
   </div>
@@ -238,6 +238,6 @@
 </footer>
 <script src="js/gsap.min.js" defer></script>
 <script src="js/ScrollTrigger.min.js" defer></script>
-<script src="js/app.js" defer></script>
+<script src="js/app.js?v=20261122m" defer></script>
 <script src="../../assets/demo-local.js" defer></script></body>
 </html>

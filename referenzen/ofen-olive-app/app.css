@@ -234,3 +234,54 @@ button{cursor:pointer;background:none;border:0}
 .top__links{display:flex;gap:.4rem}
 .view--res{background:var(--paper);padding-bottom:0}
 .view--res .bar{z-index:3}
+
+/* ===== Mobil-Optimierung 2026-11 (unter 900 px = App ohne Handy-Rahmen, sowie Touch-Geräte; Desktop mit Maus unverändert) ===== */
+@media (max-width:899px){
+  :root{--bar:44px}
+  .demo-bar a{align-self:stretch;display:flex;align-items:center;padding:0 .5rem;margin-right:-.5rem}
+  .dish__t b i,.card h4 i{font-size:.75rem}
+  .top__link{font-size:.85rem}
+}
+@media (max-width:600px){
+  :root{--bar:52px}
+  .demo-bar{font-size:.75rem}
+}
+@media (pointer:coarse) and (min-width:601px){:root{--bar:44px}}
+@media (pointer:coarse){
+  /* auch im Handy-Rahmen auf Touch-Tablets */
+  .demo-bar{font-size:.75rem}
+  .demo-bar a{align-self:stretch;display:flex;align-items:center;padding:0 .5rem;margin-right:-.5rem}
+  .kicker{font-size:12px}
+  .dish__t b i,.card h4 i{font-size:.75rem}
+  .top__link{min-height:44px;padding:0 1rem}
+  .icon-btn{width:44px;height:44px}
+  .bar{grid-template-columns:44px 1fr 44px}
+  .kn a{display:inline-flex;align-items:center;min-height:44px}
+  .seg button{min-height:44px;justify-content:center}
+  .slot{min-height:44px}
+  .step button{width:44px;height:44px}
+  .lock__x{min-height:44px}
+  .ci__del{min-height:44px;display:flex;align-items:center;width:fit-content}
+}
+
+/* ===== Runde 2: Handy quer (Touch, höchstens 500 px hoch): App bildschirmfüllend statt Handy-Attrappe,
+   Kopfbild und Sperrbildschirm an die geringe Höhe angepasst. Desktop mit Maus ist nie betroffen ===== */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  body{background:var(--ink)}
+  .desk{display:block;max-width:none;padding:var(--bar) 0 0;min-height:100%}
+  .desk__side{display:none}
+  .phone{position:relative;width:auto;height:calc(100svh - var(--bar));max-height:none;border-radius:0;box-shadow:none;background:none;overflow:visible}
+  .phone::before{display:none}
+  .app{border-radius:0}
+  .view{inset:0}
+  .hero{aspect-ratio:auto;height:62svh}
+  .sheet{height:96%}
+  .sheet__img{aspect-ratio:3}
+  /* Sperrbildschirm quer: Uhr links, Mitteilungen rechts, Zurück-Knopf darunter (sonst unter der Kante) */
+  .lock{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);grid-template-rows:minmax(0,1fr) auto;align-items:center;column-gap:1rem;padding:0 1rem}
+  .lock__clock{grid-column:1;grid-row:1;padding:0}
+  .lock__time{font-size:min(4.4rem,22svh)}
+  .lock__stack{grid-column:2;grid-row:1;margin:0;max-height:none;padding:0}
+  .lock__x{grid-column:1/-1;grid-row:2;margin:0 auto .8rem}
+  .done__card{padding-top:1.5rem}
+}

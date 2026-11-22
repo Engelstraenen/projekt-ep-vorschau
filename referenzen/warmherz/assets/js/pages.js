@@ -75,14 +75,34 @@
       }
     }
     if (n) new IntersectionObserver(es => { if (es[0].isIntersecting) load(); }, { rootMargin: '150% 0px' }).observe(wf);
+    /* Hochformat (Handy, Tablet hoch): Bild füllt die oberen 70 %, läuft nach unten weich in Schwarz aus,
+       und der Ausschnitt folgt dem Motiv (Bild-Nr. -> Motiv-Mitte in Bildbreite: Wärmepumpe, Fenster, Familie) */
+    const FOCAL = [[0, .77], [30, .82], [42, .86], [54, .42], [64, .36], [72, .44], [121, .44]];
+    const focal = i => { for (let k = 1; k < FOCAL.length; k++) if (i <= FOCAL[k][0]) { const [a, fa] = FOCAL[k - 1], [b, fb] = FOCAL[k]; return fa + (fb - fa) * (i - a) / (b - a); } return FOCAL[FOCAL.length - 1][1]; };
+    const mobile = matchMedia('(max-width: 1020px)');
     function draw(i) {
       const im = frames[i]; if (!im || !im.complete || !im.naturalWidth) return;
-      const w = cv.width = cv.clientWidth * devicePixelRatio, h = cv.height = cv.clientHeight * devicePixelRatio;
-      const sc = Math.max(w / im.naturalWidth, h / im.naturalHeight), dw = im.naturalWidth * sc, dh = im.naturalHeight * sc;
-      ctx.drawImage(im, (w - dw) / 2, (h - dh) / 2, dw, dh);
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      const w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
+      if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }   // nur bei Größenänderung neu anlegen (ruckelt sonst auf Handys)
+      const ar = im.naturalWidth / im.naturalHeight;
+      if (w / h >= .8) {
+        const sc = Math.max(w / im.naturalWidth, h / im.naturalHeight), dw = im.naturalWidth * sc, dh = im.naturalHeight * sc;
+        ctx.drawImage(im, (w - dw) / 2, (h - dh) / 2, dw, dh);
+        return;
+      }
+      let dh = h * .7, dw = dh * ar; if (dw < w) { dw = w; dh = w / ar; }
+      const dx = Math.min(0, Math.max(w - dw, w / 2 - focal(i) * dw));
+      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(im, dx, 0, dw, dh);
+      const g = ctx.createLinearGradient(0, dh * .55, 0, dh);
+      g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, '#000');
+      ctx.fillStyle = g; ctx.fillRect(0, dh * .55, w, dh * .45 + 1);
     }
+    const pin = $('.wf-pin', wf);
     function update() {
-      const r = wf.getBoundingClientRect(), total = Math.max(1, wf.offsetHeight - innerHeight);
+      // Handy: Weg = Abschnitt minus gepinnte Bühne (stabile svh-Höhe), nicht innerHeight (springt mit der Adressleiste)
+      const r = wf.getBoundingClientRect(), total = Math.max(1, wf.offsetHeight - (mobile.matches ? pin.offsetHeight : innerHeight));
       const p = Math.min(1, Math.max(0, -r.top / total));
       const temp = Math.round(-10 + 31 * p);
       tEl.textContent = (temp < 0 ? '−' : '') + Math.abs(temp);

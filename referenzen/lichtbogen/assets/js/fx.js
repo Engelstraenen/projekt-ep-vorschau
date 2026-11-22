@@ -151,7 +151,7 @@ window.FX = (function () {
     if (sum > 0.05) { ctx.globalAlpha = Math.min(0.2, sum * 0.035); ctx.fillStyle = '#a9ccff'; ctx.fillRect(0, 0, innerWidth, innerHeight); ctx.globalAlpha = 1; }
     rings = rings.filter(function (r) { return now - r.t < r.life; });
     rings.forEach(function (r) {
-      var k = (now - r.t) / r.life, e = 1 - Math.pow(1 - k, 3);
+      var k = Math.max(0, (now - r.t) / r.life), e = 1 - Math.pow(1 - k, 3); /* rAF-Zeit kann vor dem Entstehen des Rings liegen: sonst negativer Radius, Exception, Effekt-Schleife steht */
       ctx.globalAlpha = (1 - k) * 0.55; ctx.strokeStyle = '#cfe6ff'; ctx.lineWidth = 2 + 10 * (1 - k);
       ctx.beginPath(); ctx.arc(r.x, r.y, 8 + r.R * e, 0, 6.3); ctx.stroke();
     });

@@ -2,7 +2,8 @@
 (function () {
   var sec = document.querySelector('.story'); if (!sec) return;
   var cv = sec.querySelector('.story__cv'), ctx = cv.getContext('2d');
-  var mobile = matchMedia('(max-width: 700px)').matches;
+  // Quadratische Frames (film/m) nur für Phones hochkant; quer (auch Phone quer) passen die 16:9-Frames (film/d)
+  var mobile = matchMedia('(max-width: 700px) and (orientation: portrait)').matches;
   var N = 218, FPS = 12, dir = mobile ? 'film/m/' : 'film/d/';
   var imgs = new Array(N), cur = 0, drawn = -1;
   function src(i) { return dir + String(i + 1).padStart(3, '0') + '.webp'; }
@@ -27,7 +28,8 @@
     var W = cv.width, H = cv.height, s = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
     ctx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h);
   }
-  function size() { var r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); draw(true); }
+  // Nur bei echter Größenänderung neu aufsetzen (canvas.width = … leert das Bild; mobil feuert resize schon beim Ein-/Ausblenden der Adressleiste)
+  function size() { var r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2), w = Math.round(r.width * d), h = Math.round(r.height * d); if (w === cv.width && h === cv.height && drawn >= 0) return; cv.width = w; cv.height = h; draw(true); }
   addEventListener('resize', size); size();
 
   var lines = [].slice.call(sec.querySelectorAll('.story__st')), words = sec.querySelector('.story__words'), mm = sec.querySelector('.story__mm b'), bar = sec.querySelector('.story__bar i');

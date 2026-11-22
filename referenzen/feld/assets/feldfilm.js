@@ -12,6 +12,20 @@
   var imgs = new Array(N);
   var want = 0, drawn = -1, progress = 0;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Fokus (0..1 der Bildbreite) je Frame: Füller, Akte, Raum, Fenster, Gespräch, Unterschrift */
+  var narrow = matchMedia('(max-width: 960px)');
+  var stacked = matchMedia('(max-width: 960px) and (orientation: portrait)'); /* Bild oben, Text darunter */
+  var focus = [[0, .45], [24, .52], [38, .7], [64, .7], [76, .5], [122, .52], [132, .55], [162, .56], [172, .6], [182, .72], [212, .72], [220, .63], [241, .63]];
+  function focusOf(f) {
+    for (var j = 1; j < focus.length; j++) {
+      if (f <= focus[j][0]) {
+        var a = focus[j - 1], b = focus[j], t = (f - a[0]) / Math.max(1, b[0] - a[0]);
+        t = t * t * (3 - 2 * t);
+        return a[1] + (b[1] - a[1]) * t;
+      }
+    }
+    return focus[focus.length - 1][1];
+  }
 
   function src(i) { return dir + String(i + 1).padStart(3, '0') + '.webp'; }
   function load(i) {
@@ -53,13 +67,19 @@
     var W = cv.width, H = cv.height;
     var s = Math.max(W / im.naturalWidth, H / im.naturalHeight);
     var w = im.naturalWidth * s, h = im.naturalHeight * s;
-    ctx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h);
+    var x = (W - w) / 2;
+    /* Hochformat (Handy/Tablet): Bildausschnitt folgt dem Motiv der Szene statt stur der Bildmitte */
+    if (narrow.matches && w > W + 1) x = Math.min(0, Math.max(W - w, W / 2 - focusOf(f) * w));
+    ctx.drawImage(im, x, (H - h) / 2, w, h);
   }
   function size() {
     var r = cv.getBoundingClientRect();
     var d = Math.min(devicePixelRatio || 1, 2);
-    cv.width = Math.round(r.width * d);
-    cv.height = Math.round(r.height * d);
+    var w = Math.round(r.width * d), h = Math.round(r.height * d);
+    /* Adressleiste ein/aus loest resize aus, die Buehne (svh) bleibt gleich gross: nicht neu anlegen */
+    if (w === cv.width && h === cv.height && drawn > -1) return;
+    cv.width = w;
+    cv.height = h;
     paint(true);
   }
   addEventListener('resize', size);
@@ -93,7 +113,8 @@
     paint(false);
     var stage = p * (stages.length - 1);
     stages.forEach(function (el, i) {
-      var o = Math.max(0, 1 - Math.abs(stage - i) * 1.35);
+      /* Hochformat (gestapelte Bühne): Texte nacheinander statt übereinander blenden; Querformat/Desktop wie gehabt */
+      var o = Math.max(0, 1 - Math.abs(stage - i) * (stacked.matches ? 2.1 : 1.35));
       el.style.opacity = String(o);
       el.style.transform = 'translate3d(0,' + ((i - stage) * 18) + 'px,0)';
       if (Math.round(stage) === i) el.removeAttribute('aria-hidden');

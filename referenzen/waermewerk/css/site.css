@@ -305,3 +305,65 @@ p{margin:0;text-wrap:pretty}
 .foot__legal{margin-top:48px;font-size:13px;color:var(--muted-d)}
 @media (max-width:700px){.foot__grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}[data-rv]{opacity:1;transform:none}}
+
+/* ===== Mobil/Tablet (2026-11): unterhalb der Desktop-Breakpoints (900px Navigation) oder Touch-Tablet; Desktop mit Maus unverändert ===== */
+@media (max-width:900px),(hover:none) and (pointer:coarse){
+ /* Tap-Ziele >= 44px: Trefferfläche per Padding + negativem Margin, Layout bleibt gleich */
+ .demo-bar a{display:inline-block;padding:12px 0;margin:-12px 0}
+ .logo{padding-block:14.5px;margin-block:-14.5px}
+ .menu summary{padding:10px 12px;margin-right:-12px}
+ .menu__panel{max-height:calc(100svh - 90px);overflow:auto}
+ .sl{height:44px;margin-block:-8px}
+ .ctrl__l label,.field label{padding-block:11px;margin-block:-11px}
+ .haus__list button{min-height:44px}
+ .ok input{width:20px;height:20px;margin-top:1px;flex:none}
+ .foot ul{gap:0}
+ .foot ul a{display:inline-flex;align-items:center;min-height:44px}
+ main>p:last-child>a{display:inline-block;padding-block:10px;margin-block:-10px}
+ /* Schrift >= 12px */
+ .viz__read dt{font-size:12px}
+}
+@media (max-width:900px){
+ /* 16:9-Loops im Hochformat: Motiv statt Bildmitte */
+ .hero__v{object-position:60% 50%}
+ .prinzip .bgv{object-position:72% 50%}
+ .anfrage .bgv{object-position:72% 50%}
+}
+@media (max-width:700px){
+ .hs{width:44px;height:44px;margin:-22px 0 0 -22px}.hs::before{inset:13px}
+ /* Querschnitt: Infokarte unter dem Bild statt darüber (verdeckte sonst Bild und Punkte); app.js setzt sie hinter die Bühne */
+ .haus__panel{position:relative;left:auto!important;top:auto!important;right:auto;bottom:auto;width:auto;margin-top:0;height:0;padding-block:0;border-width:0;overflow:hidden;visibility:hidden}
+ .haus__panel.on{margin-top:12px;height:auto;padding-block:20px;border-width:1px;visibility:visible}
+}
+/* Scroll-Film als gestapelte Bühne im Hochformat: Bild oben (Motiv per Fokuspunkt), Text darunter */
+@media (max-width:900px) and (orientation:portrait){
+ .film canvas{height:58%;bottom:auto}
+ .film__shade{background:linear-gradient(180deg,#0a141980 0%,#0a141900 22%,#0a141900 44%,#0a1419f2 58%,#0a1419 100%)}
+ .film__cap{left:var(--pad);right:calc(var(--pad) + 22px);top:calc(58% + clamp(20px,4svh,40px));bottom:auto;max-width:none}
+ .film__cap p{top:0;bottom:auto}
+ .film__cap strong{font-size:clamp(28px,7.6vw,44px)}
+ .film__bar{top:calc(58% + clamp(20px,4svh,40px));bottom:auto;height:clamp(90px,14svh,140px)}
+ .film__deg{top:84px}
+}
+/* Runde 2: Touch-Tablet quer (Desktop-Navigation sichtbar) – Navigationslinks 44px hoch */
+@media (min-width:901px) and (hover:none) and (pointer:coarse){.nav a:not(.btn){padding:12px 5px;margin:-12px -5px}.nav .btn--sm{min-height:46px}}
+/* 320 px: Bauart-Tabs passen in die Breite statt rechts abgeschnitten */
+@media (max-width:400px){.tabs__list{display:flex;width:100%}.tab{flex:1 1 0;padding:12px 6px;font-size:14px;min-height:46px}}
+/* Querformat-Handys (Höhe <= 500px): Film als Vollbild-Bühne mit kompakter Bildunterschrift, Bühnen passen in die Höhe */
+@media (orientation:landscape) and (max-height:500px) and (max-width:900px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
+ .hero h1{font-size:clamp(40px,12vh,56px)}
+ .hero__body{padding-top:92px}
+ .film__cap{right:auto;width:min(520px,56vw);max-width:none;bottom:24px}
+ .film__cap .kicker{margin-bottom:10px}
+ .film__cap strong{font-size:clamp(24px,7.6vh,32px)}
+ .film__deg{top:76px;font-size:clamp(30px,10vh,44px)}
+ .film__bar{bottom:24px;height:22vh}
+ .menu__panel a{padding:9px 14px}
+ .viz{min-height:calc(100svh - 90px)}
+ .viz__read{grid-template-columns:repeat(4,1fr)}
+ .viz__read div:nth-child(n){border-top:0;border-left:1px solid var(--line-d)}
+ .viz__read div:first-child{border-left:0}
+ .viz__read div{padding:10px 14px}
+ .haus__stage{max-width:calc((100svh - 96px) * 16 / 9);margin-inline:auto}
+ .ba{max-width:calc((100svh - 96px) * 4 / 3);width:100%;margin-inline:auto}
+}

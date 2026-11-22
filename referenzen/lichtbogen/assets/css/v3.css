@@ -431,3 +431,57 @@ html.out.film .shade{display:none}
 .nd-stage.hold .nd-re span{width:0;height:0;border:8px solid transparent;border-left:13px solid #fff;border-right:0;margin-left:4px}
 @media (min-width:860px){.nd-in{grid-template-columns:.85fr 1.15fr;gap:54px}}
 @media (prefers-reduced-motion:reduce){.nd-stage *{animation:none!important}.nd-check{stroke-dashoffset:0}.sc5 .w{fill:#ffc35a}}
+
+/* ===== Mobil-Optimierung 2026-11 (nur unter 720 px bzw. Touch/Tablet, Desktop unverändert) ===== */
+@media (max-width:719px){
+  /* Szene 1 hochkant: Film formatfüllend (cover) statt 16:9-Streifen mit schwarzen Flächen oben und unten.
+     Bühne ist 100svh hoch, der Film 2752:1536, also mindestens 179,17svh breit. */
+  .k-wrap{width:max(100vw,179.17svh)}
+  .vf-n{font-size:max(12px,5.6cqw)}
+  .cam-cnt{font-size:.9rem}
+  .arc-cap{font-size:.9rem;bottom:96px}
+}
+@media (max-width:1023px),(pointer:coarse){
+  /* Handy und Tablet (auch quer): kleine Beschriftungen mindestens 12 px */
+  [data-v="3"] .demo{font-size:.78rem;padding:6px 0}
+  .hint-scroll{font-size:.75rem}
+  .bsp{font-size:.75rem}
+}
+@media (min-width:720px) and (max-width:1023px){
+  /* Tablet hochkant: Aussage und Knöpfe untereinander, sonst ragt der Notdienst-Knopf aus der schmalen Spalte */
+  .hero-grid{grid-template-columns:1fr;gap:26px}
+  /* Kopfzeile: Lichtschalter ohne Beschriftung wie am Handy, damit Menü und Nummer einzeilig bleiben */
+  [data-v="3"] .head .lsw span{display:none}
+  [data-v="3"] .lsw{padding-left:6px}
+}
+@media (max-width:1199px){
+  /* Tablet: die drei Schritt-Karten tragen auch die Klasse .rv (Bewertungskarte, feste 360 px) und liefen bei 768 px
+     bis 1144 px aus dem Bild. Unter 1200 px füllen sie wieder ihre Rasterzelle. */
+  .grid3>.card.rv{width:auto}
+}
+@media (pointer:coarse){
+  /* Sucher-Beschriftung „Foto 1 von 3“ auch quer und am Tablet mindestens 12 px (der Sucher ist dort schmal) */
+  .vf-n{font-size:max(12px,5.6cqw)}
+  /* Auslöser im Sucher: mindestens 44 px */
+  .vf-shut{width:max(44px,19cqw);height:max(44px,19cqw);margin-left:calc(max(44px,19cqw) / -2)}
+  .lsw{height:44px}
+  .textbtn{min-height:44px}
+}
+
+/* ===== Runde 2: Handy quer (Touch, höchstens 500 px hoch) ===== */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  /* Szenentexte an die geringe Höhe koppeln, damit nichts über den Rand läuft */
+  .beat h1{font-size:min(17vw,30svh)}
+  .beat .big{font-size:min(8.4vw,15svh)}
+  /* Foto-Szene: Text links neben dem Handy, in seiner Spalte umbrechen statt unter das Polaroid zu laufen */
+  .cam-txt .beat{width:40%}
+  .cam-txt .big{font-size:clamp(1.45rem,4.2vw,3.5rem);-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+  .beat.low{bottom:8svh}
+  .arc-cap{bottom:16px}
+  .nd-stage{width:100%;max-width:min(100%,140svh);justify-self:center;margin-inline:auto}
+}
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse) and (max-width:719px){
+  /* Foto-Szene quer: Text links neben dem Handy wie am Desktop statt unten quer darüber */
+  .cam-txt .beat{left:20px;right:auto;width:38%;bottom:auto;top:50%;transform:translateY(-50%)}
+  .cam::before{left:0;right:auto;top:0;bottom:0;width:48%;height:auto;background:linear-gradient(90deg,rgba(6,9,18,.85),rgba(6,9,18,0))}
+}

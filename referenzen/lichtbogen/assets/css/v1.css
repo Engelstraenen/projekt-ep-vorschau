@@ -84,3 +84,18 @@
   .hs-card{left:32px;right:auto;bottom:32px;width:400px;padding:24px}
   .daynight{right:32px;top:24px}
 }
+
+/* ===== Mobil-Optimierung 2026-11 (nur Touch / unter 720 px, Desktop unverändert) ===== */
+@media (pointer:coarse){
+  .daynight{min-height:44px}
+  .hot-hit{fill:transparent}
+}
+
+/* ===== Runde 2: Handy quer (Touch, höchstens 500 px hoch): Karte links, Haus rechts (wie am Desktop), Karte passt in die Höhe ===== */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  .hs-card{left:max(12px,env(safe-area-inset-left));right:auto;top:auto;bottom:12px;width:min(46%,400px);max-height:calc(100svh - 24px);overflow:auto;padding:14px 16px 12px}
+  .hs-card h1{font-size:clamp(1.15rem,3.4vw,1.6rem);margin:6px 0}
+  .hs-card .muted{font-size:.9rem;line-height:1.45}
+  .hs-act{margin-top:10px}
+  .daynight{top:10px;right:10px}
+}

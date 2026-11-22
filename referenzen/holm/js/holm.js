@@ -1,9 +1,20 @@
 // HOLM & CO – Scroll-Regie: Lenis + GSAP ScrollTrigger. Ohne Skript bleibt die Seite vollständig lesbar.
 (function () {
+  // Mobiles Menü: nach Tipp auf einen Eintrag, mit Esc oder Tipp daneben schließen (sonst blieb es offen über der Seite)
+  var menu = document.querySelector('details.menu');
+  if (menu) {
+    var shut = function () { menu.removeAttribute('open'); };
+    menu.querySelectorAll('.menu__panel a').forEach(function (a) { a.addEventListener('click', shut); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.open) { shut(); menu.querySelector('summary').focus(); } });
+    document.addEventListener('click', function (e) { if (menu.open && !menu.contains(e.target)) shut(); });
+  }
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!window.gsap || !window.ScrollTrigger || reduce) return;
   document.documentElement.classList.add('gs');
   gsap.registerPlugin(ScrollTrigger);
+  // Touch/Tablet/Phone: Höhenänderungen durch die einblendende Adressleiste lösen kein Neu-Layout aus
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  var touchUI = matchMedia('(max-width: 1060px), (pointer: coarse)').matches, coarse = matchMedia('(pointer: coarse)').matches;
   if (window.Lenis) {
     var lenis = new Lenis({ lerp: .1, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
@@ -24,7 +35,22 @@
     });
     gsap.from('.hero h1 .ch', { yPercent: 110, rotate: 6, duration: 1.1, ease: 'expo.out', stagger: .035, delay: .15 });
   }
-  gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=90%', scrub: true, pin: true, pinSpacing: true } })
+  // Hero-Pin: Desktop mit Maus wie gehabt per GSAP-Pin. Touch/Tablet/Phone: derselbe gepinnte Effekt per CSS position:sticky
+  // (läuft im Compositor, kein Umschalten auf position:fixed per Skript, das bei nativem Touch-Scroll springt).
+  // Die Hülle .hero-pin samt 90svh Pin-Strecke (::after) steht in mobile-fix.css; die Hülle entsteht nur hier, also nur auf Touch/schmal.
+  var hero = document.querySelector('.hero'), heroST;
+  if (touchUI && hero) {
+    var heroWrap = document.createElement('div'); heroWrap.className = 'hero-pin';
+    hero.parentNode.insertBefore(heroWrap, hero); heroWrap.appendChild(hero);
+    // Ist der Hero höher als der Bildschirm (Querformat), klebt er mit der Unterkante am Bildschirmrand statt oben
+    var heroTop = function () { var t = Math.min(0, Math.round(window.innerHeight - hero.offsetHeight)); hero.style.setProperty('--hero-top', t + 'px'); return t; };
+    heroTop();
+    ScrollTrigger.addEventListener('refreshInit', heroTop);
+    heroST = { trigger: heroWrap, start: function () { return 'top ' + heroTop() + 'px'; }, end: function () { return '+=' + (heroWrap.offsetHeight - hero.offsetHeight); }, scrub: true, invalidateOnRefresh: true };
+  } else {
+    heroST = { trigger: '.hero', start: 'top top', end: '+=90%', scrub: true, pin: true, pinSpacing: true };
+  }
+  gsap.timeline({ scrollTrigger: heroST })
     .to('.hero__media', { clipPath: 'inset(7% 7% 12% 7% round 6px)', ease: 'none' }, 0)
     .to('.hero__media img', { scale: 1.12, ease: 'none' }, 0)
     .to('.hero h1 .ln:first-child', { xPercent: -14, ease: 'none' }, 0)
@@ -60,8 +86,18 @@
     var rail = document.querySelector('.rail');
     if (rail) {
       var dist = function () { return rail.scrollWidth - innerWidth; };
-      gsap.to(rail, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '.projekte', start: 'top top', end: function () { return '+=' + dist(); }, pin: true, scrub: true, invalidateOnRefresh: true } });
-      gsap.utils.toArray('.rail__img img').forEach(function (im) { gsap.fromTo(im, { xPercent: -8 }, { xPercent: 8, ease: 'none', scrollTrigger: { trigger: '.projekte', start: 'top top', end: function () { return '+=' + dist(); }, scrub: true } }); });
+      var railTrig = '.projekte', railPin = true, railWrap = null, proj = document.querySelector('.projekte');
+      if (coarse && proj) {
+        // Touch-Tablet quer (≥ 1061px): gleiche Fahrt, aber per CSS sticky statt GSAP-Pin (position:fixed per Skript springt bei Touch-Scroll)
+        railWrap = proj.parentNode.classList.contains('rail-pin') ? proj.parentNode : document.createElement('div');
+        if (!railWrap.parentNode) { railWrap.className = 'rail-pin'; proj.parentNode.insertBefore(railWrap, proj); railWrap.appendChild(proj); }
+        var setDist = function () { railWrap.style.setProperty('--rail-dist', Math.max(0, dist()) + 'px'); };
+        setDist(); ScrollTrigger.addEventListener('refreshInit', setDist);
+        railTrig = railWrap; railPin = false;
+      }
+      gsap.to(rail, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: railTrig, start: 'top top', end: function () { return '+=' + dist(); }, pin: railPin, scrub: true, invalidateOnRefresh: true } });
+      gsap.utils.toArray('.rail__img img').forEach(function (im) { gsap.fromTo(im, { xPercent: -8 }, { xPercent: 8, ease: 'none', scrollTrigger: { trigger: railTrig, start: 'top top', end: function () { return '+=' + dist(); }, scrub: true } }); });
+      if (railWrap) return function () { ScrollTrigger.removeEventListener('refreshInit', setDist); railWrap.style.setProperty('--rail-dist', '0px'); };
     }
   });
 

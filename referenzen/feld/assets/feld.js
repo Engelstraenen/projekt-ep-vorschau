@@ -67,7 +67,8 @@
     if (dock && erst) {
       var st = { h: true, e: false, f: false };
       var upd = function () { dock.classList.toggle('is-on', !st.h && !st.e && !st.f); };
-      var heroRow = $('.hero__cta') || $('.hero');
+      /* Handy/Tablet: Dock erst nach dem ganzen Hero (lag sonst auf flachen Bildschirmen über Überschrift und Lead) */
+      var heroRow = (matchMedia('(max-width: 960px), (hover: none) and (pointer: coarse)').matches ? $('.hero') : null) || $('.hero__cta') || $('.hero');
       if (heroRow) new IntersectionObserver(function (es) { st.h = es[0].isIntersecting; upd(); }).observe(heroRow);
       new IntersectionObserver(function (es) { st.e = es[0].isIntersecting; upd(); }).observe(erst);
       if (film) new IntersectionObserver(function (es) { st.f = es[0].isIntersecting; upd(); }, { rootMargin: '-10% 0px -10% 0px' }).observe(film);

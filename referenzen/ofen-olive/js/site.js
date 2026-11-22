@@ -49,12 +49,18 @@
     }
   };
 
+  // Touch: mit der festen Bühnenhöhe (100svh) rechnen statt mit innerHeight, damit die Adressleiste beim
+  // Ein- und Ausfahren die Blenden und Texte nicht springen lässt. Desktop bleibt bei innerHeight.
+  const touch = matchMedia('(hover: none), (pointer: coarse)').matches, stage = $('.stage', film);
+  let stableH = 0, lastW = innerWidth;
+  const measure = () => { stableH = stage ? stage.offsetHeight : 0; lastW = innerWidth; };
+  measure();
   let active = -1, ticking = false;
   const play = i => vids.forEach((v, k) => { if (Math.abs(k - i) <= 1) { if (v.paused) v.play().catch(() => {}); } else if (!v.paused) v.pause(); });
 
   function frame() {
     ticking = false;
-    const vh = innerHeight;
+    const vh = touch && stableH ? stableH : innerHeight;
     head.classList.toggle('is-solid', scrollY > vh * .6);
     let cur = 0;
     chs.forEach((ch, i) => {
@@ -70,7 +76,8 @@
     if (cur !== active) { active = cur; play(cur); rail.forEach((li, k) => li.classList.toggle('is-on', k === cur)); film.dataset.side = sides[cur]; }
   }
   const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
-  addEventListener('scroll', req, { passive: true }); addEventListener('resize', req);
+  addEventListener('scroll', req, { passive: true });
+  addEventListener('resize', () => { if (touch && innerWidth === lastW) return; measure(); req(); });
   frame();
 
   // Hintergrund-Videos ausserhalb des Films erst bei Sichtbarkeit starten
@@ -78,4 +85,30 @@
   $$('video[data-lazy]').forEach(v => io.observe(v));
   // Film pausieren, wenn nicht sichtbar
   new IntersectionObserver(([e]) => { if (!e.isIntersecting) vids.forEach(v => v.pause()); else play(active); }).observe(film);
+
+  // Mobilmenü (Knopf ist nur unter 820 px sichtbar): öffnet die Hauptnavigation als Liste, schließt per Link, Esc oder Tipp daneben
+  const burger = $('.head__burger'), nav = $('#hauptnav');
+  if (burger && nav && head) {
+    const isOpen = () => head.classList.contains('is-menu');
+    const set = open => { head.classList.toggle('is-menu', open); burger.setAttribute('aria-expanded', String(open)); burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen'); };
+    burger.addEventListener('click', () => set(!isOpen()));
+    nav.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+    addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen()) { set(false); burger.focus(); } });
+    document.addEventListener('click', e => { if (isOpen() && !head.contains(e.target)) set(false); });
+    matchMedia('(min-width: 821px)').addEventListener('change', e => { if (e.matches) set(false); });
+  }
+
+  // Wenig Höhe am Touch-Gerät (Handy quer, kleine Handys bis 700 px Höhe): Kopf beim Runterscrollen ausblenden,
+  // beim Hochscrollen zeigen, damit Film, Builder und Reservierung die Höhe fast ganz bekommen
+  const quer = matchMedia('(pointer: coarse) and (max-height: 700px)');
+  if (head) {
+    let lastY = scrollY;
+    addEventListener('scroll', () => {
+      const y = scrollY;
+      if (!quer.matches || head.classList.contains('is-menu') || y < 80) { head.classList.remove('is-hidden'); lastY = y; return; }
+      if (Math.abs(y - lastY) < 8) return;
+      head.classList.toggle('is-hidden', y > lastY);
+      lastY = y;
+    }, { passive: true });
+  }
 })();
