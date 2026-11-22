@@ -42,3 +42,10 @@
 @media (max-width:360px){
 .tabbar a span{letter-spacing:-.02em}
 }
+/* Tablet hochkant (600-899px): App-Inhalt auf 680px Breite begrenzt und mittig (sonst wurden Court-Kacheln und Karten
+   riesig hochskaliert); Kopfbild, Hintergrund und Tab-Leiste bleiben vollflaechig */
+@media (min-width:600px) and (max-width:899px){
+.scr{max-width:680px;margin-inline:auto}
+.shead.has-img{margin-inline:calc((680px - 100vw) / 2 - var(--pad));padding-inline:calc((100vw - 680px) / 2 + var(--pad))}
+.shead.has-img .me-btn{right:calc((100vw - 680px) / 2 + var(--pad))}
+}

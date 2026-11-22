@@ -1,5 +1,5 @@
 // FLUTLICHT 27 App: einfacher Offline-Speicher. Seiten zuerst aus dem Netz, Dateien zuerst aus dem Speicher.
-const CACHE = "fl27-app-v2"; // v2: Mobil-Check 2026-11 (CSS-Chunk geaendert)
+const CACHE = "fl27-app-v3"; // v3: Mobil-Check 2026-11 Runde 2 (CSS-Chunk geaendert)
 self.addEventListener("install", (e) => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then((c) => c.addAll(["./", "./manifest.webmanifest"]).catch(() => {}))); });
 self.addEventListener("activate", (e) => { e.waitUntil(caches.keys().then((k) => Promise.all(k.filter((n) => n !== CACHE).map((n) => caches.delete(n))))); self.clients.claim(); });
 self.addEventListener("fetch", (e) => {
