@@ -337,6 +337,9 @@ body[data-page="foto-check"] .fab-foto{display:none}
   .fc .stats div{padding:18px 16px}
   .fc .stats b{font-size:38px}
   .foot-grid p a{display:inline-block;padding:11px 0;min-width:44px}
+  .kontakt-direct a{padding:18px 16px;gap:10px}
+  .kontakt-direct .kd{min-width:0}
+  .kontakt-direct b{display:block;font-size:clamp(20px,6vw,28px);overflow-wrap:anywhere}
   /* Fester Foto-Knopf unten: Inhalte der gepinnten Szenen frei halten */
   .story.on .fl-stage{padding-bottom:76px}
   .fl-hint{bottom:80px}
