@@ -307,3 +307,197 @@ Screenshots (390 px) liegen im selben Ordner.
   - `sw.js`: Cache-Name auf `fl27-app-v2`, damit niemand die alte CSS aus dem Offline-Speicher bekommt.
 - **Geprüft:** 2/10 → 0/0 bei 360–768; alle 5 Tabs, Court-Ansicht und Bestellleiste geprüft. Desktop: Layout identisch.
 
+
+
+---
+
+## Runde 2 (Vorgaben des Inhabers): alle Handyformate und gewollte Effekte
+
+Geprüft wurde jede Seite in 14 Viewports:
+- Handy hochkant: 320×568, 360×640, 375×667, 390×844, 414×896, 430×932
+- Handy quer: 568×320, 667×375, 844×390, 932×430
+- Tablet: 768×1024, 820×1180, 1024×768, 1180×820 (Touch)
+
+Gewollte Effekte bleiben auch mobil erhalten. Wo in Runde 1 ein Effekt auf Touch abgeschaltet, ersetzt oder abgeschwächt war, ist er wiederhergestellt und stattdessen die Ursache behoben. Maus-only bleiben nur reine Hover-Effekte, die schon im Original an eine Maus gebunden waren.
+
+### Runde 2 – holm, quartier (alle Formate, Effekte erhalten)
+Alle 8 Seiten in allen 14 Viewports (112 Läufe): kein seitliches Scrollen, 0 Tippflächen < 44 px, 0 Texte < 12 px, keine Fehler. Desktop mit Maus: holm pixelgleich, quartier mit identischem Layout-Snapshot.
+
+**holm**
+- **Vorher:**
+  - 1180×820 (Touch-Tablet quer): 2723 px breit, verursacht durch die Galerie-Spur und die Laufschrift; 11–16 Tippflächen zu klein.
+  - Quer: Hero höher als der Bildschirm (460 bzw. 533 px), Überschrift und Buttons halb unter der Kopfzeile; Menü-Panel unter der Bildkante.
+  - 320 px: Logo zweizeilig, „Räuchereiche“ zu breit für die Kachel.
+- **Effekt wiederhergestellt:** Der Hero-Pin, in Runde 1 auf Touch durch einen Scrub ersetzt, ist auf Phone, Tablet und Touch quer wieder gepinnt. Strecke und Timeline sind gleich, umgesetzt per CSS `position:sticky` mit Strecke in `svh`, damit die Adressleiste nichts verschiebt. Der Galerie-Pin auf Touch-Tablets quer läuft ebenfalls per sticky. Mit Maus bleibt der GSAP-Pin.
+- **Geändert:**
+  - `js/holm.js` und `js/holmfilm.js`: Quer kommen die 16:9-Frames.
+  - `mobile-fix.css`: Sticky-Regeln, Touch-Tablet-Regeln, Block bis 374 px, Querformat-Block (Hero zweispaltig mit 100svh, Film vollflächig mit Text auf Verlauf).
+
+**quartier**
+- **Vorher:**
+  - Quer: Hero-Überschrift und Kopf der Etagenliste unter der Kopfzeile, also unerreichbar.
+  - 320/360 px: Kopf der Etagenliste unter der Kopfzeile, Fußzeilen-Schriftzug abgeschnitten.
+- **Geändert** (`mobile-fix.css`): Querformat-Block mit zweispaltiger Etagenliste, die notfalls in sich scrollt. Unter 760 px ist die Etagenliste auf den Platz unter der Kopfzeile begrenzt; kleine Phones bekommen einen kräftigeren Verlauf hinter dem Hero-Text.
+- **Effekte:** Nichts abgeschaltet. Die Kamera-Parallaxe war schon im Original nur für die Maus.
+- **Offen:** Quer können die Beschriftungen der Lage-Karte an die Kopfzeile stoßen (dekorativ).
+
+### Runde 2 – feld, alma, waermewerk (alle Formate, Effekte erhalten)
+12 Seiten × 14 Viewports = 168 Läufe ohne Befund. Die einzige Meldung ist das unsichtbare Screenreader-Label des Vorher/Nachher-Reglers bei waermewerk. Desktop mit Maus: geometrisch identisch und pixelgleich.
+
+**feld**
+- **Vorher:**
+  - 320 px: Partnerkarten 5 px zu breit, rechte Footer-Spalte abgeschnitten (von `overflow:hidden` verdeckt).
+  - Quer 568/667: Die gestapelte Film-Bühne war nur 186 px hoch, Text gequetscht.
+  - 844×390: Hero-Chips über der Überschrift; „Fragen“ und „Erstgespräch“ im Menü nicht erreichbar.
+  - Touch-Tablets: 25 Tippflächen zu klein, 4 Texte mit 11 px.
+- **Geändert:**
+  - `feld.css`: Tipp- und Schrift-Regeln auch für Touch-Tablets, Menü scrollbar, quer der Film als kompakte Vollbild-Bühne, 320 px Footer einspaltig.
+  - `feldfilm.js` und `feld.js`: kleinere Anpassungen.
+- **Effekte wiederhergestellt:**
+  - Die Hero-Chips (in Runde 1 bis 700 px ausgeblendet) sind mit ihrer Animation zurück.
+  - Quer und am Desktop läuft wieder die Original-Choreografie der Kapiteltexte mit überlappender Überblendung.
+
+**alma**
+- **Vorher:**
+  - Quer 844/932: Desktop-Layout auf 390 px Höhe; Überschrift über dem Logo, HUD über dem Text, 16 Tippflächen und bis zu 41 Texte zu klein.
+  - Quer 568/667: 9:16-Frames quer zugeschnitten.
+  - 820×1180 (Tablet hochkant): Text und HUD überlappten.
+  - Unterseiten quer: Menüpunkte 4–6 nicht erreichbar.
+- **Geändert:**
+  - `v3.css`: Querformat-Layout (Text links, Probe und HUD rechts). Tablets hochkant nutzen das Hochformat-Layout, Touch-Tablets bekommen Mindestgrößen.
+  - `v3.js`: quer 16:9-Frames, Probe je nach Layout platziert.
+- **Effekt wiederhergestellt:** Die Probe wird nie mehr ausgeblendet, höchstens auf 42 % verkleinert. Schweben, Morph und HUD-Animationen laufen unverändert.
+- **Offen:** Quer lädt alma die 1920er-Frames (etwa 50 MB statt 21 MB); ein eigener Querformat-Satz mit etwa 1280 px wäre sparsamer.
+
+**waermewerk**
+- **Vorher:**
+  - Quer: Film gestapelt bzw. Bildunterschrift unter dem Kopf; Menü, Querschnitt und Vorher/Nachher höher als der Bildschirm.
+  - 320 px: Tab „Hybrid“ abgeschnitten.
+  - Touch-Tablets: 28 Tippflächen zu klein.
+- **Geändert** (`site.css`): Gestapelter Film nur hochkant, quer wieder Vollbild-Film; Menü kompakt; Querschnitt passt in die Höhe; 320 px Tabs passen; Touch-Tablet-Regeln.
+- **Effekte wiederhergestellt:**
+  - Hover-Versatz der Leistungsliste beim Antippen wie im Original.
+  - Infokarte animiert wieder.
+  - Schnee unverändert.
+  - Maus-only, wie im Original: Wärmebild-Linse, Video-Vorschau und Parallaxe im Querschnitt.
+
+### Runde 2 – lichtbogen, ofen-olive, ofen-olive-app (alle Formate, Effekte erhalten)
+17 Seiten in allen 14 Viewports: kein Querscrollen, Tippflächen ≥ 44 px, Schrift ≥ 12 px. Ausnahme ist nur ein Link im Fließtext der Datenschutz-Seite. Desktop mit Maus: 0 Abweichungen.
+
+**lichtbogen**
+- **Vorher:**
+  - Handy quer: Kopfzeile (115 px) und Anrufleiste (ca. 68 px) ließen nur etwa 140 px für Inhalt, Szenentexte lagen unter dem Kopf.
+  - Haus quer: Die Karte verdeckte die Bühne.
+  - Rechner quer: Das PV-Bild klebte über dem ganzen Bildschirm.
+  - Foto-Szene quer: Der Text lief über das Handy.
+  - Touch quer: „Foto 3 von 3“ nur 5,7–9,9 px groß.
+  - 320 px: Pille „Jobs“ angeschnitten; Haus-Schalter 40 px.
+- **Effekt wiederhergestellt:** Der Intro-Zoom ist wieder ×2,0 wie im Original (in Runde 1 auf ×1,15 reduziert). Das Hochformat bleibt gefüllt, der Zoom-Mittelpunkt wandert hochkant mit dem Hauptschalter. Die Hover-Unterdrückung aus Runde 1 ist entfernt.
+- **Geändert:**
+  - `style.css`, Querformat: Kopfzeile scrollt mit weg, Anrufleiste als zwei runde Knöpfe.
+  - `style.css`, 320 px: Pillen-Leiste einzeilig.
+  - `v3.css`: Szenentexte an die Höhe gekoppelt; Foto-Szene quer mit Text links.
+  - `v1.css`/`v1.js`: Haus quer mit Karte links und Haus rechts; Schalter-Trefferflächen 44 px bei 320.
+  - Cache-Version erneut hochgezählt.
+- **Offen:** Hochkant wirkt das Schlussbild bei ×2 weich (nur 13 % der Filmbreite des 1280er-Videos). Die eigentliche Lösung ist der 9:16-Render.
+
+**ofen-olive**
+- **Vorher:**
+  - 320 px: 337 px breit (Gerichtnamen, Personen-Zähler, „Weiter“-Buttons); Builder-Knopf zeigte nur „In den …“.
+  - Handy quer: Kopf 118–123 px hoch; das offene Menü war 380 px hoch bei 320 px Bildschirm, „Liefergebiet“ unerreichbar. Die Builder-Bühne war höher als der Bildschirm.
+- **Geändert:**
+  - `site.css`: quer Kopf mit Menü-Knopf, offenes Menü zweispaltig und scrollbar.
+  - `site.js`: Kopf blendet sich auf niedrigen Touch-Screens beim Runterscrollen aus.
+  - `builder.css`: quer Pizza links und Belag rechts; der Zutaten-Flug bleibt im Bild.
+  - `reservierung.css`: Zähler bei 320 px unter der Beschriftung.
+- **Effekte:** Nichts abgeschwächt.
+- **Offen:** Bei 320×568 überlappt der Bestellknopf beim Start leicht „Tisch reservieren“.
+
+**ofen-olive-app**
+- **Vorher:**
+  - 932×430: Handy-Attrappe nur 306 px hoch.
+  - Quer: „Zurück zur App“ unter der Kante; Kopfbild höher als der Bildschirm.
+  - 320 px: Zähler und Knöpfe abgeschnitten.
+- **Geändert** (`app.css`): Quer randlos, Kopfbild höchstens 62 % der Höhe, Sperrbildschirm zweispaltig.
+- **Geprüft:** Ablauf bei 320×568, 568×320 und 932×430 durchgespielt.
+
+### Runde 2 – warmherz, volta, lumen (alle Formate, Effekte erhalten)
+Matrix nach den Fixes: 24 Seiten × 14 Viewports = 336 Läufe. Ergebnis: 0 × horizontales Scrollen, 0 Tippflächen < 44 px, 0 Texte < 12 px, keine Fehler. Einzige Meldung ist ein Fehlalarm (1-px-Screenreader-Label bei volta). Desktop 1440 mit Maus: 0 Abweichungen.
+
+**warmherz**
+- **Vorher:**
+  - 320 px: index 324 px breit (schräges Handy-Mockup), bad 323 px („Ansprechpartner.“ in 40-px-Schrift), Hotspots 41 px.
+  - Handy quer: Kopf-, Förder- und Foto-Leisten belegten über die Hälfte der Höhe. Die Hero-Überschrift lag über den Gesichtern, die Temperatur im Scroll-Video unter dem Kopf. In den Scroll-Geschichten lag die Schrittleiste über dem Text.
+  - Tablet quer: foto-check 1043 px breit.
+- **Geändert:**
+  - `pages.css`, Querformat-Block: Förder-Chip und Foto-Knopf als kleine Pillen, Hero-Foto als Band, Scroll-Geschichten zweispaltig in Bühnenhöhe.
+  - `pages.css`, Block bis 380 px: Silbentrennung, kleinere Überschriften.
+  - `pages.css`: Grid-Spalten dürfen schrumpfen.
+  - `app.js`: Hotspot-Tippfläche r = 51 (≥ 44 px auch bei 320).
+- **Effekte wiederhergestellt:**
+  - Das Wärmebild im Hero folgt wieder dem Finger.
+  - Der „Scrollen“-Hinweis im Scroll-Video ist mobil wieder sichtbar.
+  - Maus-only bleiben nur die Kipp-Karten, wie im Original.
+
+**volta**
+- **Vorher:**
+  - 320 px: Chips über der Überschrift, Board-Kärtchen abgeschnitten.
+  - Quer: Szenenbilder höher als der Bildschirm, Menü-Panel 200 px hoch.
+- **Effekt wiederhergestellt:** Das Scroll-Spulen von `ot.mp4` läuft auch auf Handy und Tablet wieder, die Schleife ist entfernt. Behoben ist die Ursache des Ruckelns:
+  - Neue Datei `film/ot-m.mp4`: 1280×720, Schlüsselbild alle 6 Bilder (41 statt 1 auf 242), keine B-Frames, 3,4 MB, SSIM 0,98. Sie wird per `<source media="(max-width:1000px), (hover:none)">` gewählt, der Desktop lädt unverändert `ot.mp4`.
+  - Suchsprünge sind gebündelt.
+  - Messung bei 390 px mit 4× gedrosselter CPU:
+
+    | | Ø Suchsprung | max. Suchsprung | gezeigte Bilder | Rückstand |
+    |---|---|---|---|---|
+    | alt | 367 ms | 1,26 s | 22 | 0,41 s |
+    | neu | 57 ms | 0,44 s | 51 | 0,02 s |
+
+- **Weiter geändert:** Chips als Statuszeile unter der Uhr, Szenenbilder quer 16:9, Menü-Panel bis 100svh − 90 px.
+- **Offen:** Die Astro-Quelle braucht dieselben Änderungen.
+
+**lumen**
+- **Vorher:** Der 4:5-Hero-Rahmen war im Querformat 710 px hoch bei 320 px Bildschirm (568×320) bzw. 433 px (844×390).
+- **Geändert:** Hero-Rahmen quer bildschirmhoch mit Fokus auf den Baum; Termin-Karte über der Dock-Leiste.
+- **Effekte:** Auf Touch war nichts abgeschaltet; alle Effekte laufen mobil.
+
+### Runde 2 – nivora, flutlicht27, flutlicht27-app (alle Formate, Effekte erhalten)
+Volle Matrix mit 14 Viewports über 9 Seiten (flutlicht27, App, nivora Start, Shop, Kollektionen „alle“ und „kinder“, glacier-shell, apex-88, touring-pack). Ergebnis: kein horizontales Scrollen, 0 Tippflächen < 44 px, 0 Texte < 12 px. Desktop mit Maus unverändert.
+
+**nivora**
+- **Vorher:**
+  - 820/844 px (zwischen den Umbrüchen der Seite): 3–12 Tippflächen zu klein.
+  - 932×430 und Tablet quer mit Touch: Desktop-Layout mit bis zu 88 Tippflächen und 170 Texten unter 12 px (bis 3 px).
+  - Quer: Abschnitts-Navigation über Kopfzeile und Warenkorb; Menüs endeten unter der Bildschirmkante.
+  - 320 px: „Jetzt entdecken“ lag unter dem Demo-Hinweis.
+- **Geändert:**
+  - Mindestgrößen gelten jetzt auch für Touch-Geräte (`(pointer:coarse)`), mit Maus bleibt das Aussehen gleich.
+  - Quer: Abschnitts-Navigation als Leiste unten rechts, Demo-Hinweis kompakt, Menüs scrollen.
+  - 320–380 px: Navigation in voller Breite; das aktive Kapitel wird in den sichtbaren Bereich gescrollt.
+- **Effekte:** Nichts abgeschaltet. Die Hover-Füllung der „+“-Schnellauswahl ist wiederhergestellt.
+- **Offen:**
+  - Der Farbring der Brille wechselt auf Touch-Geräten sofort statt mit 0,2 s Überblendung.
+  - Bei 568×320 verdecken Demo-Hinweis und Leiste etwa 60 px.
+  - „In die Tasche“ steht am Desktop weiterhin 25 px versetzt (schon vorher so, nicht angefasst).
+
+**flutlicht27**
+- **Vorher:**
+  - 320×568: Seitenbreite 347 px.
+  - Touch quer: 20 Tippflächen und 16 Texte zu klein.
+  - Quer: Überschriften unter der Kopfzeile, Match-Szene gestaucht, Schläger-Karten von der Leiste geschnitten.
+- **Geändert:**
+  - Quer: Überschriften unter der Kopfzeile, Match-Szene neu verteilt, Schläger-Karten waagerecht, Menü scrollt.
+  - 320–374 px: Kopfzeile, Titel und Listen in der Breite angepasst.
+  - Touch-Tablets: Tippflächen 44 px, Schrift ab 12 px.
+- **Effekte:** Scrubbing, Pin, Videos, Schläger-Fahrt und Match-Animation sind unverändert.
+
+**flutlicht27-app**
+- **Vorher:**
+  - 932×430: Telefon-Rahmen nur 350 px hoch.
+  - Tablet hochkant: Handy-Layout riesig hochskaliert.
+  - Touch quer: 2 Tippflächen und 11 Texte zu klein.
+- **Geändert:**
+  - Touch quer über 900 px: App randlos.
+  - Tablet hochkant: Inhalt auf 680 px Breite begrenzt und mittig.
+  - Service-Worker-Cache auf `fl27-app-v3`.
+
