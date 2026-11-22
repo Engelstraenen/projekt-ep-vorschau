@@ -186,3 +186,29 @@
   .bz__minus{width:44px;height:44px;top:calc(-.1rem - 16px);right:calc(50% + 1rem - 8px);border-radius:0;
     background:radial-gradient(circle at calc(100% - 18.4px) calc(100% - 17.6px),var(--bz-ink) 0 10.4px,transparent 11px);place-items:center;padding:16px 8px 7.2px 15.2px;font-size:.85rem}
 }
+
+/* ===== Runde 2: Handy quer (Touch, höchstens 500 px hoch): Pizza links (klebt), Belag rechts.
+   So bleibt der Flug jeder Zutat aus ihrem Feld auf den Teig im Bild, statt dass die Pizza die ganze Höhe belegt ===== */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  .bz{display:grid;grid-template-columns:minmax(0,46%) minmax(0,1fr);column-gap:1.2rem;row-gap:.9rem;align-items:start}
+  .bz__head{grid-column:1/-1}
+  .bz__top{grid-column:1;grid-row:2/span 3;position:sticky;top:var(--bz-top,0px);margin:0;padding:.3rem 0 .5rem;background:none;box-shadow:none;border-radius:0;gap:.8rem}
+  .bz__sec{grid-column:2}
+  .bz__stage{width:min(100%,calc(100svh - 190px));margin-bottom:2.6rem}
+  .bz__grid,.bz__grid--sauce{grid-template-columns:repeat(auto-fill,minmax(84px,1fr))}
+  .bz__dock{gap:.45rem}
+  .bz__reset{padding:0 .8rem}
+  .bz__cta{padding:0 .9rem;gap:.5rem;font-size:.92rem}
+}
+
+/* ===== Runde 2: kleine Handys hochkant (bis 700 px Höhe): klebende Pizza-Bühne kleiner, damit unter ihr noch Belag-Felder sichtbar sind ===== */
+@media (pointer:coarse) and (max-height:700px) and (orientation:portrait){
+  .bz__stage{width:min(100%,300px,26svh);margin-bottom:3rem}
+  .bz__top{gap:.7rem}
+}
+/* ===== Runde 2: 320 px: Ofen-Knopf behält seine Beschriftung ===== */
+@media (max-width:359px){
+  .bz__dock{gap:.45rem}
+  .bz__reset{padding:0 .8rem}
+  .bz__cta{padding:0 .9rem;gap:.5rem;font-size:.92rem}
+}

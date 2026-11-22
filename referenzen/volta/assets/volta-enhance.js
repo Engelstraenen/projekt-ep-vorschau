@@ -5,10 +5,12 @@
   var vid = document.querySelector('.day__vid');
   var neon = document.querySelectorAll('[data-neon]');
   var scenes = document.querySelectorAll('.day .scene');
-  /* Mobil-Check 11/2026: gestapelter Tag (≤1000 px) bzw. Touch ohne Maus -> Film läuft als Schleife statt
-     per Scroll gespult zu werden (ot.mp4 hat nur ein Schlüsselbild, Spulen ruckelt auf Handys stark). */
+  /* Mobil-Check 11/2026: Der Film wird auch auf Handy/Tablet per Scroll gespult (gewollter Effekt).
+     Ursache des Ruckelns war ot.mp4 mit nur einem Schlüsselbild auf 242 Bilder: Handy/Touch laden über
+     <source media> die Fassung film/ot-m.mp4 (Schlüsselbild alle 6 Bilder); Suchsprünge werden gebündelt,
+     damit der Decoder nicht hinterherläuft. Desktop mit Maus: unverändert. */
   var stacked = matchMedia('(max-width: 1000px)');
-  var touchPlay = matchMedia('(max-width: 1000px), (hover: none)');
+  var touch = matchMedia('(max-width: 1000px), (hover: none)');
   var film = day && day.querySelector('.day__film');
   var track = day && day.querySelector('.day__track');
   var neonWrap = document.querySelector('.day__neon');
@@ -16,6 +18,8 @@
   /* Motion chips over day */
   if (day && !reduce) {
     var pin = day.querySelector('.day__pin');
+    var head = day.querySelector('.day__head'), chipRow = null;
+    if (stacked.matches && head) { chipRow = document.createElement('div'); chipRow.className = 'mg-row'; chipRow.setAttribute('aria-hidden', 'true'); head.appendChild(chipRow); }
     if (pin) {
       [['Tour live', '12%', '22%'], ['Route baut', 'auto', '18%'], ['Team Nord', '70%', '28%']].forEach(function (c, i) {
         var el = document.createElement('span');
@@ -24,8 +28,8 @@
         el.style.top = c[2];
         if (c[1] === 'auto') el.style.right = '8%'; else el.style.left = c[1];
         el.style.opacity = '0';
-        // gestapelt: Chips schweben im Film-Bühnenbild (hinter den Karten), nicht quer über der langen Kartenliste
-        (stacked.matches && film ? film : pin).appendChild(el);
+        // gestapelt: Chips als Statuszeile unter der Uhr (sonst über Titel/Karten der langen Kartenliste)
+        (stacked.matches && chipRow ? chipRow : pin).appendChild(el);
         requestAnimationFrame(function () {
           el.style.transition = 'opacity .7s cubic-bezier(.23,1,.32,1) ' + (0.2 + i * 0.12) + 's, transform .7s cubic-bezier(.23,1,.32,1) ' + (0.2 + i * 0.12) + 's';
           el.style.opacity = '1';
@@ -53,18 +57,24 @@
     }
     return 0.5;
   }
-  var focusRaf = 0;
-  function focusLoop() {
-    focusRaf = 0;
-    if (!vid || !touchPlay.matches) return;
+  function frame(t) {
     var portrait = vid.clientWidth / Math.max(1, vid.clientHeight) < 1;
-    vid.style.objectPosition = portrait ? (focalAt(vid.currentTime || 0) * 100).toFixed(1) + '% 50%' : '';
-    if (!vid.paused) focusRaf = requestAnimationFrame(focusLoop);
+    vid.style.objectPosition = portrait ? (focalAt(t) * 100).toFixed(1) + '% 50%' : '';
+  }
+  /* Touch: immer nur ein Suchsprung gleichzeitig; das jeweils neueste Ziel folgt nach 'seeked' */
+  var want = -1;
+  function seek() {
+    if (want < 0 || !touch.matches) return;
+    frame(want);
+    if (vid.seeking || Math.abs(vid.currentTime - want) < 1 / 48) return;
+    try { vid.currentTime = want; } catch (e) {}
   }
 
   function scrub(p) {
-    if (vid && vid.duration && !reduce && !touchPlay.matches) {
-      try { vid.currentTime = Math.max(0, Math.min(vid.duration - 0.05, p * vid.duration)); } catch (e) {}
+    if (vid && vid.duration && !reduce) {
+      var t = Math.max(0, Math.min(vid.duration - 0.05, p * vid.duration));
+      if (touch.matches) { want = t; seek(); }
+      else { try { vid.currentTime = t; } catch (e) {} }
     }
     neon.forEach(function (n, i) {
       var on = p > 0.55 + i * 0.1;
@@ -96,18 +106,17 @@
     if (vid) {
       vid.addEventListener('loadedmetadata', measure);
       vid.pause();
-      /* Touch/gestapelt: stumme Schleife, läuft nur sichtbar */
       if (!reduce) {
+        vid.addEventListener('seeked', seek);
+        /* iOS lädt trotz preload keine Bilddaten, bis das Video einmal lief: beim Annähern kurz anspielen und anhalten */
+        var primed = false;
         var filmIo = new IntersectionObserver(function (es) {
-          var vis = es[0].isIntersecting;
-          if (touchPlay.matches && vis) { vid.loop = true; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); }
-          else if (touchPlay.matches) vid.pause();
-        }, { threshold: 0.05 });
+          if (!es[0].isIntersecting || primed || !touch.matches) return;
+          primed = true;
+          if (vid.readyState < 2) { var pr = vid.play(); if (pr && pr.then) pr.then(function () { vid.pause(); measure(); }).catch(function () {}); }
+        }, { rootMargin: '400px 0px' });
         filmIo.observe(day);
-        vid.addEventListener('play', function () { if (!focusRaf) focusRaf = requestAnimationFrame(focusLoop); });
-        vid.addEventListener('seeked', function () { if (!focusRaf) focusRaf = requestAnimationFrame(focusLoop); });
-        if (touchPlay.addEventListener) touchPlay.addEventListener('change', function (m) { if (!m.matches) { vid.pause(); vid.loop = false; vid.style.objectPosition = ''; measure(); } });
-        focusLoop();
+        if (touch.addEventListener) touch.addEventListener('change', function (m) { if (!m.matches) { want = -1; vid.style.objectPosition = ''; } measure(); });
       }
     }
     measure();

@@ -227,3 +227,71 @@ body.rz-near .fab{opacity:0;transform:translateY(12px);pointer-events:none}
   .kn a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
   .foot a{display:inline-flex;align-items:center;min-height:44px}
 }
+
+/* ===== Runde 2: Handy quer (Touch, höchstens 500 px hoch). Desktop mit Maus ist nie betroffen ===== */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  /* Kopf wie am Handy (Menü-Knopf statt Desktop-Menü) und beim Runterscrollen ausgeblendet, beim Hochscrollen wieder da */
+  :root{--bar:44px}
+  .head{flex-wrap:wrap;row-gap:.4rem;padding-block:.35rem}
+  .head.is-solid{padding-block:.35rem}
+  .head__logo{display:flex;align-items:center;min-height:44px}
+  .head__nav,.head__cta{display:none}
+  .fab{display:block}
+  .head__burger{display:grid;place-items:center;flex:none;width:44px;height:44px;margin-left:auto;padding:0;border-radius:50%;border:1px solid rgba(243,235,221,.4);background:rgba(28,26,23,.5);color:var(--creme);cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .head__burger span,.head__burger span::before,.head__burger span::after{display:block;width:18px;height:1.5px;border-radius:2px;background:currentColor;transition:transform .25s var(--ease-out),opacity .2s}
+  .head__burger span{position:relative}
+  .head__burger span::before,.head__burger span::after{content:"";position:absolute;left:0}
+  .head__burger span::before{top:-6px}
+  .head__burger span::after{top:6px}
+  .head.is-menu .head__burger span{background:transparent}
+  .head.is-menu .head__burger span::before{transform:translateY(6px) rotate(45deg);background:var(--creme)}
+  .head.is-menu .head__burger span::after{transform:translateY(-6px) rotate(-45deg);background:var(--creme)}
+  .head.is-menu{background:rgba(28,26,23,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding-bottom:.6rem}
+  /* offenes Menü passt in die geringe Höhe: zweispaltig und notfalls scrollbar */
+  .head.is-menu .head__nav{display:grid;grid-template-columns:1fr 1fr;column-gap:1.5rem;order:3;flex-basis:100%;margin:0;font-size:1.05rem;max-height:calc(100svh - var(--bar) - 70px);overflow-y:auto;overscroll-behavior:contain}
+  .head.is-menu .head__nav a{display:flex;align-items:center;justify-content:flex-start;min-height:48px;opacity:1;border-bottom:1px solid rgba(243,235,221,.14)}
+  .head.is-menu .head__nav a::after{display:none}
+  /* Filmtexte: an die Höhe gekoppelt, damit Karte und Gericht zusammen ins Bild passen */
+  .display{font-size:min(5.2vw,10svh)}
+  /* Startbild: beim Laden unter dem sichtbaren Kopf beginnen, beim Scrollen (Kopf weg) direkt unter der Hinweisleiste kleben */
+  .ch--hero{padding-top:calc(var(--bar) + 64px)}
+  h1.display{font-size:min(9vw,15svh)}
+  .ch__card{top:calc(var(--bar) + 6svh);max-width:min(30rem,62%)}
+  .ch__card--hero{top:calc(var(--bar) + 8px);max-width:min(44rem,70%)}
+  .ch__card--wide{top:calc(var(--bar) + 5svh)}
+  .ch__card p:not(.eyebrow):not(.status){margin-top:.6rem;font-size:.95rem;line-height:1.45}
+  .eyebrow{margin-bottom:.6rem}
+  .lead{margin-top:.7rem;font-size:.95rem;max-width:48ch}
+  .ch__actions{margin-top:.9rem}
+  .status{margin-top:.9rem}
+  .dish{margin-top:.9rem;padding:.6rem 1rem}
+  .ch--low{padding-bottom:12vh}
+  .ch--high{padding-top:20vh}
+  .ch--center{padding-top:12vh}
+  .scrollhint{bottom:1rem}
+  /* Builder bekommt die ganze Breite, damit Pizza und Belag nebeneinander passen (siehe builder.css) */
+  .bauen{grid-template-columns:minmax(0,1fr);overflow-x:clip;padding-block:3rem}
+  .bauen__card{--bz-top:calc(var(--bar) + 8px)}
+  .res{padding-top:4rem}
+  .res__img{display:none}
+}
+/* ===== Runde 2: sehr schmale Handys (320 px) ===== */
+@media (max-width:900px){
+  /* Speisekarte: lange Gerichtnamen (all'amatriciana) brechen um, statt die Seite auf 337 px zu verbreitern */
+  .karte{grid-template-columns:minmax(0,1fr)}
+  .menu__item{grid-template-columns:64px minmax(0,1fr) auto}
+  .menu__item h3{overflow-wrap:anywhere;-webkit-hyphens:auto;hyphens:auto}
+}
+@media (max-width:359px){
+  .menu__item{grid-template-columns:52px minmax(0,1fr) auto;gap:.75rem}
+  .menu__item img{width:52px;height:52px}
+  .menu__item h3{font-size:1.4rem}
+}
+
+/* ===== Runde 2: wenig Höhe am Touch-Gerät (Handy quer, kleine Handys bis 700 px Höhe):
+   Kopf beim Runterscrollen ausblenden (site.js), Builder-Bühne klebt dann direkt unter der Hinweisleiste ===== */
+@media (pointer:coarse) and (max-height:700px){
+  .head{transition:transform .3s var(--ease-out),background-color .3s ease,padding .3s var(--ease-out)}
+  .head.is-hidden{transform:translateY(calc(-100% - 2px))}
+  .bauen__card{--bz-top:calc(var(--bar) + 8px)}
+}

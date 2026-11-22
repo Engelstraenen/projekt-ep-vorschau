@@ -269,8 +269,8 @@ dl,dd{margin:0}
 
 .quote .wrap{padding-block:clamp(12px,2vw,24px)}
 
-/* ===== Mobil/Tablet (2026-11): nur unterhalb des Desktop-Breakpoints (960px), Desktop unverändert ===== */
-@media (max-width:960px){
+/* ===== Mobil/Tablet (2026-11): unterhalb des Desktop-Breakpoints (960px) oder Touch-Tablet quer; Desktop mit Maus unverändert ===== */
+@media (max-width:960px),(hover:none) and (pointer:coarse){
  /* Tap-Ziele >= 44px: Trefferfläche per Padding + negativem Margin, Layout bleibt gleich */
  .skip{padding:13px 16px}
  .demo-bar a{display:inline-block;padding:12px 0;margin:-12px 0}
@@ -284,6 +284,7 @@ dl,dd{margin:0}
  .foot__cols a,.foot__links a{display:inline-flex;align-items:center;min-height:44px}
  .dock{white-space:nowrap}
  .mg,.film__mm span{font-size:12px}
+ .menu-btn{min-height:46px}
 }
 /* Ratgeber: unter 900px kein Pin (feld.js) -> Leiste wischbar statt abgeschnitten */
 @media (max-width:900px){
@@ -292,8 +293,6 @@ dl,dd{margin:0}
  .rail__card,.dates{scroll-snap-align:start}
 }
 @media (max-width:700px){
- /* Deko-Chips (doppeln die Zeile „Savignyplatz 9 · Seit 1987“) kollidierten auf niedrigen Handys mit Überschrift */
- .mg-layer{display:none}
  /* Hero-Loop (16:9) im Hochformat: Füller und Tasse statt unscharfem Hintergrund */
  .hero__bg video,.hero__bg img{object-position:72% 50%}
  .erst .bgv{object-position:62% 50%}
@@ -311,4 +310,37 @@ dl,dd{margin:0}
  .film__bar{height:18vh}
  .film__words span{font-size:150px}
  .hero__bg video,.hero__bg img{object-position:66% 50%}
+}
+/* Runde 2: Touch-Tablet quer (Desktop-Layout) – Navigationslinks 44px hoch */
+@media (min-width:961px) and (hover:none) and (pointer:coarse){.nav a{display:inline-block;padding:13px 5px;margin:-5px -5px}}
+/* Menü-Panel scrollt, wenn es höher als der Bildschirm ist (Querformat) */
+@media (max-width:960px){.nav{max-height:calc(100svh - 112px);overflow-y:auto;overscroll-behavior:contain}}
+/* Hero-Chips: auf Handys und flachen Querformaten oben in einer Zeile, Inhalt hält Abstand (sonst Kollision mit Überschrift) */
+@media (max-width:700px),(max-width:960px) and (orientation:landscape) and (max-height:500px){
+ .hero{padding-top:64px}
+ .mg--1,.mg--2{top:16px}
+}
+/* 320 px: nichts darf breiter als die Spalte werden */
+@media (max-width:480px){
+ .partners{grid-template-columns:minmax(0,1fr)}
+ .partner__d div{flex-wrap:wrap}
+ .partner__d dd{min-width:0;overflow-wrap:anywhere;hyphens:auto}
+ .foot__cols{grid-template-columns:1fr}
+}
+@media (max-width:400px){.site-head__in{gap:16px}.brand__word{white-space:nowrap}}
+@media (max-width:360px){.hero__h{font-size:42px}}
+/* Querformat-Handys (Höhe <= 500px): Film als Vollbild-Bühne wie am Desktop, nur kompakter; Menü kompakter */
+@media (max-width:960px) and (orientation:landscape) and (max-height:500px){
+ .nav a{font-size:22px;padding:10px 0}
+ .film__cv{height:100%}
+ .film__shade{background:linear-gradient(90deg,rgba(22,19,15,.92) 0%,rgba(22,19,15,.55) 42%,rgba(22,19,15,.12) 68%),linear-gradient(180deg,rgba(22,19,15,.25) 0%,transparent 28%,rgba(22,19,15,.72) 100%)}
+ .film__txt{padding-bottom:18px}
+ .film__st{max-width:min(520px,60vw)}
+ .film__st h2{font-size:clamp(26px,7.4vh,32px);margin:8px 0 10px}
+ .film__st p{font-size:15px;line-height:1.5}
+ .film__mm{top:50%;bottom:auto;translate:0 -60%}
+ .film__bar{height:26vh}
+ .film__words span{font-size:clamp(96px,22vw,200px)}
+ .split__stage{max-height:78svh}
+ .arch img{max-height:82svh}
 }

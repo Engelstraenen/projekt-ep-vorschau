@@ -31,6 +31,21 @@
   .pin>div::after{left:calc(50% - var(--dx,0px))}
 
   .caption{font-size:15px}
+
+  /* Etagenliste: nie höher als der Platz unter der Kopfzeile (bei 360×640 lag ihr Kopf darunter); notfalls scrollt sie in sich */
+  .units{max-height:calc(100svh - 150px);overflow-y:auto;overscroll-behavior:contain}
+  /* Fußzeilen-Schriftzug „Quartier Aero“ war unter ~400px rechts abgeschnitten */
+  .foot .mark{font-size:min(clamp(64px,15.5vw,250px),16vw)}
+}
+
+/* Kleine Phones hochkant (z. B. 320×568, 360×640): kompaktere Etagenliste, kräftigerer Verlauf hinter dem
+   Hero-Text – das jetzt vollständig sichtbare Haus lag dort hinter der messingfarbenen Überschrift */
+@media (max-width:760px) and (max-height:700px) and (orientation:portrait){
+  .units{bottom:16px;max-height:calc(100svh - 96px);padding:14px 16px}
+  .units h3{font-size:24px}
+  .units .small{margin-bottom:8px!important}
+  .unit{padding:7px 2px}
+  .scrim{background:linear-gradient(0deg,rgba(14,11,9,.92) 0%,rgba(14,11,9,.8) 45%,rgba(14,11,9,.5) 72%,rgba(14,11,9,.45) 100%)}
 }
 
 /* Kopfzeile über dem hellen Exposé-Teil (Klasse setzt js/mobile-nav.js): vorher helle Schrift auf hellem
@@ -52,6 +67,35 @@
   .foot nav a{display:inline-flex;align-items:center;min-height:44px}
 }
 @keyframes qmenu-in{from{opacity:0;transform:translateY(-8px)}}
+
+/* Handy quer (nur 320–430px Höhe): Textblöcke, Kennzahlen und die Etagenliste passen sonst nicht in die
+   Höhe – Hero-Überschrift und der Kopf der Etagenliste lagen unter der Kopfzeile (unerreichbar). */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse),(orientation:landscape) and (max-height:500px) and (max-width:760px){
+  h1{font-size:clamp(34px,11svh,52px)}
+  h2{font-size:clamp(30px,10svh,46px)}
+  .lead{font-size:15px;margin-top:10px;max-width:56ch}
+  .cta{margin-top:16px}
+  .scrollhint{display:none}
+  .L{bottom:24px}
+  .T{top:76px}
+  .R{top:auto;bottom:24px;margin-top:0}
+  .Rb{bottom:24px}
+  .glass{padding:14px 18px}
+  .facts{gap:10px 22px}
+  .facts b{font-size:30px}
+  .caption strong{font-size:19px;margin-bottom:4px}
+  .quote{font-size:22px}
+  /* Etagenliste zweispaltig, damit sie in die geringe Höhe passt; notfalls scrollt sie in sich */
+  .units{bottom:16px;width:min(720px,calc(100vw - 2 * var(--pad) - 26px));display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:22px;padding:12px 18px;max-height:calc(100svh - 92px);overflow-y:auto;overscroll-behavior:contain}
+  .units h3,.units .small{grid-column:1/-1}
+  .units h3{font-size:20px}
+  .units .small{margin:0 0 8px!important;font-size:12px}
+  .unit{padding:6px 2px}
+  .unit:nth-last-child(2){border-bottom:1px solid var(--line)}
+  .unit .ty{font-size:16px}
+  .demo-note{display:none}
+  @media (max-width:760px){.units{width:auto}}
+}
 
 /* ---------- Unterseiten (Impressum, Datenschutz, Danke) ---------- */
 @media (width<=1180px){

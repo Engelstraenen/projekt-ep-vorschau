@@ -558,3 +558,29 @@ body:has(.viz)::after{display:none!important}
   input[type=range]{height:44px}
   .field>label{min-height:44px;align-items:center}
 }
+
+/* ===== Runde 2: Handy quer (Touch, höchstens 500 px hoch). Desktop mit Maus ist nie betroffen ===== */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  /* Kopf scrollt mit weg, statt ein Drittel der Höhe zu belegen; das Menü steht oben und im Fuß */
+  .head{position:relative}
+  html{scroll-padding-top:12px}
+  /* Anrufleiste: zwei runde Symbol-Knöpfe rechts unten statt eines Balkens über die ganze Breite
+     (die Beschriftung bleibt als Linktext für Screenreader, liegt aber außerhalb des Kreises) */
+  .bar,html[data-v] .bar{left:auto;right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));flex-direction:column;gap:8px;padding:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .bar .btn{flex:none;width:48px;height:48px;min-height:48px;padding:0 0 0 13px;gap:40px;justify-content:flex-start;overflow:hidden;border-radius:50%;box-shadow:0 8px 20px -8px rgba(0,0,0,.6)}
+  .bar .btn--ghost{background:var(--card)}
+  .foot{padding-bottom:40px}
+  .toast{bottom:20px}
+  /* Rechner und Jobs: nichts klebt, was höher als der halbe Bildschirm ist */
+  .viz{position:relative;top:auto}
+  .res{position:static}
+  .timer{top:8px}
+}
+/* ===== Runde 2: sehr schmale Handys (320 px, iPhone SE 1) ===== */
+@media (max-width:359px){
+  /* alle vier Seiten-Pillen passen nebeneinander, nichts wird angeschnitten */
+  .subnav{padding:0 12px 10px;gap:5px}
+  .subnav a{padding:0 9px;font-size:.8rem}
+  /* Anrufleiste: Beschriftung bleibt einzeilig */
+  .bar .btn{padding:0 8px;gap:6px;font-size:.88rem;white-space:nowrap}
+}

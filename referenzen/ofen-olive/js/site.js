@@ -97,4 +97,18 @@
     document.addEventListener('click', e => { if (isOpen() && !head.contains(e.target)) set(false); });
     matchMedia('(min-width: 821px)').addEventListener('change', e => { if (e.matches) set(false); });
   }
+
+  // Wenig Höhe am Touch-Gerät (Handy quer, kleine Handys bis 700 px Höhe): Kopf beim Runterscrollen ausblenden,
+  // beim Hochscrollen zeigen, damit Film, Builder und Reservierung die Höhe fast ganz bekommen
+  const quer = matchMedia('(pointer: coarse) and (max-height: 700px)');
+  if (head) {
+    let lastY = scrollY;
+    addEventListener('scroll', () => {
+      const y = scrollY;
+      if (!quer.matches || head.classList.contains('is-menu') || y < 80) { head.classList.remove('is-hidden'); lastY = y; return; }
+      if (Math.abs(y - lastY) < 8) return;
+      head.classList.toggle('is-hidden', y > lastY);
+      lastY = y;
+    }, { passive: true });
+  }
 })();

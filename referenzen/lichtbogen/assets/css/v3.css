@@ -460,11 +460,28 @@ html.out.film .shade{display:none}
   .grid3>.card.rv{width:auto}
 }
 @media (pointer:coarse){
+  /* Sucher-Beschriftung „Foto 1 von 3“ auch quer und am Tablet mindestens 12 px (der Sucher ist dort schmal) */
+  .vf-n{font-size:max(12px,5.6cqw)}
   /* Auslöser im Sucher: mindestens 44 px */
   .vf-shut{width:max(44px,19cqw);height:max(44px,19cqw);margin-left:calc(max(44px,19cqw) / -2)}
   .lsw{height:44px}
   .textbtn{min-height:44px}
-  /* Hover-Effekte bleiben nach dem Antippen nicht kleben */
-  .svc.lit:hover{transform:none}
-  .rv:hover{transform:none}
+}
+
+/* ===== Runde 2: Handy quer (Touch, höchstens 500 px hoch) ===== */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  /* Szenentexte an die geringe Höhe koppeln, damit nichts über den Rand läuft */
+  .beat h1{font-size:min(17vw,30svh)}
+  .beat .big{font-size:min(8.4vw,15svh)}
+  /* Foto-Szene: Text links neben dem Handy, in seiner Spalte umbrechen statt unter das Polaroid zu laufen */
+  .cam-txt .beat{width:40%}
+  .cam-txt .big{font-size:clamp(1.45rem,4.2vw,3.5rem);-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+  .beat.low{bottom:8svh}
+  .arc-cap{bottom:16px}
+  .nd-stage{max-width:min(100%,140svh);margin-inline:auto}
+}
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse) and (max-width:719px){
+  /* Foto-Szene quer: Text links neben dem Handy wie am Desktop statt unten quer darüber */
+  .cam-txt .beat{left:20px;right:auto;width:38%;bottom:auto;top:50%;transform:translateY(-50%)}
+  .cam::before{left:0;right:auto;top:0;bottom:0;width:48%;height:auto;background:linear-gradient(90deg,rgba(6,9,18,.85),rgba(6,9,18,0))}
 }

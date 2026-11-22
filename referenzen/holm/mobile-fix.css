@@ -13,11 +13,17 @@
   /* Mobile Navigation: Panel direkt unter der (sticky) Kopfzeile statt fest bei top:100/108px –
      backdrop-filter macht .head in Safari zum Bezugsrahmen, dann klaffte eine Lücke. */
   .menu:not([open]) .menu__panel{display:none}
-  .menu__panel{position:absolute;top:100%;max-height:calc(100svh - 64px);overflow-y:auto;overscroll-behavior:contain}
+  .menu__panel{position:absolute;top:100%;overflow-y:auto;overscroll-behavior:contain}
+  /* Panel nie höher als der sichtbare Rest unter Kopfzeile (+ Demo-Leiste), sonst scrollt es in sich – wichtig quer (320–430px Höhe) */
+  .menu__panel{max-height:calc(100svh - 100% - 52px)}
+}
 
+/* Phone/Tablet unter 1060px und Touch-Geräte darüber (z. B. Tablet quer 1180px). Maus-Desktop unverändert. */
+@media (width<=1060px),(pointer:coarse){
   /* Tap-Ziele ≥ 44px (Trefferfläche vergrößert, Layout bleibt) */
   .demo-bar a{display:inline-block;padding-block:11.5px;margin-block:-3.5px}
   .logo{min-height:44px}
+  .nav>a:not(.btn){padding-block:10px}
   .btn--small{min-height:44px}
   .chip span{min-height:44px}
   .field label,.check{padding-block:10.5px;margin-block:-10.5px}
@@ -31,6 +37,12 @@
   main#inhalt:has(>h1) h2{margin:40px 0 12px;font-size:clamp(26px,6.4vw,36px)}
   main#inhalt:has(>h1) p{color:var(--muted);margin-bottom:14px}
   main#inhalt:has(>h1) a{color:var(--oak-d)}
+}
+
+/* Touch-Tablet quer über 1060px: Laufschrift .kin und die seitlich fahrende Projekt-Galerie (Spur 2700px breit)
+   machten die Seite seitlich scrollbar (1180×820: 2723px). Abschneiden am Abschnitt, die Effekte bleiben gleich. */
+@media (pointer:coarse) and (width>=1061px){
+  #leistungen,.projekte{overflow-x:hidden;overflow-x:clip}
 }
 
 @media (width<=700px){
@@ -55,3 +67,46 @@
   .story__mm{top:auto;bottom:46%;translate:0}
   .story__bar{height:16vh}
 }
+
+@media (width<=374px){
+  /* 320px: Logo brach zweizeilig um („HOLM &“ / „CO“), „Räuchereiche“ passte nicht in die halbe Kachel,
+     „80 %“ in der Werkstatt-Leiste brach um */
+  .head__in{gap:12px}
+  .logo{white-space:nowrap}
+  .mat__opt{font-size:15px;padding:12px}
+  .werk__nums dd{font-size:30px;white-space:nowrap}
+}
+
+/* Handy quer (geringe Höhe): Hero und Film-Kapitel passen in 320–430px Höhe */
+@media (orientation:landscape) and (max-height:500px) and (width<=1060px){
+  /* Hero zweispaltig wie am Desktop und kompakter, damit er (samt Buttons) in die Höhe passt und
+     der gepinnte Effekt den ganzen Hero zeigt */
+  .hero{min-height:100svh}
+  .hero__body{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px 28px;padding-top:76px;padding-bottom:16px}
+  .hero h1{font-size:clamp(40px,14svh,64px)}
+  .hero__lead{font-size:15px;line-height:1.5;margin-bottom:14px}
+  .hero__cta{gap:8px}
+  .hero .btn{min-height:44px;padding:0 18px;font-size:14px}
+  .dim--x{top:76px}
+  .dim--y{display:none}
+
+  /* Film quer: Bild über die ganze Bühne (16:9-Frames, js/holmfilm.js), Text links auf Verlauf –
+     statt der Hochkant-Aufteilung (Bild 62 %, Text darunter), die bei 320px Höhe Text über das Bild quetschte */
+  .story__cv{height:100%}
+  .story__shade{background:linear-gradient(90deg,#1c1611e0 0%,#1c161199 38%,#1c161100 62%),linear-gradient(#1c161100 55%,#1c16118c)}
+  .story__txt{padding-bottom:20px}
+  .story__st{max-width:min(56%,520px);background:0 0;padding-top:0}
+  .story__st h2{font-size:clamp(24px,8svh,34px);margin:8px 0 8px}
+  .story__st p{font-size:15px;line-height:1.5}
+  .story__mm{left:auto;right:var(--pad);top:50%;bottom:auto;translate:0 -50%;justify-items:end}
+  .story__mm b{font-size:22px}
+  .story__bar{height:24svh}
+}
+
+/* Hero-Pin auf Touch/Tablet/Phone per CSS sticky (Hülle .hero-pin setzt js/holm.js nur dort; Desktop mit Maus: GSAP-Pin wie bisher).
+   Pin-Strecke wie am Desktop (end:+=90%): 90svh – svh, damit die Adressleiste die Strecke nicht verändert. */
+.hero-pin::after{content:"";display:block;height:90svh}
+.hero-pin>.hero{position:sticky;top:var(--hero-top,0px)}
+/* Projekt-Galerie auf Touch-Tablets quer (≥ 1061px) ebenfalls per sticky; Pin-Strecke = Breite der Fahrt (setzt js/holm.js) */
+.rail-pin::after{content:"";display:block;height:var(--rail-dist,0px)}
+.rail-pin>.projekte{position:sticky;top:0}

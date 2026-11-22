@@ -5,6 +5,7 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var hs = $('#hs'), stage = $('.hs-stage'), zoom = $('#hs-zoom'), house = $('#house'), card = $('#hs-card');
+  var touch = matchMedia('(hover: none), (pointer: coarse)').matches;
   /* Bildmitte und Vergrößerung je Bereich (Koordinaten der Zeichnung 800 x 720) */
   var CAM = { all: [400, 380, 1], pv: [520, 190, 2.1], wallbox: [706, 476, 2.6], smart: [288, 325, 2.5], licht: [288, 464, 2.5], echeck: [512, 464, 2.5], altbau: [512, 325, 2.5], not: [300, 620, 2.5] };
   var step = -1, dots = $('#hs-dots');
@@ -12,7 +13,7 @@
 
   function cam(key) {
     var c = CAM[key] || CAM.all, W = stage.clientWidth, H = stage.clientHeight, k = W / 800;
-    var wide = W >= 720;
+    var wide = W >= 720 || (touch && W > H);   /* Handy quer: Haus rechts, Karte links wie am Desktop */
     var base = Math.min(1, H / (720 * k)) * (wide ? 0.92 : 1);        /* Haus passt immer ganz ins Bild */
     var s = base * c[2] * (wide ? 0.75 : 1);
     if (key === 'all') s = base;
@@ -33,7 +34,6 @@
     card.classList.remove('sw'); void card.offsetWidth; card.classList.add('sw');
   }
   /* Touch: feste Bühnenhöhe (100svh) statt innerHeight, damit die Adressleiste die Schritte nicht verschiebt */
-  var touch = matchMedia('(hover: none), (pointer: coarse)').matches;
   function VH() { return touch ? (stage.clientHeight || innerHeight) : innerHeight; }
   var tick = false;
   function onScroll() {
@@ -65,10 +65,10 @@
       scrollTo({ top: top + (i + 0.5) / Z.length * (r.height - VH()), behavior: 'smooth' });
     }
   }
-  /* Touch: unsichtbare Trefferfläche je Schalter, mindestens 100 Einheiten der Zeichnung (= 44 px in der Gesamtansicht ab 360 px Breite) */
+  /* Touch: unsichtbare Trefferfläche je Schalter, mindestens 112 Einheiten der Zeichnung (= 44 px in der Gesamtansicht schon ab 320 px Breite) */
   if (touch) $$('.hot').forEach(function (el) {
     try {
-      var bb = el.getBBox(), w = Math.max(bb.width, 100), h = Math.max(bb.height, 100);
+      var bb = el.getBBox(), w = Math.max(bb.width, 112), h = Math.max(bb.height, 112);
       var hit = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
       hit.setAttribute('class', 'hot-hit'); hit.setAttribute('fill', 'transparent');
       hit.setAttribute('x', (bb.x + bb.width / 2 - w / 2).toFixed(1)); hit.setAttribute('y', (bb.y + bb.height / 2 - h / 2).toFixed(1));

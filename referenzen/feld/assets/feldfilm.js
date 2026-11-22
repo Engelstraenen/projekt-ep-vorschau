@@ -14,6 +14,7 @@
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* Fokus (0..1 der Bildbreite) je Frame: Füller, Akte, Raum, Fenster, Gespräch, Unterschrift */
   var narrow = matchMedia('(max-width: 960px)');
+  var stacked = matchMedia('(max-width: 960px) and (orientation: portrait)'); /* Bild oben, Text darunter */
   var focus = [[0, .45], [24, .52], [38, .7], [64, .7], [76, .5], [122, .52], [132, .55], [162, .56], [172, .6], [182, .72], [212, .72], [220, .63], [241, .63]];
   function focusOf(f) {
     for (var j = 1; j < focus.length; j++) {
@@ -112,8 +113,8 @@
     paint(false);
     var stage = p * (stages.length - 1);
     stages.forEach(function (el, i) {
-      /* Hochformat: Texte stehen untereinander statt über dem Bild -> sauber nacheinander statt übereinander blenden */
-      var o = Math.max(0, 1 - Math.abs(stage - i) * (narrow.matches ? 2.1 : 1.35));
+      /* Hochformat (gestapelte Bühne): Texte nacheinander statt übereinander blenden; Querformat/Desktop wie gehabt */
+      var o = Math.max(0, 1 - Math.abs(stage - i) * (stacked.matches ? 2.1 : 1.35));
       el.style.opacity = String(o);
       el.style.transform = 'translate3d(0,' + ((i - stage) * 18) + 'px,0)';
       if (Math.round(stage) === i) el.removeAttribute('aria-hidden');

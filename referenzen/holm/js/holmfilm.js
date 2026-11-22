@@ -2,7 +2,8 @@
 (function () {
   var sec = document.querySelector('.story'); if (!sec) return;
   var cv = sec.querySelector('.story__cv'), ctx = cv.getContext('2d');
-  var mobile = matchMedia('(max-width: 700px)').matches;
+  // Quadratische Frames (film/m) nur für Phones hochkant; quer (auch Phone quer) passen die 16:9-Frames (film/d)
+  var mobile = matchMedia('(max-width: 700px) and (orientation: portrait)').matches;
   var N = 218, FPS = 12, dir = mobile ? 'film/m/' : 'film/d/';
   var imgs = new Array(N), cur = 0, drawn = -1;
   function src(i) { return dir + String(i + 1).padStart(3, '0') + '.webp'; }

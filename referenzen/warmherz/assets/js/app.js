@@ -102,7 +102,6 @@
   /* Wärmebild folgt der Maus */
   const hero = $('.hero');
   if (hero) hero.addEventListener('pointermove', e => {
-    if (e.pointerType && e.pointerType !== 'mouse') return;   // nur Maus, nicht beim Wischen auf dem Handy
     const r = hero.getBoundingClientRect();
     hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
     hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
@@ -214,7 +213,7 @@
     /* Touch: unsichtbare, größere Tippfläche (Punkte sind auf dem Handy nur ~10 px groß) */
     if (matchMedia('(pointer: coarse)').matches) {
       const hit = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      hit.setAttribute('r', '46'); hit.setAttribute('fill', 'transparent'); hit.setAttribute('class', 'hs-hit');
+      hit.setAttribute('r', '51'); hit.setAttribute('fill', 'transparent'); hit.setAttribute('class', 'hs-hit');
       g.prepend(hit);
     }
     g.addEventListener('mouseenter', act); g.addEventListener('click', act);

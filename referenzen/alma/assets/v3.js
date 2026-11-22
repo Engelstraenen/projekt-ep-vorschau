@@ -2,8 +2,14 @@
 'use strict';
 const gsap = window.gsap;
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const mq = matchMedia('(max-width: 800px)');
+const mq = matchMedia('(max-width: 800px), (orientation: portrait) and (max-width: 1100px) and (pointer: coarse)'); // Tablet hochkant: Hochformat-Layout
 let MOB = mq.matches;
+/* Querformat-Handy (flach): eigenes Layout (Text links, Probe/HUD rechts) und 16:9-Frames statt Hochformat-Frames */
+const lsq = matchMedia('(orientation: landscape) and (max-height: 500px) and (max-width: 800px), (orientation: landscape) and (max-height: 500px) and (pointer: coarse)');
+let LS = lsq.matches;
+/* Touch-Tablet quer (Desktop-Layout): Probe unter den mittigen Text statt fest bei 62 % (lag sonst auf dem Lauftext) */
+const tbq = matchMedia('(min-width: 801px) and (min-height: 501px) and (orientation: landscape) and (hover: none) and (pointer: coarse)');
+const STABLE = () => MOB || LS; // Bühne 100lvh -> Höhe stabil gegen Adressleiste
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -27,7 +33,7 @@ const wm = $('.wm'), tcN = $('.tc__n'), tcC = $('.tc__c'), tcB = $('.top__tc b')
 /* ---------- Frames ---------- */
 let frames = [], dir = '';
 function setupFrames() {
-  dir = MOB ? 'm' : 'd';
+  dir = MOB && !LS ? 'm' : 'd';
   frames = Array.from({ length: N * F }, (_, i) => ({ src: `film/v3/${dir}/${String(i + 1).padStart(3, '0')}.webp`, img: null, ok: false }));
 }
 function load(i) {
@@ -57,10 +63,10 @@ function frameAt(p) { // p global 0..N
 /* ---------- Canvas ---------- */
 let cw = 0, ch = 0, stageH = innerHeight;
 function size() {
-  const dpr = Math.min(devicePixelRatio || 1, MOB ? 2 : 1.5);
+  const dpr = Math.min(devicePixelRatio || 1, STABLE() ? 2 : 1.5);
   /* Mobil: Bühne ist 100lvh hoch (CSS) -> Puffer aus dieser stabilen Höhe, nicht aus innerHeight (Adressleiste) */
-  stageH = MOB ? (cv.clientHeight || innerHeight) : innerHeight;
-  const w = Math.round((MOB ? (cv.clientWidth || innerWidth) : innerWidth) * dpr), h = Math.round(stageH * dpr);
+  stageH = STABLE() ? (cv.clientHeight || innerHeight) : innerHeight;
+  const w = Math.round((STABLE() ? (cv.clientWidth || innerWidth) : innerWidth) * dpr), h = Math.round(stageH * dpr);
   if (w === cw && h === ch) return;
   cw = cv.width = w; ch = cv.height = h; dirty = true;
 }
@@ -204,19 +210,25 @@ function enter(c, dirn) {
 }
 
 /* ---------- Objekt ---------- */
-/* Mobil: Probe mittig in den freien Raum zwischen Kapiteltext und HUD setzen und bei wenig Platz verkleinern
-   (auf normal hohen Handys lag sie sonst über dem Lauftext). */
-let slot = null, slotCh = -2, slotAge = 0, objY = null;
+/* Mobil: Probe in den freien Raum zwischen Kapiteltext und HUD setzen und bei wenig Platz verkleinern
+   (auf normal hohen Handys lag sie sonst über dem Lauftext). Querformat: rechte Spalte über dem HUD.
+   Schweben, Morph, Unschärfe-Überblendung und Einblenden bleiben unverändert; die Probe wird nie ausgeblendet. */
+let slot = null, slotCh = -2, slotAge = 0, objY = null, objX = null;
 function objSlot() {
   if (cur !== slotCh || ++slotAge > 12) {
     slotCh = cur; slotAge = 0; slot = null;
     const a = chs[cur];
-    if (a) { const t = $('.ch__txt', a).getBoundingClientRect(), h = $('.ch__hud', a).getBoundingClientRect(); slot = { top: t.bottom + 14, bot: h.top - 14 }; }
+    if (a) {
+      const t = $('.ch__txt', a).getBoundingClientRect(), h = $('.ch__hud', a).getBoundingClientRect();
+      slot = LS ? { top: t.top, bot: h.top - 12, left: t.right + 12, right: h.right }
+        : tbq.matches ? { top: t.bottom + 14, bot: innerHeight - 24, left: t.left, right: t.right }
+        : { top: t.bottom + 14, bot: h.top - 14, left: 0, right: innerWidth };
+    }
   }
   return slot;
 }
 function objUpdate() {
-  const POS = MOB ? POS_M : POS_D, vw = innerWidth, vh = MOB ? stageH : innerHeight, base = obj.offsetWidth;
+  const POS = MOB || LS ? POS_M : POS_D, vw = innerWidth, vh = STABLE() ? stageH : innerHeight, base = obj.offsetWidth;
   if (P < -.4) { obj.style.opacity = 0; return; }
   const pc = clamp(P, 0, N - .0001), c = Math.floor(pc), t = pc - c, b = Math.round(pc);
   let p0 = POS[c], p1 = p0, m = 0, ca = c, cb = c;
@@ -225,21 +237,21 @@ function objUpdate() {
   const x = .5, y = MOB ? .42 : .62; // Desktop: unter dem mittigen Textblock
   let s = lerp(p0[2], p1[2], m);
   const fl = RM ? 0 : Math.sin(performance.now() / 1800) * 3;
-  let fadeIn = clamp((P + .4) / .4);
-  let py = y * vh;
-  if (MOB) {
+  const fadeIn = clamp((P + .4) / .4);
+  let py = y * vh, px = x * vw;
+  if (MOB || LS || tbq.matches) {
     const sl = objSlot();
     if (sl) {
-      const avail = sl.bot - sl.top, fit = avail / (base * 1.3);
-      py = (sl.top + sl.bot) / 2;
-      s = Math.min(s, fit);
-      fadeIn *= clamp((fit - .3) / .15);
+      const avail = Math.min(sl.bot - sl.top, sl.right - sl.left), fit = avail / (base * 1.3);
+      py = (sl.top + sl.bot) / 2; px = (sl.left + sl.right) / 2;
+      s = Math.min(s, Math.max(.42, fit));
     }
     objY = objY === null || RM ? py : objY + (py - objY) * .14;
-    py = objY;
+    objX = objX === null || RM ? px : objX + (px - objX) * .14;
+    py = objY; px = objX;
   }
   obj.style.opacity = fadeIn;
-  obj.style.transform = `translate3d(${x * vw - base / 2}px,${py - base / 2 + fl}px,0) scale(${Math.max(0, s)})`;
+  obj.style.transform = `translate3d(${px - base / 2}px,${py - base / 2 + fl}px,0) scale(${s})`;
   const ia = OBJ[ca], ib = OBJ[cb];
   objI.forEach((im, k) => {
     let o = 0, bl = 0, sc = 1;
@@ -283,7 +295,7 @@ function init() {
   requestAnimationFrame(tick);
 }
 addEventListener('scroll', readScroll, { passive: true });
-addEventListener('resize', () => { const m = mq.matches; if (m !== MOB) { MOB = m; setupFrames(); loader(); } size(); measure(); readScroll(); slotCh = -2; });
+addEventListener('resize', () => { const m = mq.matches, l = lsq.matches, d0 = MOB && !LS; MOB = m; LS = l; if ((m && !l) !== d0) { setupFrames(); loader(); } size(); measure(); readScroll(); slotCh = -2; });
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { slotCh = -2; });
 init();
 })();

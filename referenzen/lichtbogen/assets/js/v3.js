@@ -92,10 +92,12 @@
     p1 = prog(s1);
     var W = kwrap.offsetWidth, H = kwrap.offsetHeight, k = ease((p1 - 0.05) / 0.5);
     var zm = vOK ? (innerWidth < 720 ? 2.0 : 1.8) : (innerWidth < 720 ? 2.0 : 2.5);
-    /* Handy hochkant: der Film füllt die Bühne jetzt formatfüllend (cover), deshalb nur noch leicht heranfahren,
-       bis derselbe Ausschnitt wie früher erreicht ist (früher 178vw breit x 2,0) */
-    if (innerWidth < 720) zm = Math.max(1.15, innerWidth * 3.56 / W);
-    var s = 1 + (zm - 1) * k, u = vOK ? U0 + (U1 - U0) * k : 0.44, v = vOK ? V0 + (V1 - V0) * k : 0.40;
+    /* Handy hochkant: der Film füllt die Bühne formatfüllend (cover), der Zoom bleibt beim Original (x 2,0).
+       Damit die Hand am Hauptschalter im schmalen Ausschnitt bleibt, wandert das Ziel mit dem Schalter im Film mit
+       (im Film fährt die Kamera selbst nach rechts heran: Schalter von 44 % / 40 % auf 52 % / 42 % des Bildes). */
+    var pu1 = U1, pv1 = V1;
+    if (innerWidth < 720 && VH() > innerWidth) { pu1 = 0.52; pv1 = 0.42; }
+    var s = 1 + (zm - 1) * k, u = vOK ? U0 + (pu1 - U0) * k : 0.44, v = vOK ? V0 + (pv1 - V0) * k : 0.40;
     var ox = (u - 0.5) * W, oy = (v - 0.5) * H, tx = -ox * s * k, ty = -oy * s * k;
     /* nicht über den Bildrand hinaus schieben */
     var mx = Math.max(0, (W * s - innerWidth) / 2), my = Math.max(0, (H * s - VH()) / 2);

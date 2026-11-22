@@ -189,3 +189,11 @@
   .rz-chip,.rz-tab{min-height:44px}
   .rz-link{min-height:44px}
 }
+/* ===== Runde 2: sehr schmale Handys (320 px): Personen-Zähler rutscht unter die Beschriftung statt über den Rand ===== */
+@media (max-width:359px){
+  .rz-row{flex-wrap:wrap;row-gap:.6rem}
+  .rz-row .rz-hint{max-width:none}
+  /* Zurück-Knopf nur mit Pfeil (Name bleibt per aria-label), damit „Weiter · Wünsche“ ganz hineinpasst */
+  .rz-btn--icon{flex:none;min-width:48px;padding-inline:.8rem}
+  .rz-btn--icon span{display:none}
+}
