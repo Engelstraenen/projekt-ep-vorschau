@@ -50,3 +50,6 @@
 @media (max-width:900px){
 .ed-toast>button{min-height:44px}
 }
+@media (max-width:900px){
+.ed-nav a,.ed-nav button{display:inline-flex;justify-content:center;min-width:44px;min-height:44px;align-items:center}
+}

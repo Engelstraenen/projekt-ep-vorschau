@@ -441,8 +441,8 @@ html.out.film .shade{display:none}
   .cam-cnt{font-size:.9rem}
   .arc-cap{font-size:.9rem;bottom:96px}
 }
-@media (max-width:1023px){
-  /* Handy und Tablet: kleine Beschriftungen mindestens 12 px */
+@media (max-width:1023px),(pointer:coarse){
+  /* Handy und Tablet (auch quer): kleine Beschriftungen mindestens 12 px */
   [data-v="3"] .demo{font-size:.78rem;padding:6px 0}
   .hint-scroll{font-size:.75rem}
   .bsp{font-size:.75rem}

@@ -95,7 +95,7 @@
 }
 
 /* ===== Mobil-Optimierung 2026-11 (Handy und Tablet unter 1024 px, Desktop unverändert) ===== */
-@media (max-width:1023px){
+@media (max-width:1023px),(pointer:coarse){
   .gauge span{font-size:.75rem}
   .lever small{font-size:.75rem}
 }

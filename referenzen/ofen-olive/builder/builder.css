@@ -166,7 +166,7 @@
 @media (prefers-reduced-motion:reduce){.bz__fire i::before,.bz__heat,.bz__sparks i,.bz__pie.is-sauce-pour::after{animation:none}.bz__pie{transition:none}.bz.is-baking .bz__ovenbg,.bz.is-done .bz__ovenbg{filter:blur(10px)}}
 
 /* ===== Mobil-Optimierung 2026-11 (Website unter 900 px, App ohne Handy-Rahmen; Touch-Ziele nur bei Touch) ===== */
-@media (max-width:899px){
+@media (max-width:899px),(pointer:coarse){
   .bz__lbl{font-size:.78rem}
   .bz__st{font-size:.75rem}
   .bz__badge{font-size:.75rem}

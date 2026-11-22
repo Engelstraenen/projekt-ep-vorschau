@@ -195,7 +195,7 @@ body.rz-near .fab{opacity:0;transform:translateY(12px);pointer-events:none}
   .head.is-menu .head__burger span::after{transform:translateY(-6px) rotate(-45deg);background:var(--creme)}
   .head.is-menu{background:rgba(28,26,23,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding-bottom:1rem}
   .head.is-menu .head__nav{display:flex;flex-direction:column;gap:0;order:3;flex-basis:100%;margin:0;font-size:1.15rem}
-  .head.is-menu .head__nav a{display:flex;align-items:center;min-height:52px;opacity:1;border-bottom:1px solid rgba(243,235,221,.14)}
+  .head.is-menu .head__nav a{display:flex;align-items:center;justify-content:flex-start;min-height:52px;opacity:1;border-bottom:1px solid rgba(243,235,221,.14)}
   .head.is-menu .head__nav a::after{display:none}
   .scrollhint{font-size:.75rem}
   .menu__item h3 i,.kl h4 i{font-size:.75rem}
@@ -215,7 +215,14 @@ body.rz-near .fab{opacity:0;transform:translateY(12px);pointer-events:none}
   /* Texte stehen hochkant mitten im Bild: Abdunklung dort kräftiger, damit sie auch über hellem Käse lesbar bleiben */
   .stage__shade,.film[data-side] .stage__shade{background:linear-gradient(0deg,rgba(20,17,14,.88) 0%,rgba(20,17,14,.62) 50%,rgba(20,17,14,.42))}
 }
+@media (pointer:coarse) and (min-width:821px){:root{--bar:44px}}
 @media (pointer:coarse){
+  /* Touch-Tablet quer (Desktop-Layout): Hinweisleiste, Logo und Menü mit 44 px Tippfläche, kleine Beschriftungen 12 px */
+  .demo-bar a{align-self:stretch;display:flex;align-items:center;padding:0 .5rem;margin-right:-.5rem}
+  .head__logo{display:flex;align-items:center;min-height:44px}
+  .head__nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
+  .menu__add{width:44px;height:44px}
+  .rail,.scrollhint,.menu__item h3 i,.kl h4 i,.demo-bar{font-size:.75rem}
   .btn{min-height:44px}
   .kn a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
   .foot a{display:inline-flex;align-items:center;min-height:44px}

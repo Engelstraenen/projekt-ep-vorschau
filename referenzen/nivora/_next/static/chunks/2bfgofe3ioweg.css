@@ -39,3 +39,7 @@
 @media (max-width:380px){
 .ec-hero{height:540px}
 }
+@media (max-width:900px){
+.ec-main-nav a{display:inline-flex;justify-content:center;min-width:44px}
+.ec-product-name{min-width:44px}
+}

@@ -180,7 +180,7 @@
 .rz-nav .rz-btn--ghost{background:#FBF6EE}
 
 /* ===== Mobil-Optimierung 2026-11 (Website unter 900 px, App ohne Handy-Rahmen; Touch-Ziele nur bei Touch) ===== */
-@media (max-width:899px){
+@media (max-width:899px),(pointer:coarse){
   .rz-day small,.rz-l,.rz-prog em,.rz-prog i,.rz-time small,.rz-tab i,.rz-badge,.rz-done__k{font-size:.75rem}
 }
 @media (pointer:coarse){

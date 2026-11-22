@@ -2,7 +2,7 @@
    Desktop (>1060 px) bleibt unverändert. Quelle (Astro-Projekt) braucht dieselben Regeln. */
 
 /* Tippflächen ≥ 44 px (Kopf, Demo-Leiste, Fuß) */
-@media (max-width:1060px){
+@media (max-width:1060px),(hover:none) and (pointer:coarse){
   .demo-bar a{display:inline-flex;align-items:center;min-height:44px;padding:0}
   .site-head .logo{min-height:44px}
   .site-foot a{padding:10px 0;min-height:44px}
@@ -30,6 +30,15 @@
   .day__neon.is-flow span.is-on{opacity:1}
   .mg-chip{font-size:12px}
 }
+/* Hintergrund-Schleife (CTA, Fuß) im Hochformat: Kartenmonitor statt Bürostuhl in der Bildmitte */
+@media (max-width:700px){
+  .cta__bgv,.foot__bgv{object-position:30% 50%}
+}
 @media (max-width:1000px) and (prefers-reduced-motion:reduce){
   .day__neon.is-flow span{opacity:1}
+}
+/* Touch-Tablets quer (gepinnter Tag mit Touch): Chip-Schrift ≥ 12 px */
+@media (hover:none) and (pointer:coarse){
+  .mg-chip{font-size:12px}
+  .nav a:not(.btn){display:inline-block;padding:10px 0;min-width:44px;text-align:center}
 }

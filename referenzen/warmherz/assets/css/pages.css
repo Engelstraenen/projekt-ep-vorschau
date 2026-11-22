@@ -281,7 +281,19 @@ body[data-page="foto-check"] .fab-foto{display:none}
    MOBIL-CHECK 11/2026 · nur Handy/Tablet (≤1020 px bzw. Touch).
    Desktop (>1020 px, Maus) bleibt unverändert.
    ===================================================================== */
-@media (max-width:1020px){
+/* Tablet quer mit Touch (1021–1366 px): Burger-Menü statt der Desktop-Leiste, die bei 1024 px über den Rand läuft (1066 px) */
+@media (min-width:1021px) and (max-width:1366px) and (hover:none) and (pointer:coarse){
+  .links,.nav-call{display:none}
+  .chip-count{margin-left:auto}
+  .burger{display:block}
+  .links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;padding:20px 32px 28px;background:rgba(14,14,14,.98);font-size:20px}
+  .dd-menu{position:static;width:auto;grid-template-columns:1fr;opacity:1;visibility:visible;transform:none;display:none;background:transparent;border:0;box-shadow:none;padding:6px 0 0 10px}
+  .dd.open .dd-menu{display:grid}
+  .dd-btn{font-size:20px;color:#fff}
+  .nav-foto{margin:0;align-self:flex-start}
+}
+/* Handy/Tablet (≤1020 px) und Touch-Tablets quer: Menü, Tippflächen, Mindestschrift */
+@media (max-width:1020px),(max-width:1366px) and (hover:none) and (pointer:coarse){
   /* Menü: X-Zustand, scrollbar wenn das Untermenü offen ist, 44-px-Zeilen */
   .burger{width:44px;height:44px}
   .burger i{transition:transform .25s var(--ease),top .25s var(--ease)}
@@ -305,10 +317,12 @@ body[data-page="foto-check"] .fab-foto{display:none}
   .calc input[type=range]{background:linear-gradient(90deg,#D6D0C7,var(--acc)) center/100% 8px no-repeat}
   /* Schrift ≥ 12 px */
   .band-count small,.chip-txt small,.fine,.ph-head small{font-size:12px}
+}
+@media (max-width:1020px){
   /* Kein Querscrollen: Rasterspalten dürfen schrumpfen */
   .fc > *,.apply > *,.check-grid > *,.hp-grid > *,.calc-grid > *,.kontakt-grid > *,.heinz-grid > *{min-width:0}
   .path.learn{grid-template-columns:1fr}
-  /* Scroll-Video: stabile Höhe (svh), Text über dem Foto-Knopf */
+  /* Scroll-Video: stabile Höhe (svh) */
   .wf-pin{height:100vh;height:100svh}
 }
 @media (max-width:820px){

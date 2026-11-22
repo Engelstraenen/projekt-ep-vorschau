@@ -8,3 +8,6 @@
 .nfs-presets{gap:2px}
 .nfs-presets>button{min-height:44px;min-width:44px}
 }
+@media (max-width:900px){
+.nfs-navigation>button{min-width:44px;flex:none}
+}

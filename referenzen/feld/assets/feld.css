@@ -292,6 +292,8 @@ dl,dd{margin:0}
  .rail__card,.dates{scroll-snap-align:start}
 }
 @media (max-width:700px){
+ /* Deko-Chips (doppeln die Zeile „Savignyplatz 9 · Seit 1987“) kollidierten auf niedrigen Handys mit Überschrift */
+ .mg-layer{display:none}
  /* Hero-Loop (16:9) im Hochformat: Füller und Tasse statt unscharfem Hintergrund */
  .hero__bg video,.hero__bg img{object-position:72% 50%}
  .erst .bgv{object-position:62% 50%}
