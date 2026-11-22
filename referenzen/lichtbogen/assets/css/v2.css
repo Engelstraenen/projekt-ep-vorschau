@@ -93,3 +93,9 @@
   .drawer{padding:34px}
   .drawer-in{grid-template-columns:1.2fr .8fr;align-items:center}
 }
+
+/* ===== Mobil-Optimierung 2026-11 (nur unter 720 px, Desktop unverändert) ===== */
+@media (max-width:719px){
+  .gauge span{font-size:.75rem}
+  .lever small{font-size:.75rem}
+}

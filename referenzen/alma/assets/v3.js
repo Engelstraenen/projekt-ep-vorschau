@@ -55,10 +55,14 @@ function frameAt(p) { // p global 0..N
 }
 
 /* ---------- Canvas ---------- */
-let cw = 0, ch = 0;
+let cw = 0, ch = 0, stageH = innerHeight;
 function size() {
   const dpr = Math.min(devicePixelRatio || 1, MOB ? 2 : 1.5);
-  cw = cv.width = Math.round(innerWidth * dpr); ch = cv.height = Math.round(innerHeight * dpr); dirty = true;
+  /* Mobil: Bühne ist 100lvh hoch (CSS) -> Puffer aus dieser stabilen Höhe, nicht aus innerHeight (Adressleiste) */
+  stageH = MOB ? (cv.clientHeight || innerHeight) : innerHeight;
+  const w = Math.round((MOB ? (cv.clientWidth || innerWidth) : innerWidth) * dpr), h = Math.round(stageH * dpr);
+  if (w === cw && h === ch) return;
+  cw = cv.width = w; ch = cv.height = h; dirty = true;
 }
 function img(im, o = {}) {
   if (!im) return;
@@ -200,19 +204,42 @@ function enter(c, dirn) {
 }
 
 /* ---------- Objekt ---------- */
+/* Mobil: Probe mittig in den freien Raum zwischen Kapiteltext und HUD setzen und bei wenig Platz verkleinern
+   (auf normal hohen Handys lag sie sonst über dem Lauftext). */
+let slot = null, slotCh = -2, slotAge = 0, objY = null;
+function objSlot() {
+  if (cur !== slotCh || ++slotAge > 12) {
+    slotCh = cur; slotAge = 0; slot = null;
+    const a = chs[cur];
+    if (a) { const t = $('.ch__txt', a).getBoundingClientRect(), h = $('.ch__hud', a).getBoundingClientRect(); slot = { top: t.bottom + 14, bot: h.top - 14 }; }
+  }
+  return slot;
+}
 function objUpdate() {
-  const POS = MOB ? POS_M : POS_D, vw = innerWidth, vh = innerHeight, base = obj.offsetWidth;
+  const POS = MOB ? POS_M : POS_D, vw = innerWidth, vh = MOB ? stageH : innerHeight, base = obj.offsetWidth;
   if (P < -.4) { obj.style.opacity = 0; return; }
   const pc = clamp(P, 0, N - .0001), c = Math.floor(pc), t = pc - c, b = Math.round(pc);
   let p0 = POS[c], p1 = p0, m = 0, ca = c, cb = c;
   if (b >= 1 && b <= N - 1 && Math.abs(pc - b) < W) { ca = b - 1; cb = b; p0 = POS[ca]; p1 = POS[cb]; m = eio((pc - (b - W)) / (2 * W)); }
   /* Fester Platz in der Mitte — nur Motiv/Scale morphen, nicht über den Frame wandern */
   const x = .5, y = MOB ? .42 : .62; // Desktop: unter dem mittigen Textblock
-  const s = lerp(p0[2], p1[2], m);
+  let s = lerp(p0[2], p1[2], m);
   const fl = RM ? 0 : Math.sin(performance.now() / 1800) * 3;
-  const fadeIn = clamp((P + .4) / .4);
+  let fadeIn = clamp((P + .4) / .4);
+  let py = y * vh;
+  if (MOB) {
+    const sl = objSlot();
+    if (sl) {
+      const avail = sl.bot - sl.top, fit = avail / (base * 1.3);
+      py = (sl.top + sl.bot) / 2;
+      s = Math.min(s, fit);
+      fadeIn *= clamp((fit - .3) / .15);
+    }
+    objY = objY === null || RM ? py : objY + (py - objY) * .14;
+    py = objY;
+  }
   obj.style.opacity = fadeIn;
-  obj.style.transform = `translate3d(${x * vw - base / 2}px,${y * vh - base / 2 + fl}px,0) scale(${s})`;
+  obj.style.transform = `translate3d(${x * vw - base / 2}px,${py - base / 2 + fl}px,0) scale(${Math.max(0, s)})`;
   const ia = OBJ[ca], ib = OBJ[cb];
   objI.forEach((im, k) => {
     let o = 0, bl = 0, sc = 1;
@@ -256,6 +283,7 @@ function init() {
   requestAnimationFrame(tick);
 }
 addEventListener('scroll', readScroll, { passive: true });
-addEventListener('resize', () => { const m = mq.matches; if (m !== MOB) { MOB = m; setupFrames(); loader(); } size(); measure(); readScroll(); });
+addEventListener('resize', () => { const m = mq.matches; if (m !== MOB) { MOB = m; setupFrames(); loader(); } size(); measure(); readScroll(); slotCh = -2; });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { slotCh = -2; });
 init();
 })();

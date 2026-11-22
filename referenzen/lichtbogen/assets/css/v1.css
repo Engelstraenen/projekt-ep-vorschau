@@ -84,3 +84,9 @@
   .hs-card{left:32px;right:auto;bottom:32px;width:400px;padding:24px}
   .daynight{right:32px;top:24px}
 }
+
+/* ===== Mobil-Optimierung 2026-11 (nur Touch / unter 720 px, Desktop unverändert) ===== */
+@media (pointer:coarse){
+  .daynight{min-height:44px}
+  .hot-hit{fill:transparent}
+}

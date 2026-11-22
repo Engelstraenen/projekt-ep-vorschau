@@ -234,3 +234,26 @@ button{cursor:pointer;background:none;border:0}
 .top__links{display:flex;gap:.4rem}
 .view--res{background:var(--paper);padding-bottom:0}
 .view--res .bar{z-index:3}
+
+/* ===== Mobil-Optimierung 2026-11 (nur ohne Handy-Rahmen, also unter 900 px; Touch-Ziele nur bei Touch) ===== */
+@media (max-width:899px){
+  :root{--bar:44px}
+  .demo-bar a{align-self:stretch;display:flex;align-items:center;padding:0 .5rem;margin-right:-.5rem}
+  .dish__t b i,.card h4 i{font-size:.75rem}
+  .top__link{font-size:.85rem}
+}
+@media (max-width:600px){
+  :root{--bar:52px}
+  .demo-bar{font-size:.75rem}
+}
+@media (max-width:899px) and (pointer:coarse){
+  .top__link{min-height:44px;padding:0 1rem}
+  .icon-btn{width:44px;height:44px}
+  .bar{grid-template-columns:44px 1fr 44px}
+  .kn a{display:inline-flex;align-items:center;min-height:44px}
+  .seg button{min-height:44px;justify-content:center}
+  .slot{min-height:44px}
+  .step button{width:44px;height:44px}
+  .lock__x{min-height:44px}
+  .ci__del{min-height:44px;display:flex;align-items:center;width:fit-content}
+}

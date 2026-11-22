@@ -178,3 +178,14 @@
 }
 .rz-step output b,.rz-mini b,.rz-done__when,.rz-h,.rz-done__h{font-variant-numeric:lining-nums}
 .rz-nav .rz-btn--ghost{background:#FBF6EE}
+
+/* ===== Mobil-Optimierung 2026-11 (Website unter 900 px, App ohne Handy-Rahmen; Touch-Ziele nur bei Touch) ===== */
+@media (max-width:899px){
+  .rz-day small,.rz-l,.rz-prog em,.rz-prog i,.rz-time small,.rz-tab i,.rz-badge,.rz-done__k{font-size:.75rem}
+}
+@media (pointer:coarse){
+  .rz-time{min-height:44px;justify-content:center}
+  .rz-step button{width:44px;height:44px}
+  .rz-chip,.rz-tab{min-height:44px}
+  .rz-link{min-height:44px}
+}

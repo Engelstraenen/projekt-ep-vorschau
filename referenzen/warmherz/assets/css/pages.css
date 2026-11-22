@@ -276,3 +276,76 @@ body[data-page="foto-check"] .fab-foto{display:none}
   .ig-foot{flex-direction:column;align-items:flex-start}
   .rating-chips{gap:8px}.rchip span:last-child{display:none}
 }
+
+/* =====================================================================
+   MOBIL-CHECK 11/2026 · nur Handy/Tablet (≤1020 px bzw. Touch).
+   Desktop (>1020 px, Maus) bleibt unverändert.
+   ===================================================================== */
+@media (max-width:1020px){
+  /* Menü: X-Zustand, scrollbar wenn das Untermenü offen ist, 44-px-Zeilen */
+  .burger{width:44px;height:44px}
+  .burger i{transition:transform .25s var(--ease),top .25s var(--ease)}
+  .burger[aria-expanded="true"] i:first-child,.burger[aria-expanded="true"] i:last-child{top:21px}
+  .burger[aria-expanded="true"] i:first-child{transform:rotate(45deg)}
+  .burger[aria-expanded="true"] i:last-child{transform:rotate(-45deg)}
+  .links.open{gap:4px;max-height:calc(100vh - 64px);max-height:calc(100svh - 64px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+  .links.open > a,.links.open .dd-btn{min-height:44px;display:flex;align-items:center}
+  .links.open .nav-foto{margin:6px 0}
+  .links.open .dd-menu a{padding:10px 14px}
+  html.menu-open .fab-foto{display:none}
+  /* Tippflächen ≥ 44 px */
+  .logo{min-height:44px}
+  .rchip{min-height:44px}
+  .hero-foto{min-height:44px}
+  .social a{width:44px;height:44px}
+  .crumbs a{display:inline-block;padding:14px 8px;margin:-14px -8px}
+  .job-link{display:inline-flex;align-items:center;min-height:44px}
+  /* Schieberegler: 44 px hohe Tippfläche, Spur bleibt 8 px */
+  input[type=range]{height:44px;margin:4px 0 -4px;border-radius:0;background:linear-gradient(90deg,#7EC8E3,#FFD39A 55%,var(--acc)) center/100% 8px no-repeat}
+  .calc input[type=range]{background:linear-gradient(90deg,#D6D0C7,var(--acc)) center/100% 8px no-repeat}
+  /* Schrift ≥ 12 px */
+  .band-count small,.chip-txt small,.fine,.ph-head small{font-size:12px}
+  /* Kein Querscrollen: Rasterspalten dürfen schrumpfen */
+  .fc > *,.apply > *,.check-grid > *,.hp-grid > *,.calc-grid > *,.kontakt-grid > *,.heinz-grid > *{min-width:0}
+  .path.learn{grid-template-columns:1fr}
+  /* Scroll-Video: stabile Höhe (svh), Text über dem Foto-Knopf */
+  .wf-pin{height:100vh;height:100svh}
+}
+@media (max-width:820px){
+  /* Scroll-Geschichten: Schrittnamen unter den Punkten statt versteckt (font-size:0) */
+  .fl-rail li{font-size:12px;flex-direction:column;gap:4px;letter-spacing:0;text-transform:none;font-weight:700;text-align:center;min-width:0}
+}
+@media (max-width:640px){
+  .person{width:44px;height:44px}
+  .phone{width:min(300px,100%)}
+  .ig-prof > div{min-width:0}
+  .ig-prof h2{font-size:clamp(22px,6.2vw,30px);overflow-wrap:anywhere}
+  .fc .stats div{padding:18px 16px}
+  .fc .stats b{font-size:38px}
+  .foot-grid p a{display:inline-block;padding:11px 0;min-width:44px}
+  /* Fester Foto-Knopf unten: Inhalte der gepinnten Szenen frei halten */
+  .story.on .fl-stage{padding-bottom:76px}
+  .fl-hint{bottom:80px}
+  .wf-ui{padding-bottom:92px}
+  .wf-hint{display:none}
+  /* Szene kompakter, damit das Motiv oben frei bleibt; Knopf erscheint am Ende an Stelle der Texte */
+  .wf-ui .kicker{margin-bottom:12px}
+  .wf-temp b{font-size:76px}
+  .wf-temp span{font-size:32px}
+  .wf-bar{margin:12px 0 18px}
+  .wf-caps{min-height:118px}
+  .wf-cap{font-size:17px}
+  .wf-cap b{font-size:24px}
+  .wf-cta{position:absolute;left:16px;bottom:92px}
+}
+@media (max-width:820px) and (max-height:700px){
+  .fl-step .fl-art,.fl-steps.shared .fl-art{max-height:34svh}
+}
+/* Hochformat: Standbild der Bildfolge wie die Leinwand (Motiv oben, weich auslaufend) */
+@media (max-aspect-ratio:4/5){
+  .wf-still{height:70%;object-position:77% 50%;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+}
+@media (max-width:1020px) and (prefers-reduced-motion:reduce){
+  .wf-pin{height:90vh}
+  .wf-cta{position:static}
+}

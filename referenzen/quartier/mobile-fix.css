@@ -1,0 +1,58 @@
+/* QUARTIER AERO – Mobil-/Tablet-Korrekturen (PROJEKT EX, Mobil-Check 2026-11).
+   Startseite: alles unterhalb des Seiten-Umbruchs 760px. Unterseiten (Base-Layout): unterhalb 1180px.
+   Die Desktop-Ansicht bleibt unverändert. In der Astro-Quelle gehören die Regeln in die jeweiligen
+   Layout-Styles (Startseite bzw. Base.astro), das Menü-Markup in den Header der Startseite. */
+
+/* ---------- Startseite ---------- */
+.qmenu{display:none}
+
+@media (max-width:760px){
+  /* Mobiles Menü: Die Kapitel-Navigation war unter 760px ersatzlos ausgeblendet */
+  .bar{gap:12px}
+  .bar>.btn{display:none}
+  .logo{min-height:44px;align-items:center}
+  .qmenu{display:block;margin-left:auto}
+  .qmenu summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(20,17,14,.34);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--line);font:500 13px/1 var(--sans);letter-spacing:.04em;color:var(--paper)}
+  .qmenu summary::-webkit-details-marker{display:none}
+  .qmenu__icon{display:grid;gap:5px;width:18px}
+  .qmenu__icon i{height:1.5px;background:currentColor;transition:transform .25s var(--ease-out)}
+  .qmenu[open] .qmenu__icon i:first-child{transform:translateY(3.25px) rotate(45deg)}
+  .qmenu[open] .qmenu__icon i:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+  .qmenu:not([open]) .qmenu__panel{display:none}
+  .qmenu__panel{position:fixed;z-index:21;left:10px;right:10px;top:72px;display:grid;padding:6px 20px 20px;border-radius:18px;background:rgba(20,17,14,.92);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid var(--line);max-height:calc(100svh - 86px);overflow-y:auto;overscroll-behavior:contain}
+  .qmenu__panel a:not(.btn){display:flex;align-items:center;min-height:56px;border-bottom:1px solid var(--line);font:300 30px/1.1 var(--serif);letter-spacing:-.01em;color:var(--paper);text-decoration:none}
+  .qmenu__panel .btn{justify-content:center;margin-top:18px;min-height:48px;font-size:15px}
+  body[data-ch=aussen] .qmenu__panel a[data-to=aussen],body[data-ch=lobby] .qmenu__panel a[data-to=lobby],
+  body[data-ch=wohnen] .qmenu__panel a[data-to=wohnen],body[data-ch=dach] .qmenu__panel a[data-to=dach],
+  body[data-ch=lage] .qmenu__panel a[data-to=lage]{color:var(--brass)}
+  @media (prefers-reduced-motion:no-preference){.qmenu[open] .qmenu__panel{animation:qmenu-in .35s var(--ease-out) both}}
+
+  /* Kopfzeile über dem hellen Exposé-Teil: vorher helle Schrift auf hellem Grund (Logo unsichtbar, Kopf überlagerte Formular) */
+  .bar{transition:background-color .25s ease,color .25s ease}
+  .bar.on-paper{background:rgba(244,239,231,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--ink);box-shadow:0 1px 0 rgba(20,17,14,.1)}
+  .bar.on-paper .logo b{color:#85521f}
+  .bar.on-paper .qmenu summary{background:var(--ink);border-color:var(--ink)}
+
+  /* Tap-Ziele ≥ 44px, Fließtext ≥ 15px */
+  .btn{min-height:44px}
+  .foot nav{gap:4px 22px}
+  .foot nav a{display:inline-flex;align-items:center;min-height:44px}
+  .caption{font-size:15px}
+}
+@keyframes qmenu-in{from{opacity:0;transform:translateY(-8px)}}
+
+/* ---------- Unterseiten (Impressum, Datenschutz, Danke) ---------- */
+@media (width<=1180px){
+  .demo-bar a{display:inline-block;padding-block:12.5px;margin-block:-4.5px}
+  .site-head .logo{min-height:44px}
+  .site-foot ul a{padding-block:10px}
+  /* Rechtstexte hatten keinen Seitenrand: Text klebte am Displayrand */
+  main#inhalt:has(>h1){max-width:780px;margin:0 auto;padding:clamp(48px,9vw,96px) var(--pad) clamp(72px,10vw,120px)}
+  main#inhalt:has(>h1) h1{margin-bottom:28px;font-size:clamp(40px,10vw,72px);line-height:.98}
+  main#inhalt:has(>h1) h2{margin:40px 0 12px;font-size:clamp(24px,6vw,30px);font-weight:500;line-height:1.1}
+  main#inhalt:has(>h1) p{color:var(--mute-d)}
+  main#inhalt:has(>h1) p+p{margin-top:12px}
+  main#inhalt:has(>h1) a{color:var(--brass);text-underline-offset:3px}
+  main#inhalt>p:last-child{line-height:44px}
+  main#inhalt>p:last-child>a{display:inline-block}
+}

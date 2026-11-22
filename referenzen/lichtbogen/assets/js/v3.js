@@ -14,7 +14,13 @@
   var isOut = function () { return root.classList.contains('out'); };
   var store = function () {}; /* die Seite startet bei jedem Öffnen dunkel, der Zustand wird nicht gemerkt */
   function cover(w, h, u, v, px, py) { var dw = Math.max(w, h * AR), dh = dw / AR; return [(w - dw) * px + u * dw, (h - dh) * py + v * dh]; }
-  function prog(sec) { var r = sec.getBoundingClientRect(); return clamp(-r.top / (r.height - innerHeight), 0, 1); }
+  /* Mobil: Touch-Geräte rechnen mit der festen Höhe der gepinnten Bühne (100svh) statt mit innerHeight,
+     damit die ein- und ausfahrende Adressleiste die Szenen nicht springen lässt. Desktop bleibt bei innerHeight. */
+  var touch = matchMedia('(hover: none), (pointer: coarse)').matches, stableH = 0;
+  function VH() { return touch && stableH ? stableH : innerHeight; }
+  function measureVH() { var pin = s1 && s1.querySelector('.pin'); stableH = pin ? pin.offsetHeight : 0; }
+  measureVH();
+  function prog(sec) { var r = sec.getBoundingClientRect(); return clamp(-r.top / (r.height - VH()), 0, 1); }
   function inView(sec) { var r = sec.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }
 
   /* Überschrift in Wörter teilen */
@@ -86,13 +92,16 @@
     p1 = prog(s1);
     var W = kwrap.offsetWidth, H = kwrap.offsetHeight, k = ease((p1 - 0.05) / 0.5);
     var zm = vOK ? (innerWidth < 720 ? 2.0 : 1.8) : (innerWidth < 720 ? 2.0 : 2.5);
+    /* Handy hochkant: der Film füllt die Bühne jetzt formatfüllend (cover), deshalb nur noch leicht heranfahren,
+       bis derselbe Ausschnitt wie früher erreicht ist (früher 178vw breit x 2,0) */
+    if (innerWidth < 720) zm = Math.max(1.15, innerWidth * 3.56 / W);
     var s = 1 + (zm - 1) * k, u = vOK ? U0 + (U1 - U0) * k : 0.44, v = vOK ? V0 + (V1 - V0) * k : 0.40;
     var ox = (u - 0.5) * W, oy = (v - 0.5) * H, tx = -ox * s * k, ty = -oy * s * k;
     /* nicht über den Bildrand hinaus schieben */
-    var mx = Math.max(0, (W * s - innerWidth) / 2), my = Math.max(0, (H * s - innerHeight) / 2);
+    var mx = Math.max(0, (W * s - innerWidth) / 2), my = Math.max(0, (H * s - VH()) / 2);
     tx = clamp(tx, -mx, mx); ty = clamp(ty, -my, my);
     kwrap.style.transform = 'translate(calc(-50% + ' + tx.toFixed(1) + 'px),calc(-50% + ' + ty.toFixed(1) + 'px)) scale(' + s.toFixed(4) + ')';
-    hotX = innerWidth / 2 + ox * s + tx; hotY = innerHeight / 2 + oy * s + ty;
+    hotX = innerWidth / 2 + ox * s + tx; hotY = VH() / 2 + oy * s + ty;
     hot.style.transform = 'translate(' + (ox * s + tx).toFixed(1) + 'px,' + (oy * s + ty).toFixed(1) + 'px)';
     hot.classList.toggle('show', p1 > 0.3 && p1 < PB + 0.04 && isOut());
     /* wer die Schwelle überfährt, hebt den Handschalter oben wieder auf */
@@ -164,7 +173,7 @@
     override = isOut() ? 'on' : 'off'; applyLight(); scene1();
     if (override === 'off' && window.LB) window.LB.toast('Licht aus. Finger oder Maus sind jetzt die Taschenlampe.');
   });
-  function toP1(p) { var top = s1.getBoundingClientRect().top + scrollY; scrollTo({ top: top + (s1.offsetHeight - innerHeight) * p, behavior: reduce ? 'auto' : 'smooth' }); }
+  function toP1(p) { var top = s1.getBoundingClientRect().top + scrollY; scrollTo({ top: top + (s1.offsetHeight - VH()) * p, behavior: reduce ? 'auto' : 'smooth' }); }
   hot.addEventListener('click', function () { toP1(PC + 0.03); });
   $('#replay').addEventListener('click', function () { override = null; scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
   setSwitch(); if (isOut()) startTorch();
@@ -274,7 +283,7 @@
   function shoot() {
     var n = p5 < P5[0] + D5 * 0.9 ? 0 : p5 < P5[1] + D5 * 0.9 ? 1 : 2;
     var top = s5.getBoundingClientRect().top + scrollY;
-    scrollTo({ top: top + (s5.offsetHeight - innerHeight) * (P5[n] + D5 + 0.004), behavior: reduce ? 'auto' : 'smooth' });
+    scrollTo({ top: top + (s5.offsetHeight - VH()) * (P5[n] + D5 + 0.004), behavior: reduce ? 'auto' : 'smooth' });
   }
   function back(t) { t = clamp(t, 0, 1); var c = 1.7; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); }
   function placePols() {
@@ -337,9 +346,12 @@
     if (inView(s5)) scene5();
   }
   function onScroll() { if (!tick) { tick = true; requestAnimationFrame(frame); } }
-  function resize() { fit3(); fitPhone(); frame(); }
+  var lastW = innerWidth;
+  function resize() { lastW = innerWidth; measureVH(); fit3(); fitPhone(); frame(); }
+  /* Touch: reine Höhenänderungen (Adressleiste) ignorieren, sonst wird die Lichtbogen-Leinwand neu aufgebaut und flackert */
+  function onResize() { if (touch && innerWidth === lastW) return; resize(); }
   addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', resize); addEventListener('load', resize);
+  addEventListener('resize', onResize); addEventListener('load', resize);
   resize(); scene1(); scene3(); scene5();
 
   /* ---------- Karten zünden und gehen auf ---------- */

@@ -155,6 +155,7 @@ body.in-film .scrim{background:linear-gradient(90deg,rgba(14,11,9,.55) 0%,rgba(1
 @media (prefers-reduced-motion:reduce){.w>span{transition:none;transform:none}.scrollhint i{animation:none}.veil{transition:none}}
 </style>
 <noscript><style>.blk{opacity:1!important;visibility:visible!important;position:relative;inset:auto;margin:20px}.stick{height:auto}.veil{display:none}[data-ch]{height:auto!important}</style></noscript>
+<link rel="stylesheet" href="mobile-fix.css">
 <link rel="stylesheet" href="../../assets/demo-local.css"></head>
 <body>
 <a class="skip" href="#kontakt">Direkt zum Exposé</a>
@@ -169,6 +170,13 @@ body.in-film .scrim{background:linear-gradient(90deg,rgba(14,11,9,.55) 0%,rgba(1
     <a href="#haus" data-to="aussen">Haus</a><a href="#lobby" data-to="lobby">Lobby</a><a href="#wohnungen" data-to="wohnen">Wohnungen</a><a href="#dach" data-to="dach">Dach</a><a href="#lage" data-to="lage">Lage</a>
   </nav>
   <a class="btn" href="#kontakt">Exposé anfordern</a>
+  <details class="qmenu">
+    <summary><span class="qmenu__icon" aria-hidden="true"><i></i><i></i></span><span>Menü</span></summary>
+    <nav class="qmenu__panel" aria-label="Mobile Navigation">
+      <a href="#haus" data-to="aussen">Haus</a><a href="#lobby" data-to="lobby">Lobby</a><a href="#wohnungen" data-to="wohnen">Wohnungen</a><a href="#dach" data-to="dach">Dach</a><a href="#lage" data-to="lage">Lage</a>
+      <a class="btn" href="#kontakt">Exposé anfordern</a>
+    </nav>
+  </details>
 </header>
 <div id="progress" aria-hidden="true"><i></i></div>
 <p class="demo-note">Demo-Projekt von Projekt EX, fiktive Marke · <a href="../../leistungen/websites.html#quartier">Zurück zu Projekt EX</a></p>
@@ -275,5 +283,6 @@ body.in-film .scrim{background:linear-gradient(90deg,rgba(14,11,9,.55) 0%,rgba(1
   <nav aria-label="Rechtliches"><span>Demo-Projekt von Projekt EX, fiktive Marke. Visualisierungen und Filmszenen sind Beispiele.</span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="lizenzen/LICENSE-three.txt">Lizenzen</a><a href="../../leistungen/websites.html#quartier">Zurück zu Projekt EX</a></nav>
 </footer>
 <script type="module" src="js/main.js"></script>
+<script src="js/mobile-nav.js" defer></script>
 <script src="../../assets/demo-local.js" defer></script></body>
 </html>

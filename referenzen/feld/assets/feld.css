@@ -277,11 +277,13 @@ dl,dd{margin:0}
  .brand{padding-block:3px;margin-block:-3px}
  .link{padding-block:9.5px;margin-block:-3.5px}
  .contact a{display:inline-block;padding:12px 0;margin:-12px 0}
- .field label{padding-block:11.5px;margin-block:-11.5px}
+ .field label{padding-block:12px;margin-block:-12px}
+ main>p:last-child>a{display:inline-block;padding-block:10px;margin-block:-10px}
  .check{padding-block:8px;margin-block:-8px;min-height:44px}
  .opt span{min-height:44px}
  .foot__cols a,.foot__links a{display:inline-flex;align-items:center;min-height:44px}
  .dock{white-space:nowrap}
+ .mg,.film__mm span{font-size:12px}
 }
 /* Ratgeber: unter 900px kein Pin (feld.js) -> Leiste wischbar statt abgeschnitten */
 @media (max-width:900px){
@@ -290,7 +292,6 @@ dl,dd{margin:0}
  .rail__card,.dates{scroll-snap-align:start}
 }
 @media (max-width:700px){
- .mg,.film__mm span{font-size:12px}
  /* Hero-Loop (16:9) im Hochformat: Füller und Tasse statt unscharfem Hintergrund */
  .hero__bg video,.hero__bg img{object-position:72% 50%}
  .erst .bgv{object-position:62% 50%}

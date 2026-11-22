@@ -164,3 +164,21 @@
 .bz[data-sauce="bbq"] .bz__pie.is-sauce-pour::after{background:conic-gradient(from -20deg,transparent 0 10%,rgba(90,35,18,.28) 18%,transparent 30%,rgba(70,28,14,.22) 45%,transparent 60%,rgba(90,35,18,.18) 75%,transparent 90%)}
 .bz[data-sauce="pesto"] .bz__pie.is-sauce-pour::after{background:conic-gradient(from -20deg,transparent 0 10%,rgba(70,110,40,.3) 18%,transparent 30%,rgba(55,95,35,.22) 48%,transparent 62%,rgba(70,110,40,.18) 78%,transparent 90%)}
 @media (prefers-reduced-motion:reduce){.bz__fire i::before,.bz__heat,.bz__sparks i,.bz__pie.is-sauce-pour::after{animation:none}.bz__pie{transition:none}.bz.is-baking .bz__ovenbg,.bz.is-done .bz__ovenbg{filter:blur(10px)}}
+
+/* ===== Mobil-Optimierung 2026-11 (Website unter 900 px, App ohne Handy-Rahmen; Touch-Ziele nur bei Touch) ===== */
+@media (max-width:899px){
+  .bz__lbl{font-size:.78rem}
+  .bz__st{font-size:.75rem}
+  .bz__badge{font-size:.75rem}
+}
+@media (pointer:coarse){
+  /* Größenwahl S/M/L: 44 px statt 40 x 35 px */
+  .bz__size{grid-template-columns:repeat(3,2.75rem)}
+  .bz__size button{height:2.75rem}
+  .bz__sizepill{width:2.75rem;height:2.75rem}
+  .bz__size[data-i="1"] .bz__sizepill{transform:translateX(2.75rem)}
+  .bz__size[data-i="2"] .bz__sizepill{transform:translateX(5.5rem)}
+  /* Minus-Knopf: sichtbar bleibt der kleine Punkt, die Trefferfläche ist 44 px und liegt nach außen (oben links) versetzt */
+  .bz__minus{width:44px;height:44px;top:calc(-.1rem - 16px);right:calc(50% + 1rem - 8px);border-radius:0;
+    background:radial-gradient(circle at calc(100% - 18.4px) calc(100% - 17.6px),var(--bz-ink) 0 10.4px,transparent 11px);place-items:center;padding:16px 8px 7.2px 15.2px;font-size:.85rem}
+}

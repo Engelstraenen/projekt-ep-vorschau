@@ -175,3 +175,44 @@ h1.display{font-size:clamp(3.2rem,9vw,8.4rem);line-height:.92}
 @media (max-width:640px){.res{padding-inline:.75rem;padding-top:7.5rem}.res__copy{padding-inline:.5rem}.res__img{display:none}.res__card{padding:1.3rem 1rem 1.2rem;border-radius:24px}}
 .fab{transition:opacity .2s ease,transform .25s var(--ease-out)}
 body.rz-near .fab{opacity:0;transform:translateY(12px);pointer-events:none}
+
+/* ===== Mobil-Optimierung 2026-11 (nur unter dem Desktop-Umbruch 820 px bzw. Touch; Desktop unverändert) ===== */
+.head__burger{display:none}
+@media (max-width:820px){
+  :root{--bar:44px}
+  .demo-bar a{align-self:stretch;display:flex;align-items:center;padding:0 .5rem;margin-right:-.5rem}
+  .head__logo{display:flex;align-items:center;min-height:44px}
+  /* Mobilmenü: dieselbe Hauptnavigation, als aufklappbare Liste unter dem Logo */
+  .head{flex-wrap:wrap;row-gap:.4rem}
+  .head__burger{display:grid;place-items:center;flex:none;width:44px;height:44px;margin-left:auto;padding:0;border-radius:50%;border:1px solid rgba(243,235,221,.4);background:rgba(28,26,23,.5);color:var(--creme);cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .head__burger span,.head__burger span::before,.head__burger span::after{display:block;width:18px;height:1.5px;border-radius:2px;background:currentColor;transition:transform .25s var(--ease-out),opacity .2s}
+  .head__burger span{position:relative}
+  .head__burger span::before,.head__burger span::after{content:"";position:absolute;left:0}
+  .head__burger span::before{top:-6px}
+  .head__burger span::after{top:6px}
+  .head.is-menu .head__burger span{background:transparent}
+  .head.is-menu .head__burger span::before{transform:translateY(6px) rotate(45deg);background:var(--creme)}
+  .head.is-menu .head__burger span::after{transform:translateY(-6px) rotate(-45deg);background:var(--creme)}
+  .head.is-menu{background:rgba(28,26,23,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding-bottom:1rem}
+  .head.is-menu .head__nav{display:flex;flex-direction:column;gap:0;order:3;flex-basis:100%;margin:0;font-size:1.15rem}
+  .head.is-menu .head__nav a{display:flex;align-items:center;min-height:52px;opacity:1;border-bottom:1px solid rgba(243,235,221,.14)}
+  .head.is-menu .head__nav a::after{display:none}
+  .scrollhint{font-size:.75rem}
+  .menu__item h3 i,.kl h4 i{font-size:.75rem}
+  .kn{font-size:.8rem}
+  /* Film hochkant: Bildausschnitt je Szene auf das Motiv legen (Videos gibt es nur in 16:9) */
+  .layer:nth-child(1) video{object-position:46% 50%}
+  .layer:nth-child(3) video{object-position:48% 50%}
+  .layer:nth-child(6) video{object-position:62% 50%}
+  /* Holzofen-Glut und Funken des Pizza-Builders ragen über den Bildschirmrand: abschneiden, ohne Sticky zu brechen */
+  .bauen{overflow-x:clip}
+}
+@media (max-width:640px){
+  :root{--bar:52px}
+  .demo-bar{font-size:.75rem}
+}
+@media (pointer:coarse){
+  .btn{min-height:44px}
+  .kn a{display:inline-flex;align-items:center;min-height:44px}
+  .foot a{display:inline-flex;align-items:center;min-height:44px}
+}

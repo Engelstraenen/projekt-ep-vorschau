@@ -1,9 +1,20 @@
 // HOLM & CO – Scroll-Regie: Lenis + GSAP ScrollTrigger. Ohne Skript bleibt die Seite vollständig lesbar.
 (function () {
+  // Mobiles Menü: nach Tipp auf einen Eintrag, mit Esc oder Tipp daneben schließen (sonst blieb es offen über der Seite)
+  var menu = document.querySelector('details.menu');
+  if (menu) {
+    var shut = function () { menu.removeAttribute('open'); };
+    menu.querySelectorAll('.menu__panel a').forEach(function (a) { a.addEventListener('click', shut); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.open) { shut(); menu.querySelector('summary').focus(); } });
+    document.addEventListener('click', function (e) { if (menu.open && !menu.contains(e.target)) shut(); });
+  }
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!window.gsap || !window.ScrollTrigger || reduce) return;
   document.documentElement.classList.add('gs');
   gsap.registerPlugin(ScrollTrigger);
+  // Touch/Tablet/Phone: Höhenänderungen durch die einblendende Adressleiste lösen kein Neu-Layout aus
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  var touchUI = matchMedia('(max-width: 1060px), (pointer: coarse)').matches;
   if (window.Lenis) {
     var lenis = new Lenis({ lerp: .1, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
@@ -24,7 +35,8 @@
     });
     gsap.from('.hero h1 .ch', { yPercent: 110, rotate: 6, duration: 1.1, ease: 'expo.out', stagger: .035, delay: .15 });
   }
-  gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=90%', scrub: true, pin: true, pinSpacing: true } })
+  // Desktop: Hero gepinnt. Touch/Tablet/Phone: derselbe Effekt ohne Pin (Pin-Wechsel auf position:fixed ruckelt bei nativem Touch-Scroll)
+  gsap.timeline({ scrollTrigger: touchUI ? { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } : { trigger: '.hero', start: 'top top', end: '+=90%', scrub: true, pin: true, pinSpacing: true } })
     .to('.hero__media', { clipPath: 'inset(7% 7% 12% 7% round 6px)', ease: 'none' }, 0)
     .to('.hero__media img', { scale: 1.12, ease: 'none' }, 0)
     .to('.hero h1 .ln:first-child', { xPercent: -14, ease: 'none' }, 0)

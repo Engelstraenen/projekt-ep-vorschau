@@ -32,12 +32,15 @@
     $$('i', dots).forEach(function (d, n) { d.classList.toggle('on', n <= i); });
     card.classList.remove('sw'); void card.offsetWidth; card.classList.add('sw');
   }
+  /* Touch: feste Bühnenhöhe (100svh) statt innerHeight, damit die Adressleiste die Schritte nicht verschiebt */
+  var touch = matchMedia('(hover: none), (pointer: coarse)').matches;
+  function VH() { return touch ? (stage.clientHeight || innerHeight) : innerHeight; }
   var tick = false;
   function onScroll() {
     if (tick) return; tick = true;
     requestAnimationFrame(function () {
       tick = false;
-      var r = hs.getBoundingClientRect(), p = Math.max(0, Math.min(0.999, -r.top / (r.height - innerHeight)));
+      var r = hs.getBoundingClientRect(), p = Math.max(0, Math.min(0.999, -r.top / (r.height - VH())));
       go(Math.floor(p * Z.length));
     });
   }
@@ -59,9 +62,20 @@
     var i = Z.map(function (x) { return x.z; }).indexOf(z);
     if (i > -1 && i !== step) {
       var r = hs.getBoundingClientRect(), top = r.top + scrollY;
-      scrollTo({ top: top + (i + 0.5) / Z.length * (r.height - innerHeight), behavior: 'smooth' });
+      scrollTo({ top: top + (i + 0.5) / Z.length * (r.height - VH()), behavior: 'smooth' });
     }
   }
+  /* Touch: unsichtbare Trefferfläche je Schalter, mindestens 92 Einheiten der Zeichnung (= 44 px in der Gesamtansicht am Handy) */
+  if (touch) $$('.hot').forEach(function (el) {
+    try {
+      var bb = el.getBBox(), w = Math.max(bb.width, 92), h = Math.max(bb.height, 92);
+      var hit = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      hit.setAttribute('class', 'hot-hit'); hit.setAttribute('fill', 'transparent');
+      hit.setAttribute('x', (bb.x + bb.width / 2 - w / 2).toFixed(1)); hit.setAttribute('y', (bb.y + bb.height / 2 - h / 2).toFixed(1));
+      hit.setAttribute('width', w.toFixed(1)); hit.setAttribute('height', h.toFixed(1));
+      el.insertBefore(hit, el.firstChild);
+    } catch (e) {}
+  });
   $$('.hot').forEach(function (el) {
     el.addEventListener('click', function () { act(el); });
     el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(el); } });

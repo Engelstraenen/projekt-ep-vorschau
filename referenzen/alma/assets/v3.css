@@ -256,3 +256,36 @@ img{display:block;max-width:100%}a{color:inherit}
   .ch__k{justify-content:flex-start}
   .ch__lead{margin-inline:0}
 }
+
+/* ===== Mobil/Tablet (2026-11): nur <=800px (Breakpoint der Seite), Desktop unverändert ===== */
+@media (max-width:800px){
+ /* Bühne an der großen Viewport-Höhe fest: Adressleiste ein/aus skaliert das Bild nicht mehr */
+ .stage{bottom:auto;height:100vh;height:100lvh}
+ /* HUD unten statt mittig (überlagerte sonst Probe und Text auf normal hohen Handys) */
+ .ch__hud{top:auto;bottom:calc(20px + env(safe-area-inset-bottom,0px));translate:none;width:auto}
+ /* Mini-Beschriftungen in SVG-Instrumenten: lesbar groß oder (zu schmale Spalte) weglassen */
+ .alt__ticks text{display:none}
+ .map__lbl text{font-size:13px}
+ .hud--map:not(:only-child) .map__lbl{display:none}
+ .curve__grid text,.curve__fc text{font-size:18px}
+ .ch__lead{text-shadow:0 1px 14px rgba(8,5,4,.85),0 0 2px rgba(8,5,4,.6)}
+ .ch__k{text-shadow:0 1px 10px rgba(8,5,4,.8)}
+ /* Schrift >= 12px */
+ .hl,.ch__k,.top__cta,.hv span,.row__n,.logo span,.bars span,.roast span,.grind p,.recipe{font-size:12px}
+ .hl{letter-spacing:.12em}
+ /* Ring-Werte im selben Grid-Feld wie der Ring: bleiben mittig, auch wenn das Label umbricht */
+ .hud--ring .ring,.hud--brew .ring,.hud--ring .hv--in,.hud--brew .hv--in{grid-area:2/1}
+ .hud--ring .hv--in,.hud--brew .hv--in{position:relative;top:auto;left:auto;translate:none;align-self:center}
+ /* Tap-Ziele >= 44px */
+ .skip{left:8px;top:-80px;padding:12px 16px}.skip:focus{left:8px;top:8px}
+ .logo{padding-block:7px;margin-block:-7px}
+ .top__cta{display:inline-flex;align-items:center;min-height:44px;padding:0 16px}
+ .foot__grid ul{gap:0}
+ .foot__grid a{display:inline-flex;align-items:center;min-height:44px}
+ /* niedrige Handys: Kopf etwas höher, HUD kompakter (svh = stabil, springt nicht mit der Adressleiste) */
+ .ch__txt{top:clamp(80px,13svh,96px)}
+ .ch__hud{gap:min(18px,2.4svh)}
+ .ring{width:min(96px,13svh);height:min(96px,13svh)}.hud--ring .hv--in,.hud--brew .hv--in{width:min(96px,13svh)}
+ .bars{height:min(80px,10svh)}
+ .alt{height:min(110px,14svh)}
+}

@@ -431,3 +431,37 @@ html.out.film .shade{display:none}
 .nd-stage.hold .nd-re span{width:0;height:0;border:8px solid transparent;border-left:13px solid #fff;border-right:0;margin-left:4px}
 @media (min-width:860px){.nd-in{grid-template-columns:.85fr 1.15fr;gap:54px}}
 @media (prefers-reduced-motion:reduce){.nd-stage *{animation:none!important}.nd-check{stroke-dashoffset:0}.sc5 .w{fill:#ffc35a}}
+
+/* ===== Mobil-Optimierung 2026-11 (nur unter 720 px bzw. Touch/Tablet, Desktop unverändert) ===== */
+@media (max-width:719px){
+  /* Szene 1 hochkant: Film formatfüllend (cover) statt 16:9-Streifen mit schwarzen Flächen oben und unten.
+     Bühne ist 100svh hoch, der Film 2752:1536, also mindestens 179,17svh breit. */
+  .k-wrap{width:max(100vw,179.17svh)}
+  .vf-n{font-size:max(12px,5.6cqw)}
+  .cam-cnt{font-size:.9rem}
+  .arc-cap{font-size:.9rem;bottom:96px}
+}
+@media (max-width:1023px){
+  /* Handy und Tablet: kleine Beschriftungen mindestens 12 px */
+  [data-v="3"] .demo{font-size:.78rem;padding:6px 0}
+  .hint-scroll{font-size:.75rem}
+  .bsp{font-size:.75rem}
+}
+@media (min-width:720px) and (max-width:1023px){
+  /* Tablet hochkant: Aussage und Knöpfe untereinander, sonst ragt der Notdienst-Knopf aus der schmalen Spalte */
+  .hero-grid{grid-template-columns:1fr;gap:26px}
+}
+@media (max-width:1199px){
+  /* Tablet: die drei Schritt-Karten tragen auch die Klasse .rv (Bewertungskarte, feste 360 px) und liefen bei 768 px
+     bis 1144 px aus dem Bild. Unter 1200 px füllen sie wieder ihre Rasterzelle. */
+  .grid3>.card.rv{width:auto}
+}
+@media (pointer:coarse){
+  /* Auslöser im Sucher: mindestens 44 px */
+  .vf-shut{width:max(44px,19cqw);height:max(44px,19cqw);margin-left:calc(max(44px,19cqw) / -2)}
+  .lsw{height:44px}
+  .textbtn{min-height:44px}
+  /* Hover-Effekte bleiben nach dem Antippen nicht kleben */
+  .svc.lit:hover{transform:none}
+  .rv:hover{transform:none}
+}

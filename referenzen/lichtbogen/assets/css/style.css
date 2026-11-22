@@ -505,3 +505,44 @@ body:has(.viz)::after{display:none!important}
   #viz-wb.mw>.viz-svg{height:56.25cqw!important;aspect-ratio:auto}
   #viz-wb.mw .mw-bat,#viz-wb.mw .mw-cap{margin:0 6px}
 }
+
+/* ===== Mobil-Optimierung 2026-11: nur unter dem Desktop-Umbruch (720 px) bzw. bei Touch, Desktop bleibt unverändert ===== */
+@media (max-width:719px){
+  html{scroll-padding-top:124px}
+  .head-in{gap:10px}
+  .logo{min-height:44px}
+  /* Seitenmenü (Start, Rechner, Foto-Check, Jobs): Pillen 44 px hoch */
+  .subnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 15px;font-size:.9rem}
+  .tool{flex:none;width:44px;height:44px}
+  /* Kopf ist durch die höheren Pillen 6 px höher: klebende Elemente darunter nachziehen */
+  .viz{top:118px}
+  .timer{top:122px}
+  [data-v="1"] .viz,[data-v="1"] .timer{top:8px}
+  /* Foto-Check: lange Wörter in den drei Feldern umbrechen statt abschneiden */
+  .slot b,.slot{-webkit-hyphens:auto;hyphens:auto;overflow-wrap:anywhere}
+  /* Rechner-Szene: Beschriftungen in den Tafeln mindestens 12 px */
+  .mw-bat span,.mw-cap span,.mw-clock span{font-size:max(12px,2.6cqw)}
+  .hud span{font-size:max(12px,2.6cqw)}
+  .chip{font-size:max(12px,2.5cqw)}
+  .wn p span,.wp p span,.wr p span{font-size:max(12px,2.5cqw)}
+  .wn-track u{font-size:max(11px,2.1cqw)}
+  .fuse span{font-size:.75rem}
+  .tag{font-size:.75rem}
+}
+@media (max-width:1023px){
+  .logo small{font-size:.75rem;letter-spacing:.04em}
+}
+@media (pointer:coarse){
+  /* Tippflächen mindestens 44 px (Tablet und Handy) */
+  .demo a{display:inline-block;padding:15px 4px;margin:-15px -4px}
+  .logo{min-height:44px}
+  .tool{flex:none;width:44px;height:44px}
+  .btn--sm{min-height:44px}
+  .nav a{display:inline-flex;align-items:center;min-height:44px}
+  .soc-i{width:44px;height:44px}
+  .foot nav a{display:inline-flex;align-items:center;min-height:44px;min-width:44px}
+  .textbtn{min-height:44px}
+  summary{padding:11px 0}
+  input[type=range]{height:44px}
+  .field>label{min-height:44px;align-items:center}
+}

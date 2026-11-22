@@ -1,0 +1,57 @@
+/* HOLM & CO – Mobil-/Tablet-Korrekturen (PROJEKT EX, Mobil-Check 2026-11).
+   Alle Regeln greifen nur unterhalb des Desktop-Umbruchs der Seite (1060px) bzw. im Hochformat;
+   die Desktop-Ansicht bleibt unverändert. In der Astro-Quelle gehört dieser Block ans Ende des
+   globalen Stylesheets (Layout), damit er auf allen Seiten gilt. */
+
+@media (width<=1060px){
+  /* Kein seitliches Scrollen: Die Laufschrift .kin (nowrap, 15vw) blähte die einzige Grid-Spalte
+     von .sec__head auf ~1120px auf; Überschrift und Absatz liefen rechts aus dem Bild. */
+  .sec__head{grid-template-columns:minmax(0,1fr)}
+  .sec__head>*{min-width:0}
+  #leistungen{overflow-x:hidden;overflow-x:clip}
+
+  /* Mobile Navigation: Panel direkt unter der (sticky) Kopfzeile statt fest bei top:100/108px –
+     backdrop-filter macht .head in Safari zum Bezugsrahmen, dann klaffte eine Lücke. */
+  .menu:not([open]) .menu__panel{display:none}
+  .menu__panel{position:absolute;top:100%;max-height:calc(100svh - 64px);overflow-y:auto;overscroll-behavior:contain}
+
+  /* Tap-Ziele ≥ 44px (Trefferfläche vergrößert, Layout bleibt) */
+  .demo-bar a{display:inline-block;padding-block:11.5px;margin-block:-3.5px}
+  .logo{min-height:44px}
+  .btn--small{min-height:44px}
+  .chip span{min-height:44px}
+  .field label,.check{padding-block:10.5px;margin-block:-10.5px}
+  .foot li a{padding-block:9px}
+  main#inhalt>p:last-child{line-height:44px}
+  main#inhalt>p:last-child>a{display:inline-block}
+
+  /* Rechtstexte (Impressum, Datenschutz) hatten keinen Seitenrand: Text klebte am Displayrand */
+  main#inhalt:has(>h1){max-width:820px;padding:clamp(48px,9vw,96px) var(--pad) clamp(72px,10vw,120px)}
+  main#inhalt:has(>h1) h1{margin-bottom:28px;font-size:clamp(44px,11vw,80px)}
+  main#inhalt:has(>h1) h2{margin:40px 0 12px;font-size:clamp(26px,6.4vw,36px)}
+  main#inhalt:has(>h1) p{color:var(--muted);margin-bottom:14px}
+  main#inhalt:has(>h1) a{color:var(--oak-d)}
+}
+
+@media (width<=700px){
+  /* Holzwahl: „Räuchereiche“ (Chip + Text nebeneinander) war breiter als die halbe Spalte –
+     bei 360px lief die rechte Spalte 29px aus dem Bild. Jetzt gleich breite Kacheln, Chip über dem Namen. */
+  .mat__pick{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mat__opt{flex-direction:column;align-items:flex-start;gap:10px;padding:14px;font-size:18px}
+  .mat__chip{width:30px;height:30px}
+
+  /* Fußzeilen-Schriftzug (nowrap, 48px) war rechts abgeschnitten: umbrechen statt abschneiden */
+  .foot__big{white-space:normal;font-size:clamp(48px,15.5vw,100px);line-height:.92}
+}
+
+/* Tablet im Hochformat (z. B. 768×1024): Film-Kapitel wie auf dem Phone – Bild oben (62 %),
+   Text darunter auf dunklem Grund. Vorher füllte der 16:9-Film das Hochformat (nur ~42 % der
+   Bildbreite sichtbar) und der Text lag schlecht lesbar mitten im Bild. */
+@media (701px<=width<=1060px) and (orientation:portrait){
+  .story__cv{height:62%}
+  .story__shade{background:linear-gradient(#1c161100 40%,#1c1611 62%)}
+  .story__txt{padding-bottom:48px}
+  .story__st{max-width:620px}
+  .story__mm{top:auto;bottom:46%;translate:0}
+  .story__bar{height:16vh}
+}
