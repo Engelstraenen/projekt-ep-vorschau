@@ -478,7 +478,7 @@ html.out.film .shade{display:none}
   .cam-txt .big{font-size:clamp(1.45rem,4.2vw,3.5rem);-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
   .beat.low{bottom:8svh}
   .arc-cap{bottom:16px}
-  .nd-stage{max-width:min(100%,140svh);margin-inline:auto}
+  .nd-stage{width:100%;max-width:min(100%,140svh);justify-self:center;margin-inline:auto}
 }
 @media (orientation:landscape) and (max-height:500px) and (pointer:coarse) and (max-width:719px){
   /* Foto-Szene quer: Text links neben dem Handy wie am Desktop statt unten quer darüber */

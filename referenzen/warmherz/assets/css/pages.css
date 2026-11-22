@@ -417,8 +417,8 @@ body[data-page="foto-check"] .fab-foto{display:none}
   /* Vorher/Nachher-Kopf: Etiketten oben nicht über der Brotkrumen-Zeile */
   .ba-hero .in{padding-top:58px}
 }
-/* ---------- Runde 2: sehr schmale Handys (320–400 px) ---------- */
-@media (max-width:400px){
+/* ---------- Runde 2: sehr schmale Handys (320–380 px) ---------- */
+@media (max-width:380px){
   h1,h2,h3{-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
   h2{font-size:clamp(32px,10vw,40px)}
   .phone{width:min(300px,calc(100% - 28px))}

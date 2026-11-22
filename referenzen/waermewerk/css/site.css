@@ -346,9 +346,9 @@ p{margin:0;text-wrap:pretty}
  .film__deg{top:84px}
 }
 /* Runde 2: Touch-Tablet quer (Desktop-Navigation sichtbar) – Navigationslinks 44px hoch */
-@media (min-width:901px) and (hover:none) and (pointer:coarse){.nav a:not(.btn){padding-block:12px;margin-block:-12px}.nav .btn--sm{min-height:44px}}
+@media (min-width:901px) and (hover:none) and (pointer:coarse){.nav a:not(.btn){padding:12px 5px;margin:-12px -5px}.nav .btn--sm{min-height:46px}}
 /* 320 px: Bauart-Tabs passen in die Breite statt rechts abgeschnitten */
-@media (max-width:400px){.tabs__list{display:flex;width:100%}.tab{flex:1 1 0;padding:12px 6px;font-size:14px}}
+@media (max-width:400px){.tabs__list{display:flex;width:100%}.tab{flex:1 1 0;padding:12px 6px;font-size:14px;min-height:46px}}
 /* Querformat-Handys (Höhe <= 500px): Film als Vollbild-Bühne mit kompakter Bildunterschrift, Bühnen passen in die Höhe */
 @media (orientation:landscape) and (max-height:500px) and (max-width:900px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
  .hero h1{font-size:clamp(40px,12vh,56px)}

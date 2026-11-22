@@ -64,3 +64,7 @@
 @media (pointer:coarse) and (min-width:901px){
 .editorial-site .tl-hotspot-heat>b,.editorial-site .tl-hotspot-sos>b{white-space:normal;max-width:84px;padding:4px 6px;line-height:1.3}
 }
+/* Touch-Desktop-Anordnung (> 1100px): Ziel-Liste der Karte mit 44px Zeilen */
+@media (pointer:coarse){
+.em-destination-list>button{min-height:44px}
+}

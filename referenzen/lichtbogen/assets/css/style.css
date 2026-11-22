@@ -573,7 +573,7 @@ body:has(.viz)::after{display:none!important}
   .toast{bottom:20px}
   /* Rechner und Jobs: nichts klebt, was höher als der halbe Bildschirm ist */
   .viz{position:relative;top:auto}
-  .res{position:static}
+  .res{position:relative;top:auto}   /* relative statt static: die Karte bleibt Bezugsrahmen ihres Lichtstreifens (::before) */
   .timer{top:8px}
 }
 /* ===== Runde 2: sehr schmale Handys (320 px, iPhone SE 1) ===== */
