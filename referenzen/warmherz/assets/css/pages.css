@@ -300,7 +300,7 @@ body[data-page="foto-check"] .fab-foto{display:none}
   .burger[aria-expanded="true"] i:first-child,.burger[aria-expanded="true"] i:last-child{top:21px}
   .burger[aria-expanded="true"] i:first-child{transform:rotate(45deg)}
   .burger[aria-expanded="true"] i:last-child{transform:rotate(-45deg)}
-  .links.open{gap:4px;max-height:calc(100vh - 64px);max-height:calc(100svh - 64px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+  .links.open{background:#0e0e0e;gap:4px;max-height:calc(100vh - 64px);max-height:calc(100svh - 64px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
   .links.open > a,.links.open .dd-btn{min-height:44px;display:flex;align-items:center}
   .links.open .nav-foto{margin:6px 0}
   .links.open .dd-menu a{padding:10px 14px}
