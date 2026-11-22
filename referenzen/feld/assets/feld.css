@@ -268,3 +268,44 @@ dl,dd{margin:0}
 .film__st:first-child{opacity:1}
 
 .quote .wrap{padding-block:clamp(12px,2vw,24px)}
+
+/* ===== Mobil/Tablet (2026-11): nur unterhalb des Desktop-Breakpoints (960px), Desktop unverändert ===== */
+@media (max-width:960px){
+ /* Tap-Ziele >= 44px: Trefferfläche per Padding + negativem Margin, Layout bleibt gleich */
+ .skip{padding:13px 16px}
+ .demo-bar a{display:inline-block;padding:12px 0;margin:-12px 0}
+ .brand{padding-block:3px;margin-block:-3px}
+ .link{padding-block:9.5px;margin-block:-3.5px}
+ .contact a{display:inline-block;padding:12px 0;margin:-12px 0}
+ .field label{padding-block:11.5px;margin-block:-11.5px}
+ .check{padding-block:8px;margin-block:-8px;min-height:44px}
+ .opt span{min-height:44px}
+ .foot__cols a,.foot__links a{display:inline-flex;align-items:center;min-height:44px}
+ .dock{white-space:nowrap}
+}
+/* Ratgeber: unter 900px kein Pin (feld.js) -> Leiste wischbar statt abgeschnitten */
+@media (max-width:900px){
+ .rail__track{width:auto;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--m);-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
+ .rail__track::-webkit-scrollbar{display:none}
+ .rail__card,.dates{scroll-snap-align:start}
+}
+@media (max-width:700px){
+ .mg,.film__mm span{font-size:12px}
+ /* Hero-Loop (16:9) im Hochformat: Füller und Tasse statt unscharfem Hintergrund */
+ .hero__bg video,.hero__bg img{object-position:72% 50%}
+ .erst .bgv{object-position:62% 50%}
+ .foot .bgv{object-position:72% 50%}
+}
+@media (max-width:560px){.steps li,.steps li+li{padding-left:0;padding-right:0}}
+/* Film als gestapelte Bühne auch auf Tablets im Hochformat (Bild oben, Text unten) */
+@media (min-width:701px) and (max-width:960px) and (orientation:portrait){
+ .film__cv{height:60%}
+ .film__shade{background:linear-gradient(180deg,rgba(22,19,15,.2) 0%,transparent 22%,transparent 40%,rgba(22,19,15,.96) 61%)}
+ .film__st{max-width:620px}
+ .film__st h2{font-size:44px}
+ .film__st p{font-size:17px}
+ .film__mm{top:auto;bottom:44%;translate:0}
+ .film__bar{height:18vh}
+ .film__words span{font-size:150px}
+ .hero__bg video,.hero__bg img{object-position:66% 50%}
+}
