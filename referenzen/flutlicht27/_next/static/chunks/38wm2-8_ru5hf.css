@@ -37,3 +37,9 @@ html.pex-menu-open .nav ul a{display:flex;align-items:center;min-height:52px;fon
 }
 .pex-menu-btn{display:none}
 @media (max-width:900px){.pex-menu-btn{display:grid}}
+/* Videos im Hochformat (16:9-Material, cover schneidet ~70 % der Breite weg): Fokuspunkt je Clip.
+   Clip 1 (Action): Spieler links der Bildmitte; Clip 3 (Bar): Ball + Glas leicht rechts; Clip 2 (Match) bleibt mittig (Netz). */
+@media (max-width:900px) and (orientation:portrait){
+.clip[data-clip="1"]{object-position:38% 50%}
+.clip[data-clip="3"]{object-position:54% 50%}
+}
