@@ -33,8 +33,25 @@ DirectoryIndex index.html
   RewriteRule ^leistungen/ki-werbeclips(\.html)?$ /leistungen/werbeclips [R=301,L]
   RewriteRule ^widerruf(\.html)?/?$ /rechtliches [R=301,L]
 
-  # 4) Saubere URLs: /faq -> faq.html (passend zu den Canonical-Tags)
-  RewriteCond %{REQUEST_FILENAME} !-d
+  # 3b) SEO-Paket 11/2026: .html-Adressen dauerhaft auf saubere URLs (ein 301-Sprung, Query bleibt erhalten).
+  #     Nur Hauptseiten (Wurzel, leistungen/, branchen/). Demo-Ordner (referenzen/, demos/, vorschau/, lab/ ...) bleiben unberuehrt.
+  #     THE_REQUEST = vom Browser wirklich angefragte Adresse -> keine Schleife mit der internen Umschreibung in 4).
+  #     REDIRECT_STATUS leer = nur echte Anfragen, nicht die interne 404-Fehlerseite.
+  RewriteCond %{ENV:REDIRECT_STATUS} ^$
+  RewriteCond %{THE_REQUEST} ^[A-Z]+\s/+index\.html[\s?]
+  RewriteRule ^index\.html$ / [R=301,L]
+  RewriteCond %{ENV:REDIRECT_STATUS} ^$
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteCond %{THE_REQUEST} ^[A-Z]+\s/+[^?\s]+\.html[\s?]
+  RewriteRule ^((?:leistungen/|branchen/)?[^/]+)\.html$ /$1 [R=301,L,NE]
+  #     Schraegstrich am Ende einer Seite (/faq/) -> /faq, sonst stimmen relative Links nicht
+  RewriteCond %{ENV:REDIRECT_STATUS} ^$
+  RewriteCond %{REQUEST_URI} ^/((?:leistungen/|branchen/)?[^/]+)/$
+  RewriteCond %{DOCUMENT_ROOT}/%1.html -f
+  RewriteRule ^ /%1 [R=301,L]
+
+  # 4) Saubere URLs: /faq -> faq.html (passend zu den Canonical-Tags).
+  #    Ohne "!-d": /branchen (Seite branchen.html UND Ordner branchen/) liefert die Seite statt 403.
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.+?)/?$ /$1.html [L]
 </IfModule>
@@ -54,7 +71,7 @@ ErrorDocument 404 /404.html
   Header always unset X-Powered-By
   Header unset X-Powered-By
   # CSP-BEGIN
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-B7tdwna2T5tu2b+Z0FSSuI0toY0O0CpGCdwjP2POEGw=' 'sha256-DOSzzHudZur9nA1X6CXT0D99FkUpIK1eU5MLhvI9hEw=' 'sha256-GNH/OzHntoG96nZw+hCSKjYqkJ5NLSXTvXEReWSPJF8=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-ORYTzHdG9jJqWlDOTrWg8cvAnrL+YPXKAFnyDkv7gAs=' 'sha256-WZRJfWvsnNCPcxzZwvyhovnZGqhZaC+8gPGPRbx6wTk=' 'sha256-Z2bDqGIPmcVKFMBT9xfS4rdRZ90pvzKggQIXe2FWlN4=' 'sha256-hjVn+IRsqvrt8bMHeAuDaoUehRtmyqdrzqX5qm/5igI=' 'sha256-jRmPsbsPwu8oEM8kbjPs5Zz0wagNXEpsG6Wg1pI6/m4=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests; frame-ancestors 'none'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-B7tdwna2T5tu2b+Z0FSSuI0toY0O0CpGCdwjP2POEGw=' 'sha256-DOSzzHudZur9nA1X6CXT0D99FkUpIK1eU5MLhvI9hEw=' 'sha256-GNH/OzHntoG96nZw+hCSKjYqkJ5NLSXTvXEReWSPJF8=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-Q6I5IfKlI+ibJ5vI4h/sZtrxKeGSFSTV14oGzfXoqIE=' 'sha256-WZRJfWvsnNCPcxzZwvyhovnZGqhZaC+8gPGPRbx6wTk=' 'sha256-WpiYNAJzQaohBxw9ijXZKGkXwuqQ3k+8G8638bkuhDU=' 'sha256-Z2bDqGIPmcVKFMBT9xfS4rdRZ90pvzKggQIXe2FWlN4=' 'sha256-jRmPsbsPwu8oEM8kbjPs5Zz0wagNXEpsG6Wg1pI6/m4=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests; frame-ancestors 'none'"
   # CSP-END
 
   # Caching: HTML kurz, Assets lang
