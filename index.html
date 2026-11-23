@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-Y5UdLspFwDMS5o2estCDjvxOJuwh3KP0H3+vuQKD9A8=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6SYSAYD/XmJo0bydQxoSp4QK6ZYYKeTaHk5n2UTLR9s=' 'sha256-NG8xqvrKrX82LRSWTe54jx9hJYkJ+X9aWHJWybojydU=' 'sha256-NYQYEEdVfUYaWS8zawz+2W1gWHFaer3Yf9ULIKnByZc=' 'sha256-lwu4Z0JOnSGfixHhdKUnk5Crnd+joEnkGlRObwtm8Ck=' 'sha256-tailY8JBFgwNmdhLzbQ2iAuA80ZU19ZDvkmOYibwUZQ=' 'sha256-vs9+pzqcNrXcb8XBunFuIivrkBFsUu9w8vDWUYtMvDY=' 'sha256-z+vUOCn7r76JKSqm5W12EexkOH1518Qt5hcRm3Xu2mo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message || e.target?.src || e))); addEventListener("unhandledrejection", (e) => window.__errs.push("Promise: " + (e.reason?.message || e.reason))); { const ce = console.error; console.error = (...a) => { window.__errs.push("Konsole: " + a.join(" ").slice(0, 300)); ce.apply(console, a); }; }</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -311,13 +311,13 @@
   section[data-dom] .copy { grid-row: 1; }
   @media (max-width: 860px) {
     section[data-dom] .sticky { grid-template-rows: 1fr auto; }
-    section[data-dom] .dom-img { grid-column: 1; grid-row: 1; width: min(100%, calc((100% ) * 1)); max-height: 100%; align-self: center; }
+    section[data-dom] .dom-img { grid-column: 1; grid-row: 1; width: min(100%, var(--pw, 100%)); max-height: 100%; align-self: center; }
     section[data-dom] .copy { grid-row: 2; }
   }
   /* Fotos hinter dem Schwarm (data-flock): +50 % breiter als vorher (Handy 70 % der Inhaltsbreite → ~92 % der Bildschirmbreite,
      16 px Rand). Der Schwarm skaliert in flockPlace() mit der Bildbreite mit und bleibt oben/unten und an den Rändern sichtbar. */
   @media (max-width: 860px) and (orientation: portrait) {
-    section[data-flock] .dom-img { --w: calc(100% + 2 * var(--gutter) - 32px); width: var(--w); max-height: none; justify-self: start; margin-left: calc((100% - var(--w)) / 2); } /* alle Schwarm-Fotos gleich groß (Bildschirmbreite − 2 × 16 px), unabhängig von der Textlänge – reicht der Platz nicht, wird das Kapitel länger (fitChapters) */
+    section[data-flock] .dom-img { --w: min(calc(100% + 2 * var(--gutter) - 32px), var(--pw, 100vw)); width: var(--w); max-height: none; justify-self: start; margin-left: calc((100% - var(--w)) / 2); } /* alle Schwarm-Fotos gleich groß (Bildschirmbreite − 2 × 16 px), unabhängig von der Textlänge – reicht der Platz nicht, wird das Kapitel länger (fitChapters) */
   }
   @media (max-width: 860px) and (orientation: landscape) { section[data-flock] .dom-img { width: 70%; } } /* Handy quer: wie bisher, sonst fehlt die Höhe */
   /* Desktop/Tablet quer: das Foto wächst in den äußeren Rand und bis an die Textspalte (Text bleibt frei) */
@@ -401,6 +401,7 @@
   @media (prefers-reduced-motion: reduce) { .vthumb .vplay::before { animation: none; } }
   .kino { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 24px; background: rgba(10,10,14,.72); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); opacity: 0; pointer-events: none; transition: opacity .4s var(--ease); }
   .kino.open { opacity: 1; pointer-events: auto; }
+  @media (max-width: 860px) { .kino:not(.open) { visibility: hidden; transition: opacity .4s var(--ease), visibility 0s linear .4s; } } /* Handy: geschlossener Film-Dialog ganz aus dem Trefferbereich (sein × lag über „Menü“); Öffnen und Ausblenden sehen gleich aus */
   .kino .vplayer { width: min(1360px, 100%, calc((100svh - 120px) * 16 / 9)); transform: scale(.94); transition: transform .5s var(--ease); }
   .kino.open .vplayer { transform: none; }
   .kino .close { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 22px; cursor: pointer; }
@@ -786,7 +787,11 @@
         </ul>
       </div>
     </section>
-    <footer class="epf" id="epf" role="contentinfo">
+    </div>
+  </section>
+</main>
+<!-- Seitenfuß als eigener Seitenbereich nach <main> (nicht Teil des Kontakt-Kapitels): sieht unverändert aus -->
+<footer class="epf" id="epf" role="contentinfo">
   <div class="epf-cta">
     <p class="epf-kicker">Projekt starten</p>
     <p class="epf-big"><a href="kontakt.html">Erzähl uns von deiner Idee. <span>Wir machen sie sichtbar.</span><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></p>
@@ -802,9 +807,6 @@
   <div class="epf-mark" aria-hidden="true"><span>PROJEKT</span><b>EX</b></div>
   <p class="epf-legal"><span>© 2026 PROJEKT EX</span><span>Vom ersten Gedanken. Zum fertigen Ergebnis.</span></p>
 </footer>
-    </div>
-  </section>
-</main>
 
 <!-- es-module-shims entfernt (Audit 10/2026): löste unter strikter CSP blob:-Skripte aus; Import-Maps können alle aktuellen Browser nativ (Safari ab 16.4). -->
 <script type="importmap">
@@ -1017,14 +1019,24 @@ let anchors = [];
 const svhProbe = Object.assign(document.createElement('div'), { ariaHidden: 'true' });
 svhProbe.style.cssText = 'position:absolute;left:0;top:0;width:1px;height:100vh;height:100svh;visibility:hidden;pointer-events:none';
 document.body.append(svhProbe);
+const PH_MIN = .55; // Handy hochkant: kleinste Fotohöhe (Anteil der vollen 3:2-Höhe), damit der Detail-Link am Kapitelanfang sichtbar ist
 function fitChapters() {
   const W = innerWidth, svh = svhProbe.offsetHeight, stacked = W <= 860 && W < innerHeight;
   for (const s of document.querySelectorAll('section.ch[data-dom]')) {
     const st = s.querySelector('.sticky'), cp = s.querySelector('.copy'), cs = getComputedStyle(st);
     const padT = parseFloat(cs.paddingTop), padB = parseFloat(cs.paddingBottom);
-    let need;
-    if (stacked) need = padT + 16 + (W - 32) * IMG_H / IMG_W + 20 + cp.offsetHeight + padB; // Kopfzeile · Foto (3:2) · Text
-    else need = padT + 32 + cp.offsetHeight + 32; // Text neben dem Foto (Desktop/Tablet; Handy quer: sonst wird längerer Text unten abgeschnitten)
+    let need, ph = 0;
+    if (stacked) {
+      const full = (W - 32) * IMG_H / IMG_W, rest = padT + 16 + 20 + cp.offsetHeight; // Kopfzeile · Foto (3:2) · Text
+      // Detail-Link schon am Kapitelanfang ganz im Bild: fehlen dafür ein paar Pixel Höhe, wird das Foto so weit kleiner (höchstens bis PH_MIN).
+      // Die Fotogröße kommt nur aus Bildschirmhöhe und Textmaßen (Layout, ohne Transform), nie aus der gemessenen Fotohöhe – keine Rückkopplung wie am 20.11.
+      const lk = cp.querySelector('a.more'); let lb = cp.offsetHeight; // Unterkante des Detail-Links im Textblock
+      if (lk) { let y = lk.offsetTop + lk.offsetHeight, e = lk.offsetParent; while (e && e !== cp && cp.contains(e)) { y += e.offsetTop; e = e.offsetParent; } lb = e === cp ? y : y - cp.offsetTop; }
+      const room = Math.floor(svh - 8 - (rest - cp.offsetHeight + lb));
+      if (room < full && room >= full * PH_MIN) ph = room;
+      need = rest + (ph || full) + padB;
+    } else need = padT + 32 + cp.offsetHeight + 32; // Text neben dem Foto (Desktop/Tablet; Handy quer: sonst wird längerer Text unten abgeschnitten)
+    if (s._ph !== ph) { s._ph = ph; if (ph) s.style.setProperty('--pw', `${(ph * IMG_W / IMG_H).toFixed(1)}px`); else s.style.removeProperty('--pw'); }
     const over = Math.max(0, Math.ceil(need - svh));
     if (s._over !== over) {
       s._over = over;
