@@ -34,8 +34,16 @@ DirectoryIndex index.html
   RewriteRule ^widerruf(\.html)?/?$ /rechtliches [R=301,L]
 
   # 4) Saubere URLs: /faq -> faq.html (passend zu den Canonical-Tags)
+  # 4a) /pfad/ -> 301 auf /pfad, wenn pfad.html existiert und pfad kein Ordner ist. Sonst lösen relative Pfade
+  #     (assets/…, ../assets/…) eine Ebene zu tief auf (404/500, z. B. demos/nivora-cockpit/, warmherz/foto-check/).
+  #     PATH_INFO leer oder "/": nur der Seitenpfad selbst, nicht /pfad/irgendwas.
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteCond %{PATH_INFO} ^/?$
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteCond %{PATH_INFO} ^/?$
   RewriteRule ^(.+?)/?$ /$1.html [L]
 </IfModule>
 
