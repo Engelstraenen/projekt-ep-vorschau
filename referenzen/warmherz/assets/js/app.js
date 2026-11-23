@@ -39,6 +39,15 @@
   }
   tick(); setInterval(tick, 1000);
 
+  /* ---------- „3 Fotos schicken“ (fest unten): am Handy aus, solange die Hero-Buttons im Bild sind ----------
+     Sonst liegt der feste Knopf auf „Zuschuss berechnen“ / „Jobs bei uns“. Ausblenden nur per CSS unter 641 px (pages.css). */
+  const fab = $('.fab-foto'), heroCtas = $('.hero .ctas, .phero .ctas');
+  if (fab && heroCtas && 'IntersectionObserver' in window) {
+    const r0 = heroCtas.getBoundingClientRect();
+    fab.classList.toggle('is-off', r0.bottom > 0 && r0.top < innerHeight);
+    new IntersectionObserver(es => fab.classList.toggle('is-off', es[0].isIntersecting)).observe(heroCtas);
+  }
+
   /* ---------- Punkte auf object-fit:cover-Bildern ---------- */
   function placeOn(box, img) {
     if (!box || !img) return;

@@ -52,6 +52,9 @@ body[data-page="foto-check"] .fab-foto{display:none}
   .fab-foto{right:12px;bottom:12px;left:12px;justify-content:center;padding:13px 16px}
   .fab-foto small{display:none}
   .foot{padding-bottom:110px}
+  /* aus, solange die Hero-Buttons sichtbar sind (Klasse setzt app.js), damit er sie nicht verdeckt */
+  .fab-foto{transition:transform .25s var(--ease),background .2s,opacity .25s,visibility .25s}
+  .fab-foto.is-off{opacity:0;visibility:hidden}
 }
 
 /* Stellen: Tätigkeiten je Job (Eugen 19.11.2026) */
