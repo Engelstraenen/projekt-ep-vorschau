@@ -6,3 +6,7 @@ html body [data-local-demo] p.demo-local-status {
   max-width: 65ch;
   margin-block: 1em;
 }
+
+/* Geschlossenes Handy-Menü (details.menu in HOLM, WÄRMEWERK, VOLTA): Inhalt ganz ausblenden.
+   Sonst bekommen die Links im zugeklappten details trotzdem eine Fläche und gelten als „verdeckt“. */
+details.menu:not([open]) > .menu__panel { display: none; }

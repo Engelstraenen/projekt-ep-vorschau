@@ -128,6 +128,9 @@
   .sc-shot.is-phone .sc-img { height: calc(100% - 28px); aspect-ratio: auto; }
   .sc-shot.is-phone a, .sc-shot.is-phone figure { height: 100%; }
   .sc-shot figcaption { font-size: 12px; margin-top: 6px; }
+  /* Leuchten hinter dem Browser-Rahmen (::before, 30 px seitlich) und die versteckten Hinweise in .sc-url ragen über den
+     Bildschirmrand; html schneidet sie dort ohnehin ab. Hier schon an main abschneiden, damit die Seite nicht breiter wird. */
+  main { overflow-x: clip; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sc-browser, .sc-shot { animation: none; }

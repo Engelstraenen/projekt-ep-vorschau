@@ -696,7 +696,7 @@ a.card:hover .card-img img{transform:scale(1.05)}
 }
 @media (max-width:640px){
   .sec{padding:80px 0}
-  .phero .in{padding:0 16px 44px}
+  .phero .in{padding:72px 16px 44px} /* oben Platz für den Förder-Balken unter der Kopfzeile; greift nur, wenn der Inhalt höher als 70vh ist */
   .phero{min-height:70vh}
   .cards,.cards.c4,.cards.c2,.team,.plans,.stats{grid-template-columns:1fr}
   .fc-slots{grid-template-columns:repeat(3,1fr)}

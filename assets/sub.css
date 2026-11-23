@@ -165,6 +165,12 @@ nav.links a[aria-current="page"] { opacity: 1; font-weight: 600; }
   .brand i { display: none; }
   .menu-mobile { font-size: 0 !important; gap: 0 !important; }
 }
+/* 401–420 px (z. B. Pixel 7 mit 412 px) und unter 360 px: liquid-glass.css (später geladen, gleiche Spezifität) überschreibt
+   die kompakte .btn.small-Regel oben, dann ragt die Kopfzeile 4 px (bei 320 px 13 px) über den Bildschirmrand.
+   Hier wieder kompakt wie auf der Startseite; 360–400 px bleibt unverändert. */
+@media (max-width: 359px), (min-width: 401px) and (max-width: 420px) {
+  header.top .btn.small { height: 34px; padding: 0 14px; font-size: 13px; }
+}
 
 /* Prozess: Erklärvideo zur Bestellabwicklung, zwischen Hero und den vier Schritten */
 .prozess-hero { padding-bottom: clamp(28px, 4vh, 48px); }
