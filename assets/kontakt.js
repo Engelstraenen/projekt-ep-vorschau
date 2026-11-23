@@ -51,7 +51,7 @@
   var prof = q.get('profil'), ta = document.getElementById('f-nachricht');
   if (prof && ta && !ta.value) ta.value = 'Google-Profil: ' + prof.slice(0, 300) + '\n\nDiese Bewertungen möchten wir prüfen lassen (mit Grund):\n';
   if (q.get('ok') === '1') status.textContent = 'Danke! Deine Anfrage ist angekommen. Wir melden uns in der Regel innerhalb von zwei Werktagen.';
-  if (q.get('err')) status.textContent = 'Das hat leider nicht geklappt. Bitte prüfe die Angaben oder schreib direkt an info@projektex.de.';
+  if (q.get('err')) status.textContent = 'Das hat leider nicht geklappt. Bitte prüfe die Angaben oder schreib direkt an kontakt@projektex.de.';
   var msgs = {
     name: 'Bitte gib deinen Namen an.',
     email: 'Bitte gib eine gültige E-Mail-Adresse an.',
@@ -92,7 +92,7 @@
       '\nZeitpunkt: ' + val('f-zeitpunkt') + '\nZeitpunkt sonstiges: ' + val('f-sonst-zeitpunkt') +
       '\nWer entscheidet?: ' + val('f-entscheidet') + '\nEntscheidung sonstiges: ' + val('f-sonst-entscheidet') +
       '\n\nNachricht:\n' + val('f-nachricht') + '\n';
-    status.textContent = 'Dein E-Mail-Programm öffnet sich mit der vorbereiteten Anfrage. Bitte dort noch auf Senden tippen. Falls nichts passiert, schreib direkt an info@projektex.de.';
-    location.href = 'mailto:info@projektex.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    status.textContent = 'Dein E-Mail-Programm öffnet sich mit der vorbereiteten Anfrage. Bitte dort noch auf Senden tippen. Falls nichts passiert, schreib direkt an kontakt@projektex.de.';
+    location.href = 'mailto:kontakt@projektex.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   }
 })();
