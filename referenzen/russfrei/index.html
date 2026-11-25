@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RUSSFREI – Schornsteinfeger-Meisterbetrieb (Demo)</title>
+<meta name="description" content="Demo von PROJEKT EX: interaktive Musterseite für einen erfundenen Schornsteinfeger-Meisterbetrieb. Ein Haus im Schnitt – die Schachtkamera fährt den Schornstein hinab.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f0e0d">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f0e0d'/%3E%3Cpath d='M7 15 16 7l9 8v10H7z' fill='none' stroke='%23ff3b30' stroke-width='2'/%3E%3Cpath d='M16 7v18' stroke='%23ff3b30' stroke-width='2'/%3E%3Ccircle cx='16' cy='12' r='2.6' fill='%23ff3b30'/%3E%3C/svg%3E">
+<script src="assets/manifest.js"></script>
+</head>
+<body>
+
+<div class="demo" id="demo"><span class="d-l">Demo von <a href="../../leistungen/websites.html#russfrei">PROJEKT EX</a> · erfundener Betrieb · Formulare senden nichts</span><span class="d-s">Demo von <a href="../../leistungen/websites.html#russfrei">PROJEKT EX</a></span><span id="firma"></span></div>
+
+<header class="hd">
+  <a class="logo" href="#s0" data-go="s0" aria-label="RUSSFREI – zum Start">
+    <span class="brand">RUSSFREI</span><span class="tagline">Sicher. Sauber. Zuhause.</span>
+  </a>
+  <a class="btn btn-sm hd-cta" href="#s8" data-go="s8">Termin wählen</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu"><span class="bl">Menü</span><i></i><i></i></button>
+</header>
+
+<nav class="menu" id="menu" aria-label="Menü" hidden>
+  <a href="#s1" data-go="s1">Kehren</a><a href="#s2" data-go="s2">Inspektion</a><a href="#s3" data-go="s3">Messung</a><a href="#s4" data-go="s4">CO-Schutz</a><a href="#s5" data-go="s5">Wärmebild</a><a href="#s6" data-go="s6">Ausbildung</a><a href="#s7" data-go="s7">Bewertungen</a><a href="#s8" data-go="s8">Termin &amp; Kontakt</a>
+</nav>
+
+<!-- Bühne: Hausschnitt + Leuchtpunkt + Vollbild-Fotos -->
+<div class="stage" id="stage" aria-hidden="true">
+  <div class="cut" id="cut">
+    <div class="cut-z" id="cutZ">
+      <img class="cut-img" id="cutImg" alt="">
+      <img class="cut-th" id="cutTh" alt="">
+    </div>
+  </div>
+  <svg class="trace" id="trace"><line id="trFull"/><line id="trLit"/><circle id="trDot" r="9"/><circle id="trPing" r="9"/></svg>
+  <div class="checks" id="checks"></div>
+  <div class="callout" id="callout"><b>Riss im Schornstein</b><span>Früh erkannt. Größere Schäden vermieden.</span><img id="calloutImg" alt=""></div>
+  <div class="layers" id="layers"></div>
+  <canvas class="smoke" id="smoke"></canvas>
+  <div class="th-scale" id="thScale"><b>°C</b><i></i><span>warm</span><span>kalt</span></div>
+  <div class="vig"></div>
+  <p class="zoomcap" id="zoomcap"></p>
+  <p class="where" id="where"><i></i><span></span></p>
+</div>
+
+<!-- Mini-Schnitt = Navigation -->
+<nav class="mini" id="mini" aria-label="Ebenen im Haus">
+  <svg class="mini-house" viewBox="0 0 40 120" aria-hidden="true"><path d="M4 22 20 6l16 16v94H4z"/><line x1="20" y1="2" x2="20" y2="116" class="mc"/></svg>
+  <ol id="miniList"></ol>
+</nav>
+
+<main class="track" id="track">
+  <section class="sc" id="s0" data-kind="cut" data-floor="DACH" aria-label="Start">
+    <div class="panel">
+      <p class="kick">Schornsteinfeger-Meisterbetrieb</p>
+      <h1 class="h-xl">Für ein sicheres Zuhause.</h1>
+      <p class="lead">Wir fahren mit der Kamera durch Ihren Schornstein – vom Dach bis in den Keller. Und wir kommen nur, wenn Sie da sind.</p>
+      <div class="row"><a class="btn btn-big" href="#s8" data-go="s8">Zeitfenster wählen</a><a class="btn-ghost" href="#s1" data-go="s1">Kamera einfahren ↓</a></div>
+    </div>
+  </section>
+
+  <section class="sc" id="s1" data-go-txt="Kamera fährt in den Schornstein" data-where="Blick in den Schornstein · vom Dach nach unten" data-kind="photo" data-img="h-2" data-floor="DACH" aria-label="Kehren">
+    <div class="panel right">
+      <p class="kick"><b>Dach</b> · Kehren</p>
+      <h2 class="h-l">Saubere Wege. Sichere Luft.</h2>
+      <p>Wir kehren von oben, dichten unten ab und nehmen den Ruß mit. Danach sehen Sie auf Fotos, wie frei der Zug wieder ist.</p>
+    </div>
+  </section>
+
+  <section class="sc" id="s2" data-kind="cut" data-floor="DACHBODEN" data-fx="callout" aria-label="Inspektion">
+    <div class="panel">
+      <p class="kick"><b>Dachboden</b> · Inspektion</p>
+      <h2 class="h-l">Wir zeigen Ihnen, was wir sehen.</h2>
+      <p>Die Schachtkamera fährt jeden Meter ab. Jeder Befund kommt als Foto mit Stockwerk ins Protokoll – mit einem Satz, den man versteht.</p>
+    </div>
+  </section>
+
+  <section class="sc" id="s3" data-go-txt="Kamera fährt in den Heizungskeller" data-where="Im Heizungskeller · Abgasmessung am Kessel" data-kind="photo" data-img="h-4" data-floor="KELLER" aria-label="Messung">
+    <div class="panel">
+      <p class="kick"><b>Keller</b> · Messung</p>
+      <h2 class="h-l">Messen. Prüfen. Schützen.</h2>
+      <p>Für eine effiziente und saubere Heizung: Wir messen an Ihrem Kessel und erklären das Ergebnis direkt vor Ort.</p>
+    </div>
+    <div class="meter" id="meter">
+      <p class="m-h">Abgasmessung <span>Beispielwerte</span></p>
+      <dl>
+        <div><dt>CO</dt><dd data-to="12" data-dec="0">0</dd><em>ppm</em></div>
+        <div><dt>O₂</dt><dd data-to="5.8" data-dec="1">0</dd><em>%</em></div>
+        <div><dt>Abgastemp.</dt><dd data-to="128" data-dec="0">0</dd><em>°C</em></div>
+      </dl>
+      <svg class="spark" id="spark" viewBox="0 0 260 40" preserveAspectRatio="none"><path d="M0 30 L18 26 L32 29 L46 18 L60 22 L74 12 L88 20 L102 16 L116 24 L130 10 L144 19 L158 14 L172 22 L186 9 L200 17 L214 13 L228 21 L242 11 L260 15"/></svg>
+      <p class="m-ok"><i></i>Messung abgeschlossen · Ergebnis erklärt</p>
+    </div>
+  </section>
+
+  <section class="sc" id="s4" data-go-txt="Kamera fährt ins Wohnzimmer" data-where="Im Wohnzimmer · CO-Melder an der Decke" data-kind="photo" data-img="h-5" data-floor="WOHNEN" data-fx="ring" aria-label="CO-Schutz">
+    <div class="panel">
+      <p class="kick"><b>Wohnen</b> · CO-Schutz</p>
+      <h2 class="h-l">Kleine Technik. Große Sicherheit.</h2>
+      <p>Kohlenmonoxid riecht man nicht. Wir prüfen den Abzug, beraten zu CO-Meldern und montieren sie dort, wo sie Sie wirklich warnen.</p>
+      <button class="btn-ghost" id="coTest" type="button">Melder testen</button>
+    </div>
+  </section>
+
+  <section class="sc" id="s5" data-kind="cut" data-floor="TECHNIK" data-fx="thermo" aria-label="Wärmebild und Energieberatung">
+    <div class="panel right">
+      <p class="kick"><b>Ganzes Haus</b> · Energieberatung</p>
+      <h2 class="h-l">Wärme sichtbar machen.</h2>
+      <ul class="ticks"><li>Wärmebrücken</li><li>Energieverluste</li><li>Optimierungspotenzial</li></ul>
+      <p>Wärmebild, Heizungstausch, Kaminofen-Kauf: Wir sagen Ihnen vorher, was passt.</p>
+    </div>
+  </section>
+
+  <section class="sc" id="s6" data-go-txt="Kamera fährt aufs Dach" data-where="Auf dem Dach · Ausbildung" data-kind="photo" data-img="h-7" data-floor="DACH" aria-label="Ausbildung und Karriere">
+    <div class="kin" id="kin" aria-hidden="true"><span>Feste<br>Crew.</span><span>Eigener<br>Dienstwagen.</span><span>Meisterkurs<br>bezahlt.</span></div>
+    <div class="panel right job">
+      <p class="kick"><b>Dach</b> · Ausbildung</p>
+      <h2 class="h-l">Starte hoch hinaus.</h2>
+            <p>Deine Ausbildung. Echte Perspektiven. Azubi, Geselle oder Quereinstieg – ein Funkspruch reicht.</p>
+      <form class="tx" id="jobForm" novalidate>
+        <p class="tx-h"><span class="rec"></span>Funkspruch an den Meister <em id="txTime">≈ 45 s</em></p>
+        <div class="chips" role="radiogroup" aria-label="Ich bin">
+          <label><input type="radio" name="rolle" value="Azubi" checked><span>Azubi</span></label>
+          <label><input type="radio" name="rolle" value="Geselle"><span>Geselle</span></label>
+          <label><input type="radio" name="rolle" value="Quereinstieg"><span>Quereinstieg</span></label>
+        </div>
+        <label class="f"><span>Vorname</span><input name="name" autocomplete="given-name" required></label>
+        <label class="f"><span>Handy</span><input name="tel" type="tel" autocomplete="tel" inputmode="tel" required></label>
+        <button class="btn" type="submit">Jetzt bewerben →</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="sc" id="s7" data-kind="cut" data-floor="KELLER" data-fx="checks" aria-label="Protokoll und Bewertungen">
+    <div class="panel">
+      <p class="kick"><b>Vom Dach bis Keller</b> · Protokoll</p>
+      <h2 class="h-l">Alles geprüft. Alles sicher.</h2>
+      <p>Ihr digitaler Feuerstätten-Pass: jede Ebene abgehakt, jedes Foto dabei – als Link aufs Handy.</p>
+    </div>
+    <div class="tags" id="tags" aria-label="Bewertungen (Beispiele)">
+      <figure class="tagc"><blockquote>„Pünktlich im gewählten Zeitfenster, alles sauber hinterlassen. Das Protokoll kam direkt aufs Handy.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <figure class="tagc"><blockquote>„Endlich erklärt mal jemand, was die Messwerte bedeuten. Ruhig und kompetent.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <figure class="tagc"><blockquote>„Vor dem Kaminofen-Kauf beraten lassen – hat uns einen Fehlkauf erspart.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <p class="fine">Musterseite: Hier laufen später Ihre echten Google-Bewertungen mit Note, Anzahl, Link und Stand-Datum ein.</p>
+    </div>
+  </section>
+
+  <section class="sc last" id="s8" data-go-txt="Kamera fährt zum Kaminofen" data-where="Am Kaminofen im Wohnzimmer" data-kind="photo" data-vid="ks-ofen" data-floor="WOHNEN" aria-label="Termin und Kontakt">
+    <div class="panel book">
+      <p class="kick"><b>Wohnen</b> · Ihr Termin</p>
+      <h2 class="h-l">Sicherheit beginnt zuhause.</h2>
+      <form class="slot" id="slotForm" novalidate>
+        <p class="s-h">Tag</p>
+        <div class="chips" id="days" role="radiogroup" aria-label="Tag"></div>
+        <p class="s-h">Zeitfenster</p>
+        <div class="chips" role="radiogroup" aria-label="Zeitfenster">
+          <label><input type="radio" name="win" value="07–09" checked><span>07–09</span></label>
+          <label><input type="radio" name="win" value="09–12"><span>09–12</span></label>
+          <label><input type="radio" name="win" value="12–15"><span>12–15</span></label>
+          <label><input type="radio" name="win" value="15–18"><span>15–18</span></label>
+        </div>
+        <div class="two"><label class="f"><span>Name</span><input name="name" autocomplete="name" required></label>
+        <label class="f"><span>Telefon</span><input name="tel" type="tel" autocomplete="tel" inputmode="tel" required></label></div>
+        <button class="btn btn-big" type="submit">Termin buchen →</button>
+        <p class="fine">Wir rufen am Vortag kurz an. Passt es nicht, verschieben wir – ohne Zettel an der Tür.</p>
+      </form>
+      <div class="contact">
+        <a href="tel:+490000000000">0000 000 000 <span>Beispielnummer</span></a>
+        <a href="mailto:termin@russfrei.example">termin@russfrei.example</a>
+        <span>Mo–Fr 7–18 Uhr (Beispiel, erfundener Betrieb)</span>
+      </div>
+      <p class="pex-cta">Musterseite von <a href="../../leistungen/websites.html#russfrei">PROJEKT EX</a> · <a href="mailto:kontakt@projektex.de">kontakt@projektex.de</a> · Mo–So, 24 Stunden erreichbar</p>
+      <nav class="legal" aria-label="Rechtliches"><button type="button" data-modal="imp">Impressum</button><button type="button" data-modal="ds">Datenschutz</button><a href="#s0" data-go="s0">Nach oben ↑</a></nav>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog class="modal" id="modal"><div id="modalBody"></div><button class="btn btn-sm" type="button" id="modalX">Schließen</button></dialog>
+
+<script src="assets/lenis.min.js" defer></script>
+<script src="main.js" defer></script>
+</body>
+</html>
