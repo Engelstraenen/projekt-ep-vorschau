@@ -1,0 +1,2 @@
+Schriften Inter und Inter Tight: SIL Open Font License 1.1, https://scripts.sil.org/OFL
+Lenis 1.1.13: MIT-Lizenz, https://github.com/darkroomengineering/lenis
