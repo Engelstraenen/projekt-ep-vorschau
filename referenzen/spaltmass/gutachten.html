@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Gutachten – SPALTMASS Kfz-Sachverständige (Demo)</title>
+<meta name="description" content="Demo von PROJEKT EX: Was im Gutachten steht, was Ihnen zusteht: Rechner für Wertminderung und Nutzungsausfall, Tracker, Unterschied zum Kostenvoranschlag.">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="theme-color" content="#1d1420">
+<link rel="stylesheet" href="assets/css/style.css?v=20">
+<link rel="stylesheet" href="assets/css/sub.css?v=20">
+</head>
+<body class="sub">
+<div class="demo" id="demo"><span class="d-l">Demo von <a href="../../leistungen/websites.html#spaltmass">PROJEKT EX</a> · erfundener Betrieb · Formulare senden nichts</span><span class="d-s">Demo von <a href="../../leistungen/websites.html#spaltmass">PROJEKT EX</a></span></div>
+
+<header class="nav">
+  <a class="logo" href="index.html"><b>SPALTMASS</b><span>Kfz-Sachverständige</span></a>
+  <nav class="links" aria-label="Themen">
+    <a href="melden.html">Melden</a><a href="messen.html">Messen</a><a href="recht.html">Ihr Recht</a><a href="gutachten.html">Gutachten</a><a href="karriere.html">Karriere</a>
+  </nav>
+  <a class="back" href="index.html?p=.62">Zurück zur Fahrt</a>
+  <button class="burger" aria-label="Menü" aria-expanded="false"><i></i><i></i></button>
+</header>
+<main>
+<section class="s-hero"><img data-src="p06-drucker" alt="Gutachten kommt aus dem Druckerschlitz"><div class="in"><p class="kick">04 · Gutachten</p><h1>Gutachten<br>in 48&nbsp;h.</h1><p class="lead">Mit Fotos, Maßen und Kalkulation. Und mit allem, was Ihnen zusteht.</p></div></section>
+<div class="wrap">
+<section class="blk rv"><p class="kick">Gutachten oder Kostenvoranschlag</p><h2>Was drinsteht, wird bezahlt.</h2><div class="cards">
+<div class="card"><span class="tag">Beide</span><b>Reparaturkosten</b><p>Teile, Lack, Arbeitszeit.</p></div>
+<div class="card"><span class="tag">Nur Gutachten</span><b>Wertminderung</b><p>Ein Unfallauto ist beim Verkauf weniger wert, auch repariert.</p></div>
+<div class="card"><span class="tag">Nur Gutachten</span><b>Nutzungsausfall</b><p>Geld für jeden Tag ohne Auto, wenn Sie keinen Mietwagen nehmen.</p></div>
+<div class="card"><span class="tag">Nur Gutachten</span><b>Wiederbeschaffungs- und Restwert</b><p>Entscheidet, ob sich die Reparatur lohnt.</p></div>
+<div class="card"><span class="tag">Nur Gutachten</span><b>Beweissicherung</b><p>Fotos und Maße, die vor Gericht halten.</p></div></div></section>
+<section class="blk rv" id="rechner"><p class="kick">Rechner</p><h2>Was steht Ihnen zu?</h2><p class="lead">Grobe Schätzung nach den üblichen Methoden. Das genaue Ergebnis steht im Gutachten.</p>
+<div class="calc"><div>
+<label>Wiederbeschaffungswert des Autos <output data-o="wbw"></output><input type="range" name="wbw" min="5000" max="80000" step="500" value="25000"></label>
+<label>Reparaturkosten <output data-o="rk"></output><input type="range" name="rk" min="500" max="30000" step="100" value="6500"></label>
+<label>Zulassungsjahr <output data-o="age"></output><input type="range" name="age" min="1" max="8" step="1" value="2"></label>
+<label>Fahrzeuggruppe (Nutzungsausfall)<select name="grp"><option value="A">A · Kleinstwagen</option><option value="C">C · Kleinwagen</option><option value="E">E · Kompakt</option><option value="F" selected>F · Mittelklasse</option><option value="H">H · Obere Mittelklasse</option><option value="J">J · Oberklasse</option><option value="L">L · Luxus/Sport</option></select></label>
+<label>Tage ohne Auto <output data-o="days"></output><input type="range" name="days" min="1" max="21" step="1" value="6"></label></div>
+<div class="res"><div><span>Wertminderung</span><b data-r="mw">0 €</b></div><div><span>Nutzungsausfall</span><b data-r="nu">0 €</b></div><div class="sum"><span>Zusätzlich zur Reparatur</span><b data-r="sum">0 €</b></div><p class="src" data-r="info"></p></div></div>
+<p class="src">Wertminderung nach Ruhkopf/Sahm, Nutzungsausfall nach Schwacke-Gruppen (Richtwerte). Keine verbindliche Berechnung, Werte ohne Gewähr.</p></section>
+<section class="blk rv"><p class="kick">Nutzungsausfall</p><h2>Tagessätze nach Fahrzeuggruppe.</h2>
+<div class="cols"><div style="--d:0"><em>23</em><i style="--v:.13"></i>A</div><div style="--d:1"><em>29</em><i style="--v:.17"></i>B</div><div style="--d:2"><em>35</em><i style="--v:.2"></i>C</div><div style="--d:3"><em>38</em><i style="--v:.22"></i>D</div><div style="--d:4"><em>43</em><i style="--v:.25"></i>E</div><div style="--d:5"><em>50</em><i style="--v:.29"></i>F</div><div style="--d:6"><em>59</em><i style="--v:.34"></i>G</div><div style="--d:7"><em>65</em><i style="--v:.37"></i>H</div><div style="--d:8"><em>79</em><i style="--v:.45"></i>J</div><div style="--d:9"><em>119</em><i style="--v:.68"></i>K</div><div style="--d:10"><em>175</em><i style="--v:1"></i>L</div></div>
+<p class="src">Euro je Tag, Schwacke-Tabelle (Sanden/Danner/Küppersbusch), Richtwerte für Pkw. Welche Gruppe Ihr Auto hat, steht im Gutachten.</p></section>
+<section class="blk rv"><p class="kick">Tracker</p><h2>Wo ist mein Gutachten?</h2><p class="lead">Wie bei einem Paket: Sie sehen jederzeit, wie weit wir sind. (Demo)</p>
+<ol class="track" id="tracker"><li><b>Gemeldet</b>Fotos da</li><li><b>Termin</b>morgen 9:00</li><li><b>Besichtigt</b>vor Ort</li><li><b>Kalkuliert</b>Kosten, Werte</li><li><b>Versendet</b>an Sie + Werkstatt</li></ol></section>
+</div>
+<div class="wrap"><div class="cta-band rv"><h2>Unfall gehabt?<br><span class="ac">Wir sind in 24&nbsp;h da.</span></h2><div class="btns" style="margin:0"><a class="btn big" href="index.html?p=0">Schaden melden</a><a class="btn ghost big" href="tel:+4900000000" data-demo="Demo: Hier klingelt die 24/7-Hotline des erfundenen Betriebs (0000 000 000, Beispiel).">24/7 anrufen <small>(Beispiel)</small></a></div></div></div>
+</main>
+<p class="pex-cta">Musterseite von <a href="../../leistungen/websites.html#spaltmass">PROJEKT EX</a> · <a href="mailto:kontakt@projektex.de">kontakt@projektex.de</a> · Mo–So, 24 Stunden erreichbar · <a href="tel:+4915204388945">+49 1520 4388945</a></p>
+<p class="demo-phone">Beispielnummer des erfundenen Betriebs: 0000 000 000 (Beispiel) · Formulare senden nichts.</p>
+<footer class="s-foot"><span>© SPALTMASS Kfz-Sachverständige (Demo-Seite)</span><span><a class="back" href="index.html?p=.62">Zurück zur Fahrt</a> · <a href="../../impressum.html">Impressum</a> · <a href="../../datenschutz.html">Datenschutz</a></span></footer>
+<div class="toast" role="status" hidden></div>
+
+<script src="assets/js/img.js?v=20"></script>
+<script src="assets/js/sub.js?v=20"></script>
+</body>
+</html>
