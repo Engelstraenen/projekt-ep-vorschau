@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SPALTMASS – Kfz-Sachverständige (Demo)</title>
+<meta name="description" content="Demo von PROJEKT EX: Unabhängige Kfz-Sachverständige: Schaden antippen und melden, Gutachter direkt anrufen. Vor Ort in 24 h, Gutachten in 48 h. Bei unverschuldetem Unfall zahlt die gegnerische Versicherung.">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="theme-color" content="#1e252b">
+<link rel="preload" href="assets/fonts/grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=38">
+</head>
+<body>
+<div class="demo" id="demo"><span class="d-l">Demo von <a href="../../leistungen/websites.html#spaltmass">PROJEKT EX</a> · erfundener Betrieb · Formulare senden nichts</span><span class="d-s">Demo von <a href="../../leistungen/websites.html#spaltmass">PROJEKT EX</a></span></div>
+
+<a class="skip" href="#kontakt">Zum Kontakt</a>
+
+<header class="nav">
+  <a class="logo" href="#" data-go="0" aria-label="SPALTMASS, zum Anfang"><b>SPALTMASS</b><span>Kfz-Sachverständige</span></a>
+  <nav class="links" aria-label="Stationen der Prüfstraße">
+    <a href="#" data-go="messen">Messen</a>
+    <a href="#" data-go="werte">Werte</a>
+    <a href="#" data-go="gutachten">Gutachten</a>
+    <a href="#" data-go="karriere">Karriere</a>
+    <a href="#" data-go="bewertungen">Bewertungen</a>
+    <a href="#" data-go="kontakt">Kontakt</a>
+  </nav>
+  <a class="nav-cta" href="tel:+4900000000" data-demo="Demo: Hier klingelt die 24/7-Hotline des erfundenen Betriebs (0000 000 000, Beispiel).">24/7 anrufen <small>(Beispiel)</small></a>
+  <button class="burger" aria-label="Menü" aria-expanded="false"><i></i><i></i></button>
+</header>
+
+<main id="fahrt">
+  <div class="stage" id="stage">
+    <!-- Bilder und Film der Prüfstraße (Storyboard SPSB-7B) -->
+    <div class="ly" data-ly="p01"><img alt="Unfallauto am Eingang des Prüftunnels" data-src="p01-eingang"></div>
+    <div class="ly" data-ly="v1" data-vid="v1"></div>
+    <div class="ly" data-ly="p04"><img alt="Gutachter misst Spaltmaß und Lackschicht" data-src="p04-messen"></div>
+    <div class="ly" data-ly="p05"><img alt="Auto zwischen zwei Anzeigetafeln im Tunnel" data-src="p05-werte"></div>
+    <div class="ly" data-ly="p06"><img alt="Gutachten kommt aus dem Drucker in der Tunnelwand" data-src="p06-drucker"></div>
+    <div class="ly" data-ly="p07"><img alt="Repariertes Auto fährt aus dem Tunnel ins Tageslicht" data-src="p07-tageslicht"></div>
+    <div class="ly" data-ly="p08"><img alt="Junge Sachverständige am Leitstand mit Tablet" data-src="p08-karriere"></div>
+    <div class="shade"></div>
+    <div class="flash" aria-hidden="true"></div>
+
+    <!-- Panel 1: Schaden antippen -->
+    <section class="tx tx-hero" data-tx="hero" id="melden">
+      <p class="kick">Unabhängige Kfz-Sachverständige</p>
+      <h1>Tippen Sie auf den Schaden.</h1>
+      <p class="lead">Kurz beschreiben, abschicken, anrufen. Der Gutachter hat alles schon im Postfach.</p>
+    </section>
+    <div class="calls" aria-hidden="true"><span class="call"><small>Spaltmaß</small>6,1 mm</span><span class="call"><small>Lack</small>118 µm · Serie</span></div>
+    <div class="pins" aria-live="polite"></div>
+    <div class="pin-edit" role="dialog" aria-label="Schaden beschreiben" hidden>
+      <p class="pe-h">Was ist hier kaputt?</p>
+      <div class="pe-chips"><button type="button">Delle</button><button type="button">Kratzer</button><button type="button">Riss</button><button type="button">Scheibe</button><button type="button">Licht</button><button type="button">Stoßfänger</button></div>
+      <input type="text" class="pe-text" placeholder="Eigener Kommentar, z. B. Tür klemmt" aria-label="Kommentar zum Schaden">
+      <div class="pe-act"><button type="button" class="pe-del">Entfernen</button><button type="button" class="btn pe-ok">Fertig</button></div>
+    </div>
+    <aside class="report" aria-label="Ihre Meldung">
+      <p class="rp-h"><span>Ihre Meldung</span><b class="rp-n">0</b></p>
+      <ol class="rp-list"></ol>
+      <p class="rp-empty">Tippen Sie aufs Auto, wo es kaputt ist.</p>
+      <div class="rp-act"><button class="btn rp-send" data-open="melden">Schaden abschicken</button><a class="btn ghost" href="tel:+4900000000" data-demo="Demo: Hier klingelt die 24/7-Hotline des erfundenen Betriebs (0000 000 000, Beispiel).">24/7 anrufen <small>(Beispiel)</small></a></div>
+    </aside>
+
+    <!-- Panel 3: Streifenlicht -->
+    <section class="tx tx-licht" data-tx="licht" id="messen">
+      <p class="kick">01 · Sehen</p>
+      <h2>Jeder Millimeter.</h2>
+      <p class="lead">Im Streifenlicht knicken die Lichtlinien genau dort ab, wo das Blech verbeult ist. So sehen wir jede Delle, auch die kleinen.</p>
+    </section>
+    <ul class="wall" aria-hidden="true"><li>Sehen</li><li>Messen</li><li>Bewerten</li><li>Für Ihre Sicherheit</li></ul>
+
+    <!-- Panel 4: Messen -->
+    <section class="tx tx-messen" data-tx="messen">
+      <p class="kick">02 · Messen</p>
+      <h2>Spaltmaß und Lack.</h2>
+      <p class="lead">Spaltmaßlehre in die Fuge, Lackschicht-Messgerät auf die heilen Teile. Weicht eine Seite ab oder ist der Lack zu dick, finden wir Vorschäden.</p>
+      <ul class="reads"><li><b data-count="6.1" data-dec="1">0</b><span>mm Spaltmaß rechts · links 3,8</span></li><li><b data-count="118">0</b><span>µm Lack an heilen Teilen · Serie</span></li></ul>
+      <div class="btns"><a class="btn ghost more" href="messen.html">So messen wir</a></div>
+    </section>
+
+    <!-- Panel 5: Werte + 130 % -->
+    <div class="screens" aria-hidden="true">
+      <div class="scr scr-l"><p>Wiederbeschaffungswert</p><i style="--v:.86"></i><p>Reparaturkosten</p><i class="hl" style="--v:.62"></i><p>Restwert</p><i style="--v:.22"></i></div>
+      <div class="scr scr-r"><p>130-%-Regel</p><svg viewBox="0 0 120 70"><path class="g-b" d="M10 62 A50 50 0 0 1 110 62"/><path class="g-f" d="M10 62 A50 50 0 0 1 110 62" pathLength="100"/></svg><b class="g-v">72 %</b></div>
+    </div>
+    <section class="tx tx-werte" data-tx="werte" id="werte">
+      <p class="kick">03 · Bewerten</p>
+      <h2>Reparieren oder ersetzen?</h2>
+      <p class="lead">Reparaturkosten im Verhältnis zum Wiederbeschaffungswert. Tippen Sie einen Fall an:</p>
+      <div class="t130" role="group" aria-label="130-Prozent-Check"><button data-r="60">60 %</button><button data-r="115">115 %</button><button data-r="145">145 %</button></div>
+      <p class="t130-out" aria-live="polite">Unverschuldet? Sie wählen den Gutachter, die gegnerische Versicherung zahlt.</p>
+      <div class="btns"><a class="btn ghost more" href="recht.html">Ihr Recht: Haftpflicht, Kasko, Leasing</a></div>
+    </section>
+
+    <!-- Panel 6: Gutachten aus dem Drucker -->
+    <div class="strip" aria-hidden="true"><div class="paper"><b>SPALTMASS · Gutachten Nr. 2611-0417</b><img alt="" data-src="d03-delle"><img alt="" data-src="p04-messen"><ul><li>Reparaturkosten</li><li>Wertminderung</li><li>Nutzungsausfall</li><li>Restwert</li></ul></div></div>
+    <section class="tx tx-gutachten" data-tx="gutachten" id="gutachten">
+      <p class="kick">04 · Gutachten</p>
+      <h2>Gutachten in 48&nbsp;h.</h2>
+      <p class="lead">Mit Fotos, Messwerten und Kalkulation. Digital an Sie, Ihre Werkstatt und Ihren Anwalt.</p>
+      <div class="btns"><a class="btn ghost more" href="gutachten.html">Rechner: Was steht mir zu?</a></div>
+    </section>
+
+    <!-- Panel 7: Tageslicht -->
+    <section class="tx tx-wie" data-tx="wie"><p class="kick">05 · Ergebnis</p><h2>Wie neu. Und belegt.</h2><p class="lead">Repariert nach Gutachten. Der Streifenlicht-Test findet nichts mehr.</p></section>
+
+    <!-- Panel 8: Karriere -->
+    <section class="tx tx-karriere" data-tx="karriere" id="karriere">
+      <p class="kick">06 · Karriere</p>
+      <h2 class="kin"><span>Kfz-Profi?</span><span class="ac">Werde Gutachter.</span></h2>
+      <ul class="perks"><li>Weiterbildung zum Sachverständigen, bezahlt</li><li>E-Firmenwagen ab Tag 1</li><li>Planbare Termine statt Werkstattschicht</li></ul>
+      <div class="btns"><button class="btn" data-open="bewerben">In 60 Sekunden bewerben</button><a class="btn ghost more" href="karriere.html">Dein Weg</a></div>
+    </section>
+
+    <!-- Panel 9: Handy + Google + Kontakt -->
+    <div class="phone" aria-hidden="true"><div class="ph-scr"><p class="ph-logo">SPALTMASS</p><img alt="" data-src="p01-eingang"><div class="ph-g"><span>Google</span><i>★★★★★</i><small>Beispiel</small></div><b class="ph-btn">Schaden melden</b></div></div>
+    <section class="tx tx-bew" data-tx="bewertungen" id="bewertungen">
+      <p class="kick">07 · Bewertungen</p>
+      <div class="gcard"><p class="g-brand" aria-label="Google"><span style="color:#4285f4">G</span><span style="color:#ea4335">o</span><span style="color:#fbbc05">o</span><span style="color:#4285f4">g</span><span style="color:#34a853">l</span><span style="color:#ea4335">e</span> <small>Bewertungen</small></p>
+        <div class="score"><b data-count="4.9" data-dec="1">0</b><span class="stars" style="--f:0"><i>★★★★★</i><i>★★★★★</i></span></div>
+        <p class="g-meta"><b data-count="214">0</b> Rezensionen · <a href="#" data-demo="Demo: Hier öffnet sich das echte Google-Profil der Firma.">Auf Google ansehen</a></p></div>
+      <p class="demo">Beispiel für Ihre echte Google-Note · Demo-Seite, die Firma ist erfunden</p>
+      <div class="quotes" aria-live="polite">
+        <blockquote class="on">„Schnell, kompetent und fair. Genau so, wie es sein soll.“<cite>Beispiel · noch keine echte Bewertung</cite></blockquote>
+        <blockquote>„Ich wusste nicht, dass ich den Gutachter selbst wählen darf.“<cite>Beispiel · noch keine echte Bewertung</cite></blockquote>
+      </div>
+    </section>
+    <section class="tx tx-kontakt" data-tx="kontakt" id="kontakt">
+      <p class="kick">08 · Kontakt</p>
+      <h2>Vertrauen fährt weiter.</h2>
+      <div class="btns"><button class="btn big" data-open="melden">Schaden melden</button><a class="btn ghost big" href="tel:+4900000000" data-demo="Demo: Hier klingelt die 24/7-Hotline des erfundenen Betriebs (0000 000 000, Beispiel).">24/7 anrufen <small>(Beispiel)</small></a></div>
+      <ul class="kfacts"><li><b>24/7</b> erreichbar</li><li><b>24 h</b> vor Ort</li><li><b>48 h</b> Gutachten</li></ul>
+      <p class="pex-cta">Musterseite von <a href="../../leistungen/websites.html#spaltmass">PROJEKT EX</a> · <a href="mailto:kontakt@projektex.de">kontakt@projektex.de</a> · Mo–So, 24 Stunden erreichbar · <a href="tel:+4915204388945">+49 1520 4388945</a></p>
+<p class="demo-phone">Beispielnummer des erfundenen Betriebs: 0000 000 000 (Beispiel) · Formulare senden nichts.</p>
+<p class="foot">© SPALTMASS Kfz-Sachverständige (Demo) · <a href="../../impressum.html">Impressum</a> · <a href="../../datenschutz.html">Datenschutz</a></p>
+    </section>
+
+    <div class="prog" aria-hidden="true"><i></i></div>
+    <div class="hint" aria-hidden="true">Scrollen · durch die Prüfstraße</div>
+  </div>
+</main>
+
+<!-- Schaden melden: abschicken, danach anrufen -->
+<dialog id="m-melden" aria-labelledby="mm-h">
+  <form method="dialog" class="mm">
+    <button class="x" value="x" aria-label="Schließen">×</button>
+    <p class="kick">Schaden melden</p>
+    <h3 id="mm-h">In 2 Minuten erledigt.</h3>
+    <fieldset><legend>Wer war schuld?</legend>
+      <label><input type="radio" name="s" value="gegner" checked><span>Der andere</span></label>
+      <label><input type="radio" name="s" value="teil"><span>Unklar</span></label>
+      <label><input type="radio" name="s" value="ich"><span>Ich selbst</span></label>
+    </fieldset>
+    <p class="hinweis" data-hint></p>
+    <div class="mm-pins"></div>
+    <label class="shot"><input type="file" accept="image/*" multiple></label>
+    <div class="thumbs" aria-live="polite"></div>
+    <p class="small">Die Fotos bleiben in dieser Demo auf Ihrem Gerät.</p>
+    <input type="text" placeholder="Name" aria-label="Name" autocomplete="name">
+    <input type="tel" placeholder="Telefon" aria-label="Telefon" autocomplete="tel">
+    <button class="btn" value="ok" type="submit">Schaden abschicken</button>
+  </form>
+  <div class="mm done" hidden>
+    <p class="kick">Gemeldet</p>
+    <h3>Der Gutachter hat alles im Postfach.</h3>
+    <p class="small">Ihre Markierungen, Kommentare und Fotos liegen ihm vor. Rufen Sie jetzt an, dann geht er alles mit Ihnen durch.</p>
+    <a class="btn big" href="tel:+4900000000" data-demo="Demo: Hier klingelt der Gutachter des erfundenen Betriebs (0000 000 000, Beispiel).">Jetzt Gutachter anrufen <small>(Beispiel)</small></a>
+    <button class="btn ghost mm-close" type="button">Später</button>
+  </div>
+</dialog>
+
+<dialog id="m-bewerben" aria-labelledby="mb-h">
+  <form method="dialog" class="mm" novalidate>
+    <button class="x" value="x" aria-label="Schließen">×</button>
+    <p class="kick">Bewerbung · <span data-sec>60</span> s</p>
+    <h3 id="mb-h">Kein Anschreiben. Drei Fragen.</h3>
+    <div class="q on"><p>Was bist du?</p><div class="opts"><button type="button">Kfz-Meister</button><button type="button">Techniker</button><button type="button">Ingenieur</button><button type="button">Geselle</button></div></div>
+    <div class="q"><p>Ab wann?</p><div class="opts"><button type="button">Sofort</button><button type="button">In 3 Monaten</button><button type="button">Später</button></div></div>
+    <div class="q"><p>Wie erreichen wir dich?</p><input type="tel" placeholder="Telefon" aria-label="Telefon" autocomplete="tel"><button type="button" class="btn send">Abschicken</button></div>
+    <div class="q"><p class="ok">Danke! Wir melden uns innerhalb von 24&nbsp;h. (Demo)</p></div>
+  </form>
+</dialog>
+<div class="toast" role="status" hidden></div>
+
+<script src="assets/js/img.js?v=38"></script>
+<script src="assets/js/vid.js?v=38"></script>
+<script src="assets/js/app.js?v=38"></script>
+</body>
+</html>

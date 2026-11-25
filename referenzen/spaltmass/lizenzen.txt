@@ -1,0 +1,4 @@
+Schriften in assets/fonts/
+- Inter: SIL Open Font License 1.1, https://github.com/rsms/inter
+- Space Grotesk (als „Grotesk“ eingebunden): SIL Open Font License 1.1, https://github.com/floriankarsten/space-grotesk
+Beide liegen lokal, es werden keine Schrift- oder Skript-CDNs geladen.
