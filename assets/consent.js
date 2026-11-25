@@ -104,7 +104,7 @@
             acceptAllBtn: 'Alle akzeptieren',
             acceptNecessaryBtn: 'Alle ablehnen',
             showPreferencesBtn: 'Einstellungen',
-            footer: '<a href="' + root + 'impressum.html">Impressum</a><a href="' + root + 'datenschutz.html">Datenschutz</a>'
+            footer: '<a href="' + root + 'impressum">Impressum</a><a href="' + root + 'datenschutz">Datenschutz</a>'
           },
           preferencesModal: {
             title: 'Cookie-Einstellungen',
@@ -117,7 +117,7 @@
               { title: 'Notwendig', description: 'Speichert nur deine Auswahl in diesem Banner (Cookie „cc_cookie“, 182 Tage). Immer aktiv.', linkedCategory: 'necessary' },
               { title: 'Statistik', description: list([['Google Analytics 4', TRACKING.ga4]]) + '. Hilft uns zu verstehen, wie die Seite genutzt wird.', linkedCategory: 'analytics' },
               { title: 'Marketing', description: list([['Google Ads Conversion-Tracking', TRACKING.googleAds], ['Meta-Pixel', TRACKING.metaPixel], ['TikTok-Pixel', TRACKING.tiktokPixel]]) + '. Misst die Wirkung unserer Anzeigen.', linkedCategory: 'marketing' },
-              { title: 'Mehr Informationen', description: 'Details in der <a href="' + root + 'datenschutz.html#cookies">Datenschutzerklärung</a>.' }
+              { title: 'Mehr Informationen', description: 'Details in der <a href="' + root + 'datenschutz#cookies">Datenschutzerklärung</a>.' }
             ]
           }
         }
