@@ -13,11 +13,13 @@
     region: ['lokal', 'regional', 'deutschlandweit', 'international', 'B2B', 'B2C', 'beides'],
     ziel: ['mehr Anfragen', 'mehr Reichweite', 'Bekanntheit', 'Mitarbeiter finden', 'Online-Verkauf', 'bei Google gefunden werden', 'Social Media aufbauen', 'Abläufe entlasten', 'Marke schärfen', 'unzulässige Bewertungen prüfen lassen'],
     haken: ['zu wenige Anfragen', 'kaum Reichweite', 'Website veraltet oder fehlt', 'keine Zeit für Social Media', 'Werbung bringt nichts', 'Auftritt uneinheitlich', 'zu viel Handarbeit', 'kein Überblick', 'Online-Shop fehlt oder hakt'],
-    leistungen: ['Websites', 'SEO & Sichtbarkeit', 'Systeme & Dashboards', 'Automatisierung & Chatbots', 'App Design', 'Werbeclips', 'Ads-Management', 'Newsletter-Marketing', 'Logo Design', 'Print Design', 'Merch-Produktion', 'Räume & Visualisierung', 'Individuelle Aufträge', 'Bewertungs-Löschservice'],
+    leistungen: ['Websites', 'SEO & Sichtbarkeit', 'Systeme & Dashboards', 'Automatisierung & KI-Agenten', 'App Design', 'Werbeclips', 'Ads-Management', 'Newsletter-Marketing', 'Logo Design', 'Print Design', 'Merch-Produktion', 'Räume & Visualisierung', 'Individuelle Aufträge', 'Bewertungs-Löschservice'],
     material: ['Logo', 'eigene Fotos', 'eigene Videos', 'Texte', 'Farben und Schriften', 'Domain', 'nichts davon'],
     zeitpunkt: ['sofort', 'in 1–3 Monaten', 'in diesem Jahr', 'später', 'noch offen'],
     entscheidet: ['ich selbst', 'mit Partner/Team', 'Geschäftsführung', 'noch unklar']
   };
+  // Sichtbarer Name -> Wert, den kontakt.php erlaubt (Whitelist dort noch mit altem Namen, kontakt.php unverändert)
+  var SEND = { 'Automatisierung & KI-Agenten': 'Automatisierung & Chatbots' };
   document.querySelectorAll('[data-chips]').forEach(function (group) {
     var key = group.getAttribute('data-chips');
     var hidden = document.getElementById('f-' + key);
@@ -25,7 +27,7 @@
     var single = group.getAttribute('data-mode') === 'single';
     function sync() {
       var picked = [];
-      group.querySelectorAll('button[aria-pressed="true"]').forEach(function (b) { picked.push(b.textContent.trim()); });
+      group.querySelectorAll('button[aria-pressed="true"]').forEach(function (b) { var t = b.textContent.trim(); picked.push(SEND[t] || t); });
       if (hidden) hidden.value = picked.join(', ');
     }
     group.querySelectorAll('button').forEach(function (btn) {
