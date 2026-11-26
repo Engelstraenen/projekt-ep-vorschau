@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ASTREIN Tischlerei (Demo)</title>
+<meta name="description" content="Demo von PROJEKT EX: Website für eine erfundene Tischlerei. Massivholzmöbel und Einbauten nach Maß.">
+<meta name="theme-color" content="#0f1a15">
+<link rel="stylesheet" href="assets/fonts-lokal/g-8ff2d1fe.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="demo"><span class="for">So könnte das für <span data-firma></span> aussehen. </span><b>Demo von <a href="https://projektex.de/" rel="noopener">PROJEKT EX</a></b><span class="short"> · erfundener Betrieb</span><span class="long">: erfundener Betrieb, alle Personen, Zahlen und Stimmen sind Beispiele.</span></div>
+
+<header class="top" id="top">
+  <a class="logo" href="#stamm" aria-label="ASTREIN Startseite">ASTREIN<small>Tischlerei</small></a>
+  <nav class="nav" id="nav" aria-label="Hauptmenü">
+    <a href="#stamm">Möbel</a><a href="#einbau">Einbau</a><a href="#holzlabor">Holzlabor</a><a href="#karriere">Karriere</a><a href="#bewertungen">Bewertungen</a>
+    <a class="btn" href="#anfrage">Projekt anfragen</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav"><i></i><i></i></button>
+</header>
+
+<!-- KAPITEL 1: FILM Vom Stamm zum Tisch -->
+<section class="film" id="stamm" data-film="stamm" style="--len:520vh">
+  <div class="stage">
+    <img class="poster frame on" data-need="asf1" data-step="0" alt="Eichenstamm im nebligen Holzhof">
+    <img class="poster frame" data-need="asf2" data-step="1" alt="Tischler hobelt eine Baumkanten-Bohle">
+    <img class="poster frame" data-need="asf3" data-step="2" alt="Verleimte Eichenbohlen mit orangen Zwingen">
+    <img class="poster frame" data-need="asf4" data-step="3" alt="Fertiger Baumkantentisch im Esszimmer">
+    <video muted playsinline preload="auto" data-vid="stamm"></video>
+    <div class="shade"></div>
+    <div class="hero-copy">
+      <p class="kicker">Tischlerei · Massivholz · Einbau nach Maß</p>
+      <h1>Aus einem<br>Stamm.</h1>
+      <p class="lead">Wir bauen Möbel, die bleiben. Vom Baumstamm bis in Ihr Esszimmer, alles in unserer Werkstatt.</p>
+      <a class="btn" href="#anfrage">Projekt anfragen</a>
+    </div>
+    <ol class="steps" aria-label="Arbeitsschritte">
+      <li data-at="0"><b>01</b> Stamm</li>
+      <li data-at=".25"><b>02</b> Hobeln</li>
+      <li data-at=".5"><b>03</b> Verleimen</li>
+      <li data-at=".75"><b>04</b> Zuhause</li>
+    </ol>
+    <div class="say" data-at=".8"><h2>Ein Tisch für<br>50 Jahre.</h2></div>
+    <p class="scroll-hint">Scrollen</p>
+  </div>
+</section>
+
+<!-- KAPITEL 2: MOTION Holzlabor -->
+<section class="holzlabor" id="holzlabor">
+  <div class="wrap">
+    <header class="sec-head"><p class="kicker">Holzlabor</p><h2>Welches Holz<br>passt zu Ihnen?</h2><p class="lead">Tippen Sie eine Holzart an. Die Tischplatte wechselt sofort.</p></header>
+    <div class="lab">
+      <div class="table-view" data-need="m1-tisch">
+        <img class="tbl base" data-src="m1-tisch" alt="Massivholz-Esstisch mit Baumkante">
+        <img class="tbl over" alt="" aria-hidden="true">
+      </div>
+      <div class="woods" role="radiogroup" aria-label="Holzart">
+        <button role="radio" aria-checked="true" data-wood="eiche" style="--w:#c49a63">Eiche<small>hart, hell, lebendig</small></button>
+        <button role="radio" aria-checked="false" data-wood="nussbaum" style="--w:#5a3b26">Nussbaum<small>dunkel, edel, warm</small></button>
+        <button role="radio" aria-checked="false" data-wood="esche" style="--w:#d9c3a0">Esche<small>hell, kräftige Maserung</small></button>
+        <button role="radio" aria-checked="false" data-wood="kirsche" style="--w:#a0583a">Kirsche<small>rötlich, dunkelt nach</small></button>
+        <button role="radio" aria-checked="false" data-wood="ulme" style="--w:#8b6a45">Ulme<small>wild gemasert, selten</small></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KAPITEL 3: FILM Einbau nach Maß (Nische) -->
+<section class="film einbau" id="einbau" data-film="nische" style="--len:460vh">
+  <div class="stage">
+    <img class="poster" data-need="f2-nische" alt="Leere Nische unter einer Treppe im Altbau">
+    <video muted playsinline preload="auto" data-vid="nische"></video>
+    <div class="shade"></div>
+    <svg class="laser" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g class="l l1"><line x1="420" y1="780" x2="1180" y2="780"/><text x="800" y="765">246,5 cm</text></g>
+      <g class="l l2"><line x1="420" y1="780" x2="420" y2="170"/><text x="440" y="470">231 cm</text></g>
+      <g class="l l3"><line x1="420" y1="170" x2="1180" y2="610"/><text x="830" y="370">Schräge 34°</text></g>
+    </svg>
+    <div class="chap-copy"><p class="kicker">Einbau nach Maß</p><h2>Jeder Zentimeter<br>zählt.</h2></div>
+    <ol class="steps" aria-label="Arbeitsschritte Einbau">
+      <li data-at=".2"><b>01</b> Aufmaß</li>
+      <li data-at=".4"><b>02</b> Zuschnitt</li>
+      <li data-at=".6"><b>03</b> Montage</li>
+      <li data-at=".8"><b>04</b> Fertig</li>
+    </ol>
+    <div class="say" data-at=".88"><h2>Passt. Auf den<br>Millimeter.</h2></div>
+  </div>
+</section>
+
+<!-- KAPITEL 4: MOTION Projekt in 3 Schritten -->
+<section class="anfrage" id="anfrage">
+  <div class="wrap">
+    <header class="sec-head"><p class="kicker">Projekt anfragen</p><h2>Foto. Maße.<br>Rückruf in 24 h.</h2><p class="lead">Kein Termin für einen ersten Blick nötig. Schicken Sie uns, was Sie haben, wir melden uns mit einer ehrlichen Einschätzung.</p></header>
+    <ol class="three">
+      <li><b>1</b><h3>Foto</h3><p>Raum oder Ecke fotografieren, gern mehrere Bilder.</p></li>
+      <li><b>2</b><h3>Maße</h3><p>Breite, Höhe, Tiefe. Ungefähr reicht, genau messen wir vor Ort.</p></li>
+      <li><b>3</b><h3>Rückruf</h3><p>Innerhalb von 24 Stunden meldet sich ein Meister bei Ihnen.</p></li>
+    </ol>
+    <form class="req" id="req" novalidate>
+      <label class="file"><input type="file" accept="image/*" multiple id="fotos"><span>Fotos hinzufügen</span><small id="fotos-n">noch keine Fotos</small></label>
+      <fieldset class="dims"><legend>Maße in cm</legend>
+        <label>Breite<input inputmode="decimal" name="b" placeholder="z. B. 240"></label>
+        <label>Höhe<input inputmode="decimal" name="h" placeholder="z. B. 230"></label>
+        <label>Tiefe<input inputmode="decimal" name="t" placeholder="z. B. 60"></label>
+      </fieldset>
+      <label>Was soll entstehen?<select name="art"><option>Einbauschrank</option><option>Esstisch</option><option>Küche</option><option>Treppe</option><option>Tür</option><option>Etwas anderes</option></select></label>
+      <label>Name<input name="name" autocomplete="name"></label>
+      <label>Telefon oder E-Mail<input name="kontakt" autocomplete="email"></label>
+      <button class="btn" type="submit">Anfrage senden</button>
+      <p class="fine" id="req-ok" hidden>Danke! In der Demo wird nichts gesendet. Im Echtbetrieb ruft Sie ein Meister innerhalb von 24 Stunden zurück.</p>
+      <p class="fine">Demo: Es wird nichts gesendet.</p>
+    </form>
+  </div>
+</section>
+
+<!-- KAPITEL 5: FILM + KINETIK Karriere -->
+<section class="film karriere" id="karriere" data-film="karriere" style="--len:560vh">
+  <div class="stage">
+    <img class="poster" data-need="f3-karriere" alt="Junger Tischler an der CNC-Maschine">
+    <video muted playsinline preload="auto" data-vid="karriere"></video>
+    <div class="shade"></div>
+    <div class="chap-copy"><p class="kicker">Karriere · Ausbildung</p><h2>Bau was,<br>das bleibt.</h2></div>
+    <div class="kinetic" aria-label="Vorteile">
+      <span data-at=".22">Führerschein.</span>
+      <span data-at=".36">Werkzeug.</span>
+      <span data-at=".5">Feste Crew.</span>
+      <span data-at=".64">Meister? Zahlen wir mit.</span>
+      <span data-at=".78">Zukunft.</span>
+    </div>
+    <a class="btn big" data-at=".86" href="#bewerben">In 60 Sekunden bewerben</a>
+  </div>
+</section>
+
+<!-- KAPITEL 6: MOTION Bewerbung in 60 Sekunden -->
+<section class="bewerben" id="bewerben">
+  <div class="wrap two">
+    <header class="sec-head"><p class="kicker">Bewerbung</p><h2>Kein Anschreiben.<br>5 Fragen.</h2><p class="lead">Wischen oder tippen. Danach nur noch Kontakt, fertig.</p><div class="clock"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><circle class="ring" cx="22" cy="22" r="19"/></svg><b id="sec">60</b><small>Sekunden</small></div></header>
+    <div class="phone" aria-live="polite">
+      <div class="screen">
+        <div class="bar"><i id="prog"></i></div>
+        <p class="qn" id="qn">Frage 1 von 5</p>
+        <div class="cards" id="cards"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KAPITEL 7: Bewertungen -->
+<section class="bewertungen" id="bewertungen">
+  <div class="wrap">
+    <header class="sec-head"><p class="kicker">Bewertungen</p><h2>Was Kunden<br>sagen.</h2><p class="lead">Hier stehen im Echtbetrieb Ihre echten Werte von Google und Tripadvisor, mit Link und Stand-Datum.</p></header>
+    <div class="portals">
+      <div class="portal"><p class="pn">Google</p><p class="score"><b data-count="4.9" data-dec="1">0,0</b><span class="stars" style="--f:0"></span></p><p class="cnt"><b data-count="187">0</b> Bewertungen · Beispiel</p></div>
+      <div class="portal"><p class="pn">Tripadvisor</p><p class="score"><b data-count="5.0" data-dec="1">0,0</b><span class="stars" style="--f:0"></span></p><p class="cnt"><b data-count="42">0</b> Bewertungen · Beispiel</p></div>
+    </div>
+    <div class="ticker" aria-hidden="true"><div><span>pünktlich</span><span>sauber gearbeitet</span><span>Maß genau</span><span>Beratung</span><span>Massivholz</span><span>fairer Ablauf</span><span>Einbauschrank</span><span>Esstisch</span><span>pünktlich</span><span>sauber gearbeitet</span><span>Maß genau</span><span>Beratung</span><span>Massivholz</span><span>fairer Ablauf</span><span>Einbauschrank</span><span>Esstisch</span></div></div>
+    <div class="quotes" id="quotes">
+      <figure><blockquote>„Die Nische unter der Treppe war fünf Jahre ungenutzt. Jetzt passt da alles rein und man sieht keine Fuge.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <figure><blockquote>„Foto und Maße geschickt, am nächsten Tag kam der Rückruf. So einfach hatte ich mir das nicht vorgestellt.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <figure><blockquote>„Der Tisch ist aus einem einzigen Stamm. Unsere Kinder werden ihn mal erben.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="logo">ASTREIN<small>Tischlerei</small></p>
+    <p>Werkstattweg 1 · 00000 Musterstadt (Demo)</p>
+    <p><a href="#anfrage">Projekt anfragen</a> · <a href="#karriere">Karriere</a> · <a href="#" data-modal="impressum">Impressum</a> · <a href="#" data-modal="impressum">Datenschutz</a></p>
+  </div>
+</footer>
+
+<dialog id="impressum"><form method="dialog"><h2>Impressum</h2><p>Dies ist eine Demo von PROJEKT EX. ASTREIN Tischlerei ist ein erfundener Betrieb. Es werden keine Daten gesendet oder gespeichert.</p><button class="btn">Schließen</button></form></dialog>
+
+<script src="assets/js/img.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
