@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WURZELWERK · Ein Baum. Ein Jahr.</title>
+<meta name="description" content="Demo: Garten- und Landschaftsbau als Scrollytelling. Die Kamera kreist um einen Baum durch das ganze Jahr.">
+<meta name="theme-color" content="#2f3a24">
+<link rel="preload" href="../assets/fonts/grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: G; src: url(../assets/fonts/grotesk.woff2) format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: I; src: url(../assets/fonts/inter.woff2) format("woff2"); font-weight: 100 900; font-display: swap; }
+:root { --bg: #2f3a24; --bg-rgb: 47,58,36; --bg2: #1f2717; --or: #e8b4b0; --or-rgb: 232,180,176; --on-or: #2a2420; --tx: #f4efe6; --tx-rgb: 244,239,230; --mute: rgba(244,239,230,.78); --gut: clamp(16px, 5vw, 80px); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { font: 400 16px/1.5 I, system-ui, sans-serif; color: var(--tx); background: var(--bg2); -webkit-font-smoothing: antialiased; }
+button, input { font: inherit; color: inherit; } button { cursor: pointer; border: 0; background: none; }
+a { color: inherit; }
+
+/* 3D-Szene aus der Vorlage „Sakura QR“, fest im Hintergrund */
+.hero { position: fixed; inset: 0; z-index: 0; overflow: hidden; transition: background 1.2s ease;
+  background: radial-gradient(60% 50% at 62% 42%, rgba(var(--season-rgb, 233,214,214), .35) 0%, transparent 70%), radial-gradient(130% 100% at 60% 40%, #3a4830 0%, #2f3a24 45%, #1f2717 100%); }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+#scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: grab; outline: none; }
+#scene.is-grabbing { cursor: grabbing; }
+.loader { position: absolute; left: 50%; top: 45%; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--or); font-weight: 600; font-size: 14px; transition: opacity .8s; z-index: 3; pointer-events: none; }
+.loader.is-done { opacity: 0; }
+.loader__bar { width: 140px; height: 3px; border-radius: 3px; background: rgba(var(--or-rgb), .2); overflow: hidden; }
+.loader__bar i { display: block; height: 100%; width: 0; background: var(--or); transition: width .25s; }
+.ui { position: absolute; left: 0; right: 0; bottom: 22px; display: flex; justify-content: center; z-index: 4; pointer-events: none; }
+.hint { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border-radius: 999px; background: rgba(var(--bg-rgb), .55); border: 1px solid rgba(var(--tx-rgb), .16); color: var(--mute); font-size: 13px; backdrop-filter: blur(8px); }
+.hint span { transition: opacity .3s; }
+.toast { display: none; }
+
+/* Kopf + Jahreszeiten-Schalter */
+.demo { position: fixed; z-index: 60; top: 0; left: 0; right: 0; height: 26px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 12px; background: var(--bg2); color: var(--mute); white-space: nowrap; overflow: hidden; }
+.demo a { text-decoration: none; padding: 2px 10px; border-radius: 999px; font-weight: 600; }
+.demo a.on { background: var(--or); color: var(--on-or); }
+.nav { position: fixed; z-index: 55; top: 26px; left: 0; right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--gut); pointer-events: none; }
+.logo { pointer-events: auto; font: 600 20px/1 G, I, sans-serif; letter-spacing: .06em; text-decoration: none; display: flex; flex-direction: column; gap: 4px; min-height: 44px; justify-content: center; }
+.logo small { font: 500 10px/1 I, sans-serif; letter-spacing: .22em; text-transform: uppercase; opacity: .8; }
+.seasons { pointer-events: auto; position: relative; display: flex; padding: 4px; border-radius: 999px; background: rgba(var(--bg-rgb), .55); border: 1px solid rgba(var(--tx-rgb), .18); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.seasons .ind { position: absolute; top: 4px; bottom: 4px; left: 0; border-radius: 999px; background: var(--or); transition: transform .5s cubic-bezier(.2,.8,.2,1), width .5s; }
+.se { position: relative; z-index: 1; min-height: 44px; padding: 0 18px; border-radius: 999px; font: 600 14px/1 I, sans-serif; transition: color .3s; }
+.se.on { color: var(--on-or); }
+.navcta { pointer-events: auto; min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--or); color: var(--on-or); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; text-decoration: none; }
+
+/* Story: Stationen rund um den Baum */
+#story { position: relative; z-index: 2; pointer-events: none; }
+.st { min-height: 150vh; display: flex; align-items: center; padding: 120px var(--gut) 80px; }
+.st.r { justify-content: flex-end; }
+.card { pointer-events: auto; width: min(460px, 100%); padding: 30px; border-radius: 26px; background: rgba(var(--bg-rgb), .72); border: 1px solid rgba(var(--tx-rgb), .14); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 30px 80px rgba(0,0,0,.25); opacity: 0; transform: translateY(40px); transition: opacity .8s, transform .8s cubic-bezier(.2,.8,.2,1); }
+.st.in .card { opacity: 1; transform: none; }
+.eye { font: 600 12px/1 I, sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--or); margin-bottom: 14px; }
+.h { font: 400 clamp(34px, 4.2vw, 58px)/1.04 G, sans-serif; letter-spacing: -.01em; margin-bottom: 14px; }
+.p { color: var(--mute); font-size: 16px; margin-bottom: 18px; }
+.fig { display: flex; align-items: baseline; gap: 10px; padding: 14px 0; border-top: 1px solid rgba(var(--tx-rgb), .16); border-bottom: 1px solid rgba(var(--tx-rgb), .16); margin-bottom: 18px; }
+.fig b { font: 500 clamp(36px, 4vw, 52px)/1 G, sans-serif; color: var(--or); }
+.fig span { font-size: 14px; color: var(--mute); }
+.photo { margin: 0 0 18px; border-radius: 18px; overflow: hidden; aspect-ratio: 16/9; background: #1f2717; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.08); transition: transform 1.6s cubic-bezier(.2,.8,.2,1); }
+.st.in .photo img { transform: scale(1); }
+.more { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 999px; background: var(--or); color: var(--on-or); font-weight: 600; font-size: 15px; text-decoration: none; }
+.more:hover { box-shadow: 0 10px 30px rgba(var(--or-rgb), .35); }
+.bridge { min-height: 120vh; display: flex; align-items: center; justify-content: center; padding: 120px var(--gut); }
+.bridge figure { pointer-events: auto; width: min(1100px, 100%); border-radius: 28px; overflow: hidden; aspect-ratio: 16/9; opacity: 0; transform: scale(.86); transition: opacity 1s, transform 1.4s cubic-bezier(.2,.8,.2,1); box-shadow: 0 40px 120px rgba(0,0,0,.35); }
+.bridge.in figure { opacity: 1; transform: none; }
+.bridge img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bridge figcaption { display: none; }
+.foot { position: relative; z-index: 3; background: var(--bg2); padding: 70px var(--gut) 40px; color: var(--mute); }
+.foot b { font: 600 20px G, sans-serif; color: var(--tx); letter-spacing: .06em; }
+@media (max-width: 900px) {
+  .nav { top: 26px; height: 56px; }
+  .navcta { display: none; }
+  .seasons { position: fixed; top: 88px; left: 16px; right: 16px; justify-content: space-between; }
+  .se { flex: 1; padding: 0 4px; font-size: 13px; }
+  .st, .st.r { justify-content: center; align-items: flex-end; padding: 150px 16px 70px; }
+  .card { padding: 20px; border-radius: 20px; }
+  .h { font-size: clamp(30px, 8.5vw, 40px); }
+  .p { font-size: 15px; }
+  .demo { font-size: 11px; gap: 4px; }
+}
+@media (max-width: 900px) and (max-height: 520px) {
+  .seasons { top: 30px; left: auto; right: 16px; width: 380px; }
+  .st, .st.r { align-items: center; justify-content: flex-end; padding: 70px 16px 30px; }
+  .card { width: 52%; max-height: calc(100vh - 100px); overflow: auto; }
+  .photo { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .card, .photo img, .bridge figure { transition: none; } }
+</style>
+<script type="importmap" src="../assets/inline/86be89d7ad24.js"></script>
+</head>
+<body>
+<div class="demo">Demo-Webseite · Vorlage Sakura <a href="../?v=natur">Rundgang 1</a><a href="../?v=kamera">Rundgang 2</a><a class="on" href="./">3D-Baum</a></div>
+<header class="nav">
+  <a class="logo" href="#top">WURZELWERK<small>Garten &amp; Landschaft</small></a>
+  <nav class="seasons" aria-label="Jahreszeit wählen"><i class="ind"></i>
+    <button class="se on" data-s="0">Frühling</button><button class="se" data-s="1">Sommer</button><button class="se" data-s="2">Herbst</button><button class="se" data-s="3">Winter</button>
+  </nav>
+  <a class="navcta" href="#kontakt">Planungstermin</a>
+</header>
+
+<section class="hero" id="hero" aria-label="3D-Baum, Kamera kreist beim Scrollen">
+  <canvas id="scene" aria-label="3D-Apfelbaum im Garten. Ziehen zum Drehen." tabindex="0"></canvas>
+  <div class="loader" id="loader" role="status">Garten wird gepflanzt …<div class="loader__bar"><i id="loaderBar"></i></div></div>
+  <div class="toast" id="toast"></div>
+  <div class="ui" id="ui"><div class="hint"><span id="hintText">Scrollen = einmal ums Jahr · Ziehen = Baum drehen</span></div></div>
+</section>
+
+<main id="story">
+  <section class="st r" id="top" data-season="0">
+    <div class="card">
+      <p class="eye">Nordseite · März</p>
+      <h1 class="h">Ein Baum.<br>Vier Seiten.<br>Ein Jahr.</h1>
+      <figure class="photo"><img data-src="sb1,p1" alt="Frühlingsgarten mit Minibagger und blühendem Apfelbaum im Morgennebel"></figure>
+      <p class="p">Gehen Sie einmal um unseren Apfelbaum. An jeder Seite sehen Sie, was WURZELWERK in dieser Jahreszeit für einen Garten tut.</p>
+      <div class="fig"><b data-n="40">0</b><span>cm Aushub, bevor eine Terrasse entsteht</span></div>
+      <a class="more" href="#s2">Rundgang starten ↓</a>
+    </div>
+  </section>
+
+  <section class="st r" id="s2" data-season="0">
+    <div class="card">
+      <p class="eye">Ostseite · April · Neuanlage</p>
+      <h2 class="h">Was man nie sieht, trägt alles.</h2>
+      <figure class="photo"><img data-src="sb2,p2" alt="Landschaftsgärtner mit Rüttelplatte und Schnurgerüst an der neuen Terrasse"></figure>
+      <p class="p">Frostschutz in Lagen verdichtet, Schnurgerüst für das Gefälle, Platten mit dem Vakuumheber. Darum sackt bei uns keine Terrasse ab.</p>
+      <div class="fig"><b data-n="30">0</b><span>bis 40 cm Frostschutz 0/32 · 2 % Gefälle vom Haus weg</span></div>
+    </div>
+  </section>
+
+  <section class="bridge" data-season="0"><figure><img data-src="sa2,b1" alt="Apfelblüte ganz nah, in ihrer Mitte ein Handy-Bildschirm"></figure></section>
+
+  <section class="st r" id="s3" data-season="0">
+    <div class="card">
+      <p class="eye">Unter der Blüte · Mai · Angebot per Foto</p>
+      <h2 class="h">Foto schicken statt Termin abwarten.</h2>
+      <figure class="photo"><img data-src="sa3,p3" alt="Hand fotografiert eine kahle Gartenecke mit dem Handy"></figure>
+      <p class="p">Drei Fotos, grobe Fläche, fertig. Wir melden uns mit einem Vorschlag, oft ganz ohne Besichtigung.</p>
+      <div class="fig"><b data-n="48">0</b><span>Stunden bis zum Vorschlag</span></div>
+      <a class="more" href="#kontakt">Foto senden</a>
+    </div>
+  </section>
+
+  <section class="st r" id="s4" data-season="1">
+    <div class="card">
+      <p class="eye">Südseite · Juli · Rasen &amp; Wasser</p>
+      <h2 class="h">Sommer. Gepflegt, nicht geplagt.</h2>
+      <figure class="photo"><img data-src="sb4,p4" alt="Regner sprüht Wasserbögen mit Regenbogen über frischen Rollrasen"></figure>
+      <p class="p">Rollrasen über Nacht, Regner und Tropfschläuche, die nur gießen, wenn der Boden es braucht.</p>
+      <div class="fig"><b data-n="15">0</b><span>Liter pro m² täglich in den ersten zwei Wochen</span></div>
+    </div>
+  </section>
+
+  <section class="bridge" data-season="1"><figure><img data-src="sa4,b2" alt="Wassertropfen im Abendlicht werden zu Lichterketten"></figure></section>
+
+  <section class="st r" id="s5" data-season="1">
+    <div class="card">
+      <p class="eye">Unter dem Baum · August · Pflege-Abo</p>
+      <h2 class="h">Ein Garten zum Genießen.</h2>
+      <figure class="photo"><img data-src="sb5,p5" alt="Freunde an einer langen Tafel unter dem Apfelbaum am Abend"></figure>
+      <p class="p">Einmal im Monat kommt die Crew: Rasen, Beete, Hecke, Bewässerung. Sie haben Feierabend.</p>
+      <div class="fig"><b data-n="12">0</b><span>Pflegebesuche im Jahr</span></div>
+    </div>
+  </section>
+
+  <section class="bridge" data-season="2"><figure><img data-src="sa6,b3" alt="Ein Apfelblatt färbt sich orange und fällt"></figure></section>
+
+  <section class="st r" id="s6" data-season="2">
+    <div class="card">
+      <p class="eye">Westseite · Oktober · Gehölzschnitt</p>
+      <h2 class="h">Schneiden, wenn es der Baum will.</h2>
+      <figure class="photo"><img data-src="sb6,p6" alt="Gärtner auf der Leiter beim Obstbaumschnitt im Herbstnebel"></figure>
+      <p class="p">Starke Rückschnitte an Hecken sind nur von Oktober bis Februar erlaubt. Wir planen danach und nehmen das Laub gleich mit.</p>
+      <div class="fig"><b>1.10.–28.2.</b><span>Zeit für starke Rückschnitte (§ 39 BNatSchG)</span></div>
+    </div>
+  </section>
+
+  <section class="bridge" data-season="2"><figure><img data-src="sa7,b4" alt="Ein roter Apfel fällt in die Kiste eines Azubis"></figure></section>
+
+  <section class="st r" id="s7" data-season="2">
+    <div class="card">
+      <p class="eye">Am Stamm · November · Ausbildung</p>
+      <h2 class="h">Führerschein. Feste Crew. Draußen.</h2>
+      <figure class="photo"><img data-src="sb7,p7" alt="Junger Azubi mit einer Kiste Äpfel am Stamm"></figure>
+      <p class="p">Ausbildung zum Gärtner im Garten- und Landschaftsbau oder Quereinstieg. Bewerbung in 60 Sekunden, ohne Unterlagen.</p>
+      <div class="fig"><b data-n="3">0</b><span>Jahre Ausbildung, danach Vorarbeiter oder Meister</span></div>
+    </div>
+  </section>
+
+  <section class="bridge" data-season="3"><figure><img data-src="sa8,b5" alt="Atem wird zu Schneeflocken über dem Wintergarten"></figure></section>
+
+  <section class="st r" id="kontakt" data-season="3">
+    <div class="card">
+      <p class="eye">Nordseite · Januar · Planung</p>
+      <h2 class="h">Im Winter planen wir Ihren Frühling.</h2>
+      <figure class="photo"><img data-src="sb8,p8" alt="Winterabend, Granitweg und beleuchtete Trockenmauer am kahlen Apfelbaum"></figure>
+      <p class="p">Mauern, Wege, Licht: Im Januar zeichnen wir, im März kommt der Bagger.</p>
+      <div class="fig"><b data-n="15">0</b><span>% Anlauf einer Trockenmauer zur Erde</span></div>
+      <a class="more" href="mailto:demo@example.com">Planungstermin anfragen</a>
+    </div>
+  </section>
+</main>
+<footer class="foot"><b>WURZELWERK</b><p>Demo-Webseite · erfundener Betrieb · keine echten Kontaktdaten. 3D-Szene auf Basis der Vorlage „Sakura QR“ (motionsites).</p></footer>
+
+<script src="../assets/js/imgs.js"></script>
+<script src="../assets/inline/d8cf596d137a.js"></script>
+<script type="module" src="../assets/inline/6fd59d3f0e3d.js"></script>
+</body>
+</html>

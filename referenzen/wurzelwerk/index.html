@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WURZELWERK · Ein Baum. Vier Seiten. Ein Jahr.</title>
+<meta name="description" content="Demo-Webseite für einen Garten- und Landschaftsbaubetrieb: ein Rundgang um einen Baum durch das ganze Gartenjahr.">
+<meta name="theme-color" content="#2f3a24">
+<link rel="preload" href="assets/fonts/serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/rund.css">
+</head>
+<body>
+
+<div class="demo">Demo-Webseite<span class="long">&nbsp;· erfundener Betrieb · Formulare senden nichts</span><span class="for" hidden>&nbsp;· erstellt für <b data-firma></b></span></div>
+
+<header class="nav">
+  <a class="logo" href="#s1" aria-label="WURZELWERK, zum Anfang">WURZELWERK<small>Garten &amp; Landschaft</small></a>
+  <button class="burger" aria-label="Menü öffnen" aria-expanded="false"><i></i><i></i></button>
+</header>
+
+<nav class="menu" aria-label="Hauptmenü">
+  <a href="#s2" data-goid="s2"><small>Frühling</small>Neu anlegen</a>
+  <a href="#s3" data-goid="s3"><small>Frühling</small>Angebot per Foto</a>
+  <a href="#s4" data-goid="s4"><small>Sommer</small>Rasen &amp; Pflege</a>
+  <a href="#s5" data-goid="s5"><small>Sommer</small>Bewertungen</a>
+  <a href="#s6" data-goid="s6"><small>Herbst</small>Gehölzschnitt</a>
+  <a href="#s7" data-goid="s7"><small>Herbst</small>Ausbildung &amp; Jobs</a>
+  <a href="#s8" data-goid="s8"><small>Winter</small>Planung &amp; Kontakt</a>
+</nav>
+
+<!-- Sonnenbahn wie im Storyboard: Punkt wandert durchs Jahr, Jahreszeiten antippbar -->
+<nav class="seasons sunarc" aria-label="Jahreszeit wählen">
+  <svg viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"><path id="arc" d="M 20 110 Q 500 -40 980 110" fill="none"/></svg>
+  <i class="ind" aria-hidden="true"></i>
+  <button class="se" data-goid="s1" data-se="0" style="--x:16%;--y:58%">Frühling</button>
+  <button class="se" data-goid="s4" data-se="1" style="--x:39%;--y:22%">Sommer</button>
+  <button class="se" data-goid="s6" data-se="2" style="--x:61%;--y:22%">Herbst</button>
+  <button class="se" data-goid="s8" data-se="3" style="--x:84%;--y:58%">Winter</button>
+  <i class="sundot" aria-hidden="true"></i>
+</nav>
+
+<main id="rund">
+  <div class="stage" aria-hidden="true">
+    <div class="shade"></div>
+    <div class="veil"></div>
+    <canvas class="fx"></canvas>
+  </div>
+
+  <!-- Storyboard „Eine Kamerafahrt“ (B): ein durchgehender Film um den Baum, Clip an Clip (Bild n → n+1) -->
+  <section class="stop" id="s1" data-chain="11" data-img="sb1" data-alt="p1" data-se="0" data-tr="veil" data-side="Nordseite · März">
+    <div class="txt lowleft">
+      <h1 class="sh">Ein Baum.<br>Vier Seiten.<br><em>Ein Jahr.</em></h1>
+      <a class="rbtn light" href="leistungen/planung.html">Bevor der erste Stein liegt <span>→</span></a>
+    </div>
+  </section>
+
+  <section class="stop story" id="s2" data-chain="12" data-img="sb2" data-alt="p2" data-se="0" data-tr="veil" data-side="Ostseite · April">
+    <div class="txt lowleft story-txt">
+      <p class="kick">Ostseite · April</p>
+      <div class="beat"><h3 class="bh">Erst messen, dann graben.</h3><p>Schnurgerüst und Laser legen Höhen und Gefälle fest, bevor der Bagger kommt.</p></div>
+      <div class="beat num"><b><span class="cnt" data-to="40">0</span> cm</b><p>tief wird für eine Terrasse ausgehoben.</p></div>
+      <div class="beat num"><b><span class="cnt" data-to="2">0</span> %</b><p>Gefälle vom Haus weg: 2 cm pro Meter, damit Regen abläuft.</p></div>
+      <div class="beat"><div class="stack" aria-label="Aufbau einer Terrasse, rund 40 cm">
+        <i style="--c:#cfccc4" data-w="15"><em>Belag + Bett</em></i><i style="--c:#a59a86" data-w="25"><em>Tragschicht 15 cm</em></i><i style="--c:#6f685b" data-w="60"><em>Frostschutz 30–40 cm</em></i></div>
+        <a class="rbtn light" href="leistungen/neuanlage.html">Was unter Ihrer Terrasse liegt <span>→</span></a></div>
+    </div>
+  </section>
+
+  <section class="stop right story" id="s3" data-chain="31" data-img="sb3" data-alt="p3" data-se="0" data-tr="iris" data-cx="50" data-cy="40" data-side="Durch die Blüten · Mai">
+    <div class="txt lowleft story-txt">
+      <p class="kick">Unter der Blüte · Mai</p>
+      <div class="beat"><h3 class="bh">Wir planen mit dem, was schon da ist.</h3><p>Der alte Baum, das Licht, der Boden: daraus entsteht Ihr Garten.</p></div>
+      <div class="beat num"><b><span class="cnt" data-to="5">0</span>–<span class="cnt" data-to="9">0</span></b><p>Stauden pro m². So schließt sich ein Beet nach ein bis zwei Jahren.</p></div>
+    </div>
+    <div class="rcard">
+      <h2 class="rt">Garten<br>neu gestalten</h2>
+      <p>Individuelle Planung.<br>Sorgfältige Ausführung.<br>Mit Wurzelwerk.</p>
+      <a class="rbtn" href="leistungen/neuanlage.html">Mehr erfahren <span>→</span></a>
+    </div>
+  </section>
+
+
+
+  <section class="stop right story" id="s4" data-chain="32" data-img="sb4" data-alt="p4" data-se="1" data-tr="clip" data-clip="4" data-trf="fade" data-side="Durch den Sprühnebel · Juli">
+    <div class="txt lowleft story-txt">
+      <p class="kick">Südseite · Juli</p>
+      <div class="beat"><h3 class="bh">Über Nacht grün.</h3><p>Rollrasen wird frühmorgens geschält und am selben Tag verlegt.</p></div>
+      <div class="beat num"><b><span class="cnt" data-to="10">0</span>–<span class="cnt" data-to="15">0</span> l/m²</b><p>Wasser täglich in den ersten zwei Wochen.</p></div>
+      <div class="beat"><div class="bars" aria-label="Wasserbedarf Rasen, Liter pro m² und Woche, Richtwerte">
+        <i data-h="40"><em>10</em><s>Apr</s></i><i data-h="60"><em>15</em><s>Mai</s></i><i data-h="80"><em>20</em><s>Jun</s></i><i data-h="100"><em>25</em><s>Jul</s></i><i data-h="80"><em>20</em><s>Aug</s></i><i data-h="40"><em>10</em><s>Sep</s></i></div>
+        <p class="src">Eingewachsener Rasen, Liter pro m² und Woche (Richtwerte)</p>
+        <a class="rbtn light" href="leistungen/rasen.html">Rasen &amp; Bewässerung <span>→</span></a></div>
+    </div>
+    <div class="rcard small" id="angebot">
+      <h2 class="rt">Foto schicken</h2>
+      <p>Drei Fotos von Ihrer Ecke. Wir melden uns mit einem Vorschlag, oft ohne Besichtigung.</p>
+      <div class="steps-calc"><label for="sc-l">Länge <output for="sc-l">8</output> Schritte</label><input type="range" id="sc-l" min="2" max="30" value="8">
+        <label for="sc-b">Breite <output for="sc-b">6</output> Schritte</label><input type="range" id="sc-b" min="2" max="20" value="6">
+        <p class="sc-res">≈ <b data-sc>27</b> m² <small>(1 Schritt ≈ 0,75 m)</small></p></div>
+      <a class="rbtn" href="leistungen/angebot.html">Mehr erfahren <span>→</span></a>
+    </div>
+  </section>
+
+
+  <section class="stop right story" id="s5" data-chain="33" data-img="sb5" data-alt="p5" data-se="1" data-tr="fade" data-side="Abendlicht · August">
+    <div class="txt lowleft story-txt">
+      <p class="kick">Unter dem Baum · August</p>
+      <div class="beat"><h3 class="bh">Genießen statt pflegen.</h3><p>Mit festen Pflegeterminen übers Jahr bleibt der Garten so, wie er am ersten Abend war.</p></div>
+      <div class="beat num"><b><span class="cnt" data-to="7">0</span> Monate</b><p>Rasensaison: gemäht wird von April bis Oktober.</p></div>
+    </div>
+    <div class="rev" id="bewertungen">
+      <figure class="rq"><blockquote>„Von der Planung bis zum letzten Detail – ein echtes Team.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <figure class="rq"><blockquote>„Unser Garten ist jetzt unser Lieblingsort.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <figure class="rq"><blockquote>„Zuverlässig, kreativ und einfach sympathisch.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <a class="rbtn light" href="leistungen/pflege.html">Pflege-Abo <span>→</span></a>
+    </div>
+  </section>
+
+
+  <section class="stop story" id="s6" data-chain="34" data-img="sb6" data-alt="p6" data-se="2" data-tr="clip" data-clip="6" data-trf="iris" data-cx="50" data-cy="70" data-side="Herbstnebel · Oktober">
+    <div class="txt lowleft story-txt">
+      <p class="kick">Westseite · Oktober</p>
+      <div class="beat"><h3 class="bh">Schneiden zur richtigen Zeit.</h3><p>Laub weg, Gehölze in Form, der Garten wird winterfest.</p></div>
+      <div class="beat"><div class="cal" aria-label="Starker Rückschnitt nur Oktober bis Februar">
+        <i class="y">J</i><i class="y">F</i><i>M</i><i>A</i><i>M</i><i>J</i><i>J</i><i>A</i><i>S</i><i class="y">O</i><i class="y">N</i><i class="y">D</i></div>
+        <p class="src">Rosa: starker Rückschnitt erlaubt, 1. Oktober bis 28. Februar (§ 39 Bundesnaturschutzgesetz). Sonst nur schonender Formschnitt.</p></div>
+      <div class="beat num"><b>+<span class="cnt" data-to="1.5" data-d="1">0</span> m</b><p>über die Krone hinaus schützen wir den Wurzelraum bei Bauarbeiten (DIN 18920).</p>
+        <a class="rbtn light" href="leistungen/gehoelzschnitt.html">Gehölzschnitt &amp; Laub <span>→</span></a></div>
+    </div>
+  </section>
+
+
+  <section class="stop story" id="s7" data-chain="35" data-img="sb7" data-alt="p7" data-se="2" data-tr="fade" data-side="Am Stamm · November">
+    <div class="txt lowleft">
+      <h2 class="sh">Führerschein.<br>Feste Crew.<br><em>Draußen.</em></h2>
+      <div class="beat num"><b><span class="cnt" data-to="3">0</span> Jahre</b><p>Ausbildung Gärtner/in, Fachrichtung Garten- und Landschaftsbau. Danach Meister oder Techniker.</p></div>
+      <div class="beat"><button class="rbtn light" data-open="bewerbung">60-Sekunden-Bewerbung <span>→</span></button> <a class="rbtn light" href="leistungen/ausbildung.html">Ausbildung &amp; Jobs <span>→</span></a></div>
+    </div>
+  </section>
+
+
+  <section class="stop right story" id="s8" data-img="sb8" data-alt="p8" data-se="3" data-tr="clip" data-clip="8" data-side="Schneetreiben · Januar">
+    <div class="txt lowleft"><h2 class="sh small">Winter.<br>Wir planen<br>Ihren Frühling.</h2>
+      <div class="beat num"><b><span class="cnt" data-to="10">0</span>–<span class="cnt" data-to="15">0</span> %</b><p>Anlauf zur Erde: So hält eine Trockenmauer ohne Mörtel.</p></div>
+      <div class="beat"><a class="rbtn light" href="leistungen/winter.html">Mauer, Licht &amp; Winter <span>→</span></a></div></div>
+    <div class="rcard" id="kontakt">
+      <h2 class="rt">Lassen Sie<br>uns sprechen.</h2>
+      <ul class="rlist">
+        <li><span aria-hidden="true">☏</span>Telefon (Demo)</li>
+        <li><span aria-hidden="true">✉</span>E-Mail (Demo)</li>
+        <li><span aria-hidden="true">⌖</span>Ihre Stadt &amp; Umgebung</li>
+      </ul>
+      <button class="rbtn" data-open="anfrage">Projekt anfragen <span>→</span></button>
+    </div>
+  </section>
+</main>
+
+<div class="side" aria-live="polite"><span class="sideTxt"></span></div>
+<div class="swipe" aria-hidden="true"><span>←</span> Wischen <span>→</span></div>
+
+<footer class="foot">
+  <div class="fw">
+    <div><b class="logo">WURZELWERK</b><p>Garten- und Landschaftsbau. Ein Baum, vier Seiten, ein Jahr: so arbeiten wir das ganze Jahr für Ihren Garten.</p></div>
+    <div><small>Leistungen</small><p>Neuanlage · Terrassen &amp; Pflaster · Mauern · Rollrasen · Bewässerung · Gehölzschnitt · Pflege-Abo · Winterdienst</p></div>
+    <div><small>Kontakt</small><p><button class="lnk" data-open="anfrage">Planungstermin anfragen</button><br><button class="lnk" data-open="bewerbung">Bewerben in 60 Sekunden</button><br><button class="lnk" data-open="impressum">Impressum &amp; Datenschutz</button></p></div>
+  </div>
+  <p class="fine">Demo-Webseite · erfundener Betrieb · keine echten Kontaktdaten · Formulare senden nichts</p>
+</footer>
+
+<dialog id="m-anfrage" class="modal">
+  <form method="dialog" data-demo="Demo: Anfrage wäre jetzt beim Team. Rückmeldung in 24 Stunden.">
+    <button class="x" value="x" aria-label="Schließen">×</button>
+    <p class="eye">Planungstermin</p>
+    <h2 class="ct">Was soll im Frühling entstehen?</h2>
+    <div class="chips" role="group" aria-label="Wunsch">
+      <label><input type="checkbox"><span>Terrasse</span></label><label><input type="checkbox"><span>Rasen</span></label><label><input type="checkbox"><span>Mauer</span></label>
+      <label><input type="checkbox"><span>Wege</span></label><label><input type="checkbox"><span>Bepflanzung</span></label><label><input type="checkbox"><span>Pflege</span></label>
+    </div>
+    <label class="fld">Name<input autocomplete="name" required></label>
+    <label class="fld">Telefon oder E-Mail<input autocomplete="email" required></label>
+    <button class="btn ink" value="ok">Termin anfragen</button>
+  </form>
+</dialog>
+
+<dialog id="m-bewerbung" class="modal">
+  <form method="dialog" class="swipe-app" data-demo="Demo: Bewerbung wäre jetzt beim Team. Wir rufen innerhalb von 24 Stunden an.">
+    <button class="x" value="x" aria-label="Schließen">×</button>
+    <div class="bar"><i></i></div>
+    <div class="cards">
+      <fieldset class="sc on"><legend class="ct">Was fährst du?</legend>
+        <label class="opt"><input type="radio" name="f" value="b"><span>Auto (B)</span></label>
+        <label class="opt"><input type="radio" name="f" value="be"><span>Mit Anhänger (BE)</span></label>
+        <label class="opt"><input type="radio" name="f" value="k"><span>Noch nichts, Führerschein zahlen wir mit</span></label></fieldset>
+      <fieldset class="sc"><legend class="ct">Was passt zu dir?</legend>
+        <label class="opt"><input type="radio" name="a" value="az"><span>Ausbildung</span></label>
+        <label class="opt"><input type="radio" name="a" value="qe"><span>Quereinstieg</span></label>
+        <label class="opt"><input type="radio" name="a" value="pr"><span>Gelernt, mit Erfahrung</span></label></fieldset>
+      <fieldset class="sc"><legend class="ct">Wie erreichen wir dich?</legend>
+        <label class="fld">Vorname<input autocomplete="given-name"></label>
+        <label class="fld">Handynummer<input type="tel" autocomplete="tel"></label>
+        <button class="btn ink" value="ok">Abschicken</button></fieldset>
+    </div>
+    <p class="hint">Antippen geht direkt weiter · keine Unterlagen nötig</p>
+  </form>
+</dialog>
+
+<dialog id="m-impressum" class="modal">
+  <form method="dialog">
+    <button class="x" value="x" aria-label="Schließen">×</button>
+    <h2 class="ct">Impressum &amp; Datenschutz</h2>
+    <p>Dies ist eine Demo-Webseite für einen erfundenen Garten- und Landschaftsbaubetrieb. Es gibt keinen echten Betrieb, keine echten Kontaktdaten, und Formulare senden nichts. Es werden keine Cookies gesetzt und keine Daten übertragen.</p>
+  </form>
+</dialog>
+
+<div class="toast" hidden role="status"></div>
+<script src="assets/js/imgs.js"></script>
+<script src="assets/js/clips.js"></script>
+<script src="assets/js/rund.js"></script>
+</body>
+</html>
