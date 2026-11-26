@@ -18,8 +18,6 @@
     zeitpunkt: ['sofort', 'in 1–3 Monaten', 'in diesem Jahr', 'später', 'noch offen'],
     entscheidet: ['ich selbst', 'mit Partner/Team', 'Geschäftsführung', 'noch unklar']
   };
-  // Sichtbarer Name -> Wert, den kontakt.php erlaubt (Whitelist dort noch mit altem Namen, kontakt.php unverändert)
-  var SEND = { 'Automatisierung & KI-Agenten': 'Automatisierung & Chatbots' };
   document.querySelectorAll('[data-chips]').forEach(function (group) {
     var key = group.getAttribute('data-chips');
     var hidden = document.getElementById('f-' + key);
@@ -27,7 +25,7 @@
     var single = group.getAttribute('data-mode') === 'single';
     function sync() {
       var picked = [];
-      group.querySelectorAll('button[aria-pressed="true"]').forEach(function (b) { var t = b.textContent.trim(); picked.push(SEND[t] || t); });
+      group.querySelectorAll('button[aria-pressed="true"]').forEach(function (b) { picked.push(b.textContent.trim()); });
       if (hidden) hidden.value = picked.join(', ');
     }
     group.querySelectorAll('button').forEach(function (btn) {

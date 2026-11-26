@@ -13,7 +13,7 @@ const FROM     = 'kontakt@projektex.de';           // Absender muss ein IONOS-Po
 const HOSTS    = ['projektex.de', 'www.projektex.de', 'test.projektex.de']; // test.: geschützte Test-Subdomain laut docs/IONOS-UMZUG.md
 const MIN_SECS = 4;      // schneller ausgefüllt = Bot
 const MAX_PER_HOUR = 5;  // Anfragen je IP-Hash und Stunde
-const LEISTUNGEN = ['Websites', 'SEO & Sichtbarkeit', 'Systeme & Dashboards', 'Automatisierung & Chatbots', 'App Design', 'Werbeclips', 'Ads-Management', 'Newsletter-Marketing', 'Logo Design', 'Print Design', 'Merch-Produktion', 'Räume & Visualisierung', 'Individuelle Aufträge', 'Bewertungs-Löschservice'];
+const LEISTUNGEN = ['Websites', 'SEO & Sichtbarkeit', 'Systeme & Dashboards', 'Automatisierung & KI-Agenten', 'App Design', 'Werbeclips', 'Ads-Management', 'Newsletter-Marketing', 'Logo Design', 'Print Design', 'Merch-Produktion', 'Räume & Visualisierung', 'Individuelle Aufträge', 'Bewertungs-Löschservice'];
 
 ini_set('display_errors', '0');   // nie Fehlermeldungen/Pfade an Besucher ausgeben
 ini_set('log_errors', '1');
@@ -80,7 +80,7 @@ $kanaele = $pick(clean(field('kanaele'), 400), ['keine Website', 'Website vorhan
 $region = $pick(clean(field('region'), 200), ['lokal', 'regional', 'deutschlandweit', 'international', 'B2B', 'B2C', 'beides']);
 $ziel = $pick(clean(field('ziel'), 500), ['mehr Anfragen', 'mehr Reichweite', 'Bekanntheit', 'Mitarbeiter finden', 'Online-Verkauf', 'bei Google gefunden werden', 'Social Media aufbauen', 'Abläufe entlasten', 'Marke schärfen', 'unzulässige Bewertungen prüfen lassen']);
 $haken = $pick(clean(field('haken'), 500), ['zu wenige Anfragen', 'kaum Reichweite', 'Website veraltet oder fehlt', 'keine Zeit für Social Media', 'Werbung bringt nichts', 'Auftritt uneinheitlich', 'zu viel Handarbeit', 'kein Überblick', 'Online-Shop fehlt oder hakt']);
-$leistungen = $pick(clean(field('leistungen'), 600), LEISTUNGEN);
+$leistungen = $pick(str_replace('Automatisierung & Chatbots', 'Automatisierung & KI-Agenten', clean(field('leistungen'), 600)), LEISTUNGEN); // alter Name (kontakt.js im Browser-Cache) -> neuer Name
 $material = $pick(clean(field('material'), 240), ['Logo', 'eigene Fotos', 'eigene Videos', 'Texte', 'Farben und Schriften', 'Domain', 'nichts davon']);
 $zeitpunkt = $pick(clean(field('zeitpunkt'), 80), ['sofort', 'in 1–3 Monaten', 'in diesem Jahr', 'später', 'noch offen']);
 $entscheidet = $pick(clean(field('entscheidet'), 80), ['ich selbst', 'mit Partner/Team', 'Geschäftsführung', 'noch unklar']);
