@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BAU Facility Services · Alles für Ihre Immobilie – aus einer Hand</title>
+<meta name="description" content="BAU Facility Services GmbH, Ratingen: Planung & Organisation, Koordination & Durchführung, Bau & Umbau, Sanierung & Renovierung und Hausmeister-Leistungen. Ein Ansprechpartner für das ganze Haus.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="assets/logo.svg">
+<link rel="preload" href="assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script src="assets/manifest.js"></script>
+</head>
+<body>
+<a class="sr" href="#start">Zum Inhalt</a>
+<header class="nav">
+  <a class="nav__logo" href="#start" aria-label="BAU Facility Services – Start"><img src="assets/logo.svg" alt="BAU Facility Services" width="170" height="61"></a>
+  <div class="seg" role="group" aria-label="Objektart wählen"><button type="button" data-mode="wohn" aria-pressed="true">Privat</button><button type="button" data-mode="firma" aria-pressed="false">Gewerblich</button></div>
+  <ul class="nav__links">
+    <li><a href="#keller">Hausmeister</a></li>
+    <li><a href="zusatzleistungen.html">Zusatzleistungen</a></li>
+    <li><a href="#werte">Über uns</a></li>
+    <li><a href="#team">Karriere</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <span class="nav__loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Ratingen</span>
+  <a class="btn btn--or btn--sm" href="#kontakt">Anfrage</a>
+  <button class="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu"><span></span></button>
+</header>
+<div class="progress" aria-hidden="true"></div>
+<nav class="menu" id="menu" hidden aria-label="Menü">
+  <a href="#keller">Hausmeister-Leistungen</a><a href="#koordination">Ihr Ansprechpartner</a><a href="zusatzleistungen.html">Zusatzleistungen: Bau, Sanierung, Planung</a><a href="#team">Karriere</a><a href="#kontakt">Kontakt</a>
+</nav>
+
+<main>
+<!-- 1 · HERO -->
+<section class="hero" id="start">
+  <div class="hero__copy">
+    <p class="eyebrow">BAU Facility Services · Ratingen</p>
+    <h1>Alles für Ihre Immobilie – aus einer Hand.</h1>
+    <p class="lead">Von der Renovierung über den Umbau bis zum Hausmeisterservice: Wir sorgen dafür, dass Gebäude funktionieren, gepflegt bleiben und wieder Orte werden, an denen man sich wohlfühlt.</p>
+    <div class="row"><a class="btn btn--or" href="#haus">Das ganze Haus ansehen <span class="arrow">↓</span></a><a class="btn btn--ghost" href="#kontakt">Anfrage stellen</a></div>
+    <p class="scrollhint"><i></i>Scrollen: einmal durchs ganze Haus</p>
+  </div>
+  <div class="hero__media">
+    <img data-img="m4-vorort" alt="Servicewagen von BAU Facility Services vor dem Haus Nr. 12, ein Techniker geht zur Tür" fetchpriority="high">
+    <video data-video="vorort" muted playsinline preload="auto" aria-hidden="true"></video>
+  </div>
+</section>
+
+<!-- 2–7 · DAS GANZE HAUS -->
+<section class="haus" id="haus">
+  <div class="stage" id="stage">
+    <div class="haus__intro" id="intro">
+      <p class="eyebrow">Das ganze Haus</p>
+      <h2 id="introH">Die ganze Wohnanlage. Vom Keller bis zum Dach.</h2>
+      <p class="lead">Zuerst alles, was unser Hausmeister erledigt. Oben umschalten: Privat (Wohnanlage) oder Gewerblich (Firmenanlage). Danach, was wir zusätzlich anbieten.</p>
+    </div>
+    <div class="house" id="house">
+      <img class="cut" data-img="w1-schnitt" alt="Schnitt durch eine Wohnanlage: Keller, Treppenhaus, Wohnetagen und Dach">
+      <img class="facade" data-img="w2-fassade" alt="Fassade der Wohnanlage">
+      <div class="hl" id="hl"></div>
+      <div class="labels" id="labels">
+        <a class="lab" href="#dach" data-f="dach"><i></i><b>Dach</b></a>
+        <a class="lab" href="#og" data-f="og"><i></i><b>1. Obergeschoss</b></a>
+        <a class="lab" href="#eg" data-f="eg"><i></i><b>Erdgeschoss</b></a>
+        <a class="lab" href="#keller" data-f="keller"><i></i><b>Keller</b></a>
+        <a class="lab" href="#aussen" data-f="aussen"><i></i><b>Außen</b></a>
+      </div>
+    </div>
+
+    <!-- Akt 1 · Hausmeister-Rundgang (Kamera fährt ohne Rauszoomen vom Keller nach oben) -->
+    <article class="sc sc--hm" id="c-keller" aria-live="polite"></article>
+    <article class="sc sc--hm" id="c-eg" aria-live="polite"></article>
+    <article class="sc sc--hm" id="c-og" aria-live="polite"></article>
+    <article class="sc sc--hm" id="c-dach" aria-live="polite"></article>
+    <article class="sc sc--hm" id="c-aussen" aria-live="polite"></article>
+
+    <!-- Koordination -->
+    <div class="coord" id="coord"><svg id="coordSvg" aria-hidden="true"></svg></div>
+    <article class="sc sc--coord" id="contactCard" aria-labelledby="t-coord">
+      <img data-img="a1-ansprechpartner" alt="Ihr fester Ansprechpartner bei BAU Facility Services (Symbolbild)">
+      <p class="crumb">Ein Objekt · ein Ansprechpartner</p>
+      <h2 id="t-coord">Ein fester Ansprechpartner für Ihre Anlage.</h2>
+      <p class="lead">Ihr Hausmeister kennt jede Etage. Sie haben eine Nummer für alles, mit Foto-Protokoll nach jedem Einsatz.</p>
+      <div class="row"><a class="more" href="#kontakt">Hausmeister anfragen <span class="arrow">→</span></a><a class="more" href="zusatzleistungen.html">Zusatzleistungen <span class="arrow">→</span></a></div>
+    </article>
+    </div>
+  </div>
+</section>
+<span id="keller" class="sr"></span><span id="eg" class="sr"></span><span id="og" class="sr"></span><span id="dach" class="sr"></span><span id="aussen" class="sr"></span><span id="koordination" class="sr"></span>
+
+<!-- ZUSATZLEISTUNGEN (Teaser, eigene Seite) -->
+<section class="zteaser" id="zusatz" aria-labelledby="zt-h">
+  <div class="zteaser__head">
+    <p class="eyebrow">Zusätzlich zum Hausmeisterdienst</p>
+    <h2 id="zt-h">Wenn mehr ansteht als der Hausmeister.</h2>
+    <p class="lead">Umbau, Sanierung, Planung und die Koordination aller Gewerke übernehmen unsere Bauteams und Fachbetriebe. Alles erklärt, mit Vorher und Nachher.</p>
+  </div>
+  <div class="zteaser__grid">
+    <a class="ztile" href="zusatzleistungen.html#umbau"><img data-img="e2-eg-nachher" alt="Umgebauter, heller Wohnraum" loading="lazy"><span>Bau & Umbau</span></a>
+    <a class="ztile" href="zusatzleistungen.html#sanierung"><img data-img="o3-bad-ergebnis" alt="Saniertes Bad" loading="lazy"><span>Sanierung & Renovierung</span></a>
+    <a class="ztile" href="zusatzleistungen.html#planung"><img data-img="d1-dach" alt="Projektleiter plant mit Grundrissen" loading="lazy"><span>Planung & Organisation</span></a>
+    <a class="ztile ztile--svg" href="zusatzleistungen.html#koordination"><svg viewBox="0 0 200 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M100 60 40 22M100 60 160 22M100 60 30 78M100 60 170 78M100 60 72 108M100 60 128 108"/></g><g fill="currentColor"><circle cx="40" cy="22" r="6"/><circle cx="160" cy="22" r="6"/><circle cx="30" cy="78" r="6"/><circle cx="170" cy="78" r="6"/><circle cx="72" cy="108" r="6"/><circle cx="128" cy="108" r="6"/></g><circle cx="100" cy="60" r="14" fill="#9d7a42"/></svg><span>Koordination & Durchführung</span></a>
+  </div>
+  <a class="btn btn--or" href="zusatzleistungen.html">Alle Zusatzleistungen ansehen <span class="arrow">→</span></a>
+</section>
+
+<!-- 8 · AUSSEN / TEAM -->
+<section class="team" id="team">
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <p class="eyebrow">Außen · Team · Karriere</p>
+    <div class="kin" id="kin"><span><b>Feste Crew.</b></span><span><b>Dienstwagen.</b></span><span><b>Pünktlich Feierabend.</b></span></div>
+    <p class="lead">Ein starkes Team für gepflegte Immobilien in Ratingen und Umgebung. Haustechnik, Hausmeister-Service, Bau und Sanierung.</p>
+    <div class="perks"><span>Unbefristet</span><span>Regionales Einsatzgebiet</span><span>Fester Ansprechpartner</span></div>
+    <div class="row"><button class="btn btn--or" data-open="apply">In 60 Sekunden bewerben <span class="arrow">→</span></button><a class="more" href="karriere.html">Alle Infos zur Karriere <span class="arrow">→</span></a></div>
+  </div>
+  <div class="team__media"><img data-img="t1-team" alt="Team von BAU Facility Services bei der Pflege des Außenbereichs"></div>
+</section>
+
+<!-- 9 · WERTE, ÜBER UNS, STIMMEN -->
+<section class="werte" id="werte">
+  <p class="eyebrow">Unser Versprechen</p>
+  <h2>Wir sind für Sie da.</h2>
+  <div class="werte__grid">
+    <article class="wert"><svg viewBox="0 0 48 48"><path d="M8 22 24 9l16 13v17H8z"/><path d="M19 39V28h10v11"/></svg><h3>Alles aus einer Hand</h3><p>Von der Planung bis zur Umsetzung koordinieren wir alle Schritte zuverlässig und übersichtlich.</p></article>
+    <article class="wert"><svg viewBox="0 0 48 48"><path d="M24 6 9 12v11c0 9 6.5 16 15 19 8.5-3 15-10 15-19V12z"/><path d="m17 24 5 5 9-10"/></svg><h3>Zuverlässig umgesetzt</h3><p>Strukturiert, termintreu und mit einem klaren Blick für jedes Detail.</p></article>
+    <article class="wert"><svg viewBox="0 0 48 48"><circle cx="16" cy="16" r="6"/><circle cx="32" cy="16" r="6"/><path d="M4 38c1.5-7 6.5-11 12-11s10.5 4 12 11M24 38c1.5-7 4-11 8-11 5.5 0 10.5 4 12 11"/></svg><h3>Starke Partner</h3><p>Für jedes Projekt passende Fachbetriebe und eingespielte Partner.</p></article>
+    <article class="wert"><svg viewBox="0 0 48 48"><path d="M24 41s-15-8.6-15-20a8 8 0 0 1 15-4 8 8 0 0 1 15 4c0 11.4-15 20-15 20z"/></svg><h3>Persönlich betreut</h3><p>Ein fester Ansprechpartner begleitet Sie und hält Sie jederzeit auf dem Laufenden.</p></article>
+  </div>
+</section>
+<section class="about" aria-label="Über uns">
+  <div class="quote">
+    <q>Wir schaffen Orte, die wieder funktionieren, Wert gewinnen und Menschen ein gutes Gefühl geben.</q>
+    <b>Osman Yilmaz<span>Geschäftsführer, BAU Facility Services GmbH</span></b>
+    <p class="note">Als zentrale Schnittstelle stimmen wir alle Gewerke aufeinander ab und arbeiten mit ausgewählten Fachbetrieben zusammen. Für Sie heißt das: klare Zuständigkeiten, kurze Wege und ein Ansprechpartner, der den Überblick behält.</p>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="contact" id="kontakt">
+  <div style="display:grid;gap:16px;align-content:start">
+    <p class="eyebrow">Kontakt</p>
+    <h2>Jetzt unverbindlich anfragen.</h2>
+    <p class="lead">Ob erste Idee, konkrete Planung oder laufendes Projekt: Sprechen Sie uns an. Persönlich, zuverlässig und unkompliziert.</p>
+    <p style="font-size:18px;line-height:1.7"><a href="tel:+4917623815829">+49 176 23815829</a><br><a href="mailto:info@baufacilityservices.de">info@baufacilityservices.de</a><br>Alter Kirchweg 9, 40880 Ratingen</p>
+  </div>
+  <form class="f" id="contactForm">
+    <label>Name<input name="name" autocomplete="name" required></label>
+    <label>Telefon<input name="tel" type="tel" autocomplete="tel"></label>
+    <label>E-Mail<input name="mail" type="email" autocomplete="email" required></label>
+    <label>Worum geht es?<select name="topic"><option>Hausmeister-Leistungen</option><option>Bau & Umbau</option><option>Sanierung & Renovierung</option><option>Planung & Organisation</option><option>Koordination & Durchführung</option></select></label>
+    <label>Nachricht<textarea name="msg"></textarea></label>
+    <button class="btn btn--or" type="submit" style="justify-self:start">Anfrage senden <span class="arrow">→</span></button>
+    <p class="note">Öffnet Ihr E-Mail-Programm mit der fertigen Nachricht.</p>
+  </form>
+</section>
+</main>
+
+<footer class="foot">
+  <img src="assets/logo-w.svg" alt="BAU Facility Services" width="200" height="72">
+  <nav aria-label="Seiten"><a href="hausmeister.html">Hausmeister</a><a href="bau-umbau.html">Bau & Umbau</a><a href="sanierung.html">Sanierung</a><a href="planung.html">Planung</a><a href="koordination.html">Koordination</a><a href="karriere.html">Karriere</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
+  <small>© 2026 BAU Facility Services GmbH i. G. · Ratingen</small>
+</footer>
+
+<div class="modal" id="apply" hidden role="dialog" aria-modal="true" aria-labelledby="apT">
+  <div class="modal__box">
+    <button class="modal__x" data-close aria-label="Schließen">×</button>
+    <div class="row" style="justify-content:space-between"><h3 id="apT" style="font:700 22px var(--f-d)">Bewerben in 60 Sekunden</h3><span class="timer" id="timer">60</span></div>
+    <div class="stepbar"><i class="on"></i><i></i><i></i></div>
+    <form class="f" id="applyForm">
+      <fieldset data-st="0" style="border:0;display:grid;gap:12px"><label>Was machst du?<select name="job"><option>Haustechnik / Installation</option><option>Hausmeister-Service</option><option>Maler / Trockenbau</option><option>Ausbildung</option><option>Quereinstieg</option></select></label><button type="button" class="btn btn--or" data-next>Weiter →</button></fieldset>
+      <fieldset data-st="1" hidden style="border:0;display:grid;gap:12px"><label>Führerschein Klasse B?<select name="fs"><option>Ja</option><option>Nein</option><option>Mache ich gerade</option></select></label><label>Ab wann?<select name="ab"><option>Sofort</option><option>In 1 Monat</option><option>In 3 Monaten</option></select></label><button type="button" class="btn btn--or" data-next>Weiter →</button></fieldset>
+      <fieldset data-st="2" hidden style="border:0;display:grid;gap:12px"><label>Name<input name="n" required autocomplete="name"></label><label>Telefon<input name="t" type="tel" required autocomplete="tel"></label><button class="btn btn--or" type="submit">Bewerbung abschicken →</button><p class="note">Öffnet Ihr E-Mail-Programm, kein Lebenslauf nötig.</p></fieldset>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/gsap.min.js"></script>
+<script src="assets/js/ScrollTrigger.min.js"></script>
+<script src="assets/js/lenis.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

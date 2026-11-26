@@ -1,0 +1,3 @@
+# /branchen ist eine Seite (branchen.html) UND dieser Ordner (Branchenseiten).
+# Kein automatischer Schraegstrich (mod_dir), sonst Schleife /branchen <-> /branchen/. Regeln: siehe /.htaccess
+DirectorySlash Off

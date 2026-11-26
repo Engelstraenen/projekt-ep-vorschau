@@ -111,7 +111,7 @@ def check_reference_videos(root, errors):
                 continue
             f = os.path.join(d, fn)
             rel = os.path.relpath(f, root)
-            if rel.startswith('referenzen' + os.sep) or rel.startswith('vorschau' + os.sep):
+            if (rel.startswith('referenzen' + os.sep) and rel != os.path.join('referenzen', 'index.html')) or rel.startswith('vorschau' + os.sep):
                 continue
             h = open(f, encoding='utf-8').read()
 
@@ -225,7 +225,7 @@ def main():
     for loc in locs:
         if not loc.startswith(DOMAIN + '/'): errors.append(f'sitemap: {loc}')
         path = loc[len(DOMAIN) + 1:] or 'index'
-        f = os.path.join(out, path if path.endswith('.html') else path + '.html')
+        f = os.path.join(out, path + 'index.html' if path.endswith('/') else path if path.endswith('.html') else path + '.html')
         if not os.path.isfile(f): errors.append(f'sitemap-Ziel fehlt: {loc}'); continue
         h = open(f, encoding='utf-8').read()
         h = re.sub(r'\s*<meta name="robots" content="noindex[^"]*">', '', h)
