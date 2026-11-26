@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SCHICHTWECHSEL – Fahrzeugfolierung Köln</title>
+<meta name="description" content="Über 200 Folien: Chrom, Color-Shift, Satin, Matt, Glitzer, Carbon und Lackschutz. Fahrzeugfolierung in Köln. Angebot per Foto.">
+<meta name="theme-color" content="#150c26">
+<link rel="preload" href="assets/fonts/grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="home">
+
+<div class="demo" id="demo">Demo-Seite<span class="for"></span> · Formulare senden nichts</div>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#start" aria-label="SCHICHTWECHSEL Startseite"><b>SCHICHTWECHSEL</b><small>Fahrzeugfolierung, Köln</small></a>
+  <nav class="links" id="links" aria-label="Kapitel">
+    <a href="folien.html">Folien</a>
+    <a href="wissen.html">Wissen</a>
+    <a href="handwerk.html">Handwerk</a>
+    <a href="referenzen.html">Referenzen</a>
+    <a href="#bewertungen">Bewertungen</a>
+    <a href="karriere.html">Karriere</a>
+  </nav>
+  <a class="btn btn-s holo-b" href="#angebot">Angebot per Foto</a>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<!-- Der Musterfächer: Navigation durch die ganze Seite (Storyboard 1) -->
+<nav class="fan" id="fan" aria-label="Musterfächer – Kapitel">
+  <div class="fan-blades" id="fanBlades"></div>
+  <span class="rivet" aria-hidden="true"></span>
+  <button class="fan-hit" id="fanHit" type="button" aria-label="Kapitel-Fächer öffnen"></button>
+  <div class="fan-label" id="fanLabel" aria-live="polite"><small>Aktuelle Folie</small><b>Color-Shift</b><i>01 · Start</i></div>
+</nav>
+
+<main>
+
+<!-- 01 + 02: Held und erste Lamelle -->
+<section class="duo" id="duo" data-ch="0">
+  <span class="anchor" id="start"></span>
+  <span class="anchor a2" id="folie"></span>
+  <div class="stage">
+    <div class="car" id="car">
+      <img class="cv on" data-k="k0" src="assets/img/k0-1600.webp" srcset="assets/img/k0-1600.webp 1600w, assets/img/k0.webp 2560w" sizes="100vw" alt="Sportwagen in Color-Shift-Chromfolie im violetten Studio">
+      <img class="cv" data-k="k1" src="assets/img/k1-1600.webp" srcset="assets/img/k1-1600.webp 1600w, assets/img/k1.webp 2560w" sizes="100vw" alt="Derselbe Sportwagen in Spiegelchrom Silber" loading="lazy">
+      <img class="cv" data-k="k2" src="assets/img/k2-1600.webp" srcset="assets/img/k2-1600.webp 1600w, assets/img/k2.webp 2560w" sizes="100vw" alt="Derselbe Sportwagen in Satin Magenta" loading="lazy">
+      <img class="cv" data-k="k3" src="assets/img/k3-1600.webp" srcset="assets/img/k3-1600.webp 1600w, assets/img/k3.webp 2560w" sizes="100vw" alt="Derselbe Sportwagen in Matt Schwarz" loading="lazy">
+      <img class="cv" data-k="k4" src="assets/img/k4-1600.webp" srcset="assets/img/k4-1600.webp 1600w, assets/img/k4.webp 2560w" sizes="100vw" alt="Derselbe Sportwagen in violetter Glitzerfolie" loading="lazy">
+      <img class="cv" data-k="k5" src="assets/img/k5-1600.webp" srcset="assets/img/k5-1600.webp 1600w, assets/img/k5.webp 2560w" sizes="100vw" alt="Derselbe Sportwagen in Forged-Carbon-Optik" loading="lazy">
+      <i class="sweep" id="sweep" aria-hidden="true"></i>
+    </div>
+    <div class="shade"></div>
+
+    <div class="hero-copy" id="heroCopy">
+      <h1><span class="ln">Über 200 Folien.</span><span class="ln">Eine davon</span><span class="ln">ist deine.</span></h1>
+      <div class="prog" aria-hidden="true"><span>01</span><i><b id="progBar"></b></i><span>09</span></div>
+      <p class="lead">Fahrzeugfolierung in Köln. Chrom, Color-Shift, Satin, Matt, Glitzer, Carbon und Lackschutz. Dein Lack bleibt darunter, wie er ist.</p>
+    </div>
+
+    <div class="folie-copy" id="folieCopy">
+      <small class="kick">Aktuelle Folie</small>
+      <h2 id="fName">Chrom Silber</h2>
+      <p id="fDesc">Spiegelchrom<br>Hochglanz<br>Für maximale Präsenz</p>
+      <div class="finishes" id="finishes" role="group" aria-label="Folie am Auto wechseln">
+        <button data-k="k1" class="on" aria-pressed="true"><i class="sw sw-chrom"></i>Chrom</button>
+        <button data-k="k2" aria-pressed="false"><i class="sw sw-satin"></i>Satin</button>
+        <button data-k="k3" aria-pressed="false"><i class="sw sw-matt"></i>Matt</button>
+        <button data-k="k4" aria-pressed="false"><i class="sw sw-glitter"></i>Glitzer</button>
+        <button data-k="k5" aria-pressed="false"><i class="sw sw-carbon"></i>Carbon</button>
+        <button data-k="k0" aria-pressed="false"><i class="sw sw-shift"></i>Shift</button>
+      </div>
+      <a class="more" href="folien.html">Alle Folienarten im Detail</a>
+    </div>
+  </div>
+</section>
+
+<!-- 03 Wissen -->
+<section class="wissen" id="wissen" data-ch="2">
+  <div class="stage">
+    <div class="w-copy">
+      <h2>Wissen, was dein Schutz leistet.</h2>
+      <div class="w-tabs" role="tablist" aria-label="Wissen">
+        <button role="tab" aria-selected="true" data-t="aufbau">Aufbau</button>
+        <button role="tab" aria-selected="false" data-t="haltbarkeit">Haltbarkeit</button>
+        <button role="tab" aria-selected="false" data-t="pflege">Pflege</button>
+        <button role="tab" aria-selected="false" data-t="technologie">Technologie</button>
+      </div>
+      <p class="w-text" id="wText">Vier Schichten, zusammen etwa so dick wie ein Blatt Papier. Die Farbe sitzt in der Folie, nicht auf deinem Lack.</p>
+      <a class="more" href="wissen.html">Gegossen oder kalandriert? Ganz erklärt</a>
+    </div>
+    <div class="layers" id="layers" aria-label="Aufbau einer Autofolie">
+      <div class="lay l1"><span>Schutzlaminat <small>(kratzfest)</small></span></div>
+      <div class="lay l2"><span>Gegossene Folie <small>(farbig)</small></span></div>
+      <div class="lay l3"><span>Klebstoff mit <small>Luftkanälen</small></span></div>
+      <div class="lay l4"><span>Trägerpapier <small>(mit Raster)</small></span></div>
+    </div>
+    <div class="chart" id="chart">
+      <h3>Haltbarkeit im Vergleich</h3>
+      <div class="bars">
+        <div class="bar b1" style="--v:1"><b data-to="10" data-pre="bis ">bis 10</b><i></i><span>Gegossen</span></div>
+        <div class="bar b2" style="--v:.5"><b data-txt="3–5">3–5</b><i></i><span>Kalandriert</span></div>
+        <div class="bar b3" style="--v:1"><b data-to="10" data-pre="bis ">bis 10</b><i></i><span>Lackschutz (PPF)</span></div>
+      </div>
+      <p class="note">Jahre, Herstellerangaben für Außenflächen (vertikal, mitteleuropäisches Klima). Bei fachgerechter Verarbeitung und Pflege.</p>
+      <div class="calc" id="calc">
+        <h3>Wie lange hält <em>deine</em> Folie?</h3>
+        <label>Folie <select id="cF"><option value="cast">Gegossen, Farbe</option><option value="metal">Chrom, Metallic</option><option value="cal">Kalandriert</option><option value="ppf">Lackschutz PPF</option></select></label>
+        <label>Auto steht <select id="cG"><option value="g">Garage</option><option value="s">Straße</option></select></label>
+        <label>Fläche <select id="cS"><option value="v">Seiten, Türen</option><option value="h">Dach, Haube</option></select></label>
+        <output id="cOut"><b>6–8</b> Jahre</output>
+        <small>Grobe Richtwerte aus Herstellerdatenblättern. Waagerechte Flächen bekommen mehr Sonne und halten kürzer.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 Handwerk -->
+<section class="hand" id="handwerk" data-ch="3">
+  <div class="stage">
+    <div class="h-img"><img src="assets/img/m1-1600.webp" srcset="assets/img/m1-1600.webp 1600w, assets/img/m1.webp 2560w" sizes="100vw" alt="Rakel mit Filzkante drückt Chromfolie in eine Sicke, Heißluftföhn glüht" loading="lazy"></div>
+    <div class="shade-l"></div>
+    <div class="h-copy">
+      <h2><span class="ln">Eingeschlagen.</span><span class="ln">Nicht abgeschnitten.</span></h2>
+      <p>Saubere Kanten, perfekte Übergänge, maximaler Halt. Stoßstangen, Spiegel und Griffe kommen ab, die Folie läuft um die Kante. So macht man es richtig.</p>
+      <ol class="h-steps">
+        <li><b>01</b>Demontage</li><li><b>02</b>Reinigen</li><li><b>03</b>Auflegen</li><li><b>04</b>Einschlagen</li><li><b>05</b>Nachwärmen</li><li><b>06</b>Endkontrolle</li>
+      </ol>
+      <a class="more" href="handwerk.html">Der ganze Ablauf, Schritt für Schritt</a>
+    </div>
+  </div>
+</section>
+
+<!-- 05 Referenzen + Bewertungen -->
+<section class="refs" id="referenzen" data-ch="4">
+  <div class="stage">
+    <div class="r-img"><img src="assets/img/r0.webp" alt="Drei folierte Sportwagen: matt schwarz mit Holo-Linien, Strass, Forged Carbon" loading="lazy"><div class="bars-light" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <h2>Referenzen, die für sich sprechen.</h2>
+    <div class="pills">
+      <a class="pill" href="referenzen.html#holo" style="--x:24%">Holografik Linien</a>
+      <a class="pill" href="referenzen.html#strass" style="--x:50%">Crystal Rhinestone</a>
+      <a class="pill" href="referenzen.html#carbon" style="--x:76%">Forged Carbon</a>
+    </div>
+  </div>
+  <div class="reviews" id="bewertungen">
+    <div class="rv-head">
+      <h3>Bewertungen</h3>
+      <p class="rv-note">Demo: Hier stehen später die echten Google-Bewertungen mit Note, Anzahl und Link. Die Karten unten sind Beispiele, keine echten Bewertungen.</p>
+    </div>
+    <div class="rv-cards" id="rvCards">
+      <blockquote class="rv"><span class="tag">Beispiel · noch keine echte Bewertung</span><p>„Ich wollte Satin-Grau und habe mich am Fächer für Color-Shift entschieden. Die Kanten sieht man nicht mal, wenn man sucht.“</p></blockquote>
+      <blockquote class="rv"><span class="tag">Beispiel · noch keine echte Bewertung</span><p>„Leasing-Rückgabe nach vier Jahren: Folie runter, der Lack darunter war wie am ersten Tag.“</p></blockquote>
+      <blockquote class="rv"><span class="tag">Beispiel · noch keine echte Bewertung</span><p>„Drei Fotos geschickt, am nächsten Tag hatte ich das Angebot. Während der Arbeit kamen Fotos aus der Werkstatt aufs Handy.“</p></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- 06 Alles folierbar -->
+<section class="alles" id="alles" data-ch="5">
+  <div class="stage">
+    <h2><span class="ln">Alles folierbar.</span><span class="ln">Vom Boot bis zur Konsole.</span></h2>
+    <div class="cards" id="cards">
+      <a class="card" href="alles-folierbar.html#boote" style="--i:0"><img src="assets/img/a1.webp" alt="Sportboot in Color-Shift-Chrom auf dem Wasser" loading="lazy"><span>Boote</span></a>
+      <a class="card" href="alles-folierbar.html#motorrad" style="--i:1"><img src="assets/img/a2.webp" alt="Motorradtank in Holo-Folie" loading="lazy"><span>Motorrad</span></a>
+      <a class="card" href="alles-folierbar.html#schaufenster" style="--i:2"><img src="assets/img/a3.webp" alt="Schaufenster mit großer Fensterfolie" loading="lazy"><span>Schaufenster &amp; Werbeflächen</span></a>
+      <a class="card" href="alles-folierbar.html#konsole" style="--i:3"><img src="assets/img/a4.webp" alt="Spielkonsole in violetter Chromfolie, ohne Logo" loading="lazy"><span>Konsole, Laptop, Möbel</span></a>
+    </div>
+    <a class="more" href="alles-folierbar.html">Auch Fuhrpark, Wände, Küchenfronten</a>
+  </div>
+</section>
+
+<!-- 07 Konfigurator -->
+<section class="konf" id="konfigurator" data-ch="6">
+  <div class="stage">
+    <div class="k-copy">
+      <h2>Live am Auto.</h2>
+      <p>Deine Farbe. In Echtzeit. Ohne Rätselraten. Zieh den Regler, tipp eine Folie an.</p>
+    </div>
+    <div class="cmp" id="cmp">
+      <img class="c-a" src="assets/img/s0.webp" alt="Seitenansicht in Chrom Silber" loading="lazy">
+      <div class="c-b" id="cB"><img id="cBimg" src="assets/img/s1.webp" alt="Seitenansicht in der gewählten Folie" loading="lazy"></div>
+      <button class="handle" id="handle" aria-label="Vergleich verschieben" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><i></i></button>
+      <span class="c-lab l">Chrom Silber</span><span class="c-lab r" id="cLab">Satin Magenta</span>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Folie wählen">
+      <button data-s="s1" data-n="Satin Magenta" class="on" aria-pressed="true"><i class="sw sw-satin"></i></button>
+      <button data-s="s2" data-n="Matt Schwarz" aria-pressed="false"><i class="sw sw-matt"></i></button>
+      <button data-s="s3" data-n="Color-Shift Chrom" aria-pressed="false"><i class="sw sw-shift"></i></button>
+      <button data-s="s4" data-n="Chrom Blau" aria-pressed="false"><i class="sw sw-blue"></i></button>
+      <button data-s="s5" data-n="Forged Carbon" aria-pressed="false"><i class="sw sw-carbon"></i></button>
+      <button data-s="s6" data-n="Glitzer Violett" aria-pressed="false"><i class="sw sw-glitter"></i></button>
+      <button data-s="s7" data-n="Perlweiß Irisierend" aria-pressed="false"><i class="sw sw-pearl"></i></button>
+    </div>
+    <a class="btn holo-b" id="konfCta" href="#angebot">Satin Magenta anfragen</a>
+  </div>
+</section>
+
+<!-- 08 Karriere -->
+<section class="job" id="karriere" data-ch="7">
+  <div class="stage">
+    <div class="j-img"><img src="assets/img/j1.webp" alt="Junger Folierer mit Heißluftföhn und Musterfächer vor dem Chrom-Auto" loading="lazy"></div>
+    <div class="shade-l"></div>
+    <div class="j-copy">
+      <h2 class="kin"><span>Feste Crew.</span><span>Führerschein.</span><span>Zertifikat?</span><span>Zahlen wir.</span></h2>
+      <p>Quereinstieg mit Anlernen. Hersteller-Schulung bezahlen wir. Gelernte Fahrzeuglackierer und Schilder- und Lichtreklamehersteller sind besonders willkommen.</p>
+      <div class="j-cta"><button class="btn btn-o" id="jobBtn">In 60 Sekunden bewerben <span aria-hidden="true">→</span></button><a class="more" href="karriere.html">Alles zum Job</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 Angebot per Foto -->
+<section class="offer" id="angebot" data-ch="8">
+  <div class="stage">
+    <div class="o-copy">
+      <h2>Dein Auto. Dein Look. Dein Angebot.</h2>
+      <p>Drei Fotos, Modell, Wunschfolie. Du bekommst ein festes Angebot, ohne Anfahrt und ohne Rückrufschleife.</p>
+      <ul class="o-live">
+        <li><b>Live-Status</b> Während dein Auto bei uns ist, kommt jeder Schritt mit Foto aufs Handy.</li>
+        <li><b>Leasing</b> Rückgabe? Folie ab, Lack wie neu.</li>
+        <li><b>Fuhrpark</b> Folieren nachts und am Wochenende.</li>
+      </ul>
+      <a class="more" href="angebot.html">So läuft das Angebot ab</a>
+    </div>
+    <form class="phone" id="phone" data-nosubmit aria-label="Angebot per Foto">
+      <div class="ph-notch" aria-hidden="true"></div>
+      <p class="ph-t">Dein Auto. Dein Look. Dein Angebot.</p>
+      <button class="ph-main holo-b" type="button" id="phMain">Auto fotografieren, Angebot bekommen</button>
+      <p class="ph-s">So einfach geht's:</p>
+      <div class="slots">
+        <label class="slot"><input type="file" accept="image/*" capture="environment"><span>Front<br>aufnehmen</span></label>
+        <label class="slot"><input type="file" accept="image/*" capture="environment"><span>Seite<br>aufnehmen</span></label>
+        <label class="slot"><input type="file" accept="image/*" capture="environment"><span>Heck<br>aufnehmen</span></label>
+      </div>
+      <label class="ph-f">Modell <input type="text" placeholder="z. B. Kompaktwagen, Baujahr 2021" autocomplete="off"></label>
+      <label class="ph-f">Wunschfolie <input type="text" id="phFolie" value="Satin Magenta"></label>
+      <ol class="track" id="track"><li class="on">Fotos hochgeladen</li><li>Folie empfohlen</li><li>Angebot bereit</li></ol>
+      <button class="ph-send holo-b" type="button" id="phSend">Anfrage senden</button>
+      <p class="ph-ok" id="phOk" hidden>Demo: nichts wurde gesendet. Im echten Betrieb meldet sich die Werkstatt mit dem Angebot.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div><b>SCHICHTWECHSEL</b><br>Fahrzeugfolierung, Köln<br><small>Demo-Unternehmen, keine echte Firma</small></div>
+  <div><a href="folien.html">Folien</a><a href="wissen.html">Wissen</a><a href="handwerk.html">Handwerk</a><a href="referenzen.html">Referenzen</a></div>
+  <div><a href="alles-folierbar.html">Alles folierbar</a><a href="karriere.html">Karriere</a><a href="angebot.html">Angebot</a><a href="impressum.html">Impressum</a></div>
+</footer>
+
+<dialog class="jobdlg" id="jobDlg" aria-label="Bewerbung in 60 Sekunden">
+  <form method="dialog" class="jd">
+    <button class="x" value="x" aria-label="Schließen">×</button>
+    <p class="jd-step" id="jdStep">1 / 4</p>
+    <div class="jd-q on" data-q="1"><h3>Was machst du gerade?</h3><div class="opts"><button type="button">Quereinsteiger</button><button type="button">Fahrzeuglackierer/in</button><button type="button">Schilder- und Lichtreklame</button><button type="button">Schule / Ausbildung</button></div></div>
+    <div class="jd-q" data-q="2"><h3>Schon mal foliert?</h3><div class="opts"><button type="button">Noch nie</button><button type="button">Ein bisschen</button><button type="button">Regelmäßig</button></div></div>
+    <div class="jd-q" data-q="3"><h3>Ab wann kannst du?</h3><div class="opts"><button type="button">Sofort</button><button type="button">In 1–3 Monaten</button><button type="button">Später</button></div></div>
+    <div class="jd-q" data-q="4"><h3>Wie erreichen wir dich?</h3><label>Name <input type="text" autocomplete="name"></label><label>Telefon <input type="tel" autocomplete="tel"></label><button type="button" class="btn holo-b" id="jdSend">Bewerbung abschicken</button></div>
+    <div class="jd-q" data-q="5"><h3>Danke!</h3><p>Demo: nichts wurde gesendet. Im echten Betrieb ruft dich die Werkstatt innerhalb von zwei Tagen an.</p></div>
+  </form>
+</dialog>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/inline/nosubmit.js"></script>
+</body>
+</html>
