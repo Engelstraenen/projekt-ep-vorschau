@@ -1,0 +1,130 @@
+/* Unterseite Diamanten (Storyboard LRQ3 „Am Tresen, Schritt für Schritt“, Eugen 25.11.2026). Dunkel, jede Szene ein Foto. */
+:root{--pl:#e4e7ee;--pl-rgb:228,231,238}
+
+/* 1 → 2 → 3 Intro: Briefchen → Pinzette → Lupe */
+.dt-intro{position:relative;height:430vh}
+.dt-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#05060c}
+.dt-l,.dt-m,.dt-m img{position:absolute;inset:0;width:100%;height:100%}
+.dt-l,.dt-m img{object-fit:cover;object-position:var(--fx,50%) 50%;will-change:transform}
+.dt-m{overflow:hidden;clip-path:circle(0px at 50% 50%);will-change:clip-path}
+.dt-rim{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.dt-rim circle{fill:none;stroke:#07080d;stroke-width:var(--rw,40px)}
+.dt-rim circle.hi{stroke:rgba(var(--pl-rgb),.55);stroke-width:1.5px}
+.dt-txt{position:fixed;left:clamp(16px,4.2vw,72px);bottom:clamp(70px,14vh,150px);max-width:min(520px,86vw);z-index:5;opacity:0;visibility:hidden}
+.dt-txt::before{content:"";position:absolute;inset:-60px -120px -60px -80px;z-index:-1;background:radial-gradient(closest-side,rgba(5,6,12,.62),rgba(5,6,12,0))}
+.dt-step{position:fixed;right:clamp(16px,4.2vw,72px);bottom:clamp(24px,5vh,48px);z-index:5;font-size:14px;letter-spacing:.24em;color:rgba(243,241,236,.7);opacity:0;visibility:hidden}
+.dt-step span{font:400 28px var(--serif);letter-spacing:0;color:#fff}
+
+/* Sektionen: Fotos stehen still, damit Messpunkte stimmen; langsame Kamerafahrt über --k */
+.dt-sec .dt-fix{transform:scale(var(--z,1));transform-origin:var(--ox,50%) var(--oy,50%);will-change:transform}
+.dt-sec .lp-in{z-index:3}
+.lp-sec input[type=range]{accent-color:var(--pl)}
+
+/* Reinheit: Einschlüsse über dem Stein */
+.dt-inc{position:absolute;z-index:2;pointer-events:none;overflow:visible;transition:opacity .4s}
+.dt-inc .c{fill:rgba(16,17,22,.86);stroke:rgba(255,255,255,.28);stroke-width:.25}
+.dt-inc .f{fill:none;stroke:rgba(235,238,245,.55);stroke-width:.35;stroke-linecap:round}
+.dt-inc .p{fill:rgba(16,17,22,.75)}
+.dt-inc g{opacity:0;transition:opacity .45s}
+.dt-inc g.on{opacity:1}
+#rhInc{left:var(--ix,60%);top:var(--iy,50%);width:var(--id,40vh);height:var(--id,40vh);transform:translate(-50%,-50%)}
+.dt-scale{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}
+.dt-scale button,.fa-row button{min-width:44px;min-height:44px;padding:0 10px;border-radius:999px;border:1px solid rgba(var(--pl-rgb),.35);background:rgba(5,6,12,.55);color:#f3f1ec;font:500 14px/1 I;letter-spacing:.04em;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.dt-scale button[aria-checked=true],.fa-row button[aria-checked=true]{background:var(--pl);color:#05060c;border-color:var(--pl)}
+.dt-scale button:focus-visible,.fa-row button:focus-visible{outline:2px solid #8fa6ff;outline-offset:2px}
+#rhName,#grOut,.lp-h2 b{font-weight:400;color:var(--pl)}
+
+/* Farbe: Lichtschlitz wandert zum gewählten Stein */
+.fa-slit{position:absolute;z-index:1;top:0;bottom:0;left:var(--sx,10%);width:var(--sw,7vw);transform:translateX(-50%);pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(235,240,255,.13) 35%,rgba(235,240,255,.2) 50%,rgba(235,240,255,.13) 65%,rgba(255,255,255,0));mix-blend-mode:screen;transition:left .7s cubic-bezier(.2,.8,.2,1)}
+#farbe .lp-in.fa-in{align-self:stretch;display:flex;flex-direction:column;justify-content:space-between}
+#farbe.lp-photo::after{background:linear-gradient(180deg,rgba(5,6,12,.86) 0%,rgba(5,6,12,.45) 30%,rgba(5,6,12,0) 50%,rgba(5,6,12,0) 80%,rgba(5,6,12,.7) 100%)}
+.fa-row{position:absolute;left:0;right:0;top:78%;height:0}
+.fa-row button{position:absolute;left:var(--x);transform:translateX(-50%);font:400 20px var(--serif);padding:0}
+.fa-out{position:absolute;left:max(16px,4.2vw);right:max(16px,4.2vw);bottom:clamp(22px,5vh,48px);font-size:16px;line-height:1.5;max-width:60ch}
+.fa-out b{font:400 24px var(--serif);color:var(--pl);margin-right:8px}
+
+/* Größe am Finger */
+.gr-ring{position:absolute;z-index:2;left:var(--gx,60%);top:var(--gy,50%);width:var(--gd,60px);height:var(--gd,60px);transform:translate(-50%,-50%);pointer-events:none;overflow:visible;transition:width .45s cubic-bezier(.2,.8,.2,1),height .45s cubic-bezier(.2,.8,.2,1)}
+.gr-ring{filter:drop-shadow(0 2px 3px rgba(0,0,0,.55)) drop-shadow(0 0 1px rgba(0,0,0,.4))}
+.gr-ring line{stroke:var(--pl);stroke-width:1;vector-effect:non-scaling-stroke}
+.gr-ring text{fill:#fff;font:500 13px I}
+.gr-chart{margin:26px 0 0;width:min(440px,100%);padding:20px 22px;border-radius:14px;background:rgba(5,6,12,.62);backdrop-filter:blur(8px);border:1px solid rgba(var(--pl-rgb),.14)}
+.gr-chart figcaption{font-size:14px;letter-spacing:.06em;opacity:.8}
+.gr-bars{display:grid;grid-template-columns:repeat(7,1fr);align-items:end;gap:8px;height:150px;margin-top:16px}
+.gr-bars div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;cursor:pointer}
+.gr-bars i{display:block;width:100%;height:0;border-radius:3px 3px 0 0;background:linear-gradient(180deg,rgba(var(--pl-rgb),.9),rgba(var(--pl-rgb),.35));transition:height 1s cubic-bezier(.2,.8,.2,1),background .3s}
+.gr-bars div.on i{background:linear-gradient(180deg,#fff,#aab8e8)}
+.gr-bars em{font-style:normal;font-size:14px;opacity:.85;white-space:nowrap}
+.gr-bars b{font-weight:500;font-size:14px}
+.gr-ruler{position:absolute;z-index:2;left:var(--rx0,40%);width:var(--rw0,30%);bottom:clamp(18px,4vh,40px);height:26px;border-bottom:1px solid rgba(var(--pl-rgb),.7);background:repeating-linear-gradient(90deg,rgba(var(--pl-rgb),.7) 0 1px,transparent 1px var(--mm,6px)) bottom/100% 8px no-repeat;pointer-events:none}
+.gr-ruler span{position:absolute;bottom:12px;font-size:14px;white-space:nowrap;transform:translateX(-50%);color:rgba(243,241,236,.85)}
+
+/* Ihr Diamant: Split-Screen */
+#wahl{background:#05060c}
+#wahl .wa-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.14;filter:blur(18px);transform:scale(1.15)}
+.wa-in{align-items:center}
+.wa-stone{position:relative;width:min(360px,70vw);aspect-ratio:1;margin-top:26px;border-radius:50%;overflow:hidden;transform:scale(var(--ws,1));transition:transform .6s cubic-bezier(.2,.8,.2,1);-webkit-mask:radial-gradient(closest-side,#000 92%,transparent 100%);mask:radial-gradient(closest-side,#000 92%,transparent 100%)}
+.wa-stone img{position:absolute;max-width:none;transition:filter .5s}
+#waInc{left:20%;top:20%;width:60%;height:60%}
+.wa-ctl{border-left:1px solid rgba(var(--pl-rgb),.22);padding-left:clamp(20px,3vw,48px);min-width:0}
+.wa-ctl .ctl{margin-bottom:6px}
+.wa-ctl .ctl-top label{color:#f3f1ec;font-size:16px}
+.wa-ctl .ctl-top output{color:var(--pl)}
+.wa-sum{margin-top:18px;font:400 26px/1.3 var(--serif);color:#fff}
+#waGo{margin-top:18px}
+
+/* Termin */
+.tm-steps{list-style:none;counter-reset:s;margin:20px 0 0;padding:0;display:grid;gap:10px}
+.tm-steps li{counter-increment:s;position:relative;padding-left:44px;font-size:15px;line-height:1.5;opacity:.88}
+.tm-steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(var(--pl-rgb),.5);display:grid;place-items:center;font:400 17px var(--serif)}
+.tm-steps b{display:block;font-weight:600;opacity:1}
+#tmGo{margin-top:22px}
+.tm-days{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.tm-days button{min-height:44px;padding:0 14px;border-radius:999px;border:1px solid rgba(17,22,42,.2);background:#fff;font:500 14px I;cursor:pointer}
+.tm-days button[aria-checked=true]{background:#11162a;color:#fff;border-color:#11162a}
+
+/* Ende: Lupe zum Ziehen */
+.en-loupe{position:absolute;z-index:2;left:var(--lx,68%);top:var(--ly,48%);width:clamp(150px,22vw,280px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;cursor:grab;touch-action:none;pointer-events:auto;box-shadow:0 0 0 10px #07080d,0 0 0 11.5px rgba(var(--pl-rgb),.5),0 30px 80px rgba(0,0,0,.7);overflow:hidden;background:#05060c}
+.en-loupe:active{cursor:grabbing}
+.en-loupe i{position:absolute;inset:0;background-repeat:no-repeat;filter:brightness(1.25) contrast(1.08)}
+.en-loupe span{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);font-size:14px;letter-spacing:.2em;color:#fff;text-shadow:0 1px 6px #000}
+#ende .lp-facets{filter:brightness(.8) saturate(.9);animation:facetDrift 30s ease-in-out infinite alternate;transform-origin:60% 45%}
+@keyframes facetDrift{0%{transform:scale(1.04) rotate(0deg) translate(0,0)}50%{transform:scale(1.12) rotate(1.2deg) translate(-1.5%,1%)}100%{transform:scale(1.07) rotate(-.8deg) translate(1.5%,-1%)}}
+
+@media (max-width:899px){
+  .fa-row{position:static;top:auto!important;height:auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:auto}
+  .fa-row button{position:static;transform:none}
+  .fa-out{position:static;margin-top:12px}
+  #farbe .lp-in.fa-in{padding-bottom:28px}
+  #faBg{transition:object-position .8s cubic-bezier(.2,.8,.2,1)}
+  .dt-intro{height:400vh}
+  .dt-txt{bottom:clamp(60px,10vh,110px)}
+  .dt-step{bottom:16px}
+  .fa-row button{font-size:17px;min-width:44px}
+  .fa-out{font-size:15px}
+  .gr-chart{justify-self:stretch;width:100%;margin-top:24px}
+  .gr-bars{height:110px;gap:5px}
+  .gr-bars{gap:3px} .gr-bars em,.gr-bars b{font-size:14px;letter-spacing:-.02em}
+  .wa-in{grid-template-columns:1fr}
+  .wa-ctl{border-left:0;padding-left:0;border-top:1px solid rgba(var(--pl-rgb),.22);padding-top:16px;margin-top:20px}
+  .wa-stone{margin:18px auto 0;width:min(240px,62vw)}
+  .wa-sum{font-size:22px}
+  .en-loupe{width:150px}
+  #termin .lp-col{max-width:100%}
+}
+@media (max-height:500px) and (orientation:landscape){
+  .dt-txt{bottom:40px} .dt-txt .lp-h{font-size:40px} .dt-txt .lp-sub{font-size:14px;margin-top:8px;letter-spacing:.12em}
+  .gr-chart{display:none}
+  .fa-out{font-size:14px;bottom:10px}
+}
+@media (prefers-reduced-motion:reduce){#ende .lp-facets{animation:none}.dt-sec .dt-fix{transform:none}}
+/* Handy: Foto als Bühne oben, Text darunter, damit Stein und Kreis frei bleiben */
+@media (max-width:899px){
+  #groesse{align-items:flex-start}
+  #groesse .lp-bg{height:50svh;bottom:auto}
+  #groesse .lp-in{padding-top:calc(50svh + 8px)}
+  #groesse.lp-photo::after{background:linear-gradient(180deg,rgba(5,6,12,.55) 0%,rgba(5,6,12,0) 16%,rgba(5,6,12,0) 38%,#05060c 50%)}
+  .gr-ruler{top:calc(50svh - 44px);bottom:auto}
+}
+
+@media (max-width:899px){.gr-ruler{display:none}}

@@ -1,0 +1,98 @@
+/* Eugen 26.11.2026: Nach dem dunklen Einstieg darf die Seite NICHT weiß werden. Die Galerie übernimmt die Welt des Einstiegs:
+   Schwarz, schmale Lichtschlitze, Kobalt-Samt, Platin. Diese Datei überschreibt die Farbwelt „Weiße Galerie“ aus style.css. */
+:root{
+  --bg:#05060c;--bg-rgb:5,6,12;--stone:#14161f;
+  --ink:#f3f1ec;--ink-rgb:243,241,236;--mut:#a9adbb;
+  --or:#e4e7ee;--or-rgb:228,231,238;--or2:#8fa6ff;--on-or:#05060c;
+  --line:rgba(243,241,236,.16);
+  --glass:rgba(10,12,20,.72);
+  color-scheme:dark;
+}
+/* Eingang „Treten Sie ein“ entfällt: der Einstieg fährt direkt in die erste Vitrine */
+#eingang,.shot[data-s="0"]{display:none!important}
+
+.stage{background:var(--bg)}
+.shot.case .bgblur{filter:blur(14px) saturate(.9) brightness(.7)}
+.shot.case .vit{box-shadow:0 0 0 1px rgba(228,231,238,.35),0 0 0 6px rgba(20,24,40,.6),0 40px 90px rgba(0,0,0,.6)}
+.shot.case .vit::after{background:linear-gradient(115deg,rgba(255,255,255,.12),transparent 35%,transparent 70%,rgba(255,255,255,.05))}
+.pane,.door{border-color:rgba(228,231,238,.55);box-shadow:0 0 0 1px rgba(143,166,255,.25),0 30px 80px rgba(0,0,0,.5)}
+.door i{background:linear-gradient(115deg,rgba(255,255,255,.12),rgba(255,255,255,.02) 40%,rgba(255,255,255,.07) 70%,rgba(255,255,255,.02))}
+
+.demo-bar{background:rgba(5,6,12,.88);color:var(--mut)}
+.top{background:linear-gradient(rgba(5,6,12,.8),rgba(5,6,12,0))}
+.menu a{color:var(--ink)}
+.burger{background:rgba(5,6,12,.6);border-color:var(--line)}
+.burger span{background:var(--ink)}
+
+.card{background:var(--glass);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px var(--line)}
+.card h2,.card h3{color:var(--ink)}
+.card em,.kicker{color:var(--or2)}
+.info,.small,.step-n,.c4-mm{color:var(--mut)}
+.sub-link{color:var(--or)}
+
+.btn-or,.btn.btn-or{background:var(--or);color:var(--on-or);border-color:var(--or)}
+.btn-or:hover{background:#fff}
+.btn-line{border-color:rgba(228,231,238,.5);color:var(--ink);background:rgba(5,6,12,.35)}
+.btn-line:hover{background:var(--or);color:var(--on-or)}
+
+.chip,.drawer,.slots button,.days button,.cal button{background:rgba(255,255,255,.04);border-color:var(--line);color:var(--ink)}
+.chip.on,.drawer.on,.slots button.on,.days button.on,.cal button.on{background:var(--or);border-color:var(--or);color:var(--on-or)}
+.days button.on small{color:var(--on-or)}
+.drawer.on::after{background:rgba(5,6,12,.5)}
+.stamp{background:radial-gradient(circle at 35% 30%,#2a2e3c,#11131b);color:var(--ink);border-color:var(--line)}
+.stamp.on{background:radial-gradient(circle at 35% 30%,#8fa6ff,#2b3f8f);color:#fff}
+.sw.on i{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--or)}
+.timeline li span{background:var(--bg)}
+.engr{background:rgba(5,6,12,.7);color:var(--ink)}
+
+input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(90deg,var(--or) var(--v,50%),rgba(243,241,236,.18) var(--v,50%))}
+input[type=range]::-moz-range-track{background:rgba(243,241,236,.18)}
+input[type=range]::-webkit-slider-thumb{background:var(--bg);border-color:var(--or);box-shadow:0 2px 8px rgba(0,0,0,.5)}
+input[type=range]::-moz-range-thumb{background:var(--bg);border-color:var(--or)}
+input[type=text],input:not([type]),input[inputmode]{background:rgba(255,255,255,.05);border-color:var(--line);color:var(--ink)}
+
+.c4-stage{background:radial-gradient(circle,#1a1d2a 0%,#07080e 75%);box-shadow:0 0 0 1px var(--line)}
+.loupe{background:#07080e;box-shadow:0 0 0 5px rgba(5,6,12,.85)}
+
+.h-hero,.flight-txt{color:var(--ink);text-shadow:0 2px 30px rgba(0,0,0,.8)}
+.hero-sub{color:var(--ink);text-shadow:0 1px 14px rgba(0,0,0,.8)}
+.revs>.kicker,.rv-note{text-shadow:0 1px 10px #000}
+.rv{background:var(--glass);color:var(--ink);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 0 1px var(--line)}
+
+.modal{background:#0d0f17;color:var(--ink);box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px var(--line)}
+.modal::backdrop{background:rgba(0,0,0,.6)}
+.modal h3{color:var(--ink)}
+.x{background:rgba(255,255,255,.05);border-color:var(--line);color:var(--ink)}
+.ar-demo p{background:rgba(5,6,12,.8);color:var(--ink)}
+.toast{background:var(--or);color:var(--on-or)}
+@media (max-width:1300px){.menu{background:rgba(8,9,15,.97)!important;box-shadow:-30px 0 80px rgba(0,0,0,.6)}}
+footer,.foot{background:#05060c;color:var(--mut)}
+
+/* Diamant-Regler: echter Stein (freigestellt) statt Bild auf Weiß */
+.gem-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:normal;transition:filter .5s}
+.gem-inc circle,.gem-inc path{fill:rgba(10,10,14,.85);stroke:rgba(255,255,255,.25)}
+/* Großer Stein auf dem Stift in der Vitrine, wächst mit dem Karat */
+.dstone{position:absolute;transform:translate(-50%,-94%) scale(var(--k,1));transform-origin:50% 94%;transition:transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none;filter:drop-shadow(0 6px 14px rgba(0,0,0,.6))}
+.dstone img{position:absolute;inset:0;width:100%;height:100%;transition:filter .5s}
+.dstone svg{position:absolute;inset:22%;width:56%;height:56%}
+.dstone svg circle,.dstone svg path{fill:rgba(10,10,14,.85);stroke:rgba(255,255,255,.25)}
+
+/* Schmuck & Uhren: Bilder groß (Eugen 26.11.: keine kleinen Bilder), Vitrine füllt die Bühne rechts der Karte */
+.shot.case .vit{left:auto;right:0;top:0;width:min(72vw,calc(100vw - 440px));height:100%;aspect-ratio:auto;transform:none;border-radius:0;box-shadow:none}
+.shot.case .vit img{object-fit:cover;object-position:50% 50%}
+.shot.case .vit::after{background:linear-gradient(90deg,rgba(5,6,12,.9) 0%,rgba(5,6,12,0) 22%)}
+@media (max-width:899px){.shot.case .vit{width:100%;height:62%}.shot.case .vit::after{background:linear-gradient(0deg,rgba(5,6,12,.95) 0%,rgba(5,6,12,0) 40%)}}
+.gold-calc{margin-top:14px}
+.gold-out{margin-top:8px;font-size:15px;color:var(--mut)}
+.gold-out b{font:500 26px var(--serif);color:var(--ink);font-variant-numeric:tabular-nums;margin-left:6px}
+
+/* Unterseiten deutlich verlinkt (Eugen 26.11.: „wo ist die Unterseite?“) */
+.sub-btn{display:flex;width:100%;min-height:56px;margin:16px 0 10px;gap:10px;background:var(--or);color:var(--on-or);border-color:var(--or);font-size:16px;letter-spacing:.02em;box-shadow:0 0 0 1px rgba(228,231,238,.35),0 10px 30px rgba(143,166,255,.18)}
+.sub-btn:hover{background:#fff}
+.sub-btn span{transition:transform .3s}.sub-btn:hover span{transform:translateX(4px)}
+
+.svc-tabs{margin:14px 0 6px}
+.svc-list{list-style:none;padding:0;margin:8px 0 4px;display:grid;gap:6px}
+.svc-list li{position:relative;padding-left:20px;font-size:15px;line-height:1.45}
+.svc-list li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--or2)}
+.svc-list[hidden]{display:none}
