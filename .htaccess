@@ -33,8 +33,11 @@ DirectoryIndex index.html
   RewriteRule ^leistungen/ki-werbeclips(\.html)?$ /leistungen/werbeclips [R=301,L]
   RewriteRule ^widerruf(\.html)?/?$ /rechtliches [R=301,L]
 
-  # 4) Saubere URLs: /faq -> faq.html (passend zu den Canonical-Tags)
-  RewriteCond %{REQUEST_FILENAME} !-d
+  # Branchen-Hub: /branchen/ (mit Schraegstrich) -> /branchen, sonst stimmen relative Links nicht
+  RewriteRule ^branchen/$ /branchen [R=301,L]
+
+  # 4) Saubere URLs: /faq -> faq.html (passend zu den Canonical-Tags).
+  #    Ohne "!-d": /branchen (Seite branchen.html UND Ordner branchen/) liefert die Seite statt 403.
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.+?)/?$ /$1.html [L]
 </IfModule>
