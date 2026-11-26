@@ -13,7 +13,7 @@ S = [
  ('websites', '01', 'Design', 'Websites', 'Design, Entwicklung, Hosting &amp; Betreuung', 'digital-design'),
  ('seo', '02', 'Find', 'SEO &amp; Sichtbarkeit', 'Audit, On-page, Content', 'seo'),
  ('systeme', '03', 'Manage', 'Systeme &amp; Dashboards', 'Warenwirtschaft, Personal, Dashboards', 'dashboards'),
- ('automatisierung-chatbots', '04', 'Connect', 'Automatisierung &amp; Chatbots', 'Chatbots, Integrationen, Abläufe', 'workflow'),
+ ('automatisierung-chatbots', '04', 'Connect', 'Automatisierung &amp; KI-Agenten', 'Agenten, Integrationen, Abläufe', 'workflow'),
  ('apps', '05', 'Develop', 'App Design', 'UX, UI, Prototyp, Entwicklung', 'app-design'),
  ('games', '05', 'Play', 'Game Design', 'Browser, Mobile, Serious Games', 'game'),
  ('werbeclips', '06', 'Create', 'Werbeclips', 'Werbefilme, Motion Design, Social Ads', 'campaign'),
