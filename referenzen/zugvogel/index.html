@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ZUGVOGEL Umzüge – Festpreis in 2 Minuten</title>
+<meta name="description" content="Umzug mit Möbellift, Festpreis in 2 Minuten, Besichtigung per Handy, Halteverbotszone inklusive. Demo-Webseite für Umzugsfirmen.">
+<meta name="theme-color" content="#0b1a1d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1a1d'/%3E%3Cpath d='M10 24 L26 38 L32 32 L38 38 L54 24 L54 32 L38 46 L32 40 L26 46 L10 32Z' fill='%23d8b260'/%3E%3C/svg%3E">
+<script src="assets/inline/1d490b9eb47d.js"></script>
+<link rel="preload" href="assets/fonts/grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=2">
+</head>
+<body>
+<div class="demo"><span class="for">So könnte das für <span data-firma></span> aussehen. </span><b>Demo von <a href="https://projektex.de/" rel="noopener">PROJEKT EX</a></b><span class="long">: erfundener Betrieb, alle Personen, Zahlen und Stimmen sind Beispiele.</span><span class="short"> · erfundener Betrieb</span></div>
+
+<header class="top" id="top">
+  <a class="logo" href="#start" aria-label="ZUGVOGEL Umzüge, zum Anfang">
+    <svg viewBox="0 0 64 40" aria-hidden="true"><path d="M2 6 L22 24 L32 15 L42 24 L62 6 L62 16 L42 34 L32 25 L22 34 L2 16Z"/></svg>
+    <span>ZUGVOGEL</span>
+  </a>
+  <nav class="nav" id="nav" aria-label="Hauptmenü">
+    <a href="#rechner">Festpreis</a>
+    <a href="#besichtigung">Besichtigung</a>
+    <a href="#halteverbot">Halteverbot</a>
+    <a href="#live">Umzugstag</a>
+    <a href="#leistungen">Leistungen</a>
+    <a href="#karriere">Karriere</a>
+    <a href="#bewertungen">Bewertungen</a>
+  </nav>
+  <a class="btn btn-or top-cta" href="#rechner">Festpreis</a>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+</header>
+
+<main id="start">
+
+<!-- 1 FILM: Möbellift (Vorher → Leiter fährt hoch → Packer am Fenster) -->
+<section class="film" id="lift" style="--h:330vh">
+  <div class="stage">
+    <div class="media">
+      <img class="still" src="assets/img/zv-a2.webp" srcset="assets/img/zv-a2-m.webp 1280w, assets/img/zv-a2.webp 1920w" sizes="100vw" alt="Altbau zur blauen Stunde, davor Möbellift-Anhänger und Umzugs-LKW" fetchpriority="high">
+      <video class="vid" data-src="assets/vid/lift" data-key="lift" muted playsinline preload="auto"></video>
+    </div>
+    <div class="shade"></div>
+    <div class="beat b-hero">
+      <p class="kicker">Umzüge · Möbellift · Halteverbot</p>
+      <h1>Dritter Stock,<br>kein Aufzug?</h1>
+      <p class="lead">Kein Problem. Scrollen Sie und sehen Sie zu.</p>
+      <span class="scrollhint" aria-hidden="true"></span>
+    </div>
+    <div class="beat b-big"><h2>Wir heben das.</h2><p>Möbellift bis 30 m: Kein Treppenhaus-Kratzer, halbe Tragezeit, keine Rückenschmerzen.</p></div>
+    <div class="beat b-side"><p class="num">01</p><h3>Leiter ans Fenster</h3><p>Aufbau in 15 Minuten. Das Treppenhaus bleibt frei für die Nachbarn.</p></div>
+  </div>
+</section>
+
+<!-- 2 FILM: Sofa kommt runter, LKW lädt -->
+<section class="film" id="festpreis" style="--h:300vh">
+  <div class="stage">
+    <div class="media">
+      <img class="still" src="assets/img/zv-c2.webp" srcset="assets/img/zv-c2-m.webp 1280w, assets/img/zv-c2.webp 1920w" sizes="100vw" alt="Eingepacktes Sofa auf der Möbellift-Plattform, darunter Umzugs-LKW mit offener Ladebordwand" loading="lazy">
+      <video class="vid" data-src="assets/vid/sofa" data-key="sofa" muted playsinline preload="auto"></video>
+    </div>
+    <div class="shade"></div>
+    <div class="beat b-side"><p class="num">02</p><h3>In Decken, in Folie, gesichert</h3><p>Jedes Möbel wird gepolstert und verzurrt, bevor es das Fenster verlässt.</p></div>
+    <div class="beat b-side r"><p class="num">03</p><h3>Direkt auf die Ladebordwand</h3><p>Vom Fenster in den LKW, ohne Umweg über den Gehweg.</p></div>
+    <div class="beat b-cta">
+      <h2>Was kostet<br>mein Umzug?</h2>
+      <div class="row"><a class="btn btn-or" href="#rechner">Festpreis in 2 Minuten</a><a class="btn btn-line" href="#besichtigung">Video-Besichtigung</a></div>
+    </div>
+    <div class="blueprint" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- 3 MOTION: Umzugsrechner -->
+<section class="calc" id="rechner">
+  <div class="calc-bg" aria-hidden="true"><img src="assets/img/zv-f.webp" srcset="assets/img/zv-f-m.webp 1800w, assets/img/zv-f.webp 2560w" sizes="100vw" alt="" loading="lazy"></div>
+  <div class="wrap">
+    <p class="kicker">Umzugsrechner</p>
+    <h2>Festpreis statt<br>Rätselraten.</h2>
+    <p class="lead">Zimmer wählen, Möbel antippen – der LKW füllt sich mit. Wird es zu viel, wächst er: vom 3,5-Tonner bis zum 18-Tonner.</p>
+    <div class="calc-grid">
+      <div class="calc-in">
+        <div class="tabs" role="tablist" aria-label="Wohnungsgröße">
+          <button role="tab" data-preset="1">1 Zimmer</button><button role="tab" data-preset="2" aria-selected="true">2 Zimmer</button><button role="tab" data-preset="3">3 Zimmer</button><button role="tab" data-preset="4">4+ Zimmer</button>
+        </div>
+        <ul class="items" id="items"></ul>
+        <div class="opts">
+          <label class="opt">Etage auszug<select id="floorA"><option value="0">EG</option><option value="1">1.</option><option value="2">2.</option><option value="3" selected>3.</option><option value="4">4.</option><option value="5">5.+</option></select></label>
+          <label class="opt">Entfernung<select id="km"><option value="10">bis 10 km</option><option value="30" selected>bis 30 km</option><option value="80">bis 80 km</option><option value="250">bis 250 km</option><option value="600">über 250 km</option></select></label>
+          <label class="chk"><input type="checkbox" id="optLift" checked><span>Möbellift</span></label>
+          <label class="chk"><input type="checkbox" id="pack"><span>Packservice</span></label>
+          <label class="chk"><input type="checkbox" id="hvz" checked><span>Halteverbotszone</span></label>
+        </div>
+      </div>
+      <div class="calc-out">
+        <svg class="truck" id="truck" viewBox="-95 -140 440 360" aria-hidden="true"></svg>
+        <div class="load"><span id="loadTxt">Laderaum</span><i><b id="loadBar"></b></i><p id="truckMsg" aria-live="polite"></p></div>
+        <div class="readout">
+          <div><span class="big"><b id="m3">0</b> m³</span><small>Umzugsgut</small></div>
+          <div><span class="mid" id="truckSize">7,5 t</span><small>LKW</small></div>
+          <div><span class="mid" id="crew">3</span><small>Packer</small></div>
+          <div><span class="mid" id="hours">6</span><small>Stunden</small></div>
+        </div>
+        <div class="price">
+          <small>Festpreis-Schätzung</small>
+          <p><b id="pFrom">0</b> – <b id="pTo">0</b> €</p>
+          <small class="note">Beispielrechnung. Der verbindliche Festpreis kommt nach Video-Besichtigung, schriftlich, ohne Kleingedrucktes.</small>
+        </div>
+        <button class="btn btn-or wide" data-open="anfrage">Festpreis anfragen</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 MOTION + FOTO: Besichtigung per Handy -->
+<section class="scan" id="besichtigung" style="--h:300vh">
+  <div class="stage">
+    <div class="scan-bg" aria-hidden="true"><img src="assets/img/zv-d-m.webp" alt="" loading="lazy"></div>
+    <div class="scan-copy">
+      <p class="kicker">Besichtigung per Handy</p>
+      <h2>Kein Termin.<br>Kein Fremder<br>in der Wohnung.</h2>
+      <p class="lead">Filmen Sie jedes Zimmer 30 Sekunden. Wir zählen Möbel und Kartons und schicken den Festpreis innerhalb von 24 Stunden.</p>
+      <ol class="steps"><li><b>Filmen</b> Zimmer für Zimmer</li><li><b>Hochladen</b> direkt hier</li><li><b>Festpreis</b> per Mail, schriftlich</li></ol>
+    </div>
+    <div class="phone scan-phone">
+      <div class="screen">
+        <img src="assets/img/zv-d.webp" srcset="assets/img/zv-d-m.webp 1800w, assets/img/zv-d.webp 3840w" sizes="(max-width:900px) 90vw, 50vw" alt="Wohnzimmer im Handy-Sucher mit erkannten Möbeln" loading="lazy">
+        <div class="ar" id="ar"></div>
+        <div class="rec"><i></i>REC <span id="recT">00:00</span></div>
+        <div class="sum"><span>Erkannt</span><b><span id="arM3">0,0</span> m³</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="upload">
+  <div class="wrap">
+    <h3>Jetzt Video schicken</h3>
+    <label class="drop"><input type="file" accept="video/*,image/*" multiple id="file"><span class="d-ico" aria-hidden="true"></span><span class="d-txt"><b>Videos oder Fotos auswählen</b><small id="fileInfo">Demo: Dateien werden nicht hochgeladen.</small></span></label>
+  </div>
+</section>
+
+<!-- 5 MOTION: Halteverbotszone -->
+<section class="hvz" id="halteverbot" style="--h:260vh">
+  <div class="stage">
+    <svg class="map" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><pattern id="blk" width="160" height="160" patternUnits="userSpaceOnUse"><rect width="160" height="160" style="fill:var(--m1)"/><rect x="18" y="18" width="124" height="124" rx="6" style="fill:var(--m2)"/></pattern></defs>
+      <rect width="1600" height="900" fill="url(#blk)"/>
+      <path class="road" d="M-20 610 H1620"/>
+      <path class="road thin" d="M520 -20 V920 M1180 -20 V920"/>
+      <path class="route" id="route" d="M-20 610 H760"/>
+      <g class="house" transform="translate(800 330)">
+        <rect x="0" y="0" width="260" height="250" style="fill:var(--m3)"/><path d="M-10 0 L130 -70 L270 0Z" style="fill:var(--m4)"/>
+        <g style="fill:var(--m5)"><rect x="30" y="30" width="40" height="52"/><rect x="110" y="30" width="40" height="52"/><rect x="190" y="30" width="40" height="52"/><rect x="30" y="110" width="40" height="52"/><rect x="110" y="110" width="40" height="52"/><rect x="190" y="110" width="40" height="52"/></g>
+        <rect class="lit" x="190" y="30" width="40" height="52"/>
+        <rect x="105" y="185" width="50" height="65" style="fill:var(--m1)"/>
+      </g>
+      <rect class="zone" x="620" y="585" width="420" height="50" rx="4"/>
+      <g class="sign s1"><line x1="0" y1="0" x2="0" y2="-120"/><circle cx="0" cy="-150" r="30"/><path d="M-21 -171 L21 -129 M21 -171 L-21 -129"/></g>
+      <g class="sign s2"><line x1="0" y1="0" x2="0" y2="-120"/><circle cx="0" cy="-150" r="30"/><path d="M-21 -171 L21 -129 M21 -171 L-21 -129"/></g>
+      <g class="minitruck" id="mt"><g class="mt-in"><ellipse cx="-60" cy="30" rx="150" ry="9" class="mt-shadow"/><g class="mt-beam"><path d="M58 -14 L330 -48 L330 22 Z"/></g><g class="mt-body"><rect x="-196" y="-8" width="246" height="12" rx="2" class="mt-chassis"/><rect x="-192" y="-128" width="176" height="122" rx="5" class="mt-box"/><path d="M-150 -128V-6M-108 -128V-6M-66 -128V-6" class="mt-rib"/><rect x="-192" y="-62" width="176" height="16" class="mt-stripe"/><path d="M-180 -100 l14 12 6 -6 6 6 14 -12 v7 l-14 12 -6 -6 -6 6 -14 -12z" class="mt-logo"/><text x="-136" y="-86" class="mt-name">ZUGVOGEL</text><rect x="-197" y="-34" width="8" height="16" rx="2" class="mt-tail"/><rect x="-197" y="-52" width="8" height="10" rx="2" class="mt-blink b1"/><g class="mt-ramp"><rect x="-203" y="-66" width="8" height="60" rx="2"/></g><path d="M-12 -86 H34 Q48 -86 54 -64 L62 -34 V0 H-12 Z" class="mt-cab"/><path d="M2 -78 H32 Q42 -78 46 -62 L50 -46 H2 Z" class="mt-win"/><path d="M-4 -40 H10" class="mt-handle"/><rect x="52" y="-26" width="12" height="9" rx="3" class="mt-lamp"/><rect x="54" y="-38" width="8" height="7" rx="2" class="mt-blink b2"/><rect x="-14" y="-8" width="80" height="12" rx="3" class="mt-bumper"/><path d="M30 -84 v-6 h10" class="mt-mirror"/></g><g class="hw" transform="translate(-150 6)"><circle r="23" class="hw-tyre"/><circle r="13" class="hw-rim"/><g class="hw-sp"><path d="M-11 0H11M0 -11V11M-8 -8L8 8M8 -8L-8 8"/></g><circle r="4" class="hw-hub"/></g><g class="hw" transform="translate(-110 6)"><circle r="23" class="hw-tyre"/><circle r="13" class="hw-rim"/><g class="hw-sp"><path d="M-11 0H11M0 -11V11M-8 -8L8 8M8 -8L-8 8"/></g><circle r="4" class="hw-hub"/></g><g class="hw" transform="translate(28 6)"><circle r="23" class="hw-tyre"/><circle r="13" class="hw-rim"/><g class="hw-sp"><path d="M-11 0H11M0 -11V11M-8 -8L8 8M8 -8L-8 8"/></g><circle r="4" class="hw-hub"/></g><g class="mt-smoke"><circle cx="-205" cy="-2" r="6"/><circle cx="-222" cy="-8" r="9"/><circle cx="-244" cy="-14" r="12"/></g></g></g>
+    </svg>
+    <div class="hvz-copy">
+      <p class="kicker">Halteverbotszone</p>
+      <h2>Ihr Parkplatz<br>steht schon fest.</h2>
+      <p class="lead">Wir beantragen die Zone bei der Stadt, stellen die Schilder rechtzeitig auf und dokumentieren alles mit Fotos.</p>
+    </div>
+    <ol class="tl" id="tl">
+      <li><i></i><b>Antrag</b><small>wir bei der Stadt</small></li>
+      <li><i></i><b>Schilder</b><small>mind. 3 volle Tage vorher</small></li>
+      <li><i></i><b>Umzugstag</b><small>LKW direkt vor der Tür</small></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 6 MOTION: Umzugstag live -->
+<section class="live" id="live" style="--h:240vh">
+  <div class="stage">
+    <div class="live-copy">
+      <p class="kicker">Umzugstag</p>
+      <h2>Sie wissen immer,<br>wo Ihr Team ist.</h2>
+      <p class="lead">Live-Status aufs Handy: Abfahrt, Ankunft, beladen, unterwegs, angekommen. Keine Anrufe, kein Warten am Fenster.</p>
+      <ul class="feed" id="feed">
+        <li><time>06:45</time> Team startet im Depot</li>
+        <li><time>07:12</time> Team unterwegs – Ankunft 7:30</li>
+        <li><time>07:29</time> Team ist da, Möbellift wird aufgebaut</li>
+        <li><time>11:40</time> LKW beladen, Abfahrt zur neuen Adresse</li>
+        <li><time>14:55</time> Alles drin. Willkommen zu Hause.</li>
+      </ul>
+    </div>
+    <div class="phone live-phone">
+      <div class="screen dark">
+        <div class="app-top"><span>9:41</span><b>ZUGVOGEL</b><span>●●●</span></div>
+        <svg class="mini" viewBox="0 0 300 520" aria-hidden="true">
+          <rect width="300" height="520" style="fill:var(--m1)"/>
+          <g style="stroke:var(--m3)" stroke-width="14" fill="none"><path d="M-10 100 H310 M-10 260 H310 M-10 420 H310 M60 -10 V530 M200 -10 V530"/></g>
+          <path id="lroute" d="M60 500 V260 H200 V100 H260" style="stroke:var(--or)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="6 9"/>
+          <circle cx="260" cy="100" r="10" style="fill:var(--or)"/><circle cx="260" cy="100" r="22" fill="none" style="stroke:var(--or)" stroke-opacity=".4" class="pulse"/>
+          <g id="ltruck"><rect x="-13" y="-9" width="26" height="18" rx="3" fill="#fff"/></g>
+        </svg>
+        <div class="card" id="card"><small id="cardT">07:12</small><b id="cardS">Team unterwegs – Ankunft 7:30</b><span class="bar"><i id="cardBar"></i></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 LEISTUNGEN + VERSICHERUNG -->
+<section class="leist" id="leistungen">
+  <div class="wrap">
+    <p class="kicker">Leistungen</p>
+    <h2>Alles, was beim<br>Umzug anfällt.</h2>
+    <p class="lead">Zwölf Leistungen, ein Ansprechpartner, ein Festpreis. Antippen zeigt, was genau dazugehört.</p>
+    <ul class="sv-grid" id="svGrid"><li><button type="button" class="sv" data-sv="privat" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 22 24 9l16 13v17H8z M19 39V28h10v11"/></svg><b>Privatumzug</b><small>Wohnung, Haus, WG – mit Festpreis.</small></button></li><li><button type="button" class="sv" data-sv="firma" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 40V10h20v30 M30 18h8v22 M16 16h4M16 23h4M16 30h4M10 40h30"/></svg><b>Firmen- & Büroumzug</b><small>Am Wochenende, montags läuft alles.</small></button></li><li><button type="button" class="sv" data-sv="pack" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 16 24 8l16 8v18l-16 8-16-8z M8 16l16 8 16-8 M24 24v18"/></svg><b>Packservice & Material</b><small>Wir packen ein – oder liefern Kartons.</small></button></li><li><button type="button" class="sv" data-sv="montage" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 36 28 20 M26 14a6 6 0 1 0 8 8l6 6-6 6-6-6 M10 38l4-4"/></svg><b>Möbel- & Küchenmontage</b><small>Abbau, Aufbau, Anschluss.</small></button></li><li><button type="button" class="sv" data-sv="lift" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 42 34 6 M18 34h10 M22 26h10 M26 18h10 M30 42h10"/></svg><b>Möbellift</b><small>Außen hoch statt durchs Treppenhaus.</small></button></li><li><button type="button" class="sv" data-sv="hvz" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 42V24 M24 6a9 9 0 1 1 0 18 9 9 0 0 1 0-18z M18 9l12 12 M30 9 18 21"/></svg><b>Halteverbotszone</b><small>Antrag, Schilder, Fotoprotokoll.</small></button></li><li><button type="button" class="sv" data-sv="lager" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 40V18l18-10 18 10v22 M12 40V24h24v16 M12 30h24 M12 35h24"/></svg><b>Einlagerung</b><small>Trocken, abschließbar, monatlich kündbar.</small></button></li><li><button type="button" class="sv" data-sv="schwer" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 34V16h32v18 M8 24h32 M14 34v6M34 34v6 M14 16v8M20 16v8M26 16v8M32 16v8"/></svg><b>Klavier & Schwerlast</b><small>Klavier, Tresor, Aquarium.</small></button></li><li><button type="button" class="sv" data-sv="senior" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 14a5 5 0 1 0 0-10 5 5 0 0 0 0 10 M16 44l3-18h10l3 18 M14 26l-4 10 M34 26l4 10"/></svg><b>Seniorenumzug</b><small>Ruhig, mit Zeit und einem festen Team.</small></button></li><li><button type="button" class="sv" data-sv="entr" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 14h24l-2 28H14z M8 14h32 M19 8h10v6 M20 20v16M28 20v16"/></svg><b>Entrümpelung & Entsorgung</b><small>Was nicht mitkommt, geht fachgerecht.</small></button></li><li><button type="button" class="sv" data-sv="reinigung" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M30 6 18 30 M14 30h16l-4 12H10z M34 14l6-2M36 22l6 1"/></svg><b>Endreinigung & Übergabe</b><small>Schlüssel abgeben, Kaution zurück.</small></button></li><li><button type="button" class="sv" data-sv="fern" aria-expanded="false" aria-controls="svd"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 42a18 18 0 1 0 0-36 18 18 0 0 0 0 36z M6 24h36 M24 6c-6 6-6 30 0 36 M24 6c6 6 6 30 0 36"/></svg><b>Fern- & Auslandsumzug</b><small>Europaweit, mit Zollpapieren.</small></button></li></ul>
+    <div class="sv-detail" id="svd" hidden><div><h3 id="svT"></h3><ul id="svB"></ul></div><button class="btn btn-or" data-open="anfrage">In den Festpreis aufnehmen</button></div>
+    <script type="application/json" id="svData">{"privat": {"n": "Privatumzug", "b": ["Festpreis nach Video-Besichtigung, schriftlich", "Abbau, Transport, Aufbau aus einer Hand", "Etiketten je Raum – jeder Karton landet im richtigen Zimmer"]}, "firma": {"n": "Firmen- & Büroumzug", "b": ["Umzug Freitag ab 16 Uhr bis Sonntag", "IT-Kisten mit Etikett je Arbeitsplatz", "Aktenvernichtung nach DIN 66399 auf Wunsch"]}, "pack": {"n": "Packservice & Material", "b": ["Kartons, Packpapier, Kleiderboxen, Polsterdecken", "Geschirr stehend, in Papier – bruchsicher", "Auspacken am neuen Ort ebenfalls möglich"]}, "montage": {"n": "Möbel- & Küchenmontage", "b": ["Schränke, Betten, Regale ab- und aufbauen", "Küche anpassen, Arbeitsplatte zuschneiden", "Lampen und Geräte anschließen (Fachbetrieb)"]}, "lift": {"n": "Möbellift", "b": ["Bis ca. 30 m Höhe, je nach Stellplatz", "Schont Treppenhaus und Rücken", "Schneller ab 3. Etage ohne Aufzug"]}, "hvz": {"n": "Halteverbotszone", "b": ["Antrag bei der Stadt übernehmen wir", "Schilder stehen mindestens 3 volle Tage vorher", "Aufstellprotokoll mit Fotos"]}, "lager": {"n": "Einlagerung", "b": ["Lagerung in verplombten Holzcontainern", "Für Zwischenzeit, Renovierung, Auslandsjahr", "Teilentnahme nach Absprache"]}, "schwer": {"n": "Klavier & Schwerlast", "b": ["Klaviergurte, Treppenraupe, Rollbretter", "Tresore bis 1 t mit Spezialgerät", "Fester Ansprechpartner vor Ort"]}, "senior": {"n": "Seniorenumzug", "b": ["Vorher-Besuch, Möbel-Auswahl für die neue Wohnung", "Bilder hängen, Bett bezogen am ersten Abend", "Abstimmung mit Angehörigen und Heim"]}, "entr": {"n": "Entrümpelung & Entsorgung", "b": ["Sperrmüll, Elektroschrott, Altholz getrennt", "Gut Erhaltenes geht an Sozialkaufhäuser", "Besenrein übergeben"]}, "reinigung": {"n": "Endreinigung & Übergabe", "b": ["Endreinigung nach Übergabe-Standard", "Bohrlöcher schließen, kleine Reparaturen", "Übergabe-Termin mit dem Vermieter begleiten"]}, "fern": {"n": "Fern- & Auslandsumzug", "b": ["Fester Liefertermin auch über 500 km", "Beiladung spart bis zu 40 % (Teilladung)", "Zoll- und Meldepapiere für Nicht-EU-Länder"]}}</script>
+  </div>
+</section>
+
+<section class="vers" id="versichert">
+  <div class="wrap vers-grid">
+    <div>
+      <p class="kicker">Versichert</p>
+      <h2>Schwarz auf weiß<br>abgesichert.</h2>
+      <p class="lead">Jeder Umzug mit uns ist nach Handelsgesetzbuch versichert: 620 € je Kubikmeter Laderaum. Für Ihren Hausrat aus dem Rechner heißt das:</p>
+      <ul class="facts">
+        <li><b>Schaden sichtbar?</b> Spätestens am Tag nach der Lieferung melden. <b>Verdeckt?</b> Innerhalb von 14 Tagen. <small>§ 451f HGB</small></li>
+        <li><b>Treppenhaus, Böden, Aufzug:</b> Kratzer am Gebäude deckt unsere Betriebshaftpflicht.</li>
+        <li><b>Steuer:</b> 20 % der Arbeitskosten sind absetzbar, bis 4.000 € im Jahr. <small>§ 35a EStG</small></li>
+      </ul>
+    </div>
+    <div class="vers-card">
+      <div class="vrow"><span>Ihr Umzugsgut</span><b><span id="vM3">36,2</span> m³</b></div>
+      <div class="vrow big"><span>Gesetzliche Haftung inklusive</span><b><span id="vHaft">22.444</span> €</b></div>
+      <label class="vslide" for="vWert">Wert Ihres Hausrats (Neuwert): <b><span id="vWertT">40.000</span> €</b><input type="range" id="vWert" min="5000" max="150000" step="5000" value="40000"></label>
+      <svg class="vbars" viewBox="0 0 400 120" role="img" aria-labelledby="vbT"><title id="vbT">Vergleich gesetzliche Haftung und Hausratwert</title>
+        <text x="0" y="14" class="vl">Gesetzliche Haftung (620 €/m³)</text><rect x="0" y="22" width="400" height="26" rx="6" class="vtrack"/><rect x="0" y="22" width="0" height="26" rx="6" class="vhaft" id="vbH"/>
+        <text x="0" y="78" class="vl">Neuwert Ihres Hausrats</text><rect x="0" y="86" width="400" height="26" rx="6" class="vtrack"/><rect x="0" y="86" width="0" height="26" rx="6" class="vwert" id="vbW"/>
+        <rect x="0" y="86" width="0" height="26" class="vgap" id="vbG"/>
+      </svg>
+      <p class="vnote" id="vNote"></p>
+      <small class="note">Beispielrechnung. Transportversicherung zum Neuwert auf Wunsch, die Prämie steht im Festpreis-Angebot.</small>
+    </div>
+  </div>
+</section>
+
+<!-- 7 FILM + KINETIK: Karriere -->
+<section class="film career" id="karriere" style="--h:300vh">
+  <div class="stage">
+    <div class="media">
+      <img class="still" src="assets/img/zv-e2.webp" srcset="assets/img/zv-e2-m.webp 1280w, assets/img/zv-e2.webp 1920w" sizes="100vw" alt="Junger Möbelpacker in Arbeitskleidung am Umzugs-LKW" loading="lazy">
+      <video class="vid" data-src="assets/vid/crew" data-key="crew" muted playsinline preload="auto"></video>
+    </div>
+    <div class="shade side"></div>
+    <div class="beat b-career">
+      <p class="kicker">Karriere</p>
+      <h2>Stark<br>im Team.</h2>
+    </div>
+    <div class="kin" aria-label="Was wir bieten">
+      <p>Feste Crew.</p>
+      <p>Führerschein C1 – zahlen wir.</p>
+      <p>Pünktlich Feierabend.</p>
+      <p>Arbeitskleidung &amp; Schuhe.</p>
+    </div>
+    <div class="beat b-cta r">
+      <h2>Bewerben in<br>60 Sekunden.</h2>
+      <p>Ohne Anschreiben, ohne Lebenslauf.</p>
+      <div class="row"><button class="btn btn-or" data-open="job">In 60 Sekunden bewerben</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 Bewertungen -->
+<section class="reviews" id="bewertungen">
+  <div class="wrap">
+    <p class="kicker">Bewertungen</p>
+    <h2>Was Kunden sagen.</h2>
+    <div class="score">
+      <div class="portal">
+        <span class="pname">Google</span>
+        <p class="rating"><b class="count" data-to="4.9" data-dec="1">0,0</b><span class="stars" style="--v:0"><i>★★★★★</i><i class="f">★★★★★</i></span></p>
+        <small><span class="count" data-to="318" data-dec="0">0</span> Bewertungen · Beispielwerte, Stand Demo</small>
+      </div>
+      <div class="portal">
+        <span class="pname">Weiterempfehlung</span>
+        <p class="rating"><b class="count" data-to="97" data-dec="0">0</b><span class="unit">%</span></p>
+        <small>würden wieder mit uns umziehen · Beispiel</small>
+      </div>
+    </div>
+  </div>
+  <div class="marquee"><div class="m-track">
+    <span>Pünktlich</span><span>Nichts kaputt</span><span>Möbellift</span><span>Freundliches Team</span><span>Festpreis gehalten</span><span>Schnell</span><span>Halteverbot organisiert</span><span>Sauber</span>
+    <span>Pünktlich</span><span>Nichts kaputt</span><span>Möbellift</span><span>Freundliches Team</span><span>Festpreis gehalten</span><span>Schnell</span><span>Halteverbot organisiert</span><span>Sauber</span>
+  </div></div>
+  <div class="marquee rev"><div class="m-track">
+    <span>Google ★ 4,9 · Beispiel</span><span>318 Bewertungen · Beispiel</span><span>Häufig genannt: Möbellift</span><span>Häufig genannt: Pünktlichkeit</span><span>Häufig genannt: Festpreis</span>
+    <span>Google ★ 4,9 · Beispiel</span><span>318 Bewertungen · Beispiel</span><span>Häufig genannt: Möbellift</span><span>Häufig genannt: Pünktlichkeit</span><span>Häufig genannt: Festpreis</span>
+  </div></div>
+  <div class="wrap">
+    <div class="quotes" id="quotes" aria-live="polite">
+      <figure class="on"><blockquote>„Um 7:29 standen sie vor der Tür, um 15 Uhr war alles drin. Der Preis war genau der aus dem Angebot.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <figure><blockquote>„Das Klavier kam über den Möbellift aus dem 4. Stock. Ich habe nur zugeschaut.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+      <figure><blockquote>„Video gefilmt, am nächsten Morgen kam der Festpreis. Keine Besichtigung, kein Stress.“</blockquote><figcaption>Beispiel · noch keine echte Bewertung</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 9 Abschluss -->
+<section class="final" id="termin">
+  <div class="wrap">
+    <h2>Ihr Umzugstag.<br><span class="or">Unser Job.</span></h2>
+    <p class="lead">Freie Termine in den nächsten Wochen – sichern Sie sich Ihren Wunschtag.</p>
+    <div class="cal" id="cal" role="group" aria-label="Freie Termine (Beispiel)"></div>
+    <div class="row c"><button class="btn btn-or" data-open="anfrage">Termin sichern</button><a class="btn btn-line" href="tel:+490000000000">Anrufen</a></div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="f-logo"><svg viewBox="0 0 64 40" aria-hidden="true"><path d="M2 6 L22 24 L32 15 L42 24 L62 6 L62 16 L42 34 L32 25 L22 34 L2 16Z"/></svg> ZUGVOGEL Umzüge</div>
+    <p>Musterstraße 1 · 00000 Musterstadt · Mo–Sa 7–19 Uhr</p>
+    <nav aria-label="Rechtliches"><a href="#" data-open="impressum">Impressum</a><a href="#" data-open="datenschutz">Datenschutz</a></nav>
+    <p class="small">Demo-Webseite von PROJEKT EX. Erfundener Betrieb, alle Angaben sind Beispiele.</p>
+  </div>
+</footer>
+
+<!-- Modals -->
+<dialog class="modal" id="anfrage" aria-labelledby="aT">
+  <form method="dialog" class="m-box" data-flow>
+    <button class="x" value="x" aria-label="Schließen">×</button>
+    <p class="kicker">Festpreis-Anfrage</p>
+    <h3 id="aT">In 3 Schritten zum Festpreis</h3>
+    <div class="step on" data-s="1"><p class="q">Wann soll es losgehen?</p><div class="choice"><button type="button" data-next>Diesen Monat</button><button type="button" data-next>Nächsten Monat</button><button type="button" data-next>Später</button></div></div>
+    <div class="step" data-s="2"><p class="q">Von wo nach wo?</p><label>Auszug (PLZ)<input inputmode="numeric" maxlength="5" autocomplete="postal-code"></label><label>Einzug (PLZ)<input inputmode="numeric" maxlength="5"></label><button type="button" class="btn btn-or wide" data-next>Weiter</button></div>
+    <div class="step" data-s="3"><p class="q">Wie erreichen wir Sie?</p><label>Name<input autocomplete="name"></label><label>Telefon oder E-Mail<input autocomplete="email"></label><button type="button" class="btn btn-or wide" data-next>Anfrage senden</button></div>
+    <div class="step done" data-s="4"><p class="ok">✓</p><h3>Danke! Festpreis folgt in 24 h.</h3><p class="small">Demo: Es wurde nichts gesendet.</p></div>
+  </form>
+</dialog>
+<dialog class="modal" id="job" aria-labelledby="jT">
+  <form method="dialog" class="m-box" data-flow>
+    <button class="x" value="x" aria-label="Schließen">×</button>
+    <p class="kicker">Bewerbung · 60 Sekunden</p>
+    <h3 id="jT">Werde Teil der Crew</h3>
+    <div class="step on" data-s="1"><p class="q">Als was?</p><div class="choice"><button type="button" data-next>Möbelpacker/in</button><button type="button" data-next>Fahrer/in C1 / CE</button><button type="button" data-next>Ausbildung Umzugsservice</button></div></div>
+    <div class="step" data-s="2"><p class="q">Erfahrung?</p><div class="choice"><button type="button" data-next>Keine – ich lerne schnell</button><button type="button" data-next>Bis 2 Jahre</button><button type="button" data-next>Mehr als 2 Jahre</button></div></div>
+    <div class="step" data-s="3"><p class="q">Wie erreichen wir dich?</p><label>Vorname<input autocomplete="given-name"></label><label>Handynummer<input inputmode="tel" autocomplete="tel"></label><button type="button" class="btn btn-or wide" data-next>Abschicken</button></div>
+    <div class="step done" data-s="4"><p class="ok">✓</p><h3>Stark! Wir rufen dich an.</h3><p class="small">Demo: Es wurde nichts gesendet.</p></div>
+  </form>
+</dialog>
+<dialog class="modal" id="impressum" aria-labelledby="iT"><form method="dialog" class="m-box"><button class="x" value="x" aria-label="Schließen">×</button><h3 id="iT">Impressum</h3><p>ZUGVOGEL Umzüge ist ein erfundener Musterbetrieb. Diese Demo-Seite stammt von PROJEKT EX und dient nur zur Ansicht.</p></form></dialog>
+<dialog class="modal" id="datenschutz" aria-labelledby="dT"><form method="dialog" class="m-box"><button class="x" value="x" aria-label="Schließen">×</button><h3 id="dT">Datenschutz</h3><p>Diese Demo setzt keine Cookies und sendet keine Formulardaten. Schriften und Medien liegen auf demselben Server.</p></form></dialog>
+
+<script src="assets/js/vid.js?v=1"></script>
+<script src="assets/js/app.js?v=2"></script>
+</body>
+</html>
