@@ -1,1 +1,0 @@
-try{var t=new URLSearchParams(location.search).get("farbe");if(t)sessionStorage.setItem("zv-farbe",t);else t=sessionStorage.getItem("zv-farbe");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}
