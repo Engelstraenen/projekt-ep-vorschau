@@ -1,0 +1,1 @@
+window.DRS_IG_FEED = ""; /* Behold-JSON-Link eintragen = neue Instagram-Videos erscheinen automatisch (docs/instagram.md) */

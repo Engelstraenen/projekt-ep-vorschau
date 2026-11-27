@@ -2,184 +2,75 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wärmepumpe · WARMHERZ Bielefeld (Demo)</title>
-<meta name="description" content="Wärmepumpe vom Familienbetrieb: Luft-Wasser, Erdwärme oder Hybrid, raumweise berechnet, Einbau in 2–3 Tagen.">
-<meta name="theme-color" content="#0E0E0E">
-<link rel="stylesheet" href="assets/fonts/fonts2.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1795040489">
-<link rel="stylesheet" href="assets/css/pages.css?v=1795040489">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5B1F'/%3E%3Cpath d='M32 50S14 39 14 26a9 9 0 0 1 18-4 9 9 0 0 1 18 4c0 13-18 24-18 24z' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wärmepumpe · WARMHERZ (Demo)</title>
+<meta name="description" content="Wie eine Luft/Wasser-Wärmepumpe aus kalter Luft Wärme macht, mit gemessenen Jahresarbeitszahlen.">
+<meta name="theme-color" content="#121424">
+<link rel="preload" href="assets/fonts/ibm-plex-sans-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="assets/img/b6-1280.webp 1280w, assets/img/b6-1920.webp 1920w, assets/img/b6-2560.webp 2560w, assets/img/b6-3584.webp 3584w" imagesizes="100vw" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/style.css?v=202611270947">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23fff4c2'/%3E%3Cstop offset='.35' stop-color='%23ffc83d'/%3E%3Cstop offset='.65' stop-color='%23ff6a00'/%3E%3Cstop offset='1' stop-color='%233b1a8a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='15' fill='url(%23g)'/%3E%3C/svg%3E">
 </head>
-<body data-page="waermepumpe">
-
-<div class="demo-bar">Demo von PROJEKT EX · WARMHERZ ist eine erfundene Firma · alle Personen, Zahlen und Stimmen sind Beispiele</div>
-
-<header class="nav" id="nav">
-  <a href="index.html" class="logo" aria-label="WARMHERZ Startseite">
-    <span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span>
-    <span>Warmherz</span>
-  </a>
-  <nav class="links" aria-label="Hauptmenü">
-    <div class="dd">
-      <button class="dd-btn" aria-expanded="false" data-key="leistungen" data-active="1">Leistungen <span aria-hidden="true">▾</span></button>
-      <div class="dd-menu">
-        <a href="waermepumpe.html" data-key="waermepumpe" aria-current="page"><b>Wärmepumpe</b><small>Luft, Erde oder Hybrid</small></a>
-        <a href="heizungstausch.html" data-key="heizungstausch"><b>Heizungstausch</b><small>Öl und Gas raus, 2–3 Tage</small></a>
-        <a href="fussbodenheizung.html" data-key="fussbodenheizung"><b>Fußbodenheizung</b><small>auch nachträglich gefräst</small></a>
-        <a href="bad.html" data-key="bad"><b>Bad</b><small>vom Gäste-WC bis barrierefrei</small></a>
-        <a href="wartung.html" data-key="wartung"><b>Wartung & Notdienst</b><small>im Winter 24/7</small></a>
-      </div>
-    </div>
-    <a href="foerderung.html" data-key="foerderung">Förderung</a>
-    <a href="foto-check.html" data-key="foto-check" class="nav-foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>Foto-Check</a>
-    <a href="ablauf.html" data-key="ablauf">So läuft's ab</a>
-    <a href="jobs.html" data-key="jobs">Jobs</a>
-    <a href="ueber-uns.html" data-key="ueber-uns">Über uns</a>
-    <a href="kontakt.html" data-key="kontakt">Kontakt</a>
+<body class="unter">
+<header class="kopf">
+  <a class="marke" href="index.html"><i></i>WARMHERZ</a>
+  <nav aria-label="Hauptmenü">
+    <a href="thermografie.html">Wärmebild</a>
+    <a href="waermepumpe.html">Wärmepumpe</a>
+    <a class="lang" href="heizungstausch.html">Heizungstausch</a>
+    <a href="foerderung.html">Förderung</a>
+    <a class="lang" href="index.html#k8">Bewertungen</a>
+    <a href="jobs.html">Jobs</a>
+    <a class="btn" href="foto-check.html">Foto-Check</a>
   </nav>
-  <a href="tel:+495210000000" class="nav-call">0521 000 00 00</a>
-  <a href="foerderung.html" class="chip-count" aria-label="Bis zu 22.400 Euro Zuschuss sichern, Förderung sinkt am 1. Februar"><span class="dot"></span><span class="chip-txt"><b><span class="lbl-long">Bis zu </span>22.400 € Zuschuss<span class="lbl-long"> sichern</span></b><small class="lbl-long">nur noch <span data-days>–</span> Tage, dann gibt es weniger</small></span></a>
-  <button class="burger" aria-label="Menü öffnen" aria-expanded="false"><i></i><i></i></button>
+  <button class="burger" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
 </header>
+<div class="menue" role="dialog" aria-label="Menü">
+  <button class="zu" aria-label="Menü schließen">×</button>
+  <a href="index.html">Start</a>
+  <a href="thermografie.html">Wärmebild-Check</a>
+  <a href="heizungstausch.html">Heizungstausch</a>
+  <a href="heizlast.html">Heizlast</a>
+  <a href="ablauf.html">Ablauf</a>
+  <a href="waermepumpe.html">Wärmepumpe</a>
+  <a href="foerderung.html">Förderung</a>
+  <a href="fussbodenheizung.html">Fußbodenheizung</a>
+  <a href="wartung.html">Wartung &amp; Notdienst</a>
+  <a href="index.html#k8">Bewertungen</a>
+  <a href="jobs.html">Jobs &amp; Ausbildung</a>
+  <a href="foto-check.html">Foto-Check</a>
+</div>
+
 
 <main>
-<section class="phero ">
-  <img src="assets/img/lukas.webp" alt="" fetchpriority="high">
-  <div class="shade"></div>
-  <div class="in"><div class="crumbs"><a href="index.html">Start</a><span>/</span>Leistungen<span>/</span>Wärmepumpe</div>
-    <p class="kicker">Wärmepumpe</p>
-    <h1 class="reveal">Wärme aus der Luft. <em>Auch bei −15 °C.</em></h1>
-    <p class="sub reveal">Wir planen und bauen Wärmepumpen für Bestandshäuser in Ostwestfalen: raumweise berechnet, leise aufgestellt, in 2–3 Tagen eingebaut.</p>
-    <div class="ctas"><a href="foerderung.html" class="btn acc">Zuschuss berechnen <span>→</span></a><a href="foto-check.html" class="btn line">Fotos schicken <span>→</span></a></div>
-    <div class="rating-chips">
-  <a href="index.html#bewertungen" class="rchip"><span class="src-mark g" aria-hidden="true">G</span><b>4,9</b><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>127 Google-Bewertungen</span></a>
-  <a href="index.html#bewertungen" class="rchip"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><b>4,8</b><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>86 auf Trustpilot</span></a>
-</div>
-  </div>
-</section>
-<!-- ============ WÄRMEPUMPE INTERAKTIV ============ -->
-<section class="hp" id="waermepumpe">
-  <div class="wrap hp-grid">
-    <div class="hp-copy">
-      <p class="kicker">So funktioniert's</p>
-      <h2 class="reveal">Aus <em>1 Teil Strom</em> werden <span data-cop-big>3,4</span> Teile Wärme.</h2>
-      <p class="sub">Ziehen Sie den Regler auf die Außentemperatur von heute. Das Haus reagiert sofort. Tippen Sie auf die Punkte, um zu sehen, was wo eingebaut wird.</p>
-      <label class="temp-ctl">
-        <span>Draußen</span><b data-tout>+2 °C</b>
-        <input type="range" min="-15" max="15" value="2" step="1" data-temp aria-label="Außentemperatur">
-        <span class="scale"><i>−15 °C</i><i>0</i><i>+15 °C</i></span>
-      </label>
-      <div class="energy">
-        <div class="ebar"><span class="e-strom" style="flex:1">Strom 1</span><span class="e-umwelt" data-umwelt style="flex:2.4">Umwelt 2,4</span></div>
-        <p class="enote">Beispielgerät, Vorlauf 35 °C. Je milder es draußen ist, desto mehr Wärme kommt gratis aus der Luft.</p>
-      </div>
-      <div class="hp-info" aria-live="polite"><b data-info-t>Außengerät</b><p data-info-p>Holt Wärme aus der Luft, sogar bei −15 °C. Steht leise im Garten, etwa so laut wie ein Kühlschrank in ein paar Metern Abstand.</p></div>
-    </div>
-
-    <div class="house-wrap">
-      <svg class="house" viewBox="0 0 640 520" role="img" aria-label="Haus im Querschnitt mit Wärmepumpe">
-        <defs>
-          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2B3550" data-sky1/><stop offset="1" stop-color="#6C5A66" data-sky2/></linearGradient>
-          <linearGradient id="room" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF1E6"/><stop offset="1" stop-color="#FFDCC4"/></linearGradient>
-          <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FF5B1F" stop-opacity=".45"/><stop offset="1" stop-color="#FF5B1F" stop-opacity="0"/></radialGradient>
-        </defs>
-        <rect width="640" height="520" fill="url(#sky)" rx="18"/>
-        <g class="snow" data-snow></g>
-        <rect x="0" y="430" width="640" height="90" fill="#1E1E1E"/>
-        <rect x="0" y="426" width="640" height="8" fill="#3A3A3A" data-ground/>
-        <path d="M180 170 L380 60 L580 170 Z" fill="#2A2A2A"/>
-        <rect x="200" y="170" width="360" height="260" fill="#EDEAE5"/>
-        <rect x="214" y="186" width="160" height="104" fill="url(#room)"/>
-        <rect x="386" y="186" width="160" height="104" fill="url(#room)"/>
-        <rect x="214" y="302" width="332" height="116" fill="url(#room)"/>
-        <rect x="200" y="430" width="360" height="80" fill="#2E2E2E"/>
-        <rect x="214" y="440" width="332" height="62" fill="#3A3A3A"/>
-        <ellipse cx="380" cy="360" rx="190" ry="90" fill="url(#glow)" class="warmglow"/>
-        <rect x="236" y="250" width="56" height="26" rx="3" fill="#fff" stroke="#CFCFCF"/>
-        <path d="M244 250v26M252 250v26M260 250v26M268 250v26M276 250v26M284 250v26" stroke="#E5E5E5"/>
-        <rect x="470" y="232" width="56" height="44" rx="4" fill="#fff" stroke="#CFCFCF"/>
-        <path d="M484 214v18M478 214h12" stroke="#FF5B1F" stroke-width="3" stroke-linecap="round"/>
-        <path class="flow floor" d="M222 412 h300 c10 0 10 -8 0 -8 h-300 c-10 0 -10 -8 0 -8 h300" fill="none"/>
-        <rect x="300" y="360" width="110" height="34" rx="8" fill="#2A2A2A"/>
-        <rect x="300" y="346" width="110" height="18" rx="6" fill="#3A3A3A"/>
-        <rect x="430" y="446" width="44" height="52" rx="4" fill="#fff"/>
-        <rect x="484" y="452" width="34" height="46" rx="12" fill="#DADADA"/>
-        <circle cx="452" cy="462" r="5" fill="#FF5B1F"/>
-        <path class="flow main" d="M118 400 V470 H430" fill="none"/>
-        <path class="flow up" d="M474 460 H560 M520 452 V300 H292 V276 M520 300 V276 H498" fill="none"/>
-        <g class="outdoor">
-          <rect x="60" y="360" width="116" height="70" rx="6" fill="#F5F5F5" stroke="#CFCFCF"/>
-          <circle cx="100" cy="395" r="24" fill="#E3E3E3" stroke="#BDBDBD"/>
-          <g class="fan" data-fan style="transform-origin:100px 395px"><path d="M100 395 L100 374 A21 21 0 0 1 118 385 Z M100 395 L118 405 A21 21 0 0 1 100 416 Z M100 395 L82 405 A21 21 0 0 1 82 385 Z" fill="#9E9E9E"/></g>
-          <path d="M138 372h28M138 382h28M138 392h28M138 402h28M138 412h28" stroke="#D6D6D6" stroke-width="3"/>
-          <rect x="66" y="430" width="12" height="6" fill="#777"/><rect x="158" y="430" width="12" height="6" fill="#777"/>
-        </g>
-        <g class="airflow"><path d="M20 380c14-6 22 6 34 0M14 400c14-6 22 6 36 0M20 420c14-6 22 6 34 0" fill="none" stroke="#7EC8E3" stroke-width="2.5" stroke-linecap="round"/></g>
-        <g class="hs" data-hs="0" transform="translate(118 352)"><circle r="16" class="hs-pulse"/><circle r="9" class="hs-dot"/></g>
-        <g class="hs" data-hs="1" transform="translate(452 438)"><circle r="16" class="hs-pulse"/><circle r="9" class="hs-dot"/></g>
-        <g class="hs" data-hs="2" transform="translate(372 404)"><circle r="16" class="hs-pulse"/><circle r="9" class="hs-dot"/></g>
-        <g class="hs" data-hs="3" transform="translate(264 240)"><circle r="16" class="hs-pulse"/><circle r="9" class="hs-dot"/></g>
-        <g class="hs" data-hs="4" transform="translate(498 222)"><circle r="16" class="hs-pulse"/><circle r="9" class="hs-dot"/></g>
-        <g class="hs" data-hs="5" transform="translate(380 116)"><circle r="16" class="hs-pulse"/><circle r="9" class="hs-dot"/></g>
-        <g transform="translate(560 200)"><rect x="-26" y="-20" width="64" height="34" rx="10" fill="#0E0E0E"/><text x="6" y="3" fill="#fff" font-size="15" font-weight="800" text-anchor="middle" font-family="Inter Tight, sans-serif">21 °C</text></g>
-      </svg>
-      <div class="house-legend"><span><i class="lg-flow"></i>Heizwasser fließt</span><span><i class="lg-hs"></i>antippen</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec light">
-  <div class="wrap">
-    <div class="sec-head"><div><p class="kicker">Drei Bauarten</p><h2 class="reveal">Welche passt zu <em>Ihrem</em> Haus?</h2></div><p class="sub">Wir empfehlen nicht das teuerste Gerät, sondern das, was zu Ihrem Haus passt.</p></div>
-    <div class="cards">
-      <div class="card"><div class="big-n">01</div><h3>Luft-Wasser</h3><p>Holt Wärme aus der Außenluft. Die häufigste Lösung im Bestand: schnell eingebaut, wenig Platz, keine Bohrung.</p><span class="pill">passt zu den meisten Häusern</span></div>
-      <div class="card"><div class="big-n">02</div><h3>Erdwärme</h3><p>Nutzt die gleichbleibende Wärme im Boden. Sehr effizient und praktisch lautlos, braucht eine Bohrung oder Kollektoren.</p><span class="pill">große Häuser, Neubau</span></div>
-      <div class="card"><div class="big-n">03</div><h3>Hybrid</h3><p>Wärmepumpe plus vorhandener Kessel für die kältesten Tage. Ein sanfter Einstieg, wenn die Heizkörper noch nicht passen.</p><span class="pill">unsanierte Häuser</span></div>
-    </div>
-  </div>
-</section>
-<section class="sec">
-  <div class="wrap duo">
-    <div class="split-img"><img src="assets/img/lea.webp" alt="Lea und Lukas verlegen Rohre im Technikraum" loading="lazy"></div>
-    <div>
-      <p class="kicker">Altbau?</p>
-      <h2 class="reveal">Geht meistens. <em>Wir prüfen ehrlich.</em></h2>
-      <p class="sub">Entscheidend ist nicht das Baujahr, sondern welche Vorlauftemperatur Ihre Heizkörper brauchen. Oft reicht es, zwei oder drei Heizkörper zu tauschen.</p>
-      <ul class="checks"><li>Raumweise Heizlastberechnung statt Daumenregel</li><li>Aufstellort mit Blick auf die Nachbarn geplant</li><li>Festpreis-Angebot mit Ihrem Zuschuss in Euro</li><li>Einweisung am letzten Tag, Wartung jedes Jahr</li></ul>
-    </div>
-  </div>
-</section>
-<section class="sec light"><div class="wrap"><p class="kicker">Häufige Fragen</p><h2 class="reveal" style="margin-bottom:40px">Was Kunden uns <em>fragen.</em></h2><div class="faq"><details><summary>Wie laut ist das Außengerät?</summary><p>Moderne Geräte sind etwa so leise wie ein Kühlschrank in einigen Metern Abstand. Den Aufstellort planen wir so, dass auch die Nachbarn nichts merken.</p></details><details><summary>Was kostet eine Wärmepumpe?</summary><p>Im Einfamilienhaus meist zwischen 25.000 und 40.000 € inklusive Einbau. Davon übernimmt der Staat bis zu 70 %. Rechnen Sie es im Förderrechner aus.</p></details><details><summary>Wie lange dauert der Einbau?</summary><p>Meist zwei bis drei Tage. Abends ist es bei Ihnen trotzdem warm, wir lassen niemanden frieren.</p></details><details><summary>Brauche ich eine Fußbodenheizung?</summary><p>Nein. Oft reichen die vorhandenen Heizkörper oder ein paar größere. Fußbodenheizung ist ideal, aber kein Muss.</p></details></div></div></section>
-<section class="cta-band"><div class="wrap"><h2>Passt eine Wärmepumpe zu Ihrem Haus?</h2><div class="ctas"><a href="foto-check.html" class="btn dark">Fotos schicken, wir prüfen <span>→</span></a><a href="foerderung.html" class="btn white">Zuschuss berechnen <span>→</span></a></div></div></section>
-
+<section class="u-hero"><div class="szene"><video class="foto" muted playsinline loop autoplay preload="metadata" poster="assets/img/b6-1280.webp"><source src="assets/video/f3-m.mp4?v=202611270947" media="(max-width: 800px)"><source src="assets/video/f3.mp4?v=202611270947"></video></div>
+<div class="text"><a class="zurueck" href="index.html#k6">← Zurück zur Geschichte</a><p class="mono gelb hero-rein">Wärmepumpe</p><h1 class="hero-rein">Aus kalter Luft wird Wärme.</h1><p class="hero-rein">Die Luft, die aus dem Gerät kommt, ist kälter als die Winterluft. Die Wärme, die ihr fehlt, steckt jetzt im Heizwasser.</p></div></section>
+<section class="u-teil"><h2 class="rein">Der Kreislauf in vier Schritten.</h2><ol class="schritte">
+<li><h3>Verdampfen</h3><p>Ein Kältemittel siedet schon weit unter null Grad und nimmt Wärme aus der Außenluft auf.</p></li>
+<li><h3>Verdichten</h3><p>Der Verdichter presst das Gas zusammen, dabei wird es heiß. Hierfür braucht die Pumpe Strom.</p></li>
+<li><h3>Verflüssigen</h3><p>Das heiße Gas gibt seine Wärme ans Heizwasser ab und wird wieder flüssig.</p></li>
+<li><h3>Entspannen</h3><p>Ein Ventil senkt den Druck, das Kältemittel wird wieder eiskalt. Der Kreis beginnt von vorn.</p></li></ol></section>
+<section class="u-teil"><h2 class="rein">COP oder JAZ?</h2><p class="rein">Der COP ist ein Prüfstandswert bei festen Bedingungen. Die Jahresarbeitszahl (JAZ) misst ein ganzes Jahr im echten Haus: Wärme geteilt durch Strom. Nur die JAZ sagt etwas über Ihre Kosten.</p>
+<div class="glas" style="max-width:720px"><div class="balken">
+<div class="b"><span>L/W Ø Bestand</span><span class="s"><i data-w="63%"></i></span><em>3,3</em></div>
+<div class="b"><span>L/W Spanne</span><span class="s"><i data-w="77%"></i></span><em>2,4–4,0</em></div>
+<div class="b"><span>Erdreich</span><span class="s"><i data-w="100%"></i></span><em>3,6–5,2</em></div></div>
+<p class="quelle" style="margin-top:12px">Fraunhofer ISE, „WP-QS im Bestand“, Zwischenergebnis 2024: 22 Luft/Wasser- und 10 Erdreich-Wärmepumpen in Häusern von 1850 bis 2001.</p></div></section>
+<section class="u-teil"><h2 class="rein">Häufige Fragen.</h2><div class="faq"><details><summary>Funktioniert das im Altbau?</summary><p>Der Feldtest des Fraunhofer ISE zeigt: ja, auch in Häusern ab 1850. Entscheidend sind Heizlast, Vorlauftemperatur und eine saubere Einstellung.</p></details><details><summary>Wie laut ist das Außengerät?</summary><p>Moderne Geräte sind leise. Wir planen den Standort mit Abstand zum Nachbarn und prüfen die Schallwerte.</p></details><details><summary>Brauche ich neue Heizkörper?</summary><p>Nicht immer. Oft reicht es, einzelne Heizkörper in kritischen Räumen zu tauschen. Das zeigt die Heizlast Raum für Raum.</p></details></div></section>
+<section class="u-teil"><h2 class="rein">Ihr nächster Schritt.</h2><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="foto-check.html">Foto-Check starten</a><a class="btn leer" href="tel:+495210000000">0521 000 000 (Demo)</a></div></section>
 </main>
 
-<a href="foto-check.html" class="fab-foto" aria-label="Foto-Check: 3 Fotos schicken, wir wissen sofort Bescheid">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>
-  <span><b>3 Fotos schicken</b><small>Wir wissen sofort Bescheid</small></span>
-</a>
-
-<footer class="foot">
-  <div class="wrap foot-grid">
-    <div>
-      <a href="index.html" class="logo"><span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span><span>Warmherz</span></a>
-      <p>Heizung · Wärmepumpe · Bad<br>Am Kupferhammer 12 · 33602 Bielefeld (fiktiv)</p>
-      <p class="foot-tel"><a href="tel:+495210000000">0521 000 00 00</a><br><small>Mo–Fr 7–17 Uhr, Sa 8–12 Uhr</small></p>
-      <div class="social"><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf Instagram (Demo)" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" class="f"/></svg></a><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf Facebook (Demo)" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10.5H8v3h2.5V21z"/></svg></a><a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf TikTok (Demo)" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M16.6 3c.4 2.2 1.8 3.6 4 3.8v3c-1.5 0-2.8-.4-4-1.2v6.3a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.1a2.6 2.6 0 1 0 1.7 2.4V3z"/></svg></a><a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf YouTube (Demo)" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="f" d="M10 9.2v5.6l5-2.8z"/></svg></a><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf LinkedIn (Demo)" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M4 9h3.4v11H4zM5.7 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM9.6 9h3.3v1.5c.5-.9 1.6-1.8 3.3-1.8 3.5 0 4.1 2.3 4.1 5.3v6H17v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H9.6z"/></svg></a><a href="https://wa.me/495210000000" target="_blank" rel="noopener" aria-label="WARMHERZ auf WhatsApp (Demo)" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-3.6A8 8 0 1 1 8 19z"/><path class="f" d="M9 8.3c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.5l-.5.6c-.1.1-.2.3 0 .5.5.9 1.4 1.8 2.4 2.3.2.1.4.1.5 0l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.3.2.3.4 0 .5-.2 1.2-.8 1.5-.6.3-1.4.4-2.7-.1-2-.8-3.6-2.6-4.1-3.7-.4-.9-.4-1.9 0-2.6z"/></svg></a></div>
-    </div>
-    <div><b>Leistungen</b><p><a href="waermepumpe.html">Wärmepumpe</a><br><a href="heizungstausch.html">Heizungstausch</a><br><a href="fussbodenheizung.html">Fußbodenheizung</a><br><a href="bad.html">Bad</a><br><a href="wartung.html">Wartung & Notdienst</a></p></div>
-    <div><b>Service</b><p><a href="foerderung.html">Förderrechner</a><br><a href="ablauf.html">So läuft's ab</a><br><a href="foto-check.html">Foto-Check: 3 Fotos schicken</a><br><a href="kontakt.html">Rückruf anfordern</a></p></div>
-    <div><b>WARMHERZ</b><p><a href="ueber-uns.html">Über uns</a><br><a href="jobs.html">Jobs & Ausbildung</a><br><a href="impressum.html">Impressum</a><br><a href="datenschutz.html">Datenschutz</a></p></div>
+<footer class="fuss">
+  <div class="spalten">
+    <div><a class="marke" href="index.html"><i></i>WARMHERZ</a><small>Heizung · Wärmepumpe · Bad. Bielefeld seit 1987.<br>Demo-Webseite von PROJEKT EX, fiktiver Betrieb.</small></div>
+    <div><b>Leistungen</b><a href="thermografie.html">Wärmebild-Check</a><a href="heizungstausch.html">Heizungstausch</a><a href="waermepumpe.html">Wärmepumpe</a><a href="fussbodenheizung.html">Fußbodenheizung</a><a href="wartung.html">Wartung &amp; Notdienst</a></div>
+    <div><b>Planen</b><a href="heizlast.html">Heizlast</a><a href="ablauf.html">Ablauf</a><a href="foerderung.html">Förderung</a><a href="foto-check.html">Foto-Check</a></div>
+    <div><b>Kontakt</b><a href="tel:+495210000000">0521 000 000 (Demo)</a><a href="foto-check.html">Anfrage per Foto</a><a href="jobs.html">Jobs &amp; Ausbildung</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
   </div>
-  <p class="demo-note">Dies ist eine Demo-Webseite von PROJEKT EX. WARMHERZ, alle Personen, Bewertungen, Preise und Gehälter sind erfunden. Förderangaben sind Beispielwerte ohne Gewähr. Eingaben auf dieser Seite werden nicht übertragen.</p>
+  <small>Alle Zahlen zu Förderung und Effizienz mit Stand-Datum und Quelle, ohne Gewähr. Personen, Firma und Bewertungen sind Beispiele dieser Demo.</small>
 </footer>
-
-<script src="assets/js/gsap.min.js?v=1795040489"></script>
-<script src="assets/js/ScrollTrigger.min.js?v=1795040489"></script>
-<script src="assets/js/app.js?v=1795040489"></script>
-<script src="assets/js/pages.js?v=1795040489"></script>
-<script src="assets/js/flow.js?v=1795040489"></script>
-<script src="assets/js/film.js?v=1795040489"></script>
+<div class="demo-hinweis">Demo · fiktiv</div>
+<script src="assets/js/linse.js?v=202611270947" defer></script>
+<script src="assets/js/main.js?v=202611270947" defer></script>
 </body>
 </html>

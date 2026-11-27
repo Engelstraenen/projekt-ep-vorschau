@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catering · Festliches Buffet von Dr. Schiwago</title>
+<meta name="description" content="Catering von Dr. Schiwago in Duisburg: das Festliche Buffet mit 61 Gerichten der russischen, ukrainischen, georgischen, armenischen und usbekischen Küche in fünf Gängen. Stellen Sie Ihre Favoriten zusammen, für Hochzeiten, Geburtstage und Jubiläen.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070605">
+<link rel="alternate" hreflang="de" href="https://projektex.de/referenzen/drschiwago/catering.html">
+<link rel="alternate" hreflang="ru" href="https://projektex.de/referenzen/drschiwago/ru/catering.html">
+<link rel="icon" href="https://drschiwago.de/favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-garamond-normal-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?v=1795730989">
+<link rel="stylesheet" href="assets/css/style.css?v=1795730989">
+<link rel="stylesheet" href="assets/css/catering.css?v=1795730989">
+<script src="assets/js/img.js?v=1795730989"></script>
+</head>
+<body class="page-catering">
+
+<header class="nav nav--page" id="nav">
+  <a class="nav__mark nav__mark--logo" href="index.html" aria-label="Angerhof · Dr. Schiwago, zur Startseite"><img src="assets/img/angerhof-logo-weiss.webp?v=1795730989" alt="Angerhof Restaurant und Eventlocation" width="900" height="340"></a>
+  <nav class="nav__links" aria-label="Hauptmenü">
+    <a href="index.html#buffet">Buffet</a>
+    <a href="index.html#abend">Der Abend</a>
+    <a href="rundgang.html">Rundgang</a>
+    <a href="index.html#feiern">Feiern</a>
+    <a href="catering.html" aria-current="page">Catering</a>
+    <a href="#galerie">Fotos</a>
+    <a href="#bewertungen">Bewertungen</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+  <a class="nav__lang" href="ru/catering.html" hreflang="ru" lang="ru" aria-label="Русская версия">RU</a>
+  <a class="line-btn nav__cta" href="tel:+4920393577235">0203 93577235</a>
+  <button class="nav__burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="chero" data-need="catering">
+    <img class="chero__img" data-img="catering" alt="Festlich aufgebautes Buffet für eine Feier">
+    <div class="chero__shade" aria-hidden="true"></div>
+    <div class="chero__text">
+      <p class="eyebrow">Catering von Dr. Schiwago</p>
+      <h1 class="chero__title">Festliches Buffet</h1>
+      <p class="chero__lead">Russische, ukrainische, georgische, armenische und usbekische Spezialitäten, beliebte Klassiker und moderne Akzente. Für Hochzeiten, Geburtstage, Jubiläen und jede besondere Feier.</p>
+      <div class="chero__nums">
+        <span><b data-to="61">0</b>Gerichte zur Auswahl</span>
+        <span><b data-to="5">0</b>Gänge</span>
+        <span><b data-to="19">0</b>Favoriten wählen Sie</span>
+      </div>
+      <div class="chero__btns">
+        <a class="line-btn" href="#baukasten">Buffet zusammenstellen</a>
+        <a class="line-btn line-btn--quiet" href="tel:+4920393577235">Jetzt anrufen</a>
+      </div>
+    </div>
+    <div class="scrollhint" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- SO GEHT'S -->
+  <section class="how" aria-label="So funktioniert es">
+    <div class="how__step reveal"><b>1</b><h2>Favoriten wählen</h2><p>Aus jedem Gang tippen Sie Ihre Lieblingsgerichte an.</p></div>
+    <div class="how__step reveal"><b>2</b><h2>Anfrage senden</h2><p>Anlass, Datum und Gäste dazu. Per E-Mail oder Anruf.</p></div>
+    <div class="how__step reveal"><b>3</b><h2>Wir kochen</h2><p>Den Rest besprechen wir persönlich. Sie feiern.</p></div>
+  </section>
+
+  <!-- BAUKASTEN -->
+  <section class="builder" id="baukasten" aria-label="Buffet zusammenstellen">
+    <div class="builder__head">
+      <p class="eyebrow">Ihr Buffet</p>
+      <h2 class="title">Fünf Gänge. Ihre Wahl.</h2>
+      <p>Tippen Sie die Gerichte an, die auf Ihr Buffet sollen. Ihre Auswahl bleibt gespeichert, bis Sie die Anfrage senden.</p>
+    </div>
+    <div class="courses" id="courses"></div>
+  </section>
+
+  <!-- ANFRAGE -->
+  <section class="ask" id="anfrage" aria-label="Anfrage">
+    <div class="ask__inner">
+      <div class="ask__sum">
+        <p class="eyebrow">Ihre Auswahl</p>
+        <h2 class="title">Ihr Festliches Buffet</h2>
+        <div class="ask__list" id="ask-list"><p class="ask__empty">Noch nichts gewählt. Tippen Sie oben Ihre Favoriten an.</p></div>
+      </div>
+      <form class="ask__form" id="ask-form" novalidate>
+        <h3>Anfrage</h3>
+        <label class="field">Anlass
+          <select name="anlass">
+            <option>Hochzeit</option><option>Geburtstag</option><option>Jubiläum</option><option>Firmenfeier</option><option>Weihnachtsfeier</option><option>Taufe / Familienfest</option><option>Etwas anderes</option>
+          </select>
+        </label>
+        <div class="field__row">
+          <label class="field">Datum<input type="date" name="datum"></label>
+          <label class="field">Gäste<input type="number" name="gaeste" min="10" step="1" placeholder="z. B. 80" inputmode="numeric"></label>
+        </div>
+        <button class="line-btn" type="submit">Per E-Mail anfragen</button>
+        <a class="line-btn line-btn--quiet" href="tel:+4920393577235">Lieber anrufen: 0203 93577235</a>
+        <p class="ask__note">Die E-Mail öffnet sich fertig ausgefüllt in Ihrem Mailprogramm. Unverbindlich.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ANLÄSSE -->
+  <section class="marquee" aria-label="Anlässe">
+    <div class="marquee__row"><span>Hochzeiten</span><i>✦</i><span>Geburtstage</span><i>✦</i><span>Jubiläen</span><i>✦</i><span>Firmenfeiern</span><i>✦</i><span>Taufen</span><i>✦</i><span>Hochzeiten</span><i>✦</i><span>Geburtstage</span><i>✦</i><span>Jubiläen</span><i>✦</i><span>Firmenfeiern</span><i>✦</i><span>Taufen</span><i>✦</i></div>
+  </section>
+
+  <!-- GALERIE: echte Fotos -->
+  <section class="gal" id="galerie">
+    <div class="gal__head">
+      <p class="eyebrow">Echte Fotos</p>
+      <h2 class="title">Aus unserer Küche.</h2>
+    </div>
+    <div class="gal__grid">
+      <figure class="gal__item gal__item--w reveal" data-need="foto-buffet-2"><img data-img="foto-buffet-2" alt="Das Buffet mit Platten und Salaten"><figcaption>Das ganze Buffet</figcaption></figure>
+      <figure class="gal__item reveal" data-need="foto-buffet-3"><img data-img="foto-buffet-3" alt="Räucherlachs"><figcaption>Räucherlachs</figcaption></figure>
+      <figure class="gal__item reveal" data-need="foto-buffet-4"><img data-img="foto-buffet-4" alt="Auberginenröllchen"><figcaption>Auberginenröllchen</figcaption></figure>
+      <figure class="gal__item reveal" data-need="foto-buffet-1"><img data-img="foto-buffet-1" alt="Hausgemachte Röllchen"><figcaption>Hausgemachte Röllchen</figcaption></figure>
+      <figure class="gal__item gal__item--w reveal" data-need="foto-buffet-7"><img data-img="foto-buffet-7" alt="Salate und Vorspeisen"><figcaption>Salate</figcaption></figure>
+      <figure class="gal__item reveal" data-need="foto-buffet-6"><img data-img="foto-buffet-6" alt="Calamari und Canapés"><figcaption>Vorspeisen</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- BEWERTUNGEN (Stand 22.11.2026) -->
+  <section class="reviews reviews--compact" id="bewertungen">
+    <p class="eyebrow">Bewertungen</p>
+    <div class="rev__grid">
+      <a class="rev reveal" href="https://maps.google.com/?cid=11130484458952799172" target="_blank" rel="noopener" data-rate="4.6">
+        <span class="rev__src">Google</span>
+        <b class="rev__note" data-to-dec="4.6">4,6</b>
+        <span class="rev__stars" aria-label="4,6 von 5 Sternen"><span class="rev__stars-off">★★★★★</span><span class="rev__stars-on">★★★★★</span></span>
+        <span class="rev__count"><b data-to="489">489</b> Bewertungen</span>
+        <span class="rev__meta">Russisches Restaurant · Stand 22.11.2026</span>
+        <span class="rev__link">Profil ansehen</span>
+      </a>
+    </div>
+    <div class="ticker ticker--g" aria-hidden="true"><div class="ticker__row"><span>Google 4,6 von 5</span><i aria-hidden="true">✦</i><span>489 Bewertungen</span><i aria-hidden="true">✦</i><span>Häufig erwähnt:</span><i aria-hidden="true">✦</i><span>Musik · 55</span><i aria-hidden="true">✦</i><span>Abend · 26</span><i aria-hidden="true">✦</i><span>Buffet · 21</span><i aria-hidden="true">✦</i><span>DJ · 20</span><i aria-hidden="true">✦</i><span>Tanzfläche · 18</span><i aria-hidden="true">✦</i><span>Publikum · 7</span><i aria-hidden="true">✦</i><span>Karaoke · 6</span><i aria-hidden="true">✦</i><span>Schaschlik · 5</span><i aria-hidden="true">✦</i><span>Google 4,6 von 5</span><i aria-hidden="true">✦</i><span>489 Bewertungen</span><i aria-hidden="true">✦</i><span>Häufig erwähnt:</span><i aria-hidden="true">✦</i><span>Musik · 55</span><i aria-hidden="true">✦</i><span>Abend · 26</span><i aria-hidden="true">✦</i><span>Buffet · 21</span><i aria-hidden="true">✦</i><span>DJ · 20</span><i aria-hidden="true">✦</i><span>Tanzfläche · 18</span><i aria-hidden="true">✦</i><span>Publikum · 7</span><i aria-hidden="true">✦</i><span>Karaoke · 6</span><i aria-hidden="true">✦</i><span>Schaschlik · 5</span><i aria-hidden="true">✦</i></div></div>
+  </section>
+
+  <!-- SCHLUSS -->
+  <section class="call">
+    <p class="eyebrow">Ihre Anfrage</p>
+    <h2 class="title">Ein Anruf, und wir planen Ihr Buffet.</h2>
+    <p>Sagen Sie uns Anlass, Datum und Gästezahl. Den Rest besprechen wir persönlich.</p>
+    <a class="call__tel" href="tel:+4920393577235">0203 93577235</a>
+  </section>
+
+</main>
+
+<footer class="foot" id="kontakt">
+  <img class="foot__logo" src="assets/img/logo-gold.svg" alt="Dr. Schiwago" width="180" height="109">
+  <div class="foot__cols">
+    <div><h4>Adresse</h4><p>Düsseldorfer Landstraße 431<br>47259 Duisburg</p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Dr.+Schiwago%2C+D%C3%BCsseldorfer+Landstra%C3%9Fe+431%2C+47259+Duisburg" target="_blank" rel="noopener">Route planen</a></div>
+    <div><h4>Restaurant</h4><p>Jeden Samstag<br>18 bis 02 Uhr</p><a href="index.html">Zur Startseite</a></div>
+    <div><h4>Kontakt</h4><p><a href="tel:+4920393577235">0203 93577235</a><br><a href="mailto:info@drschiwago.de">info@drschiwago.de</a></p></div>
+    <div><h4>Folgen</h4><p><a href="https://www.instagram.com/dr.schiwago_restaurant/" target="_blank" rel="noopener">Instagram</a><br><a href="https://www.tiktok.com/@dr.schiwago_restaurant" target="_blank" rel="noopener">TikTok</a><br><a href="index.html#feiern">Eventlocation mieten</a></p></div>
+  </div>
+  <div class="foot__legal"><a href="https://drschiwago.de/impressum" target="_blank" rel="noopener">Impressum</a><a href="https://drschiwago.de/datenschutz" target="_blank" rel="noopener">Datenschutz</a></div>
+</footer>
+
+<div class="tray" id="tray" aria-live="polite">
+  <div class="tray__info"><b><span data-tray-n>0</span> / 19</b><span>Favoriten gewählt</span></div>
+  <div class="tray__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <a class="line-btn tray__btn" href="#anfrage">Anfrage</a>
+</div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox__x" aria-label="Schließen">×</button>
+  <img alt="">
+  <p class="lightbox__cap"></p>
+</div>
+
+<script src="assets/js/app.js?v=1795730989"></script>
+<script src="assets/js/catering.js?v=1795730989"></script>
+</body>
+</html>
