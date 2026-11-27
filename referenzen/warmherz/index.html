@@ -2,312 +2,273 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WARMHERZ · Heizung & Wärmepumpe in Bielefeld (Demo)</title>
-<meta name="description" content="Demo-Webseite eines fiktiven Familienbetriebs für Wärmepumpen, Heizung und Bad in Bielefeld.">
-<meta name="theme-color" content="#0E0E0E">
-<link rel="preload" href="assets/img/h-luecke.webp" as="image">
-<link rel="stylesheet" href="assets/fonts/fonts2.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1795040489">
-<link rel="stylesheet" href="assets/css/pages.css?v=1795040489">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5B1F'/%3E%3Cpath d='M32 50S14 39 14 26a9 9 0 0 1 18-4 9 9 0 0 1 18 4c0 13-18 24-18 24z' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WARMHERZ · Wo geht Ihre Wärme hin? Heizung & Wärmepumpe Bielefeld (Demo)</title>
+<meta name="description" content="Finden Sie mit der Wärmebild-Linse die Wärmelecks, sehen Sie Ihr Haus im Wärmebild, den Umbau als Film und Ihre Förderung als Thermometer. Demo von PROJEKT EX.">
+<meta name="theme-color" content="#121424">
+<link rel="preload" href="assets/fonts/ibm-plex-sans-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" imagesrcset="assets/img/b1-1280.webp 1280w, assets/img/b1-1920.webp 1920w, assets/img/b1-2560.webp 2560w, assets/img/b1-3584.webp 3584w" imagesizes="100vw" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/style.css?v=202611270947">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23fff4c2'/%3E%3Cstop offset='.35' stop-color='%23ffc83d'/%3E%3Cstop offset='.65' stop-color='%23ff6a00'/%3E%3Cstop offset='1' stop-color='%233b1a8a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='15' fill='url(%23g)'/%3E%3C/svg%3E">
 </head>
-<body data-page="start">
-
-<div class="demo-bar">Demo von PROJEKT EX · WARMHERZ ist eine erfundene Firma · alle Personen, Zahlen und Stimmen sind Beispiele</div>
-
-<header class="nav" id="nav">
-  <a href="index.html" class="logo" aria-label="WARMHERZ Startseite">
-    <span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span>
-    <span>Warmherz</span>
-  </a>
-  <nav class="links" aria-label="Hauptmenü">
-    <div class="dd">
-      <button class="dd-btn" aria-expanded="false" data-key="leistungen">Leistungen <span aria-hidden="true">▾</span></button>
-      <div class="dd-menu">
-        <a href="waermepumpe.html" data-key="waermepumpe"><b>Wärmepumpe</b><small>Luft, Erde oder Hybrid</small></a>
-        <a href="heizungstausch.html" data-key="heizungstausch"><b>Heizungstausch</b><small>Öl und Gas raus, 2–3 Tage</small></a>
-        <a href="fussbodenheizung.html" data-key="fussbodenheizung"><b>Fußbodenheizung</b><small>auch nachträglich gefräst</small></a>
-        <a href="bad.html" data-key="bad"><b>Bad</b><small>vom Gäste-WC bis barrierefrei</small></a>
-        <a href="wartung.html" data-key="wartung"><b>Wartung & Notdienst</b><small>im Winter 24/7</small></a>
-      </div>
-    </div>
-    <a href="foerderung.html" data-key="foerderung">Förderung</a>
-    <a href="foto-check.html" data-key="foto-check" class="nav-foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>Foto-Check</a>
-    <a href="ablauf.html" data-key="ablauf">So läuft's ab</a>
-    <a href="jobs.html" data-key="jobs">Jobs</a>
-    <a href="ueber-uns.html" data-key="ueber-uns">Über uns</a>
-    <a href="kontakt.html" data-key="kontakt">Kontakt</a>
+<body class="start">
+<header class="kopf">
+  <a class="marke" href="index.html"><i></i>WARMHERZ</a>
+  <nav aria-label="Hauptmenü">
+    <a href="thermografie.html">Wärmebild</a>
+    <a href="waermepumpe.html">Wärmepumpe</a>
+    <a class="lang" href="heizungstausch.html">Heizungstausch</a>
+    <a href="foerderung.html">Förderung</a>
+    <a class="lang" href="index.html#k8">Bewertungen</a>
+    <a href="jobs.html">Jobs</a>
+    <a class="btn" href="foto-check.html">Foto-Check</a>
   </nav>
-  <a href="tel:+495210000000" class="nav-call">0521 000 00 00</a>
-  <a href="foerderung.html" class="chip-count" aria-label="Bis zu 22.400 Euro Zuschuss sichern, Förderung sinkt am 1. Februar"><span class="dot"></span><span class="chip-txt"><b><span class="lbl-long">Bis zu </span>22.400 € Zuschuss<span class="lbl-long"> sichern</span></b><small class="lbl-long">nur noch <span data-days>–</span> Tage, dann gibt es weniger</small></span></a>
-  <button class="burger" aria-label="Menü öffnen" aria-expanded="false"><i></i><i></i></button>
+  <button class="burger" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
 </header>
+<div class="menue" role="dialog" aria-label="Menü">
+  <button class="zu" aria-label="Menü schließen">×</button>
+  <a href="index.html">Start</a>
+  <a href="thermografie.html">Wärmebild-Check</a>
+  <a href="heizungstausch.html">Heizungstausch</a>
+  <a href="heizlast.html">Heizlast</a>
+  <a href="ablauf.html">Ablauf</a>
+  <a href="waermepumpe.html">Wärmepumpe</a>
+  <a href="foerderung.html">Förderung</a>
+  <a href="fussbodenheizung.html">Fußbodenheizung</a>
+  <a href="wartung.html">Wartung &amp; Notdienst</a>
+  <a href="index.html#k8">Bewertungen</a>
+  <a href="jobs.html">Jobs &amp; Ausbildung</a>
+  <a href="foto-check.html">Foto-Check</a>
+</div>
+<aside class="skala" aria-label="Kapitel nach Temperatur">
+  <span class="lbl">+40°</span>
+  <div class="bar"><div class="zeiger"><span class="grad">−10°</span></div></div>
+  <span class="lbl">−10°</span>
+</aside>
+
+<div class="buehne" aria-hidden="true">
+  <div class="szene" data-k="k1" data-lecks='[{"x":75,"y":40,"name":"Dach & Traufe","wert":"15–20 %"},{"x":72,"y":57,"name":"Fenster","wert":"20–25 %"},{"x":54,"y":28,"name":"Rollladenkasten","wert":"Wärmebrücke"},{"x":44,"y":62,"name":"Haustür & Laibung","wert":"Wärmebrücke"},{"x":72,"y":77,"name":"Sockel & Keller","wert":"5–11 %"}]'>
+    <img class="foto" src="assets/img/b1-1280.webp" srcset="assets/img/b1-1280.webp 1280w, assets/img/b1-1920.webp 1920w, assets/img/b1-2560.webp 2560w, assets/img/b1-3584.webp 3584w" sizes="100vw" alt="" fetchpriority="high" loading="eager"><img class="waerme" src="assets/img/b1t-1280.webp" srcset="assets/img/b1t-1280.webp 1280w, assets/img/b1t-1920.webp 1920w, assets/img/b1t-2560.webp 2560w, assets/img/b1t-3584.webp 3584w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="szene" data-k="k2" data-push><img class="foto" src="assets/img/b2-1280.webp" srcset="assets/img/b2-1280.webp 1280w, assets/img/b2-1920.webp 1920w, assets/img/b2-2560.webp 2560w" sizes="100vw" alt="" loading="lazy" decoding="async"></div>
+  <div class="szene wisch" data-k="k3"><img class="foto" src="assets/img/b3-1280.webp" srcset="assets/img/b3-1280.webp 1280w, assets/img/b3-1920.webp 1920w, assets/img/b3-2560.webp 2560w, assets/img/b3-3584.webp 3584w" sizes="100vw" alt="" loading="lazy" decoding="async"><img class="waerme" src="assets/img/b3t-1280.webp" srcset="assets/img/b3t-1280.webp 1280w, assets/img/b3t-1920.webp 1920w, assets/img/b3t-2560.webp 2560w, assets/img/b3t-3584.webp 3584w" sizes="100vw" alt="" loading="lazy" decoding="async"><i class="kante"></i></div>
+  <div class="szene flach" data-k="k4"><div class="flaeche raster-bg"></div></div>
+  <div class="szene ohne-verlauf" data-k="k5"><video class="foto" muted playsinline preload="auto" poster="assets/img/b3-1280.webp" data-gross="assets/video/f1.mp4?v=202611270947" data-klein="assets/video/f1-m.mp4?v=202611270947"><source src="assets/video/f1-m.mp4?v=202611270947" media="(max-width: 800px)"><source src="assets/video/f1.mp4?v=202611270947"></video></div>
+  <div class="szene" data-k="k6" data-push><video class="foto" muted playsinline preload="auto" poster="assets/img/b6-1280.webp" data-gross="assets/video/f3.mp4?v=202611270947" data-klein="assets/video/f3-m.mp4?v=202611270947"><source src="assets/video/f3-m.mp4?v=202611270947" media="(max-width: 800px)"><source src="assets/video/f3.mp4?v=202611270947"></video></div>
+  <div class="szene flach" data-k="kf"><div class="flaeche glut"></div></div>
+  <div class="szene teilung" data-k="k7"><img class="foto" src="assets/img/b7-1280.webp" srcset="assets/img/b7-1280.webp 1280w, assets/img/b7-1920.webp 1920w, assets/img/b7-2560.webp 2560w, assets/img/b7-3584.webp 3584w" sizes="100vw" alt="" loading="lazy" decoding="async"><img class="waerme" src="assets/img/b7t-1280.webp" srcset="assets/img/b7t-1280.webp 1280w, assets/img/b7t-1920.webp 1920w, assets/img/b7t-2560.webp 2560w, assets/img/b7t-3584.webp 3584w" sizes="100vw" alt="" loading="lazy" decoding="async"><div class="teiler"><b>⟷</b></div><span class="tag-l">Foto</span><span class="tag-r">Wärmebild</span></div>
+  <div class="szene" data-k="k8"><video class="foto" muted playsinline loop autoplay preload="metadata" poster="assets/img/b8-1280.webp"><source src="assets/video/f2-m.mp4?v=202611270947" media="(max-width: 800px)"><source src="assets/video/f2.mp4?v=202611270947"></video></div>
+</div>
+<div class="linse" aria-hidden="true"><b></b></div>
+<div class="linse-tipp">Wärmebild-Linse: über das Haus fahren</div>
 
 <main>
-<!-- ============ HERO ============ -->
-<section class="hero" id="top">
-  <div class="hero-media">
-    <img src="assets/img/h-luecke.webp" alt="Das WARMHERZ-Team steht eng zusammen, Lukas hält den Arm um einen freien Platz" class="hero-img" fetchpriority="high">
-    <div class="hero-shade"></div>
-    <div class="heat" aria-hidden="true"></div>
-
-    <button class="person" data-fx="18.5" data-fy="27" data-name="Heinz, 61" data-role="Meister & Inhaber" data-quote="Seit 1987 machen wir Bielefeld warm."></button>
-    <button class="person" data-fx="29.5" data-fy="33" data-name="Lea, 19" data-role="Azubi, 2. Lehrjahr" data-quote="Ich wollte nie ins Büro."></button>
-    <button class="person" data-fx="40" data-fy="26" data-name="Lukas, 31" data-role="Monteur seit 2019" data-quote="Am liebsten Altbauten. Da sieht man den Unterschied."></button>
-    <button class="person" data-fx="64.5" data-fy="30" data-name="Murat, 38" data-role="Kundendienst" data-quote="Samstags auch. Wenn's kalt ist, ist's kalt."></button>
-    <button class="person" data-fx="75.5" data-fy="36" data-name="Sabine, 45" data-role="Büro & Termine" data-quote="Ich sorge dafür, dass Lukas pünktlich klingelt."></button>
-    <button class="person" data-fx="84.5" data-fy="27" data-name="Finn, 26" data-role="Monteur" data-quote="Wärmepumpe, Bad, Fußboden: hier lernst du alles."></button>
-
-    <a href="jobs.html" class="spot" data-fx="52" data-fy="45" aria-label="Hier ist ein Platz frei. Zu den Jobs">
-      <span class="spot-tag">Dein Platz<small>Wir suchen 2 Monteure →</small></span>
-      <span class="spot-ring"></span>
-    </a>
-    <div class="person-card" role="status" aria-live="polite"><small></small><b></b><span></span></div>
-  </div>
-
-  <div class="hero-copy">
-    <div>
-      <p class="kicker">Familienbetrieb seit 1987 · Bielefeld</p>
-      <h1 class="split">Wir machen<br>Bielefeld <em>warm.</em></h1>
-      <p class="lead">Wärmepumpen, Heizung und Bad. Von sechs Leuten, die Sie mit Namen kennen.</p>
-    </div>
-    <div class="ctas">
-      <a href="foerderung.html" class="btn acc">Zuschuss berechnen <span>→</span></a>
-      <a href="jobs.html" class="btn line">Jobs bei uns <span>→</span></a>
-      <a href="foto-check.html" class="hero-foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg><span>Heizung macht Probleme? <b>3 Fotos schicken →</b></span></a>
-    </div>
-    <div class="rating-chips">
-  <a href="index.html#bewertungen" class="rchip"><span class="src-mark g" aria-hidden="true">G</span><b>4,9</b><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>127 Google-Bewertungen</span></a>
-  <a href="index.html#bewertungen" class="rchip"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><b>4,8</b><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>86 auf Trustpilot</span></a>
-</div>
-  </div>
-  <div class="scroll-hint" aria-hidden="true">Scrollen</div>
-</section>
-
-<!-- ============ COUNTDOWN-BAND ============ -->
-<section class="band" id="countdown" aria-label="Förder-Countdown">
-  <div class="band-inner">
-    <div class="band-count">
-      <div><b data-cd="d">00</b><small>Tage</small></div>
-      <div><b data-cd="h">00</b><small>Std</small></div>
-      <div><b data-cd="m">00</b><small>Min</small></div>
-      <div><b data-cd="s">00</b><small>Sek</small></div>
-    </div>
-    <p class="band-text">bis der <b>Förderbonus sinkt</b>. Am 1. Februar 2027 fällt der Klimageschwindigkeits&shy;bonus von 16 auf 12 Prozent.</p>
-    <a href="foerderung.html" class="btn dark">Meinen Zuschuss ausrechnen <span>→</span></a>
-  </div>
-  <div class="marquee" aria-hidden="true"><div class="track">
-    <span>Wärmepumpe</span><span>●</span><span>Heizungstausch</span><span>●</span><span>Fußbodenheizung</span><span>●</span><span>Bad</span><span>●</span><span>Wartung</span><span>●</span><span>Notdienst 24/7</span><span>●</span><span>Förderanträge</span><span>●</span>
-    <span>Wärmepumpe</span><span>●</span><span>Heizungstausch</span><span>●</span><span>Fußbodenheizung</span><span>●</span><span>Bad</span><span>●</span><span>Wartung</span><span>●</span><span>Notdienst 24/7</span><span>●</span><span>Förderanträge</span><span>●</span>
-  </div></div>
-</section>
-
-<!-- ============ FOTO-CHECK (TEASER) ============ -->
-<section class="check" id="foto-check-kurz">
-  <div class="wrap check-grid">
-    <div>
-      <p class="kicker">Foto-Check</p>
-      <h2 class="reveal">3 Fotos schicken. <em>Wir wissen sofort Bescheid.</em></h2>
-      <p class="sub">Heizung macht Probleme, Fleck an der Decke, neue Heizung geplant? Schicken Sie 3 bis 5 Fotos und zwei Sätze. Wir sehen sofort, was los ist, und bringen gleich das passende Teil mit.</p>
-      <ul class="steps"><li><b>1</b>Thema wählen</li><li><b>2</b>3 bis 5 Fotos machen</li><li><b>3</b>Abschicken, wir melden uns heute</li></ul>
-      <div class="dayvid-ctas"><a href="foto-check.html" class="btn dark">Zum Foto-Check <span>→</span></a></div>
-    </div>
-    <div class="phone">
-      <div class="phone-in">
-        <div class="ph-head"><b>Foto-Check</b><small>WARMHERZ</small></div>
-        <div class="slot filled" style="background-image:url(assets/img/keller-vorher.webp)"><span class="slot-ph"><i>✓</i>Heizraum</span></div>
-        <div class="slot"><span class="slot-ph"><i>+</i>Typenschild</span></div>
-        <div class="slot"><span class="slot-ph"><i>+</i>Heizkörper</span></div>
-        <a href="foto-check.html" class="btn acc full">Weiter <span>→</span></a>
+  <!-- K1 · Einstieg: die Linse als Spiel -->
+  <section class="kap buehne-greif" id="k1" data-szene="k1" data-temp="-10" data-name="Wärmelecks" data-ueber="zoom" data-zoom="72,57">
+    <div class="text">
+      <p class="mono gelb hero-rein">Wärmebild · Bielefeld · −10 °C</p>
+      <h1 class="hero-rein">Wo geht Ihre <span class="gelb">Wärme</span> hin?</h1>
+      <p class="hero-rein">Fahren Sie mit der Linse über das Haus. Fünf Stellen verraten sich.</p>
+      <div class="hero-rein leck-box">
+        <div class="lecks"><i></i><i></i><i></i><i></i><i></i><span><b data-leck-zahl>0</b>/5 gefunden</span></div>
+        <div class="leck-chips" aria-live="polite"></div>
+        <p class="alle-lecks" hidden><a class="btn" href="thermografie.html">Alle gefunden · Wärmebild-Check buchen</a></p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ VON −10 °C AUF 21 °C (SCROLL-VIDEO) ============ -->
-<section class="wf" id="warm" aria-label="Von minus 10 Grad draußen auf 21 Grad drinnen">
-  <div class="wf-pin">
-    <canvas class="wf-canvas" data-seq data-frames="122" data-path="assets/seq/f_" aria-hidden="true"></canvas>
-    <img class="wf-still" src="assets/img/ff-garten.webp" alt="Wärmepumpe im verschneiten Garten vor dem warm erleuchteten Wohnzimmer" data-seq-still>
-    <div class="wf-shade"></div>
-    <div class="wf-ui">
-      <p class="kicker">Von draußen nach drinnen</p>
-      <div class="wf-temp"><b data-wf-temp>−10</b><span>°C</span></div>
-      <div class="wf-bar"><i data-wf-bar></i></div>
-      <div class="wf-caps">
-        <p class="wf-cap" data-from="0" data-to=".26"><b>Draußen −10 °C.</b> Die Wärmepumpe holt trotzdem Wärme aus der Luft.</p>
-        <p class="wf-cap" data-from=".26" data-to=".52"><b>1 Teil Strom, 3 bis 4 Teile Wärme.</b> Leise, ohne Öl, ohne Gas.</p>
-        <p class="wf-cap" data-from=".52" data-to=".78"><b>Drinnen verteilt sie sich.</b> Über den Boden und die Heizkörper.</p>
-        <p class="wf-cap" data-from=".78" data-to="1.01"><b>21 °C. Überall.</b> Und bis zu 22.400 € Zuschuss.</p>
+  <!-- K2 · Wir messen zuerst: Fahrt auf die Kamera, Fakten fliegen rein -->
+  <section class="kap" id="k2" data-szene="k2" data-temp="-6" data-name="Messen" data-ueber="zoom" data-zoom="52,40" style="min-height:220vh">
+    <div class="text klebt">
+      <p class="mono gelb">Wir messen zuerst</p>
+      <h2>Erst das Wärmebild.<br>Dann die Heizung.</h2>
+      <div class="fakten-flug">
+        <div data-ab="0.12-2"><b>&lt; 5 °C</b><span>draußen, abends</span></div>
+        <div data-ab="0.32-2"><b>45 min</b><span>Rundgang mit Kamera</span></div>
+        <div data-ab="0.52-2"><b>1 Bericht</b><span>mit allen Bildern</span></div>
       </div>
-      <a href="foerderung.html" class="btn acc wf-cta">Meinen Zuschuss berechnen <span>→</span></a>
+      <a class="mehr" href="thermografie.html">So läuft der Wärmebild-Check →</a>
     </div>
-    <div class="wf-hint" aria-hidden="true">Scrollen</div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ LEISTUNGEN (TEASER) ============ -->
-<section class="sec light" id="leistungen">
-  <div class="wrap">
-    <div class="sec-head"><div><p class="kicker">Was wir machen</p><h2 class="reveal">Alles, was Ihr Haus <em>warm</em> macht.</h2></div>
-    <p class="sub reveal">Ein Team, ein Ansprechpartner, ein Termin. Wählen Sie, worum es bei Ihnen geht.</p></div>
-    <div class="cards">
-      <a href="waermepumpe.html" class="card"><div class="card-img"><img src="assets/img/lukas.webp" alt="Monteur Lukas an einer Wärmepumpe" loading="lazy"></div><h3>Wärmepumpe</h3><p>Luft, Erde oder Hybrid. Raumweise berechnet, nicht nach Gefühl.</p><span class="more">Mehr erfahren →</span></a>
-      <a href="heizungstausch.html" class="card"><div class="card-img"><img src="assets/img/keller-nachher.webp" alt="Technikraum nach dem Heizungstausch" loading="lazy"></div><h3>Heizungstausch</h3><p>Öl oder Gas raus, neue Technik rein. Meist in 2–3 Tagen.</p><span class="more">Mehr erfahren →</span></a>
-      <a href="fussbodenheizung.html" class="card"><div class="card-img"><img src="assets/img/p-fussboden.webp" alt="Fußbodenheizung wird in den Estrich gefräst" loading="lazy"></div><h3>Fußbodenheizung</h3><p>Auch nachträglich: gefräst in den alten Estrich.</p><span class="more">Mehr erfahren →</span></a>
-      <a href="bad.html" class="card"><div class="card-img"><img src="assets/img/p-bad.webp" alt="Neues Bad mit bodengleicher Dusche" loading="lazy"></div><h3>Bad</h3><p>Vom Gäste-WC bis zum barrierefreien Bad, mit festem Endtermin.</p><span class="more">Mehr erfahren →</span></a>
-      <a href="wartung.html" class="card"><div class="card-img"><img src="assets/img/p-wartung.webp" alt="Murat wartet eine Wärmepumpe im Schnee" loading="lazy"></div><h3>Wartung & Notdienst</h3><p>Jährliche Wartung und im Winter rund um die Uhr erreichbar.</p><span class="more">Mehr erfahren →</span></a>
-      <a href="foerderung.html" class="card"><div class="card-img"><img src="assets/img/display.webp" alt="Lukas erklärt die neue Wärmepumpe" loading="lazy"></div><h3>Förderung</h3><p>Bis zu 70 % Zuschuss. Wir rechnen aus und stellen den Antrag mit Ihnen.</p><span class="more">Zuschuss berechnen →</span></a>
+  <!-- K3 · Vorher: Regler = Zeitmaschine, das Wärmebild wischt mit dem Alter über den Keller -->
+  <section class="kap" id="k3" data-szene="k3" data-temp="-2" data-name="Vorher" data-ueber="wisch">
+    <div class="text klebt">
+      <p class="mono gelb">Vorher · Ihr Heizkeller</p>
+      <h2 class="rein">Der Keller heizt mit.<br>Leider nur sich selbst.</h2>
+      <div class="alter rein">
+        <label for="heiz-bj">Wann wurde Ihre Heizung eingebaut?</label>
+        <output id="heiz-alt">25 Jahre</output>
+        <input id="heiz-bj" type="range" min="1980" max="2025" value="2001">
+        <div class="jahre"><span>1980</span><span id="heiz-jahr">2001</span><span>2025</span></div>
+        <p id="heiz-msg"></p>
+      </div>
+      <p class="quelle">Schornsteinfeger-Erhebung 2025 (ZIV): über 86 % der Öl- und rund 66 % der Gaskessel ohne Brennwert sind älter als 20 Jahre.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ FÖRDERUNG (TEASER) ============ -->
-<section class="sec" id="foerderung-kurz">
-  <div class="wrap duo">
-    <div>
-      <p class="kicker">Förderung</p>
-      <h2 class="reveal">Bis zu <em>80 %</em> zahlt der Staat.</h2>
-      <p class="sub">Grundförderung, Klimabonus und Einkommensbonus: Wir rechnen Ihren Zuschuss in einer Minute aus und stellen den Antrag mit Ihnen. Aber nicht mehr lange zum heutigen Satz.</p>
-      <ul class="checks"><li>Zuschuss in Euro, sofort im Rechner</li><li>Antrag füllen wir gemeinsam aus</li><li>Ab 1. Februar 2027 sinkt der Klimabonus</li></ul>
-      <div class="dayvid-ctas"><a href="foerderung.html" class="btn acc">Meinen Zuschuss berechnen <span>→</span></a></div>
+  <!-- K4 · Heizlast: Ihr Haus als Wärmebild-Grafik, Regler ändern Farben und Wärmeströme sofort -->
+  <section class="kap haus-kap" id="k4" data-szene="k4" data-temp="4" data-name="Heizlast" data-ueber="fade">
+    <div class="haus-buehne">
+      <div class="haus-steuer">
+        <p class="mono gelb">Heizlast</p>
+        <h2 class="rein">Wie viel Wärme braucht Ihr Haus?</h2>
+        <div class="feld"><label for="hl-flaeche">Wohnfläche <output id="hl-flaeche-out">140 m²</output></label><input id="hl-flaeche" type="range" min="80" max="260" step="5" value="140"></div>
+        <div class="feld"><label>Baujahr</label><div class="wahl" id="hl-bj"><button data-v="1977" aria-pressed="true">bis 1977</button><button data-v="1994" aria-pressed="false">1978–94</button><button data-v="2001" aria-pressed="false">1995–2001</button><button data-v="2015" aria-pressed="false">2002–15</button><button data-v="neu" aria-pressed="false">ab 2016</button></div></div>
+        <div class="feld"><label>Gedämmt, neue Fenster?</label><div class="wahl" id="hl-san"><button data-v="0" aria-pressed="true">nein</button><button data-v="1" aria-pressed="false">ja</button></div></div>
+        <div class="hl-ergebnis"><span class="ergebnis" id="hl-kw">0 kW</span><span class="mono" id="hl-wm2"></span></div>
+        <p class="quelle">Richtwerte je Baualter, ersetzt keine Heizlastberechnung nach DIN EN 12831.</p><a class="mehr" href="heizlast.html">Warum die Heizlast alles entscheidet →</a>
+      </div>
+      <figure class="haus" id="heizlast" aria-label="Ihr Haus als Wärmebild-Grafik">
+        <canvas class="haus-ströme"></canvas>
+        <svg viewBox="0 0 600 560" role="img" aria-label="Haus mit Räumen, eingefärbt nach Wärmebedarf">
+          <g class="raeume">
+            <g class="raum" data-a=".13" data-v="-.05"><rect x="70" y="230" width="140" height="120"/><text x="140" y="282">Schlafen</text><text class="w" x="140" y="314"></text></g>
+            <g class="raum" data-a=".12" data-v="0"><rect x="210" y="230" width="120" height="120"/><text x="270" y="282">Kind 1</text><text class="w" x="270" y="314"></text></g>
+            <g class="raum" data-a=".12" data-v="0"><rect x="330" y="230" width="110" height="120"/><text x="385" y="282">Kind 2</text><text class="w" x="385" y="314"></text></g>
+            <g class="raum" data-a=".10" data-v=".1"><rect x="440" y="230" width="90" height="120"/><text x="485" y="282">Bad</text><text class="w" x="485" y="314"></text></g>
+            <g class="raum" data-a=".30" data-v=".04"><rect x="70" y="350" width="220" height="120"/><text x="180" y="402">Wohnen</text><text class="w" x="180" y="434"></text></g>
+            <g class="raum" data-a=".12" data-v="0"><rect x="290" y="350" width="130" height="120"/><text x="355" y="402">Küche</text><text class="w" x="355" y="434"></text></g>
+            <g class="raum" data-a=".11" data-v="-.12"><rect x="420" y="350" width="110" height="120"/><text x="475" y="402">Flur</text><text class="w" x="475" y="434"></text></g>
+          </g>
+          <g class="linien">
+            <path pathLength="1" d="M30 230 L300 50 L570 230 Z"/>
+            <path pathLength="1" d="M70 230 V470 H530 V230"/>
+            <path pathLength="1" d="M70 350 H530 M210 230 V350 M330 230 V350 M440 230 V350 M290 350 V470 M420 350 V470"/>
+            <path pathLength="1" class="boden" d="M0 470 H600"/>
+            <path pathLength="1" class="keller" d="M70 470 V540 H530 V470"/>
+          </g>
+          <text class="keller-t" x="300" y="514">Heizraum</text>
+        </svg>
+      </figure>
     </div>
-    <div class="result">
-      <small>Beispiel: Ölheizung, 32.000 € Kosten, selbst bewohnt</small>
-      <div class="big">12.880 €</div>
-      <div class="later"><div><small>ab 1. Februar 2027</small><b>11.445 €</b></div><div class="loss"><small>Wer wartet, verliert</small><b>− 1.435 €</b></div></div>
-      <p class="fine">Beispielrechnung ohne Gewähr. Verbindlich ist die aktuelle BEG-Richtlinie.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ VORHER / NACHHER ============ -->
-<section class="ba" id="vorher-nachher">
-  <div class="wrap">
-    <p class="kicker">Vorher / Nachher</p>
-    <h2 class="reveal">Aus dem Öltank-Keller wird <em>Platz.</em></h2>
-    <div class="ba-box" data-ba style="--p:50%">
-      <img src="assets/img/keller-nachher.webp" alt="Nachher: heller Technikraum mit Wärmepumpe" loading="lazy">
-      <div class="ba-before"><img src="assets/img/keller-vorher.webp" alt="Vorher: alter Heizungskeller mit Öltank" loading="lazy"></div>
-      <span class="ba-tag l">1990</span><span class="ba-tag r">Heute</span>
-      <input type="range" min="0" max="100" value="50" aria-label="Vorher-Nachher-Regler" data-ba-range>
-      <div class="ba-handle" aria-hidden="true"><span>⟷</span></div>
+  <!-- K5 · Film: Umbau Heizkeller (Vorher → Arbeit → Ergebnis) -->
+  <section class="kap" id="k5" data-szene="k5" data-temp="10" data-name="Umbau" data-film data-ueber="portal" data-anker="58,55" style="min-height:320vh">
+    <div class="text">
+      <p class="mono gelb">Der Umbau</p>
+      <h2>Drei Tage.<br>Ein neuer Keller.</h2>
+      <ol class="film-schritte">
+        <li data-ab="0-0.36"><b>1</b><span>Ausbau</span></li>
+        <li data-ab="0.36-0.55"><b>2</b><span>Raum vorbereiten</span></li>
+        <li data-ab="0.55-0.86"><b>3</b><span>Hydraulik</span></li>
+        <li data-ab="0.86-1.01"><b>4</b><span>Inbetriebnahme</span></li>
+      </ol>
+      <a class="mehr" href="ablauf.html">Der Ablauf Tag für Tag →</a>
     </div>
-    <div class="ba-facts"><div><b>⅓</b><span>Platz im Keller gewonnen</span></div><div><b>0</b><span>Öllieferungen pro Jahr</span></div><div><b>2,5</b><span>Tage Einbau</span></div></div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ BEWERTUNGEN (Google + Trustpilot, Demo) ============ -->
-<section class="sec reviews" id="bewertungen">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><p class="kicker">Bewertungen</p><h2 class="reveal">213 Kunden. <em>4,9 Sterne.</em></h2></div>
-      <div class="rv-score">
-        <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="score"><span class="src-mark g" aria-hidden="true">G</span><div><b>4,9</b><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>127 Bewertungen auf Google</span></div></a>
-        <a href="https://de.trustpilot.com/" target="_blank" rel="noopener" class="score"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><div><b>4,8</b><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>„Hervorragend“ · 86 auf Trustpilot</span></div></a>
+  <!-- K6 · Nachher: Wärmepumpe läuft an (Scroll-Film), Außentemperatur-Regler → Wärme-Blöcke -->
+  <section class="kap" id="k6" data-szene="k6" data-temp="15" data-name="Nachher" data-film data-ueber="fade" style="min-height:240vh">
+    <div class="text klebt">
+      <p class="mono gelb">Nachher · die Wärmepumpe</p>
+      <h2 class="rein">Aus kalter Luft<br>wird warmes Haus.</h2>
+      <div class="cop glas rein" id="wetter">
+        <div class="cop-kopf"><label for="w-regler">Außentemperatur</label><output id="w-temp">−2 °C</output></div>
+        <input id="w-regler" type="range" min="-15" max="15" step="1" value="-2" aria-label="Außentemperatur">
+        <div class="cop-reihe"><span class="strom" title="1 kWh Strom">1 kWh<br>Strom</span><span class="pfeil">→</span><span class="bloecke" id="w-bloecke"></span></div>
+        <p class="cop-satz">ergibt ca. <b class="gelb" id="w-cop">3,4</b> kWh Wärme</p>
+        <p class="quelle"><button class="live" id="w-live" type="button">Bielefeld live</button> <span id="w-stand"></span> Richtwert Luft/Wasser bei 35 °C Vorlauf. Im Bestand gemessen: Jahresarbeitszahl Ø 3,3 (Fraunhofer ISE 2024).</p>
+      </div>
+      <a class="mehr rein" href="waermepumpe.html">Wie die Wärmepumpe aus Kälte Wärme macht →</a>
+    </div>
+  </section>
+
+  <!-- K6b · Förderung als Thermometer -->
+  <section class="kap foerder-kap" id="kfoerder" data-szene="kf" data-temp="18" data-name="Förderung" data-ueber="fade">
+    <div class="foerder-buehne">
+      <div class="foerder-text">
+        <p class="mono gelb">Förderung · KfW 458</p>
+        <h2 class="rein">Bis zu 70 % zahlt der Staat.</h2>
+        <div class="countdown rein" id="countdown"></div>
+        <p class="unter">bis der Bonus am 01.02.2027 von 16 auf 12 % sinkt</p>
+        <div id="foerder" class="foerder-regler">
+          <div class="feld"><label for="fr-kosten">Was kostet Ihre neue Heizung? <output id="fr-kosten-out"></output></label><input id="fr-kosten" type="range" min="15000" max="45000" step="500" value="32000"></div>
+          <div class="feld"><label>Wohnen Sie selbst im Haus?</label><div class="wahl" id="fr-selbst"><button data-v="1" aria-pressed="true">ja</button><button data-v="0" aria-pressed="false">vermietet</button></div></div>
+          <div class="feld"><label>Haushaltseinkommen (zu versteuern)</label><div class="wahl" id="fr-eink"><button data-v="30" aria-pressed="false">bis 30 T€</button><button data-v="40" aria-pressed="false">bis 40 T€</button><button data-v="50" aria-pressed="false">bis 50 T€</button><button data-v="hoch" aria-pressed="true">mehr</button></div></div>
+        </div>
+      </div>
+      <div class="thermo-wrap">
+        <svg class="thermo" viewBox="0 0 160 560" aria-hidden="true">
+          <rect class="rohr" x="52" y="16" width="56" height="440" rx="28"/>
+          <g class="teile"><rect id="th-g" x="60" width="40"/><rect id="th-k" x="60" width="40"/><rect id="th-e" x="60" width="40"/></g>
+          <circle class="kugel" cx="80" cy="490" r="48"/>
+          <g class="striche"></g>
+        </svg>
+        <ul class="thermo-legende" id="fr-teile"></ul>
+        <div class="thermo-zahl"><span class="mono">Zuschuss <span id="fr-satz"></span></span><b class="ergebnis" id="fr-zuschuss"></b></div>
+        <div class="kostenbalken"><i id="fr-bz"></i><span>Ihr Anteil <b id="fr-eigen"></b></span></div>
+      </div>
+      <p class="quelle foerder-quelle">kfw.de/458, Stand 21.07.2026. Förderfähig max. 28.000 € (1. Wohneinheit), Deckel 70 %, bei geringem Einkommen 80 %. Keine Rechts- oder Steuerberatung. <a class="mehr" href="foerderung.html">Alles zur Förderung →</a></p>
+    </div>
+  </section>
+
+  <!-- K7 · 21°: geteiltes Bild, Scrollen oder Ziehen verschiebt die Trennlinie -->
+  <section class="kap teil-kap" id="k7" data-szene="k7" data-temp="21" data-name="21 Grad" data-ueber="fade" style="min-height:220vh">
+    <div class="text klebt">
+      <div class="zahl-gross" data-zaehl="21" data-nach="°">0°</div>
+      <h2 class="rein">Warm bis in die Zehen.</h2>
+      <p class="rein">Fußbodenheizung braucht nur 35 °C Vorlauf. Ziehen Sie die Linie: Der ganze Boden ist gleich warm.</p>
+      <a class="mehr rein" href="fussbodenheizung.html">Fußbodenheizung nachrüsten →</a>
+    </div>
+  </section>
+
+  <!-- K8 · Team / Recruiting + Bewertungen (Film im Hintergrund) -->
+  <section class="kap" id="k8" data-szene="k8" data-temp="30" data-name="Team" style="min-height:230vh">
+    <div class="text" style="max-width:720px">
+      <p class="mono gelb">Das Team</p>
+      <h2 class="rein">Hier fehlt noch jemand.</h2>
+      <div class="kinetik"><span>Ausbildung</span><span>Feste Crew</span><span>Ab 3.400 €*</span><small>* Beispielwert dieser Demo. Ausbildungsvergütung nach SHK-Tarif NRW.</small></div>
+      <div class="glas bewerbung" id="bewerbung">
+        <div style="display:flex;justify-content:space-between;align-items:center"><b>Bewerben in 60 Sekunden</b><span class="uhr">60 s</span></div>
+        <div class="schritt an"><span>Was willst du machen?</span><div class="wahl"><button data-stelle="azubi">Ausbildung</button><button data-stelle="monteur">Monteur/in</button><button data-stelle="quereinstieg">Quereinstieg</button><button data-stelle="kundendienst">Kundendienst</button></div></div>
+        <div class="schritt"><span>Erfahrung?</span><div class="wahl"><button data-erf="0">keine</button><button data-erf="1">1–3 Jahre</button><button data-erf="2">mehr</button></div></div>
+        <div class="schritt"><form style="display:grid;gap:10px"><input type="text" required placeholder="Vorname" aria-label="Vorname"><input type="tel" required placeholder="Handynummer" aria-label="Handynummer"><button class="btn">Abschicken</button></form></div>
+        <div class="schritt"><b class="gelb">Danke. Geschafft in <span id="bw-zeit"></span>.</b><span>Wir rufen dich innerhalb von 24 Stunden zurück. (Demo: nichts wurde gesendet.)</span></div>
+      </div>
+      <a class="mehr" href="jobs.html">Alle Jobs, Lohn und Ausbildung →</a>
+      <div class="glas rein stimmen-box">
+        <span class="mono">Was Kunden sagen</span>
+        <div class="stimmen">
+          <div class="stimme"><p>„Sie kamen mit der Wärmebildkamera, bevor überhaupt über Geräte geredet wurde.“</p><small>Beispiel · noch keine echte Bewertung</small></div>
+          <div class="stimme"><p>„Drei Tage Keller-Baustelle, danach sauberer als vorher.“</p><small>Beispiel · noch keine echte Bewertung</small></div>
+          <div class="stimme"><p>„Der Notdienst war um zwei Uhr nachts da. Bei minus acht Grad.“</p><small>Beispiel · noch keine echte Bewertung</small></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="rv-rows" aria-label="Kundenbewertungen">
-    <div class="rv-row"><div class="rv-track"><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Samstagabend Heizung aus, Murat war in 50 Minuten da. Das Ersatzteil hatte er schon dabei, weil wir vorher ein Foto vom Display geschickt hatten.“</blockquote><figcaption><b>Katrin M.</b> · Bielefeld-Schildesche<span>vor 2 Wochen</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>Trustpilot</span></span></div><blockquote>„Ölkessel raus, Wärmepumpe rein, in vier Tagen. Den Förderantrag hat WARMHERZ komplett für uns gemacht.“</blockquote><figcaption><b>Thomas R.</b> · Gütersloh<span>vor 1 Monat</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Lukas hat uns jeden Abend kurz geschrieben, was gemacht wurde. So stelle ich mir Handwerk vor.“</blockquote><figcaption><b>Sabine K.</b> · Herford<span>vor 3 Wochen</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Fußbodenheizung im Altbau gefräst, an einem Tag und fast ohne Staub. Unglaublich sauber gearbeitet.“</blockquote><figcaption><b>Jens W.</b> · Bielefeld-Mitte<span>vor 2 Monaten</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>Trustpilot</span></span></div><blockquote>„Festpreis im Angebot, Festpreis auf der Rechnung. Keine Überraschungen.“</blockquote><figcaption><b>Familie Özdemir</b> · Bad Salzuflen<span>vor 5 Tagen</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Samstagabend Heizung aus, Murat war in 50 Minuten da. Das Ersatzteil hatte er schon dabei, weil wir vorher ein Foto vom Display geschickt hatten.“</blockquote><figcaption><b>Katrin M.</b> · Bielefeld-Schildesche<span>vor 2 Wochen</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>Trustpilot</span></span></div><blockquote>„Ölkessel raus, Wärmepumpe rein, in vier Tagen. Den Förderantrag hat WARMHERZ komplett für uns gemacht.“</blockquote><figcaption><b>Thomas R.</b> · Gütersloh<span>vor 1 Monat</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Lukas hat uns jeden Abend kurz geschrieben, was gemacht wurde. So stelle ich mir Handwerk vor.“</blockquote><figcaption><b>Sabine K.</b> · Herford<span>vor 3 Wochen</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Fußbodenheizung im Altbau gefräst, an einem Tag und fast ohne Staub. Unglaublich sauber gearbeitet.“</blockquote><figcaption><b>Jens W.</b> · Bielefeld-Mitte<span>vor 2 Monaten</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>Trustpilot</span></span></div><blockquote>„Festpreis im Angebot, Festpreis auf der Rechnung. Keine Überraschungen.“</blockquote><figcaption><b>Familie Özdemir</b> · Bad Salzuflen<span>vor 5 Tagen</span></figcaption></figure></div></div>
-    <div class="rv-row rev"><div class="rv-track"><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>Trustpilot</span></span></div><blockquote>„Bad in neun Werktagen statt der befürchteten sechs Wochen. Ein Ansprechpartner für alles.“</blockquote><figcaption><b>Petra L.</b> · Enger<span>vor 6 Wochen</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Drei Fotos geschickt, am nächsten Morgen war das Angebot da. Der Foto-Check ist genial.“</blockquote><figcaption><b>Markus D.</b> · Halle (Westf.)<span>vor 1 Woche</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Wartungsvertrag Komfort: Die Wärmepumpe meldet sich selbst, wenn etwas ist. Zwei Winter ohne Ausfall.“</blockquote><figcaption><b>Gerd H.</b> · Steinhagen<span>vor 4 Monaten</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>Trustpilot</span></span></div><blockquote>„Freundlich, pünktlich und im Wohnzimmer Schuhe aus. Kleinigkeit, aber man merkt es.“</blockquote><figcaption><b>Anja B.</b> · Bielefeld-Brackwede<span>vor 3 Monaten</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Heinz hat uns ehrlich gesagt, dass sich die Wärmepumpe bei uns erst nach der Dämmung lohnt. Solche Beratung bekommt man selten.“</blockquote><figcaption><b>Ralf S.</b> · Werther<span>vor 2 Wochen</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>Trustpilot</span></span></div><blockquote>„Bad in neun Werktagen statt der befürchteten sechs Wochen. Ein Ansprechpartner für alles.“</blockquote><figcaption><b>Petra L.</b> · Enger<span>vor 6 Wochen</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Drei Fotos geschickt, am nächsten Morgen war das Angebot da. Der Foto-Check ist genial.“</blockquote><figcaption><b>Markus D.</b> · Halle (Westf.)<span>vor 1 Woche</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Wartungsvertrag Komfort: Die Wärmepumpe meldet sich selbst, wenn etwas ist. Zwei Winter ohne Ausfall.“</blockquote><figcaption><b>Gerd H.</b> · Steinhagen<span>vor 4 Monaten</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark tp" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span>Trustpilot</span></span></div><blockquote>„Freundlich, pünktlich und im Wohnzimmer Schuhe aus. Kleinigkeit, aber man merkt es.“</blockquote><figcaption><b>Anja B.</b> · Bielefeld-Brackwede<span>vor 3 Monaten</span></figcaption></figure><figure class="rv"><div class="rv-top"><span class="stars" aria-label="5 von 5 Sternen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></span><span class="rv-src"><span class="src-mark g" aria-hidden="true">G</span><span>Google</span></span></div><blockquote>„Heinz hat uns ehrlich gesagt, dass sich die Wärmepumpe bei uns erst nach der Dämmung lohnt. Solche Beratung bekommt man selten.“</blockquote><figcaption><b>Ralf S.</b> · Werther<span>vor 2 Wochen</span></figcaption></figure></div></div>
-  </div>
-  <div class="wrap rv-foot"><p>Beispielbewertungen für die Demo · echte Bewertungen werden live aus Google und Trustpilot eingebunden.</p>
-    <div class="ctas"><a href="https://www.google.com/maps" target="_blank" rel="noopener" class="btn line">Auf Google bewerten <span>→</span></a><a href="https://de.trustpilot.com/" target="_blank" rel="noopener" class="btn line">Auf Trustpilot lesen <span>→</span></a></div></div>
-</section>
-<!-- ============ JOBS (TEASER) ============ -->
-<section class="platz" id="jobs">
-  <div class="platz-hero">
-    <div class="platz-media">
-      <img src="assets/img/h-stuhl.webp" alt="Das Team sitzt beim Kaffee in der Werkstatt, vorne ein leerer Stuhl mit einer vollen Tasse" class="platz-bg" loading="lazy">
-      <span class="spot" data-fx="52" data-fy="81" aria-hidden="true"><span class="spot-tag">Dein Kaffee wird kalt<small>Der Stuhl ist frei</small></span><span class="spot-ring"></span></span>
-    </div>
-    <div class="platz-shade"></div>
-    <div class="platz-copy">
-      <p class="kicker">Jobs bei WARMHERZ</p>
-      <h2 class="reveal">Hier fehlt noch <em>jemand.</em></h2>
-      <p class="sub">Monteurin, Azubi, Quereinsteiger: Wir suchen Leute, die gern mit den Händen arbeiten und abends sehen wollen, was sie geschafft haben.</p>
-    </div>
-  </div>
+  </section>
 
-  <div class="wrap">
-    <div class="why">
-      <article data-tilt><b>16:30</b><h3>Pünktlich Feierabend</h3><p>Bericht per App auf der Baustelle. Abends kein Papierkram.</p></article>
-      <article data-tilt><b>1.000 €</b><h3>Prämie fürs Werben</h3><p>Bringst du jemanden mit, der bleibt, gibt's 1.000 € extra.</p></article>
-      <article data-tilt><b>100 %</b><h3>Schulung bezahlt</h3><p>Wärmepumpen-Zertifikat, Kältescheine, Meisterkurs: zahlen wir.</p></article>
-      <article data-tilt><b>1</b><h3>Eigener Transporter</h3><p>Für dich allein, nicht ständig wechseln, nicht suchen.</p></article>
-    </div>
-
-    <div class="jobs-ctas">
-      <a href="ausbildung.html" class="btn acc">Ausbildung bei uns <span>→</span></a>
-      <a href="fachkraefte.html" class="btn line">Fachkräfte & Quereinstieg <span>→</span></a>
-      <a href="jobs.html#bewerben" class="btn line">In 60 Sekunden bewerben <span>→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CHEF / NACHFOLGE ============ -->
-<section class="heinz light" id="chef">
-  <div class="wrap heinz-grid">
-    <figure class="heinz-img"><img src="assets/img/heinz.webp" alt="Heinz Brinkmann, Inhaber, in der Werkstatt" loading="lazy"></figure>
-    <div>
-      <p class="kicker">Ein ehrliches Wort vom Chef</p>
-      <blockquote class="reveal">„Ich bin 61. Ich suche jemanden, der das hier mal <em>weiterführt.</em>“</blockquote>
-      <p class="sub">Für unsere Kunden heißt das: WARMHERZ bleibt. Für ehrgeizige Gesellinnen und Gesellen heißt das: Hier kannst du Meister werden, und mehr. Den Meisterkurs bezahlen wir.</p>
-      <div class="sig">Heinz Brinkmann <small>Inhaber, Meister im Installateur- und Heizungsbauerhandwerk</small></div>
-      <div class="actions">
-        <a href="tel:+495210000000" class="btn dark">Heinz anrufen <span>→</span></a>
-        <a href="kontakt.html?thema=nachfolge#kontakt" class="btn acc">Rückruf von Heinz <span>→</span></a>
+  <!-- K9 · Foto-Check: Fotos fliegen ins Handy -->
+  <section class="flaeche-kap" id="k9" data-szene="k8" data-temp="37" data-name="Foto-Check">
+    <div class="raster" style="align-items:center">
+      <div class="s6" style="display:grid;gap:18px">
+        <p class="mono gelb">Zum Schluss · Ihr Haus</p>
+        <h2 class="rein">Foto schicken.<br>Angebot bekommen.</h2>
+        <p class="rein">3 bis 5 Fotos reichen. Ohne Termin.</p>
+        <div class="zeile" style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="foto-check.html">Foto-Check starten</a><a class="btn leer" href="tel:+495210000000">Notdienst 24/7</a></div>
+      </div>
+      <div class="s6 flug-feld">
+        <div class="flug f1"><img src="assets/img/b3-1280.webp" srcset="assets/img/b3-1280.webp 1280w, assets/img/b3-1920.webp 1920w, assets/img/b3-2560.webp 2560w, assets/img/b3-3584.webp 3584w" sizes="(max-width:900px) 100vw, 50vw" alt="Foto vom Heizkeller" loading="lazy" decoding="async"><span>Heizkeller</span></div>
+        <div class="flug f2"><img src="assets/img/b1-1280.webp" srcset="assets/img/b1-1280.webp 1280w, assets/img/b1-1920.webp 1920w, assets/img/b1-2560.webp 2560w, assets/img/b1-3584.webp 3584w" sizes="(max-width:900px) 100vw, 50vw" alt="Foto vom Haus" loading="lazy" decoding="async"><span>Haus</span></div>
+        <div class="flug f3"><img src="assets/img/b7-1280.webp" srcset="assets/img/b7-1280.webp 1280w, assets/img/b7-1920.webp 1920w, assets/img/b7-2560.webp 2560w, assets/img/b7-3584.webp 3584w" sizes="(max-width:900px) 100vw, 50vw" alt="Foto vom Wohnzimmer" loading="lazy" decoding="async"><span>Heizkörper</span></div>
+        <div class="handy"><div class="bild"><div class="inhalt"><b>Ihr Vorab-Check</b><div class="handy-fotos"><i></i><i></i><i></i></div><span class="handy-status"><b id="fc-n">0</b>/3 Fotos</span><a class="btn" href="foto-check.html" style="justify-content:center">Senden</a></div></div></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============ INSTAGRAM (Demo-Kanal) ============ -->
-<section class="sec ig-sec" id="instagram">
-  <div class="wrap">
-    <div class="ig-head">
-      <div class="ig-prof">
-        <span class="ig-ava"><span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span></span>
-        <div><p class="kicker">Instagram</p><h2 class="reveal">@warmherz.<em>bielefeld</em></h2>
-          <p class="ig-stats"><b>214</b> Beiträge <b>2.481</b> Follower <b>Baustellen, Team, Vorher/Nachher</b></p></div>
-      </div>
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="btn acc"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" class="f"/></svg>Folgen <span>→</span></a>
-    </div>
-    <div class="ig-grid"><a href="https://www.instagram.com/" target="_blank" rel="noopener" class="ig-tile"><img src="assets/img/keller-nachher.webp" alt="" loading="lazy"><span class="ig-type"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path class="f" d="M10 8.8v6.4l5.2-3.2z"/></svg></span><span class="ig-ov"><span class="ig-like"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg>1.204</span><span class="ig-cap">Vorher: Öltank. Nachher: Platz für die Tischtennisplatte. Keller in Schildesche, 4 Tage.</span></span></a><a href="https://www.instagram.com/" target="_blank" rel="noopener" class="ig-tile"><img src="assets/img/lea.webp" alt="" loading="lazy"><span class="ig-ov"><span class="ig-like"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg>987</span><span class="ig-cap">Lea, 2. Lehrjahr: „Die erste eigene Pressung vergisst man nicht.“</span></span></a><a href="https://www.instagram.com/" target="_blank" rel="noopener" class="ig-tile"><img src="assets/img/transporter.webp" alt="" loading="lazy"><span class="ig-ov"><span class="ig-like"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg>642</span><span class="ig-cap">06:58 Uhr. Die Flotte rollt.</span></span></a><a href="https://www.instagram.com/" target="_blank" rel="noopener" class="ig-tile"><img src="assets/img/team.webp" alt="" loading="lazy"><span class="ig-type"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path class="f" d="M10 8.8v6.4l5.2-3.2z"/></svg></span><span class="ig-ov"><span class="ig-like"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg>1.531</span><span class="ig-cap">Sechs Leute, ein Ziel: Bielefeld warm. Wir suchen Verstärkung, Link in Bio.</span></span></a><a href="https://www.instagram.com/" target="_blank" rel="noopener" class="ig-tile"><img src="assets/img/kaffee.webp" alt="" loading="lazy"><span class="ig-ov"><span class="ig-like"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg>458</span><span class="ig-cap">Erst Kaffee, dann Wärmepumpe.</span></span></a><a href="https://www.instagram.com/" target="_blank" rel="noopener" class="ig-tile"><img src="assets/img/p-fussboden.webp" alt="" loading="lazy"><span class="ig-type"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path class="f" d="M10 8.8v6.4l5.2-3.2z"/></svg></span><span class="ig-ov"><span class="ig-like"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg>873</span><span class="ig-cap">Fräsen statt Estrich raus: Fußbodenheizung an einem Tag.</span></span></a></div>
-    <div class="ig-foot"><span>Auch hier:</span><div class="social"><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf Instagram (Demo)" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" class="f"/></svg></a><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf Facebook (Demo)" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10.5H8v3h2.5V21z"/></svg></a><a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf TikTok (Demo)" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M16.6 3c.4 2.2 1.8 3.6 4 3.8v3c-1.5 0-2.8-.4-4-1.2v6.3a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.1a2.6 2.6 0 1 0 1.7 2.4V3z"/></svg></a><a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf YouTube (Demo)" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="f" d="M10 9.2v5.6l5-2.8z"/></svg></a><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf LinkedIn (Demo)" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M4 9h3.4v11H4zM5.7 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM9.6 9h3.3v1.5c.5-.9 1.6-1.8 3.3-1.8 3.5 0 4.1 2.3 4.1 5.3v6H17v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H9.6z"/></svg></a><a href="https://wa.me/495210000000" target="_blank" rel="noopener" aria-label="WARMHERZ auf WhatsApp (Demo)" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-3.6A8 8 0 1 1 8 19z"/><path class="f" d="M9 8.3c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.5l-.5.6c-.1.1-.2.3 0 .5.5.9 1.4 1.8 2.4 2.3.2.1.4.1.5 0l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.3.2.3.4 0 .5-.2 1.2-.8 1.5-.6.3-1.4.4-2.7-.1-2-.8-3.6-2.6-4.1-3.7-.4-.9-.4-1.9 0-2.6z"/></svg></a></div></div>
-  </div>
-</section>
-<section class="cta-band"><div class="wrap"><h2>Lieber kurz sprechen? <br>Wir gehen ran.</h2><div class="ctas"><a href="tel:+495210000000" class="btn dark">0521 000 00 00 anrufen <span>→</span></a><a href="kontakt.html" class="btn white">Rückruf anfordern <span>→</span></a></div></div></section>
-
+  </section>
 </main>
 
-<a href="foto-check.html" class="fab-foto" aria-label="Foto-Check: 3 Fotos schicken, wir wissen sofort Bescheid">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>
-  <span><b>3 Fotos schicken</b><small>Wir wissen sofort Bescheid</small></span>
-</a>
-
-<footer class="foot">
-  <div class="wrap foot-grid">
-    <div>
-      <a href="index.html" class="logo"><span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span><span>Warmherz</span></a>
-      <p>Heizung · Wärmepumpe · Bad<br>Am Kupferhammer 12 · 33602 Bielefeld (fiktiv)</p>
-      <p class="foot-tel"><a href="tel:+495210000000">0521 000 00 00</a><br><small>Mo–Fr 7–17 Uhr, Sa 8–12 Uhr</small></p>
-      <div class="social"><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf Instagram (Demo)" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" class="f"/></svg></a><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf Facebook (Demo)" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10.5H8v3h2.5V21z"/></svg></a><a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf TikTok (Demo)" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M16.6 3c.4 2.2 1.8 3.6 4 3.8v3c-1.5 0-2.8-.4-4-1.2v6.3a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.1a2.6 2.6 0 1 0 1.7 2.4V3z"/></svg></a><a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf YouTube (Demo)" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="f" d="M10 9.2v5.6l5-2.8z"/></svg></a><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf LinkedIn (Demo)" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M4 9h3.4v11H4zM5.7 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM9.6 9h3.3v1.5c.5-.9 1.6-1.8 3.3-1.8 3.5 0 4.1 2.3 4.1 5.3v6H17v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H9.6z"/></svg></a><a href="https://wa.me/495210000000" target="_blank" rel="noopener" aria-label="WARMHERZ auf WhatsApp (Demo)" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-3.6A8 8 0 1 1 8 19z"/><path class="f" d="M9 8.3c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.5l-.5.6c-.1.1-.2.3 0 .5.5.9 1.4 1.8 2.4 2.3.2.1.4.1.5 0l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.3.2.3.4 0 .5-.2 1.2-.8 1.5-.6.3-1.4.4-2.7-.1-2-.8-3.6-2.6-4.1-3.7-.4-.9-.4-1.9 0-2.6z"/></svg></a></div>
-    </div>
-    <div><b>Leistungen</b><p><a href="waermepumpe.html">Wärmepumpe</a><br><a href="heizungstausch.html">Heizungstausch</a><br><a href="fussbodenheizung.html">Fußbodenheizung</a><br><a href="bad.html">Bad</a><br><a href="wartung.html">Wartung & Notdienst</a></p></div>
-    <div><b>Service</b><p><a href="foerderung.html">Förderrechner</a><br><a href="ablauf.html">So läuft's ab</a><br><a href="foto-check.html">Foto-Check: 3 Fotos schicken</a><br><a href="kontakt.html">Rückruf anfordern</a></p></div>
-    <div><b>WARMHERZ</b><p><a href="ueber-uns.html">Über uns</a><br><a href="jobs.html">Jobs & Ausbildung</a><br><a href="impressum.html">Impressum</a><br><a href="datenschutz.html">Datenschutz</a></p></div>
+<footer class="fuss">
+  <div class="spalten">
+    <div><a class="marke" href="index.html"><i></i>WARMHERZ</a><small>Heizung · Wärmepumpe · Bad. Bielefeld seit 1987.<br>Demo-Webseite von PROJEKT EX, fiktiver Betrieb.</small></div>
+    <div><b>Leistungen</b><a href="thermografie.html">Wärmebild-Check</a><a href="heizungstausch.html">Heizungstausch</a><a href="waermepumpe.html">Wärmepumpe</a><a href="fussbodenheizung.html">Fußbodenheizung</a><a href="wartung.html">Wartung &amp; Notdienst</a></div>
+    <div><b>Planen</b><a href="heizlast.html">Heizlast</a><a href="ablauf.html">Ablauf</a><a href="foerderung.html">Förderung</a><a href="foto-check.html">Foto-Check</a></div>
+    <div><b>Kontakt</b><a href="tel:+495210000000">0521 000 000 (Demo)</a><a href="foto-check.html">Anfrage per Foto</a><a href="jobs.html">Jobs &amp; Ausbildung</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
   </div>
-  <p class="demo-note">Dies ist eine Demo-Webseite von PROJEKT EX. WARMHERZ, alle Personen, Bewertungen, Preise und Gehälter sind erfunden. Förderangaben sind Beispielwerte ohne Gewähr. Eingaben auf dieser Seite werden nicht übertragen.</p>
+  <small>Alle Zahlen zu Förderung und Effizienz mit Stand-Datum und Quelle, ohne Gewähr. Personen, Firma und Bewertungen sind Beispiele dieser Demo.</small>
 </footer>
-
-<script src="assets/js/gsap.min.js?v=1795040489"></script>
-<script src="assets/js/ScrollTrigger.min.js?v=1795040489"></script>
-<script src="assets/js/app.js?v=1795040489"></script>
-<script src="assets/js/pages.js?v=1795040489"></script>
-<script src="assets/js/flow.js?v=1795040489"></script>
-<script src="assets/js/film.js?v=1795040489"></script>
+<div class="demo-hinweis">Demo · fiktiv</div>
+<script src="assets/js/linse.js?v=202611270947" defer></script>
+<script src="assets/js/main.js?v=202611270947" defer></script>
 </body>
 </html>

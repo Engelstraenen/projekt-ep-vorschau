@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ru" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Кейтеринг · Праздничный фуршет от «Доктора Живаго»</title>
+<meta name="description" content="Кейтеринг «Доктора Живаго» в Дуйсбурге: праздничный фуршет из 61 блюда русской, украинской, грузинской, армянской и узбекской кухни в пяти разделах. Соберите любимые блюда для свадьбы, дня рождения или юбилея.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070605">
+<link rel="alternate" hreflang="de" href="https://projektex.de/referenzen/drschiwago/catering.html">
+<link rel="alternate" hreflang="ru" href="https://projektex.de/referenzen/drschiwago/ru/catering.html">
+<link rel="icon" href="https://drschiwago.de/favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/cormorant-garamond-normal-latin.woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/fonts.css?v=1795730989">
+<link rel="stylesheet" href="../assets/css/style.css?v=1795730989">
+<link rel="stylesheet" href="../assets/css/catering.css?v=1795730989">
+<script src="../assets/js/img.js?v=1795730989"></script>
+</head>
+<body class="page-catering">
+
+<header class="nav nav--page" id="nav">
+  <a class="nav__mark nav__mark--logo" href="index.html" aria-label="Angerhof · Доктор Живаго, на главную"><img src="../assets/img/angerhof-logo-weiss.webp?v=1795730989" alt="Angerhof, ресторан и площадка для мероприятий" width="900" height="340"></a>
+  <nav class="nav__links" aria-label="Главное меню">
+    <a href="index.html#buffet">Шведский стол</a>
+    <a href="index.html#abend">Вечер</a>
+    <a href="rundgang.html">Экскурсия</a>
+    <a href="index.html#feiern">Праздники</a>
+    <a href="catering.html" aria-current="page">Кейтеринг</a>
+    <a href="#galerie">Фото</a>
+    <a href="#bewertungen">Отзывы</a>
+    <a href="#kontakt">Контакты</a>
+  </nav>
+  <a class="nav__lang" href="../catering.html" hreflang="de" lang="de" aria-label="Deutsche Version">DE</a>
+  <a class="line-btn nav__cta" href="tel:+4920393577235">0203 93577235</a>
+  <button class="nav__burger" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="chero" data-need="catering">
+    <img class="chero__img" data-img="catering" alt="Празднично накрытый фуршет">
+    <div class="chero__shade" aria-hidden="true"></div>
+    <div class="chero__text">
+      <p class="eyebrow">Кейтеринг от «Доктора Живаго»</p>
+      <h1 class="chero__title">Праздничный фуршет</h1>
+      <p class="chero__lead">Русские, украинские, грузинские, армянские и узбекские блюда, любимая классика и современные акценты. Для свадеб, дней рождения, юбилеев и любых особых праздников.</p>
+      <div class="chero__nums">
+        <span><b data-to="61">0</b>блюд на выбор</span>
+        <span><b data-to="5">0</b>раздела</span>
+        <span><b data-to="19">0</b>любимых блюд выбираете вы</span>
+      </div>
+      <div class="chero__btns">
+        <a class="line-btn" href="#baukasten">Собрать фуршет</a>
+        <a class="line-btn line-btn--quiet" href="tel:+4920393577235">Позвонить</a>
+      </div>
+    </div>
+    <div class="scrollhint" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- SO GEHT'S -->
+  <section class="how" aria-label="Как это работает">
+    <div class="how__step reveal"><b>1</b><h2>Выберите любимое</h2><p>В каждом разделе отметьте любимые блюда.</p></div>
+    <div class="how__step reveal"><b>2</b><h2>Отправьте запрос</h2><p>Добавьте повод, дату и число гостей. По почте или по телефону.</p></div>
+    <div class="how__step reveal"><b>3</b><h2>Мы готовим</h2><p>Остальное обсудим лично. А вы празднуете.</p></div>
+  </section>
+
+  <!-- BAUKASTEN -->
+  <section class="builder" id="baukasten" aria-label="Собрать фуршет">
+    <div class="builder__head">
+      <p class="eyebrow">Ваш фуршет</p>
+      <h2 class="title">Пять разделов. Ваш выбор.</h2>
+      <p>Отметьте блюда, которые должны быть на вашем фуршете. Выбор сохранится, пока вы не отправите запрос.</p>
+    </div>
+    <div class="courses" id="courses"></div>
+  </section>
+
+  <!-- ANFRAGE -->
+  <section class="ask" id="anfrage" aria-label="Запрос">
+    <div class="ask__inner">
+      <div class="ask__sum">
+        <p class="eyebrow">Ваш выбор</p>
+        <h2 class="title">Ваш праздничный фуршет</h2>
+        <div class="ask__list" id="ask-list"><p class="ask__empty">Пока ничего не выбрано. Отметьте любимые блюда выше.</p></div>
+      </div>
+      <form class="ask__form" id="ask-form" novalidate>
+        <h3>Запрос</h3>
+        <label class="field">Повод
+          <select name="anlass">
+            <option>Свадьба</option><option>День рождения</option><option>Юбилей</option><option>Корпоратив</option><option>Новогодний корпоратив</option><option>Крестины / семейный праздник</option><option>Другое</option>
+          </select>
+        </label>
+        <div class="field__row">
+          <label class="field">Дата<input type="date" name="datum"></label>
+          <label class="field">гостей<input type="number" name="gaeste" min="10" step="1" placeholder="например, 80" inputmode="numeric"></label>
+        </div>
+        <button class="line-btn" type="submit">Отправить по почте</button>
+        <a class="line-btn line-btn--quiet" href="tel:+4920393577235">Лучше позвонить: 0203 93577235</a>
+        <p class="ask__note">Письмо откроется заполненным в вашей почтовой программе. Без обязательств.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ANLÄSSE -->
+  <section class="marquee" aria-label="Поводы">
+    <div class="marquee__row"><span>Свадьбы</span><i>✦</i><span>Дни рождения</span><i>✦</i><span>Юбилеи</span><i>✦</i><span>Корпоративы</span><i>✦</i><span>Крестины</span><i>✦</i><span>Свадьбы</span><i>✦</i><span>Дни рождения</span><i>✦</i><span>Юбилеи</span><i>✦</i><span>Корпоративы</span><i>✦</i><span>Крестины</span><i>✦</i></div>
+  </section>
+
+  <!-- GALERIE: echte Fotos -->
+  <section class="gal" id="galerie">
+    <div class="gal__head">
+      <p class="eyebrow">Настоящие фото</p>
+      <h2 class="title">С нашей кухни.</h2>
+    </div>
+    <div class="gal__grid">
+      <figure class="gal__item gal__item--w reveal" data-need="foto-buffet-2"><img data-img="foto-buffet-2" alt="Шведский стол с закусками и салатами"><figcaption>Весь шведский стол</figcaption></figure>
+      <figure class="gal__item reveal" data-need="foto-buffet-3"><img data-img="foto-buffet-3" alt="Копчёный лосось"><figcaption>Копчёный лосось</figcaption></figure>
+      <figure class="gal__item reveal" data-need="foto-buffet-4"><img data-img="foto-buffet-4" alt="Рулетики из баклажанов"><figcaption>Рулетики из баклажанов</figcaption></figure>
+      <figure class="gal__item reveal" data-need="foto-buffet-1"><img data-img="foto-buffet-1" alt="Домашние рулетики"><figcaption>Домашние рулетики</figcaption></figure>
+      <figure class="gal__item gal__item--w reveal" data-need="foto-buffet-7"><img data-img="foto-buffet-7" alt="Салаты и закуски"><figcaption>Салаты</figcaption></figure>
+      <figure class="gal__item reveal" data-need="foto-buffet-6"><img data-img="foto-buffet-6" alt="Кальмары и канапе"><figcaption>Закуски</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- BEWERTUNGEN (Stand 22.11.2026) -->
+  <section class="reviews reviews--compact" id="bewertungen">
+    <p class="eyebrow">Отзывы</p>
+    <div class="rev__grid">
+      <a class="rev reveal" href="https://maps.google.com/?cid=11130484458952799172" target="_blank" rel="noopener" data-rate="4.6">
+        <span class="rev__src">Google</span>
+        <b class="rev__note" data-to-dec="4.6">4,6</b>
+        <span class="rev__stars" aria-label="4,6 из 5 звёзд"><span class="rev__stars-off">★★★★★</span><span class="rev__stars-on">★★★★★</span></span>
+        <span class="rev__count"><b data-to="489">489</b> Отзывы</span>
+        <span class="rev__meta">Русский ресторан · по состоянию на 22.11.2026</span>
+        <span class="rev__link">Открыть профиль</span>
+      </a>
+    </div>
+    <div class="ticker ticker--g" aria-hidden="true"><div class="ticker__row"><span>Google 4,6 из 5</span><i aria-hidden="true">✦</i><span>489 отзывов</span><i aria-hidden="true">✦</i><span>Часто упоминают:</span><i aria-hidden="true">✦</i><span>Музыка · 55</span><i aria-hidden="true">✦</i><span>Вечер · 26</span><i aria-hidden="true">✦</i><span>Шведский стол · 21</span><i aria-hidden="true">✦</i><span>Диджей · 20</span><i aria-hidden="true">✦</i><span>Танцпол · 18</span><i aria-hidden="true">✦</i><span>Публика · 7</span><i aria-hidden="true">✦</i><span>Караоке · 6</span><i aria-hidden="true">✦</i><span>Шашлык · 5</span><i aria-hidden="true">✦</i><span>Google 4,6 из 5</span><i aria-hidden="true">✦</i><span>489 отзывов</span><i aria-hidden="true">✦</i><span>Часто упоминают:</span><i aria-hidden="true">✦</i><span>Музыка · 55</span><i aria-hidden="true">✦</i><span>Вечер · 26</span><i aria-hidden="true">✦</i><span>Шведский стол · 21</span><i aria-hidden="true">✦</i><span>Диджей · 20</span><i aria-hidden="true">✦</i><span>Танцпол · 18</span><i aria-hidden="true">✦</i><span>Публика · 7</span><i aria-hidden="true">✦</i><span>Караоке · 6</span><i aria-hidden="true">✦</i><span>Шашлык · 5</span><i aria-hidden="true">✦</i></div></div>
+  </section>
+
+  <!-- SCHLUSS -->
+  <section class="call">
+    <p class="eyebrow">Ваш запрос</p>
+    <h2 class="title">Один звонок, и мы спланируем ваш фуршет.</h2>
+    <p>Назовите повод, дату и число гостей. Остальное обсудим лично.</p>
+    <a class="call__tel" href="tel:+4920393577235">0203 93577235</a>
+  </section>
+
+</main>
+
+<footer class="foot" id="kontakt">
+  <img class="foot__logo" src="../assets/img/logo-gold.svg" alt="Доктор Живаго" width="180" height="109">
+  <div class="foot__cols">
+    <div><h4>Адрес</h4><p>Düsseldorfer Landstraße 431<br>47259 Duisburg</p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Dr.+Schiwago%2C+D%C3%BCsseldorfer+Landstra%C3%9Fe+431%2C+47259+Duisburg" target="_blank" rel="noopener">Проложить маршрут</a></div>
+    <div><h4>Ресторан</h4><p>Каждую субботу<br>с 18:00 до 02:00</p><a href="index.html">На главную</a></div>
+    <div><h4>Контакты</h4><p><a href="tel:+4920393577235">0203 93577235</a><br><a href="mailto:info@drschiwago.de">info@drschiwago.de</a></p></div>
+    <div><h4>Мы в соцсетях</h4><p><a href="https://www.instagram.com/dr.schiwago_restaurant/" target="_blank" rel="noopener">Instagram</a><br><a href="https://www.tiktok.com/@dr.schiwago_restaurant" target="_blank" rel="noopener">TikTok</a><br><a href="index.html#feiern">Арендовать зал</a></p></div>
+  </div>
+  <div class="foot__legal"><a href="https://drschiwago.de/impressum" target="_blank" rel="noopener">Импрессум</a><a href="https://drschiwago.de/datenschutz" target="_blank" rel="noopener">Защита данных</a></div>
+</footer>
+
+<div class="tray" id="tray" aria-live="polite">
+  <div class="tray__info"><b><span data-tray-n>0</span> / 19</b><span>блюд выбрано</span></div>
+  <div class="tray__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <a class="line-btn tray__btn" href="#anfrage">Запрос</a>
+</div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox__x" aria-label="Закрыть">×</button>
+  <img alt="">
+  <p class="lightbox__cap"></p>
+</div>
+
+<script src="../assets/js/app.js?v=1795730989"></script>
+<script src="../assets/js/catering.js?v=1795730989"></script>
+</body>
+</html>

@@ -2,76 +2,60 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Datenschutz · WARMHERZ (Demo)</title>
-<meta name="description" content="Datenschutzhinweise der Demo-Webseite WARMHERZ.">
-<meta name="theme-color" content="#0E0E0E">
-<link rel="stylesheet" href="assets/fonts/fonts2.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1795040489">
-<link rel="stylesheet" href="assets/css/pages.css?v=1795040489">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5B1F'/%3E%3Cpath d='M32 50S14 39 14 26a9 9 0 0 1 18-4 9 9 0 0 1 18 4c0 13-18 24-18 24z' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="description" content="Datenschutzhinweise der Demo-Webseite.">
+<meta name="theme-color" content="#121424">
+<link rel="preload" href="assets/fonts/ibm-plex-sans-700.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="assets/css/style.css?v=202611270947">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23fff4c2'/%3E%3Cstop offset='.35' stop-color='%23ffc83d'/%3E%3Cstop offset='.65' stop-color='%23ff6a00'/%3E%3Cstop offset='1' stop-color='%233b1a8a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='15' fill='url(%23g)'/%3E%3C/svg%3E">
 </head>
-<body data-page="">
-
-<div class="demo-bar">Demo von PROJEKT EX · WARMHERZ ist eine erfundene Firma · alle Personen, Zahlen und Stimmen sind Beispiele</div>
-
-<header class="nav" id="nav">
-  <a href="index.html" class="logo" aria-label="WARMHERZ Startseite">
-    <span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span>
-    <span>Warmherz</span>
-  </a>
-  <nav class="links" aria-label="Hauptmenü">
-    <div class="dd">
-      <button class="dd-btn" aria-expanded="false" data-key="leistungen">Leistungen <span aria-hidden="true">▾</span></button>
-      <div class="dd-menu">
-        <a href="waermepumpe.html" data-key="waermepumpe"><b>Wärmepumpe</b><small>Luft, Erde oder Hybrid</small></a>
-        <a href="heizungstausch.html" data-key="heizungstausch"><b>Heizungstausch</b><small>Öl und Gas raus, 2–3 Tage</small></a>
-        <a href="fussbodenheizung.html" data-key="fussbodenheizung"><b>Fußbodenheizung</b><small>auch nachträglich gefräst</small></a>
-        <a href="bad.html" data-key="bad"><b>Bad</b><small>vom Gäste-WC bis barrierefrei</small></a>
-        <a href="wartung.html" data-key="wartung"><b>Wartung & Notdienst</b><small>im Winter 24/7</small></a>
-      </div>
-    </div>
-    <a href="foerderung.html" data-key="foerderung">Förderung</a>
-    <a href="foto-check.html" data-key="foto-check" class="nav-foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>Foto-Check</a>
-    <a href="ablauf.html" data-key="ablauf">So läuft's ab</a>
-    <a href="jobs.html" data-key="jobs">Jobs</a>
-    <a href="ueber-uns.html" data-key="ueber-uns">Über uns</a>
-    <a href="kontakt.html" data-key="kontakt">Kontakt</a>
+<body class="unter">
+<header class="kopf">
+  <a class="marke" href="index.html"><i></i>WARMHERZ</a>
+  <nav aria-label="Hauptmenü">
+    <a href="thermografie.html">Wärmebild</a>
+    <a href="waermepumpe.html">Wärmepumpe</a>
+    <a class="lang" href="heizungstausch.html">Heizungstausch</a>
+    <a href="foerderung.html">Förderung</a>
+    <a class="lang" href="index.html#k8">Bewertungen</a>
+    <a href="jobs.html">Jobs</a>
+    <a class="btn" href="foto-check.html">Foto-Check</a>
   </nav>
-  <a href="tel:+495210000000" class="nav-call">0521 000 00 00</a>
-  <a href="foerderung.html" class="chip-count" aria-label="Bis zu 22.400 Euro Zuschuss sichern, Förderung sinkt am 1. Februar"><span class="dot"></span><span class="chip-txt"><b><span class="lbl-long">Bis zu </span>22.400 € Zuschuss<span class="lbl-long"> sichern</span></b><small class="lbl-long">nur noch <span data-days>–</span> Tage, dann gibt es weniger</small></span></a>
-  <button class="burger" aria-label="Menü öffnen" aria-expanded="false"><i></i><i></i></button>
+  <button class="burger" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
 </header>
+<div class="menue" role="dialog" aria-label="Menü">
+  <button class="zu" aria-label="Menü schließen">×</button>
+  <a href="index.html">Start</a>
+  <a href="thermografie.html">Wärmebild-Check</a>
+  <a href="heizungstausch.html">Heizungstausch</a>
+  <a href="heizlast.html">Heizlast</a>
+  <a href="ablauf.html">Ablauf</a>
+  <a href="waermepumpe.html">Wärmepumpe</a>
+  <a href="foerderung.html">Förderung</a>
+  <a href="fussbodenheizung.html">Fußbodenheizung</a>
+  <a href="wartung.html">Wartung &amp; Notdienst</a>
+  <a href="index.html#k8">Bewertungen</a>
+  <a href="jobs.html">Jobs &amp; Ausbildung</a>
+  <a href="foto-check.html">Foto-Check</a>
+</div>
+
 
 <main>
-<section class="sec" style="padding-top:110px"><div class="wrap legal"><div class="crumbs"><a href="index.html">Start</a><span>/</span>Datenschutz</div><h1 style="font-size:clamp(44px,5vw,72px)">Datenschutz</h1><p><b>Diese Demo sendet keine Daten. Für den Besuch dieser Seite gilt die <a href="../../datenschutz.html">Datenschutzerklärung von PROJEKT EX</a>.</b> Formulare, Foto-Check und Bewerbungs-Chat funktionieren nur in Ihrem Browser. Nichts wird gespeichert oder übertragen.</p><h2>Schriften und Skripte</h2><p>Alle Schriften und Skripte liegen auf dem eigenen Server. Es werden keine Google Fonts, keine Analyse-Tools und keine Cookies genutzt.</p><h2>Im echten Betrieb</h2><p>Für einen echten Betrieb erstellen wir eine vollständige Datenschutzerklärung, abgestimmt auf Formulare, Foto-Upload und die Werkakte-App.</p></div></section>
+<section class="u-hero ohne-bild"><div class="text"><a class="zurueck" href="index.html#k1">← Zurück zur Geschichte</a><p class="mono gelb hero-rein">Datenschutz</p><h1 class="hero-rein">Was diese Demo speichert.</h1><p class="hero-rein">Nichts. Formulare und Foto-Check laufen nur in Ihrem Browser, es wird nichts gesendet. Schriften liegen auf diesem Server. Für die Außentemperatur fragt die Seite open-meteo.com nach dem Wetter in Bielefeld, dabei wird Ihre IP-Adresse an open-meteo übertragen.</p></div></section>
 </main>
 
-<a href="foto-check.html" class="fab-foto" aria-label="Foto-Check: 3 Fotos schicken, wir wissen sofort Bescheid">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A2 2 0 0 1 10.2 5h3.6a2 2 0 0 1 1.6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>
-  <span><b>3 Fotos schicken</b><small>Wir wissen sofort Bescheid</small></span>
-</a>
-
-<footer class="foot">
-  <div class="wrap foot-grid">
-    <div>
-      <a href="index.html" class="logo"><span class="logo-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 21 9c0 6.5-9 12-9 12z"/></svg></span><span>Warmherz</span></a>
-      <p>Heizung · Wärmepumpe · Bad<br>Am Kupferhammer 12 · 33602 Bielefeld (fiktiv)</p>
-      <p class="foot-tel"><a href="tel:+495210000000">0521 000 00 00</a><br><small>Mo–Fr 7–17 Uhr, Sa 8–12 Uhr</small></p>
-      <div class="social"><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf Instagram (Demo)" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" class="f"/></svg></a><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf Facebook (Demo)" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10.5H8v3h2.5V21z"/></svg></a><a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf TikTok (Demo)" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M16.6 3c.4 2.2 1.8 3.6 4 3.8v3c-1.5 0-2.8-.4-4-1.2v6.3a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.1a2.6 2.6 0 1 0 1.7 2.4V3z"/></svg></a><a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf YouTube (Demo)" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="f" d="M10 9.2v5.6l5-2.8z"/></svg></a><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="WARMHERZ auf LinkedIn (Demo)" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="f" d="M4 9h3.4v11H4zM5.7 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM9.6 9h3.3v1.5c.5-.9 1.6-1.8 3.3-1.8 3.5 0 4.1 2.3 4.1 5.3v6H17v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H9.6z"/></svg></a><a href="https://wa.me/495210000000" target="_blank" rel="noopener" aria-label="WARMHERZ auf WhatsApp (Demo)" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-3.6A8 8 0 1 1 8 19z"/><path class="f" d="M9 8.3c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.5l-.5.6c-.1.1-.2.3 0 .5.5.9 1.4 1.8 2.4 2.3.2.1.4.1.5 0l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.3.2.3.4 0 .5-.2 1.2-.8 1.5-.6.3-1.4.4-2.7-.1-2-.8-3.6-2.6-4.1-3.7-.4-.9-.4-1.9 0-2.6z"/></svg></a></div>
-    </div>
-    <div><b>Leistungen</b><p><a href="waermepumpe.html">Wärmepumpe</a><br><a href="heizungstausch.html">Heizungstausch</a><br><a href="fussbodenheizung.html">Fußbodenheizung</a><br><a href="bad.html">Bad</a><br><a href="wartung.html">Wartung & Notdienst</a></p></div>
-    <div><b>Service</b><p><a href="foerderung.html">Förderrechner</a><br><a href="ablauf.html">So läuft's ab</a><br><a href="foto-check.html">Foto-Check: 3 Fotos schicken</a><br><a href="kontakt.html">Rückruf anfordern</a></p></div>
-    <div><b>WARMHERZ</b><p><a href="ueber-uns.html">Über uns</a><br><a href="jobs.html">Jobs & Ausbildung</a><br><a href="impressum.html">Impressum</a><br><a href="datenschutz.html">Datenschutz</a></p></div>
+<footer class="fuss">
+  <div class="spalten">
+    <div><a class="marke" href="index.html"><i></i>WARMHERZ</a><small>Heizung · Wärmepumpe · Bad. Bielefeld seit 1987.<br>Demo-Webseite von PROJEKT EX, fiktiver Betrieb.</small></div>
+    <div><b>Leistungen</b><a href="thermografie.html">Wärmebild-Check</a><a href="heizungstausch.html">Heizungstausch</a><a href="waermepumpe.html">Wärmepumpe</a><a href="fussbodenheizung.html">Fußbodenheizung</a><a href="wartung.html">Wartung &amp; Notdienst</a></div>
+    <div><b>Planen</b><a href="heizlast.html">Heizlast</a><a href="ablauf.html">Ablauf</a><a href="foerderung.html">Förderung</a><a href="foto-check.html">Foto-Check</a></div>
+    <div><b>Kontakt</b><a href="tel:+495210000000">0521 000 000 (Demo)</a><a href="foto-check.html">Anfrage per Foto</a><a href="jobs.html">Jobs &amp; Ausbildung</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
   </div>
-  <p class="demo-note">Dies ist eine Demo-Webseite von PROJEKT EX. WARMHERZ, alle Personen, Bewertungen, Preise und Gehälter sind erfunden. Förderangaben sind Beispielwerte ohne Gewähr. Eingaben auf dieser Seite werden nicht übertragen.</p>
+  <small>Alle Zahlen zu Förderung und Effizienz mit Stand-Datum und Quelle, ohne Gewähr. Personen, Firma und Bewertungen sind Beispiele dieser Demo.</small>
 </footer>
-
-<script src="assets/js/gsap.min.js?v=1795040489"></script>
-<script src="assets/js/ScrollTrigger.min.js?v=1795040489"></script>
-<script src="assets/js/app.js?v=1795040489"></script>
-<script src="assets/js/pages.js?v=1795040489"></script>
-<script src="assets/js/flow.js?v=1795040489"></script>
-<script src="assets/js/film.js?v=1795040489"></script>
+<div class="demo-hinweis">Demo · fiktiv</div>
+<script src="assets/js/main.js?v=202611270947" defer></script>
 </body>
 </html>
