@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ein Tag bei uns – ASTREIN Tischlerei</title>
+<meta name="description" content="07:00 bis 16:00 – ein echter Arbeitstag in der Tischlerei ASTREIN. Für alle, die überlegen, bei uns anzufangen.">
+<meta name="theme-color" content="#2a0f14">
+<link rel="stylesheet" href="assets/fonts-lokal/g-d872e269.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+/* Unterseite „Ein Tag bei uns“: gleiche CI wie die Hauptseite (Bordeaux, Creme, Glut-Gold), ein durchgehender Film zum Scrollen */
+#day{height:900vh;position:relative}
+#day .pin{background:var(--bg2)}
+#films{position:absolute;inset:0}
+#films video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+#films video.on{opacity:1}
+.veil{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(var(--bg-rgb),.86),rgba(var(--bg-rgb),.25) 48%,rgba(var(--bg-rgb),0) 70%),linear-gradient(0deg,rgba(var(--bg-rgb),.55),rgba(var(--bg-rgb),0) 35%)}
+.clock{position:absolute;z-index:4;left:var(--gut);top:calc(var(--hdr) + 3vh);max-width:min(640px,46vw)}
+.clock .back{display:inline-flex;align-items:center;min-height:44px;color:var(--cr2);font:500 14px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+.clock .time{font:400 clamp(84px,12vw,190px)/.9 var(--serif);letter-spacing:-.02em;color:var(--cr);font-variant-numeric:tabular-nums;font-variation-settings:"opsz" 144;margin-top:6px}
+.clock .time b{font-weight:400;color:var(--glow)}
+.clock .st{display:grid}
+.clock .st > *{grid-area:1/1}
+.clock .card{opacity:0;transform:translateY(22px);filter:blur(6px);transition:opacity .6s,transform .8s cubic-bezier(.2,.8,.2,1),filter .6s;pointer-events:none}
+.clock .card.on{opacity:1;transform:none;filter:none;pointer-events:auto}
+.clock .card .eyebrow{color:var(--glow);margin-top:18px}
+.clock .card h2{font-size:clamp(32px,3.8vw,58px);margin-top:10px}
+.clock .card p{margin-top:12px;color:var(--cr2);font-size:clamp(16px,1.25vw,19px);max-width:520px}
+.clock .card .fact{display:inline-block;margin-top:14px;font:500 14px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--glow);border:1px solid rgba(var(--glow-rgb),.35);border-radius:999px;padding:8px 14px}
+.arc{position:absolute;z-index:3;right:-34vh;top:50%;width:72vh;height:72vh;transform:translateY(-50%);pointer-events:none}
+.arc svg{width:100%;height:100%;overflow:visible}
+.arc .tick{stroke:rgba(var(--cr-rgb),.35);stroke-width:2}
+.arc .tick.big{stroke:rgba(var(--cr-rgb),.7);stroke-width:3}
+.arc .done{fill:none;stroke:var(--glow);stroke-width:4;stroke-linecap:round;filter:drop-shadow(0 0 8px rgba(var(--glow-rgb),.6))}
+.arc text{fill:var(--cr2);font:500 15px var(--mono)}
+.arc .hand{stroke:var(--glow);stroke-width:3}
+.arc .dot{fill:var(--glow)}
+.arcnav{position:absolute;z-index:5;left:var(--gut);right:var(--gut);bottom:14px;display:flex;justify-content:space-between;border-top:1px solid var(--line)}
+.arcnav a{position:relative;font:500 13px/1 var(--mono);color:var(--cr3);text-decoration:none;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;transition:color .3s}
+.arcnav a::before{content:"";position:absolute;top:-4px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:currentColor;transition:transform .3s}
+.arcnav a.on{color:var(--glow)}.arcnav a.on::before{transform:scale(1.6);box-shadow:0 0 10px rgba(var(--glow-rgb),.8)}
+.prog{position:absolute;z-index:4;left:0;bottom:0;height:3px;background:var(--glow);width:0;box-shadow:0 0 12px rgba(var(--glow-rgb),.7)}
+.kin{position:absolute;z-index:4;left:var(--gut);bottom:16vh;display:grid;gap:2px}
+.kin span{font:400 clamp(54px,8.5vw,132px)/.95 var(--serif);color:var(--cr);opacity:0;transform:translateX(-60px);transition:opacity .7s,transform .9s cubic-bezier(.2,.8,.2,1)}
+.kin span:nth-child(2){color:var(--glow)}
+.kin.in span{opacity:1;transform:none}
+.kin.in span:nth-child(2){transition-delay:.15s}.kin.in span:nth-child(3){transition-delay:.3s}
+.kin.in ~ .clock .card{opacity:0!important}
+.hint{position:absolute;z-index:4;left:50%;bottom:76px;transform:translateX(-50%);font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cr3);transition:opacity .5s}
+@media (max-width:900px){
+  #day{height:800vh}
+  .arc,.arcnav,.hint{display:none}
+  .clock{top:auto;bottom:86px;max-width:none;right:var(--gut)}
+  .clock .time{font-size:clamp(64px,20vw,110px)}
+  .clock .card h2{font-size:clamp(28px,8vw,40px)}
+  .clock .card p{font-size:16px}
+  .veil{background:linear-gradient(0deg,rgba(var(--bg-rgb),.92),rgba(var(--bg-rgb),.55) 45%,rgba(var(--bg-rgb),0) 70%)}
+  .kin{bottom:auto;top:calc(var(--hdr) + 56px)}
+  .kin span{text-shadow:0 2px 24px rgba(var(--bg-rgb),.85)}
+}
+@media (max-height:500px){.arc,.arcnav,.hint{display:none}.clock{top:calc(var(--hdr) + 4px)}.clock .time{font-size:56px}.clock .card p{display:none}}
+</style>
+</head>
+<body>
+<header class="hdr" id="hdr">
+  <a class="logo" href="./"><b class="firma">ASTREIN</b><span>Tischlerei</span></a>
+  <ul class="menu" id="menu">
+    <li><a href="./">Die Schublade</a></li>
+    <li><a href="tag.html" class="on">Ein Tag bei uns</a></li>
+    <li><a href="lernen.html">Was du lernst</a></li>
+    <li><a href="karriere.html">Karriere &amp; Lohn</a></li>
+  </ul>
+  <a class="btn" href="#bewerbung">In 60 Sekunden bewerben</a>
+  <button class="burger" id="burger" aria-label="Menü"><i></i><i></i></button>
+</header>
+<main>
+<section id="day" class="stage">
+  <div class="pin">
+    <div id="films" role="img" aria-label="Film: ein Arbeitstag in der Tischlerei von 06:58 bis 15:45"></div>
+    <div class="veil"></div>
+    <div class="arc" aria-hidden="true"><svg viewBox="-200 -200 400 400" id="arcsvg"></svg></div>
+    <div class="kin" id="kin" aria-hidden="true"><span>Ausbildung.</span><span>Lohn offen.</span><span>Team.</span></div>
+    <div class="clock">
+      <a class="back" href="./#team">Zurück zu Schublade 4</a>
+      <div class="time" id="time">06<b>:</b>58</div>
+      <div class="st" id="cards"></div>
+    </div>
+    <nav class="arcnav" id="arcnav" aria-label="Uhrzeiten"></nav>
+    <p class="hint" id="hint">Scrollen spult den Tag</p>
+    <i class="prog" id="prog"></i>
+  </div>
+</section>
+
+<div class="block" id="bewerbung">
+  <div class="grid2">
+    <div>
+      <p class="eyebrow">16:00 · Feierabend</p>
+      <h2>Morgen um sieben?</h2>
+      <p class="lead">Komm für einen Probetag vorbei oder bewirb dich direkt. Ausbildung ab 810 € im ersten Jahr, Gesellen nach Tarif ab 16,97 € pro Stunde – <a href="karriere.html">alles offen gelegt</a>.</p>
+      <a class="more" href="lernen.html">Was du bei uns lernst</a>
+    </div>
+    <div class="panel">
+      <h3>In 60 Sekunden bewerben</h3>
+      <form class="form">
+        <div class="seg" role="group" aria-label="Was suchst du?"><button type="button" class="chip on">Probetag</button><button type="button" class="chip">Ausbildung</button><button type="button" class="chip">Geselle/Gesellin</button></div>
+        <label>Vorname<input autocomplete="given-name" required></label>
+        <label>Handy oder E-Mail<input required></label>
+        <button class="btn" type="submit">Abschicken</button>
+        <div class="done">Danke! In echt würden wir uns innerhalb von 48 Stunden melden. (Demo – es wurde nichts gesendet.)</div>
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+<footer class="foot" style="padding-top:60px"><div class="cols"><div><a class="logo" href="./"><b class="firma">ASTREIN</b><span>Tischlerei</span></a><p style="margin-top:14px">Demo-Seite einer erfundenen Tischlerei. Tagesablauf als Beispiel.</p></div><div><a href="./">Die Schublade</a><a href="werkstatt.html">Werkstatt</a></div><div><a href="lernen.html">Was du lernst</a><a href="karriere.html">Karriere &amp; Lohn</a></div></div></footer>
+<div class="demo"><span>Demo · erfundene Tischlerei · Tagesablauf Beispiel</span><button id="demoX" aria-label="Hinweis schließen">✕</button></div>
+<script src="assets/js/media.js"></script>
+<script src="assets/js/sub.js"></script>
+<script src="assets/inline/82e532aeae0a.js"></script>
+</body>
+</html>

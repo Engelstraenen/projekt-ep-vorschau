@@ -88,13 +88,11 @@
     },
     "astrein": {
       "name": "ASTREIN",
-      "label": "Tischler",
+      "label": "Tischler und Schreiner",
       "art": "demo",
-      "status": "offen",
-      "grund": "Eugen 26.11. 10:08: nur Seiten, die Eugen ausdrücklich für fertig erklärt hat",
       "href": "referenzen/astrein/",
       "bild": "img/branchen/astrein-960.webp",
-      "kurz": "Tischlerei vom Stamm zum Möbel, Massivholz im Mittelpunkt."
+      "kurz": "Möbel und Einbauten nach Maß: Holz verstehen, präzise planen, modern fertigen."
     },
     "holm": {
       "name": "HOLM & CO",
@@ -423,7 +421,6 @@
       "refs": [
         "astrein"
       ],
-      "status": "offen",
       "title": "Website für Tischler und Schreinereien | PROJEKT EX",
       "meta": "Websites für Tischlereien und Schreinereien: Holz, Handarbeit und Einzelstücke zeigen, Anfrage mit Maßen und Fotos. Live-Demo ASTREIN.",
       "h1": "Website für Tischler: Handwerk, das man anfassen möchte",

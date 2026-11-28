@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Was du lernst – Drei Jahre. Ein Stück. – ASTREIN Tischlerei</title>
+<meta name="description" content="Die Ausbildung zur Tischlerin bei ASTREIN in drei Jahren: vom ersten Anreißen bis zum Gesellenstück. Zieh den Zeitstrahl und sieh, wie Melis Schrank entsteht.">
+<meta name="theme-color" content="#2a0f14">
+<link rel="stylesheet" href="assets/fonts-lokal/g-d872e269.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+#gs{position:relative;height:900vh}
+#gs .pin{background:#160709}
+.st{position:absolute;inset:0;opacity:0;transition:opacity .8s}
+.st.on{opacity:1}
+.st img,.st video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.st img{transform:scale(1.04);transition:transform 6s ease-out}
+.st.on img{transform:scale(1)}
+.gsveil{position:absolute;inset:0;background:linear-gradient(0deg,rgba(22,7,9,.92) 0,rgba(22,7,9,.35) 38%,rgba(22,7,9,.1) 60%),linear-gradient(90deg,rgba(22,7,9,.55),transparent 55%);pointer-events:none}
+.gstxt{position:absolute;z-index:3;left:var(--gut);top:calc(var(--hdr) + 5vh);max-width:min(640px,calc(100% - 2*var(--gut)))}
+.gstxt .mon{font:500 14px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--glow)}
+.gstxt h1{font-size:clamp(48px,8vw,128px);margin-top:12px}
+.gstxt h1 span{display:inline-block;opacity:0;transform:translateY(40px);transition:opacity .6s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.gstxt h1.in span{opacity:1;transform:none}
+.gstxt ul{list-style:none;margin-top:18px;display:grid;gap:6px;font-size:clamp(15px,1.25vw,18px);color:var(--cr2)}
+.gstxt li::before{content:"— ";color:var(--glow)}
+.gstxt .note{margin-top:14px;font:14px/1.5 var(--mono);color:var(--cr3)}
+.tl{position:absolute;z-index:4;left:var(--gut);right:calc(var(--gut) + 90px);bottom:84px;height:64px;touch-action:none;cursor:grab}
+.tl:active{cursor:grabbing}
+.tl .rail{position:absolute;left:0;right:0;top:30px;height:2px;background:rgba(240,226,200,.22)}
+.tl .fillr{position:absolute;left:0;top:30px;height:2px;background:var(--glow)}
+.tl .yr{position:absolute;top:44px;font:500 14px/1 var(--mono);color:var(--cr2);transform:translateX(-50%);white-space:nowrap}
+.tl .yr0{transform:none}.tl .yr3{transform:translateX(-100%)}
+.tl .yr0::before{left:0}.tl .yr3::before{left:100%}
+.tl .yr::before{content:"";position:absolute;left:50%;top:-18px;width:1px;height:10px;background:rgba(240,226,200,.5)}
+.tl .ms{position:absolute;top:24px;width:14px;height:14px;margin-left:-7px;border-radius:50%;border:2px solid var(--cr3);background:#160709;transition:.3s}
+.tl .ms.done{border-color:var(--glow);background:var(--glow)}
+.tl .knob{position:absolute;top:13px;width:36px;height:36px;margin-left:-18px;border-radius:50%;background:var(--cr);box-shadow:0 0 0 8px rgba(240,226,200,.15),0 8px 20px rgba(0,0,0,.4);display:grid;place-items:center;font:600 11px/1 var(--mono);color:var(--on-or)}
+.drag{position:absolute;z-index:4;right:var(--gut);bottom:170px;font:12px/1.3 var(--mono);color:var(--cr3);text-align:right}
+.exam{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+@media (max-width:900px){.exam{grid-template-columns:1fr}.tl{right:var(--gut);bottom:110px}.drag{display:none}.gstxt{top:auto;bottom:200px}.gstxt h1{font-size:clamp(44px,13vw,80px)}.gstxt ul{font-size:15px}}
+@media (max-height:560px){.gstxt{top:calc(var(--hdr) + 8px)}.gstxt h1{font-size:44px}.gstxt ul{display:none}.tl{bottom:56px}}
+</style>
+</head>
+<body>
+<header class="hdr" id="hdr">
+  <a class="logo" href="./"><b class="firma">ASTREIN</b><span>Tischlerei</span></a>
+  <ul class="menu" id="menu">
+    <li><a href="./">Die Schublade</a></li>
+    <li><a href="tag.html">Ein Tag bei uns</a></li>
+    <li><a href="lernen.html" class="on">Was du lernst</a></li>
+    <li><a href="karriere.html">Karriere &amp; Lohn</a></li>
+  </ul>
+  <a class="btn" href="#bewerbung">In 60 Sekunden bewerben</a>
+  <button class="burger" id="burger" aria-label="Menü"><i></i><i></i></button>
+</header>
+<main>
+<section id="gs" class="stage">
+  <div class="pin">
+    <div id="stages"></div>
+    <div class="gsveil"></div>
+    <div class="gstxt">
+      <a class="back" href="./#vorteile">Zurück zu Schublade 5</a>
+      <p class="mon" id="mon">Monat 0</p>
+      <h1 id="gsH"></h1>
+      <ul id="gsL"></ul>
+      <p class="note" id="gsN"></p>
+    </div>
+    <div class="tl" id="tl" role="slider" aria-label="Ausbildungsmonat" aria-valuemin="0" aria-valuemax="36" tabindex="0">
+      <div class="rail"></div><div class="fillr" id="fillr"></div>
+      <span class="yr yr0" style="left:0%">Start</span><span class="yr" style="left:33.33%">1. Jahr</span><span class="yr" style="left:66.66%">2. Jahr</span><span class="yr yr3" style="left:100%">3. Jahr</span>
+      <div class="knob" id="knob">0</div>
+    </div>
+    <p class="drag">Ziehen oder scrollen →<br>36 Monate, ein Schrank</p>
+  </div>
+</section>
+
+<div class="block">
+  <p class="eyebrow">So steht es in der Ausbildungsordnung</p>
+  <h2>Die Prüfungen. Ehrlich erklärt.</h2>
+  <div class="exam">
+    <div class="panel"><p class="eyebrow">Vor Ende des 2. Jahres</p><h3>Zwischenprüfung</h3><p style="color:var(--cr2)">Zeigt, wo du stehst. Geprüft wird, was in den ersten 18 Monaten dran war.</p></div>
+    <div class="panel"><p class="eyebrow">Gesellenprüfung · Teil des Gesellenstücks</p><h3>Arbeitsaufgabe II</h3><p style="color:var(--cr2)">Ein Stück wie ein echter Kundenauftrag: höchstens <b class="mono">100 Stunden</b>, mit Dokumentation und einem Fachgespräch von höchstens <b class="mono">30 Minuten</b>. Vorher genehmigt der Prüfungsausschuss deinen fertigungsreifen Entwurf.</p></div>
+    <div class="panel"><p class="eyebrow">Gesellenprüfung</p><h3>Arbeitsaufgabe I</h3><p style="color:var(--cr2)">Höchstens <b class="mono">7 Stunden</b>: ein Erzeugnis mit Maschinen herstellen – oder etwas einbauen und montieren.</p></div>
+  </div>
+  <span class="src">Quelle: Verordnung über die Berufsausbildung zum Tischler/zur Tischlerin, <a href="https://www.gesetze-im-internet.de/tischlausbv_2006/__9.html" target="_blank" rel="noopener">§ 9 Gesellenprüfung</a>, <a href="https://www.gesetze-im-internet.de/tischlausbv_2006/__8.html" target="_blank" rel="noopener">§ 8 Zwischenprüfung</a>, <a href="https://www.gesetze-im-internet.de/tischlausbv_2006/__4.html" target="_blank" rel="noopener">§ 4 Ausbildungsberufsbild</a>.</span>
+</div>
+
+<div class="block">
+  <div class="grid2">
+    <div>
+      <p class="eyebrow">Und dann?</p>
+      <h2>Gesellin. Und das ist erst der Anfang.</h2>
+      <p class="lead">Meisterin, Technikerin, Gestalterin im Handwerk, CNC-Fachkraft oder Studium – mit jedem Schritt steigt auch der Tariflohn.</p>
+      <a class="more" href="karriere.html">Lohn &amp; Wege ansehen</a>
+    </div>
+    <div class="panel">
+      <h3>Was du in drei Jahren kannst</h3>
+      <div class="bars" id="skills">
+        <div class="bar"><span>Planen</span><span class="t"><i data-w="80"></i></span><span class="v">CAD</span></div>
+        <div class="bar"><span>Maschinen</span><span class="t"><i data-w="95"></i></span><span class="v">CNC</span></div>
+        <div class="bar"><span>Verbinden</span><span class="t"><i data-w="90"></i></span><span class="v">Holz</span></div>
+        <div class="bar"><span>Oberfläche</span><span class="t"><i data-w="85"></i></span><span class="v">Öl·Lack</span></div>
+        <div class="bar"><span>Montage</span><span class="t"><i data-w="88"></i></span><span class="v">Kunde</span></div>
+      </div>
+      <span class="src">Inhalte nach § 4 TischlAusbV, Balken = Beispiel-Schwerpunkte der Demo-Firma.</span>
+    </div>
+  </div>
+</div>
+
+<div class="block" id="bewerbung">
+  <div class="grid2">
+    <div><p class="eyebrow">Monat 0 beginnt mit einer Nachricht</p><h2>Starte deine drei Jahre.</h2><p class="lead">810 € im ersten Jahr, 900 € im zweiten, 1.050 € im dritten – nach Tarif. Und am Ende steht dein eigenes Stück.</p><a class="more" href="tag.html">Erst einen Tag bei uns ansehen</a></div>
+    <div class="panel">
+      <form class="form">
+        <div class="seg" role="group" aria-label="Was suchst du?"><button type="button" class="chip on">Ausbildung</button><button type="button" class="chip">Praktikum</button></div>
+        <label>Vorname<input autocomplete="given-name" required></label>
+        <label>Handy oder E-Mail<input required></label>
+        <button class="btn" type="submit">In 60 Sekunden bewerben</button>
+        <div class="done">Danke! In echt würden wir uns innerhalb von 48 Stunden melden. (Demo – es wurde nichts gesendet.)</div>
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+<footer class="foot" style="padding-top:60px"><div class="cols"><div><a class="logo" href="./"><b class="firma">ASTREIN</b><span>Tischlerei</span></a><p style="margin-top:14px">Demo-Seite einer erfundenen Tischlerei. Meli ist eine Beispielfigur.</p></div><div><a href="./">Die Schublade</a><a href="werkstatt.html">Werkstatt</a></div><div><a href="tag.html">Ein Tag bei uns</a><a href="karriere.html">Karriere &amp; Lohn</a></div></div></footer>
+<div class="demo"><span>Demo · erfundene Tischlerei · Meli ist eine Beispielfigur</span><button id="demoX" aria-label="Hinweis schließen">✕</button></div>
+<script src="assets/js/media.js"></script>
+<script src="assets/js/sub.js"></script>
+<script src="assets/inline/4ea9f1c1bb35.js"></script>
+</body>
+</html>
