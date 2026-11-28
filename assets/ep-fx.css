@@ -459,3 +459,8 @@ section.ch .copy > .kicker::before { height: 1px; background: color-mix(in srgb,
   section.ch .copy > .kicker { padding-top: 20px; margin-bottom: 18px; }
   nav.links { gap: 20px; }
 }
+
+.epf-social, .k-social { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; }
+.epf-social .btn, .k-social .btn { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 17px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.epf-social .btn:hover, .k-social .btn:hover { text-decoration: none; }
+.epf-social svg, .k-social svg { width: 16px; height: 16px; flex: 0 0 auto; }
