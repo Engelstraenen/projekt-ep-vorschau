@@ -1,0 +1,3 @@
+
+const LG=[['1','Helfer, einfachste Arbeiten',12.82],['2','Einfache Arbeiten, angelernt',13.75],['3.1','Geselle ohne Berufserfahrung',14.76],['3.2','Geselle nach 12 Monaten',16.12],['3.3','Geselle · Eckentgelt',16.97],['4','Facharbeit mit Zusatzkenntnissen',18.67],['5','Hochwertige Facharbeit, Teamleitung, Meister ohne Erfahrung',21.21],['6','Spezialkenntnisse: CNC-Fachkraft, Techniker, Meister mit Erfahrung',23.76],['7','Meisterin / Meister mit Berufserfahrung',26.30],['8','Meister mit Leitungsfunktion',29.70]];
+document.getElementById('lt').innerHTML=LG.map(([g,w,s])=>`<tr><td class="mono">EG ${g}</td><td>${w}</td><td class="mono">${s.toFixed(2).replace('.',',')} €</td><td class="mono">${Math.round(s*167.5).toLocaleString('de-DE')} €</td></tr>`).join('');

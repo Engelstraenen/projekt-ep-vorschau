@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ASTREIN – Tischlerei · Was steckt drin?</title>
+<meta name="description" content="Tischlerei ASTREIN: Möbel und Einbauten nach Maß. Holz verstehen, präzise planen, modern fertigen. Demo-Seite.">
+<meta name="theme-color" content="#2a0f14">
+<link rel="stylesheet" href="assets/fonts-lokal/g-0e97cd93.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="hdr" id="hdr">
+  <a class="logo" href="./"><b class="firma">ASTREIN</b><span>Tischlerei</span></a>
+  <ul class="menu" id="menu">
+    <li><a href="#holz">Holz</a></li>
+    <li><a href="#planen">Planung</a></li>
+    <li><a href="#umsetzen">Werkstatt</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="tag.html">Ein Tag bei uns</a></li>
+    <li><a href="lernen.html">Was du lernst</a></li>
+    <li><a href="karriere.html">Karriere &amp; Lohn</a></li>
+    <li><a href="#stimmen">Stimmen</a></li>
+  </ul>
+  <a class="btn" href="#anfrage">Anfrage</a>
+  <button class="burger" id="burger" aria-label="Menü"><i></i><i></i></button>
+</header>
+
+<nav class="kom" id="kom" aria-label="Kapitel">
+  <a href="#hero" data-n="0"><span>Was steckt drin?</span></a>
+  <a href="#holz" data-n="1"><span>Holz verstehen</span></a>
+  <a href="#planen" data-n="2"><span>Planen</span></a>
+  <a href="#umsetzen" data-n="3"><span>Umsetzen</span></a>
+  <a href="#team" data-n="4"><span>Team</span></a>
+  <a href="#vorteile" data-n="5"><span>Deine Vorteile</span></a>
+  <a href="#stimmen" data-n="6"><span>Stimmen</span></a>
+  <a href="#anfrage" data-n="7"><span>Anfrage</span></a>
+</nav>
+
+<main>
+<!-- 0 · Hero: Kommode, oberste Schublade glimmt → fährt auf (Film V1) -->
+<section class="stage" id="hero" data-ch="0">
+  <div class="pin">
+    <img class="media" data-k="ah1" alt="Hohe Nussbaum-Kommode mit sieben grifflosen Schubladen in einem dunklen Bordeaux-Raum, die oberste Schublade leuchtet">
+    <video class="media" data-v="v1" muted playsinline preload="auto" hidden></video>
+    <div class="glowfill" id="heroGlow"></div>
+    <div class="shade"></div>
+    <div class="copy">
+      <p class="eyebrow">Tischlerei <span class="firma">ASTREIN</span> · Möbel &amp; Einbauten nach Maß</p>
+      <h1>Was steckt<br>drin?</h1>
+      <p>Jede Schublade ein Kapitel: welches Holz, wie wir planen, wie wir bauen – und wer das alles macht.</p>
+    </div>
+    <div class="flash" id="heroFlash"></div>
+    <div class="hint">Schublade öffnen ↓</div>
+  </div>
+</section>
+
+<!-- 1 · Holz verstehen: Draufsicht Schublade mit 5 Proben -->
+<section class="stage" id="holz" data-ch="1" style="height:240vh">
+  <div class="pin">
+    <img class="media" data-k="ah2" data-crop="no" alt="Draufsicht in eine geöffnete Schublade mit fünf Holzproben: Eiche, Nussbaum, Esche, Kirsche, Ahorn">
+    <div class="shade" style="background:linear-gradient(0deg,rgba(var(--bg-rgb),.55),transparent 45%)"></div>
+    <div class="chap"><b>1</b>Holz verstehen</div>
+    <div class="spots" id="spots"></div>
+    <div class="wcard" id="wcard" aria-live="polite"></div>
+  </div>
+</section>
+
+<div class="block" id="holzlabor">
+  <p class="eyebrow">Schublade 1 · Holzlabor</p>
+  <h2>Sehen, wie es bei Ihnen aussieht.</h2>
+  <p class="lead">Ein Sideboard, fünf Hölzer, drei Oberflächen. Tippen Sie sich durch – und lassen Sie einen Tropfen fallen, um zu sehen, was die Oberfläche aushält.</p>
+  <div class="grid2">
+    <div>
+      <div class="konf-img" id="konfImg"></div>
+      <div class="chips" id="konfWood"></div>
+    </div>
+    <div class="panel">
+      <h3>Oberfläche</h3>
+      <div class="chips" id="konfFinish"></div>
+      <div class="drop" id="drop"><i></i><b id="dropTxt">Tropfen fallen lassen</b></div>
+      <p class="src" id="finTxt"></p>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Wie hart ist welches Holz?</h3>
+      <p style="color:var(--cr2);font-size:15px">Brinell-Härte quer zur Faser in N/mm² – je höher, desto weniger Dellen im Alltag.</p>
+      <div class="bars" id="bars"></div>
+      <span class="src">Richtwerte, schwanken je Stamm. Quellen: <a href="https://www.baunetzwissen.de/glossar/b/brinell-haerte-6941060" target="_blank" rel="noopener">Baunetz Wissen</a>, <a href="https://www.sanier.de/holz/holzhaerte" target="_blank" rel="noopener">sanier.de</a></span>
+    </div>
+    <div class="panel">
+      <h3>Holz arbeitet. Wir rechnen damit.</h3>
+      <p style="color:var(--cr2);font-size:15px">Eine 90 cm breite Eichenplatte bei wechselnder Holzfeuchte:</p>
+      <input class="range" id="feuchte" type="range" min="6" max="16" value="12" aria-label="Holzfeuchte in Prozent">
+      <div class="calc-out"><div><span class="eyebrow">Holzfeuchte</span><div class="big mono" id="hfOut">12 %</div></div><div><span class="eyebrow">Breite ändert sich um</span><div class="big mono" id="mmOut">+12 mm</div></div></div>
+      <div class="plank" id="plank" style="width:80%"></div>
+      <span class="src">Differentielles Schwindmaß Eiche tangential ≈ 0,34 % je 1 % Holzfeuchte, Bezug 8 %. Quelle: <a href="https://webarchiv.typo3.tum.de/ED/ARC/ls-ebb/fileadmin/w00cgv/ebb/Scripten_Allgemein/Holz_Eigenschaften_Merkmale.pdf" target="_blank" rel="noopener">TU München, Holzeigenschaften</a>. Darum planen wir Fugen und Gratleisten ein.</span>
+    </div>
+  </div>
+  <a class="more" href="holz.html">Alles über unsere Hölzer</a>
+</div>
+
+<!-- Übergang: Hirnholz-Makro → Poren werden Planlinien -->
+<section class="stage" id="makro" data-ch="1">
+  <div class="pin">
+    <img class="media" data-k="ah3" alt="Makroaufnahme Hirnholz Eiche mit Jahrringen und Poren" id="makroImg">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path id="planPath" d=""/></svg>
+    <div class="copy"><p class="eyebrow">Übergang</p><h2 id="makroTxt">Jeder Jahrring<br>wird eine Linie.</h2></div>
+  </div>
+</section>
+
+<!-- 2 · Planen -->
+<section class="stage" id="planen" data-ch="2" style="height:260vh">
+  <div class="pin">
+    <img class="media" data-k="ah4" alt="Geöffnete Schublade mit Laser-Entfernungsmesser, Tablet mit Nischenzeichnung und Bleistift" id="planA">
+    <img class="media" data-k="ah5" alt="Tischler misst eine leere Treppennische mit grünem Kreuzlinienlaser" id="planB" style="opacity:0">
+    <video class="media" data-v="v2" muted playsinline preload="auto" hidden></video>
+    <div class="shade" style="background:linear-gradient(90deg,rgba(var(--bg-rgb),.7),transparent 55%)"></div>
+    <div class="chap"><b>2</b>Planen</div>
+    <div class="copy" id="planCopy">
+      <p class="eyebrow" id="planEy">Schublade 2</p>
+      <h2 id="planH">Aufmaß auf den Millimeter.</h2>
+      <p id="planP">Linienlaser statt Zollstock, Maße direkt ins Tablet. Am selben Abend liegt die Zeichnung bei Ihnen.</p>
+    </div>
+  </div>
+</section>
+<div class="block">
+  <div class="grid2">
+    <div>
+      <p class="eyebrow">Kein Termin nötig für den ersten Schritt</p>
+      <h2>Ein A4-Blatt reicht.</h2>
+      <p class="lead">Legen Sie ein normales Blatt Papier in die Nische und machen Sie ein Foto. Das Blatt ist 29,7 cm lang – daraus schätzen wir die Maße schon vor dem ersten Besuch. Probieren Sie es unten bei der Anfrage aus.</p>
+      <a class="more" href="planung.html">So planen wir</a>
+    </div>
+    <div class="panel">
+      <h3>So läuft die Planung</h3>
+      <div class="track" style="grid-template-columns:1fr;gap:14px;margin-top:10px">
+        <div class="step on" style="display:grid;grid-template-columns:46px 1fr;gap:14px;text-align:left;align-items:center"><i>1</i><div><b>Foto + A4-Blatt</b><small>Erste Einschätzung in 24 h</small></div></div>
+        <div class="step on" style="display:grid;grid-template-columns:46px 1fr;gap:14px;text-align:left;align-items:center"><i>2</i><div><b>Aufmaß vor Ort</b><small>Linienlaser, Tablet, 45 Minuten</small></div></div>
+        <div class="step on" style="display:grid;grid-template-columns:46px 1fr;gap:14px;text-align:left;align-items:center"><i>3</i><div><b>Zeichnung + Holzmuster</b><small>Muster zum Anfassen</small></div></div>
+        <div class="step on" style="display:grid;grid-template-columns:46px 1fr;gap:14px;text-align:left;align-items:center"><i>4</i><div><b>Freigabe</b><small>Dann geht's in die Werkstatt</small></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3 · Umsetzen -->
+<section class="stage" id="umsetzen" data-ch="3" style="height:240vh">
+  <div class="pin">
+    <img class="media" data-k="ah6" alt="CNC-Nesting-Fräse fräst Möbelteile aus einer Platte, Absaugung mit Bürstenhaube">
+    <video class="media" data-v="v3" muted playsinline preload="auto" hidden></video>
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;z-index:2" aria-hidden="true"><path id="toolPath" d="" fill="none" stroke="#f3c27a" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    <div class="shade" style="background:linear-gradient(0deg,rgba(var(--bg-rgb),.75),transparent 50%)"></div>
+    <div class="chap"><b>3</b>Umsetzen</div>
+    <div class="copy">
+      <p class="eyebrow">Schublade 3</p>
+      <h2>Aus der Zeichnung wird die Fräsbahn.</h2>
+      <p>Dieselben Linien, die wir bei Ihnen gemessen haben, steuern die CNC. Kein Abschreiben, kein Übertragungsfehler.</p>
+    </div>
+  </div>
+</section>
+<div class="block">
+  <p class="eyebrow">Maschinen, die Sie nie zu Gesicht bekommen</p>
+  <h2>Präzision, die man nicht sieht. Aber spürt.</h2>
+  <div class="cards3">
+    <article class="vcard"><div class="m"><img data-k="ah7" alt="Zwei Tischler legen Nussbaum-Furnier in die Furnierpresse"><video data-v="v4" muted loop playsinline preload="none" hidden></video></div><div class="c"><h3>Furnierpresse</h3><p>Gespiegeltes Nussbaumfurnier, unter Hitze und Druck verpresst. So sieht eine Front aus wie aus einem Stück.</p></div></article>
+    <article class="vcard"><div class="m"><img data-k="ah8" alt="Auszubildende an der Kantenanleimmaschine, Ausbilder daneben"><video data-v="v5" muted loop playsinline preload="none" hidden></video></div><div class="c"><h3>Kantenanleimmaschine</h3><p>Die Kante wird in einem Durchlauf geleimt, gekappt und gefräst – sauber bis in die Ecke.</p></div></article>
+    <article class="vcard"><div class="m"><img data-k="ah12" alt="Fertiger Einbauschrank unter der Treppe, Tischler prüft die Schattenfuge"><video data-v="v6" muted loop playsinline preload="none" hidden></video></div><div class="c"><h3>Montage</h3><p>Grifflos, Push-to-open, Schattenfugen gleich breit. Wir gehen erst, wenn alles läuft.</p></div></article>
+  </div>
+  <div class="panel" style="margin-top:40px">
+    <h3>Ihr Möbel heute <span class="eyebrow" style="margin-left:10px">Beispiel-Auftrag</span></h3>
+    <div class="track" id="track"><div class="fill" id="trackFill"></div>
+      <div class="step"><i>1</i><b>Aufmaß</b><small>Mo · erledigt</small></div>
+      <div class="step"><i>2</i><b>CNC-Zuschnitt</b><small>Di · erledigt</small></div>
+      <div class="step"><i>3</i><b>Furnier &amp; Kante</b><small>Mi · läuft</small></div>
+      <div class="step"><i>4</i><b>Oberfläche</b><small>Do · geplant</small></div>
+      <div class="step"><i>5</i><b>Montage</b><small>Fr · 8 Uhr</small></div>
+    </div>
+  </div>
+  <a class="more" href="werkstatt.html">Ein Blick in die Werkstatt</a>
+</div>
+
+<!-- 4 · Team -->
+<section class="stage" id="team" data-ch="4" style="height:220vh">
+  <div class="pin">
+    <img class="media" data-k="ah9" data-crop="no" alt="Schublade mit Gehörschutz, Schutzbrille und vier Namensschildern" id="teamA">
+    <img class="media" data-k="ah10" data-crop="no" alt="Vier junge Tischlerinnen und Tischler in schwarzer Arbeitskleidung in der Werkstatt" id="teamB" style="opacity:0">
+    <div class="shade" style="background:linear-gradient(90deg,rgba(var(--bg-rgb),.75),transparent 50%)"></div>
+    <div class="badges" id="badges"></div>
+    <div class="people" id="people" style="opacity:0"></div>
+    <div class="chap"><b>4</b>Team</div>
+    <div class="copy">
+      <p class="eyebrow">Schublade 4</p>
+      <h2 id="teamH">Vier Namen. Ein Anspruch.</h2>
+      <p id="teamP">Gehörschutz, Schutzbrille, Namensschild – mehr braucht es nicht, um bei uns anzufangen. Den Rest lernst du hier.</p>
+      <a class="more" href="tag.html">Ein Tag bei uns: 07:00 bis 16:00</a>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · Deine Vorteile -->
+<section class="stage" id="vorteile" data-ch="5" style="height:140vh">
+  <div class="pin">
+    <img class="media" data-k="ah11" data-crop="no" alt="Schublade mit sechs cremefarbenen Karten" id="payImg">
+    <div class="shade" style="background:linear-gradient(180deg,rgba(var(--bg-rgb),.85),transparent 38%)"></div>
+    <div class="badges" id="payLbl"></div>
+    <div class="chap"><b>5</b>Deine Vorteile</div>
+    
+  </div>
+</section>
+<div class="block" id="lohn">
+  <p class="eyebrow">Schublade 5 · Rechne nach</p>
+  <h2>Dein Lohn, deine Stufe.</h2>
+  <span class="src">Alle Werte: Tarif Tischlerhandwerk Berlin ab 01.01.2026 (<a href="https://www.berlin.de/sen/arbeit/arbeits-und-tarifrecht/tarifbroschueren-nach-wirtschaftsbereichen/branche-t/tischlerhandwerk_01_broschuere_ab_01_2026_stand_04_2025.pdf" target="_blank" rel="noopener">berlin.de</a>), Ausbildungsvergütungen Stand 08/2026 (<a href="https://www.berlin.de/sen/arbeit/beschaeftigung/tarifregister/tarifinformationen/ausbildungsverguetungen/ausbildungsverguetungen_stand_august_2026.pdf" target="_blank" rel="noopener">berlin.de</a>). Monat = 167,5 h.</span>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Dein Lohnrechner</h3>
+      <div class="form">
+        <label>Stufe<select id="lrStufe"></select></label>
+        <label>Stunden pro Woche <input id="lrStd" type="number" min="10" max="45" value="38.5" step="0.5"></label>
+      </div>
+      <div class="calc-out"><div><span class="eyebrow">Monat brutto</span><div class="big mono" id="lrOut">–</div></div></div>
+      <span class="src">Dazu kommen bei uns (Demo-Firma, Beispiel): Werkzeug und Arbeitskleidung gestellt, Zuschuss Meisterschule, Überstunden +25 % oder Zeitkonto.</span>
+      <a class="more" href="karriere.html">Alle Vorteile &amp; Entgeltgruppen</a>
+    </div>
+    <div class="panel" id="bewerbung">
+      <h3>In 60 Sekunden bewerben</h3>
+      <form class="form" id="bewForm">
+        <div class="seg" role="group" aria-label="Was suchst du?">
+          <button type="button" class="chip on" data-v="Ausbildung">Ausbildung</button>
+          <button type="button" class="chip" data-v="Geselle">Geselle/Gesellin</button>
+          <button type="button" class="chip" data-v="Quereinstieg">Quereinstieg</button>
+        </div>
+        <label>Vorname<input name="n" autocomplete="given-name" required></label>
+        <label>Handy oder E-Mail<input name="k" required></label>
+        <button class="btn" type="submit">Abschicken</button>
+        <div class="done">Danke! In echt würden wir uns innerhalb von 48 Stunden melden. (Demo – es wurde nichts gesendet.)</div>
+      </form>
+      <a class="more" href="lernen.html">Was du bei uns lernst</a>
+    </div>
+  </div>
+</div>
+
+<!-- 6 · Stimmen -->
+<div class="block" id="stimmen" data-ch="6">
+  <p class="eyebrow">Schublade 6 · Stimmen</p>
+  <h2>Post aus der Schublade.</h2>
+  <p class="lead">So könnten Kundenstimmen hier stehen – mit echtem Google-Profil, sobald es die Tischlerei gibt.</p>
+  <div class="drawer" id="posts"></div>
+</div>
+
+<!-- 7 · Anfrage -->
+<div class="block" id="anfrage" data-ch="7">
+  <p class="eyebrow">Schublade 7 · Anfrage</p>
+  <h2>Was soll in Ihre Schublade?</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Foto + A4-Blatt</h3>
+      <div class="a4tool" id="a4">
+        <label class="btn ghost" style="cursor:pointer">Foto wählen<input type="file" accept="image/*" id="a4file" class="sr"></label>
+      </div>
+      <p class="a4out" id="a4out">1. Foto mit einem A4-Blatt in der Nische wählen · 2. die zwei kurzen Ecken des Blatts antippen · 3. Anfang und Ende der Nische antippen.</p>
+    </div>
+    <div class="panel">
+      <form class="form" id="anfForm">
+        <label>Was möchten Sie?<select name="w"><option>Einbauschrank / Nische</option><option>Küche</option><option>Einzelmöbel</option><option>Treppe / Innenausbau</option><option>Etwas anderes</option></select></label>
+        <label>Ungefähre Maße (B × H × T in cm)<input name="m" id="anfMasse" placeholder="z. B. 180 × 240 × 60"></label>
+        <label>Name<input name="n" autocomplete="name" required></label>
+        <label>Telefon für den Rückruf<input name="t" type="tel" autocomplete="tel" required></label>
+        <button class="btn" type="submit">Rückruf anfordern</button>
+        <div class="done">Danke! In echt riefen wir innerhalb von 24 Stunden zurück. (Demo – es wurde nichts gesendet.)</div>
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer class="foot" id="foot">
+  <div class="fronts" id="fronts"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="cols">
+    <div><a class="logo" href="./"><b class="firma">ASTREIN</b><span>Tischlerei</span></a><p style="margin-top:14px">Möbel und Einbauten nach Maß. Demo-Seite einer erfundenen Tischlerei – Formulare senden nichts.</p></div>
+    <div><a href="holz.html">Hölzer</a><a href="planung.html">Planung</a><a href="werkstatt.html">Werkstatt</a></div>
+    <div><a href="tag.html">Ein Tag bei uns</a><a href="lernen.html">Was du lernst</a><a href="karriere.html">Karriere &amp; Lohn</a></div>
+  </div>
+</footer>
+<div class="demo"><span>Demo · erfundene Tischlerei · Bewertungen sind Beispiele</span><button id="demoX" aria-label="Hinweis schließen">✕</button></div>
+<script src="assets/js/media.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
